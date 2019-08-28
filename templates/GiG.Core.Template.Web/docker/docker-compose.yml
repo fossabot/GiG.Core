@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  gig.core.template.web:
+    image: ${DOCKER_REGISTRY-}gigcoretemplateweb
+    build:
+      context: ..
+      dockerfile: src/GiG.Core.Template.Web/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+    ports:
+      - "5000:8080"

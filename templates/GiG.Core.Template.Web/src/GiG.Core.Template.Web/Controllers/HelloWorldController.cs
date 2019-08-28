@@ -3,7 +3,7 @@
 namespace GiG.Core.Template.Web.Controllers
 {
     [ApiController]
-    [Route("[{{ApiName}}]")]
+    [Route("[controller]")]
     public class HelloWorldController : ControllerBase
     {
         [HttpGet]
