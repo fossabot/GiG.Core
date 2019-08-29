@@ -8,6 +8,12 @@ namespace GiG.Core.Extensions.Logging
 {
     public static class HostBuilderExtensions
     {
+        /// <summary>
+        /// Adds the deafult logging implementation.
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="configurationSectionName"></param>
+        /// <returns></returns>
         public static IHostBuilder UseLogging(this IHostBuilder builder, string configurationSectionName = "Logging")
         {
             builder.ConfigureServices((context, collections) => ConfigureLoggerService(context.Configuration, collections, configurationSectionName));
