@@ -30,9 +30,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "release-notes", "release-no
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Logging.Sample", "samples\GiG.Core.Logging.Sample\GiG.Core.Logging.Sample.csproj", "{25BFD54E-1985-48F5-88BD-0D52F3535284}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Logging.Sample", "samples\GiG.Core.Logging.Sample\GiG.Core.Logging.Sample.csproj", "{25BFD54E-1985-48F5-88BD-0D52F3535284}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Extensions.Logging", "src\GiG.Core.Extensions.Logging\GiG.Core.Extensions.Logging.csproj", "{76A8984C-9850-44E0-AB6E-4BC576ECAAA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Extensions.Logging", "src\GiG.Core.Extensions.Logging\GiG.Core.Extensions.Logging.csproj", "{76A8984C-9850-44E0-AB6E-4BC576ECAAA4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GiG.Core.Web.Sample", "GiG.Core.Web.Sample", "{A599F81C-4703-4DA5-8748-729DCD42BED5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6D384490-FFA2-4013-AD75-AD09E8346C14}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Sample", "samples\GiG.Core.Web.Sample\src\GiG.Core.Web.Sample\GiG.Core.Web.Sample.csproj", "{C2E61B7C-1CC5-414E-A46C-9F8CE9919E80}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3F693F27-9C78-4824-A4A5-81622F9E551B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "component", "component", "{73E3D18B-ABA8-469D-BB19-5C87F607E3CF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Sample.Tests.Component", "samples\GiG.Core.Web.Sample\tests\component\GiG.Core.Web.Sample.Tests.Component\GiG.Core.Web.Sample.Tests.Component.csproj", "{72FFFFCF-7748-416B-8084-0F1906F6EE4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +60,14 @@ Global
 		{76A8984C-9850-44E0-AB6E-4BC576ECAAA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76A8984C-9850-44E0-AB6E-4BC576ECAAA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76A8984C-9850-44E0-AB6E-4BC576ECAAA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2E61B7C-1CC5-414E-A46C-9F8CE9919E80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2E61B7C-1CC5-414E-A46C-9F8CE9919E80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2E61B7C-1CC5-414E-A46C-9F8CE9919E80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2E61B7C-1CC5-414E-A46C-9F8CE9919E80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72FFFFCF-7748-416B-8084-0F1906F6EE4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72FFFFCF-7748-416B-8084-0F1906F6EE4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72FFFFCF-7748-416B-8084-0F1906F6EE4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72FFFFCF-7748-416B-8084-0F1906F6EE4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,6 +76,12 @@ Global
 		{01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6} = {5915362C-8F1B-4574-92D4-BEF2B1968A17}
 		{25BFD54E-1985-48F5-88BD-0D52F3535284} = {99337274-FAB8-4358-81BB-3736EE2CCDE6}
 		{76A8984C-9850-44E0-AB6E-4BC576ECAAA4} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
+		{A599F81C-4703-4DA5-8748-729DCD42BED5} = {99337274-FAB8-4358-81BB-3736EE2CCDE6}
+		{6D384490-FFA2-4013-AD75-AD09E8346C14} = {A599F81C-4703-4DA5-8748-729DCD42BED5}
+		{C2E61B7C-1CC5-414E-A46C-9F8CE9919E80} = {6D384490-FFA2-4013-AD75-AD09E8346C14}
+		{3F693F27-9C78-4824-A4A5-81622F9E551B} = {A599F81C-4703-4DA5-8748-729DCD42BED5}
+		{73E3D18B-ABA8-469D-BB19-5C87F607E3CF} = {3F693F27-9C78-4824-A4A5-81622F9E551B}
+		{72FFFFCF-7748-416B-8084-0F1906F6EE4D} = {73E3D18B-ABA8-469D-BB19-5C87F607E3CF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}
