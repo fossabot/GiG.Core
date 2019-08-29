@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace GiG.Common.Extensions.Logging
+namespace GiG.Core.Extensions.Logging
 {
     public class LoggerConfig
     {

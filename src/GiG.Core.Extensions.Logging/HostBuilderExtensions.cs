@@ -1,35 +1,34 @@
-﻿using GiG.Common.Extensions.Logging;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Extensions.Logging;
 
-namespace GiG.Core.Logging.Extensions
+namespace GiG.Core.Extensions.Logging
 {
     public static class HostBuilderExtensions
     {
-        public static IHostBuilder UseLogging(this IHostBuilder builder, string configurationSection = "Logging")
+        public static IHostBuilder UseLogging(this IHostBuilder builder, string configurationSectionName = "Logging")
         {
-            builder.ConfigureServices((context, collections) =>
-            {
-                var loggingConfig = context.Configuration.GetSection(configurationSection).Get<LoggerConfig>();
-
-                ConfigureLoggerService(loggingConfig, collections);
-            });
-
+            builder.ConfigureServices((context, collections) => ConfigureLoggerService(context.Configuration, collections, configurationSectionName));
             return builder;
         }
 
-        private static void ConfigureLoggerService(LoggerConfig loggerconfig, IServiceCollection collection)
-        {           
-            var logProvider = new LoggerConfiguration()
-                .Enrich.FromLogContext()   
-                .MinimumLevel.Is(LevelConvert.ToSerilogLevel(loggerconfig.MinimumLogLevel))
-                .WriteTo.Console()
-                .CreateLogger();
+        private static void ConfigureLoggerService(IConfiguration configuration, IServiceCollection collection, string configurationSectionName)
+        {
+            var loggingConfig = configuration.GetSection(configurationSectionName).Get<LoggerConfig>();
+            var loggerConfiguration = new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .MinimumLevel.Is(LevelConvert.ToSerilogLevel(loggingConfig.MinimumLogLevel));
 
-            collection.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(logProvider, dispose: true));
+            if (loggingConfig.LogToConsole)
+            {
+                loggerConfiguration.WriteTo.Console();
+            }
+
+            var logger = loggerConfiguration.CreateLogger();
+
+            collection.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(logger, dispose: true));
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using GiG.Core.Logging.Extensions;
+﻿using GiG.Core.Extensions.Logging;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
@@ -15,14 +15,13 @@ namespace GiG.Core.Logging.Sample
         private static IHostBuilder CreateHostBuilder(string[] arg)
         {
             return new HostBuilder()
-                .ConfigureHostConfiguration(configHost =>
-                configHost.AddJsonFile("appsettings.json"))
-                   .UseLogging()
-                   .ConfigureServices((hostContext, services) =>
-                   {
-                       services
-                           .AddHostedService<HelloWorld>();
-                   });                 
+                .ConfigureHostConfiguration(configHost => configHost.AddJsonFile("appsettings.json"))
+                .UseLogging()
+                .ConfigureServices((hostContext, services) =>
+                {
+                    services
+                        .AddHostedService<HelloWorld>();
+                });
         }
     }
 }

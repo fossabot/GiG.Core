@@ -8,12 +8,9 @@ namespace GiG.Core.Logging.Sample
 {
     public class HelloWorld : IHostedService
     {
-        private ILogger _logger;
+        private readonly ILogger _logger;
 
-        public HelloWorld(ILogger<HelloWorld> logger)
-        {
-            _logger = logger;
-        }      
+        public HelloWorld(ILogger<HelloWorld> logger) => _logger = logger;
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
@@ -21,16 +18,12 @@ namespace GiG.Core.Logging.Sample
             return Task.CompletedTask;
         }
 
-        public Task StopAsync(CancellationToken cancellationToken)
-        {
-            return Task.CompletedTask;
-        }
+        public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 
         private void LogToConsole()
         {
-            _logger.LogWarning("Stating Up");
+            _logger.LogWarning("Starting Up");
             Console.WriteLine("Hello World");
         }
-   
     }
 }
