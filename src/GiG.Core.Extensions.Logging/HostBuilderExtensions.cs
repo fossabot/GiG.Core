@@ -9,7 +9,7 @@ namespace GiG.Core.Extensions.Logging
     public static class HostBuilderExtensions
     {
         /// <summary>
-        /// Adds the deafult logging implementation.
+        /// Adds the default logging implementation.
         /// </summary>
         /// <param name="builder"></param>
         /// <param name="configurationSectionName"></param>
