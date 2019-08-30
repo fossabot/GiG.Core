@@ -17,13 +17,13 @@ namespace GiG.Core.Web.Sample.Controllers
         [HttpGet("balance")]
         public ActionResult<decimal> Get()
         {
-            return Ok(_transactionService.GetBalance());
+            return Ok(_transactionService.Balance);
         }
 
         [HttpGet("min-dep-amount")]
         public ActionResult<decimal> GetDepositLimit()
         {
-            return Ok(_transactionService.GetBalance());
+            return Ok(_transactionService.Balance);
         }
 
         [HttpPost("deposit")]
@@ -45,7 +45,7 @@ namespace GiG.Core.Web.Sample.Controllers
                 return BadRequest("Withdraw Amount must be greater than 0.");
             }
 
-            if (request.Amount > _transactionService.GetBalance())
+            if (request.Amount > _transactionService.Balance)
             {
                 return BadRequest("Withdraw Amount must be smaller or equal to the Balance.");
             }

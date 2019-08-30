@@ -5,32 +5,29 @@ namespace GiG.Core.Web.Sample.Services
 {
     public class TransactionService : ITransactionService
     {
-        private decimal _playerBalance {get;set;}
-        private ILogger _logger { get; set; }
+        private readonly ILogger _logger;
 
         public TransactionService(ILogger<TransactionService> logger)
         {
             _logger = logger;
         }
 
-        public decimal GetBalance()
-        {
-            return _playerBalance;
-        }
+        public decimal Balance { get; private set; }
 
         public decimal Deposit(decimal amount)
         {
             _logger.LogInformation($"Deposit {amount}");
-            _playerBalance += amount;
-            return GetBalance();
+            Balance += amount;
+
+            return Balance;
         }
 
         public decimal Withdraw(decimal amount)
         {
             _logger.LogInformation($"Withdraw {amount}");
-            _playerBalance -= amount;
-            return GetBalance();
+            Balance -= amount;
+            
+            return Balance;
         }
-
     }
 }
