@@ -22,12 +22,12 @@ namespace GiG.Core.Web.Sample.Tests.Component.Services
             return transactions.GetBalanceAsync().Result;            
         }
 
-        public decimal Deposit(TransactionRequest txRequest) 
+        public Response<decimal> Deposit(TransactionRequest txRequest) 
         {
             return transactions.DepositAsync(txRequest).Result;
         }
 
-        public decimal Withdraw(TransactionRequest txRequest)
+        public Response<decimal> Withdraw(TransactionRequest txRequest)
         {
             return transactions.WithdrawAsync(txRequest).Result;
         }
@@ -49,13 +49,15 @@ namespace GiG.Core.Web.Sample.Tests.Component.Services
         [Get("balance")]
         Task<decimal> GetBalanceAsync();
 
-        [Get("min-dep-amnt")]
+        [Get("min-dep-amt")]
         Task<decimal> GetMinimumDepositAmountAsync();
 
         [Post("deposit")]
-        Task<decimal> DepositAsync([Body] TransactionRequest transactionRequest);
+        [AllowAnyStatusCode]
+        Task<Response<decimal>> DepositAsync([Body] TransactionRequest transactionRequest);
 
         [Post("withdraw")]
-        Task<decimal> WithdrawAsync([Body] TransactionRequest transactionRequest);
+        [AllowAnyStatusCode]
+        Task<Response<decimal>> WithdrawAsync([Body] TransactionRequest transactionRequest);
     }
 }

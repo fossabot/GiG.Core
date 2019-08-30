@@ -92,7 +92,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line 9
- testRunner.And("I deposit \'10\' more than the mimimum deposit amount", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I deposit \'10\' \'more\' than the mimimum deposit amount", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 10
  testRunner.When("I get the new balance of the player", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 11
@@ -114,7 +114,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line 15
- testRunner.And("I deposit \'10\' more than the mimimum deposit amount", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I deposit \'10\' \'more\' than the mimimum deposit amount", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 16
  testRunner.When("I get the new balance of the player", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 17
@@ -136,7 +136,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line 21
- testRunner.And("I deposit \'10\' more than the mimimum deposit amount", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I deposit \'10\' \'more\' than the mimimum deposit amount", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 22
  testRunner.When("I withdraw \'5\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 23

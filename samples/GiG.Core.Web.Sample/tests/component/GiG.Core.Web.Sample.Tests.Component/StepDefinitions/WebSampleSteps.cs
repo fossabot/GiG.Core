@@ -1,5 +1,6 @@
 ﻿using GiG.Core.Web.Sample.Tests.Component.Services;
 using NUnit.Framework;
+using RestEase;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -42,15 +43,40 @@ namespace GiG.Core.Web.Sample.Tests.Component.StepDefinitions
             _webSampleService.Deposit(transactionRequest);
         }
 
-        [Given(@"I deposit '(.*)' more than the mimimum deposit amount")]
-        public void GivenIDepositMoreThanTheMimimumDepositAmount(decimal depositAmount)
+        [Given(@"I deposit '(.*)' '(less|more)' than the mimimum deposit amount")]
+        [When(@"I deposit '(.*)' '(less|more)' than the mimimum deposit amount")]
+        public void GivenIDepositMoreThanTheMimimumDepositAmount(decimal depositAmount, string lessOrMore)
         {
+            if (lessOrMore.Equals("less")) 
+            {
+                depositAmount *= -1;
+            }
+
             decimal minimumDepositAmount = _scenarioContext.Get<decimal>("MinDepositAmount");
             depositAmount += minimumDepositAmount;
             _scenarioContext.Add("DepositedAmount", depositAmount);
 
             TransactionRequest transactionRequest = new TransactionRequest { Amount = depositAmount };
-            _webSampleService.Deposit(transactionRequest);
+            Response<decimal> depositResponse = _webSampleService.Deposit(transactionRequest);
+
+            _scenarioContext.Add("DepositResponse", depositResponse);
+
+        }
+
+        [Then(@"the deposit response is a '(.*)'")]
+        public void ThenTheDepositResponseIsA(string responseError)
+        {
+            Response<decimal> depositResponse = _scenarioContext.Get<Response<decimal>>("DepositResponse");
+
+            Assert.AreEqual(responseError, depositResponse.ResponseMessage.StatusCode.ToString());
+        }
+
+        [Then(@"the withdraw response is a '(.*)'")]
+        public void ThenTheWithdrawResponseIsA(string responseError)
+        {
+            Response<decimal> withdrawResponse = _scenarioContext.Get<Response<decimal>>("WithdrawResponse");
+
+            Assert.AreEqual(responseError, withdrawResponse.ResponseMessage.StatusCode.ToString());
         }
 
         [When(@"I get the new balance of the player")]
@@ -81,6 +107,23 @@ namespace GiG.Core.Web.Sample.Tests.Component.StepDefinitions
             _webSampleService.Withdraw(transactionRequest);
         }
 
+        [When(@"I withdraw '(.*)' '(less|more)' than the current balance")]
+        public void WhenIWithdrawThanTheCurrentBalance(decimal withdrawnAmount, string lessOrMore)
+        {
+            if (lessOrMore.Equals("less"))
+            {
+                withdrawnAmount *= -1;
+            }
+
+            decimal currentBalance = _scenarioContext.Get<decimal>("CurrentBalance");
+            withdrawnAmount += currentBalance;
+            _scenarioContext.Add("WithdrawnAmount", withdrawnAmount);
+
+            TransactionRequest transactionRequest = new TransactionRequest { Amount = withdrawnAmount };
+            Response<decimal> withdrawnResponse = _webSampleService.Withdraw(transactionRequest);
+
+            _scenarioContext.Add("WithdrawResponse", withdrawnResponse);
+        }
 
     }
 }
