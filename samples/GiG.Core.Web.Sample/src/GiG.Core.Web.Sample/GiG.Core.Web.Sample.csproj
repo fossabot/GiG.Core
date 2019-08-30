@@ -20,7 +20,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.Extensions.Configuration\GiG.Core.Extensions.Configuration.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Extensions.Logging\GiG.Core.Extensions.Logging.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

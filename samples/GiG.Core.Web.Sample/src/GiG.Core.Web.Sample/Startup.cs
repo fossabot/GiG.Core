@@ -20,6 +20,7 @@ namespace GiG.Core.Web.Sample
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<ITransactionService, TransactionService>();
+            services.Configure<TransactionSettings>(Configuration.GetSection("TransactionSettings"));
             services.AddControllers();
         }
 
