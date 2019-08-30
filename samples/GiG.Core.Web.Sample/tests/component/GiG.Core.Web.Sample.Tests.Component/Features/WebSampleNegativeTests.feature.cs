@@ -19,6 +19,7 @@ namespace GiG.Core.Web.Sample.Tests.Component.Features
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
     [NUnit.Framework.DescriptionAttribute("Web Sample Negative Tests")]
+    [NUnit.Framework.CategoryAttribute("WebSampleNegative")]
     public partial class WebSampleNegativeTestsFeature
     {
         
@@ -31,7 +32,8 @@ namespace GiG.Core.Web.Sample.Tests.Component.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Web Sample Negative Tests", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Web Sample Negative Tests", null, ProgrammingLanguage.CSharp, new string[] {
+                        "WebSampleNegative"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -91,17 +93,19 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Withdraw amount more than balance")]
+        [NUnit.Framework.CategoryAttribute("WithdrawMoreThanBalance")]
         public virtual void WithdrawAmountMoreThanBalance()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Withdraw amount more than balance", null, ((string[])(null)));
-#line 10
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Withdraw amount more than balance", null, new string[] {
+                        "WithdrawMoreThanBalance"});
+#line 11
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 11
- testRunner.Given("I get the current balance of the player", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 12
- testRunner.When("I withdraw \'10\' \'more\' than the current balance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Given("I get the current balance of the player", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 13
+ testRunner.When("I withdraw \'10\' \'more\' than the current balance", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 14
  testRunner.Then("the withdraw response is a \'BadRequest\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

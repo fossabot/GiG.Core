@@ -1,4 +1,5 @@
-﻿Feature: Web Sample Tests
+﻿@WebSamplePositive
+Feature: Web Sample Tests
 
 Background:
 	Given I get the current balance of the player
@@ -22,7 +23,3 @@ Scenario: Withdraw an amount
 	When I withdraw '5'
 	And I get the new balance of the player
 	Then the balance should be updated correctly
-
-
-
-
