@@ -16,7 +16,9 @@ namespace GiG.Core.Extensions.Logging
         /// <returns></returns>
         public static IHostBuilder UseLogging(this IHostBuilder builder, string configurationSectionName = "Logging")
         {
+            builder.UseSerilog();
             builder.ConfigureServices((context, collections) => ConfigureLoggerService(context.Configuration, collections, configurationSectionName));
+
             return builder;
         }
 
@@ -32,9 +34,9 @@ namespace GiG.Core.Extensions.Logging
                 loggerConfiguration.WriteTo.Console();
             }
 
-            var logger = loggerConfiguration.CreateLogger();
+            Log.Logger = loggerConfiguration.CreateLogger();
 
-            collection.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(logger, dispose: true));
+            collection.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(Log.Logger, dispose: true));
         }
     }
 }
