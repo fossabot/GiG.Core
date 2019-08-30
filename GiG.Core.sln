@@ -37,6 +37,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.0", "2.0", "{0305263F-4F1
 	ProjectSection(SolutionItems) = preProject
 		release-notes\2.0\2.0.0.md = release-notes\2.0\2.0.0.md
 	EndProjectSection
+EndProject	
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Extensions.Configuration", "src\GiG.Core.Extensions.Configuration\GiG.Core.Extensions.Configuration.csproj", "{CDCD9B6F-62E6-4F37-8758-24BD6C567D93}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GiG.Core.Web.Sample", "GiG.Core.Web.Sample", "{A599F81C-4703-4DA5-8748-729DCD42BED5}"
