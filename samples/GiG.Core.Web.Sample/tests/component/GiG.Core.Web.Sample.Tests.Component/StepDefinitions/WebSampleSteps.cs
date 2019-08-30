@@ -26,9 +26,27 @@ namespace GiG.Core.Web.Sample.Tests.Component.StepDefinitions
             _scenarioContext.Add("CurrentBalance", balance);
         }
 
+        [Given(@"I get the minimum deposit limit amount")]
+        public void GivenIGetTheMinimumDepositLimitAmount()
+        {
+            decimal minimumDepositAmount = _webSampleService.GetMinimumDepositLimit();
+            _scenarioContext.Add("MinDepositAmount", minimumDepositAmount);
+        }
+
         [Given(@"I deposit '(.*)'")]
         public void GivenIDeposit(decimal depositAmount)
         {
+            _scenarioContext.Add("DepositedAmount", depositAmount);
+
+            TransactionRequest transactionRequest = new TransactionRequest { Amount = depositAmount };
+            _webSampleService.Deposit(transactionRequest);
+        }
+
+        [Given(@"I deposit '(.*)' more than the mimimum deposit amount")]
+        public void GivenIDepositMoreThanTheMimimumDepositAmount(decimal depositAmount)
+        {
+            decimal minimumDepositAmount = _scenarioContext.Get<decimal>("MinDepositAmount");
+            depositAmount += minimumDepositAmount;
             _scenarioContext.Add("DepositedAmount", depositAmount);
 
             TransactionRequest transactionRequest = new TransactionRequest { Amount = depositAmount };
