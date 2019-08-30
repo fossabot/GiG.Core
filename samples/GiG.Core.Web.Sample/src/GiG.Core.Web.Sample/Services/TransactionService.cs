@@ -14,6 +14,11 @@ namespace GiG.Core.Web.Sample.Services
 
         public decimal Balance { get; private set; }
 
+        /// <summary>
+        /// Performs a Deposit
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <returns></returns>
         public decimal Deposit(decimal amount)
         {
             _logger.LogInformation($"Deposit {amount}");
@@ -22,6 +27,11 @@ namespace GiG.Core.Web.Sample.Services
             return Balance;
         }
 
+        /// <summary>
+        /// Performs a Withdrawal
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <returns></returns>
         public decimal Withdraw(decimal amount)
         {
             _logger.LogInformation($"Withdraw {amount}");
