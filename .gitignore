@@ -306,3 +306,4 @@ OpenCover/
 *.orig
 
 **/*.Avro.cs
+**/*.feature.cs
