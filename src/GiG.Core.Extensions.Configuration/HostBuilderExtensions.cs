@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 
 namespace GiG.Core.Extensions.Configuration
 {
@@ -12,13 +12,11 @@ namespace GiG.Core.Extensions.Configuration
         /// <returns>IHostBuilder</returns>
         public static IHostBuilder UseExternalConfiguration(this IHostBuilder builder)
         {
-            builder.ConfigureAppConfiguration(appConfig =>
-                {
-                    appConfig.AddJsonFile("appsettings.override.json", optional: true, reloadOnChange: true);
-                    appConfig.AddEnvironmentVariables();
-                });
-
-            return builder;
+            return builder.ConfigureAppConfiguration(appConfig =>
+            {
+                appConfig.AddJsonFile("appsettings.override.json", optional: true, reloadOnChange: true);
+                appConfig.AddEnvironmentVariables();
+            });
         }
     }
 }

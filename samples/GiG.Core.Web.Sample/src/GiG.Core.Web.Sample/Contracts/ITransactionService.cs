@@ -2,7 +2,7 @@
 {
     public interface ITransactionService
     {
-        decimal GetBalance();
+        decimal Balance { get; }
 
         decimal Deposit(decimal amount);
 
