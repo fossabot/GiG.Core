@@ -8,7 +8,15 @@ namespace GiG.Core.Web.Sample.Tests.Component.StepDefinitions
     [Binding]
     public class WebSampleSteps
     {
-        public WebSampleSteps() { 
+        public WebSampleSteps() 
+        { 
         }
+
+        [Given(@"I get the current balance of the player")]
+        public void GivenIGetTheCurrentBalanceOfThePlayer()
+        {
+            
+        }
+
     }
 }
