@@ -1,4 +1,4 @@
-version: '3.4'
+version: "3.4"
 
 services:
   sample:
@@ -8,5 +8,13 @@ services:
       dockerfile: samples/GiG.Core.Web.Sample/src/GiG.Core.Web.Sample/Dockerfile
     environment:
       - ASPNETCORE_URLS=http://+:8080
+
+  sample-ui:
+    image: ${DOCKER_REGISTRY-}gig.core.web.sample.ui
+    build:
+      context: samples/GiG.Core.Web.Sample.UI
+      dockerfile: Dockerfile
+    depends_on:
+      - sample
     ports:
-      - "5000:8080"
+      - "4000:8080"
