@@ -5,12 +5,11 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build
 WORKDIR /src
-COPY ["samples/src/GiG.Core.Web.Sample/GiG.Core.Web.Sample.csproj", "samples/src/GiG.Core.Web.Sample/"]
-RUN dotnet restore "samples/src/GiG.Core.Web.Sample/GiG.Core.Web.Sample.csproj"
+COPY ["samples/GiG.Core.Web.Sample/src/GiG.Core.Web.Sample/GiG.Core.Web.Sample.csproj", "samples/GiG.Core.Web.Sample/src/GiG.Core.Web.Sample/"]
+RUN dotnet restore "samples/GiG.Core.Web.Sample/src/GiG.Core.Web.Sample/GiG.Core.Web.Sample.csproj"
 COPY . .
-WORKDIR "/src/samples/src/GiG.Core.Web.Sample"
+WORKDIR "samples/GiG.Core.Web.Sample/src/GiG.Core.Web.Sample/"
 RUN dotnet build "GiG.Core.Web.Sample.csproj" -c Release -o /app/build
-
 FROM build AS publish
 RUN dotnet publish "GiG.Core.Web.Sample.csproj" -c Release -o /app/publish
 
