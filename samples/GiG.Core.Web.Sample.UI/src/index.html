@@ -25,7 +25,7 @@
 								<div class="col">
 									<div class="d-flex">
 										<label class="mr-auto">Your Balance</label>
-										<h2>&euro; <span class="code" id="balance">-</span></h2>
+										<h2>&euro; <span class="code" balance>-</span></h2>
 									</div>
 								</div>
 							</div>
@@ -148,7 +148,7 @@
 										</div>
 
 										<span class="form-text">
-											&euro; 1,552.02 available to withdraw
+											&euro; <span balance></span> available to withdraw
 										</span>
 									</div>
 								</div>
@@ -213,7 +213,7 @@
 		fetch(`${baseUrl}/balance`, { headers })
 			.then(response => response.json().then(
 				data => {
-					document.getElementById("balance").innerHTML = data;
+					updateBalance(data);
 				}
 			));
 	}
@@ -300,8 +300,9 @@
 		setTimeout(function (button) {
 			button.classList.remove("loading");
 			showTab("success");
-			document.getElementById("balance").innerHTML = data;
-		}, 2500, element);
+			updateBalance(data);
+
+		}, 1500, element);
 	}
 
 	function setValue(event) {
@@ -311,7 +312,7 @@
 
 	function showError(error) {
 		document.getElementsByClassName("notifications-container")[0].innerHTML =
-		`<div class="alert alert-danger">
+			`<div class="alert alert-danger">
             <button class="close" onclick="closeNotification(this)"></button>
             ${error}
         </div>`;
@@ -319,6 +320,12 @@
 
 	function closeNotification(element) {
 		element.parentElement.remove();
+	}
+
+	function updateBalance(balance) {
+		for (balanceElement of document.querySelectorAll("[balance]")) {
+			balanceElement.innerHTML = balance.toFixed(2);
+		}
 	}
 
 	startupScript();
