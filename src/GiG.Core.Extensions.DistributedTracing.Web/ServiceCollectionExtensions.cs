@@ -8,9 +8,14 @@ namespace GiG.Core.Extensions.DistributedTracing.Web
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddGiGCorrelationId(this IServiceCollection services)
+        /// <summary>
+        /// Adds required services to support Correlation Id Functionality
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddCorrelationId(this IServiceCollection services)
         {
-            services.AddCorrelationId();
+            CorrelationIdServiceExtensions.AddCorrelationId(services);
             services.TryAddSingleton<ICorrelationContextAccessor, CorrelationContextAccessor>();
 
             return services;

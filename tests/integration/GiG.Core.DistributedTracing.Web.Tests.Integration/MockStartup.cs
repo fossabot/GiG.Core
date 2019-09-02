@@ -12,12 +12,12 @@ namespace GiG.Core.DistributedTracing.Web.Tests.Integration
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddGiGCorrelationId();
+            services.AddCorrelationId();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseGiGCorrelationId();
+            app.UseCorrelationId();
         }
     }
 }

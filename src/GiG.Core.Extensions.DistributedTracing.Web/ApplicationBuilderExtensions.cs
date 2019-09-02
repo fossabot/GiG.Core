@@ -5,7 +5,12 @@ namespace GiG.Core.Extensions.DistributedTracing.Web
 {
     public static class ApplicationBuilderExtensions
     {
-        public static IApplicationBuilder UseGiGCorrelationId(this IApplicationBuilder builder)
+        /// <summary>
+        /// Add correlation id middleware
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public static IApplicationBuilder UseCorrelationId(this IApplicationBuilder builder)
         {
             var options = new CorrelationIdOptions {UseGuidForCorrelationId = true};
 
