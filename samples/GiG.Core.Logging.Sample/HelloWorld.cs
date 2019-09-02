@@ -6,24 +6,41 @@ using Microsoft.Extensions.Logging;
 
 namespace GiG.Core.Logging.Sample
 {
-    public class HelloWorld : IHostedService
+    public class HelloWorld : BackgroundService
     {
         private readonly ILogger _logger;
+        private Timer _timer;
 
-        public HelloWorld(ILogger<HelloWorld> logger) => _logger = logger;
-
-        public Task StartAsync(CancellationToken cancellationToken)
+        public HelloWorld(ILogger<HelloWorld> logger)
         {
-            LogToConsole();
+            _logger = logger;
+        }
+
+        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        {
+            _timer = new Timer(LogToConsole, null, 0, 1000);
+            Console.WriteLine("Starting up");
+            
             return Task.CompletedTask;
         }
 
-        public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
-
-        private void LogToConsole()
+        public override void Dispose()
         {
-            _logger.LogWarning("Starting Up");
-            Console.WriteLine("Hello World");
+            _logger.LogInformation("Shutting down");
+
+            base.Dispose();
+            _timer?.Dispose();
+        }
+
+        private void LogToConsole(object state)
+        {
+            Console.WriteLine("Logging...");
+            _logger.LogTrace("Hello World! - Trace");
+            _logger.LogDebug("Hello World! - Debug");
+            _logger.LogInformation("Hello World! - Information");
+            _logger.LogWarning("Hello World! - Warning");
+            _logger.LogError("Hello World! - Error");
+            _logger.LogCritical("Hello World! - Critical");
         }
     }
 }

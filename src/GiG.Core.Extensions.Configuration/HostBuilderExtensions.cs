@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using JetBrains.Annotations;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
 namespace GiG.Core.Extensions.Configuration
@@ -8,9 +9,9 @@ namespace GiG.Core.Extensions.Configuration
         /// <summary>
         /// Adds appsettings.override.json to HostBuilder
         /// </summary>
-        /// <param name="builder">IHostBuilder</param>
-        /// <returns>IHostBuilder</returns>
-        public static IHostBuilder UseExternalConfiguration(this IHostBuilder builder)
+        /// <param name="builder">Host builder</param>
+        /// <returns>Host builder</returns>
+        public static IHostBuilder UseExternalConfiguration([NotNull] this IHostBuilder builder)
         {
             return builder.ConfigureAppConfiguration(appConfig =>
             {

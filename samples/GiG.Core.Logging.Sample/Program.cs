@@ -1,27 +1,25 @@
-﻿using GiG.Core.Extensions.Logging;
+﻿using System.IO;
+using GiG.Core.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace GiG.Core.Logging.Sample
 {
-    class Program
+    static class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            CreateHostBuilder(args).Build().Run();
+            CreateHostBuilder().Build().Run();
         }
 
-        private static IHostBuilder CreateHostBuilder(string[] arg)
+        private static IHostBuilder CreateHostBuilder()
         {
             return new HostBuilder()
-                .ConfigureHostConfiguration(configHost => configHost.AddJsonFile("appsettings.json"))
+                .ConfigureHostConfiguration(builder => builder
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true))
                 .UseLogging()
-                .ConfigureServices((hostContext, services) =>
-                {
-                    services
-                        .AddHostedService<HelloWorld>();
-                });
+                .ConfigureServices(Startup.ConfigureServices);
         }
     }
 }
