@@ -1,7 +1,7 @@
-﻿using GiG.Core.Web.Sample.Contracts;
+﻿using System.Net;
+using GiG.Core.Web.Sample.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using System.Net;
 
 namespace GiG.Core.Web.Sample.Controllers
 {

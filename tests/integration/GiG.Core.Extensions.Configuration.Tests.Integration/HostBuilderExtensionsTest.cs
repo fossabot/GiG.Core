@@ -11,7 +11,7 @@ namespace GiG.Core.Extensions.Configuration.Tests.Integration
         private const string ConfigurationName = "Configuration";
         
         [Fact] 
-        public void OverideConfigurationWithEnvironmentVariable()
+        public void OverrideConfigurationWithEnvironmentVariable()
         {
             // Arrange
             var expected = "Environment";

@@ -1,9 +1,10 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-buster-slim AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0.0-preview8 AS base
+ENV COMPlus_ReadyToRun=0
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0.100-preview8 AS build
 WORKDIR /src
 COPY ["samples/GiG.Core.Web.Sample/src/GiG.Core.Web.Sample/GiG.Core.Web.Sample.csproj", "samples/GiG.Core.Web.Sample/src/GiG.Core.Web.Sample/"]
 RUN dotnet restore "samples/GiG.Core.Web.Sample/src/GiG.Core.Web.Sample/GiG.Core.Web.Sample.csproj"
