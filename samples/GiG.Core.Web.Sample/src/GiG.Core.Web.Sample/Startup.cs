@@ -1,5 +1,6 @@
 using GiG.Core.Extensions.HealthCheck;
 using GiG.Core.Web.Sample.Contracts;
+using GiG.Core.Web.Sample.HealthChecks;
 using GiG.Core.Web.Sample.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,7 +23,7 @@ namespace GiG.Core.Web.Sample
         {
             services.AddSingleton<ITransactionService, TransactionService>();
             services.Configure<TransactionSettings>(_configuration.GetSection("TransactionSettings"));
-            services.AddHealthChecks();
+            services.AddCachedHealthChecks().AddCachedCheck<DummyCachedHealthCheck>(nameof(DummyCachedHealthCheck));
             services.AddControllers();
         }
 

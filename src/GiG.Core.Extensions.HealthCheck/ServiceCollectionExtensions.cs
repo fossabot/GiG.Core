@@ -14,7 +14,7 @@ namespace GiG.Core.Extensions.HealthCheck
         /// <returns>An instance of Microsoft.Extensions.DependencyInjection.IHealthChecksBuilder
         ///     from which health checks can be registered.
         /// </returns>
-        public static IHealthChecksBuilder AddCachedHealthCheck(this IServiceCollection services)
+        public static IHealthChecksBuilder AddCachedHealthChecks(this IServiceCollection services)
         {
             services.AddMemoryCache();
             return services.AddHealthChecks();

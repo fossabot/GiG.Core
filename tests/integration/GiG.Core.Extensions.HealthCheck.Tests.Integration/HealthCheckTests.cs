@@ -1,6 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.DependencyInjection;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace GiG.Core.Extensions.HealthCheck.Tests.Integration
@@ -14,21 +17,42 @@ namespace GiG.Core.Extensions.HealthCheck.Tests.Integration
             _testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
         }
 
-
-    }
-
-    public class MockStartup
-    {
         [Fact]
         public async Task RespondWithHealthyStatusOnLiveHealthCheck()
         {
+            var client = _testServer.CreateClient();
 
+            using var request = new HttpRequestMessage(HttpMethod.Get, "/health/live");
+            using var response = await client.SendAsync(request);
+
+            Assert.NotNull(response);
+            Assert.Equal(System.Net.HttpStatusCode.OK, response.StatusCode);
         }
 
         [Fact]
         public async Task RespondWithHealthyStatusOnReadyHealthCheck()
         {
+            var client = _testServer.CreateClient();
 
+            using var request = new HttpRequestMessage(HttpMethod.Get, "/health/ready");
+            using var response = await client.SendAsync(request);
+
+            Assert.NotNull(response);
+            Assert.Equal(System.Net.HttpStatusCode.OK, response.StatusCode);
         }
+    }
+
+    public class MockStartup
+    {
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddCachedHealthChecks();
+        }
+
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            app.UseHealthChecks();
+        }
+       
     }
 }
