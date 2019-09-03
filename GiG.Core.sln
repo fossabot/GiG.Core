@@ -58,6 +58,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Sample.Tests.C
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{3F673C64-3C05-45DB-9256-C085025BA286}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing.Abstractions", "src\GiG.Core.DistributedTracing.Abstractions\GiG.Core.DistributedTracing.Abstractions.csproj", "{BE594F54-E2A3-4B26-9D1F-54758CB7F2C0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing.Web", "src\GiG.Core.DistributedTracing.Web\GiG.Core.DistributedTracing.Web.csproj", "{CBF3F986-453A-47B2-8AC9-173A7933D7C5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Extensions.DistributedTracing.Web", "src\GiG.Core.Extensions.DistributedTracing.Web\GiG.Core.Extensions.DistributedTracing.Web.csproj", "{4FC513EB-738D-4923-97AC-6026CF685676}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.DistributedTracing.Web.Tests.Integration", "tests\integration\GiG.Core.DistributedTracing.Web.Tests.Integration\GiG.Core.DistributedTracing.Web.Tests.Integration.csproj", "{BFD7DBD0-E549-4652-AEBD-F33F6279C059}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Extensions.Logging.Enrichers", "src\GiG.Core.Extensions.Logging.Enrichers\GiG.Core.Extensions.Logging.Enrichers.csproj", "{3097BFFD-7910-4953-B506-7DBB606DA22A}"
 EndProject
 Global
@@ -94,6 +102,22 @@ Global
 		{3F673C64-3C05-45DB-9256-C085025BA286}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F673C64-3C05-45DB-9256-C085025BA286}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F673C64-3C05-45DB-9256-C085025BA286}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE594F54-E2A3-4B26-9D1F-54758CB7F2C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE594F54-E2A3-4B26-9D1F-54758CB7F2C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE594F54-E2A3-4B26-9D1F-54758CB7F2C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE594F54-E2A3-4B26-9D1F-54758CB7F2C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBF3F986-453A-47B2-8AC9-173A7933D7C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBF3F986-453A-47B2-8AC9-173A7933D7C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBF3F986-453A-47B2-8AC9-173A7933D7C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBF3F986-453A-47B2-8AC9-173A7933D7C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FC513EB-738D-4923-97AC-6026CF685676}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FC513EB-738D-4923-97AC-6026CF685676}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FC513EB-738D-4923-97AC-6026CF685676}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FC513EB-738D-4923-97AC-6026CF685676}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFD7DBD0-E549-4652-AEBD-F33F6279C059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFD7DBD0-E549-4652-AEBD-F33F6279C059}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFD7DBD0-E549-4652-AEBD-F33F6279C059}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFD7DBD0-E549-4652-AEBD-F33F6279C059}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3097BFFD-7910-4953-B506-7DBB606DA22A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3097BFFD-7910-4953-B506-7DBB606DA22A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3097BFFD-7910-4953-B506-7DBB606DA22A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -116,6 +140,10 @@ Global
 		{3F693F27-9C78-4824-A4A5-81622F9E551B} = {A599F81C-4703-4DA5-8748-729DCD42BED5}
 		{73E3D18B-ABA8-469D-BB19-5C87F607E3CF} = {3F693F27-9C78-4824-A4A5-81622F9E551B}
 		{72FFFFCF-7748-416B-8084-0F1906F6EE4D} = {73E3D18B-ABA8-469D-BB19-5C87F607E3CF}
+		{BE594F54-E2A3-4B26-9D1F-54758CB7F2C0} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
+		{CBF3F986-453A-47B2-8AC9-173A7933D7C5} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
+		{4FC513EB-738D-4923-97AC-6026CF685676} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
+		{BFD7DBD0-E549-4652-AEBD-F33F6279C059} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 		{3097BFFD-7910-4953-B506-7DBB606DA22A} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
