@@ -7,6 +7,6 @@ namespace GiG.Core.DistributedTracing.Abstractions.CorrelationId
         /// <summary>
         /// Contains the current context's correlation id
         /// </summary>
-        Guid CorrelationId { get; }
+        Guid Value { get; }
     }
 }

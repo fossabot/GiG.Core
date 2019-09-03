@@ -15,7 +15,7 @@ namespace GiG.Core.Extensions.Logging.Sinks.Fluentd
 
         public void RegisterSink(LoggerSinkConfiguration sinkConfiguration)
         {
-            sinkConfiguration.Fluentd(_options.HostName, _options.Port);
+            sinkConfiguration.Fluentd(_options.Hostname, _options.Port);
         }
     }
 }

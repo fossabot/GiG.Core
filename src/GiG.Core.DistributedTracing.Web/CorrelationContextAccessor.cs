@@ -13,6 +13,6 @@ namespace GiG.Core.DistributedTracing.Web
             _correlationContextAccessor = correlationContextAccessor;
         }
 
-        public Guid CorrelationId => Guid.TryParse(_correlationContextAccessor.CorrelationContext?.CorrelationId, out var correlationId) ? correlationId : Guid.NewGuid();
+        public Guid Value => Guid.TryParse(_correlationContextAccessor.CorrelationContext?.CorrelationId, out var correlationId) ? correlationId : Guid.NewGuid();
     }
 }

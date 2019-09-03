@@ -11,7 +11,7 @@ namespace GiG.Core.Extensions.Configuration
         /// </summary>
         /// <param name="builder">Host builder</param>
         /// <returns>Host builder</returns>
-        public static IHostBuilder UseExternalConfiguration([NotNull] this IHostBuilder builder)
+        public static IHostBuilder ConfigureExternalConfiguration([NotNull] this IHostBuilder builder)
         {
             return builder.ConfigureAppConfiguration(appConfig =>
             {

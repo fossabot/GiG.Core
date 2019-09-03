@@ -8,7 +8,7 @@ namespace GiG.Core.Logging.Sample
     {
         public static void ConfigureServices(HostBuilderContext hostContext, IServiceCollection services)
         {
-            services
+            services              
                 .AddHostedService<HelloWorld>();
         }
     }

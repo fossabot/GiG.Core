@@ -19,7 +19,7 @@ namespace GiG.Core.Extensions.Configuration.Tests.Integration
             Environment.SetEnvironmentVariable(ConfigurationName, expected);
 
             var host = Host.CreateDefaultBuilder()
-                .UseExternalConfiguration()
+                .ConfigureExternalConfiguration()
                 .Build();
 
             var configuration = host.Services.GetRequiredService<IConfiguration>();
@@ -35,7 +35,7 @@ namespace GiG.Core.Extensions.Configuration.Tests.Integration
             var expected = "Override";
                     
             var host = Host.CreateDefaultBuilder()
-                .UseExternalConfiguration()
+                .ConfigureExternalConfiguration()
                 .Build();
 
             var configuration = host.Services.GetRequiredService<IConfiguration>();
@@ -68,7 +68,7 @@ namespace GiG.Core.Extensions.Configuration.Tests.Integration
             var logLevelName = "LogLevel";
 
             var host = Host.CreateDefaultBuilder()
-                .UseExternalConfiguration()
+                .ConfigureExternalConfiguration()
                 .Build();
 
             var configuration = host.Services.GetRequiredService<IConfiguration>();

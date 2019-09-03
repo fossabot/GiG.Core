@@ -21,10 +21,10 @@ namespace GiG.Core.Logging.Sample
                 .ConfigureHostConfiguration(builder => builder
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true))
-                .UseLogging(x => x
+                .ConfigureLogging(x => x
                     .WriteToConsole()
                     .WriteToFluentd()
-                    .EnrichWithApplicationName())
+                    .EnrichWithApplicationMetadata())
                 .ConfigureServices(Startup.ConfigureServices);
         }
     }

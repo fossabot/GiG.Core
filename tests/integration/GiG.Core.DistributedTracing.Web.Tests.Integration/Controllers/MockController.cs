@@ -17,7 +17,7 @@ namespace GiG.Core.DistributedTracing.Web.Tests.Integration.Controllers
         [HttpGet]
         public ActionResult<string> Get()
         {
-            return _correlationContextAccessor.CorrelationId.ToString();
+            return _correlationContextAccessor.Value.ToString();
         }
     }
 }

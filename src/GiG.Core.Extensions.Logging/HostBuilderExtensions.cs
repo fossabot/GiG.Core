@@ -15,8 +15,8 @@ namespace GiG.Core.Extensions.Logging
         /// <param name="configureLogger">The delegate for configuring the <see cref="T:Serilog.LoggerConfiguration" /></param>
         /// <param name="sectionName">Configuration section name</param>
         /// <returns></returns>
-        public static IHostBuilder UseLogging([NotNull] this IHostBuilder builder,
-            Action<LoggerConfigurationBuilder> configureLogger = null,
+        public static IHostBuilder ConfigureLogging([NotNull] this IHostBuilder builder,
+            Action<LoggerConfigurationBuilder> configureLogger,
             [NotNull] string sectionName = "Logging")
         {
             builder

@@ -1,4 +1,5 @@
 using GiG.Core.Extensions.Configuration;
+using GiG.Core.Extensions.DistributedTracing.Web;
 using GiG.Core.Extensions.Logging;
 using GiG.Core.Extensions.Logging.Enrichers;
 using GiG.Core.Extensions.Logging.Sinks.Console;
@@ -17,11 +18,13 @@ namespace GiG.Core.Web.Sample
 
         private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .UseExternalConfiguration()
-                .UseLogging(x => x
+                .ConfigureExternalConfiguration()
+                .ConfigureServices(x => x.AddCorrelationId())
+                .ConfigureLogging(x => x
                     .WriteToConsole()
                     .WriteToFluentd()
-                    .EnrichWithApplicationName())
+                    .EnrichWithApplicationMetadata()
+                    .EnrichWithCorrelationId())
                 .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
     }
 }
