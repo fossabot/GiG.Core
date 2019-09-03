@@ -1,3 +1,4 @@
+using GiG.Core.Extensions.HealthCheck;
 using GiG.Core.Web.Sample.Contracts;
 using GiG.Core.Web.Sample.Services;
 using Microsoft.AspNetCore.Builder;
@@ -21,6 +22,7 @@ namespace GiG.Core.Web.Sample
         {
             services.AddSingleton<ITransactionService, TransactionService>();
             services.Configure<TransactionSettings>(_configuration.GetSection("TransactionSettings"));
+            services.AddHealthChecks();
             services.AddControllers();
         }
 
@@ -28,7 +30,7 @@ namespace GiG.Core.Web.Sample
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseRouting();
-
+            app.UseHealthChecks();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
