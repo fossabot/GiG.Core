@@ -37,7 +37,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.0", "2.0", "{0305263F-4F1
 	ProjectSection(SolutionItems) = preProject
 		release-notes\2.0\2.0.0.md = release-notes\2.0\2.0.0.md
 	EndProjectSection
-EndProject	
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Extensions.Configuration", "src\GiG.Core.Extensions.Configuration\GiG.Core.Extensions.Configuration.csproj", "{CDCD9B6F-62E6-4F37-8758-24BD6C567D93}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GiG.Core.Web.Sample", "GiG.Core.Web.Sample", "{A599F81C-4703-4DA5-8748-729DCD42BED5}"
@@ -57,6 +57,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Sample.Tests.Component", "samples\GiG.Core.Web.Sample\tests\component\GiG.Core.Web.Sample.Tests.Component\GiG.Core.Web.Sample.Tests.Component.csproj", "{72FFFFCF-7748-416B-8084-0F1906F6EE4D}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{3F673C64-3C05-45DB-9256-C085025BA286}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Extensions.Logging.Enrichers", "src\GiG.Core.Extensions.Logging.Enrichers\GiG.Core.Extensions.Logging.Enrichers.csproj", "{3097BFFD-7910-4953-B506-7DBB606DA22A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -92,6 +94,10 @@ Global
 		{3F673C64-3C05-45DB-9256-C085025BA286}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F673C64-3C05-45DB-9256-C085025BA286}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F673C64-3C05-45DB-9256-C085025BA286}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3097BFFD-7910-4953-B506-7DBB606DA22A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3097BFFD-7910-4953-B506-7DBB606DA22A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3097BFFD-7910-4953-B506-7DBB606DA22A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3097BFFD-7910-4953-B506-7DBB606DA22A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -110,6 +116,7 @@ Global
 		{3F693F27-9C78-4824-A4A5-81622F9E551B} = {A599F81C-4703-4DA5-8748-729DCD42BED5}
 		{73E3D18B-ABA8-469D-BB19-5C87F607E3CF} = {3F693F27-9C78-4824-A4A5-81622F9E551B}
 		{72FFFFCF-7748-416B-8084-0F1906F6EE4D} = {73E3D18B-ABA8-469D-BB19-5C87F607E3CF}
+		{3097BFFD-7910-4953-B506-7DBB606DA22A} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}

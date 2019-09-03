@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
@@ -12,6 +11,7 @@
     <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" IncludeAssets="all" PrivateAssets="compile" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" IncludeAssets="all" PrivateAssets="compile" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" IncludeAssets="all" PrivateAssets="compile" />
+    <PackageReference Include="Serilog.Sinks.Fluentd" Version="0.2.2" IncludeAssets="all" PrivateAssets="compile" />
   </ItemGroup>
 
 </Project>

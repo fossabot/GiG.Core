@@ -1,5 +1,8 @@
 ﻿using System.IO;
 using GiG.Core.Extensions.Logging;
+using GiG.Core.Extensions.Logging.Enrichers;
+using GiG.Core.Extensions.Logging.Sinks.Console;
+using GiG.Core.Extensions.Logging.Sinks.Fluentd;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
@@ -7,7 +10,7 @@ namespace GiG.Core.Logging.Sample
 {
     static class Program
     {
-        static void Main()
+        public static void Main()
         {
             CreateHostBuilder().Build().Run();
         }
@@ -18,7 +21,10 @@ namespace GiG.Core.Logging.Sample
                 .ConfigureHostConfiguration(builder => builder
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true))
-                .UseLogging()
+                .UseLogging(x => x
+                    .WriteToConsole()
+                    .WriteToFluentd()
+                    .EnrichWithApplicationName())
                 .ConfigureServices(Startup.ConfigureServices);
         }
     }

@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\GiG.Core.Extensions.Logging.Enrichers\GiG.Core.Extensions.Logging.Enrichers.csproj" />
     <ProjectReference Include="..\..\src\GiG.Core.Extensions.Logging\GiG.Core.Extensions.Logging.csproj" />
   </ItemGroup>
 

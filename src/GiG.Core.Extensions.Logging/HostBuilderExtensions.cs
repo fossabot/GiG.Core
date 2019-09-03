@@ -1,6 +1,5 @@
 ﻿using System;
 using JetBrains.Annotations;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
@@ -12,43 +11,41 @@ namespace GiG.Core.Extensions.Logging
         /// <summary>
         /// Adds the default logging implementation.
         /// </summary>
-        /// <param name="builder">Host builder</param>
-        /// <param name="configurationSectionName">Configuration section name</param>
+        /// <param name="builder">Host services</param>
+        /// <param name="configureLogger">The delegate for configuring the <see cref="T:Serilog.LoggerConfiguration" /></param>
+        /// <param name="sectionName">Configuration section name</param>
         /// <returns></returns>
-        public static IHostBuilder UseLogging([NotNull] this IHostBuilder builder, string configurationSectionName = "Logging")
+        public static IHostBuilder UseLogging([NotNull] this IHostBuilder builder,
+            Action<LoggerConfigurationBuilder> configureLogger = null,
+            [NotNull] string sectionName = "Logging")
         {
-            builder.UseSerilog();
-            builder.ConfigureServices((context, collections) => ConfigureLoggerService(context.Configuration, collections, configurationSectionName));
+            builder
+                .ConfigureServices((context, services) =>
+                {
+                    var configuration = context.Configuration;
+
+                    var configurationSection = configuration.GetSection(sectionName);
+                    if (configurationSection == null)
+                    {
+                        throw new ArgumentException(
+                            $"Configuration section '{sectionName}' does not exist",
+                            nameof(sectionName));
+                    }
+
+                    var loggerConfiguration = new LoggerConfiguration()
+                        .Enrich.FromLogContext()
+                        .ReadFrom.Configuration(configuration, sectionName);
+
+                    var loggerConfigurationBuilder = new LoggerConfigurationBuilder(services, loggerConfiguration, configurationSection);
+                    configureLogger?.Invoke(loggerConfigurationBuilder);
+
+                    Log.Logger = loggerConfiguration.CreateLogger();
+                    services.AddLogging(loggerBuilder => loggerBuilder.AddSerilog(Log.Logger, true));
+
+                })
+                .UseSerilog();
 
             return builder;
-        }
-
-        private static void ConfigureLoggerService(IConfiguration configuration, IServiceCollection collection, string configurationSectionName)
-        {
-            var loggingSection = configuration.GetSection(configurationSectionName);
-            if (loggingSection == null)
-            {
-                throw new ArgumentNullException(nameof(configuration), "Logging information is missing");
-            }
-
-            var loggingConfiguration = loggingSection.Get<LoggerConfiguration>();
-            if (loggingConfiguration == null)
-            {
-                throw new ArgumentNullException(nameof(configurationSectionName), "Logging section is not valid");
-            }
-            
-            var loggerConfiguration = new Serilog.LoggerConfiguration()
-                .Enrich.FromLogContext()
-                .ReadFrom.Configuration(configuration, configurationSectionName);
-
-            if (loggingConfiguration.LogToConsole)
-            {
-                loggerConfiguration.WriteTo.Console();
-            }
-
-            Log.Logger = loggerConfiguration.CreateLogger();
-
-            collection.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(Log.Logger, true));
         }
     }
 }
