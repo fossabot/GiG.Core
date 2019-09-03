@@ -10,6 +10,7 @@ namespace GiG.Core.Web.Sample.HealthChecks
     public class DummyCachedHealthCheck : CachedHealthCheck
     {
         private readonly ILogger _logger;
+
         public DummyCachedHealthCheck(ILogger<DummyCachedHealthCheck> logger, IMemoryCache memoryCache) : base(memoryCache)
         {
             _logger = logger;

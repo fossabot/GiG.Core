@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
-using Microsoft.Extensions.DependencyInjection;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
@@ -40,19 +38,5 @@ namespace GiG.Core.Extensions.HealthCheck.Tests.Integration
             Assert.NotNull(response);
             Assert.Equal(System.Net.HttpStatusCode.OK, response.StatusCode);
         }
-    }
-
-    public class MockStartup
-    {
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddCachedHealthChecks();
-        }
-
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            app.UseHealthChecks();
-        }
-       
     }
 }

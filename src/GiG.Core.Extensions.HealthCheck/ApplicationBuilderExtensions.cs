@@ -8,12 +8,12 @@ namespace GiG.Core.Extensions.HealthCheck
     {
         /// <summary>
         /// Adds the Ready and Live HealthCheck endpoints
+        /// The readiness check uses all registered checks with the 'ready' tag.
         /// </summary>
         /// <param name="app">The Microsoft.AspNetCore.Builder.IApplicationBuilder.</param>
         /// <returns>The Microsoft.AspNetCore.Builder.IApplicationBuilder.</returns>
         public static IApplicationBuilder UseHealthChecks(this IApplicationBuilder app)
         {
-            // The readiness check uses all registered checks with the 'ready' tag.
             app.UseHealthChecks("/health/ready", new HealthCheckOptions()
             {
                 AllowCachingResponses = true,

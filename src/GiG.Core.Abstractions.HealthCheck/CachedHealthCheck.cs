@@ -19,6 +19,7 @@ namespace GiG.Core.Abstractions.HealthCheck
             _cacheKey = GetType().FullName;
         }
 
+        /// <inheritdoc/>
         public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {
             return await _memoryCache.GetOrCreateAsync(_cacheKey, async result =>
@@ -29,6 +30,12 @@ namespace GiG.Core.Abstractions.HealthCheck
             });
         }
 
+        /// <summary>
+        /// Actual Health Check implementation performed when the Health Check Result is not found in Cache.
+        /// </summary>
+        /// <param name="context"> A context object associated with the current execution.</param>
+        /// <param name="cancellationToken">A CancellationToken that can be used to cancel the health check.</param>
+        /// <returns>The Health Check result</returns>
         protected abstract Task<HealthCheckResult> DoHealthCheckAsync(HealthCheckContext context, CancellationToken cancellationToken = default);
     }
 }
