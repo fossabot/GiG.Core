@@ -3,8 +3,13 @@
     /// <summary>
     /// Health Checks Settings
     /// </summary>
-    public class HealthChecksSettings
+    public class HealthChecksOptions
     {
+        /// <summary>
+        /// Health Checks default section name.
+        /// </summary>
+        public const string DefaultSectionName = "HealthChecks";
+
         /// <summary>
         /// The Url for the Live Health Check
         /// </summary>

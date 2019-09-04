@@ -8,9 +8,11 @@ This Library provides an API to register Health Checks for your application.
 Add the below to your Startup class and this will register the Live and Ready Health Check Endpoints.
 
 ```csharp
+	private readonly IConfiguration _configuration;
+	
 	public void ConfigureServices(IServiceCollection services)
 	{
-		services.AddHealthChecks();
+		services.AddHealthChecks(_configuration);
 	}
 
 	public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -24,8 +26,10 @@ Add the below to your Startup class and this will register the Live and Ready He
 You can implement a Cached Health Check by inheriting the [CachedHealthCheck](../GiG.Core.HealthChecks.Abstractions/CachedHealthCheck.cs) class.
 
 ```csharp
+	private readonly IConfiguration _configuration;
+	
 	public void ConfigureServices(IServiceCollection services)
 	{
-		services.AddCachedHealthChecks().AddCachedCheck<DummyCachedHealthCheck>(nameof(DummyCachedHealthCheck));
+		services.AddCachedHealthChecks(_configuration).AddCachedCheck<DummyCachedHealthCheck>(nameof(DummyCachedHealthCheck));
 	}
 ```

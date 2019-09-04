@@ -1,4 +1,5 @@
 ﻿using GiG.Core.HealthChecks.Abstractions;
+using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System.Collections.Generic;
@@ -24,8 +25,8 @@ namespace GiG.Core.Extensions.HealthCheck
         ///</param>
         /// <param name="tags">A list of tags that can be used to filter health checks.</param>
         /// <returns>The Microsoft.Extensions.DependencyInjection.IHealthChecksBuilder.</returns>
-        public static IHealthChecksBuilder AddCachedCheck<T>(this IHealthChecksBuilder healthChecksBuilder, string name, HealthStatus? failureStatus = null,
-          IList<string> tags = null) where T : CachedHealthCheck
+        public static IHealthChecksBuilder AddCachedCheck<T>([NotNull] this IHealthChecksBuilder healthChecksBuilder, [NotNull] string name, 
+            HealthStatus? failureStatus = null, IList<string> tags = null) where T : CachedHealthCheck
         {
             tags = tags ?? new List<string>();
             if (!tags.Contains(Constants.ReadyTag))
