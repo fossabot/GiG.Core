@@ -1,54 +1,58 @@
 ﻿using System;
+using GiG.Core.Logging.Abstractions;
 using JetBrains.Annotations;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
 namespace GiG.Core.Extensions.Logging
 {
+    /// <summary>
+    /// Host builder extensions.
+    /// </summary>
     public static class HostBuilderExtensions
     {
         /// <summary>
-        /// Adds the default logging implementation.
+        /// Configures logging sinks and enrichers.
         /// </summary>
-        /// <param name="builder">Host builder</param>
-        /// <param name="configurationSectionName">Configuration section name</param>
-        /// <returns></returns>
-        public static IHostBuilder UseLogging([NotNull] this IHostBuilder builder, string configurationSectionName = "Logging")
+        /// <param name="builder">Host builder.</param>
+        /// <param name="configureLogger">The delegate for configuring the <see cref="GiG.Core.Logging.Abstractions.LoggerConfigurationBuilder" />.</param>
+        /// <param name="sectionName">Configuration section name.</param>
+        /// <returns>Host builder.</returns>
+        public static IHostBuilder ConfigureLogging([NotNull] this IHostBuilder builder,
+            Action<LoggerConfigurationBuilder> configureLogger,
+            [NotNull] string sectionName = LoggerOptions.DefaultSectionName)
         {
-            builder.UseSerilog();
-            builder.ConfigureServices((context, collections) => ConfigureLoggerService(context.Configuration, collections, configurationSectionName));
+            builder
+                .ConfigureServices((context, services) =>
+                    ConfigureLoggingInternal(context, services, configureLogger, sectionName))
+                .UseSerilog();
 
             return builder;
         }
 
-        private static void ConfigureLoggerService(IConfiguration configuration, IServiceCollection collection, string configurationSectionName)
+        private static void ConfigureLoggingInternal(HostBuilderContext context, IServiceCollection services,
+            Action<LoggerConfigurationBuilder> configureLogger, string sectionName)
         {
-            var loggingSection = configuration.GetSection(configurationSectionName);
-            if (loggingSection == null)
+            var configuration = context.Configuration;
+
+            var configurationSection = configuration.GetSection(sectionName);
+            if (configurationSection == null)
             {
-                throw new ArgumentNullException(nameof(configuration), "Logging information is missing");
+                throw new ArgumentException($"Configuration section '{sectionName}' does not exist",
+                    nameof(sectionName));
             }
 
-            var loggingConfiguration = loggingSection.Get<LoggerConfiguration>();
-            if (loggingConfiguration == null)
-            {
-                throw new ArgumentNullException(nameof(configurationSectionName), "Logging section is not valid");
-            }
-            
-            var loggerConfiguration = new Serilog.LoggerConfiguration()
+            var loggerConfiguration = new LoggerConfiguration()
                 .Enrich.FromLogContext()
-                .ReadFrom.Configuration(configuration, configurationSectionName);
+                .ReadFrom.Configuration(configuration, sectionName);
 
-            if (loggingConfiguration.LogToConsole)
-            {
-                loggerConfiguration.WriteTo.Console();
-            }
+            var loggerConfigurationBuilder =
+                new LoggerConfigurationBuilder(services, loggerConfiguration, configurationSection);
+            configureLogger?.Invoke(loggerConfigurationBuilder);
 
             Log.Logger = loggerConfiguration.CreateLogger();
-
-            collection.AddLogging(loggingBuilder => loggingBuilder.AddSerilog(Log.Logger, true));
+            services.AddLogging(loggerBuilder => loggerBuilder.AddSerilog(Log.Logger, true));
         }
     }
 }

@@ -1,11 +1,12 @@
 using GiG.Core.Extensions.Configuration;
-using GiG.Core.Extensions.Logging;
+using GiG.Core.Extensions.DistributedTracing.Web;
+using GiG.Core.Extensions.Logging.All;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
 namespace GiG.Core.Web.Sample
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {
@@ -14,8 +15,9 @@ namespace GiG.Core.Web.Sample
 
         private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .UseExternalConfiguration()
-                .UseLogging()
+                .ConfigureServices(x => x.AddCorrelationId())
+                .ConfigureExternalConfiguration()
+                .ConfigureLogging()
                 .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
     }
 }
