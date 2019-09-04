@@ -10,7 +10,7 @@ namespace GiG.Core.Extensions.Configuration
     public static class HostBuilderExtensions
     {
         /// <summary>
-        /// Adds external configuration via JSON File.
+        /// Adds external configuration via JSON File and Environment Variables.
         /// </summary>
         /// <param name="builder">Host builder.</param>
         /// <returns>Host builder.</returns>

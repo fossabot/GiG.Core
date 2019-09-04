@@ -14,7 +14,7 @@ namespace GiG.Core.Extensions.Logging.All
     public static class HostBuilderExtensions
     {
         /// <summary>
-        /// Configures the default logging sinks and enrichers.
+        /// Configures the default logging sinks (Console and Fluentd) and enrichers (Application metadata and Correlation ID).
         /// </summary>
         /// <param name="builder">Host builder.</param>
         /// <param name="sectionName">Configuration section name.</param>
