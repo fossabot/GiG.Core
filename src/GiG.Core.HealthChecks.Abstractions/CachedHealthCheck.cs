@@ -4,15 +4,23 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GiG.Core.Abstractions.HealthCheck
+namespace GiG.Core.HealthChecks.Abstractions
 {
+    /// <summary>
+    /// Base Abstract Class for Cached Health Checks
+    /// </summary>
     public abstract class CachedHealthCheck : IHealthCheck
     {
         private readonly IMemoryCache _memoryCache;
         private readonly long _cacheExpirationMS;
         private readonly string _cacheKey;
 
-        protected CachedHealthCheck(IMemoryCache memoryCache, long cacheExpirartionMs = 2000)
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="memoryCache">The Memory Cache Provider.</param>
+        /// <param name="cacheExpirartionMs">The Expiration of the Cache in MS.</param>
+        protected CachedHealthCheck(IMemoryCache memoryCache, long cacheExpirartionMs = 1000)
         {
             _memoryCache = memoryCache;
             _cacheExpirationMS = cacheExpirartionMs;

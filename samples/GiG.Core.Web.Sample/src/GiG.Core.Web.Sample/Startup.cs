@@ -34,7 +34,7 @@ namespace GiG.Core.Web.Sample
         {
             app.UseCorrelationId();
             app.UseRouting();
-            app.UseHealthChecks();
+            app.UseHealthChecks(_configuration);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

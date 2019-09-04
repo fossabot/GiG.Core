@@ -2,6 +2,9 @@
 
 namespace GiG.Core.Extensions.HealthCheck
 {
+    /// <summary>
+    /// Service Collection Extensions
+    /// </summary>
     public static class ServiceCollectionExtensions
     {
         /// <summary>

@@ -1,4 +1,4 @@
-﻿using GiG.Core.Abstractions.HealthCheck;
+﻿using GiG.Core.HealthChecks.Abstractions;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;

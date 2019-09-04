@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\GiG.Core.Extensions.HealthCheck\GiG.Core.Extensions.HealthCheck.csproj" />
+    <ProjectReference Include="..\..\..\src\GiG.Core.Extensions.HealthChecks\GiG.Core.Extensions.HealthChecks.csproj" />
   </ItemGroup>
  
 </Project>

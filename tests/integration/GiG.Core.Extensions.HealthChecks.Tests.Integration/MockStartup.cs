@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GiG.Core.Extensions.HealthCheck.Tests.Integration
 {
     public class MockStartup
     {
+        private readonly IConfiguration _configuration;
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCachedHealthChecks();
@@ -13,8 +16,7 @@ namespace GiG.Core.Extensions.HealthCheck.Tests.Integration
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseHealthChecks();
+            app.UseHealthChecks(_configuration);
         }
-       
     }
 }

@@ -1,4 +1,4 @@
-# GiG.Core.Extensions.HealthCheck
+# GiG.Core.Extensions.HealthChecks
 
 This Library provides an API to register Health Checks for your application.
 
@@ -21,7 +21,7 @@ Add the below to your Startup class and this will register the Live and Ready He
 
 ## Cached Health Check
 
-You can implement a Cached Health Check by inheriting the [CachedHealthCheck](../GiG.Core.Abstractions.HealthCheck/CachedHealthCheck.cs) class.
+You can implement a Cached Health Check by inheriting the [CachedHealthCheck](../GiG.Core.HealthChecks.Abstractions/CachedHealthCheck.cs) class.
 
 ```csharp
 	public void ConfigureServices(IServiceCollection services)

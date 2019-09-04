@@ -9,7 +9,7 @@ namespace GiG.Core.Extensions.HealthCheck.Tests.Integration
     public class HealthCheckTests
     {
         private readonly TestServer _testServer;
-
+        
         public HealthCheckTests()
         {
             _testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
