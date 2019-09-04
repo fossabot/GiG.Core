@@ -1,15 +1,13 @@
 ﻿using GiG.Core.DistributedTracing.Abstractions.CorrelationId;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Serilog.Core;
 using Serilog.Events;
-using System;
 
-namespace GiG.Core.Extensions.Logging.Enrichers
+namespace GiG.Core.Logging.Enrichers.DistributedTracing
 {
     internal class CorrelationIdEnricher : ILogEventEnricher
     {
         private const string CorrelationId = "CorrelationId";
+     
         private readonly ICorrelationContextAccessor _correlationContextAccessor;
 
         public CorrelationIdEnricher(ICorrelationContextAccessor correlationContextAccessor)

@@ -1,8 +1,5 @@
 ﻿using System.IO;
-using GiG.Core.Extensions.Logging;
-using GiG.Core.Extensions.Logging.Enrichers;
-using GiG.Core.Extensions.Logging.Sinks.Console;
-using GiG.Core.Extensions.Logging.Sinks.Fluentd;
+using GiG.Core.Extensions.Logging.All;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
@@ -21,10 +18,7 @@ namespace GiG.Core.Logging.Sample
                 .ConfigureHostConfiguration(builder => builder
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true))
-                .ConfigureLogging(x => x
-                    .WriteToConsole()
-                    .WriteToFluentd()
-                    .EnrichWithApplicationMetadata())
+                .ConfigureLogging()
                 .ConfigureServices(Startup.ConfigureServices);
         }
     }

@@ -10,7 +10,8 @@ services:
       - ASPNETCORE_URLS=http://+:8080
       - Logging__Sinks__Fluentd__IsEnabled=true
       - Logging__Sinks__Fluentd__Hostname=fluentd
-
+    depends_on:
+      - fluentd
     ports:
       - "5000:8080"
 

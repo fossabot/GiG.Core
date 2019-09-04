@@ -6,17 +6,22 @@ using Xunit;
 
 namespace GiG.Core.Extensions.Configuration.Tests.Integration
 {
-    public class HostBuilderExtensionsTest
+    public class HostBuilderExtensionsTests
     {
-        private const string ConfigurationName = "Configuration";
+        private const string ConfigurationSectionName = "Configuration";
+
+        public HostBuilderExtensionsTests()
+        {
+            Environment.SetEnvironmentVariable(ConfigurationSectionName, null);
+        }
         
         [Fact] 
         public void OverrideConfigurationWithEnvironmentVariable()
         {
             // Arrange
-            var expected = "Environment";
+            const string expected = "Environment";
 
-            Environment.SetEnvironmentVariable(ConfigurationName, expected);
+            Environment.SetEnvironmentVariable(ConfigurationSectionName, expected);
 
             var host = Host.CreateDefaultBuilder()
                 .ConfigureExternalConfiguration()
@@ -25,14 +30,14 @@ namespace GiG.Core.Extensions.Configuration.Tests.Integration
             var configuration = host.Services.GetRequiredService<IConfiguration>();
 
             // Assert
-            Assert.Equal(expected, configuration.GetValue<string>(ConfigurationName));           
+            Assert.Equal(expected, configuration.GetValue<string>(ConfigurationSectionName));           
         }
 
         [Fact]
         public void OverrideConfigurationWithAppSettingsOverride()
         {
             // Arrange
-            var expected = "Override";
+            const string expected = "Override";
                     
             var host = Host.CreateDefaultBuilder()
                 .ConfigureExternalConfiguration()
@@ -41,7 +46,7 @@ namespace GiG.Core.Extensions.Configuration.Tests.Integration
             var configuration = host.Services.GetRequiredService<IConfiguration>();
 
             // Assert
-            Assert.Equal(expected, configuration.GetValue<string>(ConfigurationName));
+            Assert.Equal(expected, configuration.GetValue<string>(ConfigurationSectionName));
         }
 
         [Fact]
@@ -56,16 +61,15 @@ namespace GiG.Core.Extensions.Configuration.Tests.Integration
             var configuration = host.Services.GetRequiredService<IConfiguration>();
 
             // Assert
-            Assert.Equal(expected, configuration.GetValue<string>(ConfigurationName));
+            Assert.Equal(expected, configuration.GetValue<string>(ConfigurationSectionName));
         }
 
         [Fact]
         public void GetDefaultConfigurationWhenPropertyIsNotInAppSettingsOverride()
         {
             // Arrange
-            var expected = "Debug";
-
-            var logLevelName = "LogLevel";
+            const string expected = "Debug";
+            const string logLevelName = "LogLevel";
 
             var host = Host.CreateDefaultBuilder()
                 .ConfigureExternalConfiguration()

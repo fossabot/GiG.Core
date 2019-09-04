@@ -1,14 +1,15 @@
+using GiG.Core.Logging.Abstractions;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using Serilog.Configuration;
 
 namespace GiG.Core.Extensions.Logging.Sinks.Fluentd
 {
-    internal class FluentdLoggerSink : ILoggerSink
+    internal class FluentdLoggerSinkProvider : ILoggerSinkProvider
     {
         private readonly FluentdSinkOptions _options;
         
-        public FluentdLoggerSink(IConfiguration configurationSection)
+        public FluentdLoggerSinkProvider(IConfiguration configurationSection)
         {
             _options = configurationSection.Get<FluentdSinkOptions>();
         }

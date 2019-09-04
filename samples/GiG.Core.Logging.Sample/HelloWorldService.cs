@@ -6,12 +6,12 @@ using Microsoft.Extensions.Logging;
 
 namespace GiG.Core.Logging.Sample
 {
-    public class HelloWorld : BackgroundService
+    public class HelloWorldService : BackgroundService
     {
         private readonly ILogger _logger;
         private Timer _timer;
 
-        public HelloWorld(ILogger<HelloWorld> logger)
+        public HelloWorldService(ILogger<HelloWorldService> logger)
         {
             _logger = logger;
         }

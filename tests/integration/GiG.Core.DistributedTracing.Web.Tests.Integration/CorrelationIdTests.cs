@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using GiG.Core.DistributedTracing.Abstractions;
+using GiG.Core.DistributedTracing.Abstractions.CorrelationId;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Xunit;
@@ -12,16 +12,17 @@ namespace GiG.Core.DistributedTracing.Web.Tests.Integration
     public class CorrelationIdTests
     {
         private readonly TestServer _server;
-
-
+        
         public CorrelationIdTests()
         {
-            _server= new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
+            _server = new TestServer(new WebHostBuilder()
+                .UseStartup<MockStartup>());
         }
 
         [Fact]
         public async Task CorrelationIdGeneratedAndAddedToResponseHeader()
         {
+            // Arrange
             var client = _server.CreateClient();
 
             using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/mock");
@@ -29,17 +30,17 @@ namespace GiG.Core.DistributedTracing.Web.Tests.Integration
 
             var headerValues = response.Headers.GetValues(Constants.Header);
 
+            // Assert
             Assert.NotNull(headerValues);
             Assert.NotEmpty(headerValues);
 
-
-            Guid guidResult;
-            Assert.True(Guid.TryParse(headerValues.FirstOrDefault(), out guidResult));
+            Assert.True(Guid.TryParse(headerValues.FirstOrDefault(), out _));
         }
 
         [Fact]
         public async Task CorrelationIdInResponseHeaderMatchesRequestHeader()
         {
+            // Arrange
             var client = _server.CreateClient();
 
             var requestCorrelationId = Guid.NewGuid().ToString();
@@ -50,11 +51,10 @@ namespace GiG.Core.DistributedTracing.Web.Tests.Integration
 
             var headerValues = response.Headers.GetValues(Constants.Header);
 
+            // Assert
             Assert.NotNull(headerValues);
             Assert.NotEmpty(headerValues);
-            Assert.Equal(requestCorrelationId,headerValues.First());
-
-
+            Assert.Equal(requestCorrelationId, headerValues.First());
         }
     }
 }
