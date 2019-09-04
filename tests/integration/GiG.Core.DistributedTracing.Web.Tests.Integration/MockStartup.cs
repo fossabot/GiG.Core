@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace GiG.Core.DistributedTracing.Web.Tests.Integration
 {
-    public class MockStartup
+    internal class MockStartup
     {
         public void ConfigureServices(IServiceCollection services)
         {
