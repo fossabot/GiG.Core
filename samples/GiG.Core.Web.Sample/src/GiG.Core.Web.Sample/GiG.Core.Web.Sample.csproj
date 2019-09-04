@@ -2,20 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <UserSecretsId>626fa7ba-4f2a-4504-b3c4-046e9d840c9d</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>..\..\..\..</DockerfileContext>
-    <DockerComposeProjectPath>..\..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Extensions.Configuration\GiG.Core.Extensions.Configuration.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Extensions.DistributedTracing.Web\GiG.Core.Extensions.DistributedTracing.Web.csproj" />
-    <ProjectReference Include="..\..\..\..\src\GiG.Core.Extensions.Logging\GiG.Core.Extensions.Logging.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" />
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.Extensions.Logging.All\GiG.Core.Extensions.Logging.All.csproj" />
   </ItemGroup>
 
 </Project>
