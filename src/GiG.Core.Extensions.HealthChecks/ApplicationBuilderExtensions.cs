@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace GiG.Core.Extensions.HealthCheck
+namespace GiG.Core.Extensions.HealthChecks
 {
     /// <summary>
     /// Application Builder Extensions
@@ -21,7 +21,7 @@ namespace GiG.Core.Extensions.HealthCheck
         public static IApplicationBuilder UseHealthChecks([NotNull] this IApplicationBuilder app)
         {
             var scope = app.ApplicationServices.CreateScope();
-            var healthChecksOptions = scope.ServiceProvider.GetRequiredService<IOptions<HealthChecksOptions>>()?.Value ?? new HealthChecksOptions();
+            var healthChecksOptions = scope.ServiceProvider.GetService<IOptions<HealthChecksOptions>>()?.Value ?? new HealthChecksOptions();
 
             app.UseHealthChecks(healthChecksOptions.ReadyUrl, new HealthCheckOptions()
             {

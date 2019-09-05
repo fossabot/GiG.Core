@@ -1,5 +1,5 @@
 using GiG.Core.Extensions.DistributedTracing.Web;
-using GiG.Core.Extensions.HealthCheck;
+using GiG.Core.Extensions.HealthChecks;
 using GiG.Core.Web.Sample.Contracts;
 using GiG.Core.Web.Sample.HealthChecks;
 using GiG.Core.Web.Sample.Services;

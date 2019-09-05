@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace GiG.Core.Extensions.HealthCheck
+namespace GiG.Core.Extensions.HealthChecks
 {
     /// <summary>
     /// Service Collection Extensions

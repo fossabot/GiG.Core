@@ -1,4 +1,5 @@
-﻿using GiG.Core.HealthChecks.Abstractions;
+﻿using GiG.Core.Extensions.HealthChecks;
+using GiG.Core.HealthChecks.Abstractions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

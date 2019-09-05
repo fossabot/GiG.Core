@@ -1,10 +1,10 @@
-﻿using GiG.Core.HealthChecks.Abstractions;
+﻿using System.Collections.Generic;
+using GiG.Core.HealthChecks.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using System.Collections.Generic;
 
-namespace GiG.Core.Extensions.HealthCheck
+namespace GiG.Core.Extensions.HealthChecks
 {
     /// <summary>
     /// Health Checks Builder Extensions
