@@ -7,7 +7,6 @@ namespace GiG.Core.Web.FluentValidation.Tests.Integration.Controllers
     [ApiController]
     public class MockController : ControllerBase
     {
-
         public MockController()
         {
         }

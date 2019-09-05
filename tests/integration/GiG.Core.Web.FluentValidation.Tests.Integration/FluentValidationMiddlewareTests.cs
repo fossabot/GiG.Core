@@ -18,7 +18,7 @@ namespace GiG.Core.Web.FluentValidation.Tests.Integration
         }
 
         [Fact]
-        public async Task CorrelationIdGeneratedAndAddedToResponseHeader()
+        public async Task FluentValidationMiddlewareSetsResponseStatusToBadRequest()
         {
             // Arrange
             var client = _server.CreateClient();
