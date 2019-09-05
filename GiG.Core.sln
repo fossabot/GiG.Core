@@ -11,6 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5915362C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A417-4EEB-A216-4918AD56C9B5}"
 	ProjectSection(SolutionItems) = preProject
+		docs\GiG.Core.Extensions.DistributedTracing.Web.md = docs\GiG.Core.Extensions.DistributedTracing.Web.md
+		docs\GiG.Core.Extensions.Logging.All.md = docs\GiG.Core.Extensions.Logging.All.md
+		docs\GiG.Core.Extensions.Logging.md = docs\GiG.Core.Extensions.Logging.md
 		README.md = README.md
 	EndProjectSection
 EndProject
