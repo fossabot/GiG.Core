@@ -1,4 +1,6 @@
+using FluentValidation.AspNetCore;
 using GiG.Core.Extensions.DistributedTracing.Web;
+using GiG.Core.Web.FluentValidation.Extensions;
 using GiG.Core.Web.Sample.Contracts;
 using GiG.Core.Web.Sample.Services;
 using Microsoft.AspNetCore.Builder;
@@ -26,7 +28,7 @@ namespace GiG.Core.Web.Sample
             services.AddSingleton<ITransactionService, TransactionService>();
 
             // WebAPI
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,6 +36,7 @@ namespace GiG.Core.Web.Sample
         {
             app.UseCorrelationId();
             app.UseRouting();
+            app.UseFluentValidationMiddleware();
 
             app.UseEndpoints(endpoints =>
             {
