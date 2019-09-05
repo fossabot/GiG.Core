@@ -9,7 +9,7 @@ namespace GiG.Core.Web.FluentValidation.Extensions
     public static class ApplicationBuilderExtensions
     {
         /// <summary>
-        /// Adds the Middleware to handle Fluent Validation Exceptions
+        /// Adds the Fluent Validation Exception Middleware.
         /// </summary>
         /// <param name="builder">Application builder.</param>
         /// <returns>Application builder.</returns>
