@@ -10,7 +10,6 @@ namespace GiG.Core.Extensions.HealthCheck.Tests.Integration
     public class MockStartup
     {
         private readonly Mock<IConfiguration> _configurationMock;
-        private readonly HealthChecksOptions _healthChecksOptions;
 
         public MockStartup()
         {
@@ -19,8 +18,6 @@ namespace GiG.Core.Extensions.HealthCheck.Tests.Integration
             configurationSection.Setup(a => a.Value).Returns("testSection");
             _configurationMock.Setup(a => a.GetSection(HealthChecksOptions.DefaultSectionName))
                 .Returns(configurationSection.Object);
-
-            _healthChecksOptions = new HealthChecksOptions();
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -30,7 +27,7 @@ namespace GiG.Core.Extensions.HealthCheck.Tests.Integration
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseHealthChecks(_healthChecksOptions);
+            app.UseHealthChecks();
         }
     }
 }

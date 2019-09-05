@@ -27,6 +27,19 @@ namespace GiG.Core.HealthChecks.Abstractions
             _cacheKey = GetType().FullName;
         }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="memoryCache">The Memory Cache Provider.</param>
+        /// <param name="name">The name of the instance of the Health Check.</param>
+        /// <param name="cacheExpirartionMs">The Expiration of the Cache in MS.</param>
+        protected CachedHealthCheck(IMemoryCache memoryCache, string name, long cacheExpirartionMs = 1000)
+        {
+            _memoryCache = memoryCache;
+            _cacheExpirationMS = cacheExpirartionMs;
+            _cacheKey = name;
+        }
+
         /// <inheritdoc/>
         public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {

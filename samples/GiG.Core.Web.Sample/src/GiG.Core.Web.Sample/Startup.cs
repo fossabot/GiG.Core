@@ -1,13 +1,11 @@
 using GiG.Core.Extensions.DistributedTracing.Web;
 using GiG.Core.Extensions.HealthCheck;
-using GiG.Core.HealthChecks.Abstractions;
 using GiG.Core.Web.Sample.Contracts;
 using GiG.Core.Web.Sample.HealthChecks;
 using GiG.Core.Web.Sample.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 
 namespace GiG.Core.Web.Sample
 {
@@ -28,7 +26,8 @@ namespace GiG.Core.Web.Sample
             
             // Services
             services.AddSingleton<ITransactionService, TransactionService>();
-	        services.AddCachedHealthChecks(_configuration).AddCachedCheck<DummyCachedHealthCheck>(nameof(DummyCachedHealthCheck));
+	        services.AddCachedHealthChecks(_configuration)
+                .AddCachedCheck<DummyCachedHealthCheck>(nameof(DummyCachedHealthCheck));
 
             // WebAPI
             services.AddControllers();
@@ -37,10 +36,9 @@ namespace GiG.Core.Web.Sample
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
-            var scope = app.ApplicationServices.CreateScope();
             app.UseCorrelationId();
             app.UseRouting();
-            app.UseHealthChecks(scope.ServiceProvider.GetRequiredService<IOptions<HealthChecksOptions>>().Value);
+            app.UseHealthChecks();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

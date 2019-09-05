@@ -2,6 +2,8 @@
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace GiG.Core.Extensions.HealthCheck
 {
@@ -15,10 +17,12 @@ namespace GiG.Core.Extensions.HealthCheck
         /// The readiness check uses all registered checks with the 'ready' tag.
         /// </summary>
         /// <param name="app">The Microsoft.AspNetCore.Builder.IApplicationBuilder.</param>
-        /// <param name="healthChecksOptions">The Health Check Options</param>
         /// <returns>The Microsoft.AspNetCore.Builder.IApplicationBuilder.</returns>
-        public static IApplicationBuilder UseHealthChecks([NotNull] this IApplicationBuilder app, [NotNull] HealthChecksOptions healthChecksOptions)
+        public static IApplicationBuilder UseHealthChecks([NotNull] this IApplicationBuilder app)
         {
+            var scope = app.ApplicationServices.CreateScope();
+            var healthChecksOptions = scope.ServiceProvider.GetRequiredService<IOptions<HealthChecksOptions>>()?.Value ?? new HealthChecksOptions();
+
             app.UseHealthChecks(healthChecksOptions.ReadyUrl, new HealthCheckOptions()
             {
                 AllowCachingResponses = true,
