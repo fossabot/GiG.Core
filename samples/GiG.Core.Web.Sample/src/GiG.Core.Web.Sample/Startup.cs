@@ -1,5 +1,7 @@
 using GiG.Core.Extensions.DistributedTracing.Web;
+using GiG.Core.Extensions.HealthChecks;
 using GiG.Core.Web.Sample.Contracts;
+using GiG.Core.Web.Sample.HealthChecks;
 using GiG.Core.Web.Sample.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -21,9 +23,11 @@ namespace GiG.Core.Web.Sample
         {
             // Configuration
             services.Configure<TransactionSettings>(_configuration.GetSection(TransactionSettings.DefaultSectionName));
-
+            
             // Services
             services.AddSingleton<ITransactionService, TransactionService>();
+	        services.AddCachedHealthChecks(_configuration)
+                .AddCachedCheck<DummyCachedHealthCheck>(nameof(DummyCachedHealthCheck));
 
             // WebAPI
             services.AddControllers();
@@ -34,7 +38,7 @@ namespace GiG.Core.Web.Sample
         {
             app.UseCorrelationId();
             app.UseRouting();
-
+            app.UseHealthChecks();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
