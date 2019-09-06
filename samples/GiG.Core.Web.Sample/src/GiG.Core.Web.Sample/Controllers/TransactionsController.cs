@@ -1,7 +1,7 @@
-﻿using System.Net;
-using GiG.Core.Web.Sample.Contracts;
+﻿using GiG.Core.Web.Sample.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using System.Net;
 
 namespace GiG.Core.Web.Sample.Controllers
 {
@@ -67,11 +67,6 @@ namespace GiG.Core.Web.Sample.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public ActionResult<decimal> Withdraw(TransactionRequest request)
         {
-            if (request.Amount < 0)
-            {
-                return BadRequest("Withdraw Amount must be greater than 0.");
-            }
-
             if (request.Amount > _transactionService.Balance)
             {
                 return BadRequest("Withdraw Amount must be smaller or equal to the Balance.");

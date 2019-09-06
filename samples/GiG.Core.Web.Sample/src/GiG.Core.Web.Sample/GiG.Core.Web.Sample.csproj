@@ -5,11 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.5.0-preview5" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Extensions.Configuration\GiG.Core.Extensions.Configuration.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Extensions.DistributedTracing.Web\GiG.Core.Extensions.DistributedTracing.Web.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Extensions.HealthChecks\GiG.Core.Extensions.HealthChecks.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Extensions.Logging.All\GiG.Core.Extensions.Logging.All.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.HealthChecks.Abstractions\GiG.Core.HealthChecks.Abstractions.csproj" />
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.Web.FluentValidation\GiG.Core.Web.FluentValidation.csproj" />
   </ItemGroup>
 
 </Project>
