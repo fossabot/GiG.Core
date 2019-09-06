@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
+using GiG.Core.Web.FluentValidation.Abstractions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -12,8 +13,6 @@ namespace GiG.Core.Web.FluentValidation
 {
     internal class FluentValidationExceptionMiddleware
     {
-        private const string GenericValidationErrorMessage = "Fluent Validation exception";
-        private const string Json = "application/json";
         private readonly RequestDelegate _next;
         private readonly ILogger _logger;
         private readonly IOptions<JsonSerializerOptions> _jsonOptionsAccessor;
@@ -43,33 +42,38 @@ namespace GiG.Core.Web.FluentValidation
         private async Task HandleValidationExceptionAsync(HttpContext context, ValidationException ex)
         {
             context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            context.Response.ContentType = Json;
+            context.Response.ContentType = Constants.JsonMimeType;
 
-            var responseDictionary = BuildResponseDictionary(ex.Errors);
+            var responseDictionary = BuildValidationResponse(ex.Errors);
 
-            _logger.LogInformation(GenericValidationErrorMessage, ex);
+            _logger.LogInformation(Constants.GenericValidationErrorMessage, ex);
 
             await context.Response.WriteAsync(JsonSerializer.Serialize(responseDictionary,
                 _jsonOptionsAccessor.Value));
         }
 
-        private static IDictionary<string, List<string>> BuildResponseDictionary(IEnumerable<ValidationFailure> errors)
+        private static ValidationResponse BuildValidationResponse(IEnumerable<ValidationFailure> errors)
         {
-            var dictionary = new Dictionary<string, List<string>>();
+            var errorMsgsDictionary = new Dictionary<string, List<string>>();
 
             foreach (var error in errors)
             {
-                if (dictionary.ContainsKey(error.PropertyName))
+                if (errorMsgsDictionary.ContainsKey(error.PropertyName))
                 {
-                    dictionary[error.PropertyName].Add(error.ErrorMessage);
+                    errorMsgsDictionary[error.PropertyName].Add(error.ErrorMessage);
                 }
                 else
                 {
-                    dictionary.Add(error.PropertyName, new List<string> { error.ErrorMessage });
+                    errorMsgsDictionary.Add(error.PropertyName, new List<string> { error.ErrorMessage });
                 }
             }
 
-            return dictionary;
+            var validationResponse = new ValidationResponse
+            {
+                ValidationErrors = errorMsgsDictionary
+            };
+
+            return validationResponse;
         }
     }
 }

@@ -15,4 +15,8 @@
     <PackageReference Include="System.Text.Json" Version="4.6.0-preview9.19421.4" PrivateAssets="compile" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GiG.Core.Web.FluentValidation.Abstractions\GiG.Core.Web.FluentValidation.Abstractions.csproj" />
+  </ItemGroup>
+
 </Project>
