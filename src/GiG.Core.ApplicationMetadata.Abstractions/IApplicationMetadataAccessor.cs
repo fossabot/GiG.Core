@@ -1,4 +1,4 @@
-﻿namespace GiG.Core.ApplicationMetadata.Abstractions
+﻿namespace GiG.Core.Hosting.Abstractions
 {
     /// <summary>
     /// Accessor which provider version information about the application.
