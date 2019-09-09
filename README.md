@@ -5,12 +5,12 @@ The latest major release is [GiG Core 2.0](release-notes/2.0).
 ## Docs
 
 ## Distributed Tacing
-[GiG.Core.Extensions.DistributedTracing.Web](docs/GiG.Core.Extensions.DistributedTracing.Web.md)
+[GiG.Core.DistributedTracing.Web](docs/GiG.Core.DistributedTracing.Web.md)
 
 ## Logging
-[GiG.Core.Extensions.Logging](docs/GiG.Core.Extensions.Logging.md)
+[GiG.Core.Logging](docs/GiG.Core.Logging.md)
 
-[GiG.Core.Extensions.Logging.All](docs/GiG.Core.Extensions.Logging.All.md)
+[GiG.Core.Logging.All](docs/GiG.Core.Logging.All.md)
 
 ## Fluent Validation Middleware
 [GiG.Core.Web.FluentValidation](docs/GiG.Core.Web.FluentValidation.md)

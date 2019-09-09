@@ -11,9 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5915362C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A417-4EEB-A216-4918AD56C9B5}"
 	ProjectSection(SolutionItems) = preProject
-		docs\GiG.Core.Extensions.DistributedTracing.Web.md = docs\GiG.Core.Extensions.DistributedTracing.Web.md
-		docs\GiG.Core.Extensions.Logging.All.md = docs\GiG.Core.Extensions.Logging.All.md
-		docs\GiG.Core.Extensions.Logging.md = docs\GiG.Core.Extensions.Logging.md
+		docs\GiG.Core.DistributedTracing.Web.md = docs\GiG.Core.DistributedTracing.Web.md
+		docs\GiG.Core.Logging.All.md = docs\GiG.Core.Logging.All.md
+		docs\GiG.Core.Logging.md = docs\GiG.Core.Logging.md
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -34,14 +34,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "release-notes", "release-no
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Logging.Sample", "samples\GiG.Core.Logging.Sample\GiG.Core.Logging.Sample.csproj", "{25BFD54E-1985-48F5-88BD-0D52F3535284}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Extensions.Logging", "src\GiG.Core.Extensions.Logging\GiG.Core.Extensions.Logging.csproj", "{76A8984C-9850-44E0-AB6E-4BC576ECAAA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Logging", "src\GiG.Core.Logging\GiG.Core.Logging.csproj", "{76A8984C-9850-44E0-AB6E-4BC576ECAAA4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.0", "2.0", "{0305263F-4F1E-4C91-B90F-3F3268F69142}"
 	ProjectSection(SolutionItems) = preProject
 		release-notes\2.0\2.0.0.md = release-notes\2.0\2.0.0.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Extensions.Configuration", "src\GiG.Core.Extensions.Configuration\GiG.Core.Extensions.Configuration.csproj", "{CDCD9B6F-62E6-4F37-8758-24BD6C567D93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Configuration", "src\GiG.Core.Configuration\GiG.Core.Configuration.csproj", "{CDCD9B6F-62E6-4F37-8758-24BD6C567D93}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GiG.Core.Web.Sample", "GiG.Core.Web.Sample", "{A599F81C-4703-4DA5-8748-729DCD42BED5}"
 EndProject
@@ -49,7 +49,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "integration", "integration"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6D384490-FFA2-4013-AD75-AD09E8346C14}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Extensions.Configuration.Tests.Integration", "tests\integration\GiG.Core.Extensions.Configuration.Tests.Integration\GiG.Core.Extensions.Configuration.Tests.Integration.csproj", "{036F11C4-D05B-4E08-8B93-2B60C02E5837}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Configuration.Tests.Integration", "tests\integration\GiG.Core.Configuration.Tests.Integration\GiG.Core.Configuration.Tests.Integration.csproj", "{036F11C4-D05B-4E08-8B93-2B60C02E5837}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Sample", "samples\GiG.Core.Web.Sample\src\GiG.Core.Web.Sample\GiG.Core.Web.Sample.csproj", "{C2E61B7C-1CC5-414E-A46C-9F8CE9919E80}"
 EndProject
@@ -65,8 +65,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing.Web", "src\GiG.Core.DistributedTracing.Web\GiG.Core.DistributedTracing.Web.csproj", "{CBF3F986-453A-47B2-8AC9-173A7933D7C5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Extensions.DistributedTracing.Web", "src\GiG.Core.Extensions.DistributedTracing.Web\GiG.Core.Extensions.DistributedTracing.Web.csproj", "{4FC513EB-738D-4923-97AC-6026CF685676}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing.Web.Tests.Integration", "tests\integration\GiG.Core.DistributedTracing.Web.Tests.Integration\GiG.Core.DistributedTracing.Web.Tests.Integration.csproj", "{BFD7DBD0-E549-4652-AEBD-F33F6279C059}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Logging.Enrichers.ApplicationMetadata", "src\GiG.Core.Logging.Enrichers.ApplicationMetadata\GiG.Core.Logging.Enrichers.ApplicationMetadata.csproj", "{3097BFFD-7910-4953-B506-7DBB606DA22A}"
@@ -75,11 +73,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Logging.Enrichers.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Logging.Abstractions", "src\GiG.Core.Logging.Abstractions\GiG.Core.Logging.Abstractions.csproj", "{10A41C72-335A-41CF-93F1-197C9031E9FF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Extensions.Logging.Sinks.Console", "src\GiG.Core.Extensions.Logging.Sinks.Console\GiG.Core.Extensions.Logging.Sinks.Console.csproj", "{C0474C00-0063-4E3C-8611-528D9B64AC71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Logging.Sinks.Console", "src\GiG.Core.Logging.Sinks.Console\GiG.Core.Logging.Sinks.Console.csproj", "{C0474C00-0063-4E3C-8611-528D9B64AC71}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Extensions.Logging.Sinks.Fluentd", "src\GiG.Core.Extensions.Logging.Sinks.Fluentd\GiG.Core.Extensions.Logging.Sinks.Fluentd.csproj", "{58325500-DD6C-4D2D-AE55-26F7FE00C5F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Logging.Sinks.Fluentd", "src\GiG.Core.Logging.Sinks.Fluentd\GiG.Core.Logging.Sinks.Fluentd.csproj", "{58325500-DD6C-4D2D-AE55-26F7FE00C5F7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Extensions.Logging.All", "src\GiG.Core.Extensions.Logging.All\GiG.Core.Extensions.Logging.All.csproj", "{F75A75DE-3013-4221-8E19-7ADD023C9B26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Logging.All", "src\GiG.Core.Logging.All\GiG.Core.Logging.All.csproj", "{F75A75DE-3013-4221-8E19-7ADD023C9B26}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logging", "Logging", "{52AEF79F-C056-404A-9AC9-155CE8A17721}"
 EndProject
@@ -91,9 +89,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HealthChecks", "HealthCheck
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.HealthChecks.Abstractions", "src\GiG.Core.HealthChecks.Abstractions\GiG.Core.HealthChecks.Abstractions.csproj", "{B86F1CDD-8DB2-43FA-A353-7247DDCD7621}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Extensions.HealthChecks", "src\GiG.Core.Extensions.HealthChecks\GiG.Core.Extensions.HealthChecks.csproj", "{93E66CCE-628A-4307-93EC-56B6A770DE07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.HealthChecks", "src\GiG.Core.HealthChecks\GiG.Core.HealthChecks.csproj", "{93E66CCE-628A-4307-93EC-56B6A770DE07}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Extensions.HealthChecks.Tests.Integration", "tests\integration\GiG.Core.Extensions.HealthChecks.Tests.Integration\GiG.Core.Extensions.HealthChecks.Tests.Integration.csproj", "{54B0628A-D303-4AB9-9DB8-047B91CCE4F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.HealthChecks.Tests.Integration", "tests\integration\GiG.Core.HealthChecks.Tests.Integration\GiG.Core.HealthChecks.Tests.Integration.csproj", "{54B0628A-D303-4AB9-9DB8-047B91CCE4F4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF}"
 EndProject
@@ -101,7 +99,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.FluentValidati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.FluentValidation.Tests.Integration", "tests\integration\GiG.Core.Web.FluentValidation.Tests.Integration\GiG.Core.Web.FluentValidation.Tests.Integration.csproj", "{38967D6D-E40C-479D-A83B-F391D239DA1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Web.FluentValidation.Abstractions", "src\GiG.Core.Web.FluentValidation.Abstractions\GiG.Core.Web.FluentValidation.Abstractions.csproj", "{9F15621F-DE76-4F75-BCA7-DEB6F8139100}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.FluentValidation.Abstractions", "src\GiG.Core.Web.FluentValidation.Abstractions\GiG.Core.Web.FluentValidation.Abstractions.csproj", "{9F15621F-DE76-4F75-BCA7-DEB6F8139100}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -145,10 +143,6 @@ Global
 		{CBF3F986-453A-47B2-8AC9-173A7933D7C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBF3F986-453A-47B2-8AC9-173A7933D7C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBF3F986-453A-47B2-8AC9-173A7933D7C5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4FC513EB-738D-4923-97AC-6026CF685676}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4FC513EB-738D-4923-97AC-6026CF685676}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4FC513EB-738D-4923-97AC-6026CF685676}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4FC513EB-738D-4923-97AC-6026CF685676}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BFD7DBD0-E549-4652-AEBD-F33F6279C059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BFD7DBD0-E549-4652-AEBD-F33F6279C059}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFD7DBD0-E549-4652-AEBD-F33F6279C059}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -221,7 +215,6 @@ Global
 		{72FFFFCF-7748-416B-8084-0F1906F6EE4D} = {73E3D18B-ABA8-469D-BB19-5C87F607E3CF}
 		{BE594F54-E2A3-4B26-9D1F-54758CB7F2C0} = {F3E4EB54-9129-4327-9A32-89ABD4ADA6C5}
 		{CBF3F986-453A-47B2-8AC9-173A7933D7C5} = {F3E4EB54-9129-4327-9A32-89ABD4ADA6C5}
-		{4FC513EB-738D-4923-97AC-6026CF685676} = {F3E4EB54-9129-4327-9A32-89ABD4ADA6C5}
 		{BFD7DBD0-E549-4652-AEBD-F33F6279C059} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 		{3097BFFD-7910-4953-B506-7DBB606DA22A} = {52AEF79F-C056-404A-9AC9-155CE8A17721}
 		{CD7B94AE-8519-4080-8B92-094B6E7562E3} = {52AEF79F-C056-404A-9AC9-155CE8A17721}

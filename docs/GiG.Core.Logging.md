@@ -1,11 +1,21 @@
-﻿using System.IO;
-using GiG.Core.Logging.All.Extensions;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
+﻿@@ -0,0 +1,31 @@
 
-namespace GiG.Core.Logging.Sample
-{
-    static class Program
+# GiG.Core.Logging
+
+
+This Library provides an API to register Logging using Serilog for your application.
+
+
+
+## Basic Usage
+
+
+Make use of ConfigureLogging() when Creating an IHostBuilder. Logging requires configuration.
+
+
+```csharp
+
+	static class Program
     {
         public static void Main()
         {
@@ -18,8 +28,8 @@ namespace GiG.Core.Logging.Sample
                 .ConfigureHostConfiguration(builder => builder
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true))
-                .ConfigureLogging()
-                .ConfigureServices(Startup.ConfigureServices);
+                .ConfigureLogging();
         }
     }
-}
+
+```

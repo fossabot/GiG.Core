@@ -1,6 +1,6 @@
-using GiG.Core.Extensions.Configuration;
-using GiG.Core.Extensions.DistributedTracing.Web;
-using GiG.Core.Extensions.Logging.All;
+using GiG.Core.Configuration.Extensions;
+using GiG.Core.DistributedTracing.Web.Extensions;
+using GiG.Core.Logging.All.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
