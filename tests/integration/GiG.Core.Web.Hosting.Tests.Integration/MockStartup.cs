@@ -1,5 +1,6 @@
 ﻿using GiG.Core.Web.Hosting.Extensions;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GiG.Core.Web.Hosting.Tests.Integration
@@ -13,10 +14,10 @@ namespace GiG.Core.Web.Hosting.Tests.Integration
         }
 
         public void Configure(IApplicationBuilder app)
-        { 
+        {
+            app.UseForwardedHeaders();
             app.UseRouting();
             app.ConfigurePathBase();
-            app.UseForwardedHeaders();
 
             app.UseEndpoints(endpoints =>
             {

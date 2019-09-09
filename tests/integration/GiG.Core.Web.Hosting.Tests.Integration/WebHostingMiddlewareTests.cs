@@ -51,14 +51,14 @@ namespace GiG.Core.Web.Hosting.Tests.Integration
             var forwardedFor = "10.1.12.15";
             
             using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/mock/ip");
-            request.Headers.Add(ForwardedHeaders.XForwardedFor.ToString(), forwardedFor );
+            request.Headers.Add(ForwardedHeadersDefaults.XForwardedForHeaderName, forwardedFor);
             using var response = await client.SendAsync(request);
 
             // Assert
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-
-            Assert.Equal(forwardedFor, response.RequestMessage.Headers.GetValues(ForwardedHeaders.XForwardedFor.ToString()).FirstOrDefault());
+            var ipAddress = await response.Content.ReadAsStringAsync();
+            Assert.Equal(forwardedFor, ipAddress);
         }
     }
 }

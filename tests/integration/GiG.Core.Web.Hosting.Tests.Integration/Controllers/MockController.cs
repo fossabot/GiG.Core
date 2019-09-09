@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GiG.Core.Web.Hosting.Tests.Integration.Controllers
@@ -21,7 +20,7 @@ namespace GiG.Core.Web.Hosting.Tests.Integration.Controllers
         [HttpGet("ip")]
         public ActionResult<string> GetIp()
         {
-            return Ok(HttpContext.Request.RemoteIpAddress);
+            return Ok(HttpContext.Connection.RemoteIpAddress.ToString());
         }
     }
 }
