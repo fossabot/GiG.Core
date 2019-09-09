@@ -14,3 +14,6 @@ The latest major release is [GiG Core 2.0](release-notes/2.0).
 
 ## Fluent Validation Middleware
 [GiG.Core.Web.FluentValidation](docs/GiG.Core.Web.FluentValidation.md)
+
+## Hosting
+[GiG.Core.Hosting](docs/GiG.Core.Hosting.md)

@@ -8,7 +8,7 @@
         /// <summary>
         /// The application name as specified in the application's configuration.
         /// </summary>
-        string ApplicationName { get; }
+        string Name { get; }
 
         /// <summary>
         /// The application assembly version.

@@ -23,7 +23,7 @@ namespace GiG.Core.Hosting.Tests.Integration.Controllers
         [HttpGet("name")]
         public ActionResult<string> Name()
         {
-            return Ok(_applicationMetadataAccessor.ApplicationName);
+            return Ok(_applicationMetadataAccessor.Name);
         }
 
         [HttpGet("version-info")]

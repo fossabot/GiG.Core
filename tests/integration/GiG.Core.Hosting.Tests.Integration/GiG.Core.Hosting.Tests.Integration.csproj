@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\GiG.Core.ApplicationMetadata.Abstractions\GiG.Core.Hosting.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Hosting\GiG.Core.Hosting.csproj" />
   </ItemGroup>
 

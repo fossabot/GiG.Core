@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GiG.Core.ApplicationMetadata.Abstractions\GiG.Core.Hosting.Abstractions.csproj" />
+    <ProjectReference Include="..\GiG.Core.Hosting.Abstractions\GiG.Core.Hosting.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

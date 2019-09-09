@@ -15,7 +15,7 @@ namespace GiG.Core.Hosting
         }
 
         /// <inheritdoc />
-        public string ApplicationName => _configuration["ApplicationName"];
+        public string Name => _configuration["ApplicationName"];
 
         /// <inheritdoc />
         public string Version => Assembly.GetEntryAssembly()?.GetName().Version.ToString();
