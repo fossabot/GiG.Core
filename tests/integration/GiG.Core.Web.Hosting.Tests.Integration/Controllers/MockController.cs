@@ -17,5 +17,11 @@ namespace GiG.Core.Web.Hosting.Tests.Integration.Controllers
         {
             return Ok(HttpContext.Request.PathBase);
         }
+        
+        [HttpGet("ip")]
+        public ActionResult<string> GetIp()
+        {
+            return Ok(HttpContext.Request.RemoteIpAddress);
+        }
     }
 }

@@ -16,6 +16,7 @@ namespace GiG.Core.Web.Hosting.Tests.Integration
         { 
             app.UseRouting();
             app.ConfigurePathBase();
+            app.UseForwardedHeaders();
 
             app.UseEndpoints(endpoints =>
             {

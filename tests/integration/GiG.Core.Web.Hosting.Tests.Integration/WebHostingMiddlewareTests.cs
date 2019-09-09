@@ -1,7 +1,10 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -35,8 +38,27 @@ namespace GiG.Core.Web.Hosting.Tests.Integration
             // Assert
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            var responseValue = await response.Content.ReadAsStringAsync();
-            Assert.Equal("/api/mock", response.Content.ReadAsStreamAsync());
+            var responseDictionary  = await response.Content.ReadAsStringAsync();
+            var responseValues = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseDictionary);
+            Assert.Equal("/api/mock", responseValues["value"]);
+        }
+        
+        [Fact]
+        public async Task WebHostingMiddlewareConfigureXForwardedHeaders()
+        {
+            // Arrange
+            var client = _server.CreateClient();
+            var forwardedFor = "10.1.12.15";
+            
+            using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/mock/ip");
+            request.Headers.Add(ForwardedHeaders.XForwardedFor.ToString(), forwardedFor );
+            using var response = await client.SendAsync(request);
+
+            // Assert
+            Assert.NotNull(response);
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+            Assert.Equal(forwardedFor, response.RequestMessage.Headers.GetValues(ForwardedHeaders.XForwardedFor.ToString()).FirstOrDefault());
         }
     }
 }
