@@ -1,6 +1,6 @@
 using FluentValidation.AspNetCore;
-using GiG.Core.Extensions.DistributedTracing.Web;
-using GiG.Core.Extensions.HealthChecks;
+using GiG.Core.DistributedTracing.Web.Extensions;
+using GiG.Core.HealthChecks.Extensions;
 using GiG.Core.Web.FluentValidation.Extensions;
 using GiG.Core.Web.Sample.Contracts;
 using GiG.Core.Web.Sample.HealthChecks;

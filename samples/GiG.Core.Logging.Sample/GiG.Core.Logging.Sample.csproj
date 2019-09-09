@@ -11,13 +11,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\GiG.Core.Extensions.Logging.All\GiG.Core.Extensions.Logging.All.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\GiG.Core.Logging.All\GiG.Core.Logging.All.csproj" />
   </ItemGroup>
   
 </Project>

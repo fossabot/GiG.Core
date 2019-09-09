@@ -1,4 +1,4 @@
-﻿using GiG.Core.Extensions.DistributedTracing.Web;
+﻿using GiG.Core.DistributedTracing.Web.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
