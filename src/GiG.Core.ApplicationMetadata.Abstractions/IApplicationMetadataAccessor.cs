@@ -8,16 +8,16 @@
         /// <summary>
         /// The application name as specified in the application's configuration.
         /// </summary>
-        string ApplicationName { get; set; }
+        string ApplicationName { get; }
 
         /// <summary>
         /// The application assembly version.
         /// </summary>
-        string Version { get; set; }
+        string Version { get; }
         
         /// <summary>
         /// The application's informational version.
         /// </summary>
-        string InformationalVersion { get; set; }
+        string InformationalVersion { get; }
     }
 }
