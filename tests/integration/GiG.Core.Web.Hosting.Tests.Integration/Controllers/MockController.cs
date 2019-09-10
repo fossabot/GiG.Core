@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace GiG.Core.Web.Hosting.Tests.Integration.Controllers
 {
@@ -18,9 +18,11 @@ namespace GiG.Core.Web.Hosting.Tests.Integration.Controllers
         }
         
         [HttpGet("ip")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public ActionResult<string> GetIp()
         {
-            return Ok(HttpContext.Connection.RemoteIpAddress.ToString());
+            return Ok(HttpContext.Connection.RemoteIpAddress?.ToString());
         }
     }
 }

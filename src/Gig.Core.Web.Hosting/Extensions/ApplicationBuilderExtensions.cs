@@ -14,24 +14,24 @@ namespace GiG.Core.Web.Hosting.Extensions
         /// <summary>
         /// Configure the Path Base for the application using config key "PATH_BASE".
         /// </summary>
-        /// <param name="builder">Application builder.</param>
-        /// <returns>Application builder.</returns>
+        /// <param name="builder">The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</param>
+        /// <returns>The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</returns>
         public static IApplicationBuilder ConfigurePathBase(this IApplicationBuilder builder)
         {
             return builder.ConfigurePathBase(DefaultPathBaseSectionName);
         }
 
         /// <summary>
-        /// Configure the Path Base for the application using configSection parameter.
+        /// Configure the Path Base for the application using configSectionName parameter.
         /// </summary>
-        /// <param name="builder">Application builder.</param>
-        /// <param name="configSection">Config key for path base.</param>
-        /// <returns>Application builder.</returns>
-        public static IApplicationBuilder ConfigurePathBase(this IApplicationBuilder builder, string configSection)
+        /// <param name="builder">The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</param>
+        /// <param name="configSectionName">Config key name for the path base.</param>
+        /// <returns>The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</returns>
+        public static IApplicationBuilder ConfigurePathBase(this IApplicationBuilder builder, string configSectionName)
         {
             var serviceProvider = builder.ApplicationServices;
             var configuration = serviceProvider.GetRequiredService<IConfiguration>();
-            var pathBase = configuration[configSection];
+            var pathBase = configuration[configSectionName];
             
             if (!string.IsNullOrEmpty(pathBase))
             {

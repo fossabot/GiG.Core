@@ -2,6 +2,7 @@ using FluentValidation.AspNetCore;
 using GiG.Core.DistributedTracing.Web.Extensions;
 using GiG.Core.HealthChecks.Extensions;
 using GiG.Core.Web.FluentValidation.Extensions;
+using GiG.Core.Web.Hosting.Extensions;
 using GiG.Core.Web.Sample.Contracts;
 using GiG.Core.Web.Sample.HealthChecks;
 using GiG.Core.Web.Sample.Services;
@@ -33,11 +34,16 @@ namespace GiG.Core.Web.Sample
 
             // WebAPI
             services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
+            
+            // Forwarded Headers
+            services.ConfigureForwardedHeaders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
+            app.UseForwardedHeaders();
+            app.ConfigurePathBase();
             app.UseCorrelationId();
             app.UseRouting();
             app.UseFluentValidationMiddleware();

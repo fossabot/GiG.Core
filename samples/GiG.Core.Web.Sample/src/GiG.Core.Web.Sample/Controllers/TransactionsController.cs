@@ -60,7 +60,7 @@ namespace GiG.Core.Web.Sample.Controllers
         /// <summary>
         /// Performs a Withdrawal
         /// </summary>
-        /// <param name="request">Withdrawak Request</param>
+        /// <param name="request">Withdrawal Request</param>
         /// <returns></returns>
         [HttpPost("withdraw")]
         [ProducesResponseType((int)HttpStatusCode.OK)]

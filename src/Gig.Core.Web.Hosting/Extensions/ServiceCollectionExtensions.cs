@@ -12,8 +12,8 @@ namespace GiG.Core.Web.Hosting.Extensions
         /// <summary>
         /// Configure Forward Headers.
         /// </summary>
-        /// <param name="services">Service Collection.</param>
-        /// <returns>Service Collection.</returns>
+        /// <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" /> to add the services to.</param>
+        /// <returns>The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" /> so that additional calls can be chained.</returns>
         public static IServiceCollection ConfigureForwardedHeaders(this IServiceCollection services)
         {
             return services.Configure<ForwardedHeadersOptions>(options =>
