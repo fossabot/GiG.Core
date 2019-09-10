@@ -12,7 +12,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Mocks
         {
         }
 
-        protected override Task<HealthCheckResult> CheckCachedHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
+        protected override Task<HealthCheckResult> DoHealthCheckAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {
             return Task.FromResult(HealthCheckResult.Unhealthy());
         }

@@ -16,7 +16,7 @@ namespace GiG.Core.Web.Sample.HealthChecks
             _logger = logger;
         }
 
-        protected override Task<HealthCheckResult> CheckCachedHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
+        protected override Task<HealthCheckResult> DoHealthCheckAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {
             _logger.LogInformation("Dummy Health Check");
 
