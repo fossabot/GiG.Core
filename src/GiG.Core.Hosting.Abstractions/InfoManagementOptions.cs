@@ -4,7 +4,7 @@
     {
         public const string DefaultSectionName = "InfoManagement";
 
-        public bool IsEnabled { get; set; }
+        public bool IsEnabled { get; set; } = true;
 
         public string Url { get; set; } = "/actuator/info";
     }
