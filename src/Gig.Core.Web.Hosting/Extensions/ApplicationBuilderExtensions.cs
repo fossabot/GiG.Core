@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using JetBrains.Annotations;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace GiG.Core.Web.Hosting.Extensions
 {
@@ -16,8 +18,10 @@ namespace GiG.Core.Web.Hosting.Extensions
         /// </summary>
         /// <param name="builder">The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</param>
         /// <returns>The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</returns>
-        public static IApplicationBuilder ConfigurePathBase(this IApplicationBuilder builder)
+        public static IApplicationBuilder ConfigurePathBase([NotNull] this IApplicationBuilder builder)
         {
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            
             return builder.ConfigurePathBase(DefaultPathBaseSectionName);
         }
 
@@ -27,8 +31,10 @@ namespace GiG.Core.Web.Hosting.Extensions
         /// <param name="builder">The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</param>
         /// <param name="configSectionName">Config key name for the path base.</param>
         /// <returns>The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</returns>
-        public static IApplicationBuilder ConfigurePathBase(this IApplicationBuilder builder, string configSectionName)
+        public static IApplicationBuilder ConfigurePathBase([NotNull] this IApplicationBuilder builder, string configSectionName)
         {
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            
             var serviceProvider = builder.ApplicationServices;
             var configuration = serviceProvider.GetRequiredService<IConfiguration>();
             var pathBase = configuration[configSectionName];
