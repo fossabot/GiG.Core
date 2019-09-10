@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Hosting.md = docs\GiG.Core.Hosting.md
 		docs\GiG.Core.Logging.All.md = docs\GiG.Core.Logging.All.md
 		docs\GiG.Core.Logging.md = docs\GiG.Core.Logging.md
+		docs\GiG.Core.MultiTenant.Web.md = docs\GiG.Core.MultiTenant.Web.md
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -114,7 +115,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.MultiTenant.Web", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Hosting.Abstractions", "src\GiG.Core.Hosting.Abstractions\GiG.Core.Hosting.Abstractions.csproj", "{EC5286DF-10DC-4E35-BE33-C110B790BBF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.MultiTenant.Web.Tests.Integration", ""tests\integration\GiG.Core.MultiTenant.Tests.Integration\GiG.Core.MultiTenant.Web.Tests.Integration.csproj", "{415BBEEB-7DFE-48A3-8F93-97933C2D4A2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.MultiTenant.Web.Tests.Integration", "tests\integration\GiG.Core.MultiTenant.Tests.Integration\GiG.Core.MultiTenant.Web.Tests.Integration.csproj", "{415BBEEB-7DFE-48A3-8F93-97933C2D4A2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
