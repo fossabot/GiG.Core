@@ -23,7 +23,7 @@ namespace GiG.Core.Hosting.Tests.Integration
             services.ConfigureInfoManagement(_configuration);
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IConfiguration configuration)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseRouting();
             app.UseInfoManagement();
