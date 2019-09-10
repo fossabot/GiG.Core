@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.Logging.All\GiG.Core.Logging.All.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Hosting\GiG.Core.Orleans.Hosting.csproj" />
   </ItemGroup>
 

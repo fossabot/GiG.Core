@@ -17,7 +17,7 @@ namespace GiG.Core.Orleans.Hosting.Extensions
         /// <summary>
         /// Adds Assemblies to Silo Builder with references.
         /// </summary>
-        /// <param name="builder">The Orleans Silo Builder.</param>
+        /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
         /// <param name="assemblies">The Assemblies which will be added to the Silo.</param>
         /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
         public static ISiloBuilder AddAssemblies(this ISiloBuilder builder,
@@ -37,7 +37,7 @@ namespace GiG.Core.Orleans.Hosting.Extensions
         /// <summary>
         /// Configures the Orleans Cluster using a given Configuration section.
         /// </summary>
-        /// <param name="builder">The Orleans Silo Builder.</param>
+        /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
         /// <param name="configurationSection">The configuration section containing the Cluster options.</param>
         /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
         public static ISiloBuilder ConfigureCluster(this ISiloBuilder builder, IConfigurationSection configurationSection)
@@ -51,7 +51,7 @@ namespace GiG.Core.Orleans.Hosting.Extensions
         /// <summary>
         /// Configures the Orleans Cluster. Will retrieve configuration from the default Configuration Section.
         /// </summary>
-        /// <param name="builder">The Orleans Silo Builder.</param>
+        /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
         /// <param name="configuration"></param>
         /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
         public static ISiloBuilder ConfigureCluster(this ISiloBuilder builder, IConfiguration configuration)
@@ -70,7 +70,7 @@ namespace GiG.Core.Orleans.Hosting.Extensions
         /// <summary>
         /// Configures the Silo's endpoint.
         /// </summary>
-        
+        /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
         /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
         public static ISiloBuilder ConfigureEndpoint(this ISiloBuilder builder)
         {
@@ -84,7 +84,7 @@ namespace GiG.Core.Orleans.Hosting.Extensions
         /// <summary>
         /// Configures the Orleans Dashboard.
         /// </summary>
-        /// <param name="builder">The Orleans Silo Builder.</param>
+        /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
         /// <param name="configuration"></param>
         /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
         public static ISiloBuilder ConfigureDashboard(this ISiloBuilder builder, IConfiguration configuration)
@@ -108,7 +108,7 @@ namespace GiG.Core.Orleans.Hosting.Extensions
         /// <summary>
         /// Configures the Silo Builder with default configurations.
         /// </summary>
-        /// <param name="builder">The Orleans Silo Builder.</param>
+        /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
         /// <param name="configuration"></param>
         /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
         public static ISiloBuilder ConfigureDefaults(this ISiloBuilder builder, IConfiguration configuration)
