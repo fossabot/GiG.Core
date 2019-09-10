@@ -8,6 +8,7 @@ services:
       dockerfile: samples/GiG.Core.Web.Sample/src/GiG.Core.Web.Sample/Dockerfile
     environment:
       - ASPNETCORE_URLS=http://+:8080
+      - PATH_BASE=/api/transactions
       - Logging__Sinks__Fluentd__IsEnabled=true
       - Logging__Sinks__Fluentd__Hostname=fluentd
     depends_on:
