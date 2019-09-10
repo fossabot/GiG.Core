@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,6 +12,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.HealthChecks" Version="2.2.0" PrivateAssets="compile" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.2.0" PrivateAssets="compile" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0" PrivateAssets="compile" />
+    <PackageReference Include="System.Text.Json" Version="4.6.0-preview9.19421.4" PrivateAssets="compile" />
   </ItemGroup>
 
   <ItemGroup>

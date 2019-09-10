@@ -1,16 +1,25 @@
 # GiG Core Home
 
-The latest major release is [GiG Core 2.0](release-notes/2.0).
+The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 
 ## Docs
 
-## Distributed Tacing
-[GiG.Core.DistributedTracing.Web](docs/GiG.Core.DistributedTracing.Web.md)
+### Distributed Tracing
+* [GiG.Core.DistributedTracing.Web](docs/GiG.Core.DistributedTracing.Web.md)
 
-## Logging
-[GiG.Core.Logging](docs/GiG.Core.Logging.md)
+### Fluent Validation Middleware
+* [GiG.Core.Web.FluentValidation](docs/GiG.Core.Web.FluentValidation.md)
 
-[GiG.Core.Logging.All](docs/GiG.Core.Logging.All.md)
+### Health Checks
+* [GiG.Core.HealthChecks](docs/GiG.Core.HealthChecks.md)
 
-## Fluent Validation Middleware
-[GiG.Core.Web.FluentValidation](docs/GiG.Core.Web.FluentValidation.md)
+### Hosting
+* [GiG.Core.Hosting](docs/GiG.Core.Hosting.md)
+
+### Logging
+* [GiG.Core.Logging](docs/GiG.Core.Logging.md)
+
+* [GiG.Core.Logging.All](docs/GiG.Core.Logging.All.md)
+
+### Web Hosting
+* [GiG.Core.Web.Hosting](docs/GiG.Core.Web.Hosting.md)
