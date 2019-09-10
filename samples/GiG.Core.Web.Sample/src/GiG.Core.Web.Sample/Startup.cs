@@ -27,6 +27,7 @@ namespace GiG.Core.Web.Sample
             // Configuration
             services.Configure<TransactionSettings>(_configuration.GetSection(TransactionSettings.DefaultSectionName));
             services.ConfigureHealthChecks(_configuration);
+            services.ConfigureInfoManagement(_configuration);
 
             // Services
             services.AddSingleton<ITransactionService, TransactionService>();
@@ -50,6 +51,7 @@ namespace GiG.Core.Web.Sample
             app.UseRouting();
             app.UseFluentValidationMiddleware();
             app.UseHealthChecks();
+            app.UseInfoManagement();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
