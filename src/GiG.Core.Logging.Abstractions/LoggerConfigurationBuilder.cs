@@ -54,7 +54,7 @@ namespace GiG.Core.Logging.Abstractions
         {
             if (_loggerOptions.Sinks == null)
             {
-                throw new ApplicationException($"No sinks were configured.  Please add at least 1 sinkProvider provider");
+                throw new ApplicationException($"No sinks were configured.  Please add at least one sink provider");
             }
 
             if (!_loggerOptions.Sinks.TryGetValue(name, out var sinkOptions))

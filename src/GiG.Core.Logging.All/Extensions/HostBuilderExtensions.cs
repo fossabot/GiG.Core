@@ -1,6 +1,6 @@
 ﻿using GiG.Core.Logging.Abstractions;
-using GiG.Core.Logging.Enrichers.ApplicationMetadata;
-using GiG.Core.Logging.Enrichers.DistributedTracing;
+using GiG.Core.Logging.Enrichers.ApplicationMetadata.Extensions;
+using GiG.Core.Logging.Enrichers.DistributedTracing.Extensions;
 using GiG.Core.Logging.Extensions;
 using GiG.Core.Logging.Sinks.Console.Extensions;
 using GiG.Core.Logging.Sinks.Fluentd.Extensions;
