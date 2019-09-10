@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Orleans.Server" Version="2.3.0" />
+    <PackageReference Include="OrleansDashboard" Version="2.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GiG.Core.Logging.All\GiG.Core.Logging.All.csproj" />
+    <ProjectReference Include="..\GiG.Core.Orleans.Abstractions\GiG.Core.Orleans.Abstractions.csproj" />
+  </ItemGroup>
+</Project>
