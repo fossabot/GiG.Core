@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Net;
-using GiG.Core.Hosting.Abstractions;
 
 namespace GiG.Core.Web.Sample.Controllers
 {

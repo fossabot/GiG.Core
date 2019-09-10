@@ -5,10 +5,11 @@ using System.Reflection;
 namespace GiG.Core.Hosting
 {
     /// <inheritdoc />
-    public class ApplicationMetadataAccessor : IApplicationMetadataAccessor
+    internal class ApplicationMetadataAccessor : IApplicationMetadataAccessor
     {
         private readonly IConfiguration _configuration;
 
+        /// <inheritdoc />
         public ApplicationMetadataAccessor(IConfiguration configuration)
         {
             _configuration = configuration;
