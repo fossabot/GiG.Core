@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GiG.Core.Logging.All\GiG.Core.Logging.All.csproj" />
     <ProjectReference Include="..\GiG.Core.Orleans.Abstractions\GiG.Core.Orleans.Abstractions.csproj" />
   </ItemGroup>
 </Project>
