@@ -2,12 +2,9 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.TestHost;
-using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Xunit;
 

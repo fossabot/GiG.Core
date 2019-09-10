@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -6,17 +5,18 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using GiG.Core.MultiTenant.Abstractions;
+using GiG.Core.MultiTenant.Web.Tests.Integration.Mocks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Xunit;
 
-namespace GiG.Core.MultiTenant.Web.Tests.Integration
+namespace GiG.Core.MultiTenant.Web.Tests.Integration.Tests
 {
-    public class TenantTests
+    public class TenantAccessorTests
     {
         private readonly TestServer _server;
 
-        public TenantTests()
+        public TenantAccessorTests()
         {
             _server = new TestServer(new WebHostBuilder()
                 .UseStartup<MockStartup>());

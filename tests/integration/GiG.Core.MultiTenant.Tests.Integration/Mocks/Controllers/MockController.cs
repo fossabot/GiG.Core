@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GiG.Core.MultiTenant.Web.Tests.Integration.Controllers
+namespace GiG.Core.MultiTenant.Web.Tests.Integration.Mocks.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

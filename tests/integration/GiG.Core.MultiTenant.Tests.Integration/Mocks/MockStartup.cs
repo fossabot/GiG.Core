@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace GiG.Core.MultiTenant.Web.Tests.Integration
+namespace GiG.Core.MultiTenant.Web.Tests.Integration.Mocks
 {
     internal class MockStartup
     {
