@@ -9,6 +9,9 @@ using System.Reflection;
 
 namespace GiG.Core.Orleans.Hosting.Extensions
 {
+    /// <summary>
+    /// Silo Builder Extensions
+    /// </summary>
     public static class SiloBuilderExtensions
     {
         private const string ClusterOptionsDefaultSection = "Orleans:Cluster";
@@ -62,9 +65,7 @@ namespace GiG.Core.Orleans.Hosting.Extensions
                 throw new  InvalidOperationException($"Configuration section '{ClusterOptionsDefaultSection}' does not exist");
             }
 
-            builder.Configure<ClusterOptions>(configurationSection);
-
-            return builder;
+            return ConfigureCluster(builder, configurationSection);
         }
 
         /// <summary>
