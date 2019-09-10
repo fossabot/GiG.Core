@@ -29,7 +29,7 @@ namespace GiG.Core.Web.Sample
             
             // Services
             services.AddSingleton<ITransactionService, TransactionService>();
-	        
+            
             // Health Checks
             services
                 .AddCachedHealthChecks()
@@ -38,7 +38,7 @@ namespace GiG.Core.Web.Sample
             // WebAPI
             services
                 .AddControllers()
-                .AddFluentValidation(options => options.RegisterValidatorsFromAssemblyContaining<Startup>());
+                .AddFluentValidation(options => options.RegisterValidatorsFromAssemblyContaining<Startup>()
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
