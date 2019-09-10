@@ -1,7 +1,7 @@
 using FluentValidation.AspNetCore;
 using GiG.Core.DistributedTracing.Web.Extensions;
 using GiG.Core.HealthChecks.Extensions;
-using GiG.Core.MultiTenant.Web;
+using GiG.Core.Hosting.Extensions;
 using GiG.Core.MultiTenant.Web.Extensions;
 using GiG.Core.Web.FluentValidation.Extensions;
 using GiG.Core.Web.Sample.Contracts;
@@ -35,6 +35,7 @@ namespace GiG.Core.Web.Sample
 
             // WebAPI
             services.AddTenantAccessor();
+            services.AddApplicationMetadataAccessor();
             services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
         }
 
