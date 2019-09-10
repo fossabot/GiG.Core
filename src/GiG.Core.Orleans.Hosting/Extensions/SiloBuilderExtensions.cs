@@ -59,6 +59,11 @@ namespace GiG.Core.Orleans.Hosting.Extensions
         /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
         public static ISiloBuilder ConfigureCluster(this ISiloBuilder builder, IConfiguration configuration)
         {
+            if (configuration == null)
+            {
+                throw new ArgumentException($"Configuration is null", nameof(configuration));
+            }
+
             var configurationSection = configuration.GetSection(ClusterOptionsDefaultSection);
             if (configurationSection == null)
             {
@@ -90,11 +95,14 @@ namespace GiG.Core.Orleans.Hosting.Extensions
         /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
         public static ISiloBuilder ConfigureDashboard(this ISiloBuilder builder, IConfiguration configuration)
         {
+            if (configuration == null)
+            {
+                throw new ArgumentException($"Configuration is null", nameof(configuration));
+            }
 
             var orleansConfiguration = configuration.GetSection(DashboardOptions.DefaultConfigurationSection).Get<DashboardOptions>();
             if (orleansConfiguration?.Enabled ?? false)
             {
-
                 builder.UseDashboard(options =>
                 {
                     options.BasePath = orleansConfiguration.Path;
