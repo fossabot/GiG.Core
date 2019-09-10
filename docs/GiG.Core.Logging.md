@@ -4,7 +4,7 @@ This Library provides an API to register Logging using Serilog for your applicat
 
 ## Basic Usage
 
-Make use of `ConfigureLogging()`` when creating an `IHostBuilder`. Logging requires configuration.
+Make use of `ConfigureLogging()` when creating an `IHostBuilder`. Logging requires configuration.
 
 ```csharp
 
