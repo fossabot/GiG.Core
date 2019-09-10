@@ -1,17 +1,11 @@
-﻿@@ -0,0 +1,31 @@
-
-# GiG.Core.Logging.All
-
+﻿# GiG.Core.Logging.All
 
 This Library provides an API to register Logging using Serilog and muliple sinks and enrichers for your application.
-
-When using this Library your application will log to Console and Fluentd, and will also enrich your logs with Application Metadata and CorrelationId.
-
+When using this Library your application will log to Console and Fluentd, and will also enrich your logs with Application Metadata and Correlation ID.
 
 ## Basic Usage
 
-
-Make use of ConfigureLogging() when Creating an IHostBuilder. Logging requires configuration.
+Make use of `ConfigureLogging()` when Creating an `IHostBuilder`. Logging requires configuration.
 
 
 ```csharp

@@ -1,9 +1,9 @@
-﻿using GiG.Core.Logging.Abstractions;
+﻿using System;
+using GiG.Core.Logging.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
-using System;
 
 namespace GiG.Core.Logging.Extensions
 {
@@ -16,19 +16,19 @@ namespace GiG.Core.Logging.Extensions
         /// Configures logging sinks and enrichers.
         /// </summary>
         /// <param name="builder">Host builder.</param>
-        /// <param name="configureLogger">The delegate for configuring the <see cref="GiG.Core.Logging.Abstractions.LoggerConfigurationBuilder" />.</param>
+        /// <param name="configureLogger">The delegate for configuring the <see cref="T:GiG.Core.Logging.Abstractions.LoggerConfigurationBuilder" />.</param>
         /// <param name="sectionName">Configuration section name.</param>
         /// <returns>Host builder.</returns>
         public static IHostBuilder ConfigureLogging([NotNull] this IHostBuilder builder,
             Action<LoggerConfigurationBuilder> configureLogger,
             [NotNull] string sectionName = LoggerOptions.DefaultSectionName)
         {
-            builder
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+
+            return builder
                 .ConfigureServices((context, services) =>
                     ConfigureLoggingInternal(context, services, configureLogger, sectionName))
                 .UseSerilog();
-
-            return builder;
         }
 
         private static void ConfigureLoggingInternal(HostBuilderContext context, IServiceCollection services,
@@ -49,6 +49,7 @@ namespace GiG.Core.Logging.Extensions
 
             var loggerConfigurationBuilder =
                 new LoggerConfigurationBuilder(services, loggerConfiguration, configurationSection);
+
             configureLogger?.Invoke(loggerConfigurationBuilder);
 
             Log.Logger = loggerConfiguration.CreateLogger();

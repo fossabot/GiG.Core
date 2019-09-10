@@ -1,4 +1,6 @@
-﻿using JetBrains.Annotations;
+﻿using System;
+using GiG.Core.Web.FluentValidation.Internal;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 
 namespace GiG.Core.Web.FluentValidation.Extensions
@@ -15,6 +17,8 @@ namespace GiG.Core.Web.FluentValidation.Extensions
         /// <returns>Application builder.</returns>
         public static IApplicationBuilder UseFluentValidationMiddleware([NotNull] this IApplicationBuilder builder)
         {
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+
             return builder.UseMiddleware<FluentValidationExceptionMiddleware>();
         }
     }

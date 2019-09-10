@@ -26,16 +26,21 @@ namespace GiG.Core.Web.Sample
         {
             // Configuration
             services.Configure<TransactionSettings>(_configuration.GetSection(TransactionSettings.DefaultSectionName));
-            
+            services.ConfigureHealthChecks(_configuration);
+
             // Services
             services.AddSingleton<ITransactionService, TransactionService>();
-	        services.AddCachedHealthChecks(_configuration)
-                .AddCachedCheck<DummyCachedHealthCheck>(nameof(DummyCachedHealthCheck));
+
+            // Health Checks
+            services
+                .AddCachedHealthChecks()
+                .AddReadyCheck<DummyCachedHealthCheck>(nameof(DummyCachedHealthCheck));
 
             // WebAPI
-            services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
-
-            services.AddApplicationMetadataAccessor();
+            services
+                .AddApplicationMetadataAccessor()
+                .AddControllers()
+                .AddFluentValidation(options => options.RegisterValidatorsFromAssemblyContaining<Startup>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,10 +50,7 @@ namespace GiG.Core.Web.Sample
             app.UseRouting();
             app.UseFluentValidationMiddleware();
             app.UseHealthChecks();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }
