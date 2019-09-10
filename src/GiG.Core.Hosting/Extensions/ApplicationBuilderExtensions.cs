@@ -13,12 +13,12 @@ using System.Threading.Tasks;
 namespace GiG.Core.Hosting.Extensions
 {
     /// <summary>
-    /// Application Builder Extensions for Info Management Endpoint
+    /// Application Builder Extensions for Info Management Endpoint.
     /// </summary>
     public static class ApplicationBuilderExtensions
     {
         /// <summary>
-        /// Map the Info Management Endpoint to the Application
+        /// Map the Info Management Endpoint to the Application.
         /// </summary>
         /// <param name="app">The <see cref="IApplicationBuilder"/> on which to add the Info Management</param>
         /// <returns>The <see cref="IApplicationBuilder"/> so that more methods can be chained</returns>
