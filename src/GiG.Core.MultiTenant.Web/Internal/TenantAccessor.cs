@@ -1,6 +1,7 @@
 using GiG.Core.MultiTenant.Abstractions;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Immutable;
+using System.Linq;
 
 namespace GiG.Core.MultiTenant.Web.Internal
 {
@@ -19,6 +20,6 @@ namespace GiG.Core.MultiTenant.Web.Internal
         public IImmutableSet<string> Values =>
             _httpContextAccessor.HttpContext?.Request?.Headers?.TryGetValue(Constants.Header, out var value) != true
                 ? ImmutableHashSet<string>.Empty
-                : value.ToImmutableHashSet();
+                : value.Where(x => !string.IsNullOrWhiteSpace(x)).ToImmutableHashSet();
     }
 }
