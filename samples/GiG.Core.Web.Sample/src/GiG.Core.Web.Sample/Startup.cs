@@ -51,7 +51,7 @@ namespace GiG.Core.Web.Sample
         public void Configure(IApplicationBuilder app)
         {
             app.UseForwardedHeaders();
-            app.ConfigurePathBase();
+            app.UsePathBaseFromConfiguration();
             app.UseCorrelationId();
             app.UseRouting();
             app.UseFluentValidationMiddleware();

@@ -18,11 +18,11 @@ namespace GiG.Core.Web.Hosting.Extensions
         /// </summary>
         /// <param name="builder">The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</param>
         /// <returns>The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</returns>
-        public static IApplicationBuilder ConfigurePathBase([NotNull] this IApplicationBuilder builder)
+        public static IApplicationBuilder UsePathBaseFromConfiguration([NotNull] this IApplicationBuilder builder)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             
-            return builder.ConfigurePathBase(DefaultPathBaseSectionName);
+            return builder.UsePathBaseFromConfiguration(DefaultPathBaseSectionName);
         }
 
         /// <summary>
@@ -31,9 +31,10 @@ namespace GiG.Core.Web.Hosting.Extensions
         /// <param name="builder">The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</param>
         /// <param name="configSectionName">Config key name for the path base.</param>
         /// <returns>The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</returns>
-        public static IApplicationBuilder ConfigurePathBase([NotNull] this IApplicationBuilder builder, string configSectionName)
+        public static IApplicationBuilder UsePathBaseFromConfiguration([NotNull] this IApplicationBuilder builder, [NotNull] string configSectionName)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (configSectionName == null) throw new ArgumentNullException(nameof(configSectionName));
             
             var serviceProvider = builder.ApplicationServices;
             var configuration = serviceProvider.GetRequiredService<IConfiguration>();

@@ -1,11 +1,13 @@
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -14,14 +16,13 @@ namespace GiG.Core.Web.Hosting.Tests.Integration
     public class WebHostingMiddlewareTests
     {
         private readonly TestServer _server;
+        private readonly string _pathBase = "/test";
 
         public WebHostingMiddlewareTests()
         {
-            _server = new TestServer(new WebHostBuilder()
-                .UseConfiguration(new ConfigurationBuilder()
-                    .AddJsonFile("appsettings.json")
-                    .Build()
-                )
+            Environment.SetEnvironmentVariable("PATH_BASE", _pathBase);
+
+            _server = new TestServer(WebHost.CreateDefaultBuilder()
                 .UseStartup<MockStartup>());
         }
 
@@ -32,15 +33,15 @@ namespace GiG.Core.Web.Hosting.Tests.Integration
             var client = _server.CreateClient();
 
             // Act
-            using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/mock");
+            using var request = new HttpRequestMessage(HttpMethod.Get, $"{_pathBase}/api/mock");
             using var response = await client.SendAsync(request);
 
             // Assert
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            var responseDictionary  = await response.Content.ReadAsStringAsync();
-            var responseValues = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseDictionary);
-            Assert.Equal("/api/mock", responseValues["value"]);
+            var responseValue  = await response.Content.ReadAsStringAsync();
+        
+            Assert.Equal(_pathBase, responseValue);
         }
         
         [Fact]

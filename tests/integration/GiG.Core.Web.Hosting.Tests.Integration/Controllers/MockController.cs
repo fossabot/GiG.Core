@@ -7,14 +7,10 @@ namespace GiG.Core.Web.Hosting.Tests.Integration.Controllers
     [ApiController]
     public class MockController : ControllerBase
     {
-        public MockController()
-        {
-        }
-
         [HttpGet]
         public ActionResult<string> Get()
         {
-            return Ok(HttpContext.Request.PathBase);
+            return Ok(HttpContext.Request.PathBase.Value);
         }
         
         [HttpGet("ip")]
