@@ -1,9 +1,9 @@
-﻿using GiG.Core.HealthChecks.Abstractions;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using GiG.Core.HealthChecks.Abstractions;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace GiG.Core.Web.Sample.HealthChecks
 {
@@ -19,6 +19,7 @@ namespace GiG.Core.Web.Sample.HealthChecks
         protected override Task<HealthCheckResult> DoHealthCheckAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {
             _logger.LogInformation("Dummy Health Check");
+
             return Task.FromResult(HealthCheckResult.Healthy());
         }
     }

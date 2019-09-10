@@ -1,8 +1,9 @@
-﻿using CorrelationId;
+﻿using System;
+using CorrelationId;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using ICorrelationContextAccessor = GiG.Core.DistributedTracing.Abstractions.CorrelationId.ICorrelationContextAccessor;
+using ICorrelationContextAccessor = GiG.Core.DistributedTracing.Abstractions.ICorrelationContextAccessor;
 
 namespace GiG.Core.DistributedTracing.Web.Extensions
 {
@@ -18,8 +19,9 @@ namespace GiG.Core.DistributedTracing.Web.Extensions
         /// <returns>Service collection.</returns>
         public static IServiceCollection AddCorrelationId([NotNull] this IServiceCollection services)
         {
-            CorrelationIdServiceExtensions.AddCorrelationId(services);
+            if (services == null) throw new ArgumentNullException(nameof(services));
 
+            CorrelationIdServiceExtensions.AddCorrelationId(services);
             services.TryAddSingleton<ICorrelationContextAccessor, CorrelationContextAccessor>();
 
             return services;

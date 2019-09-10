@@ -3,6 +3,7 @@ using GiG.Core.DistributedTracing.Web.Extensions;
 using GiG.Core.HealthChecks.Extensions;
 using GiG.Core.Hosting.Extensions;
 using GiG.Core.Web.FluentValidation.Extensions;
+using GiG.Core.Web.Hosting.Extensions;
 using GiG.Core.Web.Sample.Contracts;
 using GiG.Core.Web.Sample.HealthChecks;
 using GiG.Core.Web.Sample.Services;
@@ -26,28 +27,36 @@ namespace GiG.Core.Web.Sample
         {
             // Configuration
             services.Configure<TransactionSettings>(_configuration.GetSection(TransactionSettings.DefaultSectionName));
-            
+            services.ConfigureHealthChecks(_configuration);
+
             // Services
             services.AddSingleton<ITransactionService, TransactionService>();
-	        services.AddCachedHealthChecks(_configuration)
-                .AddCachedCheck<DummyCachedHealthCheck>(nameof(DummyCachedHealthCheck));
 
-            // WebAPI       
-            services.AddApplicationMetadataAccessor();
-            services.AddControllers().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
+            // Health Checks
+            services
+                .AddCachedHealthChecks()
+                .AddReadyCheck<DummyCachedHealthCheck>(nameof(DummyCachedHealthCheck));
+
+            // WebAPI
+            services
+                .AddApplicationMetadataAccessor()
+                .AddControllers()
+                .AddFluentValidation(options => options.RegisterValidatorsFromAssemblyContaining<Startup>());
+            
+            // Forwarded Headers
+            services.ConfigureForwardedHeaders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
+            app.UseForwardedHeaders();
+            app.UsePathBaseFromConfiguration();
             app.UseCorrelationId();
             app.UseRouting();
             app.UseFluentValidationMiddleware();
             app.UseHealthChecks();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

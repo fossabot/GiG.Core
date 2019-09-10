@@ -1,4 +1,5 @@
 using GiG.Core.Logging.Abstractions;
+using GiG.Core.Logging.Sinks.Fluentd.Internal;
 using JetBrains.Annotations;
 
 namespace GiG.Core.Logging.Sinks.Fluentd.Extensions
