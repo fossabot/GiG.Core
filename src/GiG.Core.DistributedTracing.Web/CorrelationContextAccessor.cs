@@ -1,10 +1,10 @@
 ﻿using System;
-using GiG.Core.DistributedTracing.Abstractions.CorrelationId;
+using GiG.Core.DistributedTracing.Abstractions;
 
 namespace GiG.Core.DistributedTracing.Web
 {
     /// <inheritdoc />
-    public class CorrelationContextAccessor : ICorrelationContextAccessor
+    internal class CorrelationContextAccessor : ICorrelationContextAccessor
     {
         private readonly CorrelationId.ICorrelationContextAccessor _correlationContextAccessor;
 
