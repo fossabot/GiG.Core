@@ -1,4 +1,5 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0.100-preview9 as base
+WORKDIR /app
 ARG VERSION='1.0.0'
 COPY . .
 RUN dotnet restore GiG.Core.sln
