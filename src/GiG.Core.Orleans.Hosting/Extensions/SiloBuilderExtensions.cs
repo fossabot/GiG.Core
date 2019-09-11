@@ -9,6 +9,9 @@ using System.Reflection;
 
 namespace GiG.Core.Orleans.Hosting.Extensions
 {
+    /// <summary>
+    /// Silo Builder Extensions.
+    /// </summary>
     public static class SiloBuilderExtensions
     {
         private const string ClusterOptionsDefaultSection = "Orleans:Cluster";
