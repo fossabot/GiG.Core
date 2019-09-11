@@ -31,7 +31,7 @@ namespace GiG.Core.Web.Docs.Extensions
             services.Configure<ApiDocsOptions>(configurationSection);
 
             var docOptions = configurationSection.Get<ApiDocsOptions>() ?? new ApiDocsOptions();
-            if (docOptions.IsEnabled)
+            if (!docOptions.IsEnabled)
             {
                 return services;
             }
