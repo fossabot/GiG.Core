@@ -26,3 +26,6 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 
 ### Multi Tenancy
 * [GiG.Core.MultiTenant.Web](docs/GiG.Core.MultiTenant.md)
+
+### Web Docs
+* [GiG.Core.Web.Docs](docs/GiG.Core.Web.Docs.md)
