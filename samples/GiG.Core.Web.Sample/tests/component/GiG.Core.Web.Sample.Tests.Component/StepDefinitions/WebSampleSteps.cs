@@ -1,9 +1,6 @@
 ﻿using GiG.Core.Web.Sample.Tests.Component.Services;
 using NUnit.Framework;
 using RestEase;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TechTalk.SpecFlow;
 
 namespace GiG.Core.Web.Sample.Tests.Component.StepDefinitions
