@@ -40,7 +40,7 @@ services:
   fluentd:
     image: ${DOCKER_REGISTRY-}fluentd-elasticsearch
     build:
-      context: ./fluentd
+      context: ./docker/fluentd
       dockerfile: Dockerfile
     volumes:
       - ./fluentd/conf:/fluentd/etc

@@ -2,6 +2,7 @@ using FluentValidation.AspNetCore;
 using GiG.Core.DistributedTracing.Web.Extensions;
 using GiG.Core.HealthChecks.Extensions;
 using GiG.Core.Hosting.Extensions;
+using GiG.Core.Web.Docs.Extensions;
 using GiG.Core.Web.FluentValidation.Extensions;
 using GiG.Core.Web.Hosting.Extensions;
 using GiG.Core.Web.Sample.Contracts;
@@ -41,8 +42,9 @@ namespace GiG.Core.Web.Sample
             // WebAPI
             services
                 .AddApplicationMetadataAccessor()
+                .ConfigureApiDocs(_configuration)
                 .AddControllers()
-                .AddFluentValidation(options => options.RegisterValidatorsFromAssemblyContaining<Startup>());
+                   .AddFluentValidation(options => options.RegisterValidatorsFromAssemblyContaining<Startup>());
             
             // Forwarded Headers
             services.ConfigureForwardedHeaders();
@@ -58,6 +60,7 @@ namespace GiG.Core.Web.Sample
             app.UseFluentValidationMiddleware();
             app.UseHealthChecks();
             app.UseInfoManagement();
+            app.UseApiDocs();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
