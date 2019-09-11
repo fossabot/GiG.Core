@@ -17,12 +17,12 @@ namespace GiG.Core.Orleans.Client
         private readonly IClientBuilder _clientBuilder;
         private readonly IServiceCollection _serviceCollection;
         private readonly Lazy<IClusterClient> _clusterClient;
-        private bool _clusterOptionsSet = false;
+        private bool _clusterOptionsSet;
         
         /// <summary>
-        /// Default Constructor
+        /// Default Constructor.
         /// </summary>
-        /// <param name="serviceCollection"></param>
+        /// <param name="serviceCollection"><see cref="IServiceCollection"/></param>
         public ClusterClientBuilder(IServiceCollection serviceCollection)
         {
             _clientBuilder = new ClientBuilder();
