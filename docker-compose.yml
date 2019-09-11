@@ -31,7 +31,7 @@ services:
       context: .
       dockerfile: samples/GiG.Core.Data.Migration.Sample/Dockerfile
     environment:
-      - ConnectionStrings__DefaultConnection=Host=bonusdb;Username=postgres;Password=postgres;Database=sample
+      - "ConnectionStrings__DefaultConnection=Host=sampledb;Username=postgres;Password=postgres;Database=sample"
     depends_on:
       - sampledb
 
