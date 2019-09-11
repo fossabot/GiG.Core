@@ -25,6 +25,16 @@ services:
     ports:
       - "4000:8080"
 
+  sampledbmigration:
+    image: ${DOCKER_REGISTRY-}gig.core.data.migration.sample
+    build:
+      context: .
+      dockerfile: samples/GiG.Core.Data.Migration.Sample/Dockerfile
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=bonusdb;Username=postgres;Password=postgres;Database=sample
+    depends_on:
+      - sampledb
+
   fluentd:
     image: ${DOCKER_REGISTRY-}fluentd-elasticsearch
     build:
@@ -48,3 +58,12 @@ services:
       - elasticsearch
     ports:
       - "5601:5601"
+
+  sampledb:
+    image: postgres:11.5-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: sample
+    ports:
+      - "5432:5432"

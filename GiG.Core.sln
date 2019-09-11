@@ -102,11 +102,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.FluentValidati
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosting", "Hosting", "{436A5A62-C050-463F-B691-F56B9A76366E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Hosting", "src\GiG.Core.Hosting\GiG.Core.Hosting.csproj", "{D075F215-0FFA-482C-A5A2-44A564FCD878}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Hosting", "src\GiG.Core.Hosting\GiG.Core.Hosting.csproj", "{D075F215-0FFA-482C-A5A2-44A564FCD878}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Hosting.Abstractions", "src\GiG.Core.Hosting.Abstractions\GiG.Core.Hosting.Abstractions.csproj", "{792D51E1-D061-4896-B3A2-37A7D4BD5B40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Hosting.Abstractions", "src\GiG.Core.Hosting.Abstractions\GiG.Core.Hosting.Abstractions.csproj", "{792D51E1-D061-4896-B3A2-37A7D4BD5B40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Hosting.Tests.Integration", "tests\integration\GiG.Core.Hosting.Tests.Integration\GiG.Core.Hosting.Tests.Integration.csproj", "{6085C7C2-3E42-4A73-A0AF-5DF5EB637F9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Hosting.Tests.Integration", "tests\integration\GiG.Core.Hosting.Tests.Integration\GiG.Core.Hosting.Tests.Integration.csproj", "{6085C7C2-3E42-4A73-A0AF-5DF5EB637F9C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{22244CA4-2AD2-4F84-9748-1118DE8B0648}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Data.Migration", "src\GiG.Core.Data.Migration\GiG.Core.Data.Migration.csproj", "{14A483B6-E90E-4CF3-88B8-4B7A15A6FA2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Data.Migration.Abstractions", "src\GiG.Core.Data.Migration.Abstractions\GiG.Core.Data.Migration.Abstractions.csproj", "{EC9C0F03-9FC2-4290-99C7-29538A200A6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Data.Migration.Tests.Integration", "tests\integration\GiG.Core.Data.Migration.Tests.Integration\GiG.Core.Data.Migration.Tests.Integration.csproj", "{D4326CFC-BEF5-45C1-9E09-9F88E34FC858}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Data.Migration.Sample", "samples\GiG.Core.Data.Migration.Sample\GiG.Core.Data.Migration.Sample.csproj", "{B2406570-B497-41BD-8C3A-CDCA8E570F6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -210,6 +220,22 @@ Global
 		{6085C7C2-3E42-4A73-A0AF-5DF5EB637F9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6085C7C2-3E42-4A73-A0AF-5DF5EB637F9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6085C7C2-3E42-4A73-A0AF-5DF5EB637F9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14A483B6-E90E-4CF3-88B8-4B7A15A6FA2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14A483B6-E90E-4CF3-88B8-4B7A15A6FA2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14A483B6-E90E-4CF3-88B8-4B7A15A6FA2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14A483B6-E90E-4CF3-88B8-4B7A15A6FA2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC9C0F03-9FC2-4290-99C7-29538A200A6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC9C0F03-9FC2-4290-99C7-29538A200A6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC9C0F03-9FC2-4290-99C7-29538A200A6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC9C0F03-9FC2-4290-99C7-29538A200A6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4326CFC-BEF5-45C1-9E09-9F88E34FC858}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4326CFC-BEF5-45C1-9E09-9F88E34FC858}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4326CFC-BEF5-45C1-9E09-9F88E34FC858}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4326CFC-BEF5-45C1-9E09-9F88E34FC858}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2406570-B497-41BD-8C3A-CDCA8E570F6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2406570-B497-41BD-8C3A-CDCA8E570F6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2406570-B497-41BD-8C3A-CDCA8E570F6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2406570-B497-41BD-8C3A-CDCA8E570F6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -251,6 +277,11 @@ Global
 		{D075F215-0FFA-482C-A5A2-44A564FCD878} = {436A5A62-C050-463F-B691-F56B9A76366E}
 		{792D51E1-D061-4896-B3A2-37A7D4BD5B40} = {436A5A62-C050-463F-B691-F56B9A76366E}
 		{6085C7C2-3E42-4A73-A0AF-5DF5EB637F9C} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
+		{22244CA4-2AD2-4F84-9748-1118DE8B0648} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
+		{14A483B6-E90E-4CF3-88B8-4B7A15A6FA2A} = {22244CA4-2AD2-4F84-9748-1118DE8B0648}
+		{EC9C0F03-9FC2-4290-99C7-29538A200A6B} = {22244CA4-2AD2-4F84-9748-1118DE8B0648}
+		{D4326CFC-BEF5-45C1-9E09-9F88E34FC858} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
+		{B2406570-B497-41BD-8C3A-CDCA8E570F6D} = {99337274-FAB8-4358-81BB-3736EE2CCDE6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}
