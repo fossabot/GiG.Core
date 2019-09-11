@@ -23,3 +23,6 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 
 ### Web Hosting
 * [GiG.Core.Web.Hosting](docs/GiG.Core.Web.Hosting.md)
+
+### Multi Tenancy
+* [GiG.Core.MultiTenant.Web](docs/GiG.Core.MultiTenant.md)
