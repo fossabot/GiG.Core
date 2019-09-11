@@ -1,7 +1,7 @@
+using GiG.Core.Data.Migration.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Npgsql;
-using GiG.Core.Data.Migration.Extensions;
 
 namespace GiG.Core.Data.Migration.Sample
 {
@@ -12,14 +12,10 @@ namespace GiG.Core.Data.Migration.Sample
         {
             var configuration = hostContext.Configuration;
 
-            var test = new NpgsqlConnection(configuration["ConnectionStrings:DefaultConnection"]);
-            test.Open();
-
-            test.Dispose();
-
             services
              .AddDbMigration(new NpgsqlConnection(configuration["ConnectionStrings:DefaultConnection"]))
              .AddDefaultMigrationOptions()
+             .AddLocation("SeedData")
              .Migrate();
         }
     }
