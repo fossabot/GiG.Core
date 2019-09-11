@@ -14,8 +14,9 @@
     <ProjectReference Include="..\..\..\..\src\GiG.Core.HealthChecks\GiG.Core.HealthChecks.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Hosting\GiG.Core.Hosting.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Logging.All\GiG.Core.Logging.All.csproj" />
-    <ProjectReference Include="..\..\..\..\src\GiG.Core.HealthChecks.Abstractions\GiG.Core.HealthChecks.Abstractions.csproj" />
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.HealthChecks.Abstractions\GiG.Core.HealthChecks.Abstractions.csproj" />  
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Web.FluentValidation\GiG.Core.Web.FluentValidation.csproj" />
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.Web.Hosting\GiG.Core.Web.Hosting.csproj" />
   </ItemGroup>
 
 </Project>
