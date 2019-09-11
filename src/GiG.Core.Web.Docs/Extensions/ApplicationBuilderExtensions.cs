@@ -8,12 +8,12 @@ using System;
 namespace GiG.Core.Web.Docs.Extensions
 {
     /// <summary>
-    /// Application Builder Extensions
+    /// Application Builder Extensions.
     /// </summary>
     public static class ApplicationBuilderExtensions
     {
         /// <summary>
-        /// Adds Documentation To API 
+        /// Adds Documentation To API.
         /// </summary>
         /// <param name="app">The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</param>
         /// <returns>The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</returns>
