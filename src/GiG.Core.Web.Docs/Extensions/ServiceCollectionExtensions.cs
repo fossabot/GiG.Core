@@ -56,7 +56,7 @@ namespace GiG.Core.Web.Docs.Extensions
         }
 
         /// <summary>
-        /// Registers a configuration instance which <see cref="T:GiG.Core.HealthChecks.Abstractions.HealthChecksOptions" /> will bind against.
+        /// Registers a configuration instance which <see cref="T:GiG.Core.Web.Docs.Abstractions.ApiDocsOptions" /> will bind against.
         /// </summary>
         /// <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" /> to add the services to.</param>
         /// <param name="configuration">The configuration <see cref="T:Microsoft.Extensions.Configuration.IConfiguration" />.</param>
