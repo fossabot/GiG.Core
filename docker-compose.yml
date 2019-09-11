@@ -1,6 +1,15 @@
 version: "3.4"
 
 services:
+  sampledb:
+    image: postgres:11.5-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: sample
+    ports:
+      - "5432:5432"
+
   sample:
     image: ${DOCKER_REGISTRY-}gig.core.web.sample
     build:
@@ -25,13 +34,13 @@ services:
     ports:
       - "4000:8080"
 
-  sampledbmigration:
+  sample-migration:
     image: ${DOCKER_REGISTRY-}gig.core.data.migration.sample
     build:
       context: .
       dockerfile: samples/GiG.Core.Data.Migration.Sample/Dockerfile
     environment:
-      - ConnectionStrings__DefaultConnection=Host=bonusdb;Username=postgres;Password=postgres;Database=sample
+      - ConnectionStrings__DefaultConnection=Host=sampledb;Username=postgres;Password=postgres;Database=sample
     depends_on:
       - sampledb
 
@@ -58,12 +67,3 @@ services:
       - elasticsearch
     ports:
       - "5601:5601"
-
-  sampledb:
-    image: postgres:11.5-alpine
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: sample
-    ports:
-      - "5432:5432"
