@@ -1,4 +1,5 @@
 ﻿using GiG.Core.Data.Migration.Abstractions;
+using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -23,8 +24,11 @@ namespace GiG.Core.Data.Migration
         /// </summary>
         /// <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.</param>
         /// <param name="dbConnection">The <see cref="T:System.Data.IDbConnection" /> to be used for the DataBase migration.</param>
-        MigrationOptionsBuilder(IServiceCollection services, IDbConnection dbConnection)
+        MigrationOptionsBuilder([NotNull] IServiceCollection services, [NotNull] IDbConnection dbConnection)
         {
+            if (services == null) throw new ArgumentNullException(nameof(services));
+            if (dbConnection == null) throw new ArgumentNullException(nameof(dbConnection));
+
             _serviceProvider = services?.BuildServiceProvider();
             _options = new MigrationOptions(dbConnection);
         }
@@ -42,6 +46,7 @@ namespace GiG.Core.Data.Migration
 
         /// <summary>
         /// Sets the Default Migration Options.
+        /// Default Script locations are \Scripts and \Scripts.{EnvironmentName}
         /// </summary>
         /// <returns>The <see cref="T:GiG.Core.Data.Migration.MigrationOptionsBuilder" />.</returns>
         public MigrationOptionsBuilder AddDefaultMigrationOptions()

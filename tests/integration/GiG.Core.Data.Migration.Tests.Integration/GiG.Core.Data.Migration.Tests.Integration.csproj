@@ -6,16 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Scripts\*.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scripts.Development\*.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Scripts.Production\*.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="CustomScripts\*.sql">
+    <Content Include="**\*.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -28,7 +19,6 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.6.1" />
     <PackageReference Include="xunit" Version="2.4.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
-    <PackageReference Include="coverlet.collector" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
