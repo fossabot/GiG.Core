@@ -26,7 +26,7 @@ namespace GiG.Core.Data.Migration.Abstractions
         public IDbConnection Connection { get; set; }
 
         /// <summary>
-        /// The Schema Name for the the Migration Ch
+        /// The Schema Name for the Migration Change Log table.
         /// </summary>
         public string MetadataTableSchema { get; set; } = "";
 
