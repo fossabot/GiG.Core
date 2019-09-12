@@ -1,4 +1,5 @@
-﻿using GiG.Core.Orleans.Abstractions.Configuration;
+﻿using GiG.Core.DistributedTracing.Orleans;
+using GiG.Core.Orleans.Abstractions.Configuration;
 using Microsoft.Extensions.Configuration;
 using Orleans;
 using Orleans.Configuration;
@@ -6,7 +7,6 @@ using Orleans.Hosting;
 using System;
 using System.Net;
 using System.Reflection;
-using GiG.Core.DistributedTracing.Orleans;
 
 namespace GiG.Core.Orleans.Hosting.Extensions
 {

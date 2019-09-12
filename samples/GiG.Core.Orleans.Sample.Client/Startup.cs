@@ -23,7 +23,7 @@ namespace GiG.Core.Orleans.Sample.Client
         {
             services.AddClusterClient(x =>
             {
-                x.AddCorrelationId();
+                x.AddCorrelationOutgoingFilter();
                 x.ConfigureCluster(_configuration);
                 x.AddAssemblies(typeof(ITransactionGrain));
                 x.UseLocalhostClustering();
