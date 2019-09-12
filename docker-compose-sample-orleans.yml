@@ -13,6 +13,7 @@ services:
       - Logging__Sinks__Fluentd__Hostname=fluentd
     depends_on:
       - fluentd
+      - consul
     ports:
       - "5000:8080"
   
@@ -22,6 +23,12 @@ services:
       context: .
       dockerfile: samples/GiG.Core.Orleans.Sample.Client/Dockerfile
     depends_on:
+      - fluentd
       - sample-silo
+      - consul
     ports:
       - "4000:8080"
+
+  consul:
+    image: consul:latest
+    command: "agent -server -bootstrap -ui -client 0.0.0.0"  
