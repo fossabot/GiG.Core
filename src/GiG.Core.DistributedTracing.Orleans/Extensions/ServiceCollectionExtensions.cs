@@ -16,11 +16,11 @@ namespace GiG.Core.DistributedTracing.Orleans.Extensions
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection"/> to add services to.</param>
         /// <returns><see cref="IServiceCollection"/> so that more methods can be chained.</returns>
-        public static IServiceCollection AddCorrelationId([NotNull] this IServiceCollection services)
+        public static IServiceCollection AddCorrelationAccessor([NotNull] this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services.TryAddSingleton<ICorrelationContextAccessor, CorrelationContextAccessor>();
+            services.AddSingleton<ICorrelationContextAccessor, CorrelationContextAccessor>();
 
             return services;
         }

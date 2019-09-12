@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Orleans.Hosting;
 using System.IO;
+using GiG.Core.DistributedTracing.Orleans.Extensions;
 
 namespace GiG.Core.Orleans.Sample.Silo
 {
@@ -17,6 +18,7 @@ namespace GiG.Core.Orleans.Sample.Silo
                 {
                     builder
                         .UseLocalhostClustering()
+                        .AddCorrelationId()
                         .ConfigureCluster(ctx.Configuration)
                         .ConfigureDashboard(ctx.Configuration)
                         .ConfigureEndpoint()
@@ -27,6 +29,7 @@ namespace GiG.Core.Orleans.Sample.Silo
                     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                     .AddEnvironmentVariables())
                 .ConfigureLogging()
+                .ConfigureServices((ctx, services) => { services.AddCorrelationAccessor(); })
                 .Build()
                 .Run();
         }

@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GiG.Core.DistributedTracing.Orleans\GiG.Core.DistributedTracing.Orleans.csproj" />
     <ProjectReference Include="..\GiG.Core.Orleans.Abstractions\GiG.Core.Orleans.Abstractions.csproj" />
   </ItemGroup>
 </Project>

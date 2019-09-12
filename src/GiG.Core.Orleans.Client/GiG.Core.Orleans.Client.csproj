@@ -10,4 +10,8 @@
     <PackageReference Include="Microsoft.Orleans.Client" Version="3.0.0-beta1" PrivateAssets="compile" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GiG.Core.DistributedTracing.Orleans\GiG.Core.DistributedTracing.Orleans.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -6,6 +6,7 @@ using Orleans.Hosting;
 using System;
 using System.Net;
 using System.Reflection;
+using GiG.Core.DistributedTracing.Orleans;
 
 namespace GiG.Core.Orleans.Hosting.Extensions
 {
@@ -145,6 +146,16 @@ namespace GiG.Core.Orleans.Hosting.Extensions
                 .ConfigureCluster(configuration)
                 .ConfigureEndpoint()
                 .ConfigureDashboard(configuration);
+        }
+
+        /// <summary>
+        /// Adds correlation id functionality to grains.
+        /// </summary>
+        /// <param name="builder">The <see cref="ISiloBuilder"/> to chain more methods to.</param>
+        /// <returns></returns>
+        public static ISiloBuilder AddCorrelationId(this ISiloBuilder builder)
+        {
+            return builder.AddOutgoingGrainCallFilter<CorrelationGrainCallFilter>();
         }
     }
 }

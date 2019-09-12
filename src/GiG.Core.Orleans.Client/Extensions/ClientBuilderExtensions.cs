@@ -4,6 +4,10 @@ using Orleans.Configuration;
 using System;
 using System.Reflection;
 using System.Threading.Tasks;
+using GiG.Core.DistributedTracing.Abstractions;
+using GiG.Core.DistributedTracing.Orleans;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace GiG.Core.Orleans.Client.Extensions
 {
@@ -30,6 +34,21 @@ namespace GiG.Core.Orleans.Client.Extensions
                 .GetResult();
 
             return clusterClient;
+        }
+
+        /// <summary>
+        /// Add Correlation Id Grain call filter.
+        /// </summary>
+        /// <param name="builder"><see cref="IClientBuilder"/> to add filter to.</param>
+        /// <returns><see cref="IClientBuilder"/></returns>
+        public static IClientBuilder AddCorrelationId(this IClientBuilder builder)
+        {
+            builder.ConfigureServices(svc =>
+            {
+                svc.TryAddSingleton<ICorrelationContextAccessor, CorrelationContextAccessor>();
+            });
+            
+            return builder.AddOutgoingGrainCallFilter<CorrelationGrainCallFilter>();
         }
 
         /// <summary>
