@@ -35,7 +35,6 @@ namespace GiG.Core.Orleans.Sample.Client.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("min-dep-amt")]
-        
         public ActionResult<decimal> GetDepositLimit()
         {
             return Ok(10);
