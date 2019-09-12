@@ -48,9 +48,9 @@ namespace GiG.Core.Web.Docs.Extensions
                     c.IncludeForwardedForFilter(docOptions.IsForwardedForEnabled);
                     c.SwaggerDoc("v1", new OpenApiInfo
                     {
-                        Title = docOptions.Title ?? applicationMetadataAccessor.Name,
+                        Title = docOptions.Title ?? applicationMetadataAccessor?.Name,
                         Description = docOptions.Description,
-                        Version = applicationMetadataAccessor.Version
+                        Version = applicationMetadataAccessor?.Version
                     });
                 });
         }

@@ -16,7 +16,6 @@ namespace GiG.Core.Orleans.Hosting.Extensions
     {
         private const string ClusterOptionsDefaultSection = "Orleans:Cluster";
 
-
         /// <summary>
         /// Adds Assemblies to Silo Builder with references.
         /// </summary>
@@ -31,6 +30,26 @@ namespace GiG.Core.Orleans.Hosting.Extensions
                 foreach (var assembly in assemblies)
                 {
                     parts.AddApplicationPart(assembly).WithReferences();
+                }
+            });
+
+            return builder;
+        }
+        
+        /// <summary>
+        /// Adds Assemblies to Silo Builder with references.
+        /// </summary>
+        /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
+        /// <param name="types">The Assemblies from Types which will be added to the Silo.</param>
+        /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
+        public static ISiloBuilder AddAssemblies(this ISiloBuilder builder,
+            params Type[] types)
+        {
+            builder.ConfigureApplicationParts(parts =>
+            {
+                foreach (var type in types)
+                {
+                    parts.AddApplicationPart(type.Assembly).WithReferences();
                 }
             });
 
@@ -100,7 +119,7 @@ namespace GiG.Core.Orleans.Hosting.Extensions
                 throw new ArgumentException($"Configuration is null", nameof(configuration));
             }
 
-            var orleansConfiguration = configuration.GetSection(DashboardOptions.DefaultConfigurationSection).Get<DashboardOptions>();
+            var orleansConfiguration = configuration.GetSection(DashboardOptions.DefaultSectionName).Get<DashboardOptions>();
             if (orleansConfiguration?.Enabled ?? false)
             {
                 builder.UseDashboard(options =>

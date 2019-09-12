@@ -1,9 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Orleans;
-using System.Reflection;
+using System;
 
-namespace GiG.Core.Orleans.Client
+namespace GiG.Core.Orleans.Client.Extensions
 {
     /// <summary>
     /// Service Collection Extensions
@@ -16,14 +15,13 @@ namespace GiG.Core.Orleans.Client
         /// <param name="services">The service collection.</param>
         /// <param name="configuration">The configuration which will be used to set the options for the client.</param>
         /// <param name="assemblies">The Assemblies which will be added to the cluster client.</param>
-        public static void AddDefaultClusterClient(this IServiceCollection services,
-            IConfiguration configuration,
-            params Assembly[] assemblies)
+        public static IServiceCollection AddClusterClient(this IServiceCollection services, Action<ClientBuilder> configureClient)
         {
-            new ClusterClientBuilder(services)
-                .WithClusterOptions(configuration)
-                .WithAssemblies(assemblies)
-                .Register();
+            var builder = new ClientBuilder();
+            
+            configureClient?.Invoke(builder);
+            
+            return services.AddSingleton(builder.BuildAndConnect());
         }
     }
 }
