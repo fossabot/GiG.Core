@@ -1,4 +1,5 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0.100-preview9 as base
+ENV DOTNET_ROLL_FORWARD_ON_NO_CANDIDATE_FX=2
 WORKDIR /app
 ARG VERSION='1.0.0'
 COPY . .

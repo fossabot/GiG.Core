@@ -5,11 +5,12 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0.100-preview9 AS build
+ENV DOTNET_ROLL_FORWARD_ON_NO_CANDIDATE_FX=2
 WORKDIR /src
-COPY ["samples/GiG.Core.Orleans.Sample.Silo/src/GiG.Core.Orleans.Sample.Silo/GiG.Core.Orleans.Sample.Silo.csproj", "samples/GiG.Core.Orleans.Sample.Silo/src/GiG.Core.Orleans.Sample.Silo/"]
-RUN dotnet restore "samples/GiG.Core.Orleans.Sample.Silo/src/GiG.Core.Orleans.Sample.Client/GiG.Core.Orleans.Sample.Silo.csproj"
+COPY ["samples/GiG.Core.Orleans.Sample.Silo/GiG.Core.Orleans.Sample.Silo.csproj", "samples/GiG.Core.Orleans.Sample.Silo/"]
+RUN dotnet restore "samples/GiG.Core.Orleans.Sample.Silo/GiG.Core.Orleans.Sample.Silo.csproj"
 COPY . .
-WORKDIR "samples/GiG.Core.Orleans.Sample.Silo/src/GiG.Core.Orleans.Sample.Silo/"
+WORKDIR "samples/GiG.Core.Orleans.Sample.Silo/"
 RUN dotnet build "GiG.Core.Orleans.Sample.Silo.csproj" -c Release -o /app/build
 FROM build AS publish
 RUN dotnet publish "GiG.Core.Orleans.Sample.Silo.csproj" -c Release -o /app/publish
