@@ -1,7 +1,7 @@
 ﻿namespace GiG.Core.Orleans.Abstractions.Configuration
 {
     /// <summary>
-    /// Orleans Consul Settings
+    /// Orleans Consul Settings.
     /// </summary>
     public class ConsulOptions
     {
