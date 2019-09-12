@@ -16,23 +16,23 @@ namespace GiG.Core.Orleans.Client.Clustering.Consul.Extensions
         /// Configures Consul in Orleans.
         /// </summary>
         /// <param name="builder">The Orleans <see cref="IClientBuilder"/>.</param>
-        /// <param name="configuration"></param>
+        /// <param name="configuration">The configuration <see cref="T:Microsoft.Extensions.Configuration.IConfiguration" />.</param>
         /// <returns>Returns the <see cref="IClientBuilder"/> so that more methods can be chained.</returns>
-        public static IClientBuilder ConfigureConsul([NotNull] this IClientBuilder builder, [NotNull] IConfiguration configuration)
+        public static IClientBuilder ConfigureConsulClustering([NotNull] this IClientBuilder builder, [NotNull] IConfiguration configuration)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            return builder.ConfigureConsul(configuration.GetSection(ConsulOptions.DefaultSectionName));
+            return builder.ConfigureConsulClustering(configuration.GetSection(ConsulOptions.DefaultSectionName));
         }
 
         /// <summary>
         /// Configures Consul in Orleans.
         /// </summary>
         /// <param name="builder">The Orleans <see cref="IClientBuilder"/>.</param>
-        /// <param name="configurationSection"></param>
+        /// <param name="configurationSection">The configuration section <see cref="T:Microsoft.Extensions.Configuration.IConfigurationSection" />.</param>
         /// <returns>Returns the <see cref="IClientBuilder"/> so that more methods can be chained.</returns>
-        public static IClientBuilder ConfigureConsul([NotNull] this IClientBuilder builder, [NotNull] IConfigurationSection configurationSection)
+        public static IClientBuilder ConfigureConsulClustering([NotNull] this IClientBuilder builder, [NotNull] IConfigurationSection configurationSection)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));

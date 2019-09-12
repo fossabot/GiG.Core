@@ -20,7 +20,7 @@ namespace GiG.Core.Orleans.Sample.Silo
                         .ConfigureCluster(ctx.Configuration)
                         .ConfigureDashboard(ctx.Configuration)
                         .ConfigureEndpoint()
-                        .ConfigureConsul(ctx.Configuration)
+                        .ConfigureConsulClustering(ctx.Configuration)
                         .AddAssemblies(typeof(TransactionGrain));
                 })
                 .ConfigureHostConfiguration(builder => builder
