@@ -1,5 +1,6 @@
 using GiG.Core.DistributedTracing.Orleans.Extensions;
 using GiG.Core.Orleans.Client.Extensions;
+using GiG.Core.Orleans.Client.Clustering.Consul.Extensions;
 using GiG.Core.Orleans.Sample.Contracts;
 using GiG.Core.Web.Docs.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -25,8 +26,8 @@ namespace GiG.Core.Orleans.Sample.Client
             {
                 x.AddCorrelationOutgoingFilter();
                 x.ConfigureCluster(_configuration);
+                x.ConfigureConsulClustering(_configuration);
                 x.AddAssemblies(typeof(ITransactionGrain));
-                x.UseLocalhostClustering();
             });
 
             services.AddControllers();

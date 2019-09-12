@@ -29,6 +29,10 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 ### Web Hosting
 * [GiG.Core.Web.Hosting](docs/GiG.Core.Web.Hosting.md)
 
+### Web Docs
+* [GiG.Core.Web.Docs](docs/GiG.Core.Web.Docs.md)
+
+
 ## Build
 
 You can build the NuGet packages using one of the following methods. You should find the NuGet packages in the `artifacts` folder after the following commands are executed successfully.
@@ -73,10 +77,16 @@ dotnet test --filter "FullyQualifiedName\!~Sample" GiG.Core.sln
 
 ## Sample
 
-You can run the sample WebAPI using the following commands:
+You can run the samples using the following commands:
 
-### Build and Run
+### Web
 
 ```sh
-docker-compose up --build sample-ui
+docker-compose -f docker-compose.yml -f docker-compose-sample-web.yml up --build
+```
+
+### Orleans
+
+```sh
+docker-compose -f docker-compose.yml -f docker-compose-sample-orleans.yml up --build
 ```

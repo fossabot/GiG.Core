@@ -18,6 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Logging.All.md = docs\GiG.Core.Logging.All.md
 		docs\GiG.Core.Logging.md = docs\GiG.Core.Logging.md
 		docs\GiG.Core.MultiTenant.Web.md = docs\GiG.Core.MultiTenant.Web.md
+		docs\GiG.Core.Web.Docs.md = docs\GiG.Core.Web.Docs.md
 		docs\GiG.Core.Web.FluentValidation.md = docs\GiG.Core.Web.FluentValidation.md
 		docs\GiG.Core.Web.Hosting.md = docs\GiG.Core.Web.Hosting.md
 		README.md = README.md
@@ -28,8 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
 		Directory.Build.props = Directory.Build.props
-		NuGet.Config = NuGet.Config
 		Dockerfile = Dockerfile
+		NuGet.Config = NuGet.Config
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit", "unit", "{01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}"
@@ -163,6 +164,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Data.Migration.Sample", "samples\GiG.Core.Data.Migration.Sample\GiG.Core.Data.Migration.Sample.csproj", "{F30DE898-0D09-433F-9129-080EE013D199}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Data.Migration.Tests.Integration", "tests\integration\GiG.Core.Data.Migration.Tests.Integration\GiG.Core.Data.Migration.Tests.Integration.csproj", "{F2DAE340-50D3-4A7D-AE2C-EF6D88EE8779}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Silo.Clustering.Consul", "src\GiG.Core.Orleans.Silo.Clustering.Consul\GiG.Core.Orleans.Silo.Clustering.Consul.csproj", "{5F4AA3B0-D32E-4C83-B474-8496FE364AC2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Client.Clustering.Consul", "src\GiG.Core.Orleans.Client.Clustering.Consul\GiG.Core.Orleans.Client.Clustering.Consul.csproj", "{8862DFE3-F0FE-4D23-B722-BDE8B83EB303}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -338,6 +343,14 @@ Global
 		{E2014587-B570-4EF1-B387-30C809A5CB10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2014587-B570-4EF1-B387-30C809A5CB10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2014587-B570-4EF1-B387-30C809A5CB10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F4AA3B0-D32E-4C83-B474-8496FE364AC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F4AA3B0-D32E-4C83-B474-8496FE364AC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F4AA3B0-D32E-4C83-B474-8496FE364AC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F4AA3B0-D32E-4C83-B474-8496FE364AC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8862DFE3-F0FE-4D23-B722-BDE8B83EB303}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8862DFE3-F0FE-4D23-B722-BDE8B83EB303}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8862DFE3-F0FE-4D23-B722-BDE8B83EB303}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8862DFE3-F0FE-4D23-B722-BDE8B83EB303}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -399,6 +412,8 @@ Global
 		{E3EB22BA-0E13-4508-B5C5-45601B83C2FC} = {99337274-FAB8-4358-81BB-3736EE2CCDE6}
 		{25BFD54E-1985-48F5-88BD-0D52F3535284} = {E3EB22BA-0E13-4508-B5C5-45601B83C2FC}
 		{E2014587-B570-4EF1-B387-30C809A5CB10} = {F3E4EB54-9129-4327-9A32-89ABD4ADA6C5}
+		{5F4AA3B0-D32E-4C83-B474-8496FE364AC2} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
+		{8862DFE3-F0FE-4D23-B722-BDE8B83EB303} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
 		{412AB606-A56E-4B9E-A9C1-E2C7E02D0CF5} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
 		{F5BAE09F-8F05-4875-AC5F-2E18A225E28D} = {412AB606-A56E-4B9E-A9C1-E2C7E02D0CF5}
 		{E4A5979C-BEF1-4C06-AA0A-83CDD98C9C50} = {412AB606-A56E-4B9E-A9C1-E2C7E02D0CF5}

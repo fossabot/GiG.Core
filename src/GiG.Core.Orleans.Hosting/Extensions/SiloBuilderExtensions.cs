@@ -5,7 +5,9 @@ using Orleans;
 using Orleans.Configuration;
 using Orleans.Hosting;
 using System;
+using System.Linq;
 using System.Net;
+using System.Net.Sockets;
 using System.Reflection;
 
 namespace GiG.Core.Orleans.Hosting.Extensions
@@ -100,9 +102,14 @@ namespace GiG.Core.Orleans.Hosting.Extensions
         /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
         public static ISiloBuilder ConfigureEndpoint(this ISiloBuilder builder)
         {
+            var siloAddress = Dns.GetHostEntry(Dns.GetHostName()).AddressList
+                   .First(a => a.AddressFamily == AddressFamily.InterNetwork);
+
             return builder.Configure((EndpointOptions options) =>
             {
-                options.AdvertisedIPAddress = IPAddress.Loopback;
+                options.AdvertisedIPAddress = siloAddress;
+                options.SiloPort = EndpointOptions.DEFAULT_SILO_PORT;
+                options.GatewayPort = EndpointOptions.DEFAULT_GATEWAY_PORT;
             });
         }
 

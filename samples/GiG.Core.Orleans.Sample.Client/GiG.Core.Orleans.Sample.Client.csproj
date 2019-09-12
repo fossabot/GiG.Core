@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\GiG.Core.DistributedTracing.Orleans\GiG.Core.DistributedTracing.Orleans.csproj" />
     <ProjectReference Include="..\..\src\GiG.Core.Logging.All\GiG.Core.Logging.All.csproj" />
+    <ProjectReference Include="..\..\src\GiG.Core.Orleans.Client.Clustering.Consul\GiG.Core.Orleans.Client.Clustering.Consul.csproj" />
     <ProjectReference Include="..\..\src\GiG.Core.Orleans.Client\GiG.Core.Orleans.Client.csproj" />
     <ProjectReference Include="..\..\src\GiG.Core.Web.Docs\GiG.Core.Web.Docs.csproj" />
     <ProjectReference Include="..\GiG.Core.Orleans.Sample.Contracts\GiG.Core.Orleans.Sample.Contracts.csproj" />

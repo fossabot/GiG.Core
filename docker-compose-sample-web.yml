@@ -1,7 +1,7 @@
 version: "3.4"
 
 services:
-  sample-web:
+  sample:
     image: ${DOCKER_REGISTRY-}gig.core.web.sample
     build:
       context: .
@@ -22,6 +22,6 @@ services:
       context: samples/GiG.Core.Web.Sample.UI
       dockerfile: Dockerfile
     depends_on:
-      - sample-web
+      - sample
     ports:
       - "4000:8080"

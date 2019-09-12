@@ -7,28 +7,47 @@ services:
       context: .
       dockerfile: samples/GiG.Core.Orleans.Sample.Silo/Dockerfile
     environment:
-      - ASPNETCORE_URLS=http://+:8080
-      - PATH_BASE=/api/transactions
       - Logging__Sinks__Fluentd__IsEnabled=true
       - Logging__Sinks__Fluentd__Hostname=fluentd
+      - Orleans__Consul__Address=http://consul:8500
     depends_on:
       - fluentd
       - consul
     ports:
-      - "5000:8080"
+      - "6000:8080"
   
-  sample-client:
+  sample:
     image: ${DOCKER_REGISTRY-}gig.core.orleans.sample.client
     build:
       context: .
       dockerfile: samples/GiG.Core.Orleans.Sample.Client/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+      - PATH_BASE=/api/transactions
+      - Logging__Sinks__Fluentd__IsEnabled=true
+      - Logging__Sinks__Fluentd__Hostname=fluentd
+      - Orleans__Consul__Address=http://consul:8500
     depends_on:
       - fluentd
       - sample-silo
       - consul
     ports:
+      - "5000:8080"
+    restart: on-failure
+  
+  sample-web-ui:
+    image: ${DOCKER_REGISTRY-}gig.core.web.sample.ui
+    build:
+      context: samples/GiG.Core.Web.Sample.UI
+      dockerfile: Dockerfile
+    depends_on:
+      - sample
+    ports:
       - "4000:8080"
+    restart: on-failure
 
   consul:
     image: consul:latest
     command: "agent -server -bootstrap -ui -client 0.0.0.0"  
+    ports:
+    - "8500:8500"
