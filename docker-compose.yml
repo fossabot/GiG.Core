@@ -1,31 +1,6 @@
 version: "3.4"
 
 services:
-  sample:
-    image: ${DOCKER_REGISTRY-}gig.core.web.sample
-    build:
-      context: .
-      dockerfile: samples/GiG.Core.Web.Sample/src/GiG.Core.Web.Sample/Dockerfile
-    environment:
-      - ASPNETCORE_URLS=http://+:8080
-      - PATH_BASE=/api/transactions
-      - Logging__Sinks__Fluentd__IsEnabled=true
-      - Logging__Sinks__Fluentd__Hostname=fluentd
-    depends_on:
-      - fluentd
-    ports:
-      - "5000:8080"
-
-  sample-ui:
-    image: ${DOCKER_REGISTRY-}gig.core.web.sample.ui
-    build:
-      context: samples/GiG.Core.Web.Sample.UI
-      dockerfile: Dockerfile
-    depends_on:
-      - sample
-    ports:
-      - "4000:8080"
-
   fluentd:
     image: ${DOCKER_REGISTRY-}fluentd-elasticsearch
     build:
