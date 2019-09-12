@@ -7,6 +7,9 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 ### Distributed Tracing
 * [GiG.Core.DistributedTracing.Web](docs/GiG.Core.DistributedTracing.Web.md)
 
+### Data Migration
+* [GiG.Core.Data.Migration](docs/GiG.Core.Data.Migration.md)
+
 ### Fluent Validation
 * [GiG.Core.Web.FluentValidation](docs/GiG.Core.Web.FluentValidation.md)
 
