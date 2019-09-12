@@ -1,0 +1,27 @@
+version: "3.4"
+
+services:
+  sample-silo:
+    image: ${DOCKER_REGISTRY-}gig.core.orleans.sample.silo
+    build:
+      context: .
+      dockerfile: samples/GiG.Core.Orleans.Sample.Silo/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+      - PATH_BASE=/api/transactions
+      - Logging__Sinks__Fluentd__IsEnabled=true
+      - Logging__Sinks__Fluentd__Hostname=fluentd
+    depends_on:
+      - fluentd
+    ports:
+      - "5000:8080"
+  
+  sample-client:
+    image: ${DOCKER_REGISTRY-}gig.core.orleans.sample.client
+    build:
+      context: .
+      dockerfile: samples/GiG.Core.Orleans.Sample.Client/Dockerfile
+    depends_on:
+      - sample-silo
+    ports:
+      - "4000:8080"
