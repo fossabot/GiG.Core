@@ -12,7 +12,7 @@ namespace GiG.Core.Data.Migration.Extensions
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// 
+        /// Adds the <see cref="T:GiG.Core.Data.Migration.DataBaseMigration" /> to the container.
         /// </summary>
         /// <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" /> to add the services to.</param>
         /// <param name="dbConnection">The <see cref="T:System.Data.IDbConnection" /> to be used for the DataBase migration.</param>

@@ -13,10 +13,10 @@ namespace GiG.Core.Data.Migration.Sample
             var configuration = hostContext.Configuration;
 
             services
-             .AddDbMigration(new NpgsqlConnection(configuration["ConnectionStrings:DefaultConnection"]))
-             .AddDefaultMigrationOptions()
-             .AddLocation("SeedData")
-             .Migrate();
+                .AddDbMigration(new NpgsqlConnection(configuration["ConnectionStrings:DefaultConnection"]))
+                .AddDefaultMigrationOptions()
+                .AddLocation("SeedData")
+                .Migrate();
         }
     }
 }
