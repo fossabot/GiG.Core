@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5915362C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A417-4EEB-A216-4918AD56C9B5}"
 	ProjectSection(SolutionItems) = preProject
+		docs\GiG.Core.Data.Migration.md = docs\GiG.Core.Data.Migration.md
 		docs\GiG.Core.DistributedTracing.Web.md = docs\GiG.Core.DistributedTracing.Web.md
 		docs\GiG.Core.HealthChecks.md = docs\GiG.Core.HealthChecks.md
 		docs\GiG.Core.Hosting.md = docs\GiG.Core.Hosting.md
@@ -135,19 +136,31 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.MultiTenant.Web", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.MultiTenant.Web.Tests.Integration", "tests\integration\GiG.Core.MultiTenant.Tests.Integration\GiG.Core.MultiTenant.Web.Tests.Integration.csproj", "{415BBEEB-7DFE-48A3-8F93-97933C2D4A2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Web.Docs", "src\GiG.Core.Web.Docs\GiG.Core.Web.Docs.csproj", "{29F99B37-6245-4155-A034-88F14ED95222}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Docs", "src\GiG.Core.Web.Docs\GiG.Core.Web.Docs.csproj", "{29F99B37-6245-4155-A034-88F14ED95222}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Orleans.Sample.Silo", "samples\GiG.Core.Orleans.Sample.Silo\GiG.Core.Orleans.Sample.Silo.csproj", "{B6AE4865-8329-456D-BA9A-467390C1C0CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Sample.Silo", "samples\GiG.Core.Orleans.Sample.Silo\GiG.Core.Orleans.Sample.Silo.csproj", "{B6AE4865-8329-456D-BA9A-467390C1C0CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Orleans.Sample.Grains", "samples\GiG.Core.Orleans.Sample.Grains\GiG.Core.Orleans.Sample.Grains.csproj", "{1BCFBAFE-6040-4C0A-97FF-204FCB4897D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Sample.Grains", "samples\GiG.Core.Orleans.Sample.Grains\GiG.Core.Orleans.Sample.Grains.csproj", "{1BCFBAFE-6040-4C0A-97FF-204FCB4897D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Orleans.Sample.Contracts", "samples\GiG.Core.Orleans.Sample.Contracts\GiG.Core.Orleans.Sample.Contracts.csproj", "{D1F12F82-214B-4A0F-824C-27812420816A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Sample.Contracts", "samples\GiG.Core.Orleans.Sample.Contracts\GiG.Core.Orleans.Sample.Contracts.csproj", "{D1F12F82-214B-4A0F-824C-27812420816A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Orleans.Sample.Client", "samples\GiG.Core.Orleans.Sample.Client\GiG.Core.Orleans.Sample.Client.csproj", "{2FBF58FA-C38B-443C-B6D5-A9AEAF5A6F28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Sample.Client", "samples\GiG.Core.Orleans.Sample.Client\GiG.Core.Orleans.Sample.Client.csproj", "{2FBF58FA-C38B-443C-B6D5-A9AEAF5A6F28}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{C2B7D247-99EF-454C-B6A9-D96DF2379F19}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logging", "Logging", "{E3EB22BA-0E13-4508-B5C5-45601B83C2FC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{412AB606-A56E-4B9E-A9C1-E2C7E02D0CF5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Data.Migration.Abstractions", "src\GiG.Core.Data.Migration.Abstractions\GiG.Core.Data.Migration.Abstractions.csproj", "{F5BAE09F-8F05-4875-AC5F-2E18A225E28D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Data.Migration", "src\GiG.Core.Data.Migration\GiG.Core.Data.Migration.csproj", "{E4A5979C-BEF1-4C06-AA0A-83CDD98C9C50}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{F7101BD9-8900-4A3C-BA85-0548DA6508BD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Data.Migration.Sample", "samples\GiG.Core.Data.Migration.Sample\GiG.Core.Data.Migration.Sample.csproj", "{F30DE898-0D09-433F-9129-080EE013D199}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Data.Migration.Tests.Integration", "tests\integration\GiG.Core.Data.Migration.Tests.Integration\GiG.Core.Data.Migration.Tests.Integration.csproj", "{F2DAE340-50D3-4A7D-AE2C-EF6D88EE8779}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -303,15 +316,33 @@ Global
 		{2FBF58FA-C38B-443C-B6D5-A9AEAF5A6F28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FBF58FA-C38B-443C-B6D5-A9AEAF5A6F28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FBF58FA-C38B-443C-B6D5-A9AEAF5A6F28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5BAE09F-8F05-4875-AC5F-2E18A225E28D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5BAE09F-8F05-4875-AC5F-2E18A225E28D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5BAE09F-8F05-4875-AC5F-2E18A225E28D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5BAE09F-8F05-4875-AC5F-2E18A225E28D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4A5979C-BEF1-4C06-AA0A-83CDD98C9C50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4A5979C-BEF1-4C06-AA0A-83CDD98C9C50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4A5979C-BEF1-4C06-AA0A-83CDD98C9C50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4A5979C-BEF1-4C06-AA0A-83CDD98C9C50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F30DE898-0D09-433F-9129-080EE013D199}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F30DE898-0D09-433F-9129-080EE013D199}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F30DE898-0D09-433F-9129-080EE013D199}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F30DE898-0D09-433F-9129-080EE013D199}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2DAE340-50D3-4A7D-AE2C-EF6D88EE8779}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2DAE340-50D3-4A7D-AE2C-EF6D88EE8779}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2DAE340-50D3-4A7D-AE2C-EF6D88EE8779}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2DAE340-50D3-4A7D-AE2C-EF6D88EE8779}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6} = {5915362C-8F1B-4574-92D4-BEF2B1968A17}
+		{25BFD54E-1985-48F5-88BD-0D52F3535284} = {E3EB22BA-0E13-4508-B5C5-45601B83C2FC}
 		{76A8984C-9850-44E0-AB6E-4BC576ECAAA4} = {52AEF79F-C056-404A-9AC9-155CE8A17721}
 		{0305263F-4F1E-4C91-B90F-3F3268F69142} = {6683488A-3D9A-4408-8DC2-DFA2E318A178}
 		{CDCD9B6F-62E6-4F37-8758-24BD6C567D93} = {3DD07011-F314-4CDD-854E-A9D75721DEE9}
+		{A599F81C-4703-4DA5-8748-729DCD42BED5} = {C2B7D247-99EF-454C-B6A9-D96DF2379F19}
 		{4E76F09A-698A-4CF7-8552-A662C93EF30C} = {5915362C-8F1B-4574-92D4-BEF2B1968A17}
 		{6D384490-FFA2-4013-AD75-AD09E8346C14} = {A599F81C-4703-4DA5-8748-729DCD42BED5}
 		{036F11C4-D05B-4E08-8B93-2B60C02E5837} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
@@ -359,9 +390,13 @@ Global
 		{D1F12F82-214B-4A0F-824C-27812420816A} = {8372654D-18DE-4EB4-A40E-C231A5A4EFCB}
 		{2FBF58FA-C38B-443C-B6D5-A9AEAF5A6F28} = {8372654D-18DE-4EB4-A40E-C231A5A4EFCB}
 		{C2B7D247-99EF-454C-B6A9-D96DF2379F19} = {99337274-FAB8-4358-81BB-3736EE2CCDE6}
-		{A599F81C-4703-4DA5-8748-729DCD42BED5} = {C2B7D247-99EF-454C-B6A9-D96DF2379F19}
 		{E3EB22BA-0E13-4508-B5C5-45601B83C2FC} = {99337274-FAB8-4358-81BB-3736EE2CCDE6}
-		{25BFD54E-1985-48F5-88BD-0D52F3535284} = {E3EB22BA-0E13-4508-B5C5-45601B83C2FC}
+		{412AB606-A56E-4B9E-A9C1-E2C7E02D0CF5} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
+		{F5BAE09F-8F05-4875-AC5F-2E18A225E28D} = {412AB606-A56E-4B9E-A9C1-E2C7E02D0CF5}
+		{E4A5979C-BEF1-4C06-AA0A-83CDD98C9C50} = {412AB606-A56E-4B9E-A9C1-E2C7E02D0CF5}
+		{F7101BD9-8900-4A3C-BA85-0548DA6508BD} = {99337274-FAB8-4358-81BB-3736EE2CCDE6}
+		{F30DE898-0D09-433F-9129-080EE013D199} = {F7101BD9-8900-4A3C-BA85-0548DA6508BD}
+		{F2DAE340-50D3-4A7D-AE2C-EF6D88EE8779} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}
