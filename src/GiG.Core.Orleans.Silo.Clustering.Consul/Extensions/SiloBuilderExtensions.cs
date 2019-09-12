@@ -5,10 +5,27 @@ using Orleans;
 using Orleans.Hosting;
 using System;
 
-namespace GiG.Core.Orleans.Clustering.Consul.Extensions
+namespace GiG.Core.Orleans.Silo.Clustering.Consul.Extensions
 {
+    /// <summary>
+    /// Silo Builder Extensions.
+    /// </summary>
     public static class SiloBuilderExtensions
     {
+        /// <summary>
+        /// Configures Consul in Orleans.
+        /// </summary>
+        /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
+        /// <param name="configuration"></param>
+        /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
+        public static ISiloBuilder ConfigureConsul([NotNull] this ISiloBuilder builder, [NotNull] IConfiguration configuration)
+        {
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+
+            return builder.ConfigureConsul(configuration.GetSection(ConsulOptions.DefaultSectionName));
+        }
+
         /// <summary>
         /// Configures Consul in Orleans.
         /// </summary>
@@ -29,7 +46,7 @@ namespace GiG.Core.Orleans.Clustering.Consul.Extensions
                   {
                       options.Address = new Uri(consulOptions.Address);
                       options.KvRootFolder = consulOptions.KvRootFolder;
-                  });                
+                  });
         }
     }
 }

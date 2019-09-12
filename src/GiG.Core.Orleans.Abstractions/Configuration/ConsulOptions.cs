@@ -8,7 +8,7 @@
         /// <summary>
         /// Default configuration section name.
         /// </summary>
-        public const string DefaultConfigurationSection = "Orleans:Consul";
+        public const string DefaultSectionName = "Orleans:Consul";
       
         /// <summary>
         /// Consul Address

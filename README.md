@@ -74,10 +74,16 @@ dotnet test --filter "FullyQualifiedName\!~Sample" GiG.Core.sln
 
 ## Sample
 
-You can run the sample WebAPI using the following commands:
+You can run the samples using the following commands:
 
-### Build and Run
+### Web
 
 ```sh
-docker-compose up --build sample-ui
+docker-compose -f docker-compose.yml -f docker-compose-sample-web.yml up --build
+```
+
+### Orleans
+
+```sh
+docker-compose -f docker-compose.yml -f docker-compose-sample-orleans.yml up --build
 ```
