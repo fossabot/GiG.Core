@@ -6,9 +6,9 @@
     public class DashboardOptions
     {
         /// <summary>
-        /// Default configuration section name.
+        /// Default section name.
         /// </summary>
-        public const string DefaultConfigurationSection = "Orleans:Dashboard";
+        public const string DefaultSectionName = "Orleans:Dashboard";
 
         /// <summary>
         /// Determines whether the Dashboard should be configured.

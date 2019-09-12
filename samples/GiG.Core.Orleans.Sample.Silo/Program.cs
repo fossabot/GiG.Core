@@ -1,19 +1,18 @@
 ﻿using GiG.Core.Logging.All.Extensions;
 using GiG.Core.Orleans.Hosting.Extensions;
-using GiG.Core.Orleans.Samples.HelloWorld.Grains;
+using GiG.Core.Orleans.Sample.Grains;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Orleans.Hosting;
 using System.IO;
-using System.Threading.Tasks;
 
-namespace GiG.Core.Orleans.Sample.HelloWorld.Silo
+namespace GiG.Core.Orleans.Sample.Silo
 {
     public class Program
     {
-        public static async Task Main(string[] args)
+        public static void Main()
         {
-            var host = new HostBuilder()
+            new HostBuilder()
                 .UseOrleans((ctx, builder) =>
                 {
                     builder
@@ -21,15 +20,15 @@ namespace GiG.Core.Orleans.Sample.HelloWorld.Silo
                         .ConfigureCluster(ctx.Configuration)
                         .ConfigureDashboard(ctx.Configuration)
                         .ConfigureEndpoint()
-                        .AddAssemblies(typeof(HelloGrain).Assembly);
+                        .AddAssemblies(typeof(TransactionGrain));
                 })
                 .ConfigureHostConfiguration(builder => builder
                     .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true))
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                    .AddEnvironmentVariables())
                 .ConfigureLogging()
-                .Build();
-
-            await host.RunAsync();
+                .Build()
+                .Run();
         }
     }
 }
