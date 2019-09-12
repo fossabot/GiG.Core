@@ -1,13 +1,13 @@
+using GiG.Core.DistributedTracing.Abstractions;
+using GiG.Core.DistributedTracing.Orleans;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Orleans;
 using Orleans.Configuration;
 using System;
 using System.Reflection;
 using System.Threading.Tasks;
-using GiG.Core.DistributedTracing.Abstractions;
-using GiG.Core.DistributedTracing.Orleans;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace GiG.Core.Orleans.Client.Extensions
 {
@@ -40,14 +40,13 @@ namespace GiG.Core.Orleans.Client.Extensions
         /// Add Correlation Id Grain call filter.
         /// </summary>
         /// <param name="builder"><see cref="IClientBuilder"/> to add filter to.</param>
+        /// <param name="serviceProvider"></param>
         /// <returns><see cref="IClientBuilder"/> to chain more methods to.</returns>
-        public static IClientBuilder AddCorrelationOutgoingFilter(this IClientBuilder builder)
+        public static IClientBuilder AddCorrelationOutgoingFilter(this IClientBuilder builder, IServiceProvider serviceProvider)
         {
-            builder.ConfigureServices(svc =>
-            {
-                svc.TryAddSingleton<ICorrelationContextAccessor, CorrelationContextAccessor>();
-            });
-            
+            builder.ConfigureServices(services =>
+                services.TryAddSingleton(serviceProvider.GetRequiredService<ICorrelationContextAccessor>()));
+
             return builder.AddOutgoingGrainCallFilter<CorrelationGrainCallFilter>();
         }
 

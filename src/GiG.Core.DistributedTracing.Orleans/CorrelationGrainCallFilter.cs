@@ -21,6 +21,12 @@ namespace GiG.Core.DistributedTracing.Orleans
             _correlationContextAccessor = correlationContextAccessor;
         }
 
+        
+        /// <summary>
+        /// Invoke Grain call context.
+        /// </summary>
+        /// <param name="context"><see cref="IOutgoingGrainCallContext"/></param>
+        /// <returns>M<see cref="Task"/></returns>
         public async Task Invoke(IOutgoingGrainCallContext context)
         {
             RequestContext.Set(Constants.Header, _correlationContextAccessor?.Value);
