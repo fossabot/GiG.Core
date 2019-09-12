@@ -1,4 +1,4 @@
-# GiG Core Home
+# GiG Core
 
 The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 

@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Logging.All\GiG.Core.Logging.All.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Hosting\GiG.Core.Orleans.Hosting.csproj" />
+    <ProjectReference Include="..\GiG.Core.Orleans.Samples.HelloWorld.Grains\GiG.Core.Orleans.Samples.HelloWorld.Grains.csproj" />
   </ItemGroup>
 
   <ItemGroup>
