@@ -13,8 +13,8 @@ namespace GiG.Core.Orleans.Client.Extensions
         /// Creates and registers a new <see cref="IClusterClient"/> with default options.
         /// </summary>
         /// <param name="services">The service collection.</param>
-        /// <param name="configuration">The configuration which will be used to set the options for the client.</param>
-        /// <param name="assemblies">The Assemblies which will be added to the cluster client.</param>
+        /// <param name="configureClient">The configuration which will be used to set the options for the client.</param>
+        /// <returns>The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" /> so that additional calls can be chained.</returns>
         public static IServiceCollection AddClusterClient(this IServiceCollection services, Action<ClientBuilder> configureClient)
         {
             var builder = new ClientBuilder();
