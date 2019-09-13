@@ -5,7 +5,7 @@ services:
     image: ${DOCKER_REGISTRY-}gig.core.web.sample
     build:
       context: ..
-      dockerfile: samples/GiG.Core.Web.Sample/src/GiG.Core.Web.Sample/Dockerfile
+      dockerfile: samples/Web/src/GiG.Core.Web.Sample/Dockerfile
     environment:
       - ASPNETCORE_URLS=http://+:8080
       - PATH_BASE=/api/transactions
@@ -19,7 +19,7 @@ services:
   sample-web-ui:
     image: ${DOCKER_REGISTRY-}gig.core.web.sample.ui
     build:
-      context: ../samples/GiG.Core.Web.Sample.UI/
+      context: ../samples/Web/src/GiG.Core.Web.Sample.UI/
       dockerfile: Dockerfile
     depends_on:
       - sample

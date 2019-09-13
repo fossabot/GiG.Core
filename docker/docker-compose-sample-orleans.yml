@@ -5,7 +5,7 @@ services:
     image: ${DOCKER_REGISTRY-}gig.core.orleans.sample.silo
     build:
       context: ..
-      dockerfile: samples/GiG.Core.Orleans.Sample.Silo/Dockerfile
+      dockerfile: samples/Orleans/src/GiG.Core.Orleans.Sample.Silo/Dockerfile
     environment:
       - Logging__Sinks__Fluentd__IsEnabled=true
       - Logging__Sinks__Fluentd__Hostname=fluentd
@@ -20,7 +20,7 @@ services:
     image: ${DOCKER_REGISTRY-}gig.core.orleans.sample.client
     build:
       context: ..
-      dockerfile: samples/GiG.Core.Orleans.Sample.Client/Dockerfile
+      dockerfile: samples/Orleans/src/GiG.Core.Orleans.Sample.Client/Dockerfile
     environment:
       - ASPNETCORE_URLS=http://+:8080
       - PATH_BASE=/api/transactions
@@ -38,7 +38,7 @@ services:
   sample-web-ui:
     image: ${DOCKER_REGISTRY-}gig.core.web.sample.ui
     build:
-      context: ../samples/GiG.Core.Web.Sample.UI
+      context: ../samples/Web/src/GiG.Core.Web.Sample.UI
       dockerfile: Dockerfile
     depends_on:
       - sample
