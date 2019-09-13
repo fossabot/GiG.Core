@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace GiG.Core.Hosting.Tests.Integration
+namespace GiG.Core.Hosting.Tests.Integration.Mocks
 {
     internal class MockStartup
     {

@@ -12,6 +12,6 @@
     <None Include="docker-compose-sample-orleans.yml" />
     <None Include="docker-compose-sample-web.yml" />
     <None Include="docker-compose.yml" />
-    <None Include=".dockerignore" />
+    <None Include="../.dockerignore" />
   </ItemGroup>
 </Project>

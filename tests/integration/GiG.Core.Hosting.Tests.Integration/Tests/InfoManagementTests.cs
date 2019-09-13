@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using GiG.Core.Hosting.Tests.Integration.Mocks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using System.Net;
@@ -6,8 +7,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace GiG.Core.Hosting.Tests.Integration
+namespace GiG.Core.Hosting.Tests.Integration.Tests
 {
+    [Trait("Category", "integration")]
     public class InfoManagementTests
     {
         private readonly TestServer _testServer;

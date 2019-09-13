@@ -4,7 +4,7 @@ services:
   sample-migration:
     image: ${DOCKER_REGISTRY-}gig.core.data.migration.sample
     build:
-      context: .
+      context: ..
       dockerfile: samples/GiG.Core.Data.Migration.Sample/Dockerfile
     environment:
       - ConnectionStrings__DefaultConnection=Host=sampledb;Username=postgres;Password=postgres;Database=sample
@@ -15,7 +15,7 @@ services:
   fluentd:
     image: ${DOCKER_REGISTRY-}fluentd-elasticsearch
     build:
-      context: ./docker/fluentd
+      context: ./fluentd
       dockerfile: Dockerfile
     volumes:
       - ./fluentd/conf:/fluentd/etc

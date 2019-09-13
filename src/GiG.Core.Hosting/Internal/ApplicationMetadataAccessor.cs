@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
 
-namespace GiG.Core.Hosting
+namespace GiG.Core.Hosting.Internal
 {
     /// <inheritdoc />
     internal class ApplicationMetadataAccessor : IApplicationMetadataAccessor
@@ -25,6 +25,5 @@ namespace GiG.Core.Hosting
         public string InformationalVersion => Assembly.GetEntryAssembly()?
                                                       .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?
                                                       .InformationalVersion;
-
     }
 }

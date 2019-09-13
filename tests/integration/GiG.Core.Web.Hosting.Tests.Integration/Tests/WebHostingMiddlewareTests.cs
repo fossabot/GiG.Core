@@ -1,3 +1,4 @@
+using GiG.Core.Web.Hosting.Tests.Integration.Mocks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -8,8 +9,9 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace GiG.Core.Web.Hosting.Tests.Integration
+namespace GiG.Core.Web.Hosting.Tests.Integration.Tests
 {
+    [Trait("Category", "integration")]
     public class WebHostingMiddlewareTests
     {
         private readonly TestServer _server;

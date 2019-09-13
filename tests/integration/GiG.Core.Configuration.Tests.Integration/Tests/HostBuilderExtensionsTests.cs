@@ -1,12 +1,13 @@
-using System;
 using GiG.Core.Configuration.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using Xunit;
 
 namespace GiG.Core.Configuration.Tests.Integration.Tests
 {
+    [Trait("Category", "integration")]
     public class HostBuilderExtensionsTests
     {
         private const string ConfigurationSectionName = "Configuration";

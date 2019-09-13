@@ -1,13 +1,14 @@
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
 using GiG.Core.Web.FluentValidation.Tests.Integration.Mocks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace GiG.Core.Web.FluentValidation.Tests.Integration.Tests
 {
+    [Trait("Category", "integration")]
     public class FluentValidationMiddlewareTests
     {
         private readonly TestServer _server;

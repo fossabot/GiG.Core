@@ -6,8 +6,9 @@ using Microsoft.Extensions.Hosting.Internal;
 using System.IO;
 using Xunit;
 
-namespace GiG.Core.Data.Migration.Tests.Integration
+namespace GiG.Core.Data.Migration.Tests.Integration.Tests
 {
+    [Trait("Category", "integration")]
     public class DbMigrationTests
     {
         [Fact]

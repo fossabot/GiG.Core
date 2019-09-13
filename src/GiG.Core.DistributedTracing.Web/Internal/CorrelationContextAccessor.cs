@@ -1,7 +1,7 @@
-﻿using System;
-using GiG.Core.DistributedTracing.Abstractions;
+﻿using GiG.Core.DistributedTracing.Abstractions;
+using System;
 
-namespace GiG.Core.DistributedTracing.Web
+namespace GiG.Core.DistributedTracing.Web.Internal
 {
     /// <inheritdoc />
     internal class CorrelationContextAccessor : ICorrelationContextAccessor

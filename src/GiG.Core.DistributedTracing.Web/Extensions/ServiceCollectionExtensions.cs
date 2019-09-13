@@ -1,8 +1,9 @@
-﻿using System;
-using CorrelationId;
+﻿using CorrelationId;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using System;
+using CorrelationContextAccessor = GiG.Core.DistributedTracing.Web.Internal.CorrelationContextAccessor;
 using ICorrelationContextAccessor = GiG.Core.DistributedTracing.Abstractions.ICorrelationContextAccessor;
 
 namespace GiG.Core.DistributedTracing.Web.Extensions
