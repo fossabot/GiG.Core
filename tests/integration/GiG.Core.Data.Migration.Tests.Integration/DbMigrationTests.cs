@@ -89,7 +89,7 @@ namespace GiG.Core.Data.Migration.Tests.Integration
 
                 connection.Close();
 
-                Assert.Equal(1l, scriptsExecuted);
+                Assert.Equal(1L, scriptsExecuted);
                 Assert.True(metaTableCreated);
             }
 
