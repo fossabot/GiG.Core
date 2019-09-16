@@ -3,12 +3,12 @@
 namespace GiG.Core.Logging.Abstractions
 {
     /// <summary>
-    /// Logger Options.
+    /// Logging Options.
     /// </summary>
-    public class LoggerOptions
+    public class LoggingOptions
     {
         /// <summary>
-        /// Logger default section name.
+        /// Logging default section name.
         /// </summary>
         public const string DefaultSectionName = "Logging";
         

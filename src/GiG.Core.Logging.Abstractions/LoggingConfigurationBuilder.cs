@@ -8,9 +8,9 @@ using System.Configuration;
 namespace GiG.Core.Logging.Abstractions
 {
     /// <summary>
-    /// Logger Configuration builder.
+    /// Logging Configuration builder.
     /// </summary>
-    public class LoggerConfigurationBuilder
+    public class LoggingConfigurationBuilder
     {
         /// <summary>
         /// Sink Configuration section.
@@ -27,24 +27,26 @@ namespace GiG.Core.Logging.Abstractions
         /// </summary>
         public IServiceCollection Services { get; }
 
-        private readonly LoggerOptions _loggerOptions;
+        private readonly LoggingOptions _loggingOptions;
 
         /// <summary>
-        /// Logger Configuration builder.
+        /// Logging Configuration builder.
         /// </summary>
         /// <param name="services">Service collection.</param>
         /// <param name="loggerConfiguration">Logger Configuration.</param>
-        /// <param name="configurationSection">Logger Configuration section.</param>
-        public LoggerConfigurationBuilder([NotNull] IServiceCollection services, [NotNull] LoggerConfiguration loggerConfiguration,
+        /// <param name="configurationSection">Logging Configuration section.</param>
+        public LoggingConfigurationBuilder([NotNull] IServiceCollection services,
+            [NotNull] LoggerConfiguration loggerConfiguration,
             [NotNull] IConfigurationSection configurationSection)
         {
-            _loggerOptions = configurationSection.Get<LoggerOptions>();
-            if (_loggerOptions == null)
+            _loggingOptions = configurationSection.Get<LoggingOptions>();
+            if (_loggingOptions == null)
             {
-                throw new ConfigurationErrorsException($"Configuration section '{configurationSection.Key}' is not valid");
+                throw new ConfigurationErrorsException(
+                    $"Configuration section '{configurationSection.Key}' is not valid");
             }
 
-            const string sectionName = nameof(_loggerOptions.Sinks);
+            const string sectionName = nameof(_loggingOptions.Sinks);
             SinkConfiguration = configurationSection.GetSection(sectionName);
             if (SinkConfiguration == null)
             {
@@ -59,19 +61,23 @@ namespace GiG.Core.Logging.Abstractions
         /// Register sink provider.
         /// </summary>
         /// <param name="name">Sink provider name.</param>
-        /// <param name="sinkProvider">Logger sink provider instance.</param>
-        /// <returns></returns>
+        /// <param name="sinkProvider">Logging sink provider instance.</param>
         /// <exception cref="ApplicationException">Throws application exception when Sink providers are not configured.</exception>
-        public LoggerConfigurationBuilder RegisterSink([NotNull]  string name, [NotNull] ILoggerSinkProvider sinkProvider)
+        public LoggingConfigurationBuilder RegisterSink([NotNull] string name,
+            [NotNull] ILoggingSinkProvider sinkProvider)
         {
-            if (_loggerOptions.Sinks == null)
+            if (string.IsNullOrEmpty(name)) throw new ArgumentException(nameof(name));
+            if (sinkProvider == null) throw new ArgumentNullException(nameof(sinkProvider));
+            
+            if (_loggingOptions.Sinks == null)
             {
-                throw new ApplicationException($"No sinks were configured.  Please add at least one sink provider");
+                throw new ConfigurationErrorsException(
+                    $"No sinks were configured.  Please add at least one sink provider");
             }
 
-            if (!_loggerOptions.Sinks.TryGetValue(name, out var sinkOptions))
+            if (!_loggingOptions.Sinks.TryGetValue(name, out var sinkOptions))
             {
-                throw new ConfigurationErrorsException($"Logging sink '{name}' does not exist");
+                return this;
             }
 
             if (sinkOptions.IsEnabled)

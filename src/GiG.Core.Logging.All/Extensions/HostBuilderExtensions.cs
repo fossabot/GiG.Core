@@ -21,7 +21,7 @@ namespace GiG.Core.Logging.All.Extensions
         /// <param name="sectionName">Configuration section name.</param>
         /// <returns>Host builder.</returns>
         public static IHostBuilder ConfigureLogging([NotNull] this IHostBuilder builder,
-            [NotNull] string sectionName = LoggerOptions.DefaultSectionName) =>
+            [NotNull] string sectionName = LoggingOptions.DefaultSectionName) =>
             builder.ConfigureLogging(x => x
                 .WriteToConsole()
                 .WriteToFluentd()
