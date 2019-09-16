@@ -5,6 +5,7 @@ using Orleans.Configuration;
 using System;
 using System.Configuration;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GiG.Core.Orleans.Client.Extensions
@@ -26,7 +27,7 @@ namespace GiG.Core.Orleans.Client.Extensions
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             
             var clusterClient = builder.Build();
-
+            
             clusterClient
                 .Connect(CreateRetryFilter())
                 .ConfigureAwait(false)
