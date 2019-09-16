@@ -18,6 +18,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Orleans\GiG.Core.DistributedTracing.Orleans.csproj" />
+      <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Web\GiG.Core.DistributedTracing.Web.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Client\GiG.Core.Orleans.Client.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Hosting.Silo\GiG.Core.Orleans.Hosting.Silo.csproj" />
     </ItemGroup>

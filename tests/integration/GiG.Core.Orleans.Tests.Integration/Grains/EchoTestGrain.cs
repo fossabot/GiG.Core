@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace GiG.Core.Orleans.Tests.Integration.Grains
 {
-    public class TestGrain : Grain, ITestGrain
+    public class EchoTestGrain : Grain, IEchoTestGrain
     {
         private int _value;
 

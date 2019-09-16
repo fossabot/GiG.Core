@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace GiG.Core.Orleans.Tests.Integration.Contracts
 {
-    public interface ITestGrain : IGrainWithStringKey
+    public interface IEchoTestGrain : IGrainWithStringKey
     {
         Task SetValueAsync(int value);
         
