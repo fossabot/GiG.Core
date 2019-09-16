@@ -1,15 +1,16 @@
-using System;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.DistributedTracing.Web.Tests.Integration.Mocks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
+using System;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace GiG.Core.DistributedTracing.Web.Tests.Integration.Tests
 {
+    [Trait("Category", "integration")]
     public class CorrelationIdTests
     {
         private readonly TestServer _server;
