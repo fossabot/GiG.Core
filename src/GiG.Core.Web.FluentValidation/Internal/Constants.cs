@@ -13,6 +13,6 @@
         /// <summary>
         /// Json Mime Type
         /// </summary>
-        public const string JsonMimeType = "application/json";
+        public const string ProblemJsonMimeType = "application/problem+json";
     }
 }
