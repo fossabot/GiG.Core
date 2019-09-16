@@ -1,8 +1,8 @@
-﻿using System;
-using GiG.Core.HealthChecks.Abstractions;
+﻿using GiG.Core.HealthChecks.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using System;
 
 namespace GiG.Core.HealthChecks.Extensions
 {

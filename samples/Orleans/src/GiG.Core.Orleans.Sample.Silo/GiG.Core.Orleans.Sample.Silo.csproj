@@ -16,7 +16,7 @@
     <ProjectReference Include="..\..\..\..\src\GiG.Core.DistributedTracing.Orleans\GiG.Core.DistributedTracing.Orleans.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Logging.All\GiG.Core.Logging.All.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Clustering.Consul.Silo\GiG.Core.Orleans.Clustering.Consul.Silo.csproj" />
-    <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Hosting\GiG.Core.Orleans.Hosting.csproj" />
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Hosting.Silo\GiG.Core.Orleans.Hosting.Silo.csproj" />
     <ProjectReference Include="..\GiG.Core.Orleans.Sample.Grains\GiG.Core.Orleans.Sample.Grains.csproj" />
   </ItemGroup>
 

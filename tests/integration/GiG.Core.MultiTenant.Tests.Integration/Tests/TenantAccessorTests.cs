@@ -12,7 +12,7 @@ using Xunit;
 
 namespace GiG.Core.MultiTenant.Web.Tests.Integration.Tests
 {
-    [Trait("Category", "integration")]
+    [Trait("Category", "Integration")]
     public class TenantAccessorTests
     {
         private readonly TestServer _server;

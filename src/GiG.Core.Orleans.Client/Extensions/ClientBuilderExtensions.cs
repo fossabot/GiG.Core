@@ -2,6 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Orleans;
 using Orleans.Configuration;
 using System;
+using System.Configuration;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -51,7 +52,7 @@ namespace GiG.Core.Orleans.Client.Extensions
             var configurationSection = configuration.GetSection(ClusterDefaultSectionName);
             if (configurationSection == null)
             {
-                throw new InvalidOperationException(
+                throw new ConfigurationErrorsException(
                     $"Configuration section '{ClusterDefaultSectionName}' does not exist");
             }
 

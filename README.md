@@ -72,7 +72,7 @@ docker run --rm gig-core:test
 ### Dotnet CLI
 
 ```sh
-dotnet test --filter "FullyQualifiedName\!~Sample" GiG.Core.sln 
+dotnet test --filter "Category=Unit|Category=Integration" GiG.Core.sln 
 ```
 
 ## Sample

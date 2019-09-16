@@ -7,7 +7,7 @@ using Xunit;
 
 namespace GiG.Core.Configuration.Tests.Integration.Tests
 {
-    [Trait("Category", "integration")]
+    [Trait("Category", "Integration")]
     public class HostBuilderExtensionsTests
     {
         private const string ConfigurationSectionName = "Configuration";

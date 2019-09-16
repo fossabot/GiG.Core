@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace GiG.Core.HealthChecks.Abstractions
 {
@@ -11,6 +11,8 @@ namespace GiG.Core.HealthChecks.Abstractions
     /// </summary>
     public abstract class CachedHealthCheck : IHealthCheck
     {
+        private const long DefaultCacheExpirationMs = 500;
+
         private readonly IMemoryCache _memoryCache;
         private readonly long _cacheExpirationMs;
         private readonly string _cacheKey;
@@ -20,7 +22,7 @@ namespace GiG.Core.HealthChecks.Abstractions
         /// </summary>
         /// <param name="memoryCache">The Memory Cache Provider.</param>
         /// <param name="cacheExpirationMs">The Expiration of the Cache in MS.</param>
-        protected CachedHealthCheck(IMemoryCache memoryCache, long cacheExpirationMs = 1000)
+        protected CachedHealthCheck(IMemoryCache memoryCache, long cacheExpirationMs = DefaultCacheExpirationMs)
         {
             _memoryCache = memoryCache;
             _cacheExpirationMs = cacheExpirationMs;
@@ -33,7 +35,7 @@ namespace GiG.Core.HealthChecks.Abstractions
         /// <param name="memoryCache">The Memory Cache Provider.</param>
         /// <param name="name">The name of the instance of the Health Check.</param>
         /// <param name="cacheExpirationMs">The Expiration of the Cache in MS.</param>
-        protected CachedHealthCheck(IMemoryCache memoryCache, string name, long cacheExpirationMs = 1000)
+        protected CachedHealthCheck(IMemoryCache memoryCache, string name, long cacheExpirationMs = DefaultCacheExpirationMs)
         {
             _memoryCache = memoryCache;
             _cacheExpirationMs = cacheExpirationMs;
