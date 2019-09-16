@@ -5,6 +5,7 @@ using GiG.Core.Orleans.Sample.Grains;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using System.IO;
+using GiG.Core.DistributedTracing.Orleans.Extensions;
 
 namespace GiG.Core.Orleans.Sample.Silo
 {
@@ -26,6 +27,7 @@ namespace GiG.Core.Orleans.Sample.Silo
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                     .AddEnvironmentVariables())
+                .ConfigureServices(services => services.AddCorrelationAccessor())
                 .ConfigureLogging()
                 .Build()
                 .Run();

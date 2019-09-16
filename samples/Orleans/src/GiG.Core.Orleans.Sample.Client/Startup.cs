@@ -1,3 +1,4 @@
+using GiG.Core.DistributedTracing.Orleans.Extensions;
 using GiG.Core.Orleans.Client.Extensions;
 using GiG.Core.Orleans.Clustering.Consul.Client.Extensions;
 using GiG.Core.Orleans.Sample.Contracts;
@@ -20,8 +21,9 @@ namespace GiG.Core.Orleans.Sample.Client
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddClusterClient(x =>
+            services.AddClusterClient((x, sp) =>
             {
+                x.AddCorrelationOutgoingFilter(sp);
                 x.ConfigureCluster(_configuration);
                 x.ConfigureConsulClustering(_configuration);
                 x.AddAssemblies(typeof(ITransactionGrain));
