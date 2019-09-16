@@ -16,7 +16,7 @@
         public string Address { get; set; }
 
         /// <summary>
-        /// KV Root Folder.
+        /// Key Value Root Folder.
         /// </summary>
         public string KvRootFolder { get; set; }
     }

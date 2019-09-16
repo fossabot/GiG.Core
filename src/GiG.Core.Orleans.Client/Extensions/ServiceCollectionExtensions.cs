@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using JetBrains.Annotations;
+using Microsoft.Extensions.DependencyInjection;
 using Orleans;
 using System;
 
@@ -15,8 +16,11 @@ namespace GiG.Core.Orleans.Client.Extensions
         /// <param name="services">The <see cref="IServiceCollection" /> to add the services to.</param>
         /// <param name="configureClient">The <see cref="Action{ClientBuilder, IServiceProvider}"/> on which will be used to set the options for the client.</param>
         /// <returns>The <see cref="IServiceCollection" /> so that additional calls can be chained.</returns>
-        public static IServiceCollection AddClusterClient(this IServiceCollection services, Action<ClientBuilder, IServiceProvider> configureClient)
+        public static IServiceCollection AddClusterClient([NotNull] this IServiceCollection services, [NotNull] Action<ClientBuilder, IServiceProvider> configureClient)
         {
+            if (services == null) throw new ArgumentNullException(nameof(services));
+            if (configureClient == null) throw new ArgumentNullException(nameof(configureClient));
+            
             var builder = new ClientBuilder();
             
             configureClient?.Invoke(builder, services.BuildServiceProvider());
@@ -30,8 +34,11 @@ namespace GiG.Core.Orleans.Client.Extensions
         /// <param name="services">The <see cref="IServiceCollection" /> to add the services to.</param>
         /// <param name="configureClient">The <see cref="Action{ClientBuilder}"/> on which will be used to set the options for the client.</param>
         /// <returns>The <see cref="IServiceCollection" /> so that additional calls can be chained.</returns>
-        public static IServiceCollection AddClusterClient(this IServiceCollection services, Action<ClientBuilder> configureClient)
+        public static IServiceCollection AddClusterClient([NotNull] this IServiceCollection services, [NotNull] Action<ClientBuilder> configureClient)
         {
+            if (services == null) throw new ArgumentNullException(nameof(services));
+            if (configureClient == null) throw new ArgumentNullException(nameof(configureClient));
+            
             var builder = new ClientBuilder();
 
             configureClient?.Invoke(builder);
