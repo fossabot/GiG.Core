@@ -9,7 +9,7 @@ using Xunit;
 
 namespace GiG.Core.Hosting.Tests.Integration.Tests
 {
-    [Trait("Category", "integration")]
+    [Trait("Category", "Integration")]
     public class InfoManagementTests
     {
         private readonly TestServer _testServer;

@@ -10,7 +10,7 @@ using Xunit;
 
 namespace GiG.Core.HealthChecks.Tests.Integration.Tests
 {
-    [Trait("Category", "integration")]
+    [Trait("Category", "Integration")]
     public class HealthCheckTests
     {
         private readonly HealthChecksOptions _healthChecksOptions;

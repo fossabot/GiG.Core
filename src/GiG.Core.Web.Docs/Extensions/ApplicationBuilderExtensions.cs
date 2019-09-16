@@ -1,8 +1,8 @@
 ﻿using GiG.Core.Web.Docs.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Options;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using System;
 
 namespace GiG.Core.Web.Docs.Extensions

@@ -1,8 +1,8 @@
-﻿using System.IO;
-using GiG.Core.HealthChecks.Extensions;
+﻿using GiG.Core.HealthChecks.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.IO;
 
 namespace GiG.Core.HealthChecks.Tests.Integration.Mocks
 {

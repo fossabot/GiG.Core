@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using GiG.Core.DistributedTracing.Abstractions;
+﻿using GiG.Core.DistributedTracing.Abstractions;
 using Orleans;
 using Orleans.Runtime;
+using System.Threading.Tasks;
 
 namespace GiG.Core.DistributedTracing.Orleans
 {

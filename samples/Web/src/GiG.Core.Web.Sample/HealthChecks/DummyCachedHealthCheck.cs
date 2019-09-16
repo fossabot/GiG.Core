@@ -1,9 +1,9 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using GiG.Core.HealthChecks.Abstractions;
+﻿using GiG.Core.HealthChecks.Abstractions;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace GiG.Core.Web.Sample.HealthChecks
 {

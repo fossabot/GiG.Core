@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Orleans.Runtime.Abstractions" Version="3.0.0-beta1" />
     <PackageReference Include="OrleansDashboard" Version="2.4.5" PrivateAssets="compile" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" PrivateAssets="compile" />
   </ItemGroup>
 
   <ItemGroup>

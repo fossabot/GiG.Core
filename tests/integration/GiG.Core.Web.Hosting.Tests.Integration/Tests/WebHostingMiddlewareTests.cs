@@ -11,7 +11,7 @@ using Xunit;
 
 namespace GiG.Core.Web.Hosting.Tests.Integration.Tests
 {
-    [Trait("Category", "integration")]
+    [Trait("Category", "Integration")]
     public class WebHostingMiddlewareTests
     {
         private readonly TestServer _server;

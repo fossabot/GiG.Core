@@ -1,7 +1,7 @@
-﻿using System;
-using GiG.Core.Web.FluentValidation.Internal;
+﻿using GiG.Core.Web.FluentValidation.Internal;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
+using System;
 
 namespace GiG.Core.Web.FluentValidation.Extensions
 {

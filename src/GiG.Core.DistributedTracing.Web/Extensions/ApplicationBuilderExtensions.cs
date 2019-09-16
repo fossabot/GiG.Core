@@ -1,7 +1,7 @@
-﻿using System;
-using CorrelationId;
+﻿using CorrelationId;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
+using System;
 
 namespace GiG.Core.DistributedTracing.Web.Extensions
 {

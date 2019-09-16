@@ -11,6 +11,9 @@ namespace GiG.Core.Orleans.Sample.Client.Controllers
     [Route("[controller]")]
     public class TransactionsController : ControllerBase
     {
+        private const decimal MinimumAmount = 10;
+        private const string PlayerId = "player1";
+
         private readonly IClusterClient _clusterClient;
 
         public TransactionsController(IClusterClient clusterClient)
@@ -25,19 +28,9 @@ namespace GiG.Core.Orleans.Sample.Client.Controllers
         [HttpGet("balance")]
         public async Task<ActionResult<decimal>> Get()
         {
-            var balance = await _clusterClient.GetGrain<ITransactionGrain>("player1").GetBalance();
+            var balance = await _clusterClient.GetGrain<ITransactionGrain>(PlayerId).GetBalance();
 
             return Ok(balance);
-        }
-
-        /// <summary>
-        /// Gets the Minimum Deposit Amount
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet("min-dep-amt")]
-        public ActionResult<decimal> GetDepositLimit()
-        {
-            return Ok(10);
         }
 
         /// <summary>
@@ -50,12 +43,12 @@ namespace GiG.Core.Orleans.Sample.Client.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<decimal>> Deposit(TransactionRequest request)
         {
-            if (request.Amount < 10)
+            if (request.Amount < MinimumAmount)
             {
-                return BadRequest($"Deposit Amount must be greater than {10}.");
+                return BadRequest($"Deposit Amount must be greater than {MinimumAmount}.");
             }
 
-            var balance = await _clusterClient.GetGrain<ITransactionGrain>("player1").Deposit(request.Amount);
+            var balance = await _clusterClient.GetGrain<ITransactionGrain>(PlayerId).Deposit(request.Amount);
 
             return Ok(balance);
         }
@@ -70,7 +63,7 @@ namespace GiG.Core.Orleans.Sample.Client.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<decimal>> Withdraw(TransactionRequest request)
         {
-            var grain = _clusterClient.GetGrain<ITransactionGrain>("player1");
+            var grain = _clusterClient.GetGrain<ITransactionGrain>(PlayerId);
 
             if (request.Amount > await grain.GetBalance())
             {

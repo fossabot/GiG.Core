@@ -5,7 +5,7 @@ using Orleans;
 using Orleans.Hosting;
 using System;
 
-namespace GiG.Core.Orleans.Client.Clustering.Consul.Extensions
+namespace GiG.Core.Orleans.Clustering.Consul.Client.Extensions
 {
     /// <summary>
     /// Client Builder Extensions.

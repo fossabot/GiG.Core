@@ -4,12 +4,13 @@ using Orleans;
 using Orleans.Configuration;
 using Orleans.Hosting;
 using System;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
 
-namespace GiG.Core.Orleans.Hosting.Extensions
+namespace GiG.Core.Orleans.Hosting.Silo.Extensions
 {
     /// <summary>
     /// Silo Builder Extensions.
@@ -88,7 +89,7 @@ namespace GiG.Core.Orleans.Hosting.Extensions
             var configurationSection = configuration.GetSection(ClusterOptionsDefaultSection);
             if (configurationSection == null)
             {
-                throw new  InvalidOperationException($"Configuration section '{ClusterOptionsDefaultSection}' does not exist");
+                throw new ConfigurationErrorsException($"Configuration section '{ClusterOptionsDefaultSection}' does not exist");
             }
 
             return ConfigureCluster(builder, configurationSection);

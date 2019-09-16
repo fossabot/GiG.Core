@@ -1,0 +1,22 @@
+version: "3.4"
+
+services:
+  sample-migration:
+    image: ${DOCKER_REGISTRY-}gig.core.data.migration.sample
+    build:
+      context: ..
+      dockerfile: samples/Data/src/GiG.Core.Data.Migration.Sample/Dockerfile
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=sampledb;Username=postgres;Password=postgres;Database=sample
+    depends_on:
+      - sampledb
+    restart: on-failure
+
+  sampledb:
+    image: postgres:11.5-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: sample
+    ports:
+      - "5432:5432"
