@@ -19,7 +19,7 @@ namespace GiG.Core.Orleans.Client.Extensions
         /// Builds and Connect the client.
         /// </summary>
         /// <param name="builder">The <see cref="IClientBuilder"/>.</param>
-        /// <returns>The newly created client.</returns>
+        /// <returns>The <see cref="IClusterClient"/> so that additional calls can be chained.</returns>
         public static IClusterClient BuildAndConnect(this IClientBuilder builder)
         {
             var clusterClient = builder.Build();
@@ -36,9 +36,10 @@ namespace GiG.Core.Orleans.Client.Extensions
         /// <summary>
         /// Sets the Cluster settings using an <see cref="IConfigurationSection"/>.
         /// </summary>
+        /// <param name="builder">The <see cref="IClientBuilder"/>./param>
+        /// <param name="configurationSection">An <see cref="IConfigurationSection"/> to configure the provided <see cref="IClientBuilder"/>.</param>
         /// <returns>Returns the <see cref="IClientBuilder"/> so that more methods can be chained.</returns>
-        public static IClientBuilder ConfigureCluster(this IClientBuilder builder,
-            IConfigurationSection configurationSection)
+        public static IClientBuilder ConfigureCluster(this IClientBuilder builder, IConfigurationSection configurationSection)
         {
             return builder.Configure<ClusterOptions>(configurationSection);
         }
@@ -46,6 +47,8 @@ namespace GiG.Core.Orleans.Client.Extensions
         /// <summary>
         /// Sets the Cluster settings using an <see cref="IConfiguration"/>.
         /// </summary>
+        /// <param name="builder">The <see cref="IClientBuilder"/>./param>
+        /// <param name="configuration">An <see cref="IConfiguration"/> to configure the provided <see cref="IClientBuilder"/>.</param>
         /// <returns>Returns the <see cref="IClientBuilder"/> so that more methods can be chained.</returns>
         public static IClientBuilder ConfigureCluster(this IClientBuilder builder, IConfiguration configuration)
         {
@@ -65,7 +68,7 @@ namespace GiG.Core.Orleans.Client.Extensions
         /// Adds Assemblies to Cluster Client Builder with references.
         /// </summary>
         /// <param name="builder">The <see cref="IClientBuilder"/>.</param>
-        /// <param name="assemblies">The Assemblies which will be added to the cluster client.</param>
+        /// <param name="assemblies">The <see cref="Assembly"/> array which will be added to the cluster client.</param>
         /// <returns>Returns the <see cref="IClientBuilder"/> so that more methods can be chained.</returns>
         public static IClientBuilder ConfigureAssemblies(this IClientBuilder builder, params Assembly[] assemblies)
         {
@@ -82,7 +85,7 @@ namespace GiG.Core.Orleans.Client.Extensions
         /// Adds Assemblies to Cluster Client Builder with references.
         /// </summary>
         /// <param name="builder">The <see cref="IClientBuilder"/>.</param>
-        /// <param name="types">The Assemblies which will be added to the cluster client.</param>
+        /// <param name="types">The <see cref="Type"/> array which will be added to the cluster client.</param>
         /// <returns>Returns the <see cref="IClientBuilder"/> so that more methods can be chained.</returns>
         public static IClientBuilder AddAssemblies(this IClientBuilder builder, params Type[] types)
         {

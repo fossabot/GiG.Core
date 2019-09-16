@@ -11,12 +11,12 @@
         public const string DefaultSectionName = "Orleans:Consul";
       
         /// <summary>
-        /// Consul Address
+        /// Consul Address.
         /// </summary>
         public string Address { get; set; }
 
         /// <summary>
-        /// KV Root Folder
+        /// KV Root Folder.
         /// </summary>
         public string KvRootFolder { get; set; }
     }

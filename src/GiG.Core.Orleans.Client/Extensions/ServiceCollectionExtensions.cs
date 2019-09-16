@@ -5,16 +5,16 @@ using System;
 namespace GiG.Core.Orleans.Client.Extensions
 {
     /// <summary>
-    /// Service Collection Extensions
+    /// Service Collection Extensions.
     /// </summary>
     public static class ServiceCollectionExtensions
     {
         /// <summary>
         /// Creates and registers a new <see cref="IClusterClient"/> with default options.
         /// </summary>
-        /// <param name="services">The service collection.</param>
-        /// <param name="configureClient">The configuration which will be used to set the options for the client.</param>
-        /// <returns>The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" /> so that additional calls can be chained.</returns>
+        /// <param name="services">The <see cref="IServiceCollection" /> to add the services to.</param>
+        /// <param name="configureClient">The <see cref="Action{ClientBuilder, IServiceProvider}"/> on which will be used to set the options for the client.</param>
+        /// <returns>The <see cref="IServiceCollection" /> so that additional calls can be chained.</returns>
         public static IServiceCollection AddClusterClient(this IServiceCollection services, Action<ClientBuilder, IServiceProvider> configureClient)
         {
             var builder = new ClientBuilder();
@@ -27,9 +27,9 @@ namespace GiG.Core.Orleans.Client.Extensions
         /// <summary>
         /// Creates and registers a new <see cref="IClusterClient"/> with default options.
         /// </summary>
-        /// <param name="services">The service collection.</param>
-        /// <param name="configureClient">The configuration which will be used to set the options for the client.</param>
-        /// <returns>The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" /> so that additional calls can be chained.</returns>
+        /// <param name="services">The <see cref="IServiceCollection" /> to add the services to.</param>
+        /// <param name="configureClient">The <see cref="Action{ClientBuilder}"/> on which will be used to set the options for the client.</param>
+        /// <returns>The <see cref="IServiceCollection" /> so that additional calls can be chained.</returns>
         public static IServiceCollection AddClusterClient(this IServiceCollection services, Action<ClientBuilder> configureClient)
         {
             var builder = new ClientBuilder();
