@@ -39,7 +39,7 @@ namespace GiG.Core.Logging.Abstractions
             [NotNull] IConfigurationSection configurationSection)
         {
             _loggerOptions = configurationSection.Get<LoggerOptions>();
-            if (SinkConfiguration == null)
+            if (_loggerOptions == null)
             {
                 throw new ConfigurationErrorsException($"Configuration section '{configurationSection.Key}' is not valid");
             }
