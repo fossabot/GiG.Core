@@ -120,7 +120,6 @@ namespace GiG.Core.Orleans.Hosting.Silo.Extensions
             });
         }
 
-
         /// <summary>
         /// Configures the Orleans Dashboard.
         /// </summary>
