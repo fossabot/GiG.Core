@@ -1,4 +1,4 @@
-using GiG.Core.Data.Migration.Extensions;
+using GiG.Core.Data.Migration.Evolve.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Npgsql;

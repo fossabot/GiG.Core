@@ -1,11 +1,12 @@
 ﻿using GiG.Core.Data.Migration.Abstractions;
+using GiG.Core.Data.Migration.Evolve.Internal;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Data;
 
-namespace GiG.Core.Data.Migration.Extensions
+namespace GiG.Core.Data.Migration.Evolve.Extensions
 {
     /// <summary>
     /// Service Collection Extensions.
@@ -13,11 +14,11 @@ namespace GiG.Core.Data.Migration.Extensions
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Adds the <see cref="T:GiG.Core.Data.Migration.Evolce.DataBaseMigration" /> to the container.
+        /// Adds the <see cref="T:GiG.Core.Data.Migration.Evolve.DatabaseMigration" /> to the container.
         /// </summary>
         /// <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" /> to add the services to.</param>
         /// <param name="dbConnection">The <see cref="T:System.Data.IDbConnection" /> to be used for the DataBase migration.</param>
-        /// <returns>The <see cref="T:GiG.Core.Data.Migration.Evolce.MigrationOptionsBuilder" /> to be used to build the Migration Options.</returns>
+        /// <returns>The <see cref="T:GiG.Core.Data.Migration.Evolve.MigrationOptionsBuilder" /> to be used to build the Migration Options.</returns>
         public static MigrationOptionsBuilder AddDbMigration([NotNull] this IServiceCollection services, [NotNull] IDbConnection dbConnection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));

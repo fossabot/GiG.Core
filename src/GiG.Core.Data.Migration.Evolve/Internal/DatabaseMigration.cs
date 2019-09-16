@@ -1,7 +1,7 @@
 ﻿using GiG.Core.Data.Migration.Abstractions;
 using Microsoft.Extensions.Logging;
 
-namespace GiG.Core.Data.Migration
+namespace GiG.Core.Data.Migration.Evolve.Internal
 {
     internal class DatabaseMigration : IDatabaseMigration
     {
@@ -16,7 +16,7 @@ namespace GiG.Core.Data.Migration
         {
             if (options.Enabled)
             {
-                var evolve = new Evolve.Evolve(options.Connection, x => _logger.LogDebug(x))
+                var evolve = new global::Evolve.Evolve(options.Connection, x => _logger.LogDebug(x))
                 {
                     Locations = options.Locations,
                     MetadataTableSchema = options.MetadataTableSchema,
