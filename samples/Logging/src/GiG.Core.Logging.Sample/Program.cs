@@ -1,5 +1,4 @@
-﻿using System.IO;
-using GiG.Core.Hosting.Extensions;
+﻿using GiG.Core.Hosting.Extensions;
 using GiG.Core.Logging.All.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
