@@ -29,7 +29,7 @@ namespace GiG.Core.Orleans.Clustering.Consul.Silo.Extensions
         /// Configures Consul in Orleans.
         /// </summary>
         /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
-        /// <param name="configuration">The <see cref="IConfigurationSection" /> which contains Consul options.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection" /> which contains Consul options.</param>
         /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
         public static ISiloBuilder ConfigureConsulClustering([NotNull] this ISiloBuilder builder, [NotNull] IConfigurationSection configurationSection)
         {
