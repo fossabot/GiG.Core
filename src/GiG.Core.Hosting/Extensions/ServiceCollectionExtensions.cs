@@ -1,4 +1,5 @@
 ﻿using GiG.Core.Hosting.Abstractions;
+using GiG.Core.Hosting.Internal;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

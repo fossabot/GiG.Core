@@ -1,15 +1,16 @@
-﻿using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using GiG.Core.HealthChecks.Abstractions;
+﻿using GiG.Core.HealthChecks.Abstractions;
 using GiG.Core.HealthChecks.Extensions;
 using GiG.Core.HealthChecks.Tests.Integration.Mocks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace GiG.Core.HealthChecks.Tests.Integration.Tests
 {
+    [Trait("Category", "integration")]
     public class HealthCheckTests
     {
         private readonly HealthChecksOptions _healthChecksOptions;
@@ -146,7 +147,6 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             Assert.Equal(HttpStatusCode.ServiceUnavailable, response.StatusCode);
         }
 
-
         [Fact]
         public async Task RespondWithUnHealthyStatusOnLiveHealthCheck()
         {
@@ -184,7 +184,6 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.ServiceUnavailable, response.StatusCode);
         }
-
 
         [Fact]
         public async Task RespondWithReadyCheckUnHealthyStatusOnCombinedHealthCheck()
