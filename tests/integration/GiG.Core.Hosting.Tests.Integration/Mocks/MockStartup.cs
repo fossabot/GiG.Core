@@ -19,7 +19,6 @@ namespace GiG.Core.Hosting.Tests.Integration.Mocks
         {
             services.AddControllers();
             services.AddRouting();
-            services.AddApplicationMetadataAccessor();
             services.ConfigureInfoManagement(_configuration);
         }
 

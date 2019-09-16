@@ -1,11 +1,11 @@
-﻿using GiG.Core.Logging.All.Extensions;
+﻿using GiG.Core.Hosting.Extensions;
+using GiG.Core.Logging.All.Extensions;
 using GiG.Core.Orleans.Hosting.Extensions;
 using GiG.Core.Orleans.Sample.Grains;
 using GiG.Core.Orleans.Silo.Clustering.Consul.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using System.IO;
-using GiG.Core.DistributedTracing.Orleans.Extensions;
 
 namespace GiG.Core.Orleans.Sample.Silo
 {
@@ -14,6 +14,14 @@ namespace GiG.Core.Orleans.Sample.Silo
         public static void Main()
         {
             new HostBuilder()
+                .ConfigureHostConfiguration(builder => builder
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                    .AddEnvironmentVariables())
+                // TODO
+                // .ConfigureServices(services => services.AddCorrelationAccessor())
+                .UseApplicationMetadata()
+                .ConfigureLogging()
                 .UseOrleans((ctx, builder) =>
                 {
                     builder
@@ -23,12 +31,6 @@ namespace GiG.Core.Orleans.Sample.Silo
                         .ConfigureConsulClustering(ctx.Configuration)
                         .AddAssemblies(typeof(TransactionGrain));
                 })
-                .ConfigureHostConfiguration(builder => builder
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                    .AddEnvironmentVariables())
-                .ConfigureServices(services => services.AddCorrelationAccessor())
-                .ConfigureLogging()
                 .Build()
                 .Run();
         }

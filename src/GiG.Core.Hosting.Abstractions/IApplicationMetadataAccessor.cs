@@ -6,12 +6,12 @@
     public interface IApplicationMetadataAccessor
     {
         /// <summary>
-        /// The application name as specified in the application's configuration.
+        /// The application's name.
         /// </summary>
         string Name { get; }
 
         /// <summary>
-        /// The application assembly version.
+        /// The application's assembly version.
         /// </summary>
         string Version { get; }
         
