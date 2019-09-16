@@ -1,4 +1,5 @@
-﻿using GiG.Core.Hosting.Extensions;
+﻿using GiG.Core.DistributedTracing.Orleans.Extensions;
+using GiG.Core.Hosting.Extensions;
 using GiG.Core.Logging.All.Extensions;
 using GiG.Core.Orleans.Clustering.Consul.Silo.Extensions;
 using GiG.Core.Orleans.Hosting.Silo.Extensions;
@@ -18,6 +19,7 @@ namespace GiG.Core.Orleans.Sample.Silo
         {
             new HostBuilder()
                 .ConfigureServices(services => services.AddCorrelationAccessor())
+                .UseApplicationMetadata()
                 .ConfigureHostConfiguration(ConfigureApplicationConfiguration())
                 .ConfigureLogging()
                 .UseOrleans(ConfigureOrleans)
