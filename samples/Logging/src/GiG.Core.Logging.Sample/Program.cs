@@ -1,7 +1,7 @@
-﻿using System.IO;
-using GiG.Core.Logging.All.Extensions;
+﻿using GiG.Core.Logging.All.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using System.IO;
 
 namespace GiG.Core.Logging.Sample
 {

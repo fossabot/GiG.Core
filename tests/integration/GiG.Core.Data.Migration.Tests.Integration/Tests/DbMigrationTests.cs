@@ -8,7 +8,7 @@ using Xunit;
 
 namespace GiG.Core.Data.Migration.Tests.Integration.Tests
 {
-    [Trait("Category", "integration")]
+    [Trait("Category", "Integration")]
     public class DbMigrationTests
     {
         [Fact]
@@ -135,7 +135,7 @@ namespace GiG.Core.Data.Migration.Tests.Integration.Tests
 
         private long GetNumberOfScriptsExecuted(SqliteConnection connection, string metaTableName = "changelog")
         {
-            SqliteCommand command = new SqliteCommand($"SELECT Count(id) FROM {metaTableName}", connection);
+            var command = new SqliteCommand($"SELECT Count(id) FROM {metaTableName}", connection);
             var res = (long)command.ExecuteScalar();
 
             return res-1;
@@ -143,7 +143,7 @@ namespace GiG.Core.Data.Migration.Tests.Integration.Tests
 
         private bool WasTableCreated(SqliteConnection connection, string tableName)
         {
-            SqliteCommand sqlCmd = new SqliteCommand($"SELECT name FROM sqlite_master WHERE type = 'table' AND name = '{tableName}'", 
+            var sqlCmd = new SqliteCommand($"SELECT name FROM sqlite_master WHERE type = 'table' AND name = '{tableName}'", 
                 connection);
             var tableCreated = sqlCmd.ExecuteScalar() != null;
 

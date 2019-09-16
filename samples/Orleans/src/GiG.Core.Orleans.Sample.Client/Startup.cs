@@ -1,11 +1,10 @@
 using GiG.Core.Orleans.Client.Extensions;
-using GiG.Core.Orleans.Client.Clustering.Consul.Extensions;
+using GiG.Core.Orleans.Clustering.Consul.Client.Extensions;
 using GiG.Core.Orleans.Sample.Contracts;
 using GiG.Core.Web.Docs.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Orleans;
 
 namespace GiG.Core.Orleans.Sample.Client
 {

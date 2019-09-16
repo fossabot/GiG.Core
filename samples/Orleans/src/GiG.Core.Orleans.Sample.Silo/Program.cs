@@ -1,10 +1,9 @@
 ﻿using GiG.Core.Logging.All.Extensions;
-using GiG.Core.Orleans.Hosting.Extensions;
+using GiG.Core.Orleans.Clustering.Consul.Silo.Extensions;
+using GiG.Core.Orleans.Hosting.Silo.Extensions;
 using GiG.Core.Orleans.Sample.Grains;
-using GiG.Core.Orleans.Silo.Clustering.Consul.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Orleans.Hosting;
 using System.IO;
 
 namespace GiG.Core.Orleans.Sample.Silo

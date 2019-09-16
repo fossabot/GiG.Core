@@ -27,15 +27,21 @@ namespace GiG.Core.Hosting.Extensions
             if (app == null) throw new ArgumentNullException(nameof(app));
 
             var options = app.ApplicationServices.GetService<IOptions<InfoManagementOptions>>()?.Value ?? new InfoManagementOptions();
-
-            if (!options.IsEnabled) return app;
-
-            return app.Map(options.Url, appBuilder =>
+            if (options.IsEnabled)
             {
-                var applicationMetadataAccessor = appBuilder.ApplicationServices.GetRequiredService<IApplicationMetadataAccessor>();
-                    
-                appBuilder.Run(async context => { await WriteJsonResponseWriter(context, applicationMetadataAccessor); });
-            });
+                app.Map(options.Url, appBuilder =>
+                {
+                    var applicationMetadataAccessor =
+                        appBuilder.ApplicationServices.GetRequiredService<IApplicationMetadataAccessor>();
+
+                    appBuilder.Run(async context =>
+                    {
+                        await WriteJsonResponseWriter(context, applicationMetadataAccessor);
+                    });
+                });
+            }
+
+            return app;
         }
 
         private static Task WriteJsonResponseWriter(HttpContext httpContext, IApplicationMetadataAccessor accessor)

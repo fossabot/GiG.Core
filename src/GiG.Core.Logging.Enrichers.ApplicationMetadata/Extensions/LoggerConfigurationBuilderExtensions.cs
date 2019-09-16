@@ -1,9 +1,9 @@
-using System.Linq;
-using System.Reflection;
 using GiG.Core.Logging.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
+using System.Reflection;
 
 namespace GiG.Core.Logging.Enrichers.ApplicationMetadata.Extensions
 {

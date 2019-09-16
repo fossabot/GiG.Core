@@ -8,7 +8,7 @@ using Xunit;
 
 namespace GiG.Core.Web.FluentValidation.Tests.Integration.Tests
 {
-    [Trait("Category", "integration")]
+    [Trait("Category", "Integration")]
     public class FluentValidationMiddlewareTests
     {
         private readonly TestServer _server;

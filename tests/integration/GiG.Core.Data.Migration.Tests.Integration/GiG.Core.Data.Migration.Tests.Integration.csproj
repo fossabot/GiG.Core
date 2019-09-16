@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\GiG.Core.Data.Migration\GiG.Core.Data.Migration.csproj" />
+    <ProjectReference Include="..\..\..\src\GiG.Core.Data.Migration.Evolve\GiG.Core.Data.Migration.Evolve.csproj" />
   </ItemGroup>
 
 </Project>

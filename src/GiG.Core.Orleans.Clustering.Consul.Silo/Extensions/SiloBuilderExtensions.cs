@@ -1,11 +1,10 @@
 ﻿using GiG.Core.Orleans.Abstractions.Configuration;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
-using Orleans;
 using Orleans.Hosting;
 using System;
 
-namespace GiG.Core.Orleans.Silo.Clustering.Consul.Extensions
+namespace GiG.Core.Orleans.Clustering.Consul.Silo.Extensions
 {
     /// <summary>
     /// Silo Builder Extensions.

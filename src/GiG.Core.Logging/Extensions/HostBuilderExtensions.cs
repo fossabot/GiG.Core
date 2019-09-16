@@ -1,9 +1,10 @@
-﻿using System;
-using GiG.Core.Logging.Abstractions;
+﻿using GiG.Core.Logging.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using System;
+using System.Configuration;
 
 namespace GiG.Core.Logging.Extensions
 {
@@ -24,6 +25,7 @@ namespace GiG.Core.Logging.Extensions
             [NotNull] string sectionName = LoggerOptions.DefaultSectionName)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (sectionName == null) throw new ArgumentNullException(nameof(sectionName));
 
             return builder
                 .ConfigureServices((context, services) =>
@@ -39,8 +41,7 @@ namespace GiG.Core.Logging.Extensions
             var configurationSection = configuration.GetSection(sectionName);
             if (configurationSection == null)
             {
-                throw new ArgumentException($"Configuration section '{sectionName}' does not exist",
-                    nameof(sectionName));
+                throw new ConfigurationErrorsException($"Configuration section '{sectionName}' does not exist");
             }
 
             var loggerConfiguration = new LoggerConfiguration()

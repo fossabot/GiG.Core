@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 
 namespace GiG.Core.Data.Migration
 {
-    internal class DatabaseMigration
+    internal class DatabaseMigration : IDatabaseMigration
     {
         private readonly ILogger _logger;
 
