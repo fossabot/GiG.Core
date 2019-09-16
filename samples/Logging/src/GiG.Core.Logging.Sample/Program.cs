@@ -1,4 +1,6 @@
-﻿using GiG.Core.Logging.All.Extensions;
+﻿using System.IO;
+using GiG.Core.Hosting.Extensions;
+using GiG.Core.Logging.All.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using System.IO;
@@ -18,6 +20,7 @@ namespace GiG.Core.Logging.Sample
                 .ConfigureHostConfiguration(builder => builder
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true))
+                .UseApplicationMetadata()
                 .ConfigureLogging()
                 .ConfigureServices(Startup.ConfigureServices);
         }

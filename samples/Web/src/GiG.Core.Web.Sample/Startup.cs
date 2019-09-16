@@ -41,11 +41,10 @@ namespace GiG.Core.Web.Sample
 
             // WebAPI
             services
-                .AddApplicationMetadataAccessor()
                 .ConfigureApiDocs(_configuration)
                 .AddControllers()
                    .AddFluentValidation(options => options.RegisterValidatorsFromAssemblyContaining<Startup>());
-            
+
             // Forwarded Headers
             services.ConfigureForwardedHeaders();
         }
