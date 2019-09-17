@@ -24,7 +24,7 @@ The `ApplicationName` should be configured from the `appsettings.json`. By defau
 
 ## Info Management Endpoint
 
-### Basic Usage
+Add the below to the Startup class to register an information endpoint. The default Url is '/actuator/info'. This is used to get application information 
 
 The below code needs to be added to the `Startup.cs` to register an information endpoint.
 
