@@ -5,11 +5,11 @@ using Serilog.Configuration;
 
 namespace GiG.Core.Logging.Sinks.Fluentd.Internal
 {
-    internal class FluentdLoggerSinkProvider : ILoggerSinkProvider
+    internal class FluentdLoggingSinkProvider : ILoggingSinkProvider
     {
         private readonly FluentdSinkOptions _options;
         
-        public FluentdLoggerSinkProvider(IConfiguration configurationSection)
+        public FluentdLoggingSinkProvider(IConfiguration configurationSection)
         {
             _options = configurationSection.Get<FluentdSinkOptions>();
         }

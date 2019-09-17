@@ -3,8 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <IsPackable>false</IsPackable>
-    <Version>1.2.3.4</Version>
-    <InformationalVersion>1.2.3+Branch.refs/heads/master.Sha.bfd72b0</InformationalVersion>
   </PropertyGroup>
 
   <ItemGroup>

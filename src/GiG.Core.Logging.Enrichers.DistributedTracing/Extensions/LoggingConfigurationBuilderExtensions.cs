@@ -3,21 +3,25 @@ using GiG.Core.Logging.Abstractions;
 using GiG.Core.Logging.Enrichers.DistributedTracing.Internal;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace GiG.Core.Logging.Enrichers.DistributedTracing.Extensions
 {
     /// <summary>
-    /// Logger Configuration Builder extensions.
+    /// Logging Configuration Builder extensions.
     /// </summary>
-    public static class LoggerConfigurationBuilderExtensions
+    public static class LoggingConfigurationBuilderExtensions
     {
         /// <summary>
         /// Enrich log events with a Correlation ID.
         /// </summary>
-        /// <param name="builder">Logger enrichment configuration.</param>
+        /// <param name="builder">Logging enrichment configuration.</param>
         /// <returns>Configuration object allowing method chaining.</returns>
-        public static LoggerConfigurationBuilder EnrichWithCorrelationId([NotNull] this LoggerConfigurationBuilder builder)
+        public static LoggingConfigurationBuilder EnrichWithCorrelationId(
+            [NotNull] this LoggingConfigurationBuilder builder)
         {
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+
             var correlationContextAccessor = builder
                 .Services
                 .BuildServiceProvider()

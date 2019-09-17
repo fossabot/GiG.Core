@@ -30,7 +30,7 @@ namespace GiG.Core.Data.Migration.Abstractions
             if (dbConnection == null) throw new ArgumentNullException(nameof(dbConnection));
 
             _options = new MigrationOptions(dbConnection);
-            _serviceProvider = services?.BuildServiceProvider();
+            _serviceProvider = services.BuildServiceProvider();
         }
 
         /// <summary>
@@ -67,8 +67,8 @@ namespace GiG.Core.Data.Migration.Abstractions
         /// <returns>The <see cref="T:GiG.Core.Data.Migration.Evolve.MigrationOptionsBuilder" />.</returns>
         public MigrationOptionsBuilder AddLocation(string location)
         {
-            var basePath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-            if (basePath == null)
+            var basePath = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
+            if (string.IsNullOrEmpty(basePath))
             {
                 throw new ApplicationException("Assembly directory location cannot be NULL or empty");
             }

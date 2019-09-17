@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
+using System.Configuration;
 
 namespace GiG.Core.Web.Docs.Extensions
 {
@@ -22,21 +23,19 @@ namespace GiG.Core.Web.Docs.Extensions
             if (app == null) throw new ArgumentNullException(nameof(app));
 
             var options = app.ApplicationServices.GetService<IOptions<ApiDocsOptions>>()?.Value;
-            if (options == null) throw new ApplicationException("ConfigureDocs need to be registered");
+            if (options == null) throw new ConfigurationErrorsException("ConfigureApiDocs need to be registered");
 
             if (!options.IsEnabled)
             {
                 return app;
             }
 
-            var routePrefix = options.DocUrl;
-
             return app
                 .UseSwagger()
                 .UseSwaggerUI(c =>
                 {
                     c.ShowExtensions();
-                    c.RoutePrefix = routePrefix;
+                    c.RoutePrefix = options.DocUrl;
                     c.SwaggerEndpoint($"/swagger/v1/swagger.json", "V1 Docs");
                     c.DisplayRequestDuration();
                 });

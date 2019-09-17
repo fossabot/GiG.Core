@@ -3,9 +3,9 @@ using Serilog.Configuration;
 namespace GiG.Core.Logging.Abstractions
 {
     /// <summary>
-    /// Logger Sink Provider.
+    /// Logging Sink Provider.
     /// </summary>
-    public interface ILoggerSinkProvider
+    public interface ILoggingSinkProvider
     {
         /// <summary>
         /// Register sink provider.
