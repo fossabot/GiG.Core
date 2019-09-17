@@ -32,6 +32,9 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 ### Orleans Silo
 * [GiG.Core.Orleans.Silo](docs/GiG.Core.Orleans.Silo.md)
 
+### Request Context
+* [GiG.Core.Context.Web](docs/GiG.Core.Context.Web.md)
+
 ### Web Hosting
 * [GiG.Core.Web.Hosting](docs/GiG.Core.Web.Hosting.md)
 

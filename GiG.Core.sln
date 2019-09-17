@@ -17,12 +17,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Hosting.md = docs\GiG.Core.Hosting.md
 		docs\GiG.Core.Logging.All.md = docs\GiG.Core.Logging.All.md
 		docs\GiG.Core.Logging.md = docs\GiG.Core.Logging.md
-		docs\GiG.Core.MultiTenant.Web.md = docs\GiG.Core.MultiTenant.Web.md			
+		docs\GiG.Core.MultiTenant.Web.md = docs\GiG.Core.MultiTenant.Web.md
 		docs\GiG.Core.Orleans.Client.md = docs\GiG.Core.Orleans.Client.md
 		docs\GiG.Core.Orleans.Silo.md = docs\GiG.Core.Orleans.Silo.md
 		docs\GiG.Core.Web.Docs.md = docs\GiG.Core.Web.Docs.md
 		docs\GiG.Core.Web.FluentValidation.md = docs\GiG.Core.Web.FluentValidation.md
-		docs\GiG.Core.Web.Hosting.md = docs\GiG.Core.Web.Hosting.md	
+		docs\GiG.Core.Web.Hosting.md = docs\GiG.Core.Web.Hosting.md
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -184,6 +184,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing.Orleans", "src\GiG.Core.DistributedTracing.Orleans\GiG.Core.DistributedTracing.Orleans.csproj", "{20E3D378-C095-4FE0-838C-907C561F19E6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Tests.Integration", "tests\integration\GiG.Core.Orleans.Tests.Integration\GiG.Core.Orleans.Tests.Integration.csproj", "{A9F9FA7F-8352-44D3-A37A-88C8311C75CC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Context", "Context", "{F61B8500-FA18-43A7-B637-379735C0B141}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Context.Abstractions", "src\GiG.Core.Context.Abstractions\GiG.Core.Context.Abstractions.csproj", "{0E03308E-7EFA-466C-8B32-9564DEB6CAEC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Context.Web", "src\GiG.Core.Context.Web\GiG.Core.Context.Web.csproj", "{86DF999D-7494-4A8D-B95B-EC3E0A2F5566}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Logging.Enrichers.Context", "src\GiG.Core.Logging.Enrichers.Context\GiG.Core.Logging.Enrichers.Context.csproj", "{6FDCCBF7-A517-41B4-9CD2-E8075F9C35B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -370,6 +378,18 @@ Global
 		{A9F9FA7F-8352-44D3-A37A-88C8311C75CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A9F9FA7F-8352-44D3-A37A-88C8311C75CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9F9FA7F-8352-44D3-A37A-88C8311C75CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E03308E-7EFA-466C-8B32-9564DEB6CAEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E03308E-7EFA-466C-8B32-9564DEB6CAEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E03308E-7EFA-466C-8B32-9564DEB6CAEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E03308E-7EFA-466C-8B32-9564DEB6CAEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86DF999D-7494-4A8D-B95B-EC3E0A2F5566}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86DF999D-7494-4A8D-B95B-EC3E0A2F5566}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86DF999D-7494-4A8D-B95B-EC3E0A2F5566}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86DF999D-7494-4A8D-B95B-EC3E0A2F5566}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FDCCBF7-A517-41B4-9CD2-E8075F9C35B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FDCCBF7-A517-41B4-9CD2-E8075F9C35B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FDCCBF7-A517-41B4-9CD2-E8075F9C35B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FDCCBF7-A517-41B4-9CD2-E8075F9C35B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -445,6 +465,10 @@ Global
 		{FC62647F-B5A2-4972-9073-AA35FF870BCB} = {412AB606-A56E-4B9E-A9C1-E2C7E02D0CF5}
 		{20E3D378-C095-4FE0-838C-907C561F19E6} = {F3E4EB54-9129-4327-9A32-89ABD4ADA6C5}
 		{A9F9FA7F-8352-44D3-A37A-88C8311C75CC} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
+		{F61B8500-FA18-43A7-B637-379735C0B141} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
+		{0E03308E-7EFA-466C-8B32-9564DEB6CAEC} = {F61B8500-FA18-43A7-B637-379735C0B141}
+		{86DF999D-7494-4A8D-B95B-EC3E0A2F5566} = {F61B8500-FA18-43A7-B637-379735C0B141}
+		{6FDCCBF7-A517-41B4-9CD2-E8075F9C35B3} = {52AEF79F-C056-404A-9AC9-155CE8A17721}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}
