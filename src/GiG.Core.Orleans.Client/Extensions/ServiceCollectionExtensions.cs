@@ -19,7 +19,6 @@ namespace GiG.Core.Orleans.Client.Extensions
         public static IServiceCollection AddClusterClient([NotNull] this IServiceCollection services, [NotNull] Action<ClientBuilder, IServiceProvider> configureClient)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            if (configureClient == null) throw new ArgumentNullException(nameof(configureClient));
             
             var builder = new ClientBuilder();
             
@@ -37,7 +36,6 @@ namespace GiG.Core.Orleans.Client.Extensions
         public static IServiceCollection AddClusterClient([NotNull] this IServiceCollection services, [NotNull] Action<ClientBuilder> configureClient)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            if (configureClient == null) throw new ArgumentNullException(nameof(configureClient));
             
             var builder = new ClientBuilder();
 

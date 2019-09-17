@@ -36,10 +36,10 @@ namespace GiG.Core.Orleans.Sample.Silo
         private static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builder)
         {
             builder.ConfigureCluster(ctx.Configuration)
+                .ConfigureDashboard(ctx.Configuration)
                 .ConfigureEndpoints()
-                .UseLocalhostClustering()
-                .AddAssemblies(typeof(TransactionGrain))
-                .ConfigureDashboard(ctx.Configuration);
+                .ConfigureConsulClustering(ctx.Configuration)
+                .AddAssemblies(typeof(TransactionGrain));
         }
     }
 }

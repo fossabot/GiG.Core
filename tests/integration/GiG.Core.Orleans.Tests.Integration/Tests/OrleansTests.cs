@@ -9,6 +9,7 @@ using Xunit;
 
 namespace GiG.Core.Orleans.Tests.Integration.Tests
 {
+    [Trait("Category", "Integration")]
     public class OrleansTests : IClassFixture<ClusterFixture>
     {
         private readonly ClusterFixture _clusterFixture;
@@ -19,7 +20,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
         }
 
         [Fact]
-        public async Task GetValueAsync_CallGrain_ReturnsInt()
+        public async Task GetValueAsync_CallGrain_ReturnsExpectedInteger()
         {
             //Arrange
             var grain = _clusterFixture.ClusterClient.GetGrain<IEchoTestGrain>(Guid.NewGuid().ToString());
@@ -34,7 +35,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
         }
         
         [Fact]
-        public async Task GetCorrelationIdAsync_CallGrain_ReturnGuid()
+        public async Task GetCorrelationIdAsync_CallGrain_ReturnsExpectedCorrelationGuid()
         {
             //Arrange
             var grain = _clusterFixture.ClusterClient.GetGrain<ICorrelationTestGrain>(Guid.NewGuid().ToString());

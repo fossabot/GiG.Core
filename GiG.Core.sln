@@ -177,11 +177,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{697F21BC-B23
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{807ECA6E-BD91-4F04-B213-C500DF38DA43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Data.Migration.Evolve", "src\GiG.Core.Data.Migration.Evolve\GiG.Core.Data.Migration.Evolve.csproj", "{FC62647F-B5A2-4972-9073-AA35FF870BCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Data.Migration.Evolve", "src\GiG.Core.Data.Migration.Evolve\GiG.Core.Data.Migration.Evolve.csproj", "{FC62647F-B5A2-4972-9073-AA35FF870BCB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.DistributedTracing.Orleans", "src\GiG.Core.DistributedTracing.Orleans\GiG.Core.DistributedTracing.Orleans.csproj", "{20E3D378-C095-4FE0-838C-907C561F19E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing.Orleans", "src\GiG.Core.DistributedTracing.Orleans\GiG.Core.DistributedTracing.Orleans.csproj", "{20E3D378-C095-4FE0-838C-907C561F19E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Orleans.Tests.Integration", "tests\integration\GiG.Core.Orleans.Tests.Integration\GiG.Core.Orleans.Tests.Integration.csproj", "{A9F9FA7F-8352-44D3-A37A-88C8311C75CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Tests.Integration", "tests\integration\GiG.Core.Orleans.Tests.Integration\GiG.Core.Orleans.Tests.Integration.csproj", "{A9F9FA7F-8352-44D3-A37A-88C8311C75CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -368,11 +368,6 @@ Global
 		{A9F9FA7F-8352-44D3-A37A-88C8311C75CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A9F9FA7F-8352-44D3-A37A-88C8311C75CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9F9FA7F-8352-44D3-A37A-88C8311C75CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A9F9FA7F-8352-44D3-A37A-88C8311C75CC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{14CD4F0A-4803-48D6-B591-57EC111C9295}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{14CD4F0A-4803-48D6-B591-57EC111C9295}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{14CD4F0A-4803-48D6-B591-57EC111C9295}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{14CD4F0A-4803-48D6-B591-57EC111C9295}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -448,7 +443,6 @@ Global
 		{FC62647F-B5A2-4972-9073-AA35FF870BCB} = {412AB606-A56E-4B9E-A9C1-E2C7E02D0CF5}
 		{20E3D378-C095-4FE0-838C-907C561F19E6} = {F3E4EB54-9129-4327-9A32-89ABD4ADA6C5}
 		{A9F9FA7F-8352-44D3-A37A-88C8311C75CC} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
-		{14CD4F0A-4803-48D6-B591-57EC111C9295} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}
