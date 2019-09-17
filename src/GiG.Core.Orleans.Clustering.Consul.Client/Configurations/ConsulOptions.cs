@@ -1,7 +1,7 @@
-﻿namespace GiG.Core.Orleans.Abstractions.Configuration
+﻿namespace GiG.Core.Orleans.Clustering.Consul.Client.Configurations
 {
     /// <summary>
-    /// Orleans Consul Settings.
+    /// Orleans Client Consul Settings.
     /// </summary>
     public class ConsulOptions
     {
@@ -9,15 +9,15 @@
         /// Default configuration section name.
         /// </summary>
         public const string DefaultSectionName = "Orleans:Consul";
-      
+
         /// <summary>
         /// Consul Address.
         /// </summary>
-        public string Address { get; set; }
+        public string Address { get; set; } = "http://localhost:8500";
 
         /// <summary>
         /// Key Value Root Folder.
         /// </summary>
-        public string KvRootFolder { get; set; }
+        public string KvRootFolder { get; set; } = "dev";
     }
 }

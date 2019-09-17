@@ -1,7 +1,7 @@
-﻿namespace GiG.Core.Orleans.Abstractions.Configuration
+﻿namespace GiG.Core.Orleans.Hosting.Silo.Configurations
 {
     /// <summary>
-    /// Orleans Dashboard Settings.
+    /// Orleans Silo Dashboard Settings.
     /// </summary>
     public class DashboardOptions
     {
@@ -11,18 +11,18 @@
         public const string DefaultSectionName = "Orleans:Dashboard";
 
         /// <summary>
-        /// Determines whether the Dashboard should be configured.
+        /// Determines whether the Dashboard is enabled.
         /// </summary>
-        public bool Enabled { get; set; }
+        public bool IsEnabled { get; set; } = false;
         
         /// <summary>
-        /// Sets the Dashboard port. Default is 8181.
+        /// Sets the Dashboard port
         /// </summary>
-        public int Port { get; set; } = 8181;
+        public int Port { get; set; } = 8080;
 
         /// <summary>
         /// Sets the Dashboard path.
         /// </summary>
-        public string Path { get; set; }
+        public string Path { get; set; } = "/dashboard";
     }
 }

@@ -14,9 +14,9 @@ services:
       - fluentd
       - consul
     ports:
-      - "6000:8080"
+      - "7000:8080"
   
-  sample:
+  sample-client:
     image: ${DOCKER_REGISTRY-}gig.core.orleans.sample.client
     build:
       context: ..
@@ -41,7 +41,7 @@ services:
       context: ../samples/Web/src/GiG.Core.Web.Sample.UI
       dockerfile: Dockerfile
     depends_on:
-      - sample
+      - sample-client
     ports:
       - "4000:8080"
     restart: on-failure

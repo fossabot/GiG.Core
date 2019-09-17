@@ -11,10 +11,28 @@ using System;
 using System.IO;
 using HostBuilderContext = Microsoft.Extensions.Hosting.HostBuilderContext;
 
+
 namespace GiG.Core.Orleans.Sample.Silo
 {
     public class Program
     {
+        //    public static void Main(string[] args)
+        //    {
+        //        CreateHostBuilder(args)
+        //            .Build()
+        //            .Run();
+        //    }
+
+        //    public static IHostBuilder CreateHostBuilder(string[] args) =>
+        //        Host.CreateDefaultBuilder(args)
+        //            .UseApplicationMetadata()
+        //            .ConfigureServices(services => services.AddCorrelationAccessor())
+        //            .ConfigureExternalConfiguration()
+        //            .ConfigureLogging()
+        //            .ConfigureServices(Startup.ConfigureServices)
+        //            .UseOrleans(Startup.ConfigureOrleans);
+        //}
+
         public static void Main()
         {
             new HostBuilder()
