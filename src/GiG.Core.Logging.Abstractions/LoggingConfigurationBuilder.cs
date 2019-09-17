@@ -62,7 +62,7 @@ namespace GiG.Core.Logging.Abstractions
         /// </summary>
         /// <param name="name">Sink provider name.</param>
         /// <param name="sinkProvider">Logging sink provider instance.</param>
-        /// <exception cref="ApplicationException">Throws application exception when Sink providers are not configured.</exception>
+        /// <exception cref="ConfigurationErrorsException">Throws application exception when Sink providers are not configured.</exception>
         public LoggingConfigurationBuilder RegisterSink([NotNull] string name,
             [NotNull] ILoggingSinkProvider sinkProvider)
         {

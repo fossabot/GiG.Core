@@ -14,20 +14,6 @@ namespace GiG.Core.Hosting.Extensions
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Adds registration of Metadata Accessor for Application.
-        /// </summary>
-        /// <param name="services"></param>
-        /// <returns>Returns the <see cref="IServiceCollection"/> so that more methods can be chained.</returns>
-        public static IServiceCollection AddApplicationMetadataAccessor([NotNull] this IServiceCollection services)
-        {
-            if (services == null) throw new ArgumentNullException(nameof(services));
-
-            services.TryAddSingleton<IApplicationMetadataAccessor, ApplicationMetadataAccessor>();
-
-            return services;
-        }
-
-        /// <summary>
         /// Binds the Info Management Options to the passed configuration.
         /// </summary>
         /// <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" /> to add the services to.</param>
@@ -39,7 +25,6 @@ namespace GiG.Core.Hosting.Extensions
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
             return services.ConfigureInfoManagement(configuration.GetSection(InfoManagementOptions.DefaultSectionName));
-
         }
 
         /// <summary>
@@ -55,6 +40,20 @@ namespace GiG.Core.Hosting.Extensions
             if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
 
             return services.Configure<InfoManagementOptions>(configurationSection);
+        }
+
+        /// <summary>
+        /// Adds registration of Metadata Accessor for Application.
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns>Returns the <see cref="IServiceCollection"/> so that more methods can be chained.</returns>
+        internal static IServiceCollection AddApplicationMetadataAccessor([NotNull] this IServiceCollection services)
+        {
+            if (services == null) throw new ArgumentNullException(nameof(services));
+
+            services.TryAddSingleton<IApplicationMetadataAccessor, ApplicationMetadataAccessor>();
+
+            return services;
         }
     }
 }

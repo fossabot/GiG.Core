@@ -3,24 +3,30 @@
 This Library provides an API to register hosting related functionailty to an application.
 
 
-## Application Metadata Accessor
+## Application Metadata
 
-Add the below to your Startup class and this will register the application metadata accessor.
+### Basic Usage
+
+The below code needs to be added to the `Program.cs`. This will register the application metadata accessor.
 
 
 ```csharp
 
-public void ConfigureServices(IServiceCollection services)
-{
-	services.AddApplicationMetadataAccessor();
-}
+private static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .UseApplicationMetadata();
 
 ```
 
+### Configuration
+
+The `ApplicationName` should be configured from the `appsettings.json`. By default it will use the Assembly's Entrypoint name
+
 ## Info Management Endpoint
 
-Add the below to the Startup class to register an information endpoint. The defaule Url is '/actuator/info'. This is used to get application information 
-such as Application name and version.
+### Basic Usage
+
+The below code needs to be added to the `Startup.cs` to register an information endpoint.
 
 ```csharp
 
@@ -29,10 +35,18 @@ public void ConfigureServices(IServiceCollection services)
 	services.ConfigureInfoManagement(_configuration);
 }
 
-
 public void Configure(IApplicationBuilder app)
 {           
 	app.UseInfoManagement();           
 }
 
 ```
+
+### Configuration
+
+The below table outlines the valid Configurations.
+
+| Configuration Name  | Type	| Optional | Default Value	  |
+|---------------------|---------|----------|------------------|
+| IsEnabled			  | Boolean | No	   | `true`		      |
+| Url				  | String  | No	   | `/actuator/info` |	

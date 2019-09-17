@@ -1,9 +1,6 @@
 using GiG.Core.Logging.Abstractions;
 using JetBrains.Annotations;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using System.Linq;
-using System.Reflection;
+using System;
 
 namespace GiG.Core.Logging.Enrichers.ApplicationMetadata.Extensions
 {
@@ -13,21 +10,16 @@ namespace GiG.Core.Logging.Enrichers.ApplicationMetadata.Extensions
     public static class LoggingConfigurationBuilderExtensions
     {
         /// <summary>
-        /// Enrich log events with a Application Metadata.
+        /// Enrich log events with Application Metadata.
         /// </summary>
-        /// <param name="builder">Logging enrichment configuration.</param>
-        /// <returns>Configuration object allowing method chaining.</returns>
+        /// <param name="builder">The <see cref="LoggingConfigurationBuilder"/>.</param>
+        /// <returns>The <see cref="LoggingConfigurationBuilder" />.</returns>
         public static LoggingConfigurationBuilder EnrichWithApplicationMetadata([NotNull] this LoggingConfigurationBuilder builder)
         {
-            var configuration = builder.Services.BuildServiceProvider().GetRequiredService<IConfiguration>();
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
 
-            var applicationVersion = Assembly
-                .GetEntryAssembly()?
-                .GetCustomAttributes<AssemblyInformationalVersionAttribute>().FirstOrDefault()?
-                .InformationalVersion;
-            
-            builder.LoggerConfiguration.Enrich.WithProperty("ApplicationName", configuration["ApplicationName"]);
-            builder.LoggerConfiguration.Enrich.WithProperty("ApplicationVersion", applicationVersion);
+            builder.LoggerConfiguration.Enrich.WithProperty("ApplicationName", Hosting.ApplicationMetadata.Name);
+            builder.LoggerConfiguration.Enrich.WithProperty("ApplicationVersion", Hosting.ApplicationMetadata.Version);
 
             return builder;
         }

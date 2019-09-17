@@ -1,12 +1,12 @@
-﻿using System.Threading.Tasks;
-using RestEase;
+﻿using RestEase;
+using System.Threading.Tasks;
 
 namespace GiG.Core.Web.Sample.Tests.Component.Services
 {
     public class WebSampleService
     {
         private const string MicroserviceUrl = "http://localhost:5000/transactions";
-        ITransaction transactions;
+        readonly ITransaction transactions;
 
         public WebSampleService() 
         {

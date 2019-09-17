@@ -9,11 +9,12 @@
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" PrivateAssets="compile" />
     <PackageReference Include="Microsoft.AspNetCore.HttpOverrides" Version="2.2.0" PrivateAssets="compile" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0" PrivateAssets="compile" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" PrivateAssets="compile" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc2" PrivateAssets="compile" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" PrivateAssets="compile"  />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\GiG.Core.Hosting.Abstractions\GiG.Core.Hosting.Abstractions.csproj" />
+    <ProjectReference Include="..\GiG.Core.Hosting\GiG.Core.Hosting.csproj" />
   </ItemGroup>
 </Project>

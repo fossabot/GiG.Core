@@ -3,6 +3,7 @@ using GiG.Core.Logging.Abstractions;
 using GiG.Core.Logging.Enrichers.DistributedTracing.Internal;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace GiG.Core.Logging.Enrichers.DistributedTracing.Extensions
 {
@@ -16,8 +17,11 @@ namespace GiG.Core.Logging.Enrichers.DistributedTracing.Extensions
         /// </summary>
         /// <param name="builder">Logging enrichment configuration.</param>
         /// <returns>Configuration object allowing method chaining.</returns>
-        public static LoggingConfigurationBuilder EnrichWithCorrelationId([NotNull] this LoggingConfigurationBuilder builder)
+        public static LoggingConfigurationBuilder EnrichWithCorrelationId(
+            [NotNull] this LoggingConfigurationBuilder builder)
         {
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+
             var correlationContextAccessor = builder
                 .Services
                 .BuildServiceProvider()

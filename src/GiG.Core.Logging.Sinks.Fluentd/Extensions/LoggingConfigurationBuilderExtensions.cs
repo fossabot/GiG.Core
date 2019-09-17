@@ -1,6 +1,7 @@
 using GiG.Core.Logging.Abstractions;
 using GiG.Core.Logging.Sinks.Fluentd.Internal;
 using JetBrains.Annotations;
+using System;
 
 namespace GiG.Core.Logging.Sinks.Fluentd.Extensions
 {
@@ -16,8 +17,12 @@ namespace GiG.Core.Logging.Sinks.Fluentd.Extensions
         /// </summary>
         /// <param name="builder">Logging sink configuration.</param>
         /// <returns>Configuration object allowing method chaining.</returns>
-        public static LoggingConfigurationBuilder WriteToFluentd([NotNull] this LoggingConfigurationBuilder builder) =>
-            builder.RegisterSink(SinkName,
+        public static LoggingConfigurationBuilder WriteToFluentd([NotNull] this LoggingConfigurationBuilder builder)
+        {
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+
+            return builder.RegisterSink(SinkName,
                 new FluentdLoggingSinkProvider(builder.SinkConfiguration.GetSection(SinkName)));
+        }
     }
 }

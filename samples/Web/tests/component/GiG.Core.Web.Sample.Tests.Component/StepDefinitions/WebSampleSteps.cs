@@ -20,14 +20,14 @@ namespace GiG.Core.Web.Sample.Tests.Component.StepDefinitions
         [Given(@"I get the current balance of the player")]
         public void GivenIGetTheCurrentBalanceOfThePlayer()
         {
-            decimal balance = _webSampleService.GetBalance();
+            var balance = _webSampleService.GetBalance();
             _scenarioContext.Add("CurrentBalance", balance);
         }
 
         [Given(@"I get the minimum deposit limit amount")]
         public void GivenIGetTheMinimumDepositLimitAmount()
         {
-            decimal minimumDepositAmount = _webSampleService.GetMinimumDepositLimit();
+            var minimumDepositAmount = _webSampleService.GetMinimumDepositLimit();
             _scenarioContext.Add("MinDepositAmount", minimumDepositAmount);
         }
 
@@ -36,7 +36,7 @@ namespace GiG.Core.Web.Sample.Tests.Component.StepDefinitions
         {
             _scenarioContext.Add("DepositedAmount", depositAmount);
 
-            TransactionRequest transactionRequest = new TransactionRequest { Amount = depositAmount };
+            var transactionRequest = new TransactionRequest { Amount = depositAmount };
             _webSampleService.Deposit(transactionRequest);
         }
 
@@ -49,12 +49,12 @@ namespace GiG.Core.Web.Sample.Tests.Component.StepDefinitions
                 depositAmount *= -1;
             }
 
-            decimal minimumDepositAmount = _scenarioContext.Get<decimal>("MinDepositAmount");
+            var minimumDepositAmount = _scenarioContext.Get<decimal>("MinDepositAmount");
             depositAmount += minimumDepositAmount;
             _scenarioContext.Add("DepositedAmount", depositAmount);
 
-            TransactionRequest transactionRequest = new TransactionRequest { Amount = depositAmount };
-            Response<decimal> depositResponse = _webSampleService.Deposit(transactionRequest);
+            var transactionRequest = new TransactionRequest { Amount = depositAmount };
+            var depositResponse = _webSampleService.Deposit(transactionRequest);
 
             _scenarioContext.Add("DepositResponse", depositResponse);
 
@@ -63,7 +63,7 @@ namespace GiG.Core.Web.Sample.Tests.Component.StepDefinitions
         [Then(@"the deposit response is a '(.*)'")]
         public void ThenTheDepositResponseIsA(string responseError)
         {
-            Response<decimal> depositResponse = _scenarioContext.Get<Response<decimal>>("DepositResponse");
+            var depositResponse = _scenarioContext.Get<Response<decimal>>("DepositResponse");
 
             Assert.AreEqual(responseError, depositResponse.ResponseMessage.StatusCode.ToString());
         }
@@ -71,7 +71,7 @@ namespace GiG.Core.Web.Sample.Tests.Component.StepDefinitions
         [Then(@"the withdraw response is a '(.*)'")]
         public void ThenTheWithdrawResponseIsA(string responseError)
         {
-            Response<decimal> withdrawResponse = _scenarioContext.Get<Response<decimal>>("WithdrawResponse");
+            var withdrawResponse = _scenarioContext.Get<Response<decimal>>("WithdrawResponse");
 
             Assert.AreEqual(responseError, withdrawResponse.ResponseMessage.StatusCode.ToString());
         }
@@ -79,18 +79,18 @@ namespace GiG.Core.Web.Sample.Tests.Component.StepDefinitions
         [When(@"I get the new balance of the player")]
         public void WhenIGetTheNewBalanceOfThePlayer()
         {
-            decimal balance = _webSampleService.GetBalance();
+            var balance = _webSampleService.GetBalance();
             _scenarioContext.Add("UpdatedBalance", balance);
         }
 
         [Then(@"the balance should be updated correctly")]
         public void ThenTheBalanceShouldBeUpdatedCorrectly()
         {
-            decimal currBalance = _scenarioContext.Get<decimal>("CurrentBalance");
-            decimal updatedBalance = _scenarioContext.Get<decimal>("UpdatedBalance");
+            var currBalance = _scenarioContext.Get<decimal>("CurrentBalance");
+            var updatedBalance = _scenarioContext.Get<decimal>("UpdatedBalance");
 
-            _scenarioContext.TryGetValue<decimal>("DepositedAmount", out decimal depositedAmount);
-            _scenarioContext.TryGetValue<decimal>("WithdrawnAmount", out decimal withdrawnAmount);
+            _scenarioContext.TryGetValue<decimal>("DepositedAmount", out var depositedAmount);
+            _scenarioContext.TryGetValue<decimal>("WithdrawnAmount", out var withdrawnAmount);
 
             Assert.AreEqual(currBalance + depositedAmount - withdrawnAmount, updatedBalance, "Expected amount is not equal to actual amount");
         }
@@ -100,7 +100,7 @@ namespace GiG.Core.Web.Sample.Tests.Component.StepDefinitions
         {
             _scenarioContext.Add("WithdrawnAmount", withdrawnAmount);
 
-            TransactionRequest transactionRequest = new TransactionRequest { Amount = withdrawnAmount };
+            var transactionRequest = new TransactionRequest { Amount = withdrawnAmount };
             _webSampleService.Withdraw(transactionRequest);
         }
 
@@ -112,12 +112,12 @@ namespace GiG.Core.Web.Sample.Tests.Component.StepDefinitions
                 withdrawnAmount *= -1;
             }
 
-            decimal currentBalance = _scenarioContext.Get<decimal>("CurrentBalance");
+            var currentBalance = _scenarioContext.Get<decimal>("CurrentBalance");
             withdrawnAmount += currentBalance;
             _scenarioContext.Add("WithdrawnAmount", withdrawnAmount);
 
-            TransactionRequest transactionRequest = new TransactionRequest { Amount = withdrawnAmount };
-            Response<decimal> withdrawnResponse = _webSampleService.Withdraw(transactionRequest);
+            var transactionRequest = new TransactionRequest { Amount = withdrawnAmount };
+            var withdrawnResponse = _webSampleService.Withdraw(transactionRequest);
 
             _scenarioContext.Add("WithdrawResponse", withdrawnResponse);
         }

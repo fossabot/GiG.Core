@@ -1,4 +1,4 @@
-﻿using GiG.Core.Hosting.Abstractions;
+﻿using GiG.Core.Hosting;
 using GiG.Core.Web.Docs.Abstractions;
 using GiG.Core.Web.Docs.Filters;
 using JetBrains.Annotations;
@@ -35,9 +35,6 @@ namespace GiG.Core.Web.Docs.Extensions
             {
                 return services;
             }
-            var applicationMetadataAccessor = services
-                  .BuildServiceProvider()
-                  .GetService<IApplicationMetadataAccessor>();
 
             return services
                 .Configure<ApiDocsOptions>(configurationSection)
@@ -48,9 +45,9 @@ namespace GiG.Core.Web.Docs.Extensions
                     c.IncludeForwardedForFilter(docOptions.IsForwardedForEnabled);
                     c.SwaggerDoc("v1", new OpenApiInfo
                     {
-                        Title = docOptions.Title ?? applicationMetadataAccessor?.Name,
+                        Title = docOptions.Title ?? ApplicationMetadata.Name,
                         Description = docOptions.Description,
-                        Version = applicationMetadataAccessor?.Version
+                        Version = ApplicationMetadata.Version
                     });
                 });
         }
