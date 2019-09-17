@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace GiG.Core.Request.Abstractions
+namespace GiG.Core.Context.Abstractions
 {
     /// <summary>
     /// Request Context Accessor.

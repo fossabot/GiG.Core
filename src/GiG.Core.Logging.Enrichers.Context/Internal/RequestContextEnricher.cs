@@ -1,4 +1,4 @@
-﻿using GiG.Core.Request.Abstractions;
+﻿using GiG.Core.Context.Abstractions;
 using Serilog.Core;
 using Serilog.Events;
 

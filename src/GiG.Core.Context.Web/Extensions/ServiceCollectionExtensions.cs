@@ -1,7 +1,6 @@
-﻿using GiG.Core.Request.Abstractions;
+﻿using GiG.Core.Context.Abstractions;
 using GiG.Core.Request.Web.Internal;
 using JetBrains.Annotations;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
@@ -24,7 +23,7 @@ namespace GiG.Core.Context.Web.Extensions
 
             services
                 .AddHttpContextAccessor()
-                .TryAddSingleton<IRequestContextAccessor, RequestContextAccesor>();
+                .TryAddSingleton<IRequestContextAccessor, RequestContextAccessor>();
 
             return services;
         }

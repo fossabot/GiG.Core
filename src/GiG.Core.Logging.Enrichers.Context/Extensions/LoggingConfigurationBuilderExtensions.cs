@@ -1,6 +1,6 @@
-﻿using GiG.Core.Logging.Abstractions;
+﻿using GiG.Core.Context.Abstractions;
+using GiG.Core.Logging.Abstractions;
 using GiG.Core.Logging.Enrichers.Context.Internal;
-using GiG.Core.Request.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using System;

@@ -1,14 +1,14 @@
-﻿using GiG.Core.Request.Abstractions;
+﻿using GiG.Core.Context.Abstractions;
 using Microsoft.AspNetCore.Http;
 using System.Net;
 
 namespace GiG.Core.Request.Web.Internal
 {
-    internal class RequestContextAccesor : IRequestContextAccessor
+    internal class RequestContextAccessor : IRequestContextAccessor
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public RequestContextAccesor(IHttpContextAccessor httpContextAccessor)
+        public RequestContextAccessor(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
         }
