@@ -1,10 +1,8 @@
-using GiG.Core.Hosting.Tests.Integration.Mocks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.Extensions.Configuration;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
+using GiG.Core.Hosting.Abstractions;
+using GiG.Core.Hosting.Extensions;
+using GiG.Core.Hosting.Tests.Integration.Helpers;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Xunit;
 
 namespace GiG.Core.Hosting.Tests.Integration.Tests
@@ -12,63 +10,39 @@ namespace GiG.Core.Hosting.Tests.Integration.Tests
     [Trait("Category", "Integration")]
     public class ApplicationMetadataAccessorTests
     {
-        private readonly TestServer _testServer;
+        private readonly IApplicationMetadataAccessor _applicationMetadataAccessor;
 
         public ApplicationMetadataAccessorTests()
         {
-            _testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>()
-                                                                   .ConfigureAppConfiguration(appConfig => { appConfig.AddJsonFile("appsettings.json"); }));
+            var _host = Host.CreateDefaultBuilder()
+                           .UseApplicationMetadata()
+                           .Build();
+
+            _applicationMetadataAccessor = _host.Services.GetRequiredService<IApplicationMetadataAccessor>();
         }
 
         [Fact]
-        public async Task ApplicationMetadataApplicationName()
+        public void ApplicationMetadataAccessor_ApplicationName_ReturnsSameApplicationName()
         {
-            //Arrange
-            const string expectedResponse = "GiG.Core.Hosting.Tests.Integration";
-            const HttpStatusCode expectedStatusCode = HttpStatusCode.OK;
-            var client = _testServer.CreateClient();
-
-            //Act
-            using var request = new HttpRequestMessage(HttpMethod.Get, "/api/management/name");
-            using var response = await client.SendAsync(request);
-
-            //Assert
-            Assert.Equal(expectedStatusCode, response.StatusCode);
-            Assert.Equal(expectedResponse, await response.Content.ReadAsStringAsync());
+            //Act & Assert
+            Assert.Equal(TestHelper.ApplicationName, ApplicationMetadata.Name);
+            Assert.Equal(TestHelper.ApplicationName, _applicationMetadataAccessor.Name);
         }
 
         [Fact]
-        public async Task ApplicationMetadataVersion()
+        public void ApplicationMetadataAccessor_Version_ReturnsSameVersion()
         {
-            //Arrange
-            const string expectedResponse = "15.0.0.0";
-            const HttpStatusCode expectedStatusCode = HttpStatusCode.OK;
-            var client = _testServer.CreateClient();
-
-            //Act
-            using var request = new HttpRequestMessage(HttpMethod.Get, "/api/management/version");
-            using var response = await client.SendAsync(request);
-
-            //Assert
-            Assert.Equal(expectedStatusCode, response.StatusCode);
-            Assert.Equal(expectedResponse, await response.Content.ReadAsStringAsync());
+            //Act & Assert
+            Assert.Equal(TestHelper.Version, ApplicationMetadata.Version);
+            Assert.Equal(TestHelper.Version, _applicationMetadataAccessor.Version);
         }
 
         [Fact]
-        public async Task ApplicationMetadataInformationalVersion()
+        public void ApplicationMetadataAccessor_InformationalVersion_ReturnsSameInformationalVersion()
         {
-            //Arrange
-            const string expectedResponse = "16.2.0";
-            const HttpStatusCode expectedStatusCode = HttpStatusCode.OK;
-            var client = _testServer.CreateClient();
-
-            //Act
-            using var request = new HttpRequestMessage(HttpMethod.Get, "/api/management/version-info");
-            using var response = await client.SendAsync(request);
-
-            //Assert
-            Assert.Equal(expectedStatusCode, response.StatusCode);
-            Assert.Equal(expectedResponse, await response.Content.ReadAsStringAsync());
+            //Act & Assert
+            Assert.Equal(TestHelper.InformationalVersion, ApplicationMetadata.InformationalVersion);
+            Assert.Equal(TestHelper.InformationalVersion, _applicationMetadataAccessor.InformationalVersion);
         }
     }
 }

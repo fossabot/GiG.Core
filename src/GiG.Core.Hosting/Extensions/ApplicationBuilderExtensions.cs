@@ -27,24 +27,16 @@ namespace GiG.Core.Hosting.Extensions
             if (app == null) throw new ArgumentNullException(nameof(app));
 
             var options = app.ApplicationServices.GetService<IOptions<InfoManagementOptions>>()?.Value ?? new InfoManagementOptions();
-            if (options.IsEnabled)
-            {
-                app.Map(options.Url, appBuilder =>
-                {
-                    var applicationMetadataAccessor =
-                        appBuilder.ApplicationServices.GetRequiredService<IApplicationMetadataAccessor>();
 
-                    appBuilder.Run(async context =>
-                    {
-                        await WriteJsonResponseWriter(context, applicationMetadataAccessor);
-                    });
-                });
-            }
+            if (!options.IsEnabled) return app;
 
-            return app;
+            return app.Map(options.Url, appBuilder =>
+            {                    
+                appBuilder.Run(WriteJsonResponseWriter);
+            });
         }
 
-        private static Task WriteJsonResponseWriter(HttpContext httpContext, IApplicationMetadataAccessor accessor)
+        private static Task WriteJsonResponseWriter(HttpContext httpContext)
         {
             httpContext.Response.ContentType = "application/json";
 
@@ -53,9 +45,9 @@ namespace GiG.Core.Hosting.Extensions
                 using (var writer = new Utf8JsonWriter(stream))
                 {
                     writer.WriteStartObject();
-                    writer.WriteString(nameof(accessor.Name), accessor.Name);
-                    writer.WriteString(nameof(accessor.Version), accessor.Version);
-                    writer.WriteString(nameof(accessor.InformationalVersion), accessor.InformationalVersion);
+                    writer.WriteString(nameof(ApplicationMetadata.Name), ApplicationMetadata.Name);
+                    writer.WriteString(nameof(ApplicationMetadata.Version), ApplicationMetadata.Version);
+                    writer.WriteString(nameof(ApplicationMetadata.InformationalVersion), ApplicationMetadata.InformationalVersion);
                     writer.WriteEndObject();
                 }
 
