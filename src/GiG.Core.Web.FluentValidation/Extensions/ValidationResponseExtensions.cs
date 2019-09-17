@@ -9,7 +9,7 @@ namespace GiG.Core.Web.FluentValidation.Extensions
 {
     internal static class ValidationResponseExtensions
     {
-        public static string Serialize(this ValidationResponse validationResponse, JavaScriptEncoder javaScriptEncoder)
+        internal static string Serialize(this ValidationResponse validationResponse, JavaScriptEncoder javaScriptEncoder)
         {
             using (var stream = new MemoryStream())
             {
@@ -29,6 +29,7 @@ namespace GiG.Core.Web.FluentValidation.Extensions
                         writer.WriteEndArray();
                     });
 
+                    writer.WriteEndObject();
                     writer.WriteEndObject();
                 }
 

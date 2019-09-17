@@ -10,6 +10,7 @@ namespace GiG.Core.Web.FluentValidation.Internal
     {
         /// <summary>
         /// Title.
+        /// This is the default Fluent Validation title.
         /// </summary>
         public string Title { get; set; } = "One or more validation errors occurred.";
 

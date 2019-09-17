@@ -9,7 +9,11 @@ namespace GiG.Core.Web.FluentValidation.Tests.Integration.Mocks
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddFluentValidation();
+            services.AddControllers()
+                .AddFluentValidation();
+            
+            // Configure Api Behavior Options
+            services.ConfigureApiBehaviorOptions();
         }
 
         public void Configure(IApplicationBuilder app)

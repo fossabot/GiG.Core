@@ -11,7 +11,7 @@
         public const string GenericValidationErrorMessage = "Fluent Validation Exception";
         
         /// <summary>
-        /// Json Mime Type
+        /// Problem And Json Mime Type
         /// </summary>
         public const string ProblemJsonMimeType = "application/problem+json";
     }
