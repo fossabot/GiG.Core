@@ -1,7 +1,7 @@
 ﻿namespace GiG.Core.Orleans.Abstractions.Configuration
 {
     /// <summary>
-    /// Orleans Dashboard Settings
+    /// Orleans Dashboard Settings.
     /// </summary>
     public class DashboardOptions
     {

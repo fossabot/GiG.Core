@@ -39,7 +39,7 @@ namespace GiG.Core.Orleans.Sample.Silo
         {
             builder.ConfigureCluster(ctx.Configuration)
                 .ConfigureDashboard(ctx.Configuration)
-                .ConfigureEndpoint()
+                .ConfigureEndpoints()
                 .ConfigureConsulClustering(ctx.Configuration)
                 .AddAssemblies(typeof(TransactionGrain));
         }

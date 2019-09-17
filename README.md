@@ -24,7 +24,13 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 * [GiG.Core.Logging.All](docs/GiG.Core.Logging.All.md)
 
 ### Multi Tenancy
-* [GiG.Core.MultiTenant.Web](docs/GiG.Core.MultiTenant.md)
+* [GiG.Core.MultiTenant.Web](docs/GiG.Core.MultiTenant.Web.md)
+
+### Orleans Client
+* [GiG.Core.Orleans.Client](docs/GiG.Core.Orleans.Client.md)
+
+### Orleans Silo
+* [GiG.Core.Orleans.Silo](docs/GiG.Core.Orleans.Silo.md)
 
 ### Web Hosting
 * [GiG.Core.Web.Hosting](docs/GiG.Core.Web.Hosting.md)
