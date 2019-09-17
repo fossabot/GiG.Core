@@ -44,11 +44,11 @@ namespace GiG.Core.Web.FluentValidation.Internal
             context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
             context.Response.ContentType = Constants.ProblemJsonMimeType;
 
-            var responseDictionary = BuildValidationResponse(ex.Errors);
-            responseDictionary.Status = context.Response.StatusCode;
+            var validationResponse = BuildValidationResponse(ex.Errors);
+            validationResponse.Status = context.Response.StatusCode;
 
             _logger.LogInformation(Constants.GenericValidationErrorMessage, ex);
-            var json = responseDictionary.Serialize(_jsonOptionsAccessor?.Value?.Encoder);
+            var json = validationResponse.Serialize(_jsonOptionsAccessor?.Value?.Encoder);
 
             await context.Response.WriteAsync(json);
         }
