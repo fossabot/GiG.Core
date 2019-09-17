@@ -29,6 +29,12 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 ### Orleans Client
 * [GiG.Core.Orleans.Client](docs/GiG.Core.Orleans.Client.md)
 
+### Orleans Clustering Kubernetes Client
+* [GiG.Core.Orleans.Clustering.Kubernetes.Client](docs/GiG.Core.Orleans.Clustering.Kubernetes.Client.md)
+
+### Orleans Clustering Kubernetes Silo
+* [GiG.Core.Orleans.Clustering.Kubernetes.Silo](docs/GiG.Core.Orleans.Clustering.Kubernetes.Silo.md)
+
 ### Orleans Silo
 * [GiG.Core.Orleans.Silo](docs/GiG.Core.Orleans.Silo.md)
 

@@ -26,10 +26,10 @@ Add the below to your Startup class and this will register an Orleans Client.
 
 You can change the default values by overriding the [ClusterOptions](https://github.com/dotnet/orleans/blob/master/src/Orleans.Core/Configuration/Options/ClusterOptions.cs) by adding the following configuration setting under section `Orleans:Cluster`
 
-| Configuration Name  | Type	| Optional | Default Value	  |
-|---------------------|---------|----------|------------------|
-| ClusterId			  | String  | Yes	   | `dev`		      |
-| ServiceId			  | String  | Yes	   | `dev`            |	
+| Configuration Name | Type   | Optional | Default Value |
+|:-------------------|:-------|:---------|:--------------|
+| ClusterId          | String | Yes      | `dev`         |
+| ServiceId          | String | Yes      | `dev`         |
 
 ## Correlation Id
 

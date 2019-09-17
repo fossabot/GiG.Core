@@ -31,15 +31,15 @@ Add the below to your Program class when creating a new HostBuilder
 
 You can change the default value for the Cluster configuration by overriding the [ClusterOptions](https://github.com/dotnet/orleans/blob/master/src/Orleans.Core/Configuration/Options/ClusterOptions.cs) by adding the following configuration settings under section `Orleans:Cluster`
 
-| Configuration Name  | Type	| Optional | Default Value	  |
-|---------------------|---------|----------|------------------|
-| ClusterId			  | String  | Yes	   | `dev`		      |
-| ServiceId			  | String  | Yes	   | `dev`            |	
+| Configuration Name | Type   | Optional | Default Value |
+|:-------------------|:-------|:---------|:--------------|
+| ClusterId          | String | Yes      | `dev`         |
+| ServiceId          | String | Yes      | `dev`         |
 
 You can change the default values for the Orleans Dashboard configuration by overriding the [DashboardOptions](..\GiG.Core.Orleans.Abstractions\Configuration\DashboardOptions.cs) by adding the following configuration settings under section `Dashboard`
 
-| Configuration Name  | Type	| Optional | Default Value	  |
-|---------------------|---------|----------|------------------|
-| Enabled			  | Boolean | No	   | `false`	      |
-| Port  			  | String  | No 	   | `8181`           |	
-| Path  			  | String  | Yes	   |                  |	
+| Configuration Name | Type    | Optional | Default Value |
+|:-------------------|:--------|:---------|:--------------|
+| Enabled            | Boolean | No       | `false`       |
+| Port               | String  | No       | `8181`        |
+| Path               | String  | Yes      |               |
