@@ -15,7 +15,7 @@ namespace GiG.Core.Orleans.Clustering.Consul.Silo.Extensions
         /// Configures Consul in Orleans.
         /// </summary>
         /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
-        /// <param name="configuration">The configuration <see cref="T:Microsoft.Extensions.Configuration.IConfiguration" />.</param>
+        /// <param name="configuration">The <see cref="IConfiguration" /> which contains Consul options.</param>
         /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
         public static ISiloBuilder ConfigureConsulClustering([NotNull] this ISiloBuilder builder, [NotNull] IConfiguration configuration)
         {
@@ -29,7 +29,7 @@ namespace GiG.Core.Orleans.Clustering.Consul.Silo.Extensions
         /// Configures Consul in Orleans.
         /// </summary>
         /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
-        /// <param name="configurationSection">The configuration section <see cref="T:Microsoft.Extensions.Configuration.IConfigurationSection" />.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection" /> which contains Consul options.</param>
         /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
         public static ISiloBuilder ConfigureConsulClustering([NotNull] this ISiloBuilder builder, [NotNull] IConfigurationSection configurationSection)
         {
