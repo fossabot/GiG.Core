@@ -36,8 +36,6 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Client.Extensions
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
 
-            builder.Configure<KubernetesOptions>(configurationSection);
-
             var kubernetesOptions = configurationSection.Get<KubernetesOptions>() ?? new KubernetesOptions();
 
             return
