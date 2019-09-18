@@ -1,47 +1,29 @@
-﻿using GiG.Core.DistributedTracing.Orleans.Extensions;
+﻿using GiG.Core.Configuration.Extensions;
+using GiG.Core.DistributedTracing.Orleans.Extensions;
 using GiG.Core.Hosting.Extensions;
 using GiG.Core.Logging.All.Extensions;
-using GiG.Core.Orleans.Clustering.Consul.Silo.Extensions;
-using GiG.Core.Orleans.Hosting.Silo.Extensions;
-using GiG.Core.Orleans.Sample.Grains;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Orleans.Hosting;
-using System;
-using System.IO;
-using HostBuilderContext = Microsoft.Extensions.Hosting.HostBuilderContext;
+
 
 namespace GiG.Core.Orleans.Sample.Silo
 {
     public class Program
     {
-        public static void Main()
+        public static void Main(string[] args)
         {
-            new HostBuilder()
-                .ConfigureServices(services => services.AddCorrelationAccessor())
-                .UseApplicationMetadata()
-                .ConfigureHostConfiguration(ConfigureApplicationConfiguration())
-                .ConfigureLogging()
-                .UseOrleans(ConfigureOrleans)
+            CreateHostBuilder(args)
                 .Build()
                 .Run();
         }
 
-        private static Action<IConfigurationBuilder> ConfigureApplicationConfiguration()
-        {
-            return builder => builder
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddEnvironmentVariables();
-        }
-
-        private static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builder)
-        {
-            builder.ConfigureCluster(ctx.Configuration)
-                .ConfigureDashboard(ctx.Configuration)
-                .ConfigureEndpoints()
-                .ConfigureConsulClustering(ctx.Configuration)
-                .AddAssemblies(typeof(TransactionGrain));
-        }
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .UseApplicationMetadata()
+                .ConfigureServices(services => services.AddCorrelationAccessor())
+                .ConfigureExternalConfiguration()
+                .ConfigureLogging()
+                .ConfigureServices(Startup.ConfigureServices)
+                .UseOrleans(Startup.ConfigureOrleans);
     }
 }
