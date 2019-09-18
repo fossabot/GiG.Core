@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
+using GiG.Core.Web.FluentValidation.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -41,14 +42,15 @@ namespace GiG.Core.Web.FluentValidation.Internal
         private async Task HandleValidationExceptionAsync(HttpContext context, ValidationException ex)
         {
             context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            context.Response.ContentType = Constants.JsonMimeType;
+            context.Response.ContentType = Constants.ProblemJsonMimeType;
 
-            var responseDictionary = BuildValidationResponse(ex.Errors);
+            var validationResponse = BuildValidationResponse(ex.Errors);
+            validationResponse.Status = context.Response.StatusCode;
 
             _logger.LogInformation(Constants.GenericValidationErrorMessage, ex);
+            var json = validationResponse.Serialize(_jsonOptionsAccessor?.Value?.Encoder);
 
-            await context.Response.WriteAsync(JsonSerializer.Serialize(responseDictionary,
-                _jsonOptionsAccessor.Value));
+            await context.Response.WriteAsync(json);
         }
 
         private static ValidationResponse BuildValidationResponse(IEnumerable<ValidationFailure> errors)
@@ -69,7 +71,7 @@ namespace GiG.Core.Web.FluentValidation.Internal
 
             var validationResponse = new ValidationResponse
             {
-                ValidationErrors = errorMessageDictionary
+                Errors = errorMessageDictionary
             };
 
             return validationResponse;
