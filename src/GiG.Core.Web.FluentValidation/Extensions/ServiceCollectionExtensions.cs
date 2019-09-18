@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using GiG.Core.Web.FluentValidation.Internal;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -26,8 +27,7 @@ namespace GiG.Core.Web.FluentValidation.Extensions
                     var problemDetails = new ValidationProblemDetails(context.ModelState);
                     var result = new BadRequestObjectResult(problemDetails);
 
-                    result.ContentTypes.Add("application/problem+json");
-                    result.ContentTypes.Add("application/problem+xml");
+                    result.ContentTypes.Add(Constants.ProblemJsonMimeType);
 
                     return result;
                 };
