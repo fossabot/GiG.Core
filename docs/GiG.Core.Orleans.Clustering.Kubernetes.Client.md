@@ -1,6 +1,6 @@
 # GiG.Core.Orleans.Clustering.Kubernetes.Client
 
-This Library provides an API to register an Orleans Client running on Kubernetes
+This Library provides an API to register an Orleans Client running on Kubernetes.
 
 ## Basic Usage
 
@@ -22,7 +22,7 @@ Add the below to your Startup class and this will register an Orleans Client run
 
 ### Configuration
 
-You can change the default value for the Kubernetes configuration by overriding the [KubernetesOptions](,,\src\GiG.Core.Orleans.Clustering.Kubernetes.Silo\Configurations\KubernetesSiloOptions.cs) by adding the following configuration settings under section `Orleans:Kubernetes`
+You can change the default value for the Kubernetes configuration by overriding the [KubernetesOptions](,,\src\GiG.Core.Orleans.Clustering.Kubernetes.Silo\Configurations\KubernetesSiloOptions.cs) by adding the following configuration settings under section `Orleans:Kubernetes`.
 
 | Configuration Name | Type   | Optional | Default Value     |
 |:-------------------|:-------|:---------|:------------------|
