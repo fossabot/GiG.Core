@@ -16,7 +16,7 @@
         public bool IsEnabled { get; set; } = false;
         
         /// <summary>
-        /// Sets the Dashboard port
+        /// Sets the Dashboard port.
         /// </summary>
         public int Port { get; set; } = 8080;
 
