@@ -1,4 +1,4 @@
-﻿using GiG.Core.Orleans.Abstractions.Configuration;
+﻿using GiG.Core.Orleans.Hosting.Silo.Configurations;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Orleans;
@@ -131,7 +131,8 @@ namespace GiG.Core.Orleans.Hosting.Silo.Extensions
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
           
             var orleansConfiguration = configuration.GetSection(DashboardOptions.DefaultSectionName).Get<DashboardOptions>();
-            if (orleansConfiguration?.Enabled ?? false)
+            
+            if (orleansConfiguration?.IsEnabled ?? false)
             {
                 builder.UseDashboard(options =>
                 {

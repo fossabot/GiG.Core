@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net;
 
 namespace GiG.Core.Web.FluentValidation.Internal
 {
@@ -8,8 +9,19 @@ namespace GiG.Core.Web.FluentValidation.Internal
     internal class ValidationResponse
     {
         /// <summary>
-        /// Validation Error Messages.
+        /// Title.
+        /// This is the default Fluent Validation title.
         /// </summary>
-        public IDictionary<string, List<string>> ValidationErrors { get; set; }
+        public string Title { get; set; } = "One or more validation errors occurred.";
+
+        /// <summary>
+        /// Http Status.
+        /// </summary>
+        public int Status { get; set; } = (int)HttpStatusCode.BadRequest;
+
+        /// <summary>
+        /// Error Messages.
+        /// </summary>
+        public IDictionary<string, List<string>> Errors { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using GiG.Core.Orleans.Abstractions.Configuration;
+﻿using GiG.Core.Orleans.Clustering.Consul.Client.Configurations;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Orleans;

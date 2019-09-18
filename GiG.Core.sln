@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5915362C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A417-4EEB-A216-4918AD56C9B5}"
 	ProjectSection(SolutionItems) = preProject
+		docs\GiG.Core.Context.Orleans.md = docs\GiG.Core.Context.Orleans.md
 		docs\GiG.Core.Context.Web.md = docs\GiG.Core.Context.Web.md
 		docs\GiG.Core.Data.Migration.md = docs\GiG.Core.Data.Migration.md
 		docs\GiG.Core.DistributedTracing.Web.md = docs\GiG.Core.DistributedTracing.Web.md
@@ -120,8 +121,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orleans", "Orleans", "{8372
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orleans", "Orleans", "{8047E8B5-4505-49E7-8C01-5C5FCB7B5681}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Abstractions", "src\GiG.Core.Orleans.Abstractions\GiG.Core.Orleans.Abstractions.csproj", "{DA6E4705-1ADB-4058-A667-30D9062D27F7}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Hosting.Silo", "src\GiG.Core.Orleans.Hosting.Silo\GiG.Core.Orleans.Hosting.Silo.csproj", "{DE0CD413-1938-465C-9B41-1FCA33364749}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Hosting", "src\GiG.Core.Web.Hosting\GiG.Core.Web.Hosting.csproj", "{EAF75BF4-7854-46BC-87A7-89D793079002}"
@@ -192,11 +191,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Context.Abstractio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Context.Web", "src\GiG.Core.Context.Web\GiG.Core.Context.Web.csproj", "{86DF999D-7494-4A8D-B95B-EC3E0A2F5566}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Logging.Enrichers.Context", "src\GiG.Core.Logging.Enrichers.Context\GiG.Core.Logging.Enrichers.Context.csproj", "{6FDCCBF7-A517-41B4-9CD2-E8075F9C35B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Logging.Enrichers.Context", "src\GiG.Core.Logging.Enrichers.Context\GiG.Core.Logging.Enrichers.Context.csproj", "{6FDCCBF7-A517-41B4-9CD2-E8075F9C35B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Context.Orleans", "src\GiG.Core.Context.Orleans\GiG.Core.Context.Orleans.csproj", "{A5699BCD-9096-4FC9-8C25-5D01A408E482}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Context.Orleans", "src\GiG.Core.Context.Orleans\GiG.Core.Context.Orleans.csproj", "{A5699BCD-9096-4FC9-8C25-5D01A408E482}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Context.Web.Tests.Integration", "tests\integration\GiG.Core.Context.Web.Tests.Integration\GiG.Core.Context.Web.Tests.Integration.csproj", "{839C397E-CAAB-44B3-8D99-B48130224403}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Context.Web.Tests.Integration", "tests\integration\GiG.Core.Context.Web.Tests.Integration\GiG.Core.Context.Web.Tests.Integration.csproj", "{839C397E-CAAB-44B3-8D99-B48130224403}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -304,10 +303,6 @@ Global
 		{6085C7C2-3E42-4A73-A0AF-5DF5EB637F9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6085C7C2-3E42-4A73-A0AF-5DF5EB637F9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6085C7C2-3E42-4A73-A0AF-5DF5EB637F9C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DA6E4705-1ADB-4058-A667-30D9062D27F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA6E4705-1ADB-4058-A667-30D9062D27F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA6E4705-1ADB-4058-A667-30D9062D27F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA6E4705-1ADB-4058-A667-30D9062D27F7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DE0CD413-1938-465C-9B41-1FCA33364749}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DE0CD413-1938-465C-9B41-1FCA33364749}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE0CD413-1938-465C-9B41-1FCA33364749}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -446,7 +441,6 @@ Global
 		{6085C7C2-3E42-4A73-A0AF-5DF5EB637F9C} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 		{8372654D-18DE-4EB4-A40E-C231A5A4EFCB} = {99337274-FAB8-4358-81BB-3736EE2CCDE6}
 		{8047E8B5-4505-49E7-8C01-5C5FCB7B5681} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
-		{DA6E4705-1ADB-4058-A667-30D9062D27F7} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
 		{DE0CD413-1938-465C-9B41-1FCA33364749} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
 		{EAF75BF4-7854-46BC-87A7-89D793079002} = {D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF}
 		{1A662BC0-8C36-4C5A-8D64-DC3116604680} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}

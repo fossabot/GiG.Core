@@ -9,7 +9,7 @@
 
         public bool IsEnabled { get; set; } = true;
 
-        public string DocUrl { get; set; } = "api-docs";
+        public string Url { get; set; } = "api-docs";
 
         public string Title { get; set; }
 
