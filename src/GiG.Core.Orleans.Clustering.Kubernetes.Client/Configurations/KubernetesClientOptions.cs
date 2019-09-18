@@ -8,11 +8,17 @@
         /// <summary>
         /// Default configuration section name.
         /// </summary>
+        /// <remarks>
+        /// The default value is <c>"Orleans:Kubernetes"</c>
+        /// </remarks>
         public const string DefaultSectionName = "Orleans:Kubernetes";
 
         /// <summary>
         /// Custom Resource Definition Group name.
         /// </summary>
+        /// <remarks>
+        /// The default value is <c>"orleans.dot.net"</c>
+        /// </remarks>
         public string Group { get; set; } = "orleans.dot.net";
 
         /// <summary>
@@ -26,7 +32,7 @@
         public string ApiToken { get; set; }
 
         /// <summary>
-        ///  Certificate Data.
+        /// Certificate Data.
         /// </summary>
         public string CertificateData { get; set; }
     }
