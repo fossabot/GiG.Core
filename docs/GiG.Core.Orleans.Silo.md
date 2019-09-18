@@ -7,19 +7,20 @@ This Library provides an API to register an Orleans Silo in an application.
 The below code needs to be added to the `Program.cs` when creating a new HostBuilder
 
 ```csharp
-public static void Main(string[] args)
-{
-    CreateHostBuilder(args).Build().Run();
-}
+        public static void Main(string[] args)
+        {
+            CreateHostBuilder(args).Build().Run();
+        }
 
-public static IHostBuilder CreateHostBuilder(string[] args) =>
-    Host.CreateDefaultBuilder(args)
-      .UseApplicationMetadata()
-      .ConfigureServices(services => services.AddCorrelationAccessor())
-      .ConfigureExternalConfiguration()
-      .ConfigureLogging()
-      .ConfigureServices(Startup.ConfigureServices)
-      .UseOrleans(Startup.ConfigureOrleans);
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .UseOrleans((hostBuilder, siloBuilder) =>
+                    siloBuilder.ConfigureCluster(hostBuilder.Configuration)
+                        .ConfigureDashboard(hostBuilder.Configuration)
+                        .ConfigureEndpoints()
+                        .ConfigureConsulClustering(hostBuilder.Configuration)
+                        .AddAssemblies(typeof(TransactionGrain))
+                );
 ```
 
 ### Configuration
