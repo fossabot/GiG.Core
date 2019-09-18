@@ -21,12 +21,12 @@
         public string ApiEndpoint { get; set; }
 
         /// <summary>
-        /// K8s API Endpoint Base URL.
+        /// Api Token.
         /// </summary>
         public string ApiToken { get; set; }
 
         /// <summary>
-        /// Token data
+        ///  Certificate Data.
         /// </summary>
         public string CertificateData { get; set; }
     }
