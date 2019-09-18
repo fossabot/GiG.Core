@@ -38,5 +38,5 @@ You can change the default value for the Kubernetes configuration by overriding 
 | ApiEndpoint         | String | Yes      |                   |
 | ApiToken            | String | Yes      |                   |
 | CertificateData     | String | Yes      |                   |
-| CanCreateResources  | String | Yes      | `Yes`             |
-| DropResourcesOnInit | String | Yes      | `Yes`             |
+| CanCreateResources  | String | Yes      | `False`           |
+| DropResourcesOnInit | String | Yes      | `False`           |

@@ -35,11 +35,11 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Silo.Configurations
         /// <summary>
         /// Create Resources on Initialisation.
         /// </summary>
-        public bool CanCreateResources { get; set; } = true;
+        public bool CanCreateResources { get; set; } = false;
 
         /// <summary>
         /// Drop Resources on Initialisation.
         /// </summary>
-        public bool DropResourcesOnInit { get; set; } = true;
+        public bool DropResourcesOnInit { get; set; } = false;
     }
 }
