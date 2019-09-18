@@ -1,10 +1,10 @@
 ﻿# GiG.Core.Context.Web
 
-This Library provides an API to register the Request Context Accessor Functionality for your application.
+This Library provides an API to register the Request Context Accessor functionality for your application.
 
 ## Basic Usage
 
-Add the below to your Startup class and this will register the Request Context accessor.
+Add the below to your Startup class to register the Request Context accessor.
 
 
 ```csharp
