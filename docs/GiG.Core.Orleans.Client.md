@@ -24,7 +24,7 @@ Add the below to your Startup class and this will register an Orleans Client.
 
 ### Configuration
 
-You can change the default values by overriding the [ClusterOptions](https://github.com/dotnet/orleans/blob/master/src/Orleans.Core/Configuration/Options/ClusterOptions.cs) by adding the following configuration setting under section `Orleans:Cluster`
+You can change the default values by overriding the [ClusterOptions](https://github.com/dotnet/orleans/blob/master/src/Orleans.Core/Configuration/Options/ClusterOptions.cs) by adding the following configuration setting under section `Orleans:Cluster`.
 
 | Configuration Name | Type   | Optional | Default Value |
 |:-------------------|:-------|:---------|:--------------|
@@ -33,7 +33,7 @@ You can change the default values by overriding the [ClusterOptions](https://git
 
 ## Correlation Id
 
-Add the below to your Startup class to add CorrelationId 
+Add the below to your Startup class to add CorrelationId. 
  
 ```csharp
 
