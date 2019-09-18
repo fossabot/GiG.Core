@@ -26,15 +26,15 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 The below table outlines the valid Configurations used to override the [ClusterOptions](https://github.com/dotnet/orleans/blob/master/src/Orleans.Core/Configuration/Options/ClusterOptions.cs) under the Config section `Orleans:Cluster`
 
-| Configuration Name  | Type	| Required | Default Value	  |
+| Configuration Name | Type   | Required | Default Value |
 |:-------------------|:-------|:---------|:--------------|
-| ClusterId			  | String  | No	   | `dev`		      |
-| ServiceId			  | String  | No	   | `dev`            |	
+| ClusterId          | String | No       | `dev`         |
+| ServiceId          | String | No       | `dev`         |
 
 The below table outlines the valid Configurations used to override the [DashboardOptions](..\GiG.Core.Orleans.Abstractions\Configuration\DashboardOptions.cs) under section `Dashboard`
 
-| Configuration Name  | Type	| Required | Default Value	  |
+| Configuration Name | Type    | Required | Default Value |
 |:-------------------|:--------|:---------|:--------------|
-| IsEnabled			  | Boolean | Yes	   | `false`	      |
-| Port  			  | String  | Yes 	   | `8080`           |	
-| Path  			  | String  | No	   |                  |	
+| IsEnabled          | Boolean | Yes      | `false`       |
+| Port               | String  | Yes      | `8080`        |
+| Path               | String  | No       |               |
