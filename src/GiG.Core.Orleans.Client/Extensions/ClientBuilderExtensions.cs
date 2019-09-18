@@ -5,7 +5,6 @@ using Orleans.Configuration;
 using System;
 using System.Configuration;
 using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace GiG.Core.Orleans.Client.Extensions

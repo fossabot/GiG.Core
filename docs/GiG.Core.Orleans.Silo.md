@@ -2,44 +2,39 @@
 
 This Library provides an API to register an Orleans Silo in an application.
 
-
 ## Basic Usage
 
-Add the below to your Program class when creating a new HostBuilder
+The below code needs to be added to the `Program.cs` when creating a new HostBuilder
 
 ```csharp
+public static void Main(string[] args)
+{
+    CreateHostBuilder(args).Build().Run();
+}
 
-        public static void Main()
-        {
-            new HostBuilder()
-                .ConfigureServices(services => services.AddCorrelationAccessor())
-                .UseOrleans(ConfigureOrleans)
-                .Build()
-                .Run();
-        }
-
-        private static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builder)
-        {
-            builder.ConfigureCluster(ctx.Configuration)
-                .ConfigureDashboard(ctx.Configuration)
-                .ConfigureEndpoints()
-                .AddAssemblies(typeof(Grain));
-        }
+public static IHostBuilder CreateHostBuilder(string[] args) =>
+    Host.CreateDefaultBuilder(args)
+      .UseApplicationMetadata()
+      .ConfigureServices(services => services.AddCorrelationAccessor())
+      .ConfigureExternalConfiguration()
+      .ConfigureLogging()
+      .ConfigureServices(Startup.ConfigureServices)
+      .UseOrleans(Startup.ConfigureOrleans);
 ```
 
 ### Configuration
 
-You can change the default value for the Cluster configuration by overriding the [ClusterOptions](https://github.com/dotnet/orleans/blob/master/src/Orleans.Core/Configuration/Options/ClusterOptions.cs) by adding the following configuration settings under section `Orleans:Cluster`
+The below table outlines the valid Configurations used to override the [ClusterOptions](https://github.com/dotnet/orleans/blob/master/src/Orleans.Core/Configuration/Options/ClusterOptions.cs) under the Config section `Orleans:Cluster`
 
-| Configuration Name | Type   | Optional | Default Value |
+| Configuration Name  | Type	| Required | Default Value	  |
 |:-------------------|:-------|:---------|:--------------|
-| ClusterId          | String | Yes      | `dev`         |
-| ServiceId          | String | Yes      | `dev`         |
+| ClusterId			  | String  | No	   | `dev`		      |
+| ServiceId			  | String  | No	   | `dev`            |	
 
-You can change the default values for the Orleans Dashboard configuration by overriding the [DashboardOptions](..\GiG.Core.Orleans.Abstractions\Configuration\DashboardOptions.cs) by adding the following configuration settings under section `Dashboard`
+The below table outlines the valid Configurations used to override the [DashboardOptions](..\GiG.Core.Orleans.Abstractions\Configuration\DashboardOptions.cs) under section `Dashboard`
 
-| Configuration Name | Type    | Optional | Default Value |
+| Configuration Name  | Type	| Required | Default Value	  |
 |:-------------------|:--------|:---------|:--------------|
-| Enabled            | Boolean | No       | `false`       |
-| Port               | String  | No       | `8181`        |
-| Path               | String  | Yes      |               |
+| IsEnabled			  | Boolean | Yes	   | `false`	      |
+| Port  			  | String  | Yes 	   | `8080`           |	
+| Path  			  | String  | No	   |                  |	

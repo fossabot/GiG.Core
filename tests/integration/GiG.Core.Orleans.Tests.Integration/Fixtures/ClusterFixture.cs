@@ -1,6 +1,5 @@
 using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.DistributedTracing.Orleans.Extensions;
-using GiG.Core.DistributedTracing.Web.Extensions;
 using GiG.Core.Orleans.Client.Extensions;
 using GiG.Core.Orleans.Hosting.Silo.Extensions;
 using GiG.Core.Orleans.Tests.Integration.Contracts;

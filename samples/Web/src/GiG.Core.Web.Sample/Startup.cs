@@ -47,6 +47,9 @@ namespace GiG.Core.Web.Sample
 
             // Forwarded Headers
             services.ConfigureForwardedHeaders();
+
+            // Configure Api Behavior Options
+            services.ConfigureApiBehaviorOptions();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
