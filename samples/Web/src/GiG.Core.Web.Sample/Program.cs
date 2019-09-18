@@ -20,7 +20,7 @@ namespace GiG.Core.Web.Sample
                 .UseApplicationMetadata()
                 .ConfigureServices(x => {
                     x.AddCorrelationId();
-                    x.AddRequestContext();
+                    x.AddRequestContextAccessor();
                 })
                 .ConfigureExternalConfiguration()
                 .ConfigureLogging()

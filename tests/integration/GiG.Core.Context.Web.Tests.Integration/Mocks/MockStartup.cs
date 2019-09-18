@@ -10,7 +10,7 @@ namespace GiG.Core.Context.Web.Tests.Integration.Mocks
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddRequestContext();
+            services.AddRequestContextAccessor();
             // Forwarded Headers
             services.ConfigureForwardedHeaders();
         }

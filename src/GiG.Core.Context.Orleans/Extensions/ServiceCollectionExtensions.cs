@@ -2,6 +2,7 @@
 using GiG.Core.Context.Orleans.Internal;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 
 namespace GiG.Core.Context.Orleans.Extensions
@@ -20,7 +21,7 @@ namespace GiG.Core.Context.Orleans.Extensions
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services.AddSingleton<IRequestContextAccessor, RequestContextAccessor>();
+            services.TryAddSingleton<IRequestContextAccessor, RequestContextAccessor>();
 
             return services;
         }

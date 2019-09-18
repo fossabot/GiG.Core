@@ -21,7 +21,7 @@ namespace GiG.Core.Orleans.Sample.Client
                 .ConfigureServices(x =>
                     {
                         x.AddCorrelationId();
-                        x.AddRequestContext();
+                        x.AddRequestContextAccessor();
                     })
                 .UseApplicationMetadata()
                 .ConfigureLogging()
