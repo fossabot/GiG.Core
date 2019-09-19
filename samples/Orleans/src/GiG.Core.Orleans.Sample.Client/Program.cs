@@ -1,3 +1,4 @@
+using GiG.Core.Context.Web.Extensions;
 using GiG.Core.DistributedTracing.Web.Extensions;
 using GiG.Core.Hosting.Extensions;
 using GiG.Core.Logging.All.Extensions;
@@ -17,7 +18,11 @@ namespace GiG.Core.Orleans.Sample.Client
 
         private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureServices(x => x.AddCorrelationId())
+                .ConfigureServices(x =>
+                    {
+                        x.AddCorrelationId();
+                        x.AddRequestContextAccessor();
+                    })
                 .UseApplicationMetadata()
                 .ConfigureLogging()
                 .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());

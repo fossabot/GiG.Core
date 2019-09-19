@@ -1,3 +1,5 @@
+using GiG.Core.Context.Abstractions;
+using GiG.Core.Context.Orleans.Extensions;
 using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.DistributedTracing.Orleans.Extensions;
 using GiG.Core.Orleans.Client.Extensions;
@@ -28,7 +30,11 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                     x.UseLocalhostClustering();
                     x.AddAssemblies(typeof(EchoTestGrain));
                 })
-                .ConfigureServices(x => x.AddCorrelationAccessor())
+                .ConfigureServices(x =>
+                {
+                    x.AddCorrelationAccessor();
+                    x.AddRequestContextAccessor();
+                })
                 .Build();
 
             siloHost.StartAsync().GetAwaiter().GetResult();
@@ -37,9 +43,11 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                 .ConfigureServices(services =>
                 {
                     services.AddSingleton<ICorrelationContextAccessor, MockCorrelationContextAccessor>();
+                    services.AddSingleton<IRequestContextAccessor, MockRequestContextAccessor>();
                     services.AddClusterClient((x, sp) =>
                     {
                         x.AddCorrelationOutgoingFilter(sp);
+                        x.AddRequestContextOutgoingFilter(sp);
                         x.UseLocalhostClustering();
                         x.AddAssemblies(typeof(IEchoTestGrain));
                     });
