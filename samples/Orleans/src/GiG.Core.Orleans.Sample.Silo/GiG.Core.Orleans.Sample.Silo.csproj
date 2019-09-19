@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Configuration\GiG.Core.Configuration.csproj" />
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.Context.Orleans\GiG.Core.Context.Orleans.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.DistributedTracing.Orleans\GiG.Core.DistributedTracing.Orleans.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Hosting\GiG.Core.Hosting.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Logging.All\GiG.Core.Logging.All.csproj" />
@@ -22,7 +23,7 @@
 
   <ItemGroup>
     <None Update="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

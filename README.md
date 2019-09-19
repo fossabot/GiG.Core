@@ -4,11 +4,15 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 
 ## Docs
 
-### Distributed Tracing
-* [GiG.Core.DistributedTracing.Web](docs/GiG.Core.DistributedTracing.Web.md)
+###  Context
+* [GiG.Core.Context.Web](docs/GiG.Core.Context.Web.md)
+* [GiG.Core.Context.Orleans](docs/GiG.Core.Context.Orleans.md)
 
 ### Data Migration
 * [GiG.Core.Data.Migration](docs/GiG.Core.Data.Migration.md)
+
+### Distributed Tracing
+* [GiG.Core.DistributedTracing.Web](docs/GiG.Core.DistributedTracing.Web.md)
 
 ### Fluent Validation
 * [GiG.Core.Web.FluentValidation](docs/GiG.Core.Web.FluentValidation.md)
@@ -29,14 +33,20 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 ### Orleans Client
 * [GiG.Core.Orleans.Client](docs/GiG.Core.Orleans.Client.md)
 
+### Orleans Clustering Kubernetes Client
+* [GiG.Core.Orleans.Clustering.Kubernetes.Client](docs/GiG.Core.Orleans.Clustering.Kubernetes.Client.md)
+
+### Orleans Clustering Kubernetes Silo
+* [GiG.Core.Orleans.Clustering.Kubernetes.Silo](docs/GiG.Core.Orleans.Clustering.Kubernetes.Silo.md)
+
 ### Orleans Silo
 * [GiG.Core.Orleans.Silo](docs/GiG.Core.Orleans.Silo.md)
 
-### Web Hosting
-* [GiG.Core.Web.Hosting](docs/GiG.Core.Web.Hosting.md)
-
 ### Web Docs
 * [GiG.Core.Web.Docs](docs/GiG.Core.Web.Docs.md)
+
+### Web Hosting
+* [GiG.Core.Web.Hosting](docs/GiG.Core.Web.Hosting.md)
 
 
 ## Build

@@ -1,8 +1,7 @@
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.0.0-preview9 AS base
 ENV COMPlus_ReadyToRun=0
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0.100-preview9 AS build
 ENV DOTNET_ROLL_FORWARD_ON_NO_CANDIDATE_FX=2

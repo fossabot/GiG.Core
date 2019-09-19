@@ -1,4 +1,5 @@
 using Bogus;
+using GiG.Core.Context.Abstractions;
 using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.Orleans.Tests.Integration.Contracts;
 using GiG.Core.Orleans.Tests.Integration.Fixtures;
@@ -44,6 +45,21 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
 
             //Act 
             var actualValue = await grain.GetCorrelationIdAsync();
+
+            //Assert
+            Assert.Equal(expectedValue, actualValue);
+        }
+
+        [Fact]
+        public async Task GetIPAddressAsync_CallGrain_ReturnsExpectedIPAddress()
+        {
+            //Arrange
+            var grain = _clusterFixture.ClusterClient.GetGrain<IRequestContextTestGrain>(Guid.NewGuid().ToString());
+            var requestContextAccessor = _clusterFixture.ClientServiceProvider.GetRequiredService<IRequestContextAccessor>();
+            var expectedValue = requestContextAccessor.IPAddress;
+
+            //Act 
+            var actualValue = await grain.GetIPAddressAsync();
 
             //Assert
             Assert.Equal(expectedValue, actualValue);
