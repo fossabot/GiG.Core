@@ -22,12 +22,12 @@ namespace GiG.Core.DistributedTracing.Web.Tests.Integration.Tests
         }
 
         [Fact]
-        public async Task CorrelationIdGeneratedAndAddedToResponseHeader()
+        public async Task CorrelationIdValue_GeneratedAndAddedToResponseHeader_ReturnsCorrelationId()
         {
             // Arrange
             var client = _server.CreateClient();
 
-            using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/mock");
+            using var request = new HttpRequestMessage(HttpMethod.Get, "/api/mock");
             using var response = await client.SendAsync(request);
 
             var headerValues = response.Headers.GetValues(Constants.Header);
@@ -40,7 +40,7 @@ namespace GiG.Core.DistributedTracing.Web.Tests.Integration.Tests
         }
 
         [Fact]
-        public async Task CorrelationIdInResponseHeaderMatchesRequestHeader()
+        public async Task CorrelationIdValue_ResponseHeaderMatchesRequestHeader_ReturnsCorrelationId()
         {
             // Arrange
             var client = _server.CreateClient();
@@ -48,7 +48,7 @@ namespace GiG.Core.DistributedTracing.Web.Tests.Integration.Tests
             var requestCorrelationId = Guid.NewGuid().ToString();
             client.DefaultRequestHeaders.Add(Constants.Header, requestCorrelationId);
 
-            using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/mock");
+            using var request = new HttpRequestMessage(HttpMethod.Get, "/api/mock");
             using var response = await client.SendAsync(request);
 
             var headerValues = response.Headers.GetValues(Constants.Header);

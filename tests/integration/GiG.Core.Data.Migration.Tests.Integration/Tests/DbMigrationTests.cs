@@ -12,16 +12,19 @@ namespace GiG.Core.Data.Migration.Tests.Integration.Tests
     public class DbMigrationTests
     {
         [Fact]
-        public void DBMigration_DefaultMigration()
+        public void Migrate_DefaultMigration()
         {
             using (var connection = new SqliteConnection("Data Source=testdefault.db;"))
             {
+                // Arrange
                 var services = SetupServiceCollection();
                 var dbMigrationBuilder = services
                     .AddDbMigration(connection).AddDefaultMigrationOptions();
 
+                // Act
                 dbMigrationBuilder.Migrate();
 
+                // Assert
                 connection.Open();
 
                 var scriptsExecuted = GetNumberOfScriptsExecuted(connection);
@@ -42,16 +45,19 @@ namespace GiG.Core.Data.Migration.Tests.Integration.Tests
         }
 
         [Fact]
-        public void DBMigration_WithCustomScriptLocation()
+        public void Migrate_WithCustomScriptLocation()
         {
             using (var connection = new SqliteConnection("Data Source=testcustomlocation.db;"))
             {
+                // Arrange
                 var services = SetupServiceCollection();
                 var dbMigrationBuilder = services
                     .AddDbMigration(connection).AddLocation("CustomScripts");
 
+                // Act
                 dbMigrationBuilder.Migrate();
 
+                // Assert
                 connection.Open();
 
                 var scriptsExecuted = GetNumberOfScriptsExecuted(connection);
@@ -70,10 +76,11 @@ namespace GiG.Core.Data.Migration.Tests.Integration.Tests
         }
 
         [Fact]
-        public void DBMigration_WithCustomMetaDataTableName()
+        public void Migrate_WithCustomMetaDataTableName()
         {
             using (var connection = new SqliteConnection("Data Source=testmetatablename.db;"))
             {
+                // Arrange
                 var services = new ServiceCollection();
                 services.AddLogging();
                 var dbMigrationBuilder = services
@@ -81,8 +88,10 @@ namespace GiG.Core.Data.Migration.Tests.Integration.Tests
                     .AddLocation("Scripts")
                     .AddMetadataTableName("testchanges");
 
+                // Act
                 dbMigrationBuilder.Migrate();
 
+                // Assert
                 connection.Open();
 
                 var scriptsExecuted = GetNumberOfScriptsExecuted(connection, "testchanges");
@@ -99,18 +108,21 @@ namespace GiG.Core.Data.Migration.Tests.Integration.Tests
         }
 
         [Fact]
-        public void DBMigration_Dsiabled()
+        public void Migrate_IsDisabled()
         {
             using (var connection = new SqliteConnection("Data Source=testdisable.db;"))
             {
+                // Arrange
                 var services = new ServiceCollection();
                 services.AddLogging();
                 var dbMigrationBuilder = services
                     .AddDbMigration(connection)
                     .DisableMigration();
 
+                // Act
                 dbMigrationBuilder.Migrate();
 
+                // Assert
                 connection.Open();
 
                 var metaTableCreated = WasTableCreated(connection, "changelog");
@@ -124,7 +136,7 @@ namespace GiG.Core.Data.Migration.Tests.Integration.Tests
             File.Delete("testdisable.db");
         }
 
-        private IServiceCollection SetupServiceCollection()
+        private static IServiceCollection SetupServiceCollection()
         {
             var services = new ServiceCollection();
             services.AddSingleton<IHostingEnvironment>(new HostingEnvironment { EnvironmentName = "Development" });
@@ -133,7 +145,7 @@ namespace GiG.Core.Data.Migration.Tests.Integration.Tests
             return services;
         }
 
-        private long GetNumberOfScriptsExecuted(SqliteConnection connection, string metaTableName = "changelog")
+        private static long GetNumberOfScriptsExecuted(SqliteConnection connection, string metaTableName = "changelog")
         {
             var command = new SqliteCommand($"SELECT Count(id) FROM {metaTableName}", connection);
             var res = (long)command.ExecuteScalar();
@@ -141,7 +153,7 @@ namespace GiG.Core.Data.Migration.Tests.Integration.Tests
             return res-1;
         }
 
-        private bool WasTableCreated(SqliteConnection connection, string tableName)
+        private static bool WasTableCreated(SqliteConnection connection, string tableName)
         {
             var sqlCmd = new SqliteCommand($"SELECT name FROM sqlite_master WHERE type = 'table' AND name = '{tableName}'", 
                 connection);

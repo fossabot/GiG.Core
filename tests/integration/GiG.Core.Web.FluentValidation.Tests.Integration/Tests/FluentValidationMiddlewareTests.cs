@@ -22,12 +22,12 @@ namespace GiG.Core.Web.FluentValidation.Tests.Integration.Tests
         }
 
         [Fact]
-        public async Task FluentValidationMiddlewareSetsResponseStatusToBadRequest()
+        public async Task Validation_FluentValidationMiddlewareSetsResponseStatusToBadRequest_ReturnsBadRequestStatus()
         {
             // Arrange
             var client = _server.CreateClient();
 
-            using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/mock");
+            using var request = new HttpRequestMessage(HttpMethod.Get, "/api/mock");
 
             // Act
             using var response = await client.SendAsync(request);
@@ -37,18 +37,16 @@ namespace GiG.Core.Web.FluentValidation.Tests.Integration.Tests
 
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-            Assert.NotEmpty(GetPropertyValue(body.Result, "title"));
-            Assert.NotEmpty(GetPropertyValue(body.Result, "status"));
+            Assert.NotEmpty(GetPropertyValue(body?.Result, "title"));
+            Assert.NotEmpty(GetPropertyValue(body?.Result, "status"));
         }
 
-        private string GetPropertyValue(string json, string propertyName)
+        private static string GetPropertyValue(string json, string propertyName)
         {
-            using (JsonDocument document = JsonDocument.Parse(json))
-            {
-                var properties = document.RootElement.EnumerateObject();
+            using var document = JsonDocument.Parse(json);
+            var properties = document.RootElement.EnumerateObject();
 
-                return properties.FirstOrDefault(x => x.Name.Equals(propertyName)).Value.ToString();
-            }
+            return properties.FirstOrDefault(x => x.Name.Equals(propertyName)).Value.ToString();
         }
     }
 }

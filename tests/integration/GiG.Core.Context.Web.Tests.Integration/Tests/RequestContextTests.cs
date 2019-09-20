@@ -21,18 +21,17 @@ namespace GiG.Core.Context.Web.Tests.Integration.Tests
         }
 
         [Fact]
-        public async Task RequestContext_IPAddress_SameAsXForwardedFor()
+        public async Task RequestContext_IPAddressSameAsXForwardedFor_ReturnsXForwardedFor()
         {
             // Arrange
             var client = _server.CreateClient();
-            var forwardedFor = "10.1.12.15";
+            const string forwardedFor = "10.1.12.15";
 
-            // Act
+            // Act - Assert
             using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/mock");
             request.Headers.Add(ForwardedHeadersDefaults.XForwardedForHeaderName, forwardedFor);
             using var response = await client.SendAsync(request);
 
-            // Assert
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             var ipAddress = await response.Content.ReadAsStringAsync();

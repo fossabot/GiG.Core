@@ -15,24 +15,24 @@ namespace GiG.Core.Web.Hosting.Tests.Integration.Tests
     public class WebHostingMiddlewareTests
     {
         private readonly TestServer _server;
-        private readonly string _pathBase = "/test";
+        private const string PathBase = "/test";
 
         public WebHostingMiddlewareTests()
         {
-            Environment.SetEnvironmentVariable("PATH_BASE", _pathBase);
+            Environment.SetEnvironmentVariable("PATH_BASE", PathBase);
 
             _server = new TestServer(WebHost.CreateDefaultBuilder()
                 .UseStartup<MockStartup>());
         }
 
         [Fact]
-        public async Task WebHostingMiddlewareConfigurePathBase()
+        public async Task RequestPathBase_WebHostingMiddlewareConfigurePathBase_ReturnsPathBase()
         {
             // Arrange
             var client = _server.CreateClient();
 
             // Act
-            using var request = new HttpRequestMessage(HttpMethod.Get, $"{_pathBase}/api/mock");
+            using var request = new HttpRequestMessage(HttpMethod.Get, $"{PathBase}/api/mock");
             using var response = await client.SendAsync(request);
 
             // Assert
@@ -40,18 +40,18 @@ namespace GiG.Core.Web.Hosting.Tests.Integration.Tests
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             var responseValue  = await response.Content.ReadAsStringAsync();
         
-            Assert.Equal(_pathBase, responseValue);
+            Assert.Equal(PathBase, responseValue);
         }
         
         [Fact]
-        public async Task WebHostingMiddlewareConfigureForwardedHeaders()
+        public async Task RequestRemoteIP_WebHostingMiddlewareConfigureForwardedHeaders_ReturnsXForwardedFor()
         {
             // Arrange
             var client = _server.CreateClient();
-            var forwardedFor = "10.1.12.15";
+            const string forwardedFor = "10.1.12.15";
             
             // Act
-            using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/mock/ip");
+            using var request = new HttpRequestMessage(HttpMethod.Get, "/api/mock/ip");
             request.Headers.Add(ForwardedHeadersDefaults.XForwardedForHeaderName, forwardedFor);
             using var response = await client.SendAsync(request);
 
@@ -63,13 +63,13 @@ namespace GiG.Core.Web.Hosting.Tests.Integration.Tests
         }
         
         [Fact]
-        public async Task WebHostingForwardedHeadersNotSet()
+        public async Task RequestRemoteIP_WebHostingForwardedHeadersNotSet_ReturnsNoContentStatus()
         {
             // Arrange
             var client = _server.CreateClient();
             
             // Act
-            using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/mock/ip");
+            using var request = new HttpRequestMessage(HttpMethod.Get, "/api/mock/ip");
             using var response = await client.SendAsync(request);
 
             // Assert
