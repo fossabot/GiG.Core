@@ -1,8 +1,7 @@
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.0.0-rc1 AS base
 ENV COMPlus_ReadyToRun=0
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0.100-rc1 AS build
 WORKDIR /src

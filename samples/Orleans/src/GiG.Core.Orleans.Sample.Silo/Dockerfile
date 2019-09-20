@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0.0-rc1 AS base
+FROM mcr.microsoft.com/dotnet/core/runtime:3.0.0-rc1 AS base
 ENV COMPlus_ReadyToRun=0
 WORKDIR /app
 EXPOSE 8080
