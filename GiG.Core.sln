@@ -208,6 +208,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "performance", "performance"
 		samples\Web\tests\performance\GiG.Core.Web.Sample.Baseline.jmx = samples\Web\tests\performance\GiG.Core.Web.Sample.Baseline.jmx
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "performance", "performance", "{66468249-0BE3-4E03-A5B8-DE350CA051EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Benchmarks", "tests\performance\GiG.Core.Benchmarks\GiG.Core.Benchmarks.csproj", "{43EBE64C-94E1-4C17-A015-399A957331AC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -417,6 +421,10 @@ Global
 		{839C397E-CAAB-44B3-8D99-B48130224403}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{839C397E-CAAB-44B3-8D99-B48130224403}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{839C397E-CAAB-44B3-8D99-B48130224403}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43EBE64C-94E1-4C17-A015-399A957331AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43EBE64C-94E1-4C17-A015-399A957331AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43EBE64C-94E1-4C17-A015-399A957331AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43EBE64C-94E1-4C17-A015-399A957331AC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -500,6 +508,8 @@ Global
 		{A5699BCD-9096-4FC9-8C25-5D01A408E482} = {F61B8500-FA18-43A7-B637-379735C0B141}
 		{839C397E-CAAB-44B3-8D99-B48130224403} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 		{02CB77CD-EBE1-4978-A920-15F20270A28F} = {807ECA6E-BD91-4F04-B213-C500DF38DA43}
+		{66468249-0BE3-4E03-A5B8-DE350CA051EE} = {5915362C-8F1B-4574-92D4-BEF2B1968A17}
+		{43EBE64C-94E1-4C17-A015-399A957331AC} = {66468249-0BE3-4E03-A5B8-DE350CA051EE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}
