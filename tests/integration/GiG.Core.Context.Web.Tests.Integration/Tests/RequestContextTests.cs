@@ -27,11 +27,12 @@ namespace GiG.Core.Context.Web.Tests.Integration.Tests
             var client = _server.CreateClient();
             const string forwardedFor = "10.1.12.15";
 
-            // Act - Assert
+            // Act 
             using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/mock");
             request.Headers.Add(ForwardedHeadersDefaults.XForwardedForHeaderName, forwardedFor);
             using var response = await client.SendAsync(request);
 
+            // Assert
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             var ipAddress = await response.Content.ReadAsStringAsync();

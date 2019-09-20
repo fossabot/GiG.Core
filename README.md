@@ -4,10 +4,10 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 
 ## Docs
 
-* Context
-    * [GiG.Core.Context.Web](docs/GiG.Core.Context.Web.md)
+* Context    
     * [GiG.Core.Context.Orleans](docs/GiG.Core.Context.Orleans.md)
-
+    * [GiG.Core.Context.Web](docs/GiG.Core.Context.Web.md)
+    
 * Data Migration
     * [GiG.Core.Data.Migration](docs/GiG.Core.Data.Migration.md)
 
@@ -32,6 +32,8 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
     * Silo - [GiG.Core.Orleans.Silo](docs/GiG.Core.Orleans.Silo.md)
 
 * Orleans Clustering
+    * Consul.Client - [GiG.Core.Orleans.Clustering.Consul.Client](docs/GiG.Core.Orleans.Clustering.Consul.Client.md)
+    * Consul.Silo - [GiG.Core.Orleans.Clustering.Consul.Silo](docs/GiG.Core.Orleans.Clustering.Consul.Silo.md)
     * Kubernetes.Client - [GiG.Core.Orleans.Clustering.Kubernetes.Client](docs/GiG.Core.Orleans.Clustering.Kubernetes.Client.md)
     * Kubernetes.Silo - [GiG.Core.Orleans.Clustering.Kubernetes.Silo](docs/GiG.Core.Orleans.Clustering.Kubernetes.Silo.md)
 
