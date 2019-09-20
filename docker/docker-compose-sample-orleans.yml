@@ -14,7 +14,7 @@ services:
       - fluentd
       - consul
     ports:
-      - "6000:8080"
+      - "8000:8080"
   
   sample-client:
     image: ${DOCKER_REGISTRY-}gig.core.orleans.sample.client
@@ -32,7 +32,7 @@ services:
       - sample-silo
       - consul
     ports:
-      - "5000:8080"
+      - "7000:8080"
     restart: on-failure
   
   sample-web-ui:
@@ -43,7 +43,7 @@ services:
     depends_on:
       - sample-client
     ports:
-      - "4000:8080"
+      - "5000:8080"
     restart: on-failure
 
   consul:

@@ -1,10 +1,9 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0.0-preview9 AS base
+FROM mcr.microsoft.com/dotnet/core/runtime:3.0.0-rc1 AS base
 ENV COMPlus_ReadyToRun=0
 WORKDIR /app
 EXPOSE 8080
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0.100-preview9 AS build
-ENV DOTNET_ROLL_FORWARD_ON_NO_CANDIDATE_FX=2
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0.100-rc1 AS build
 WORKDIR /src
 COPY ["samples/Orleans/src/GiG.Core.Orleans.Sample.Silo/GiG.Core.Orleans.Sample.Silo.csproj", "samples/Orleans/src/GiG.Core.Orleans.Sample.Silo/"]
 RUN dotnet restore "samples/Orleans/src/GiG.Core.Orleans.Sample.Silo/GiG.Core.Orleans.Sample.Silo.csproj"

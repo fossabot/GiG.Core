@@ -7,8 +7,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.0.0-preview9.19424.4" />
-    <PackageReference Include="System.Text.Json" Version="4.6.0-preview9.19421.4" />
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.0.0-rc1.19457.4" />
+    <PackageReference Include="System.Text.Json" Version="4.6.0-rc1.19456.4" />
     <PackageReference Include="xunit" Version="2.4.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
   </ItemGroup>

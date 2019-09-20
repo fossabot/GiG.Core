@@ -14,7 +14,7 @@ services:
     depends_on:
       - fluentd
     ports:
-      - "5000:8080"
+      - "7000:8080"
   
   sample-web-ui:
     image: ${DOCKER_REGISTRY-}gig.core.web.sample.ui
@@ -24,4 +24,4 @@ services:
     depends_on:
       - sample-client
     ports:
-      - "4000:8080"
+      - "5000:8080"
