@@ -21,7 +21,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
         }
 
         [Fact]
-        public async Task RespondWithHealthyStatusOnCombinedHealthCheck()
+        public async Task CombinedHealthCheck_ReturnsHealthyStatus()
         {
             // Arrange
             var testServer = new TestServer(new WebHostBuilder()
@@ -39,7 +39,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
         }
 
         [Fact]
-        public async Task RespondWithHealthyStatusOnLiveHealthCheck()
+        public async Task LiveHealthCheck_ReturnsHealthyStatus()
         {
             // Arrange
             var testServer = new TestServer(new WebHostBuilder()
@@ -57,7 +57,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
         }
 
         [Fact]
-        public async Task RespondWithHealthyStatusOnReadyHealthCheck()
+        public async Task ReadyHealthCheck_ReturnsHealthyStatus()
         {
             // Arrange
             var testServer = new TestServer(new WebHostBuilder()
@@ -75,7 +75,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
         }
 
         [Fact]
-        public async Task RespondWithHealthyStatusOnCombinedHealthCheckWithCustomUrl()
+        public async Task CombinedHealthCheckWithCustomUrl_ReturnsHealthyStatus()
         {
             // Arrange
             var testServer = new TestServer(new WebHostBuilder()
@@ -93,7 +93,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
         }
 
         [Fact]
-        public async Task RespondWithHealthyStatusOnLiveHealthCheckWithCustomUrl()
+        public async Task LiveHealthCheckWithCustomUrl_ReturnsHealthyStatus()
         {
             // Arrange
             var testServer = new TestServer(new WebHostBuilder()
@@ -111,7 +111,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
         }
 
         [Fact]
-        public async Task RespondWithHealthyStatusOnReadyHealthCheckWithCustomUrl()
+        public async Task ReadyHealthCheckWithCustomUrl_ReturnsHealthyStatus()
         {
             // Arrange
             var testServer = new TestServer(new WebHostBuilder()
@@ -129,7 +129,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
         }
 
         [Fact]
-        public async Task RespondWithUnHealthyStatusOnReadyHealthCheck()
+        public async Task ReadyHealthCheck_ReturnsUnHealthyStatus()
         {
             // Arrange
             var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartupWithDefaultConfiguration>()
@@ -148,7 +148,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
         }
 
         [Fact]
-        public async Task RespondWithUnHealthyStatusOnLiveHealthCheck()
+        public async Task LiveHealthCheck_ReturnsUnHealthyStatus()
         {
             // Arrange
             var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartupWithDefaultConfiguration>()
@@ -167,7 +167,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
         }
 
         [Fact]
-        public async Task RespondWithLiveCheckUnHealthyStatusOnCombinedHealthCheck()
+        public async Task CombinedHealthCheck_ReturnsLiveCheckUnHealthyStatus()
         {
             // Arrange
             var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartupWithDefaultConfiguration>()
@@ -186,7 +186,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
         }
 
         [Fact]
-        public async Task RespondWithReadyCheckUnHealthyStatusOnCombinedHealthCheck()
+        public async Task CombinedHealthCheck_ReturnsReadyCheckUnHealthyStatus()
         {
             // Arrange
             var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartupWithDefaultConfiguration>()

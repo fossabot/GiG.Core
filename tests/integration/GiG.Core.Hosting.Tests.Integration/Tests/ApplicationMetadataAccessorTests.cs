@@ -14,11 +14,11 @@ namespace GiG.Core.Hosting.Tests.Integration.Tests
 
         public ApplicationMetadataAccessorTests()
         {
-            var _host = Host.CreateDefaultBuilder()
+            var host = Host.CreateDefaultBuilder()
                            .UseApplicationMetadata()
                            .Build();
 
-            _applicationMetadataAccessor = _host.Services.GetRequiredService<IApplicationMetadataAccessor>();
+            _applicationMetadataAccessor = host.Services.GetRequiredService<IApplicationMetadataAccessor>();
         }
 
         [Fact]

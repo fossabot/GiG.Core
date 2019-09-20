@@ -18,7 +18,7 @@ namespace GiG.Core.Configuration.Tests.Integration.Tests
         }
         
         [Fact] 
-        public void OverrideConfigurationWithEnvironmentVariable()
+        public void GetValue_ConfigurationWithEnvironmentVariablesOverride_ReturnsOverride()
         {
             // Arrange
             const string expected = "Environment";
@@ -28,15 +28,15 @@ namespace GiG.Core.Configuration.Tests.Integration.Tests
             var host = Host.CreateDefaultBuilder()
                 .ConfigureExternalConfiguration()
                 .Build();
-
+            
             var configuration = host.Services.GetRequiredService<IConfiguration>();
 
-            // Assert
+            // Act - Assert
             Assert.Equal(expected, configuration.GetValue<string>(ConfigurationSectionName));           
         }
 
         [Fact]
-        public void OverrideConfigurationWithAppSettingsOverride()
+        public void GetValue_ConfigurationWithAppSettingsOverride_ReturnsOverride()
         {
             // Arrange
             const string expected = "Override";
@@ -44,30 +44,30 @@ namespace GiG.Core.Configuration.Tests.Integration.Tests
             var host = Host.CreateDefaultBuilder()
                 .ConfigureExternalConfiguration()
                 .Build();
-
+            
             var configuration = host.Services.GetRequiredService<IConfiguration>();
 
-            // Assert
+            // Act - Assert
             Assert.Equal(expected, configuration.GetValue<string>(ConfigurationSectionName));
         }
 
         [Fact]
-        public void UseDefaultConfigurationWithOutAppSettingsOverride()
+        public void GetValue_ConfigurationWithOutAppSettingsOverride_ReturnsDefault()
         {
             // Arrange
-            var expected = "AppSettings";
+            const string expected = "AppSettings";
 
             var host = Host.CreateDefaultBuilder()               
                 .Build();
-
+            
             var configuration = host.Services.GetRequiredService<IConfiguration>();
 
-            // Assert
+            // Act - Assert
             Assert.Equal(expected, configuration.GetValue<string>(ConfigurationSectionName));
         }
 
         [Fact]
-        public void GetDefaultConfigurationWhenPropertyIsNotInAppSettingsOverride()
+        public void GetValue_WhenPropertyIsNotInAppSettingsOverride_ReturnsDefault()
         {
             // Arrange
             const string expected = "Debug";
@@ -79,7 +79,7 @@ namespace GiG.Core.Configuration.Tests.Integration.Tests
 
             var configuration = host.Services.GetRequiredService<IConfiguration>();
 
-            // Assert
+            // Act - Assert
             Assert.Equal(expected, configuration.GetValue<string>(logLevelName));
         }
     }

@@ -24,15 +24,15 @@ namespace GiG.Core.MultiTenant.Web.Tests.Integration.Tests
         }      
 
         [Fact]
-        public async Task TenantMatchesRequestHeader()
+        public async Task TenantIdValue_TenantIdMatchesRequestHeader()
         {
             // Arrange
             var client = _server.CreateClient();
 
-            var tenantId = "1";
+            const string tenantId = "1";
             client.DefaultRequestHeaders.Add(Constants.Header, tenantId);
 
-            using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/mock");
+            using var request = new HttpRequestMessage(HttpMethod.Get, "/api/mock");
             using var response = await client.SendAsync(request);
 
             var content = await response.Content.ReadAsStringAsync();
@@ -45,16 +45,16 @@ namespace GiG.Core.MultiTenant.Web.Tests.Integration.Tests
         }
 
         [Fact]
-        public async Task DuplicateTenantToSingleRequestHeader()
+        public async Task TenantIdValue_DuplicateTenantToSingleRequestHeader()
         {
             // Arrange
             var client = _server.CreateClient();
 
-            var tenantId = "1";
+            const string tenantId = "1";
             client.DefaultRequestHeaders.Add(Constants.Header, tenantId);
             client.DefaultRequestHeaders.Add(Constants.Header, tenantId);
 
-            using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/mock");
+            using var request = new HttpRequestMessage(HttpMethod.Get, "/api/mock");
             using var response = await client.SendAsync(request);
 
             var content = await response.Content.ReadAsStringAsync();
@@ -68,17 +68,17 @@ namespace GiG.Core.MultiTenant.Web.Tests.Integration.Tests
         }
 
         [Fact]
-        public async Task DifferentTenantsInRequestHeader()
+        public async Task TenantIdValue_DifferentTenantsInRequestHeader()
         {
             // Arrange
             var client = _server.CreateClient();
 
-            var listTenants =  new List<string>() { "1", "2" };
+            var listTenants =  new List<string> { "1", "2" };
    
             client.DefaultRequestHeaders.Add(Constants.Header, listTenants.First());
             client.DefaultRequestHeaders.Add(Constants.Header, listTenants.Last());
 
-            using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/mock");
+            using var request = new HttpRequestMessage(HttpMethod.Get, "/api/mock");
             using var response = await client.SendAsync(request);
 
             var content = await response.Content.ReadAsStringAsync();
@@ -93,7 +93,7 @@ namespace GiG.Core.MultiTenant.Web.Tests.Integration.Tests
         }
 
         [Fact]
-        public async Task EmptyTenantToNoRequestHeader()
+        public async Task TenantIdValue_EmptyTenantToNoRequestHeader()
         {
             // Arrange
             var client = _server.CreateClient();
@@ -102,7 +102,7 @@ namespace GiG.Core.MultiTenant.Web.Tests.Integration.Tests
             client.DefaultRequestHeaders.Add(Constants.Header, tenantId);
             client.DefaultRequestHeaders.Add(Constants.Header, tenantId);
 
-            using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/mock");
+            using var request = new HttpRequestMessage(HttpMethod.Get, "/api/mock");
             using var response = await client.SendAsync(request);
 
             var content = await response.Content.ReadAsStringAsync();
