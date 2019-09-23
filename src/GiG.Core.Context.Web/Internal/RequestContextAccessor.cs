@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using System.Net;
 
-namespace GiG.Core.Request.Web.Internal
+namespace GiG.Core.Context.Web.Internal
 {
     internal class RequestContextAccessor : IRequestContextAccessor
     {
