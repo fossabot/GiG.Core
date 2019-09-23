@@ -7,24 +7,27 @@ This Library provides an API to register an Orleans Silo running on Consul.
 Add the below to your Startup class and this will register an Orleans Silo running on Consul.
 
 ```csharp
-
-        public static void Main()
+		
+	public class Program
+    {
+        public static void Main(string[] args)
         {
-            new HostBuilder()
-                .ConfigureServices(services => services.AddCorrelationAccessor())
-                .UseOrleans(ConfigureOrleans)
-                .Build()
-                .Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
-        private static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builder)
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)                                
+                .ConfigureServices(Startup.ConfigureServices)
+                .UseOrleans(ConfigureOrleans);
+
+		public static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builder)
         {
             builder.ConfigureCluster(ctx.Configuration)
-                .ConfigureDashboard(ctx.Configuration)
                 .ConfigureEndpoints()
                 .ConfigureConsulClustering(ctx.Configuration)
                 .AddAssemblies(typeof(Grain));
         }
+    }
         
 ```
 

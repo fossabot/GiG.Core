@@ -4,7 +4,6 @@ using GiG.Core.DistributedTracing.Orleans.Extensions;
 using GiG.Core.Hosting.Extensions;
 using GiG.Core.Logging.All.Extensions;
 using Microsoft.Extensions.Hosting;
-using Orleans.Hosting;
 
 
 namespace GiG.Core.Orleans.Sample.Silo
@@ -13,9 +12,7 @@ namespace GiG.Core.Orleans.Sample.Silo
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args)
-                .Build()
-                .Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
