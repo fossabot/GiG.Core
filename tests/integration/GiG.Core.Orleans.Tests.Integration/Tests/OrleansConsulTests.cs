@@ -67,6 +67,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
 
             foreach (var value in results)
             {
+                //consul returns api result as base 64 encoded strings
                 var base64EncodedBytes = Convert.FromBase64String(value.Value);
                 var decodedTxt = System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
 

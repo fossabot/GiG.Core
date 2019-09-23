@@ -1,3 +1,4 @@
+using Bogus;
 using GiG.Core.Orleans.Client.Extensions;
 using GiG.Core.Orleans.Clustering.Consul.Client.Extensions;
 using GiG.Core.Orleans.Clustering.Consul.Silo.Extensions;
@@ -7,11 +8,10 @@ using GiG.Core.Orleans.Tests.Integration.Grains;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Orleans;
-using System;
-using System.Net.Http;
-using Bogus;
 using Orleans.Configuration;
 using Orleans.Hosting;
+using System;
+using System.Net.Http;
 
 namespace GiG.Core.Orleans.Tests.Integration.Fixtures
 {
