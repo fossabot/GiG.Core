@@ -3,6 +3,7 @@ using GiG.Core.Context.Web.Extensions;
 using GiG.Core.DistributedTracing.Web.Extensions;
 using GiG.Core.Hosting.Extensions;
 using GiG.Core.Logging.All.Extensions;
+using GiG.Core.MultiTenant.Web.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
@@ -20,6 +21,7 @@ namespace GiG.Core.Web.Sample
                 .UseApplicationMetadata()
                 .ConfigureServices(x => {
                     x.AddCorrelationId();
+                    x.AddTenantAccessor();
                     x.AddRequestContextAccessor();
                 })
                 .ConfigureExternalConfiguration()

@@ -8,6 +8,7 @@ using GiG.Core.Logging.Sinks.Fluentd.Extensions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Hosting;
 using System;
+using GiG.Core.Logging.Enrichers.MultiTenant.Extensions;
 
 namespace GiG.Core.Logging.All.Extensions
 {
@@ -32,6 +33,7 @@ namespace GiG.Core.Logging.All.Extensions
                 .WriteToFluentd()
                 .EnrichWithApplicationMetadata()
                 .EnrichWithCorrelationId()
+                .EnrichWithTenantId()
                 .EnrichWithRequestContext()
                 , sectionName);
         }
