@@ -9,7 +9,7 @@ using System;
 namespace GiG.Core.Context.Orleans.Extensions
 {
     /// <summary>
-    /// Reqeust Context Client Builder Extensions.
+    /// Request Context Client Builder Extensions.
     /// </summary>
     public static class ClientBuilderExtensions
     {
