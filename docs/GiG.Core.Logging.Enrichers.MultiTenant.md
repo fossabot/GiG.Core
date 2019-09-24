@@ -19,10 +19,7 @@ Make use of `EnrichWithTenantId()` when configuring logging. The Enricher depend
 
         private static IHostBuilder CreateHostBuilder()
         {
-            return new HostBuilder()
-                .ConfigureHostConfiguration(builder => builder
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true))
+            return Host.CreateDefaultBuilder()
 				.ConfigureServices(x => {
 					x.AddTenantAccessor();
 				})
