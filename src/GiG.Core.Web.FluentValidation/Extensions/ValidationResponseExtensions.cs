@@ -13,8 +13,7 @@ namespace GiG.Core.Web.FluentValidation.Extensions
         {
             using (var stream = new MemoryStream())
             {
-                var writerOptions = new JsonWriterOptions();
-                writerOptions.Encoder = javaScriptEncoder ?? JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
+                var writerOptions = new JsonWriterOptions {Encoder = javaScriptEncoder ?? JavaScriptEncoder.UnsafeRelaxedJsonEscaping};
 
                 using (var writer = new Utf8JsonWriter(stream, writerOptions))
                 {

@@ -1,5 +1,5 @@
 ﻿using GiG.Core.Context.Abstractions;
-using GiG.Core.Request.Web.Internal;
+using GiG.Core.Context.Web.Internal;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
