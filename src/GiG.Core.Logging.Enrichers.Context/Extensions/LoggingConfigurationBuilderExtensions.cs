@@ -16,7 +16,7 @@ namespace GiG.Core.Logging.Enrichers.Context.Extensions
         /// Enrich log events with a Request Context info.
         /// </summary>
         /// <param name="builder">Logging enrichment configuration.</param>
-        /// <returns>Configuration object allowing method chaining.</returns>
+        /// <returns><see cref="LoggingConfigurationBuilder" /> object allowing method chaining.</returns>
         public static LoggingConfigurationBuilder EnrichWithRequestContext(
             [NotNull] this LoggingConfigurationBuilder builder)
         {

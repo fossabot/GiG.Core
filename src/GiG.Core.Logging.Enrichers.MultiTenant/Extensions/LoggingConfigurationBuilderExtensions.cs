@@ -1,9 +1,9 @@
-﻿using System;
-using GiG.Core.Logging.Abstractions;
+﻿using GiG.Core.Logging.Abstractions;
 using GiG.Core.Logging.Enrichers.MultiTenant.Internal;
 using GiG.Core.MultiTenant.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace GiG.Core.Logging.Enrichers.MultiTenant.Extensions
 {
