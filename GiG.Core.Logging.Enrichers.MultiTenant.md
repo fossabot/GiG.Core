@@ -26,7 +26,7 @@ Make use of `WriteToFluentd()` when configuring logging. The Enricher depends on
 				.ConfigureServices(x => {
                     x.AddTenantAccessor();;
                 })
-                .ConfigureLogging(x =>
+				.ConfigureLogging(x =>
 				{
 					x.WriteToFluentd();
 				});
