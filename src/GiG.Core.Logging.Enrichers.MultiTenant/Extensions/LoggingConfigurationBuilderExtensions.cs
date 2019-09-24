@@ -15,8 +15,8 @@ namespace GiG.Core.Logging.Enrichers.MultiTenant.Extensions
         /// <summary>
         /// Enrich log events with a Tenant ID.
         /// </summary>
-        /// <param name="builder">Logging enrichment configuration.</param>
-        /// <returns>Configuration object allowing method chaining.</returns>
+        /// <param name="builder">The delegate for configuring the <see cref="LoggingConfigurationBuilder" />.</param>
+        /// <returns><see cref="LoggingConfigurationBuilder" /> object allowing method chaining.</returns>
         public static LoggingConfigurationBuilder EnrichWithTenantId(
             [NotNull] this LoggingConfigurationBuilder builder)
         {

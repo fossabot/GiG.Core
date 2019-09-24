@@ -15,8 +15,8 @@ namespace GiG.Core.Logging.Enrichers.DistributedTracing.Extensions
         /// <summary>
         /// Enrich log events with a Correlation ID.
         /// </summary>
-        /// <param name="builder">Logging enrichment configuration.</param>
-        /// <returns>Configuration object allowing method chaining.</returns>
+        /// <param name="builder">The delegate for configuring the <see cref="LoggingConfigurationBuilder" />.</param>
+        /// <returns><see cref="LoggingConfigurationBuilder" /> object allowing method chaining.</returns>
         public static LoggingConfigurationBuilder EnrichWithCorrelationId(
             [NotNull] this LoggingConfigurationBuilder builder)
         {
