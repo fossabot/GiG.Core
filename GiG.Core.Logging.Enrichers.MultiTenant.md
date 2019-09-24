@@ -1,7 +1,7 @@
 # GiG.Core.Logging.Enrichers.MultiTenant
 
-This Library provides an API to register Tenant Id Enricher for Logging using Serilog.
-When using this Library your application will enrich logs with a TenantId property if a TenantId is present in request headers.
+This Library provides an API to register Tenant Id Enricher for Logging when using Serilog.
+When using this Library your application will enrich logs with a TenantId property if an 'X-Tenant-ID' is present in request headers.
 
 ## Basic Usage
 
