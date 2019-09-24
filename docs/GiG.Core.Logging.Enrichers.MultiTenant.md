@@ -5,7 +5,7 @@ When using this Library your application will enrich logs with a TenantId proper
 
 ## Basic Usage
 
-Make use of `WriteToFluentd()` when configuring logging. The Enricher depends on 'GiG.Core.MultiTenant.Abstractions.ITenantAccessor'.
+Make use of `EnrichWithTenantId()` when configuring logging. The Enricher depends on 'GiG.Core.MultiTenant.Abstractions.ITenantAccessor'.
 
 
 ```csharp
@@ -28,7 +28,7 @@ Make use of `WriteToFluentd()` when configuring logging. The Enricher depends on
 				})
 				.ConfigureLogging(x =>
 				{
-					x.WriteToFluentd();
+					x.EnrichWithTenantId();
 				});
         }
     }

@@ -23,7 +23,7 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 * Logging
     * [GiG.Core.Logging](docs/GiG.Core.Logging.md)
     * [GiG.Core.Logging.All](docs/GiG.Core.Logging.All.md)
-	* [GiG.Core.Logging.Enrichers.MultiTenant](docs/GiG.Core.Logging.Enrichers.MultiTenant.md)
+    * [GiG.Core.Logging.Enrichers.MultiTenant](docs/GiG.Core.Logging.Enrichers.MultiTenant.md)
 
 * Multi Tenancy
     * [GiG.Core.MultiTenant.Web](docs/GiG.Core.MultiTenant.Web.md)
