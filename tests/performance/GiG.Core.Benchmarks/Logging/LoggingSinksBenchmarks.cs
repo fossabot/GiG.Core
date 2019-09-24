@@ -8,7 +8,8 @@ using Microsoft.Extensions.Logging;
 namespace GiG.Core.Benchmarks.Logging
 {
     [BenchmarkCategory("Logging")]
-    public class ConsoleVsFluentd
+    [MemoryDiagnoser]
+    public class LoggingSinksBenchmarks
     {
         private IHost _consoleHost;
         private IHost _fluentDHost;
@@ -35,7 +36,7 @@ namespace GiG.Core.Benchmarks.Logging
         [Benchmark]
         public void LogToConsole()
         {
-            var consoleLogger = _consoleHost.Services.GetRequiredService<ILogger<ConsoleVsFluentd>>();
+            var consoleLogger = _consoleHost.Services.GetRequiredService<ILogger<LoggingSinksBenchmarks>>();
 
             // Log to console
             for (var i = 0; i < LogCount; i++)
@@ -47,19 +48,13 @@ namespace GiG.Core.Benchmarks.Logging
         [Benchmark]
         public void LogToFluentD()
         {
-            var fluentDLogger = _fluentDHost.Services.GetRequiredService<ILogger<ConsoleVsFluentd>>();
+            var fluentDLogger = _fluentDHost.Services.GetRequiredService<ILogger<LoggingSinksBenchmarks>>();
 
             // Log to fluentd
             for (var i = 0; i < LogCount; i++)
             {
                 fluentDLogger.LogInformation("Test Fluentd");
             }
-        }
-
-        [GlobalCleanup]
-        public void TearDown()
-        {
-
         }
     }
 }

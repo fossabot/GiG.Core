@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 namespace GiG.Core.Benchmarks.Logging
 {
     [BenchmarkCategory("Logging")]
-    public class WithinVsOutsideLogLevel
+    public class LoggingLevelsBenchmarks
     {
         public IHost ConsoleHost { get; private set; }
 
@@ -25,7 +25,7 @@ namespace GiG.Core.Benchmarks.Logging
         [Benchmark]
         public void LogOutsideLevel()
         {
-            var consoleLogger = ConsoleHost.Services.GetRequiredService<ILogger<WithinVsOutsideLogLevel>>();
+            var consoleLogger = ConsoleHost.Services.GetRequiredService<ILogger<LoggingLevelsBenchmarks>>();
 
             // Log to console
             for (var i = 0; i < 1000; i++)
@@ -37,19 +37,13 @@ namespace GiG.Core.Benchmarks.Logging
         [Benchmark]
         public void LogWithinLevel()
         {
-            var consoleLogger = ConsoleHost.Services.GetRequiredService<ILogger<WithinVsOutsideLogLevel>>();
+            var consoleLogger = ConsoleHost.Services.GetRequiredService<ILogger<LoggingLevelsBenchmarks>>();
 
             // Log to console
             for (var i = 0; i < 1000; i++)
             {
                 consoleLogger.LogError("Test Within Level");
             }
-        }
-
-        [GlobalCleanup]
-        public void TearDown()
-        {
-
         }
     }
 }
