@@ -1,7 +1,9 @@
 using GiG.Core.Context.Orleans.Extensions;
 using GiG.Core.DistributedTracing.Orleans.Extensions;
 using GiG.Core.Orleans.Client.Extensions;
+using GiG.Core.Orleans.Clustering.Client.Extensions;
 using GiG.Core.Orleans.Clustering.Consul.Client.Extensions;
+using GiG.Core.Orleans.Clustering.Kubernetes.Client.Extensions;
 using GiG.Core.Orleans.Sample.Contracts;
 using GiG.Core.Web.Docs.Extensions;
 using GiG.Core.Web.Hosting.Extensions;
@@ -23,13 +25,17 @@ namespace GiG.Core.Orleans.Sample.Client
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddClusterClient((x, sp) =>
+            services.AddClusterClient((builder, sp) =>
             {
-                x.AddCorrelationOutgoingFilter(sp);
-                x.AddRequestContextOutgoingFilter(sp);
-                x.ConfigureCluster(_configuration);
-                x.ConfigureConsulClustering(_configuration);
-                x.AddAssemblies(typeof(ITransactionGrain));
+                builder.AddCorrelationOutgoingFilter(sp);
+                builder.AddRequestContextOutgoingFilter(sp);
+                builder.ConfigureCluster(_configuration);
+                builder.UseMembershipProvider(_configuration, x =>
+                {
+                    x.ConfigureConsulClustering(_configuration);
+                    x.ConfigureKubernetesClustering(_configuration);
+                });
+                builder.AddAssemblies(typeof(ITransactionGrain));
             });
 
             services.AddControllers();

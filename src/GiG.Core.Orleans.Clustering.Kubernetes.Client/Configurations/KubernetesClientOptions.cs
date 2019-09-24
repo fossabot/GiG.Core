@@ -9,9 +9,9 @@
         /// Default configuration section name.
         /// </summary>
         /// <remarks>
-        /// The default value is <c>"Orleans:Kubernetes"</c>
+        /// The default value is <c>"Orleans:MembershipProvider"</c>
         /// </remarks>
-        public const string DefaultSectionName = "Orleans:Kubernetes";
+        public const string DefaultSectionName = MembershipProviderOptions.DefaultSectionName;
 
         /// <summary>
         /// Custom Resource Definition Group name.
