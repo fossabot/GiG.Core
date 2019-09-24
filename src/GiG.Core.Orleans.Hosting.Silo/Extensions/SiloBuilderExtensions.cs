@@ -105,7 +105,7 @@ namespace GiG.Core.Orleans.Hosting.Silo.Extensions
         /// </summary>
         /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
         /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
-        public static ISiloBuilder ConfigureEndpoints([NotNull] this ISiloBuilder builder)
+        public static ISiloBuilder ConfigureEndpoints([NotNull] this ISiloBuilder builder, int siloPort = EndpointOptions.DEFAULT_SILO_PORT, int gatewayPort = EndpointOptions.DEFAULT_GATEWAY_PORT)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             
@@ -115,8 +115,8 @@ namespace GiG.Core.Orleans.Hosting.Silo.Extensions
             return builder.Configure((EndpointOptions options) =>
             {
                 options.AdvertisedIPAddress = siloAddress;
-                options.SiloPort = EndpointOptions.DEFAULT_SILO_PORT;
-                options.GatewayPort = EndpointOptions.DEFAULT_GATEWAY_PORT;
+                options.SiloPort = siloPort;
+                options.GatewayPort = gatewayPort;
             });
         }
 

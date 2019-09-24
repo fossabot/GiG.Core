@@ -32,6 +32,8 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
     * Silo - [GiG.Core.Orleans.Silo](docs/GiG.Core.Orleans.Silo.md)
 
 * Orleans Clustering
+	* Clustering.Client - [GiG.Core.Orleans.Clustering.Client](docs/GiG.Core.Orleans.Clustering.Client.md)
+    * Clustering.Silo - [GiG.Core.Orleans.Clustering.Silo](docs/GiG.Core.Orleans.Clustering.Silo.md)
     * Consul.Client - [GiG.Core.Orleans.Clustering.Consul.Client](docs/GiG.Core.Orleans.Clustering.Consul.Client.md)
     * Consul.Silo - [GiG.Core.Orleans.Clustering.Consul.Silo](docs/GiG.Core.Orleans.Clustering.Consul.Silo.md)
     * Kubernetes.Client - [GiG.Core.Orleans.Clustering.Kubernetes.Client](docs/GiG.Core.Orleans.Clustering.Kubernetes.Client.md)

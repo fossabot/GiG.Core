@@ -5,9 +5,9 @@ using Xunit;
 namespace GiG.Core.Orleans.Tests.Integration.Tests
 {
     [Trait("Category", "IntegrationWithDependency")]
-    public class OrleansConsulTests : AbstractConsulTests, IClassFixture<ConsulClusterFixture>
+    public class OrleansMembershipProviderConsulTests : AbstractConsulTests, IClassFixture<MembershipProviderFixture>
     {
-        public OrleansConsulTests(ConsulClusterFixture consulClusterFixture)
+        public OrleansMembershipProviderConsulTests(MembershipProviderFixture consulClusterFixture)
         {
             _siloName = consulClusterFixture.SiloName;
             _clusterClient = consulClusterFixture.ClusterClient;
@@ -15,6 +15,6 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
 
             var options = consulClusterFixture.ConsulOptions.Value;
             _consulKVStoreBaseAddress = $"{options.Address}/v1/kv/{options.KvRootFolder}/";
-        }    
+        }
     }
 }
