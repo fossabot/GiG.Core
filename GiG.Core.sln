@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.HealthChecks.md = docs\GiG.Core.HealthChecks.md
 		docs\GiG.Core.Hosting.md = docs\GiG.Core.Hosting.md
 		docs\GiG.Core.Logging.All.md = docs\GiG.Core.Logging.All.md
-		GiG.Core.Logging.Enrichers.MultiTenant.md = GiG.Core.Logging.Enrichers.MultiTenant.md
+		docs\GiG.Core.Logging.Enrichers.MultiTenant.md = docs\GiG.Core.Logging.Enrichers.MultiTenant.md
 		docs\GiG.Core.Logging.md = docs\GiG.Core.Logging.md
 		docs\GiG.Core.MultiTenant.Web.md = docs\GiG.Core.MultiTenant.Web.md
 		docs\GiG.Core.Orleans.Client.md = docs\GiG.Core.Orleans.Client.md
@@ -215,7 +215,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Logging.Enrichers.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "performance", "performance", "{66468249-0BE3-4E03-A5B8-DE350CA051EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Benchmarks", "tests\performance\GiG.Core.Benchmarks\GiG.Core.Benchmarks.csproj", "{43EBE64C-94E1-4C17-A015-399A957331AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Benchmarks", "tests\performance\GiG.Core.Benchmarks\GiG.Core.Benchmarks.csproj", "{43EBE64C-94E1-4C17-A015-399A957331AC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "benchmarks", "benchmarks", "{8A64AE64-5734-41A3-9D3A-B6F2B0248ECE}"
 EndProject
