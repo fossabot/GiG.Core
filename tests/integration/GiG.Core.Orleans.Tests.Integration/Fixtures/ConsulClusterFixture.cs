@@ -1,5 +1,6 @@
 using Bogus;
 using GiG.Core.Orleans.Client.Extensions;
+using GiG.Core.Orleans.Clustering.Consul.Client.Configurations;
 using GiG.Core.Orleans.Clustering.Consul.Client.Extensions;
 using GiG.Core.Orleans.Clustering.Consul.Silo.Extensions;
 using GiG.Core.Orleans.Hosting.Silo.Extensions;
@@ -7,6 +8,7 @@ using GiG.Core.Orleans.Tests.Integration.Contracts;
 using GiG.Core.Orleans.Tests.Integration.Grains;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Orleans;
 using Orleans.Configuration;
 using Orleans.Hosting;
@@ -17,6 +19,8 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
 {
     public class ConsulClusterFixture
     {
+        internal readonly IOptions<ConsulOptions> ConsulOptions;
+
         internal readonly IHttpClientFactory HttpClientFactory;
 
         internal readonly IClusterClient ClusterClient;
@@ -45,6 +49,8 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
             var clientHost = Host.CreateDefaultBuilder()
                 .ConfigureServices((ctx, services) =>
                 {
+                    services.Configure<ConsulOptions>(ctx.Configuration);
+
                     services.AddHttpClient();
                     services.AddClusterClient(x =>
                     {
@@ -57,9 +63,11 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
 
             ClientServiceProvider = clientHost.Services;
 
-            HttpClientFactory = ClientServiceProvider.GetService<IHttpClientFactory>();
+            HttpClientFactory = ClientServiceProvider.GetRequiredService<IHttpClientFactory>();
 
             ClusterClient = ClientServiceProvider.GetRequiredService<IClusterClient>();
+
+            ConsulOptions = ClientServiceProvider.GetRequiredService<IOptions<ConsulOptions>>();
         }
     }
 }

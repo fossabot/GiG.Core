@@ -16,11 +16,15 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
     public class OrleansConsulTests : IClassFixture<ConsulClusterFixture>
     {
         private readonly ConsulClusterFixture _consulClusterFixture;
-        private const string ConsulKVStoreBaseAddress = "http://localhost:8500/v1/kv/";
+        private readonly string ConsulKVStoreBaseAddress;
 
         public OrleansConsulTests(ConsulClusterFixture consulClusterFixture)
         {
             _consulClusterFixture = consulClusterFixture;
+
+            var options = _consulClusterFixture.ConsulOptions.Value;
+
+            ConsulKVStoreBaseAddress = $"{options.Address}/v1/kv/{options.KvRootFolder}/";
         }
 
         [Fact]
@@ -45,10 +49,10 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             var expectedSiloName = _consulClusterFixture.SiloName;
 
             //Act
-            var client = _consulClusterFixture.HttpClientFactory.CreateClient();
+            using var client = _consulClusterFixture.HttpClientFactory.CreateClient();
             client.BaseAddress = new Uri(ConsulKVStoreBaseAddress);
             
-            var result = await client.GetStringAsync("dev/orleans/dev?recurse=true");
+            var result = await client.GetStringAsync("orleans/dev?recurse=true");
 
             //Assert
             var results = JsonSerializer.Deserialize<IEnumerable<KVStoreResult>>(result);
