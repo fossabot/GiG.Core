@@ -12,13 +12,14 @@ namespace GiG.Core.Orleans.Sample.Client.Controllers
     public class TransactionsController : ControllerBase
     {
         private const decimal MinimumAmount = 10;
-        private const string PlayerId = "player1";
 
         private readonly IClusterClient _clusterClient;
+        private readonly IPlayerInformationAccessor _playerInformationAccessor;
 
-        public TransactionsController(IClusterClient clusterClient)
+        public TransactionsController(IClusterClient clusterClient, IPlayerInformationAccessor playerInformationAccessor)
         {
             _clusterClient = clusterClient;
+            _playerInformationAccessor = playerInformationAccessor;
         }
 
         /// <summary>
@@ -28,7 +29,7 @@ namespace GiG.Core.Orleans.Sample.Client.Controllers
         [HttpGet("balance")]
         public async Task<ActionResult<decimal>> Get()
         {
-            var balance = await _clusterClient.GetGrain<ITransactionGrain>(PlayerId).GetBalance();
+            var balance = await _clusterClient.GetGrain<ITransactionGrain>(_playerInformationAccessor.PlayerId).GetBalance();
 
             return Ok(balance);
         }
@@ -48,7 +49,7 @@ namespace GiG.Core.Orleans.Sample.Client.Controllers
                 return BadRequest($"Deposit Amount must be greater than {MinimumAmount}.");
             }
 
-            var balance = await _clusterClient.GetGrain<ITransactionGrain>(PlayerId).Deposit(request.Amount);
+            var balance = await _clusterClient.GetGrain<ITransactionGrain>(_playerInformationAccessor.PlayerId).Deposit(request.Amount);
 
             return Ok(balance);
         }
@@ -63,7 +64,7 @@ namespace GiG.Core.Orleans.Sample.Client.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<decimal>> Withdraw(TransactionRequest request)
         {
-            var grain = _clusterClient.GetGrain<ITransactionGrain>(PlayerId);
+            var grain = _clusterClient.GetGrain<ITransactionGrain>(_playerInformationAccessor.PlayerId);
 
             if (request.Amount > await grain.GetBalance())
             {
