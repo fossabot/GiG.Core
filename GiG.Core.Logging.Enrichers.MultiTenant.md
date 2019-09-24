@@ -24,8 +24,8 @@ Make use of `WriteToFluentd()` when configuring logging. The Enricher depends on
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true))
 				.ConfigureServices(x => {
-                    x.AddTenantAccessor();
-                })
+					x.AddTenantAccessor();
+				})
 				.ConfigureLogging(x =>
 				{
 					x.WriteToFluentd();
