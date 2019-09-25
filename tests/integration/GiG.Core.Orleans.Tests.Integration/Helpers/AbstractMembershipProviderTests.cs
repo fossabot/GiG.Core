@@ -10,19 +10,19 @@ namespace GiG.Core.Orleans.Tests.Integration.Helpers
 {
     public abstract class AbstractMembershipProviderTests
     {
-        protected IHostBuilder _hostBuilder;
+        protected IHostBuilder HostBuilder { get; set; }
         
         [Fact]
         public void UseMembershipProvider_GetsProviderName_ThrowsConfigurationExceptionNoProviderFound()
         {
             //Arrange
-            _hostBuilder.ConfigureAppConfiguration(x => x.AddInMemoryCollection(new Dictionary<string, string>
+            HostBuilder.ConfigureAppConfiguration(x => x.AddInMemoryCollection(new Dictionary<string, string>
             {
                 { "Orleans:MembershipProvider:Name", String.Empty }
             }));
 
             //Act & Assert
-            var exception = Assert.Throws<ConfigurationErrorsException>(() => _hostBuilder.Build());
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => HostBuilder.Build());
 
             Assert.Equal($"No Orleans Membership Provider was specified in the configuration section {MembershipProviderOptions.DefaultSectionName}", exception.Message);
         }
@@ -31,13 +31,13 @@ namespace GiG.Core.Orleans.Tests.Integration.Helpers
         public void UseMembershipProvider_GetsProviderName_ThrowsConfigurationExceptionProviderRegistrationNotFound()
         {
             //Arrange
-            _hostBuilder.ConfigureAppConfiguration(x => x.AddInMemoryCollection(new Dictionary<string, string>
+            HostBuilder.ConfigureAppConfiguration(x => x.AddInMemoryCollection(new Dictionary<string, string>
             {
                 { "Orleans:MembershipProvider:Name", "NoProviderName" }
             }));
 
             //Act & Assert
-            var exception = Assert.Throws<ConfigurationErrorsException>(() => _hostBuilder.Build());
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => HostBuilder.Build());
 
             Assert.Equal($"No Orleans Membership Providers were registered from the configuration section {MembershipProviderOptions.DefaultSectionName}", exception.Message);
         }        

@@ -9,12 +9,12 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
     {
         public OrleansMembershipProviderConsulTests(MembershipProviderFixture consulClusterFixture)
         {
-            _siloName = consulClusterFixture.SiloName;
-            _clusterClient = consulClusterFixture.ClusterClient;
-            _httpClientFactory = consulClusterFixture.HttpClientFactory;
+            SiloName = consulClusterFixture.SiloName;
+            ClusterClient = consulClusterFixture.ClusterClient;
+            HttpClientFactory = consulClusterFixture.HttpClientFactory;
 
             var options = consulClusterFixture.ConsulOptions.Value;
-            _consulKVStoreBaseAddress = $"{options.Address}/v1/kv/{options.KvRootFolder}/";
+            ConsulKvStoreBaseAddress = $"{options.Address}/v1/kv/{options.KvRootFolder}/";
         }
     }
 }

@@ -14,16 +14,16 @@ namespace GiG.Core.Orleans.Tests.Integration.Helpers
 {
     public abstract class AbstractConsulTests
     {
-        protected string _siloName;
-        protected IClusterClient _clusterClient;
-        protected IHttpClientFactory _httpClientFactory;
-        protected string _consulKVStoreBaseAddress;
-       
+        protected string SiloName { get; set; }
+        protected IClusterClient ClusterClient { get; set; }
+        protected IHttpClientFactory HttpClientFactory { get; set; }
+        protected string ConsulKvStoreBaseAddress { get; set; }
+
         [Fact]
         public async Task GetValueAsync_CallGrain_ReturnsExpectedInteger()
         {
             //Arrange
-            var grain = _clusterClient.GetGrain<IEchoTestGrain>(Guid.NewGuid().ToString());
+            var grain = ClusterClient.GetGrain<IEchoTestGrain>(Guid.NewGuid().ToString());
             var expectedValue = new Randomizer().Int();
             await grain.SetValueAsync(expectedValue);
 
@@ -38,11 +38,11 @@ namespace GiG.Core.Orleans.Tests.Integration.Helpers
         public async Task GetSiloMembership_Consul_ReturnsSiloInformation()
         {
             //Arrange
-            var expectedSiloName = _siloName;
+            var expectedSiloName = SiloName;
 
             //Act
-            using var client = _httpClientFactory.CreateClient();
-            client.BaseAddress = new Uri(_consulKVStoreBaseAddress);
+            using var client = HttpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(ConsulKvStoreBaseAddress);
 
             var result = await client.GetStringAsync("orleans/dev?recurse=true");
 
@@ -73,7 +73,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Helpers
             return silos;
         }
 
-        internal class KVStoreResult
+        private class KVStoreResult
         {
             public string Value { get; set; }
         }
