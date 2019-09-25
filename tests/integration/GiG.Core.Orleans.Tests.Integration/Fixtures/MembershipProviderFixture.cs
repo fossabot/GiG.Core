@@ -1,23 +1,23 @@
+using Bogus;
 using GiG.Core.Orleans.Client.Extensions;
 using GiG.Core.Orleans.Clustering.Client.Extensions;
+using GiG.Core.Orleans.Clustering.Consul.Client.Configurations;
 using GiG.Core.Orleans.Clustering.Consul.Client.Extensions;
 using GiG.Core.Orleans.Clustering.Consul.Silo.Extensions;
-using GiG.Core.Orleans.Clustering.Kubernetes.Silo.Extensions;
 using GiG.Core.Orleans.Clustering.Kubernetes.Client.Extensions;
+using GiG.Core.Orleans.Clustering.Kubernetes.Silo.Extensions;
 using GiG.Core.Orleans.Clustering.Silo.Extensions;
 using GiG.Core.Orleans.Hosting.Silo.Extensions;
 using GiG.Core.Orleans.Tests.Integration.Contracts;
 using GiG.Core.Orleans.Tests.Integration.Grains;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Orleans;
 using Orleans.Configuration;
 using Orleans.Hosting;
-using Microsoft.Extensions.Options;
-using GiG.Core.Orleans.Clustering.Consul.Client.Configurations;
-using System.Net.Http;
 using System;
-using Bogus;
+using System.Net.Http;
 
 namespace GiG.Core.Orleans.Tests.Integration.Fixtures
 {

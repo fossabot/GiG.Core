@@ -11,7 +11,7 @@ namespace GiG.Core.Orleans.Clustering.Extensions
     public static class OrleansBuilderExtensions
     {
         /// <summary>
-        /// Register Membership Provider From Configuration 
+        /// Register Membership Provider From Configuration.
         /// </summary>
         /// <typeparam name="T">Generic to represent host interfaces used for orleans start up.</typeparam>
         /// <param name="builder">Builder of type T used in orleans start up.</param>

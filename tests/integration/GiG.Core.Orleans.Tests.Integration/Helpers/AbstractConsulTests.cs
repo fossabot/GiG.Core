@@ -78,7 +78,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Helpers
             public string Value { get; set; }
         }
 
-        internal class Silo
+        private class Silo
         {
             public string SiloName { get; set; }
             public SiloStatus Status { get; set; }

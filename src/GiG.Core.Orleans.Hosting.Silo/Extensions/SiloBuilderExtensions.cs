@@ -104,6 +104,8 @@ namespace GiG.Core.Orleans.Hosting.Silo.Extensions
         /// Configures the Silo's endpoint.
         /// </summary>
         /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
+        /// <param name="siloPort">Silo port which are default set to the default provided by in endpoint options.</param>
+        /// <param name="gatewayPort">Gateway port which are default set to the default provided by endpoint options.</param>
         /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
         public static ISiloBuilder ConfigureEndpoints([NotNull] this ISiloBuilder builder, int siloPort = EndpointOptions.DEFAULT_SILO_PORT, int gatewayPort = EndpointOptions.DEFAULT_GATEWAY_PORT)
         {

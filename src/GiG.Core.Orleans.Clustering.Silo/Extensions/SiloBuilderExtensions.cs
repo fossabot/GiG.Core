@@ -9,7 +9,7 @@ namespace GiG.Core.Orleans.Clustering.Silo.Extensions
     public static class SiloBuilderExtensions
     {
         /// <summary>
-        /// Register Membership Provider From Configuration 
+        /// Register Membership Provider From Configuration.
         /// </summary>       
         /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
         /// <param name="configuration">The <see cref="IConfiguration" /> which contains Membership provider's configuration options.</param>
