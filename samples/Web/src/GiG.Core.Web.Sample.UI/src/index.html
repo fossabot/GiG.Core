@@ -207,7 +207,7 @@
 
 <script type="text/javascript">
 	const baseUrl = "/transactions";
-	const headers = new Headers({ 'player-id': '123', 'Content-Type': 'application/json', 'Accept': 'application/json' })
+	const headers = new Headers({ 'Player-ID': getPlayerId(), 'Content-Type': 'application/json', 'Accept': 'application/json' })
 
 	function getBalance() {
 		fetch(`${baseUrl}/balance`, { headers })
@@ -326,6 +326,24 @@
 		for (balanceElement of document.querySelectorAll("[balance]")) {
 			balanceElement.innerHTML = balance.toFixed(2);
 		}
+	}
+
+	var playerId;
+
+	function getPlayerId()
+	{
+		if (playerId == null) 
+		{
+			playerId = generatePlayerId();
+		}
+		
+		return playerId;
+	}
+
+	function generatePlayerId()
+	{
+		let r = Math.random().toString(36).substring(7);
+		return r;
 	}
 
 	startupScript();

@@ -23,6 +23,8 @@ namespace GiG.Core.Orleans.Sample.Client
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IPlayerInformationAccessor, PlayerInformationAccessor>();
+
             services.AddClusterClient((x, sp) =>
             {
                 x.AddCorrelationOutgoingFilter(sp);
