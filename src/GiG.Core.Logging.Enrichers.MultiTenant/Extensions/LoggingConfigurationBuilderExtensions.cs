@@ -1,11 +1,11 @@
-﻿using GiG.Core.Context.Abstractions;
-using GiG.Core.Logging.Abstractions;
-using GiG.Core.Logging.Enrichers.Context.Internal;
+﻿using GiG.Core.Logging.Abstractions;
+using GiG.Core.Logging.Enrichers.MultiTenant.Internal;
+using GiG.Core.MultiTenant.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace GiG.Core.Logging.Enrichers.Context.Extensions
+namespace GiG.Core.Logging.Enrichers.MultiTenant.Extensions
 {
     /// <summary>
     /// Logging Configuration Builder extensions.
@@ -13,23 +13,23 @@ namespace GiG.Core.Logging.Enrichers.Context.Extensions
     public static class LoggingConfigurationBuilderExtensions
     {
         /// <summary>
-        /// Enrich log events with a Request Context info.
+        /// Enrich log events with a Tenant ID.
         /// </summary>
         /// <param name="builder">The delegate for configuring the <see cref="LoggingConfigurationBuilder" />.</param>
         /// <returns><see cref="LoggingConfigurationBuilder" /> object allowing method chaining.</returns>
-        public static LoggingConfigurationBuilder EnrichWithRequestContext(
+        public static LoggingConfigurationBuilder EnrichWithTenantId(
             [NotNull] this LoggingConfigurationBuilder builder)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
 
-            var requestContextAccessor = builder
+            var tenantAccessor = builder
                 .Services
                 .BuildServiceProvider()
-                .GetService<IRequestContextAccessor>();
+                .GetService<ITenantAccessor>();
 
-            if (requestContextAccessor != null)
+            if (tenantAccessor != null)
             {
-                builder.LoggerConfiguration.Enrich.With(new RequestContextEnricher(requestContextAccessor));
+                builder.LoggerConfiguration.Enrich.With(new TenantEnricher(tenantAccessor));
             }
 
             return builder;

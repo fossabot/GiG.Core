@@ -25,12 +25,6 @@
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
       <_Parameter1>GiG.Core.Benchmarks</_Parameter1>      
     </AssemblyAttribute>
-    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>GiG.Core.Orleans.Clustering.Client</_Parameter1>
-    </AssemblyAttribute>
-    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>GiG.Core.Orleans.Clustering.Silo</_Parameter1>
-    </AssemblyAttribute>    
   </ItemGroup>
 
 </Project>

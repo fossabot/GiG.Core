@@ -32,7 +32,7 @@ services:
       - sample-silo
       - consul
     ports:
-      - "7070:8080"
+      - "7000:8080"
     restart: on-failure
   
   sample-web-ui:
@@ -43,7 +43,7 @@ services:
     depends_on:
       - sample-client
     ports:
-      - "5050:8080"
+      - "5000:8080"
     restart: on-failure
 
   consul:

@@ -10,7 +10,7 @@ Add the below to your Startup class and this will register an Orleans Silo runni
 
         public static void Main()
         {
-            new HostBuilder()            
+            Host.CreateDefaultBuilder()               
                 .UseOrleans(ConfigureOrleans)
                 .Build()
                 .Run();

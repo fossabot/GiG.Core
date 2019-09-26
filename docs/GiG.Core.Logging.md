@@ -17,10 +17,7 @@ Make use of `ConfigureLogging()` when creating an `IHostBuilder`. Logging requir
 
         private static IHostBuilder CreateHostBuilder()
         {
-            return new HostBuilder()
-                .ConfigureHostConfiguration(builder => builder
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true))
+            return Host.CreateDefaultBuilder()
                 .ConfigureLogging();
         }
     }
