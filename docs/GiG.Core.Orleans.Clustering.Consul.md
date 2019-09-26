@@ -1,8 +1,27 @@
-# GiG.Core.Orleans.Clustering.Consul.Silo
+# GiG.Core.Orleans.Clustering.Consul
 
-This Library provides an API to register an Orleans Silo running on Consul.
+This Library provides APIs to register Orleans Clients and Silos running on Consul.
 
 ## Basic Usage
+
+### Registering an Orleans Client
+
+Add the below to your Startup class and this will register an Orleans Client running on Consul.
+
+```csharp
+
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddClusterClient((x, sp) =>
+            {              
+                x.ConfigureCluster(_configuration);
+                x.ConfigureConsulClustering(_configuration);
+                x.AddAssemblies(typeof(ITransactionGrain));
+            });
+
+```
+
+### Registering an Orleans Silo
 
 Add the below to your Startup class and this will register an Orleans Silo running on Consul.
 
@@ -33,7 +52,7 @@ Add the below to your Startup class and this will register an Orleans Silo runni
 
 ### Configuration
 
-You can change the default value for the Consul configuration by overriding the [ConsulOptions](..\src\GiG.Core.Orleans.Clustering.Consul.Silo\Configurations\ConsulOptions.cs) by adding the following configuration settings under section `Orleans:Consul`.
+You can change the default value for the Consul configuration by overriding the [ConsulOptions](..\src\GiG.Core.Orleans.Clustering.Consul\Configurations\ConsulOptions.cs) by adding the following configuration settings under section `Orleans:Consul`.
 
 | Configuration Name | Type   | Optional | Default Value            |
 |:-------------------|:-------|:---------|:-------------------------|
