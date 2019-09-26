@@ -1,4 +1,6 @@
-﻿using GiG.Core.Orleans.Clustering.Consul.Silo.Extensions;
+﻿using GiG.Core.Orleans.Clustering.Silo.Extensions;
+using GiG.Core.Orleans.Clustering.Consul.Silo.Extensions;
+using GiG.Core.Orleans.Clustering.Kubernetes.Silo.Extensions;
 using GiG.Core.Orleans.Hosting.Silo.Extensions;
 using GiG.Core.Orleans.Sample.Grains;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,7 +22,11 @@ namespace GiG.Core.Orleans.Sample.Silo
             builder.ConfigureCluster(ctx.Configuration)
                 .ConfigureDashboard(ctx.Configuration)
                 .ConfigureEndpoints()
-                .ConfigureConsulClustering(ctx.Configuration)
+                .UseMembershipProvider(ctx.Configuration, x =>
+                {
+                    x.ConfigureConsulClustering(ctx.Configuration);
+                    x.ConfigureKubernetesClustering(ctx.Configuration);
+                })
                 .AddAssemblies(typeof(TransactionGrain));
         }
     }

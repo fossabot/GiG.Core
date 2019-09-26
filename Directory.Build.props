@@ -23,7 +23,8 @@
 
   <ItemGroup>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>GiG.Core.Benchmarks</_Parameter1>
+      <_Parameter1>GiG.Core.Benchmarks</_Parameter1>      
     </AssemblyAttribute>
   </ItemGroup>
+
 </Project>

@@ -9,7 +9,7 @@ services:
     environment:
       - Logging__Sinks__Fluentd__IsEnabled=true
       - Logging__Sinks__Fluentd__Hostname=fluentd
-      - Orleans__Consul__Address=http://consul:8500
+      - Orleans__MembershipProvider__Address=http://consul:8500
     depends_on:
       - fluentd
       - consul
@@ -26,7 +26,7 @@ services:
       - PATH_BASE=/api/transactions
       - Logging__Sinks__Fluentd__IsEnabled=true
       - Logging__Sinks__Fluentd__Hostname=fluentd
-      - Orleans__Consul__Address=http://consul:8500
+      - Orleans__MembershipProvider__Address=http://consul:8500
     depends_on:
       - fluentd
       - sample-silo

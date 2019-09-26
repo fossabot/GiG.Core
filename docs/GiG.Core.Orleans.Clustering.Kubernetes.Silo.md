@@ -10,8 +10,7 @@ Add the below to your Startup class and this will register an Orleans Silo runni
 
         public static void Main()
         {
-            Host.CreateDefaultBuilder()
-                .ConfigureServices(services => services.AddCorrelationAccessor())
+            Host.CreateDefaultBuilder()               
                 .UseOrleans(ConfigureOrleans)
                 .Build()
                 .Run();
@@ -19,8 +18,7 @@ Add the below to your Startup class and this will register an Orleans Silo runni
 
         private static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builder)
         {
-            builder.ConfigureCluster(ctx.Configuration)
-                .ConfigureDashboard(ctx.Configuration)
+            builder.ConfigureCluster(ctx.Configuration)               
                 .ConfigureEndpoints()
                 .ConfigureKubernetesClustering(ctx.Configuration)
                 .AddAssemblies(typeof(Grain));
