@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GiG.Core.Orleans.Clustering.Kubernetes.Silo.Configurations
+﻿namespace GiG.Core.Orleans.Clustering.Kubernetes.Silo.Configurations
 {
     /// <summary>
     /// Orleans Kubernetes Settings.

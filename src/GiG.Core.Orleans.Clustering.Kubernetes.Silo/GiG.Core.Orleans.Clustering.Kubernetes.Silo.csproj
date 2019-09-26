@@ -11,4 +11,8 @@
         <PackageReference Include="Orleans.Clustering.Kubernetes" Version="1.1.1" PrivateAssets="compile" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\GiG.Core.Orleans.Clustering\GiG.Core.Orleans.Clustering.csproj" />
+    </ItemGroup>
+
 </Project>

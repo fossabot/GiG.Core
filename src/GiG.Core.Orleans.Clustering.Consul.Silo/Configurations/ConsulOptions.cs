@@ -8,7 +8,7 @@
         /// <summary>
         /// Default configuration section name.
         /// </summary>
-        public const string DefaultSectionName = "Orleans:Consul";
+        public const string DefaultSectionName = MembershipProviderOptions.DefaultSectionName;
 
         /// <summary>
         /// Consul Address.

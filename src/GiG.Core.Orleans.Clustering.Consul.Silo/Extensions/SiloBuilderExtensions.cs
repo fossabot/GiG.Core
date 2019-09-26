@@ -35,9 +35,7 @@ namespace GiG.Core.Orleans.Clustering.Consul.Silo.Extensions
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
-
-            builder.Configure<ConsulOptions>(configurationSection);
-
+                 
             var consulOptions = configurationSection.Get<ConsulOptions>() ?? new ConsulOptions();
 
             return

@@ -11,8 +11,7 @@ Add the below to your Startup class and this will register an Orleans Client run
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddClusterClient((x, sp) =>
-            {
-                x.AddCorrelationOutgoingFilter(sp);
+            {               
                 x.ConfigureCluster(_configuration);
                 x.ConfigureKubernetesClustering(_configuration);
                 x.AddAssemblies(typeof(ITransactionGrain));
