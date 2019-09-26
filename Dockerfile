@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0.100-rc1 as base
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0.100 as base
 WORKDIR /app
 ARG VERSION='1.0.0'
 COPY . .
