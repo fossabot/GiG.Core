@@ -1,11 +1,11 @@
-﻿using GiG.Core.Orleans.Clustering.Kubernetes.Client.Configurations;
+﻿using GiG.Core.Orleans.Clustering.Kubernetes.Configurations;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Orleans;
 using Orleans.Clustering.Kubernetes;
 using System;
 
-namespace GiG.Core.Orleans.Clustering.Kubernetes.Client.Extensions
+namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
 {
     /// <summary>
     /// Client Builder Extensions.

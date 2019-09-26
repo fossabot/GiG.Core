@@ -1,11 +1,11 @@
-﻿using GiG.Core.Orleans.Clustering.Consul.Client.Configurations;
+﻿using GiG.Core.Orleans.Clustering.Consul.Configurations;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Orleans;
 using Orleans.Hosting;
 using System;
 
-namespace GiG.Core.Orleans.Clustering.Consul.Client.Extensions
+namespace GiG.Core.Orleans.Clustering.Consul.Extensions
 {
     /// <summary>
     /// Client Builder Extensions.

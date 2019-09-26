@@ -7,16 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Orleans.Runtime.Abstractions" Version="3.0.0-beta1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Context.Orleans\GiG.Core.Context.Orleans.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Context.Web\GiG.Core.Context.Web.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.DistributedTracing.Orleans\GiG.Core.DistributedTracing.Orleans.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.DistributedTracing.Web\GiG.Core.DistributedTracing.Web.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Hosting\GiG.Core.Hosting.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Logging.All\GiG.Core.Logging.All.csproj" />
-    <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Clustering.Client\GiG.Core.Orleans.Clustering.Client.csproj" />
-    <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Clustering.Consul.Client\GiG.Core.Orleans.Clustering.Consul.Client.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Client\GiG.Core.Orleans.Client.csproj" />
-    <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Clustering.Kubernetes.Client\GiG.Core.Orleans.Clustering.Kubernetes.Client.csproj" />
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Clustering\GiG.Core.Orleans.Clustering.csproj" />
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Clustering.Consul\GiG.Core.Orleans.Clustering.Consul.csproj" />
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Clustering.Kubernetes\GiG.Core.Orleans.Clustering.Kubernetes.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Web.Docs\GiG.Core.Web.Docs.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Web.Hosting\GiG.Core.Web.Hosting.csproj" />
     <ProjectReference Include="..\GiG.Core.Orleans.Sample.Contracts\GiG.Core.Orleans.Sample.Contracts.csproj" />

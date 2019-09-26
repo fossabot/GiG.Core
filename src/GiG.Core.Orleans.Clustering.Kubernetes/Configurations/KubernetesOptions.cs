@@ -1,4 +1,4 @@
-﻿namespace GiG.Core.Orleans.Clustering.Kubernetes.Client.Configurations
+﻿namespace GiG.Core.Orleans.Clustering.Kubernetes.Configurations
 {
     /// <summary>
     /// Orleans Kubernetes Settings.
