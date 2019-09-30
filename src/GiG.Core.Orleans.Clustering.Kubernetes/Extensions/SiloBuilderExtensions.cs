@@ -23,7 +23,7 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            return builder.ConfigureKubernetesClustering(configuration.GetSection(KubernetesOptions.DefaultSectionName));
+            return builder.ConfigureKubernetesClustering(configuration.GetSection(KubernetesClientOptions.DefaultSectionName));
         }
 
         /// <summary>

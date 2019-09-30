@@ -22,7 +22,7 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
 
-            return builder.ConfigureKubernetesClustering(configuration.GetSection(KubernetesOptions.DefaultSectionName));
+            return builder.ConfigureKubernetesClustering(configuration.GetSection(KubernetesClientOptions.DefaultSectionName));
         }
         
         /// <summary>
@@ -36,7 +36,7 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
 
-            var kubernetesOptions = configurationSection.Get<KubernetesOptions>() ?? new KubernetesOptions();
+            var kubernetesOptions = configurationSection.Get<KubernetesClientOptions>() ?? new KubernetesClientOptions();
 
             return
                 builder.UseKubeGatewayListProvider((options) =>

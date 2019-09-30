@@ -3,7 +3,7 @@
     /// <summary>
     /// Orleans Kubernetes Settings.
     /// </summary>
-    public abstract class KubernetesOptions
+    public class KubernetesClientOptions : KubernetesOptions
     {
         /// <summary>
         /// Default configuration section name.

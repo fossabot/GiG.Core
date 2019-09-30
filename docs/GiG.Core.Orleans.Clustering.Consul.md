@@ -18,12 +18,13 @@ Add the below to your Startup class and this will register an Orleans Client run
                 x.ConfigureConsulClustering(_configuration);
                 x.AddAssemblies(typeof(ITransactionGrain));
             });
+	    }
 
 ```
 
 ### Registering an Orleans Silo
 
-Add the below to your Startup class and this will register an Orleans Silo running on Consul.
+Add the below to your Program.cs and this will register an Orleans Silo running on Consul.
 
 ```csharp
 		

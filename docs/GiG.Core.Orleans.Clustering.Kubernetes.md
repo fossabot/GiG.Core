@@ -18,22 +18,26 @@ Add the below to your Startup class and this will register an Orleans Client run
                 x.ConfigureKubernetesClustering(_configuration);
                 x.AddAssemblies(typeof(ITransactionGrain));
             });
-
+		}
 ```
 
 ### Registering an Orleans Silo
 
-Add the below to your Startup class and this will register an Orleans Silo running on Kubernetes.
+Add the below to your Program.cs and this will register an Orleans Silo running on Kubernetes.
 
 ```csharp
 
-        public static void Main()
+	public class Program
+    {
+        public static void Main(string[] args)
         {
-            Host.CreateDefaultBuilder()               
-                .UseOrleans(ConfigureOrleans)
-                .Build()
-                .Run();
+            CreateHostBuilder(args).Build().Run();
         }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)                                
+                .ConfigureServices(Startup.ConfigureServices)
+                .UseOrleans(ConfigureOrleans);
 
         private static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builder)
         {
@@ -42,14 +46,15 @@ Add the below to your Startup class and this will register an Orleans Silo runni
                 .ConfigureKubernetesClustering(ctx.Configuration)
                 .AddAssemblies(typeof(Grain));
         }
-        
+    } 
+
 ```
 
 ### Configuration
 
-#### Client
+#### Silo
 
-You can change the default value for the Kubernetes configuration by overriding the [KubernetesOptions](..\src\GiG.Core.Orleans.Clustering.Kubernetes\Configurations\KubernetesSiloOptions.cs) by adding the following configuration settings under section `Orleans:Kubernetes`.
+You can change the default value for the Kubernetes configuration by overriding the [KubernetesSiloOptions](..\src\GiG.Core.Orleans.Clustering.Kubernetes\Configurations\KubernetesSiloOptions.cs) by adding the following configuration settings under section `Orleans:Kubernetes`.
 
 | Configuration Name  | Type   | Optional | Default Value                                                     |
 |:--------------------|:-------|:---------|:------------------------------------------------------------------|
@@ -60,9 +65,9 @@ You can change the default value for the Kubernetes configuration by overriding 
 | CanCreateResources  | String | Yes      | `false`                                                           |
 | DropResourcesOnInit | String | Yes      | `false`                                                           |
 
-#### Silo
+#### Client
 
-You can change the default value for the Kubernetes configuration by overriding the [KubernetesOptions](..\src\GiG.Core.Orleans.Clustering.Kubernetes\Configurations\KubernetesOptions.cs) by adding the following configuration settings under section `Orleans:Kubernetes`.
+You can change the default value for the Kubernetes configuration by overriding the [KubernetesClientOptions](..\src\GiG.Core.Orleans.Clustering.Kubernetes\Configurations\KubernetesClientOptions.cs) by adding the following configuration settings under section `Orleans:Kubernetes`.
 
 | Configuration Name  | Type   | Optional | Default Value                                                     |
 |:--------------------|:-------|:---------|:------------------------------------------------------------------|

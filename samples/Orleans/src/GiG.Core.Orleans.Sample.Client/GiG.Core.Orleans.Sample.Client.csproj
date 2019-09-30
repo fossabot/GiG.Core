@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Orleans.Runtime.Abstractions" Version="3.0.0-beta1" />
   </ItemGroup>
-
+  
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Context.Orleans\GiG.Core.Context.Orleans.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Context.Web\GiG.Core.Context.Web.csproj" />

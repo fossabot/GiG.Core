@@ -46,7 +46,7 @@ namespace GiG.Core.Orleans.Clustering.Consul.Extensions
         }
         
         /// <summary>
-        /// Configures Consul in Orleans.
+        /// Configures Consul in Silo.
         /// </summary>
         /// <param name="builder">Membership Provider builder of type <see cref="ISiloBuilder" />.</param>
         /// <param name="configuration">The <see cref="IConfiguration" /> which contains Consul options.</param>
