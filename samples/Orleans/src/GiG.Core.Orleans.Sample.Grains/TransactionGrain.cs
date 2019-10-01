@@ -1,14 +1,26 @@
 ﻿using GiG.Core.Orleans.Sample.Contracts;
 using Microsoft.Extensions.Logging;
 using Orleans;
+using Orleans.Providers;
 using System.Threading.Tasks;
 
 namespace GiG.Core.Orleans.Sample.Grains
 {
-    public class TransactionGrain : Grain, ITransactionGrain
+    /// <summary>
+    /// State class for the Transaction Grain.
+    /// </summary>
+    public class TransactionState
+    {
+        /// <summary>
+        /// The balance.
+        /// </summary>
+        public decimal Balance { get; set; } = 0;
+    }
+
+    [StorageProvider(ProviderName = Constants.InMemoryPersistanceName)]
+    public class TransactionGrain : Grain<TransactionState>, ITransactionGrain
     {
         private readonly ILogger _logger;
-        private decimal _balance = 0;
 
         public TransactionGrain(ILogger<TransactionGrain> logger)
         {
@@ -23,9 +35,11 @@ namespace GiG.Core.Orleans.Sample.Grains
         public Task<decimal> Deposit(decimal amount)
         {
             _logger.LogInformation($"Deposit {amount}");
-            _balance += amount;
+            State.Balance += amount;
 
-            return Task.FromResult(_balance);
+            base.WriteStateAsync();
+
+            return Task.FromResult(State.Balance);
         }
 
         /// <summary>
@@ -36,9 +50,11 @@ namespace GiG.Core.Orleans.Sample.Grains
         public Task<decimal> Withdraw(decimal amount)
         {
             _logger.LogInformation($"Withdraw {amount}");
-            _balance -= amount;
-            
-            return Task.FromResult(_balance);
+            State.Balance -= amount;
+
+            base.WriteStateAsync();
+
+            return Task.FromResult(State.Balance);
         }
         
         /// <summary>
@@ -47,7 +63,7 @@ namespace GiG.Core.Orleans.Sample.Grains
         /// <returns></returns>
         public Task<decimal> GetBalance()
         {
-            return Task.FromResult(_balance);
+            return Task.FromResult(State.Balance);
         }
     }
 }
