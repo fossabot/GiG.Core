@@ -22,7 +22,7 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
 
-            return builder.ConfigureKubernetesClustering(configuration.GetSection(KubernetesClientOptions.DefaultSectionName));
+            return builder.ConfigureKubernetesClustering(configuration.GetSection(KubernetesOptions.DefaultSectionName));
         }
         
         /// <summary>
@@ -47,6 +47,5 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
                     options.APIToken = kubernetesOptions.ApiToken;
                 });
         }
- 
     }
 }
