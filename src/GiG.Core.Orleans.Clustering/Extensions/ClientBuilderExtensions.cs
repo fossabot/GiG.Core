@@ -1,11 +1,13 @@
 ﻿using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
-using GiG.Core.Orleans.Clustering.Extensions;
-using System;
 using Orleans;
+using System;
 
-namespace GiG.Core.Orleans.Clustering.Client.Extensions
+namespace GiG.Core.Orleans.Clustering.Extensions
 {
+    /// <summary>
+    /// Client Builder Extensions.
+    /// </summary>
     public static class ClientBuilderExtensions
     {
         /// <summary>

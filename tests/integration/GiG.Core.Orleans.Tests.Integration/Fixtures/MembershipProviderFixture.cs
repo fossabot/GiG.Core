@@ -1,12 +1,9 @@
 using Bogus;
 using GiG.Core.Orleans.Client.Extensions;
-using GiG.Core.Orleans.Clustering.Client.Extensions;
-using GiG.Core.Orleans.Clustering.Consul.Client.Configurations;
-using GiG.Core.Orleans.Clustering.Consul.Client.Extensions;
-using GiG.Core.Orleans.Clustering.Consul.Silo.Extensions;
-using GiG.Core.Orleans.Clustering.Kubernetes.Client.Extensions;
-using GiG.Core.Orleans.Clustering.Kubernetes.Silo.Extensions;
-using GiG.Core.Orleans.Clustering.Silo.Extensions;
+using GiG.Core.Orleans.Clustering.Consul.Configurations;
+using GiG.Core.Orleans.Clustering.Consul.Extensions;
+using GiG.Core.Orleans.Clustering.Extensions;
+using GiG.Core.Orleans.Clustering.Kubernetes.Extensions;
 using GiG.Core.Orleans.Hosting.Silo.Extensions;
 using GiG.Core.Orleans.Tests.Integration.Contracts;
 using GiG.Core.Orleans.Tests.Integration.Grains;

@@ -34,12 +34,8 @@
       <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Orleans\GiG.Core.DistributedTracing.Orleans.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Web\GiG.Core.DistributedTracing.Web.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Client\GiG.Core.Orleans.Client.csproj" />
-      <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering.Client\GiG.Core.Orleans.Clustering.Client.csproj" />
-      <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering.Consul.Client\GiG.Core.Orleans.Clustering.Consul.Client.csproj" />
-      <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering.Consul.Silo\GiG.Core.Orleans.Clustering.Consul.Silo.csproj" />
-      <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering.Kubernetes.Client\GiG.Core.Orleans.Clustering.Kubernetes.Client.csproj" />
-      <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering.Kubernetes.Silo\GiG.Core.Orleans.Clustering.Kubernetes.Silo.csproj" />
-      <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering.Silo\GiG.Core.Orleans.Clustering.Silo.csproj" />
+      <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering.Consul\GiG.Core.Orleans.Clustering.Consul.csproj" />
+      <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering.Kubernetes\GiG.Core.Orleans.Clustering.Kubernetes.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Hosting.Silo\GiG.Core.Orleans.Hosting.Silo.csproj" />
     </ItemGroup>
 
