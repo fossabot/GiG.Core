@@ -28,7 +28,6 @@ namespace GiG.Core.Web.Sample
         {
             // Configuration
             services.Configure<TransactionSettings>(_configuration.GetSection(TransactionSettings.DefaultSectionName));
-            services.ConfigureHealthChecks(_configuration);
             services.ConfigureInfoManagement(_configuration);
 
             // Services
@@ -36,6 +35,7 @@ namespace GiG.Core.Web.Sample
 
             // Health Checks
             services
+                .ConfigureHealthChecks(_configuration)
                 .AddCachedHealthChecks()
                 .AddReadyCheck<DummyCachedHealthCheck>(nameof(DummyCachedHealthCheck));
 

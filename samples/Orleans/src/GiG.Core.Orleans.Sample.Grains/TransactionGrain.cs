@@ -2,12 +2,25 @@
 using GiG.Core.Orleans.Sample.Contracts;
 using Microsoft.Extensions.Logging;
 using Orleans;
+using Orleans.Providers;
 using System.Threading.Tasks;
 using Orleans.Streams;
 
 namespace GiG.Core.Orleans.Sample.Grains
 {
-    public class TransactionGrain : Grain, ITransactionGrain
+    /// <summary>
+    /// State class for the Transaction Grain.
+    /// </summary>
+    public class TransactionState
+    {
+        /// <summary>
+        /// The balance.
+        /// </summary>
+        public decimal Balance { get; set; } = 0;
+    }
+
+    [StorageProvider(ProviderName = Constants.InMemoryPersistanceName)]
+    public class TransactionGrain : Grain<TransactionState>, ITransactionGrain
     {
         private IAsyncStream<decimal> _stream;
         
@@ -35,9 +48,10 @@ namespace GiG.Core.Orleans.Sample.Grains
         public async Task<decimal> Deposit(decimal amount)
         {
             _logger.LogInformation($"Deposit {amount}");
-            _balance += amount;
+            State.Balance += amount;
 
             await _stream.OnNextAsync(_balance);
+            await base.WriteStateAsync();
 
             return _balance;
         }
@@ -50,9 +64,10 @@ namespace GiG.Core.Orleans.Sample.Grains
         public async Task<decimal> Withdraw(decimal amount)
         {
             _logger.LogInformation($"Withdraw {amount}");
-            _balance -= amount;
+            State.Balance -= amount;
 
             await _stream.OnNextAsync(_balance);
+            await base.WriteStateAsync();
             
             return _balance;
         }
@@ -63,7 +78,7 @@ namespace GiG.Core.Orleans.Sample.Grains
         /// <returns></returns>
         public Task<decimal> GetBalance()
         {
-            return Task.FromResult(_balance);
+            return Task.FromResult(State.Balance);
         }
     }
 }

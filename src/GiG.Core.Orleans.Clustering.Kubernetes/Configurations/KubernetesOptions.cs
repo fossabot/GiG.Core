@@ -1,9 +1,9 @@
-﻿namespace GiG.Core.Orleans.Clustering.Kubernetes.Client.Configurations
+﻿namespace GiG.Core.Orleans.Clustering.Kubernetes.Configurations
 {
     /// <summary>
     /// Orleans Kubernetes Settings.
     /// </summary>
-    public class KubernetesOptions
+    public abstract class KubernetesOptions
     {
         /// <summary>
         /// Default configuration section name.

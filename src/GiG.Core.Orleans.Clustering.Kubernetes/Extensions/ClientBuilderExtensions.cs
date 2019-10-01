@@ -1,11 +1,11 @@
-﻿using GiG.Core.Orleans.Clustering.Kubernetes.Client.Configurations;
+﻿using GiG.Core.Orleans.Clustering.Kubernetes.Configurations;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Orleans;
 using Orleans.Clustering.Kubernetes;
 using System;
 
-namespace GiG.Core.Orleans.Clustering.Kubernetes.Client.Extensions
+namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
 {
     /// <summary>
     /// Client Builder Extensions.
@@ -36,7 +36,7 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Client.Extensions
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
 
-            var kubernetesOptions = configurationSection.Get<KubernetesOptions>() ?? new KubernetesOptions();
+            var kubernetesOptions = configurationSection.Get<KubernetesClientOptions>() ?? new KubernetesClientOptions();
 
             return
                 builder.UseKubeGatewayListProvider((options) =>
@@ -47,6 +47,5 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Client.Extensions
                     options.APIToken = kubernetesOptions.ApiToken;
                 });
         }
- 
     }
 }

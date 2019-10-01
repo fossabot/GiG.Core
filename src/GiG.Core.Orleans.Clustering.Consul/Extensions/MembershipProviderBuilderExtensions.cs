@@ -1,9 +1,10 @@
 ﻿using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Orleans;
+using Orleans.Hosting;
 using System;
 
-namespace GiG.Core.Orleans.Clustering.Consul.Client.Extensions
+namespace GiG.Core.Orleans.Clustering.Consul.Extensions
 {
     /// <summary>
     /// Membership Provider Builder Extensions.
@@ -43,5 +44,38 @@ namespace GiG.Core.Orleans.Clustering.Consul.Client.Extensions
 
             return builder;
         }
+        
+        /// <summary>
+        /// Configures Consul in Silo.
+        /// </summary>
+        /// <param name="builder">Membership Provider builder of type <see cref="ISiloBuilder" />.</param>
+        /// <param name="configuration">The <see cref="IConfiguration" /> which contains Consul options.</param>
+        /// <returns>Returns the MembershipProviderBuilder of type <see cref="ISiloBuilder" />.</returns>
+        public static MembershipProviderBuilder<ISiloBuilder> ConfigureConsulClustering([NotNull] this MembershipProviderBuilder<ISiloBuilder> builder, [NotNull] IConfiguration configuration)
+        {
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+
+            builder.RegisterProvider(ProviderName, x => x.ConfigureConsulClustering(configuration));
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Configures Consul in Orleans.
+        /// </summary>
+        /// <param name="builder">Membership Provider builder of type <see cref="ISiloBuilder" />.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection" /> which contains Consul options.</param>
+        /// <returns>Returns the MembershipProviderBuilder of type <see cref="ISiloBuilder" />.</returns>
+        public static MembershipProviderBuilder<ISiloBuilder> ConfigureConsulClustering([NotNull] this MembershipProviderBuilder<ISiloBuilder> builder, [NotNull] IConfigurationSection configurationSection)
+        {
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
+
+            builder.RegisterProvider(ProviderName, x => x.ConfigureConsulClustering(configurationSection));
+
+            return builder;
+        }
+
     }
 }

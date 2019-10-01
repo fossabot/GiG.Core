@@ -1,7 +1,7 @@
-﻿namespace GiG.Core.Orleans.Clustering.Consul.Silo.Configurations
+﻿namespace GiG.Core.Orleans.Clustering.Consul.Configurations
 {
     /// <summary>
-    /// Orleans Silo Consul Settings.
+    /// Orleans Client Consul Settings.
     /// </summary>
     public class ConsulOptions
     {
