@@ -23,25 +23,27 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
         [Given(@"I Deposit (.*) on the account for player with id (.*) and IP (.*)")]
         public void GivenIDepositOnTheAccountForPlayerWithIdAndIP(decimal depositAmount, string playerId, string ipAddress)
         {
-            var response = _orleansSampleTransactionService.DepositAsync(playerId + _random,
-                ipAddress.Equals("") ? null : ipAddress, new TransactionRequest {Amount = depositAmount}).GetAwaiter().GetResult();
+            _orleansSampleTransactionService.SetHeaders(playerId + _random, ipAddress);
+
+            Response<decimal> response = _orleansSampleTransactionService.DepositAsync(new TransactionRequest {Amount = depositAmount}).GetAwaiter().GetResult();
             _scenarioContext.Add("DepositResponse", response);
         }
 
         [When(@"I request the balance of account for player with id (.*) and IP (.*)")]
         public void WhenIRequestTheBalanceOfAccountForPlayerWithIdAndIP(string playerId, string ipAddress)
         {
-            var response =
-                _orleansSampleTransactionService.GetBalanceAsync(playerId + _random,
-                    ipAddress.Equals("") ? null : ipAddress).GetAwaiter().GetResult();
+            _orleansSampleTransactionService.SetHeaders(playerId + _random, ipAddress);
+
+            Response<decimal> response = _orleansSampleTransactionService.GetBalanceAsync().GetAwaiter().GetResult();
             _scenarioContext.Add("GetBalanceResponse", response);
         }
 
         [When(@"I withdraw (.*) from account for player with id (.*) and IP (.*)")]
         public void WhenIWithdrawFromAccountForPlayerWithIdAndIP(decimal withdrawalAmount, string playerId, string ipAddress)
         {
-            var response = _orleansSampleTransactionService.WithdrawAsync(playerId + _random,
-                ipAddress.Equals("") ? null : ipAddress, new TransactionRequest {Amount = withdrawalAmount}).GetAwaiter().GetResult();
+            _orleansSampleTransactionService.SetHeaders(playerId + _random, ipAddress);
+
+            Response<decimal> response = _orleansSampleTransactionService.WithdrawAsync(new TransactionRequest {Amount = withdrawalAmount}).GetAwaiter().GetResult();
             _scenarioContext.Add("WithdrawResponse", response);
         }
 

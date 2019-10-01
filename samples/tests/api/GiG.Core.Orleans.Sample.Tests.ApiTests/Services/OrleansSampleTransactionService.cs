@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace GiG.Core.Orleans.Sample.Tests.ApiTests.Services
 {
-    internal class OrleansSampleTransactionService
+    internal class OrleansSampleTransactionService: IOrleansSampleTransactionService
     {
         readonly IOrleansSampleTransactionService _orleansSampleTransactionService;
 
@@ -13,19 +13,28 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.Services
             _orleansSampleTransactionService = RestClient.For<IOrleansSampleTransactionService>(microServiceUrl);
         }
 
-        public async Task<Response<decimal>> GetBalanceAsync(string playerId, string ipAddress)
+        public string PlayerId { get; set; }
+        public string IPAddress { get; set; }
+
+        public async Task<Response<decimal>> GetBalanceAsync()
         {
-            return await _orleansSampleTransactionService.GetBalanceAsync(playerId, ipAddress);
+            return await _orleansSampleTransactionService.GetBalanceAsync();
         }
 
-        public async Task<Response<decimal>> DepositAsync(string playerId, string ipAddress, TransactionRequest transactionRequest)
+        public async Task<Response<decimal>> DepositAsync(TransactionRequest transactionRequest)
         {
-            return  await _orleansSampleTransactionService.DepositAsync(playerId, ipAddress, transactionRequest);
+            return  await _orleansSampleTransactionService.DepositAsync(transactionRequest);
         }
 
-        public async Task<Response<decimal>> WithdrawAsync(string playerId, string ipAddress, TransactionRequest transactionRequest)
+        public async Task<Response<decimal>> WithdrawAsync(TransactionRequest transactionRequest)
         {
-            return await _orleansSampleTransactionService.WithdrawAsync(playerId, ipAddress, transactionRequest);
+            return await _orleansSampleTransactionService.WithdrawAsync(transactionRequest);
+        }
+
+        public void SetHeaders(string playerId, string ipAddress)
+        {
+            _orleansSampleTransactionService.PlayerId = playerId;
+            _orleansSampleTransactionService.IPAddress = ipAddress.Equals("") ? null : ipAddress;
         }
     }
 
