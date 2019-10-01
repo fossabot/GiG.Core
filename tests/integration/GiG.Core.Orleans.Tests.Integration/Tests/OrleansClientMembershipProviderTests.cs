@@ -1,7 +1,7 @@
 ﻿using GiG.Core.Orleans.Client.Extensions;
-using GiG.Core.Orleans.Clustering.Client.Extensions;
-using GiG.Core.Orleans.Clustering.Consul.Client.Extensions;
-using GiG.Core.Orleans.Clustering.Kubernetes.Client.Extensions;
+using GiG.Core.Orleans.Clustering.Consul.Extensions;
+using GiG.Core.Orleans.Clustering.Extensions;
+using GiG.Core.Orleans.Clustering.Kubernetes.Extensions;
 using GiG.Core.Orleans.Tests.Integration.Contracts;
 using GiG.Core.Orleans.Tests.Integration.Helpers;
 using Microsoft.Extensions.Hosting;

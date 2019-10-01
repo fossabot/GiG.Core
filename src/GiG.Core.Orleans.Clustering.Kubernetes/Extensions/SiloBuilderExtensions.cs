@@ -1,11 +1,11 @@
-﻿using GiG.Core.Orleans.Clustering.Kubernetes.Silo.Configurations;
+﻿using GiG.Core.Orleans.Clustering.Kubernetes.Configurations;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Orleans.Clustering.Kubernetes;
 using Orleans.Hosting;
 using System;
 
-namespace GiG.Core.Orleans.Clustering.Kubernetes.Silo.Extensions
+namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
 {
     /// <summary>
     /// Silo Builder Extensions.
@@ -37,7 +37,7 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Silo.Extensions
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
 
-            var kubernetesOptions = configurationSection.Get<KubernetesOptions>() ?? new KubernetesOptions();
+            var kubernetesOptions = configurationSection.Get<KubernetesSiloOptions>() ?? new KubernetesSiloOptions();
 
             return
                   builder.UseKubeMembership((options) =>
