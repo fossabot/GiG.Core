@@ -4,8 +4,8 @@ Feature: Orleans Sample Transactions Tests
 
 @GetBalance
 Scenario Outline: Get Player Balance
-	Given I Deposit <amount> on the account for player with id <playerId> and IP <ipAddress>
-	When I request the balance of account for player with id <playerId> and IP <ipAddress>
+	Given I Deposit <amount> on the account for player with id <playerId> and IP <ipAddress> using key DepositResponse
+	When I request the balance of account for player with id <playerId> and IP <ipAddress> using key <responseKey>
 	Then the status code for key <responseKey> is OK
 	And the balance of the account using key <responseKey> is <amount>
 
@@ -16,7 +16,7 @@ Scenario Outline: Get Player Balance
 
 @Deposit
 Scenario Outline: Deposit to player account
-	Given I Deposit <amount> on the account for player with id <playerId> and IP <ipAddress>
+	Given I Deposit <amount> on the account for player with id <playerId> and IP <ipAddress> using key <responseKey>
 	Then the status code for key <responseKey> is OK
 	And the balance of the account using key <responseKey> is <amount>
 
@@ -27,8 +27,8 @@ Scenario Outline: Deposit to player account
 
 @Withdraw
 Scenario Outline: Withdraw from player account
-	Given I Deposit <amount> on the account for player with id <playerId> and IP <ipAddress>
-	When I withdraw <withdrawalAmount> from account for player with id <playerId> and IP <ipAddress>
+	Given I Deposit <amount> on the account for player with id <playerId> and IP <ipAddress> using key DepositResponse
+	When I withdraw <withdrawalAmount> from account for player with id <playerId> and IP <ipAddress> using key <responseKey>
 	Then the status code for key <responseKey> is OK
 	And the balance of the account using key <responseKey> is <balance>
 

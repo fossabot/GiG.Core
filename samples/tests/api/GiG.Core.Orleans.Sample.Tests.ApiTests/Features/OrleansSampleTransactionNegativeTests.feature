@@ -4,8 +4,8 @@ Feature: Orleans Sample Transactions Negative Tests
 
 @GetBalance
 Scenario Outline: Get Player Balance
-	Given I Deposit <amount> on the account for player with id 12345678 and IP <ipAddress>
-	When I request the balance of account for player with id <playerId> and IP <ipAddress>
+	Given I Deposit <amount> on the account for player with id 12345678 and IP <ipAddress> using key DepositResponse
+	When I request the balance of account for player with id <playerId> and IP <ipAddress> using key <responseKey>
 	Then the status code for key <responseKey> is <responseCode>
 	And the error message using key <responseKey> is <message>
 
@@ -17,7 +17,7 @@ Scenario Outline: Get Player Balance
 
 @Deposit
 Scenario Outline: Deposit to player account
-	Given I Deposit <amount> on the account for player with id <playerId> and IP <ipAddress>
+	Given I Deposit <amount> on the account for player with id <playerId> and IP <ipAddress> using key <responseKey>
 	Then the status code for key <responseKey> is <responseCode>
 	And the error message using key <responseKey> is <message>
 
@@ -29,8 +29,8 @@ Scenario Outline: Deposit to player account
 
 @Withdraw
 Scenario Outline: Withdraw from player account
-	Given I Deposit <amount> on the account for player with id 12345678 and IP <ipAddress>
-	When I withdraw <withdrawalAmount> from account for player with id <playerId> and IP <ipAddress>
+	Given I Deposit <amount> on the account for player with id 12345678 and IP <ipAddress> using key DepositResponse
+	When I withdraw <withdrawalAmount> from account for player with id <playerId> and IP <ipAddress> using key <responseKey>
 	Then the status code for key <responseKey> is <responseCode>
 	And the error message using key <responseKey> is <message>
 

@@ -20,31 +20,31 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
             _random = new Random().Next(1, 10000).ToString();
         }
 
-        [Given(@"I Deposit (.*) on the account for player with id (.*) and IP (.*)")]
-        public void GivenIDepositOnTheAccountForPlayerWithIdAndIP(decimal depositAmount, string playerId, string ipAddress)
+        [Given(@"I Deposit (.*) on the account for player with id (.*) and IP (.*) using key (.*)")]
+        public void GivenIDepositOnTheAccountForPlayerWithIdAndIPUsingKey(decimal depositAmount, string playerId, string ipAddress, string key)
         {
             _orleansSampleTransactionService.SetHeaders(playerId + _random, ipAddress);
 
             Response<decimal> response = _orleansSampleTransactionService.DepositAsync(new TransactionRequest {Amount = depositAmount}).GetAwaiter().GetResult();
-            _scenarioContext.Add("DepositResponse", response);
+            _scenarioContext.Add(key, response);
         }
 
-        [When(@"I request the balance of account for player with id (.*) and IP (.*)")]
-        public void WhenIRequestTheBalanceOfAccountForPlayerWithIdAndIP(string playerId, string ipAddress)
+        [When(@"I request the balance of account for player with id (.*) and IP (.*) using key (.*)")]
+        public void WhenIRequestTheBalanceOfAccountForPlayerWithIdAndIPUsingKey(string playerId, string ipAddress, string key)
         {
             _orleansSampleTransactionService.SetHeaders(playerId + _random, ipAddress);
 
             Response<decimal> response = _orleansSampleTransactionService.GetBalanceAsync().GetAwaiter().GetResult();
-            _scenarioContext.Add("GetBalanceResponse", response);
+            _scenarioContext.Add(key, response);
         }
 
-        [When(@"I withdraw (.*) from account for player with id (.*) and IP (.*)")]
-        public void WhenIWithdrawFromAccountForPlayerWithIdAndIP(decimal withdrawalAmount, string playerId, string ipAddress)
+        [When(@"I withdraw (.*) from account for player with id (.*) and IP (.*) using key (.*)")]
+        public void WhenIWithdrawFromAccountForPlayerWithIdAndIPUsingKey(decimal withdrawalAmount, string playerId, string ipAddress, string key)
         {
             _orleansSampleTransactionService.SetHeaders(playerId + _random, ipAddress);
 
             Response<decimal> response = _orleansSampleTransactionService.WithdrawAsync(new TransactionRequest {Amount = withdrawalAmount}).GetAwaiter().GetResult();
-            _scenarioContext.Add("WithdrawResponse", response);
+            _scenarioContext.Add(key, response);
         }
 
         [Then(@"the status code for key (.*) is (.*)")]
