@@ -11,7 +11,7 @@ Scenario Outline: Get Player Balance
 
 	Examples:
     | amount | playerId | ipAddress | responseKey        |
-    | 10.50  | 123456   | 127.0.0.1 | GetBalanceResponse |
+    | 10.00  | 123456   | 127.0.0.1 | GetBalanceResponse |
     | 13.00  | 654321   |           | GetBalanceResponse |
 
 @Deposit

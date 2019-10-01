@@ -22,10 +22,13 @@ Scenario Outline: Deposit to player account
 	And the error message using key <responseKey> is <message>
 
 	Examples:
-    | amount | playerId | ipAddress | responseKey     | responseCode               | message               |
-    | 10.50  |			| 127.0.0.1 | DepositResponse | UnprocessableEntity        | Player ID is missing  |
-    | 13.00  | *&^%		|           | DepositResponse | UnprocessableEntity        | Player ID is invalid  |
-    | 13.00  | 1234567  | invalidIp | DepositResponse | UnprocessableEntity        | IP Address is invalid |
+    | amount | playerId | ipAddress | responseKey     | responseCode               | message								 |
+    | 10.50  |			| 127.0.0.1 | DepositResponse | UnprocessableEntity        | Player ID is missing					 |
+    | 13.00  | *&^%		|           | DepositResponse | UnprocessableEntity        | Player ID is invalid					 |
+    | 13.00  | 1234567  | invalidIp | DepositResponse | UnprocessableEntity        | IP Address is invalid					 |
+    | -1.5	 | 1234567  | 127.0.0.1 | DepositResponse | BadRequest				   | Deposit Amount must be greater than 10. |
+    | 0		 | 1234567  | 127.0.0.1 | DepositResponse | BadRequest				   | Deposit Amount must be greater than 10. |
+    | 9.99	 | 1234567  | 127.0.0.1 | DepositResponse | BadRequest				   | Deposit Amount must be greater than 10. |
 
 @Withdraw
 Scenario Outline: Withdraw from player account
@@ -35,8 +38,10 @@ Scenario Outline: Withdraw from player account
 	And the error message using key <responseKey> is <message>
 
 	Examples:
-    | amount | withdrawalAmount | playerId | ipAddress | responseKey      | responseCode          | message														|
-    | 10.50  | 10.50            |		   | 127.0.0.1 | WithdrawResponse | UnprocessableEntity   | Player ID is missing										|
-    | 13.00  | 12.00            | *&^%	   |           | WithdrawResponse | UnprocessableEntity   | Player ID is invalid										|
-    | 13.00  | 12.00            | 12345678 | invalidIp | WithdrawResponse | UnprocessableEntity   | IP Address is invalid										|
-    | 13.00  | 500.00           | 12345678 |           | WithdrawResponse | BadRequest            | Withdraw Amount must be smaller or equal to the Balance.	|
+    | amount | withdrawalAmount | playerId | ipAddress | responseKey      | responseCode          | message																			|
+    | 10.50  | 10.50            |		   | 127.0.0.1 | WithdrawResponse | UnprocessableEntity   | Player ID is missing															|
+    | 13.00  | 12.00            | *&^%	   |           | WithdrawResponse | UnprocessableEntity   | Player ID is invalid															|
+    | 13.00  | 12.00            | 12345678 | invalidIp | WithdrawResponse | UnprocessableEntity   | IP Address is invalid															|
+    | 13.00  | 500.00           | 12345678 |           | WithdrawResponse | BadRequest            | Withdraw Amount must be smaller or equal to the Balance, and greater than 0.	|
+    | 13.00  | 0	            | 12345678 |           | WithdrawResponse | BadRequest            | Withdraw Amount must be smaller or equal to the Balance, and greater than 0.	|
+    | 13.00  | -1	            | 12345678 |           | WithdrawResponse | BadRequest            | Withdraw Amount must be smaller or equal to the Balance, and greater than 0.	|
