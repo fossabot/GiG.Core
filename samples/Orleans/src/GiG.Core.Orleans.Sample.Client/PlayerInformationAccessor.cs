@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using Microsoft.AspNetCore.Http;
 
 namespace GiG.Core.Orleans.Sample.Client
 {
@@ -12,6 +13,9 @@ namespace GiG.Core.Orleans.Sample.Client
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public string PlayerId => _httpContextAccessor.HttpContext.Request.Headers[PlayerIdHeaderKey];
+        public Guid? PlayerId =>
+            Guid.TryParse(_httpContextAccessor.HttpContext.Request.Headers[PlayerIdHeaderKey], out var result)
+                ? result
+                : default(Guid?);
     }
 }

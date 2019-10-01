@@ -2,6 +2,7 @@
 using GiG.Core.Orleans.Clustering.Consul.Silo.Extensions;
 using GiG.Core.Orleans.Clustering.Kubernetes.Silo.Extensions;
 using GiG.Core.Orleans.Hosting.Silo.Extensions;
+using GiG.Core.Orleans.Sample.Contracts;
 using GiG.Core.Orleans.Sample.Grains;
 using Microsoft.Extensions.DependencyInjection;
 using Orleans.Hosting;
@@ -11,6 +12,8 @@ namespace GiG.Core.Orleans.Sample.Silo
 {
     public static class Startup
     {
+        private const string StreamProviderName = "SMSProvider";
+        
         // This method gets called by the runtime. Use this method to add services to the container.
         public static void ConfigureServices(IServiceCollection services)
         {
@@ -27,7 +30,9 @@ namespace GiG.Core.Orleans.Sample.Silo
                     x.ConfigureConsulClustering(ctx.Configuration);
                     x.ConfigureKubernetesClustering(ctx.Configuration);
                 })
-                .AddAssemblies(typeof(TransactionGrain));
+                .AddAssemblies(typeof(TransactionGrain))
+                .AddSimpleMessageStreamProvider(Constants.StreamProviderName)
+                .AddMemoryGrainStorage(Constants.StreamsMemoryStorageName);
         }
     }
 }

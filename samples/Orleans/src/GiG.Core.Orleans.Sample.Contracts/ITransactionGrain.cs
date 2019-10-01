@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace GiG.Core.Orleans.Sample.Contracts
 {
-    public interface ITransactionGrain : IGrainWithStringKey
+    public interface ITransactionGrain : IGrainWithGuidKey
     {
         /// <summary>
         /// Performs a Deposit
