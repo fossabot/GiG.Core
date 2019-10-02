@@ -15,7 +15,7 @@ namespace GiG.Core.Orleans.Sample.Silo
             CreateHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
+        private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .UseApplicationMetadata()
                 .ConfigureServices(services => {

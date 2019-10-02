@@ -1,22 +1,29 @@
-using System;
-using System.Threading.Tasks;
 using GiG.Core.Orleans.Sample.Contracts;
+using GiG.Core.Orleans.Sample.Contracts.Models.Wallet;
 using Microsoft.Extensions.Logging;
 using Orleans;
 using Orleans.Streams;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace GiG.Core.Orleans.Sample.Grains
 {
-    [ImplicitStreamSubscription(Constants.BalanceUpdateStreamNameSpace)]
-    public class BalanceUpdateReceiver : Grain, IBalanceUpdateReceiver, IAsyncObserver<decimal>
+    [ImplicitStreamSubscription(Constants.WalletTransactionsStreamNamespace)]
+    public class WalletTransactionGrain : Grain<List<WalletTransaction>>, IWalletTransactionGrain, IAsyncObserver<WalletTransaction>
     {
-        private IAsyncStream<decimal> _stream;
+        private IAsyncStream<WalletTransaction> _stream;
         private readonly ILogger _logger;
-
+      
+        public WalletTransactionGrain(ILogger<WalletTransactionGrain> logger)
+        {
+            _logger = logger;
+        }
+        
         public override async Task OnActivateAsync()
         {
             var streamProvider = GetStreamProvider(Constants.StreamProviderName);
-            _stream = streamProvider.GetStream<decimal>(this.GetPrimaryKey(), Constants.BalanceUpdateStreamNameSpace);
+            _stream = streamProvider.GetStream<WalletTransaction>(this.GetPrimaryKey(), Constants.WalletTransactionsStreamNamespace);
 
             await SubscribeAsync();
             
@@ -37,16 +44,13 @@ namespace GiG.Core.Orleans.Sample.Grains
 
             await _stream.SubscribeAsync(this.OnNextAsync);
         }
-
-        public BalanceUpdateReceiver(ILogger<TransactionGrain> logger)
-        {
-            _logger = logger;
-        }
         
-        public Task OnNextAsync(decimal item, StreamSequenceToken token = null)
+        public Task OnNextAsync(WalletTransaction item, StreamSequenceToken token = null)
         {
-            _logger.LogInformation($"User {this.GetPrimaryKey()} Balance updated to {item}");
+            State.Add(item);
             
+            _logger.LogInformation($"New {item.TransactionType.ToString()}. Amount: {item.Amount}. New Balance: {item.NewBalance}");
+
             return Task.CompletedTask;
         }
 
@@ -60,6 +64,11 @@ namespace GiG.Core.Orleans.Sample.Grains
         {
             _logger.LogError($"Stream has error: {ex.Message}");
             return Task.CompletedTask;
+        }
+
+        public Task<IEnumerable<WalletTransaction>> GetAllAsync()
+        {
+            return Task.FromResult<IEnumerable<WalletTransaction>>(State);
         }
     }
 }

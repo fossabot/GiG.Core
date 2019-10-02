@@ -36,7 +36,7 @@ namespace GiG.Core.Orleans.Sample.Client
                     x.ConfigureConsulClustering(_configuration);
                     x.ConfigureKubernetesClustering(_configuration);
                 });
-                builder.AddAssemblies(typeof(ITransactionGrain));
+                builder.AddAssemblies(typeof(IWalletGrain));
             });
 
             services.AddControllers();

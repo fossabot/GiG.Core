@@ -3,21 +3,21 @@ using System.Threading.Tasks;
 
 namespace GiG.Core.Orleans.Sample.Contracts
 {
-    public interface ITransactionGrain : IGrainWithGuidKey
+    public interface IWalletGrain : IGrainWithGuidKey
     {
         /// <summary>
-        /// Performs a Deposit
+        /// Performs a Debit
         /// </summary>
         /// <param name="amount"></param>
         /// <returns></returns>
-        Task<decimal> Deposit(decimal amount);
+        Task<decimal> Debit(decimal amount);
 
         /// <summary>
-        /// Performs a Withdrawal
+        /// Performs a Credit
         /// </summary>
         /// <param name="amount"></param>
         /// <returns></returns>
-        Task<decimal> Withdraw(decimal amount);
+        Task<decimal> Credit(decimal amount);
 
         /// <summary>
         /// Get Balance
