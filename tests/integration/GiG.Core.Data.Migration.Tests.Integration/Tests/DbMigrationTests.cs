@@ -139,7 +139,7 @@ namespace GiG.Core.Data.Migration.Tests.Integration.Tests
         private static IServiceCollection SetupServiceCollection()
         {
             var services = new ServiceCollection();
-            services.AddSingleton<IHostingEnvironment>(new HostingEnvironment { EnvironmentName = "Development" });
+            services.AddSingleton<IHostEnvironment>(new HostingEnvironment { EnvironmentName = "Development" });
             services.AddLogging();
 
             return services;
@@ -147,7 +147,7 @@ namespace GiG.Core.Data.Migration.Tests.Integration.Tests
 
         private static long GetNumberOfScriptsExecuted(SqliteConnection connection, string metaTableName = "changelog")
         {
-            var command = new SqliteCommand($"SELECT Count(id) FROM {metaTableName}", connection);
+            using var command = new SqliteCommand($"SELECT Count(id) FROM {metaTableName}", connection);
             var res = (long)command.ExecuteScalar();
 
             return res-1;
@@ -155,8 +155,7 @@ namespace GiG.Core.Data.Migration.Tests.Integration.Tests
 
         private static bool WasTableCreated(SqliteConnection connection, string tableName)
         {
-            var sqlCmd = new SqliteCommand($"SELECT name FROM sqlite_master WHERE type = 'table' AND name = '{tableName}'", 
-                connection);
+            using var sqlCmd = new SqliteCommand($"SELECT name FROM sqlite_master WHERE type = 'table' AND name = '{tableName}'", connection);
             var tableCreated = sqlCmd.ExecuteScalar() != null;
 
             return tableCreated;
