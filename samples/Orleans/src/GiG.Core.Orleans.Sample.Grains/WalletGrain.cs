@@ -68,7 +68,7 @@ namespace GiG.Core.Orleans.Sample.Grains
         /// </summary>
         /// <param name="amount"></param>
         /// <returns></returns>
-        public async Task<decimal> Debit(decimal amount)
+        public async Task<decimal> DebitAsync(decimal amount)
         {
             _logger.LogInformation($"Debit {amount}");
             State.Amount += amount;
@@ -91,12 +91,12 @@ namespace GiG.Core.Orleans.Sample.Grains
         /// </summary>
         /// <param name="amount"></param>
         /// <returns></returns>
-        public async Task<decimal> Credit(decimal amount)
+        public async Task<decimal> CreditAsync(decimal amount)
         {
-            if (amount > State.Amount)
-            {
-                throw new Exception("Credit Amount must be smaller or equal to the Balance.");
-            }
+            //if (amount > State.Amount)
+            //{
+            //    throw new Exception("Credit Amount must be smaller or equal to the Balance.");
+            //}
             
             _logger.LogInformation($"Credit {amount}");
             State.Amount -= amount;
@@ -118,7 +118,7 @@ namespace GiG.Core.Orleans.Sample.Grains
         /// Get Balance
         /// </summary>
         /// <returns></returns>
-        public Task<decimal> GetBalance()
+        public Task<decimal> GetBalanceAsync()
         {
             return Task.FromResult(State.Amount);
         }
@@ -128,10 +128,10 @@ namespace GiG.Core.Orleans.Sample.Grains
             switch (item.TransactionType)
             {
                 case PaymentTransactionType.Deposit:
-                    await Debit(item.Amount);
+                    await DebitAsync(item.Amount);
                     break;
                 case PaymentTransactionType.Withdrawal:
-                    await Credit(item.Amount);
+                    await CreditAsync(item.Amount);
                     break;
             }
         }

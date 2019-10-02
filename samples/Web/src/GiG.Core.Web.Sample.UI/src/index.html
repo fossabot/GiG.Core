@@ -206,12 +206,11 @@
 </html>
 
 <script type="text/javascript">
-	const paymentsBaseUrl = "/payments";
-	const walletsBaseUrl = "/wallets";
+	const baseUrl = "/transactions";
 	const headers = new Headers({ 'Player-ID': getPlayerId(), 'Content-Type': 'application/json', 'Accept': 'application/json' })
 
 	function getBalance() {
-		fetch(`${walletsBaseUrl}/balance`, { headers })
+		fetch(`${baseUrl}/balance`, { headers })
 			.then(response => response.json().then(
 				data => {
 					updateBalance(data);
@@ -222,7 +221,7 @@
 	function withdrawal(element) {
 		var amount = parseInt(document.getElementById("withdraw").value);
 
-		fetch(`${paymentsBaseUrl}/withdraw`, {
+		fetch(`${baseUrl}/withdraw`, {
 			method: "POST",
 			headers: headers,
 			body: JSON.stringify({
@@ -243,7 +242,7 @@
 	function deposit(element) {
 		var amount = parseInt(document.getElementById("deposit").value);
 
-		fetch(`${paymentsBaseUrl}/deposit`, {
+		fetch(`${baseUrl}/deposit`, {
 			method: "POST",
 			headers: headers,
 			body: JSON.stringify({

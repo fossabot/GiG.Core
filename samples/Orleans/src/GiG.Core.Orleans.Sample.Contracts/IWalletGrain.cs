@@ -10,19 +10,19 @@ namespace GiG.Core.Orleans.Sample.Contracts
         /// </summary>
         /// <param name="amount"></param>
         /// <returns></returns>
-        Task<decimal> Debit(decimal amount);
+        Task<decimal> DebitAsync(decimal amount);
 
         /// <summary>
         /// Performs a Credit
         /// </summary>
         /// <param name="amount"></param>
         /// <returns></returns>
-        Task<decimal> Credit(decimal amount);
+        Task<decimal> CreditAsync(decimal amount);
 
         /// <summary>
         /// Get Balance
         /// </summary>
         /// <returns></returns>
-        Task<decimal> GetBalance();
+        Task<decimal> GetBalanceAsync();
     }
 }

@@ -32,16 +32,20 @@ namespace GiG.Core.Orleans.Sample.Client.Controllers
         [HttpPost("deposit")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<ActionResult<decimal>> Deposit(TransactionRequest request)
+        public async Task<ActionResult<decimal>>Deposit(TransactionRequest request)
         {
             if (request.Amount < MinimumAmount)
             {
                 return BadRequest($"Deposit Amount must be greater than {MinimumAmount}.");
             }
 
-            var balance = await _clusterClient.GetGrain<IPaymentGrain>(_playerInformationAccessor.PlayerId.Value).Deposit(request.Amount);
+            var paymentGrain = _clusterClient.GetGrain<IPaymentGrain>(_playerInformationAccessor.PlayerId.Value);
 
-            return Ok(balance);
+            await paymentGrain.Deposit(request.Amount);
+
+            var walletGrain = _clusterClient.GetGrain<IWalletGrain>(_playerInformationAccessor.PlayerId.Value);
+
+            return Ok(await walletGrain.GetBalanceAsync());
         }
 
         /// <summary>
@@ -54,11 +58,13 @@ namespace GiG.Core.Orleans.Sample.Client.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<decimal>> Withdraw(TransactionRequest request)
         {
-            var grain = _clusterClient.GetGrain<IPaymentGrain>(_playerInformationAccessor.PlayerId.Value);
+            var paymentGrain = _clusterClient.GetGrain<IPaymentGrain>(_playerInformationAccessor.PlayerId.Value);
             
-            var balance = await grain.Withdraw(request.Amount);
+            await paymentGrain.Withdraw(request.Amount);
 
-            return Ok(balance);
+            var walletGrain = _clusterClient.GetGrain<IWalletGrain>(_playerInformationAccessor.PlayerId.Value);
+
+            return Ok(await walletGrain.GetBalanceAsync());
         }
 
         public async Task<ActionResult<IEnumerable<PaymentTransaction>>> GetAllAsync()

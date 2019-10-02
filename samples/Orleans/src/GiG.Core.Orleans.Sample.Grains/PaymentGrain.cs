@@ -1,6 +1,5 @@
 ﻿using GiG.Core.Orleans.Sample.Contracts;
 using GiG.Core.Orleans.Sample.Contracts.Models.Payment;
-using GiG.Core.Orleans.Sample.Contracts.Models.Wallet;
 using Microsoft.Extensions.Logging;
 using Orleans;
 using Orleans.Providers;
@@ -15,7 +14,6 @@ namespace GiG.Core.Orleans.Sample.Grains
         private IAsyncStream<PaymentTransaction> _stream;
 
         private readonly ILogger _logger;
-        private decimal _balance = 0;
 
         public override Task OnActivateAsync()
         {
@@ -36,7 +34,7 @@ namespace GiG.Core.Orleans.Sample.Grains
         /// </summary>
         /// <param name="amount"></param>
         /// <returns></returns>
-        public async Task<decimal> Deposit(decimal amount)
+        public async Task Deposit(decimal amount)
         {
             _logger.LogInformation($"Deposit {amount}");
 
@@ -47,8 +45,6 @@ namespace GiG.Core.Orleans.Sample.Grains
             };
 
             await _stream.OnNextAsync(transactionModel);
-
-            return _balance;
         }
 
         /// <summary>
@@ -56,7 +52,7 @@ namespace GiG.Core.Orleans.Sample.Grains
         /// </summary>
         /// <param name="amount"></param>
         /// <returns></returns>
-        public async Task<decimal> Withdraw(decimal amount)
+        public async Task Withdraw(decimal amount)
         {
             _logger.LogInformation($"Withdraw {amount}");
 
@@ -67,8 +63,6 @@ namespace GiG.Core.Orleans.Sample.Grains
             };
 
             await _stream.OnNextAsync(transactionModel);
-
-            return _balance;
         }
     }
 }

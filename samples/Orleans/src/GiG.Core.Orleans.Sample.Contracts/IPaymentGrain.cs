@@ -9,14 +9,12 @@ namespace GiG.Core.Orleans.Sample.Contracts
         /// Performs a Deposit
         /// </summary>
         /// <param name="amount"></param>
-        /// <returns></returns>
-        Task<decimal> Deposit(decimal amount);
+        Task Deposit(decimal amount);
 
         /// <summary>
         /// Performs a Withdrawal
         /// </summary>
         /// <param name="amount"></param>
-        /// <returns></returns>
-        Task<decimal> Withdraw(decimal amount);
+        Task Withdraw(decimal amount);
     }
 }

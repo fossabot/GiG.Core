@@ -25,7 +25,7 @@ namespace GiG.Core.Orleans.Sample.Client.Controllers
         [HttpGet("balance")]
         public async Task<ActionResult<decimal>> Get()
         {
-            var balance = await _clusterClient.GetGrain<IWalletGrain>(_playerInformationAccessor.PlayerId.Value).GetBalance();
+            var balance = await _clusterClient.GetGrain<IWalletGrain>(_playerInformationAccessor.PlayerId.Value).GetBalanceAsync();
 
             return Ok(balance);
         }    
