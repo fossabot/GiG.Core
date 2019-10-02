@@ -23,7 +23,7 @@ namespace GiG.Core.Benchmarks.Cache
         }
 
         [Benchmark]
-        public void ReadOperations_LargeDataSet_LargeReadCount_ItemFound()
+        public void LargeDataSet_LargeReadCount_ItemFound()
         {
             var random = new Random();
 
@@ -39,7 +39,7 @@ namespace GiG.Core.Benchmarks.Cache
         }
 
         [Benchmark]
-        public void ReadOperations_LargeDataSet_LargeReadCount_ItemNotFound()
+        public void LargeDataSet_LargeReadCount_ItemNotFound()
         {
             var random = new Random();
 
