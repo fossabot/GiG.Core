@@ -52,7 +52,7 @@ namespace GiG.Core.Data.Migration.Abstractions
         /// <returns>The <see cref="T:GiG.Core.Data.Migration.Evolve.MigrationOptionsBuilder" />.</returns>
         public MigrationOptionsBuilder AddDefaultMigrationOptions()
         {
-            var currentEnvironment = _serviceProvider.GetRequiredService<IHostingEnvironment>();
+            var currentEnvironment = _serviceProvider.GetRequiredService<IHostEnvironment>();
 
             AddLocation(DefaultScriptsLocation);
             AddLocation($"{DefaultScriptsLocation}.{currentEnvironment.EnvironmentName}");
@@ -86,7 +86,7 @@ namespace GiG.Core.Data.Migration.Abstractions
         /// <returns>The <see cref="T:GiG.Core.Data.Migration.Evolve.MigrationOptionsBuilder" />.</returns>
         public MigrationOptionsBuilder AddLocation(string location, params string[] environments)
         {
-            var currentEnvironment = _serviceProvider.GetRequiredService<IHostingEnvironment>().EnvironmentName;
+            var currentEnvironment = _serviceProvider.GetRequiredService<IHostEnvironment>().EnvironmentName;
 
             if (environments.Any(x => x.Equals(currentEnvironment)))
             {
