@@ -23,12 +23,13 @@ namespace GiG.Core.Benchmarks.Cache
         }
 
         [Benchmark]
-        public void ReadOperations_SmallDataSet_LargeReadCount()
+        public void ReadOperations_LargeDataSet_LargeReadCount()
         {
             var random = new Random();
 
             for (var i = 0; i <= ReadCount; i++)
             {
+                ///we pick a random item from the search list to use it as a search term to search the hashset with
                 var index = random.Next(1, _searchListCount);
 
                 var searchTerm = _searchList[index];
@@ -54,6 +55,7 @@ namespace GiG.Core.Benchmarks.Cache
 
             var random = new Random();
 
+            //we build a search list by picking one million random values 
             _searchList = new List<PasswordBlacklist>();
 
             for (var i = 0; i <= _searchListCount; i++)
