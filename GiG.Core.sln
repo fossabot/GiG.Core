@@ -227,12 +227,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Clustering
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Clustering.Client", "src\GiG.Core.Orleans.Clustering.Client\GiG.Core.Orleans.Clustering.Client.csproj", "{721C938B-EF7E-40E2-BCF2-7ED9ABACDF2F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{6F22F877-271D-4C8A-B68E-2713EE3211EF}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{252E33E7-FCBA-4D4B-BDA3-BE4484365131}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Orleans.Sample.Tests.ApiTests", "samples\tests\api\GiG.Core.Orleans.Sample.Tests.ApiTests\GiG.Core.Orleans.Sample.Tests.ApiTests.csproj", "{5BC109AC-1F63-4300-A88C-142AE099CD19}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -462,10 +456,6 @@ Global
 		{721C938B-EF7E-40E2-BCF2-7ED9ABACDF2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{721C938B-EF7E-40E2-BCF2-7ED9ABACDF2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{721C938B-EF7E-40E2-BCF2-7ED9ABACDF2F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5BC109AC-1F63-4300-A88C-142AE099CD19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5BC109AC-1F63-4300-A88C-142AE099CD19}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5BC109AC-1F63-4300-A88C-142AE099CD19}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5BC109AC-1F63-4300-A88C-142AE099CD19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -556,9 +546,6 @@ Global
 		{5FF2C36A-9641-48E5-A138-65B0A8785070} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
 		{3F0602CE-6A78-41F6-8F34-9C7B03A9BC32} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
 		{721C938B-EF7E-40E2-BCF2-7ED9ABACDF2F} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
-		{6F22F877-271D-4C8A-B68E-2713EE3211EF} = {99337274-FAB8-4358-81BB-3736EE2CCDE6}
-		{252E33E7-FCBA-4D4B-BDA3-BE4484365131} = {6F22F877-271D-4C8A-B68E-2713EE3211EF}
-		{5BC109AC-1F63-4300-A88C-142AE099CD19} = {252E33E7-FCBA-4D4B-BDA3-BE4484365131}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}
