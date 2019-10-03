@@ -6,7 +6,7 @@
     public class KubernetesSiloOptions : KubernetesOptions
     {
         /// <summary>
-        /// Create Resources on Initialisation.
+        /// Create Resources on Initialization.
         /// </summary>
         /// <remarks>
         /// The default value is <c>false</c>
@@ -14,7 +14,7 @@
         public bool CanCreateResources { get; set; } = false;
 
         /// <summary>
-        /// Drop Resources on Initialisation.
+        /// Drop Resources on Initialization.
         /// </summary>
         /// <remarks>
         /// The default value is <c>false</c>

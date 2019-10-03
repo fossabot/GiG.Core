@@ -139,7 +139,7 @@ namespace GiG.Core.Data.Migration.Tests.Integration.Tests
         private static IServiceCollection SetupServiceCollection()
         {
             var services = new ServiceCollection();
-            services.AddSingleton<IHostingEnvironment>(new HostingEnvironment { EnvironmentName = "Development" });
+            services.AddSingleton<IHostEnvironment>(new HostingEnvironment { EnvironmentName = "Development" });
             services.AddLogging();
 
             return services;

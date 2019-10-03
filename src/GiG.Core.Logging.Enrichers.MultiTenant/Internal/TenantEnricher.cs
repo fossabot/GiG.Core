@@ -20,8 +20,7 @@ namespace GiG.Core.Logging.Enrichers.MultiTenant.Internal
         {
             if (_tenantAccessor.Values?.Any() ?? false)
             {
-                var logEventProperty = propertyFactory.CreateProperty(TenantId, _tenantAccessor.Values,
-                    destructureObjects: true);
+                var logEventProperty = propertyFactory.CreateProperty(TenantId, _tenantAccessor.Values, true);
 
                 logEvent.AddPropertyIfAbsent(logEventProperty);
             }

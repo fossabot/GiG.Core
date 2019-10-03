@@ -28,7 +28,7 @@ namespace GiG.Core.Context.Web.Tests.Integration.Tests
             const string forwardedFor = "10.1.12.15";
 
             // Act 
-            using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/mock");
+            using var request = new HttpRequestMessage(HttpMethod.Get, "/api/mock");
             request.Headers.Add(ForwardedHeadersDefaults.XForwardedForHeaderName, forwardedFor);
             using var response = await client.SendAsync(request);
 

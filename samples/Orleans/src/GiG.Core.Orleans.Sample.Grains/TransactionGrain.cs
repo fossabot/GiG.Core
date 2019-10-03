@@ -14,7 +14,7 @@ namespace GiG.Core.Orleans.Sample.Grains
         /// <summary>
         /// The balance.
         /// </summary>
-        public decimal Balance { get; set; } = 0;
+        public decimal Balance { get; set; }
     }
 
     [StorageProvider(ProviderName = Constants.InMemoryPersistanceName)]

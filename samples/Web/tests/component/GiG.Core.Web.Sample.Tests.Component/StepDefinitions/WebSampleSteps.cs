@@ -8,8 +8,8 @@ namespace GiG.Core.Web.Sample.Tests.Component.StepDefinitions
     [Binding]
     public class WebSampleSteps
     {
-        public WebSampleService _webSampleService;
-        public ScenarioContext _scenarioContext;
+        private readonly WebSampleService _webSampleService;
+        private readonly ScenarioContext _scenarioContext;
 
         public WebSampleSteps(WebSampleService webSampleService, ScenarioContext scenarioContext) 
         {
@@ -40,9 +40,9 @@ namespace GiG.Core.Web.Sample.Tests.Component.StepDefinitions
             _webSampleService.Deposit(transactionRequest);
         }
 
-        [Given(@"I deposit '(.*)' '(less|more)' than the mimimum deposit amount")]
-        [When(@"I deposit '(.*)' '(less|more)' than the mimimum deposit amount")]
-        public void GivenIDepositMoreThanTheMimimumDepositAmount(decimal depositAmount, string lessOrMore)
+        [Given(@"I deposit '(.*)' '(less|more)' than the minimum deposit amount")]
+        [When(@"I deposit '(.*)' '(less|more)' than the minimum deposit amount")]
+        public void GivenIDepositMoreThanTheMinimumDepositAmount(decimal depositAmount, string lessOrMore)
         {
             if (lessOrMore.Equals("less")) 
             {

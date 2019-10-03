@@ -11,15 +11,9 @@ namespace GiG.Core.MultiTenant.Web.Tests.Integration.Mocks.Controllers
     {
         private readonly ITenantAccessor _tenantAccessor;
 
-        public MockController(ITenantAccessor tenantAccessor)
-        {
-            _tenantAccessor = tenantAccessor;
-        }
+        public MockController(ITenantAccessor tenantAccessor) => _tenantAccessor = tenantAccessor;
 
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
-        {
-            return _tenantAccessor.Values.ToList();
-        }
+        public ActionResult<IEnumerable<string>> Get() => _tenantAccessor.Values.ToList();
     }
 }
