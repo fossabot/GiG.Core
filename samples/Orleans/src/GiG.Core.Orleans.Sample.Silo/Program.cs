@@ -5,7 +5,6 @@ using GiG.Core.Hosting.Extensions;
 using GiG.Core.Logging.All.Extensions;
 using Microsoft.Extensions.Hosting;
 
-
 namespace GiG.Core.Orleans.Sample.Silo
 {
     public class Program
@@ -15,7 +14,7 @@ namespace GiG.Core.Orleans.Sample.Silo
             CreateHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
+        private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .UseApplicationMetadata()
                 .ConfigureServices(services => {

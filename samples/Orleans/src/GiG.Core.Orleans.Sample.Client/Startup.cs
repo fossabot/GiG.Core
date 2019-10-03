@@ -1,9 +1,11 @@
 using GiG.Core.Context.Orleans.Extensions;
 using GiG.Core.DistributedTracing.Orleans.Extensions;
+using GiG.Core.DistributedTracing.Web.Extensions;
+using GiG.Core.HealthChecks.Extensions;
 using GiG.Core.Orleans.Client.Extensions;
-using GiG.Core.Orleans.Clustering.Client.Extensions;
-using GiG.Core.Orleans.Clustering.Consul.Client.Extensions;
-using GiG.Core.Orleans.Clustering.Kubernetes.Client.Extensions;
+using GiG.Core.Orleans.Clustering.Consul.Extensions;
+using GiG.Core.Orleans.Clustering.Extensions;
+using GiG.Core.Orleans.Clustering.Kubernetes.Extensions;
 using GiG.Core.Orleans.Sample.Contracts;
 using GiG.Core.Web.Docs.Extensions;
 using GiG.Core.Web.Hosting.Extensions;
@@ -25,7 +27,10 @@ namespace GiG.Core.Orleans.Sample.Client
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Accessors
             services.AddSingleton<IPlayerInformationAccessor, PlayerInformationAccessor>();
+
+            // Orleans Client
             services.AddClusterClient((builder, sp) =>
             {
                 builder.AddCorrelationOutgoingFilter(sp);
@@ -36,14 +41,15 @@ namespace GiG.Core.Orleans.Sample.Client
                     x.ConfigureConsulClustering(_configuration);
                     x.ConfigureKubernetesClustering(_configuration);
                 });
-                builder.AddAssemblies(typeof(ITransactionGrain));
+                builder.AddAssemblies(typeof(IWalletGrain));
             });
 
-            services.AddControllers();
+            // Health Checks
+            services.AddHealthChecks();
 
+            // WebAPI
             services.ConfigureApiDocs(_configuration);
-
-            // Forwarded Headers
+            services.AddControllers();
             services.ConfigureForwardedHeaders();
         }
 
@@ -51,8 +57,12 @@ namespace GiG.Core.Orleans.Sample.Client
         public void Configure(IApplicationBuilder app)
         {
             app.UseForwardedHeaders();
+            app.UsePathBaseFromConfiguration();
+            app.UseCorrelationId();
+            app.UseHealthChecks();
             app.UseRouting();
             app.UseApiDocs();
+
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
     }

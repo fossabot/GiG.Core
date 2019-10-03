@@ -35,10 +35,10 @@ services:
       - "7000:8080"
     restart: on-failure
   
-  sample-web-ui:
-    image: ${DOCKER_REGISTRY-}gig.core.web.sample.ui
+  sample-ui:
+    image: ${DOCKER_REGISTRY-}gig.core.orleans.sample.ui
     build:
-      context: ../samples/Web/src/GiG.Core.Web.Sample.UI
+      context: ../samples/Orleans/src/GiG.Core.Orleans.Sample.UI
       dockerfile: Dockerfile
     depends_on:
       - sample-client

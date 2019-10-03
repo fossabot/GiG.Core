@@ -1,9 +1,9 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0.0-rc1 AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0.0 AS base
 ENV COMPlus_ReadyToRun=0
 WORKDIR /app
 EXPOSE 8080
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0.100-rc1 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0.100 AS build
 WORKDIR /src
 COPY ["samples/Orleans/src/GiG.Core.Orleans.Sample.Client/GiG.Core.Orleans.Sample.Client.csproj", "samples/Orleans/src/GiG.Core.Orleans.Sample.Client/"]
 RUN dotnet restore "samples/Orleans/src/GiG.Core.Orleans.Sample.Client/GiG.Core.Orleans.Sample.Client.csproj"

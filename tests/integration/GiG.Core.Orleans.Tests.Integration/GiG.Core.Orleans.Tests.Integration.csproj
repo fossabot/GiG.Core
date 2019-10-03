@@ -14,15 +14,15 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Bogus" Version="28.2.1" />
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0-rc1.19456.10" />
-        <PackageReference Include="Microsoft.Extensions.Http" Version="3.0.0-rc1.19456.10" />
+        <PackageReference Include="Bogus" Version="28.3.1" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Http" Version="3.0.0" />
         <PackageReference Include="Microsoft.Orleans.Server" Version="3.0.0-beta1" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
-        <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
-        <PackageReference Include="System.Text.Json" Version="4.6.0-rc1.19456.4" />
-        <PackageReference Include="xunit" Version="2.4.0" />
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.3.0" />
+        <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.6.0" />
+        <PackageReference Include="System.Text.Json" Version="4.6.0" />
+        <PackageReference Include="xunit" Version="2.4.1" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
         <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="3.0.0-beta1">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
         </PackageReference>
@@ -34,12 +34,8 @@
       <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Orleans\GiG.Core.DistributedTracing.Orleans.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Web\GiG.Core.DistributedTracing.Web.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Client\GiG.Core.Orleans.Client.csproj" />
-      <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering.Client\GiG.Core.Orleans.Clustering.Client.csproj" />
-      <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering.Consul.Client\GiG.Core.Orleans.Clustering.Consul.Client.csproj" />
-      <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering.Consul.Silo\GiG.Core.Orleans.Clustering.Consul.Silo.csproj" />
-      <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering.Kubernetes.Client\GiG.Core.Orleans.Clustering.Kubernetes.Client.csproj" />
-      <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering.Kubernetes.Silo\GiG.Core.Orleans.Clustering.Kubernetes.Silo.csproj" />
-      <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering.Silo\GiG.Core.Orleans.Clustering.Silo.csproj" />
+      <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering.Consul\GiG.Core.Orleans.Clustering.Consul.csproj" />
+      <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering.Kubernetes\GiG.Core.Orleans.Clustering.Kubernetes.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Hosting.Silo\GiG.Core.Orleans.Hosting.Silo.csproj" />
     </ItemGroup>
 

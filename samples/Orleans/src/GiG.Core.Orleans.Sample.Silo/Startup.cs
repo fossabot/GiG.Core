@@ -1,7 +1,8 @@
-﻿using GiG.Core.Orleans.Clustering.Silo.Extensions;
-using GiG.Core.Orleans.Clustering.Consul.Silo.Extensions;
-using GiG.Core.Orleans.Clustering.Kubernetes.Silo.Extensions;
+﻿using GiG.Core.Orleans.Clustering.Consul.Extensions;
+using GiG.Core.Orleans.Clustering.Extensions;
+using GiG.Core.Orleans.Clustering.Kubernetes.Extensions;
 using GiG.Core.Orleans.Hosting.Silo.Extensions;
+using GiG.Core.Orleans.Sample.Contracts;
 using GiG.Core.Orleans.Sample.Grains;
 using Microsoft.Extensions.DependencyInjection;
 using Orleans.Hosting;
@@ -27,7 +28,10 @@ namespace GiG.Core.Orleans.Sample.Silo
                     x.ConfigureConsulClustering(ctx.Configuration);
                     x.ConfigureKubernetesClustering(ctx.Configuration);
                 })
-                .AddAssemblies(typeof(TransactionGrain));
+                .AddMemoryGrainStorageAsDefault()
+                .AddAssemblies(typeof(WalletGrain))
+                .AddSimpleMessageStreamProvider(Constants.StreamProviderName)
+                .AddMemoryGrainStorage(Constants.StreamsMemoryStorageName);
         }
     }
 }
