@@ -28,8 +28,10 @@ namespace GiG.Core.Orleans.Sample.Silo
                     x.ConfigureConsulClustering(ctx.Configuration);
                     x.ConfigureKubernetesClustering(ctx.Configuration);
                 })
-                .AddMemoryGrainStorage(Constants.InMemoryPersistanceName)
-                .AddAssemblies(typeof(TransactionGrain));
+                .AddMemoryGrainStorageAsDefault()
+                .AddAssemblies(typeof(WalletGrain))
+                .AddSimpleMessageStreamProvider(Constants.StreamProviderName)
+                .AddMemoryGrainStorage(Constants.StreamsMemoryStorageName);
         }
     }
 }

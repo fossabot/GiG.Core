@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using GiG.Core.MultiTenant.Abstractions;
+﻿using GiG.Core.MultiTenant.Abstractions;
 using Serilog.Core;
 using Serilog.Events;
+using System.Linq;
 
 namespace GiG.Core.Logging.Enrichers.MultiTenant.Internal
 {
