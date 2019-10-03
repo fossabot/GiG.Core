@@ -23,25 +23,9 @@ namespace GiG.Core.Orleans.Sample.Grains
         {
             var streamProvider = GetStreamProvider(Constants.StreamProviderName);
             _stream = streamProvider.GetStream<WalletTransaction>(this.GetPrimaryKey(), Constants.WalletTransactionsStreamNamespace);
-
-            await SubscribeAsync();
+            await _stream.SubscribeOrResumeAsync(OnNextAsync);
             
             await base.OnActivateAsync();
-        }
-
-        private async Task SubscribeAsync()
-        {
-            var subscriptionHandles = await _stream.GetAllSubscriptionHandles();
-
-            if (subscriptionHandles.Count > 0)
-            {
-                foreach (var subscriptionHandle in subscriptionHandles)
-                {
-                    await subscriptionHandle.ResumeAsync(this.OnNextAsync);
-                }
-            }
-
-            await _stream.SubscribeAsync(this.OnNextAsync);
         }
         
         public Task OnNextAsync(WalletTransaction item, StreamSequenceToken token = null)
@@ -54,12 +38,14 @@ namespace GiG.Core.Orleans.Sample.Grains
         public Task OnCompletedAsync()
         {
             _logger.LogInformation("Stream is Complete");
+
             return Task.CompletedTask;
         }
 
         public Task OnErrorAsync(Exception ex)
         {
             _logger.LogError($"Stream has error: {ex.Message}");
+            
             return Task.CompletedTask;
         }
     }

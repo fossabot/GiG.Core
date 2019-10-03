@@ -25,55 +25,60 @@ namespace GiG.Core.Orleans.Sample.Client.Controllers
         }
 
         /// <summary>
-        /// Performs a Deposit
+        /// Get all Payments.
         /// </summary>
-        /// <param name="request">Deposit Request</param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<PaymentTransaction>>> Get()
+        {
+            var playerId = _playerInformationAccessor.PlayerId;
+
+            var transactions = await _clusterClient.GetGrain<IPaymentTransactionGrain>(playerId).GetAllAsync();
+
+            return Ok(transactions);
+        }
+
+        /// <summary>
+        /// Performs a DepositAsync.
+        /// </summary>
+        /// <param name="request">DepositAsync Request.</param>
         /// <returns></returns>
         [HttpPost("deposit")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<decimal>>Deposit(TransactionRequest request)
         {
+            var playerId = _playerInformationAccessor.PlayerId;
+            
             if (request.Amount < MinimumAmount)
             {
                 return BadRequest($"Deposit Amount must be greater than {MinimumAmount}.");
             }
 
-            var paymentGrain = _clusterClient.GetGrain<IPaymentGrain>(_playerInformationAccessor.PlayerId.Value);
+            await _clusterClient.GetGrain<IPaymentGrain>(playerId).DepositAsync(request.Amount);
 
-            await paymentGrain.Deposit(request.Amount);
-
-            var walletGrain = _clusterClient.GetGrain<IWalletGrain>(_playerInformationAccessor.PlayerId.Value);
-
-            return Ok(await walletGrain.GetBalanceAsync());
+            var balance = await _clusterClient.GetGrain<IWalletGrain>(playerId).GetBalanceAsync();
+            
+            return Ok(balance);
         }
 
         /// <summary>
-        /// Performs a Withdrawal
+        /// Performs a Withdrawal.
         /// </summary>
-        /// <param name="request">Withdrawal Request</param>
+        /// <param name="request">Withdrawal Request.</param>
         /// <returns></returns>
         [HttpPost("withdraw")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<decimal>> Withdraw(TransactionRequest request)
         {
-            var paymentGrain = _clusterClient.GetGrain<IPaymentGrain>(_playerInformationAccessor.PlayerId.Value);
-            
-            await paymentGrain.Withdraw(request.Amount);
+            var playerId = _playerInformationAccessor.PlayerId;
 
-            var walletGrain = _clusterClient.GetGrain<IWalletGrain>(_playerInformationAccessor.PlayerId.Value);
+            await _clusterClient.GetGrain<IPaymentGrain>(playerId).WithdrawAsync(request.Amount);
 
-            return Ok(await walletGrain.GetBalanceAsync());
-        }
+            var balance = await _clusterClient.GetGrain<IWalletGrain>(playerId).GetBalanceAsync();
 
-        public async Task<ActionResult<IEnumerable<PaymentTransaction>>> GetAllAsync()
-        {
-            var grain = _clusterClient.GetGrain<IPaymentTransactionGrain>(_playerInformationAccessor.PlayerId.Value);
-
-            var transactions = await grain.GetAllAsync();
-            
-            return Ok(transactions);
+            return Ok(balance);
         }
     }
 }

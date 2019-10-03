@@ -1,9 +1,9 @@
-namespace GiG.Core.Orleans.Sample.Contracts
+﻿namespace GiG.Core.Orleans.Sample.Contracts
 {
     /// <summary>
     /// Orleans Constants.
     /// </summary>
-    public class Constants
+    public static class Constants
     {
         /// <summary>
         /// The name for the Stream Provider.

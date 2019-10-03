@@ -1,10 +1,8 @@
-﻿using GiG.Core.Orleans.Sample.Client.Contracts;
-using GiG.Core.Orleans.Sample.Contracts;
+﻿using GiG.Core.Orleans.Sample.Contracts;
 using GiG.Core.Orleans.Sample.Contracts.Models.Payment;
 using Microsoft.AspNetCore.Mvc;
 using Orleans;
 using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace GiG.Core.Orleans.Sample.Client.Controllers
@@ -26,12 +24,12 @@ namespace GiG.Core.Orleans.Sample.Client.Controllers
         /// Gets the Payment Transactions.
         /// </summary>
         /// <returns></returns>
-        [HttpGet()]
-        public async Task<ActionResult<IEnumerable<PaymentTransaction>>> GetAllAsync()
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<PaymentTransaction>>> Get()
         {
-            var grain = _clusterClient.GetGrain<IPaymentTransactionGrain>(_playerInformationAccessor.PlayerId.Value);
+            var playerId = _playerInformationAccessor.PlayerId;
 
-            var transactions = await grain.GetAllAsync();
+            var transactions = await _clusterClient.GetGrain<IPaymentTransactionGrain>(playerId).GetAllAsync();
             
             return Ok(transactions);
         }

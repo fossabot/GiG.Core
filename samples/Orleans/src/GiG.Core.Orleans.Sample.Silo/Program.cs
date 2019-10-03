@@ -5,7 +5,6 @@ using GiG.Core.Hosting.Extensions;
 using GiG.Core.Logging.All.Extensions;
 using Microsoft.Extensions.Hosting;
 
-
 namespace GiG.Core.Orleans.Sample.Silo
 {
     public class Program

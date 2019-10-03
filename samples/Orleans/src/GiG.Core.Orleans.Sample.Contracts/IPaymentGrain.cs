@@ -1,20 +1,20 @@
-using System.Threading.Tasks;
 using Orleans;
+using System.Threading.Tasks;
 
 namespace GiG.Core.Orleans.Sample.Contracts
 {
     public interface IPaymentGrain : IGrainWithGuidKey
     {
         /// <summary>
-        /// Performs a Deposit
+        /// Performs a DepositAsync
         /// </summary>
         /// <param name="amount"></param>
-        Task Deposit(decimal amount);
+        Task DepositAsync(decimal amount);
 
         /// <summary>
         /// Performs a Withdrawal
         /// </summary>
         /// <param name="amount"></param>
-        Task Withdraw(decimal amount);
+        Task WithdrawAsync(decimal amount);
     }
 }
