@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System;
 
 namespace GiG.Core.Orleans.Sample.Client
 {
-    public class PlayerInformationAccessor : IPlayerInformationAccessor
+    internal class PlayerInformationAccessor : IPlayerInformationAccessor
     {
         private const string PlayerIdHeaderKey = "Player-ID";
+
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public PlayerInformationAccessor(IHttpContextAccessor httpContextAccessor)
@@ -12,6 +14,9 @@ namespace GiG.Core.Orleans.Sample.Client
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public string PlayerId => _httpContextAccessor.HttpContext.Request.Headers[PlayerIdHeaderKey];
+        public Guid PlayerId =>
+            Guid.TryParse(_httpContextAccessor.HttpContext.Request.Headers[PlayerIdHeaderKey], out var result)
+                ? result
+                : Guid.Empty;
     }
 }
