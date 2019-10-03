@@ -72,7 +72,7 @@ namespace GiG.Core.Logging.Abstractions
             if (_loggingOptions.Sinks == null)
             {
                 throw new ConfigurationErrorsException(
-                    $"No sinks were configured.  Please add at least one sink provider");
+                    "No sinks were configured.  Please add at least one sink provider");
             }
 
             if (!_loggingOptions.Sinks.TryGetValue(name, out var sinkOptions))
@@ -82,7 +82,7 @@ namespace GiG.Core.Logging.Abstractions
 
             if (sinkOptions.IsEnabled)
             {
-                sinkProvider?.RegisterSink(LoggerConfiguration.WriteTo);
+                sinkProvider.RegisterSink(LoggerConfiguration.WriteTo);
             }
 
             return this;

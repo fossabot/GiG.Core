@@ -210,7 +210,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Logging.Enrichers.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "performance", "performance", "{66468249-0BE3-4E03-A5B8-DE350CA051EE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Benchmarks", "tests\performance\GiG.Core.Benchmarks\GiG.Core.Benchmarks.csproj", "{43EBE64C-94E1-4C17-A015-399A957331AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Benchmarks", "tests\benchmarks\GiG.Core.Benchmarks\GiG.Core.Benchmarks.csproj", "{43EBE64C-94E1-4C17-A015-399A957331AC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "benchmarks", "benchmarks", "{8A64AE64-5734-41A3-9D3A-B6F2B0248ECE}"
 EndProject

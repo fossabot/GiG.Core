@@ -3,9 +3,9 @@ using Microsoft.Extensions.Hosting;
 
 namespace GiG.Core.Data.Migration.Sample
 {
-    static class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             CreateHostBuilder().Build().Run();
         }

@@ -7,7 +7,7 @@ namespace GiG.Core.Hosting
     /// </summary>
     public static class ApplicationMetadata
     {
-        private static string _name = Assembly.GetEntryAssembly().GetName().FullName;
+        private static string _name = Assembly.GetEntryAssembly()?.GetName().FullName;
 
         /// <summary>
         /// The application's name.
