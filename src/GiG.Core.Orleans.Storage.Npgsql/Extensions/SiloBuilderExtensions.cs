@@ -40,12 +40,30 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Extensions
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
             var namedStoreageSectionName = $"{sectionName}:{storageName}";
-            var npgsqlOptions = configuration.GetSection(namedStoreageSectionName).Get<NpgsqlOptions>();
+            var storageConfigSection = configuration.GetSection(namedStoreageSectionName);
+
+            return builder.AddNpgsqlGrainStorage(storageName, storageConfigSection);
+        }
+
+
+        /// <summary>
+        /// Adds a named Npgsql Grain Storage Provider.
+        /// </summary>
+        /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
+        /// <param name="storageName">The Grain Storage Instance Name.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/> containing the Grain Storage options.</param>
+        /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
+        public static ISiloBuilder AddNpgsqlGrainStorage([NotNull] this ISiloBuilder builder, string storageName, [NotNull] IConfigurationSection configurationSection)
+        {
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
+
+            var npgsqlOptions = configurationSection.Get<NpgsqlOptions>();
 
             if (npgsqlOptions == null)
             {
                 throw new ConfigurationErrorsException(
-                    $"Configuration section '{namedStoreageSectionName}' is not valid");
+                    $"Configuration section '{configurationSection.Path}' is not valid.");
             }
 
             builder.AddAdoNetGrainStorage(storageName, x =>
