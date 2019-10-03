@@ -307,3 +307,5 @@ OpenCover/
 
 **/*.Avro.cs
 **/*.feature.cs
+
+**/MasterMemory
