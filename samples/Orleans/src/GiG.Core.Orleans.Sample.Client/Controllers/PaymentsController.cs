@@ -1,9 +1,7 @@
 ﻿using GiG.Core.Orleans.Sample.Client.Contracts;
 using GiG.Core.Orleans.Sample.Contracts;
-using GiG.Core.Orleans.Sample.Contracts.Models.Payment;
 using Microsoft.AspNetCore.Mvc;
 using Orleans;
-using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -25,41 +23,27 @@ namespace GiG.Core.Orleans.Sample.Client.Controllers
         }
 
         /// <summary>
-        /// Get all Payments.
+        /// Performs a Deposit.
         /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<PaymentTransaction>>> Get()
-        {
-            var playerId = _playerInformationAccessor.PlayerId;
-
-            var transactions = await _clusterClient.GetGrain<IPaymentTransactionGrain>(playerId).GetAllAsync();
-
-            return Ok(transactions);
-        }
-
-        /// <summary>
-        /// Performs a DepositAsync.
-        /// </summary>
-        /// <param name="request">DepositAsync Request.</param>
+        /// <param name="request">Deposit Request.</param>
         /// <returns></returns>
         [HttpPost("deposit")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<decimal>>Deposit(TransactionRequest request)
-        {
-            var playerId = _playerInformationAccessor.PlayerId;
-            
+        {           
             if (request.Amount < MinimumAmount)
             {
                 return BadRequest($"Deposit Amount must be greater than {MinimumAmount}.");
             }
 
-            await _clusterClient.GetGrain<IPaymentGrain>(playerId).DepositAsync(request.Amount);
+            var paymentGrain = _clusterClient.GetGrain<IPaymentGrain>(_playerInformationAccessor.PlayerId);
 
-            var balance = await _clusterClient.GetGrain<IWalletGrain>(playerId).GetBalanceAsync();
+            await paymentGrain.DepositAsync(request.Amount);
+
+            var walletGrain = _clusterClient.GetGrain<IWalletGrain>(_playerInformationAccessor.PlayerId);
             
-            return Ok(balance);
+            return Ok(await walletGrain.GetBalanceAsync());
         }
 
         /// <summary>
@@ -72,13 +56,13 @@ namespace GiG.Core.Orleans.Sample.Client.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult<decimal>> Withdraw(TransactionRequest request)
         {
-            var playerId = _playerInformationAccessor.PlayerId;
+            var paymentGrain = _clusterClient.GetGrain<IPaymentGrain>(_playerInformationAccessor.PlayerId);
+            
+            await paymentGrain.WithdrawAsync(request.Amount);
 
-            await _clusterClient.GetGrain<IPaymentGrain>(playerId).WithdrawAsync(request.Amount);
+            var walletGrain = _clusterClient.GetGrain<IWalletGrain>(_playerInformationAccessor.PlayerId);
 
-            var balance = await _clusterClient.GetGrain<IWalletGrain>(playerId).GetBalanceAsync();
-
-            return Ok(balance);
+            return Ok(await walletGrain.GetBalanceAsync());
         }
     }
 }

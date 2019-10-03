@@ -50,7 +50,7 @@ namespace GiG.Core.Orleans.Sample.Grains
             {
                 Amount = amount,
                 NewBalance = State.Amount,
-                TransactionType = WalletTransactionType.Deposit
+                TransactionType = WalletTransactionType.Debit
             };
             
             await _walletStream.OnNextAsync(transactionModel);
@@ -78,7 +78,7 @@ namespace GiG.Core.Orleans.Sample.Grains
             {
                 Amount = amount,
                 NewBalance = State.Amount,
-                TransactionType = WalletTransactionType.Withdrawal
+                TransactionType = WalletTransactionType.Credit
             };
             
             await _walletStream.OnNextAsync(transactionModel);
