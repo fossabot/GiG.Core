@@ -7,7 +7,7 @@ using TechTalk.SpecFlow;
 namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
 {
     [Binding]
-    internal class OrleansSampleTransactionSteps: IClassFixture<OrleansSampleTransactionService>
+    internal class OrleansSampleTransactionSteps
     {
         private readonly OrleansSampleTransactionService _orleansSampleTransactionService;
         private readonly ScenarioContext _scenarioContext;
@@ -20,50 +20,58 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
             _random = new Random().Next(1, 10000).ToString();
         }
 
-        [Given(@"I Deposit (.*) on the account for player with id (.*) and IP (.*) using key (.*)")]
-        public void GivenIDepositOnTheAccountForPlayerWithIdAndIPUsingKey(decimal depositAmount, string playerId, string ipAddress, string key)
+
+        [Given(@"I Deposit '(.*)' on the account for player with(?: '(.*)' id and)? IP '(.*)'")]
+        public void GivenIDepositOnTheAccountForPlayerWithIdAndIP(decimal depositAmount, string playerState, string ipAddress)
         {
-            _orleansSampleTransactionService.SetHeaders(playerId + _random, ipAddress);
+            _orleansSampleTransactionService.SetHeaders(GetPlayerId(playerState), ipAddress);
 
             Response<decimal> response = _orleansSampleTransactionService.DepositAsync(new TransactionRequest {Amount = depositAmount}).GetAwaiter().GetResult();
-            _scenarioContext.Add(key, response);
+            _scenarioContext.Add("Deposit", response);
         }
 
-        [When(@"I request the balance of account for player with id (.*) and IP (.*) using key (.*)")]
-        public void WhenIRequestTheBalanceOfAccountForPlayerWithIdAndIPUsingKey(string playerId, string ipAddress, string key)
+        [When(@"I request the balance of account for player with(?: '(.*)' id and)? IP '(.*)'")]
+        public void WhenIRequestTheBalanceOfAccountForPlayerWithIdAndIP(string playerState, string ipAddress)
         {
-            _orleansSampleTransactionService.SetHeaders(playerId + _random, ipAddress);
+            _orleansSampleTransactionService.SetHeaders(GetPlayerId(playerState), ipAddress);
 
             Response<decimal> response = _orleansSampleTransactionService.GetBalanceAsync().GetAwaiter().GetResult();
-            _scenarioContext.Add(key, response);
+            _scenarioContext.Add("GetBalance", response);
         }
 
-        [When(@"I withdraw (.*) from account for player with id (.*) and IP (.*) using key (.*)")]
-        public void WhenIWithdrawFromAccountForPlayerWithIdAndIPUsingKey(decimal withdrawalAmount, string playerId, string ipAddress, string key)
+        [When(@"I withdraw '(.*)' from account for player with(?: '(.*)' id and)? IP '(.*)'")]
+        public void WhenIWithdrawFromAccountForPlayerWithIdAndIP(decimal withdrawalAmount, string playerState, string ipAddress)
         {
-            _orleansSampleTransactionService.SetHeaders(playerId + _random, ipAddress);
+            _orleansSampleTransactionService.SetHeaders(GetPlayerId(playerState), ipAddress);
 
             Response<decimal> response = _orleansSampleTransactionService.WithdrawAsync(new TransactionRequest {Amount = withdrawalAmount}).GetAwaiter().GetResult();
-            _scenarioContext.Add(key, response);
+            _scenarioContext.Add("Withdraw", response);
         }
 
-        [Then(@"the status code for key (.*) is (.*)")]
-        public void ThenTheStatusCodeForKeyIs(string key, string statusCode)
+        [Then(@"the status code for '(GetBalance|Deposit|Withdraw)' is '(.*)'")]
+        public void ThenTheStatusCodeForIs(string operationType, string statusCode)
         {
-            Assert.Equal(statusCode, _scenarioContext.Get<Response<decimal>>(key).ResponseMessage.StatusCode.ToString());
+            Assert.Equal(statusCode, _scenarioContext.Get<Response<decimal>>(operationType).ResponseMessage.StatusCode.ToString());
         }
 
-        [Then(@"the balance of the account using key (.*) is (.*)")]
-        public void ThenTheBalanceOfTheAccountUsingKeyIs(string key, decimal balance)
+        [Then(@"the '(GetBalance|Deposit|Withdraw)' balance is '(.*)'")]
+        public void ThenTheBalanceIs(string operationType, decimal balance)
         {
-            Assert.Equal(balance, _scenarioContext.Get<Response<decimal>>(key).GetContent());
+            
+            Assert.Equal(balance, _scenarioContext.Get<Response<decimal>>(operationType).GetContent());
         }
 
-        [Then(@"the error message using key (.*) is (.*)")]
-        public void ThenTheErrorMessageUsingKeyIs(string key, string message)
+        [Then(@"the error message for '(GetBalance|Deposit|Withdraw)' is '(.*)'")]
+        public void ThenTheErrorMessageUsingKeyIs(string operationType, string message)
         {
-            Assert.Equal(message, _scenarioContext.Get<Response<decimal>>(key).StringContent);
+            Assert.Equal(message, _scenarioContext.Get<Response<decimal>>(operationType).StringContent);
         }
 
+        private string GetPlayerId(string playerState)
+        {
+            if (string.IsNullOrEmpty(playerState))
+                return _random;
+            return playerState.Equals("invalid") ? "!!" : null;
+        }
     }
 }

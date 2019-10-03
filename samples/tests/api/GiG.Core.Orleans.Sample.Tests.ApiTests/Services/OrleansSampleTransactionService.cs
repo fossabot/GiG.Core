@@ -34,7 +34,7 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.Services
         public void SetHeaders(string playerId, string ipAddress)
         {
             _orleansSampleTransactionService.PlayerId = playerId;
-            _orleansSampleTransactionService.IPAddress = ipAddress.Equals("") ? null : ipAddress;
+            _orleansSampleTransactionService.IPAddress = string.IsNullOrEmpty(ipAddress) ? null : ipAddress;
         }
     }
 
