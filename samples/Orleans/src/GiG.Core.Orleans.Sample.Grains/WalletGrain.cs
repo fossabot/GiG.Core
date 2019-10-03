@@ -10,57 +10,30 @@ using System.Threading.Tasks;
 
 namespace GiG.Core.Orleans.Sample.Grains
 {
-    /// <summary>
-    /// State class for the Transaction Grain.
-    /// </summary>
-    public class Balance
-    {
-        /// <summary>
-        /// The balance.
-        /// </summary>
-        public decimal Amount { get; set; } = 0;
-    }
-
     [ImplicitStreamSubscription(Constants.PaymentTransactionsStreamNamespace)]
     [StorageProvider]
-    public class WalletGrain : Grain<Balance>, IWalletGrain, IAsyncObserver<PaymentTransaction>
+    public class WalletGrain : Grain<BalanceState>, IWalletGrain, IAsyncObserver<PaymentTransaction>
     {
         private IAsyncStream<WalletTransaction> _walletStream;
         private IAsyncStream<PaymentTransaction> _paymentStream;
         
         private readonly ILogger _logger;
-        private decimal _balance = 0;
-
-        public override async Task OnActivateAsync()
-        {
-            var streamProvider = GetStreamProvider(Constants.StreamProviderName);
-            _paymentStream = streamProvider.GetStream<PaymentTransaction>(this.GetPrimaryKey(), Constants.PaymentTransactionsStreamNamespace);
-            await SubscribeAsync();
-            
-            _walletStream = streamProvider.GetStream<WalletTransaction>(this.GetPrimaryKey(), Constants.WalletTransactionsStreamNamespace);
-            
-            await base.OnActivateAsync();
-        }
-        
-        private async Task SubscribeAsync()
-        {
-            var subscriptionHandles = await _paymentStream.GetAllSubscriptionHandles();
-
-            if (subscriptionHandles.Count > 0)
-            {
-                foreach (var subscriptionHandle in subscriptionHandles)
-                {
-                    await subscriptionHandle.ResumeAsync(this.OnNextAsync);
-                }
-            }
-
-            await _paymentStream.SubscribeAsync(this.OnNextAsync);
-        }
-        
+        private readonly decimal _balance = 0;
 
         public WalletGrain(ILogger<WalletGrain> logger)
         {
             _logger = logger;
+        }
+        
+        public override async Task OnActivateAsync()
+        {
+            var streamProvider = GetStreamProvider(Constants.StreamProviderName);
+            _paymentStream = streamProvider.GetStream<PaymentTransaction>(this.GetPrimaryKey(), Constants.PaymentTransactionsStreamNamespace);
+            await _paymentStream.SubscribeOrResumeAsync(OnNextAsync);
+            
+            _walletStream = streamProvider.GetStream<WalletTransaction>(this.GetPrimaryKey(), Constants.WalletTransactionsStreamNamespace);
+            
+            await base.OnActivateAsync();
         }
 
         /// <summary>
@@ -95,7 +68,7 @@ namespace GiG.Core.Orleans.Sample.Grains
         {
             //if (amount > State.Amount)
             //{
-            //    throw new Exception("Credit Amount must be smaller or equal to the Balance.");
+            //    throw new Exception("Credit Amount must be smaller or equal to the BalanceState.");
             //}
             
             _logger.LogInformation($"Credit {amount}");
@@ -115,7 +88,7 @@ namespace GiG.Core.Orleans.Sample.Grains
         }
         
         /// <summary>
-        /// Get Balance
+        /// Get BalanceState
         /// </summary>
         /// <returns></returns>
         public Task<decimal> GetBalanceAsync()
@@ -139,12 +112,14 @@ namespace GiG.Core.Orleans.Sample.Grains
         public Task OnCompletedAsync()
         {
             _logger.LogInformation("Stream is Complete");
+            
             return Task.CompletedTask;
         }
 
         public Task OnErrorAsync(Exception ex)
         {
             _logger.LogError($"Stream has error: {ex.Message}");
+
             return Task.CompletedTask;
         }
     }

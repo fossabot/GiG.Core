@@ -4,6 +4,6 @@ namespace GiG.Core.Orleans.Sample.Client
 {
     public interface IPlayerInformationAccessor
     {
-        Guid? PlayerId { get; }
+        Guid PlayerId { get; }
     }
 }

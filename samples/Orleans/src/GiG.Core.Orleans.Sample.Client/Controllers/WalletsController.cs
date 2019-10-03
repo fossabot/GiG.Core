@@ -19,13 +19,15 @@ namespace GiG.Core.Orleans.Sample.Client.Controllers
         }
 
         /// <summary>
-        /// Gets the Current Balance
+        /// Gets the Current Balance.
         /// </summary>
         /// <returns></returns>
         [HttpGet("balance")]
         public async Task<ActionResult<decimal>> Get()
         {
-            var balance = await _clusterClient.GetGrain<IWalletGrain>(_playerInformationAccessor.PlayerId.Value).GetBalanceAsync();
+            var playerId = _playerInformationAccessor.PlayerId;
+
+            var balance = await _clusterClient.GetGrain<IWalletGrain>(playerId).GetBalanceAsync();
 
             return Ok(balance);
         }    

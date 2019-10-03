@@ -15,6 +15,11 @@ namespace GiG.Core.Orleans.Sample.Grains
 
         private readonly ILogger _logger;
 
+        public PaymentGrain(ILogger<PaymentGrain> logger)
+        {
+            _logger = logger;
+        }
+
         public override Task OnActivateAsync()
         {
             var streamProvider = GetStreamProvider(Constants.StreamProviderName);
@@ -24,19 +29,14 @@ namespace GiG.Core.Orleans.Sample.Grains
             return base.OnActivateAsync();
         }
 
-        public PaymentGrain(ILogger<PaymentGrain> logger)
-        {
-            _logger = logger;
-        }
-
         /// <summary>
-        /// Performs a Deposit
+        /// Performs a DepositAsync
         /// </summary>
         /// <param name="amount"></param>
         /// <returns></returns>
-        public async Task Deposit(decimal amount)
+        public async Task DepositAsync(decimal amount)
         {
-            _logger.LogInformation($"Deposit {amount}");
+            _logger.LogInformation($"DepositAsync {amount}");
 
             var transactionModel = new PaymentTransaction()
             {
@@ -52,9 +52,9 @@ namespace GiG.Core.Orleans.Sample.Grains
         /// </summary>
         /// <param name="amount"></param>
         /// <returns></returns>
-        public async Task Withdraw(decimal amount)
+        public async Task WithdrawAsync(decimal amount)
         {
-            _logger.LogInformation($"Withdraw {amount}");
+            _logger.LogInformation($"WithdrawAsync {amount}");
 
             var transactionModel = new PaymentTransaction()
             {
