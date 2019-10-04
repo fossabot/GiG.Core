@@ -59,18 +59,11 @@ namespace GiG.Core.Orleans.Tests.Integration.Helpers
 
         private static IEnumerable<Silo> GetSilosFromResult(IEnumerable<KVStoreResult> results)
         {
-            var silos = new List<Silo>();
-
-            foreach (var value in results)
-            {
-                //consul returns api result as base 64 encoded strings
-                var base64EncodedBytes = Convert.FromBase64String(value.Value);
-                var decodedTxt = System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
-
-                silos.Add(JsonSerializer.Deserialize<Silo>(decodedTxt));
-            }
-
-            return silos;
+            return results
+                .Select(value => Convert.FromBase64String(value.Value))
+                .Select(base64EncodedBytes => System.Text.Encoding.UTF8.GetString(base64EncodedBytes))
+                .Select(decodedTxt => JsonSerializer.Deserialize<Silo>(decodedTxt))
+                .ToList();
         }
 
         private class KVStoreResult

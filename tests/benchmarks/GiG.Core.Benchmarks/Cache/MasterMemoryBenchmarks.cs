@@ -3,6 +3,7 @@ using GiG.Core.Benchmarks.Cache.Mocks;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 
 namespace GiG.Core.Benchmarks.Cache
@@ -18,7 +19,7 @@ namespace GiG.Core.Benchmarks.Cache
         [Params(10_000_000)]
         public int ReadCount { get; set; }
 
-        private int _searchListCount = 1_000_000;
+        private const int SearchListCount = 1_000_000;
 
         public MasterMemoryBenchmarks()
         {
@@ -27,15 +28,14 @@ namespace GiG.Core.Benchmarks.Cache
         }
         
         [Benchmark]
-        public void LargeDataSet_LargeReadCount_ItemFound()
+        public void MasterMemory_LargeDataSet_ItemFound()
         {            
             var random = new Random();
 
             for (var i = 0; i <= ReadCount; i++)
             {
-                ///we pick a random item from the search list to use it as a search term to search the cache with
-                var index = random.Next(1, _searchListCount);
-
+                // pick a random item from the search list to use it as a search term to search the cache with
+                var index = random.Next(1, SearchListCount);
                 var searchTerm = _searchList[index];
 
                 _largeCacheSet.PasswordBlacklistTable.FindByValue(searchTerm.Value);                
@@ -43,7 +43,7 @@ namespace GiG.Core.Benchmarks.Cache
         }
 
         [Benchmark]
-        public void SmallDataSet_LargeReadCount_ItemFound()
+        public void MasterMemory_SmallDataSet_ItemFound()
         {
             var random = new Random();
 
@@ -56,23 +56,22 @@ namespace GiG.Core.Benchmarks.Cache
         }
 
         [Benchmark]
-        public void LargeDataSet_LargeReadCount_ItemNotFound()
+        public void MasterMemory_LargeDataSet_ItemNotFound()
         {
             var random = new Random();
 
             for (var i = 0; i <= ReadCount; i++)
             {
-                ///we pick a random item from the search list to use it as a search term to search the cache with
-                var index = random.Next(1, _searchListCount);
-
+                // pick a random item from the search list to use it as a search term to search the cache with
+                var index = random.Next(1, SearchListCount);
                 var searchTerm = _searchList[index];
 
-                _largeCacheSet.PasswordBlacklistTable.FindByValue(string.Format("{0} + 3fn89r", searchTerm.Value));
+                _largeCacheSet.PasswordBlacklistTable.FindByValue($"{searchTerm.Value} + 3fn89r");
             }
         }
 
         [Benchmark]
-        public void SmallDataSet_LargeReadCount_ItemNotFound()
+        public void MasterMemory_SmallDataSet_ItemNotFound()
         {
             var random = new Random();
 
@@ -84,7 +83,7 @@ namespace GiG.Core.Benchmarks.Cache
             }
         }
 
-        private MemoryDatabase BuildSmallCacheSet()
+        private static MemoryDatabase BuildSmallCacheSet()
         {
             var builder = new DatabaseBuilder();
 
@@ -94,42 +93,35 @@ namespace GiG.Core.Benchmarks.Cache
 
             builder.Append(players);
 
-            byte[] data = builder.Build();
+            var data = builder.Build();
 
             return new MemoryDatabase(data);
         }
 
-        private MemoryDatabase BuildLargeCacheSet()
+        private static MemoryDatabase BuildLargeCacheSet()
         {
             var builder = new DatabaseBuilder();
 
-            //the file contains 1 million password blacklist entries
+            // the file contains 1 million password blacklist entries
             var passwordEntries = File.ReadAllLines("Cache\\Mocks\\passwordblacklist.txt");
-
-            var passwordBlackist = new List<PasswordBlacklist>();
-
-            foreach (var entry in passwordEntries)
-            {
-                passwordBlackist.Add(new PasswordBlacklist { Value = entry });
-            }
+            var passwordBlacklist = passwordEntries.Select(entry => new PasswordBlacklist {Value = entry}).ToList();
 
             var random = new Random();
 
-            //we build a search list by picking one million random values 
+            // build a search list by picking one million random values 
             _searchList = new List<PasswordBlacklist>();
 
-            for (var i = 0; i <= _searchListCount; i++)
+            for (var i = 0; i <= SearchListCount; i++)
             {
-                var index = random.Next(1, _searchListCount - 10);
-
-                var entry = passwordBlackist[index];
+                var index = random.Next(1, SearchListCount - 10);
+                var entry = passwordBlacklist[index];
 
                 _searchList.Add(entry);
             }            
 
-            builder.Append(passwordBlackist);
+            builder.Append(passwordBlacklist);
 
-            byte[] data = builder.Build();
+            var data = builder.Build();
 
             return new MemoryDatabase(data);
         }

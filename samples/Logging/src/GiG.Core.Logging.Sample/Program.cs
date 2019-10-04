@@ -6,7 +6,7 @@ using System.IO;
 
 namespace GiG.Core.Logging.Sample
 {
-    static class Program
+    internal static class Program
     {
         public static void Main()
         {
@@ -18,7 +18,7 @@ namespace GiG.Core.Logging.Sample
             return new HostBuilder()
                 .ConfigureHostConfiguration(builder => builder
                     .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true))
+                    .AddJsonFile("appsettings.json", false, true))
                 .UseApplicationMetadata()
                 .ConfigureLogging()
                 .ConfigureServices(Startup.ConfigureServices);
