@@ -1,18 +1,6 @@
-﻿@OrleansSampleTransaction
-@OrleansSampleTransactionPositive
-Feature: Orleans Sample Transactions Tests
-
-@GetBalance
-Scenario Outline: Get Player Balance
-	Given I Deposit '<amount>' on the account for player with IP '<ipAddress>'
-	When I request the balance of account for player with IP '<ipAddress>'
-	Then the status code for 'GetBalance' is 'OK'
-	And the 'GetBalance' balance is '<amount>'
-
-	Examples:
-    | amount | ipAddress |
-    | 10.00  | 127.0.0.1 |
-    | 13.00  |           |
+﻿@OrleansSamplePayments
+@OrleansSamplePaymentsPositive
+Feature: Orleans Sample Payments Tests
 
 @Deposit
 Scenario Outline: Deposit to player account
