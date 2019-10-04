@@ -14,10 +14,7 @@ namespace GiG.Core.Hosting
         /// </summary>
         public static string Name
         {
-            get
-            {
-                return _name;
-            }
+            get => _name;
             internal set
             {
                 if (!string.IsNullOrWhiteSpace(value))

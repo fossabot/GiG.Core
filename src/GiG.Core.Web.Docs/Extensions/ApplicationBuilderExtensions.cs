@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
 using System.Configuration;
+using System.Text;
 
 namespace GiG.Core.Web.Docs.Extensions
 {
@@ -29,6 +30,23 @@ namespace GiG.Core.Web.Docs.Extensions
             {
                 return app;
             }
+            
+            if (string.IsNullOrEmpty(options.Url))
+            {
+                throw new ConfigurationErrorsException($"{nameof(options.Url)} cannot be null or empty");
+            }
+
+            if (options.Url.StartsWith("/"))
+            {
+                throw new ConfigurationErrorsException($"{nameof(options.Url)} must not start with a slash");
+            }
+            
+            // Temporary fix until Swagger bug is fixed - https://github.com/aspnet/AspNetCore/issues/10514
+            var endpointPrefix = new StringBuilder();
+            for (var i = 0; i < options.Url.Split('/').Length; i++)
+            {
+                endpointPrefix.Append("../");
+            }
 
             return app
                 .UseSwagger()
@@ -36,7 +54,7 @@ namespace GiG.Core.Web.Docs.Extensions
                 {
                     c.ShowExtensions();
                     c.RoutePrefix = options.Url;
-                    c.SwaggerEndpoint($"/swagger/v1/swagger.json", "V1 Docs");
+                    c.SwaggerEndpoint($"{endpointPrefix}swagger/v1/swagger.json", "V1 Docs");
                     c.DisplayRequestDuration();
                 });
         }
