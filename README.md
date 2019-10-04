@@ -37,6 +37,9 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
     * Consul - [GiG.Core.Orleans.Clustering.Consul](docs/GiG.Core.Orleans.Clustering.Consul.md)
     * Kubernetes - [GiG.Core.Orleans.Clustering.Kubernetes](docs/GiG.Core.Orleans.Clustering.Kubernetes.md)
 
+* Orleans Storage
+	* Npgsql - [GiG.Core.Orleans.Storage.Npgsql](docs/GiG.Core.Orleans.Storage.Npgsql.md)
+
 * Web
     * Docs - [GiG.Core.Web.Docs](docs/GiG.Core.Web.Docs.md)
     * Hosting - [GiG.Core.Web.Hosting](docs/GiG.Core.Web.Hosting.md)
