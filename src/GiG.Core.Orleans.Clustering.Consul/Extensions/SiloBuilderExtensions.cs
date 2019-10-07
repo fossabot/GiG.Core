@@ -39,7 +39,7 @@ namespace GiG.Core.Orleans.Clustering.Consul.Extensions
             var consulOptions = configurationSection.Get<ConsulOptions>() ?? new ConsulOptions();
 
             return
-                  builder.UseConsulClustering((options) =>
+                  builder.UseConsulClustering(options =>
                   {
                       options.Address = new Uri(consulOptions.Address);
                       options.KvRootFolder = consulOptions.KvRootFolder;

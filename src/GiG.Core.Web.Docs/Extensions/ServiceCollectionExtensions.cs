@@ -63,7 +63,7 @@ namespace GiG.Core.Web.Docs.Extensions
 
         private static void IncludeXmlComments(this SwaggerGenOptions options)
         {
-            var xmlFile = $"{Assembly.GetEntryAssembly().GetName().Name}.xml";
+            var xmlFile = $"{Assembly.GetEntryAssembly()?.GetName().Name}.xml";
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
 
             options.IncludeXmlComments(xmlPath);

@@ -21,7 +21,7 @@ namespace GiG.Core.Configuration.Extensions
 
             return builder.ConfigureAppConfiguration(appConfig =>
             {
-                appConfig.AddJsonFile("appsettings.override.json", optional: true, reloadOnChange: true);
+                appConfig.AddJsonFile("appsettings.override.json", true, true);
                 appConfig.AddEnvironmentVariables();
             });
         }

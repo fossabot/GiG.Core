@@ -36,7 +36,7 @@ namespace GiG.Core.Web.Docs.Extensions
                 {
                     c.ShowExtensions();
                     c.RoutePrefix = options.Url;
-                    c.SwaggerEndpoint($"/swagger/v1/swagger.json", "V1 Docs");
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "V1 Docs");
                     c.DisplayRequestDuration();
                 });
         }

@@ -33,14 +33,14 @@ namespace GiG.Core.HealthChecks.Extensions
                           new HealthChecksOptions();
 
             return app
-                .UseHealthChecks(options.ReadyUrl, new HealthCheckOptions()
+                .UseHealthChecks(options.ReadyUrl, new HealthCheckOptions
                 {
-                    Predicate = (check) => check.Tags.Contains(Constants.ReadyTag),
+                    Predicate = check => check.Tags.Contains(Constants.ReadyTag),
                     ResponseWriter = WriteJsonResponseWriter
                 })
-                .UseHealthChecks(options.LiveUrl, new HealthCheckOptions()
+                .UseHealthChecks(options.LiveUrl, new HealthCheckOptions
                 {
-                    Predicate = (check) => check.Tags.Contains(Constants.LiveTag),
+                    Predicate = check => check.Tags.Contains(Constants.LiveTag),
                     ResponseWriter = WriteJsonResponseWriter
                 })
                 .UseHealthChecks(options.CombinedUrl, new HealthCheckOptions

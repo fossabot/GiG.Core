@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="OrleansAdoNetContent\**" />
+    <EmbeddedResource Remove="OrleansAdoNetContent\**" />
+    <None Remove="OrleansAdoNetContent\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" PrivateAssets="compile" />
+    <PackageReference Include="Microsoft.Orleans.Persistence.AdoNet" Version="3.0.0-beta1" PrivateAssets="compile" />
+    <PackageReference Include="Microsoft.Orleans.Runtime.Abstractions" Version="3.0.0-beta1" PrivateAssets="compile" />
+    <PackageReference Include="Npgsql" Version="4.1.0" PrivateAssets="compile" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.6.0" PrivateAssets="compile" />
+  </ItemGroup>
+  
+</Project>

@@ -22,7 +22,7 @@ namespace GiG.Core.Orleans.Client.Extensions
             
             var builder = new ClientBuilder();
             
-            configureClient?.Invoke(builder, services.BuildServiceProvider());
+            configureClient.Invoke(builder, services.BuildServiceProvider());
             
             return services.AddSingleton(builder.BuildAndConnect());
         }
@@ -39,7 +39,7 @@ namespace GiG.Core.Orleans.Client.Extensions
             
             var builder = new ClientBuilder();
 
-            configureClient?.Invoke(builder);
+            configureClient.Invoke(builder);
 
             return services.AddSingleton(builder.BuildAndConnect());
         }

@@ -1,7 +1,6 @@
 ﻿using GiG.Core.Orleans.Clustering;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using System;
 using System.Collections.Generic;
 using System.Configuration;
 using Xunit;
@@ -18,7 +17,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Helpers
             //Arrange
             HostBuilder.ConfigureAppConfiguration(x => x.AddInMemoryCollection(new Dictionary<string, string>
             {
-                { "Orleans:MembershipProvider:Name", String.Empty }
+                { "Orleans:MembershipProvider:Name", string.Empty }
             }));
 
             //Act & Assert

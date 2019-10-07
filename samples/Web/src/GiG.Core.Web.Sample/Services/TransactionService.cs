@@ -25,7 +25,7 @@ namespace GiG.Core.Web.Sample.Services
         /// <returns></returns>
         public decimal Deposit(decimal amount)
         {
-            _logger.LogInformation($"Request IP Address {_requestContextAccessor.IPAddress.ToString()}");
+            _logger.LogInformation($"Request IP Address {_requestContextAccessor.IPAddress}");
             _logger.LogInformation($"Deposit {amount}");
             Balance += amount;
 

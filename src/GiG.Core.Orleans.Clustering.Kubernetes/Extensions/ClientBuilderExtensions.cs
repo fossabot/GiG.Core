@@ -39,7 +39,7 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
             var kubernetesOptions = configurationSection.Get<KubernetesClientOptions>() ?? new KubernetesClientOptions();
 
             return
-                builder.UseKubeGatewayListProvider((options) =>
+                builder.UseKubeGatewayListProvider(options =>
                 {
                     options.Group = kubernetesOptions.Group;
                     options.CertificateData = kubernetesOptions.CertificateData;

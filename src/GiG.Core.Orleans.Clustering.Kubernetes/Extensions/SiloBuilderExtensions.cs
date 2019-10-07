@@ -40,7 +40,7 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
             var kubernetesOptions = configurationSection.Get<KubernetesSiloOptions>() ?? new KubernetesSiloOptions();
 
             return
-                  builder.UseKubeMembership((options) =>
+                  builder.UseKubeMembership(options =>
                   {
                       options.Group = kubernetesOptions.Group;
                       options.CertificateData = kubernetesOptions.CertificateData;
