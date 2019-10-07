@@ -2,6 +2,7 @@ using GiG.Core.Context.Orleans.Extensions;
 using GiG.Core.DistributedTracing.Orleans.Extensions;
 using GiG.Core.DistributedTracing.Web.Extensions;
 using GiG.Core.HealthChecks.Extensions;
+using GiG.Core.Hosting.Extensions;
 using GiG.Core.Orleans.Client.Extensions;
 using GiG.Core.Orleans.Clustering.Consul.Extensions;
 using GiG.Core.Orleans.Clustering.Extensions;
@@ -49,6 +50,7 @@ namespace GiG.Core.Orleans.Sample.Client
 
             // WebAPI
             services.ConfigureApiDocs(_configuration);
+            services.ConfigureInfoManagement(_configuration);
             services.AddControllers();
             services.ConfigureForwardedHeaders();
         }
@@ -60,9 +62,9 @@ namespace GiG.Core.Orleans.Sample.Client
             app.UsePathBaseFromConfiguration();
             app.UseCorrelationId();
             app.UseHealthChecks();
-            app.UseRouting();
             app.UseApiDocs();
-
+            app.UseInfoManagement();
+            app.UseRouting();
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
     }
