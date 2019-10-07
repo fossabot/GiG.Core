@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-ui
+  labels:
+    run: sample-ui
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    run: sample-ui
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-ui
+spec:
+  selector:
+    matchLabels:
+      run: sample-ui
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        run: sample-ui
+    spec:
+      containers:
+      - name: sample-ui
+        image: 10.2.31.220:31835/gig.core.orleans.sample.ui:20190930-1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
