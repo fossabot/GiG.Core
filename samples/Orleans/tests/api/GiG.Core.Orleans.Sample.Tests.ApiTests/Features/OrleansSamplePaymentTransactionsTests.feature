@@ -2,7 +2,7 @@
 @OrleansSamplePaymentTransactionsPositive
 Feature: Orleans Sample Payment Transactions Tests
 
-@GetBalance
+@GetTransactions
 Scenario Outline: Get Player Transactions
 	Given I Deposit '<depositAmount>' on the account for player with IP '<ipAddress>'
 	Then I withdraw '<withdrawalAmount>' from account for player with IP '<ipAddress>'

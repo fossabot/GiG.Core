@@ -2,7 +2,7 @@
 @OrleansSamplePaymentTransactionsNegative
 Feature: Orleans Sample Payment Transactions Negative Tests
 
-@GetBalance
+@GetTransactions
 Scenario Outline: Get Player Transactions
 	When I request the transactions of account for player with '<playerId>' id and IP '<ipAddress>'
 	Then the status code is '<responseCode>'
