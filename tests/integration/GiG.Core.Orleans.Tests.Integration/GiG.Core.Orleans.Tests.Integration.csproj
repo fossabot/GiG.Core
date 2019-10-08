@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Bogus" Version="28.3.1" />
+        <PackageReference Include="Bogus" Version="28.3.2" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0" />
         <PackageReference Include="Microsoft.Extensions.Http" Version="3.0.0" />
         <PackageReference Include="Microsoft.Orleans.Server" Version="3.0.0-beta1" />
