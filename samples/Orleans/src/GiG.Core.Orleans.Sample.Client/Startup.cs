@@ -31,6 +31,8 @@ namespace GiG.Core.Orleans.Sample.Client
             // Accessors
             services.AddSingleton<IPlayerInformationAccessor, PlayerInformationAccessor>();
 
+            services.AddSignalR();
+
             // Orleans Client
             services.AddClusterClient((builder, sp) =>
             {
@@ -43,6 +45,7 @@ namespace GiG.Core.Orleans.Sample.Client
                     x.ConfigureKubernetesClustering(_configuration);
                 });
                 builder.AddAssemblies(typeof(IWalletGrain));
+                builder.UseSignalR();
             });
 
             // Health Checks
@@ -65,7 +68,11 @@ namespace GiG.Core.Orleans.Sample.Client
             app.UseApiDocs();
             app.UseInfoManagement();
             app.UseRouting();
-            app.UseEndpoints(endpoints => endpoints.MapControllers());
+            app.UseEndpoints(endpoints => {
+
+                endpoints.MapControllers();
+                endpoints.MapHub<Hubs.PlayerBalanceHub>("/balance");
+            });            
         }
     }
 }

@@ -3,6 +3,7 @@
 <head>
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
 	<link rel="stylesheet" href="./site.css" />
+	<script src="./libs/signalr.min.js"></script>
 </head>
 
 <body>
@@ -205,10 +206,35 @@
 
 </html>
 
-<script type="text/javascript">
+<script type="text/javascript">	
 	const paymentsBaseUrl = "/payments";
 	const walletsBaseUrl = "/wallets";
 	const headers = new Headers({ 'Player-ID': getPlayerId(), 'Content-Type': 'application/json', 'Accept': 'application/json' })
+
+
+	function startConnection() {
+    connection.start().then(function () {
+       consol.log("Signal r connected");
+    }).catch(reconnect);
+}
+
+	function reconnect() {
+    	setTimeout(startConnection, 1000);
+	}
+
+	var connection = new signalR.HubConnectionBuilder()
+    .withUrl("/balance")
+    .configureLogging(signalR.LogLevel.Error)
+    .build();
+
+	connection.serverTimeoutInMilliseconds = 300000;
+
+	connection.onclose(function () {
+    	console.log("Connection closed ... Reconnecting");
+    	reconnect();
+	});
+	
+	connection.on('BalanceNotification', updateBalance);
 
 	function getBalance() {
 		fetch(`${walletsBaseUrl}/balance`, { headers })
@@ -351,4 +377,5 @@
 	}
 
 	startupScript();
+	startConnection();
 </script>
