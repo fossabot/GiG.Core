@@ -19,5 +19,9 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Sample.Contracts\GiG.Core.Orleans.Sample.Contracts.csproj" />
+  </ItemGroup>
   
 </Project>

@@ -1,18 +1,12 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using GiG.Core.Orleans.Sample.Tests.ApiTests.Contracts;
 using RestEase;
 
 namespace GiG.Core.Orleans.Sample.Tests.ApiTests.Services
 {
     [AllowAnyStatusCode]
-    public interface IOrleansSamplePaymentsService
+    public interface IOrleansSamplePaymentsService: IOrleansSampleCommonService
     {
-        [Header("player-id")]
-        Guid PlayerId { get; set; }
-
-        [Header("X-Forwarded-For")]
-        string IPAddress { get; set; }
 
         [Post("deposit")]
         Task<Response<decimal>> DepositAsync([Body] TransactionRequest transactionRequest);

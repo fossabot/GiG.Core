@@ -20,23 +20,23 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
             _sampleApiTestsFixture = sampleApiTestsFixture;
         }
 
-        [Given(@"I Deposit '(.*)' on the account for player with(?: '(.*)' id and)? IP '(.*)'")]
-        public void GivenIDepositOnTheAccountForPlayerWithIdAndIP(decimal depositAmount, string playerState, string ipAddress)
+        [Given(@"I Deposit '(.*)' on the account for player with IP '(.*)'")]
+        public void GivenIDepositOnTheAccountForPlayerWithIP(decimal depositAmount, string ipAddress)
         {
-            _orleansSamplePaymentsService.SetHeaders(_sampleApiTestsFixture.GetPlayerId(playerState), ipAddress);
+            _orleansSamplePaymentsService.SetHeaders(_sampleApiTestsFixture.RandomPlayerId, ipAddress);
 
             Response<decimal> response = _orleansSamplePaymentsService.DepositAsync(new TransactionRequest { Amount = depositAmount }).GetAwaiter().GetResult();
-            _scenarioContext.Add("Deposit", response);
+            _scenarioContext.Add(SampleApiEndpointKeys.Deposit.ToString(), response);
         }
 
-        [When(@"I withdraw '(.*)' from account for player with(?: '(.*)' id and)? IP '(.*)'")]
-        [Then(@"I withdraw '(.*)' from account for player with(?: '(.*)' id and)? IP '(.*)'")]
-        public void WhenIWithdrawFromAccountForPlayerWithIdAndIP(decimal withdrawalAmount, string playerState, string ipAddress)
+        [When(@"I withdraw '(.*)' from account for player with IP '(.*)'")]
+        [Then(@"I withdraw '(.*)' from account for player with IP '(.*)'")]
+        public void WhenIWithdrawFromAccountForPlayerWithIP(decimal withdrawalAmount, string ipAddress)
         {
-            _orleansSamplePaymentsService.SetHeaders(_sampleApiTestsFixture.GetPlayerId(playerState), ipAddress);
+            _orleansSamplePaymentsService.SetHeaders(_sampleApiTestsFixture.RandomPlayerId, ipAddress);
 
             Response<decimal> response = _orleansSamplePaymentsService.WithdrawAsync(new TransactionRequest { Amount = withdrawalAmount }).GetAwaiter().GetResult();
-            _scenarioContext.Add("Withdraw", response);
+            _scenarioContext.Add(SampleApiEndpointKeys.Withdraw.ToString(), response);
         }
 
         [Then(@"the status code for '(Deposit|Withdraw)' is '(.*)'")]
