@@ -7,14 +7,15 @@ using GiG.Core.Orleans.Client.Extensions;
 using GiG.Core.Orleans.Clustering.Consul.Extensions;
 using GiG.Core.Orleans.Clustering.Extensions;
 using GiG.Core.Orleans.Clustering.Kubernetes.Extensions;
-using GiG.Core.Orleans.Sample.Contracts;
+using GiG.Core.Orleans.Sample.Grains.Contracts;
+using GiG.Core.Orleans.Sample.Web.Extensions;
 using GiG.Core.Web.Docs.Extensions;
 using GiG.Core.Web.Hosting.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace GiG.Core.Orleans.Sample.Client
+namespace GiG.Core.Orleans.Sample.Web
 {
     public class Startup
     {
@@ -45,6 +46,9 @@ namespace GiG.Core.Orleans.Sample.Client
                 builder.AddAssemblies(typeof(IWalletGrain));
             });
 
+            services.AddMessagePublisher(_configuration);
+            ;
+            
             // Health Checks
             services.AddHealthChecks();
 

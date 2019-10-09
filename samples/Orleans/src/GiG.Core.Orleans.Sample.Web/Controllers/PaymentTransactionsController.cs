@@ -1,11 +1,11 @@
-﻿using GiG.Core.Orleans.Sample.Contracts;
-using GiG.Core.Orleans.Sample.Contracts.Models.Payment;
+﻿using GiG.Core.Orleans.Sample.Grains.Contracts;
+using GiG.Core.Orleans.Sample.Grains.Contracts.Models.Payment;
 using Microsoft.AspNetCore.Mvc;
 using Orleans;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace GiG.Core.Orleans.Sample.Client.Controllers
+namespace GiG.Core.Orleans.Sample.Web.Controllers
 {
     [ApiController]
     [Route("[controller]")]

@@ -51,3 +51,6 @@ services:
     command: "agent -server -bootstrap -ui -client 0.0.0.0"  
     ports:
     - "8500:8500"
+
+  rabbitmq:
+    image: rabbitmq:management-alpine

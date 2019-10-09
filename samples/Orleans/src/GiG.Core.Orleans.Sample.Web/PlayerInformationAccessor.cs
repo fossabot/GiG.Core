@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 
-namespace GiG.Core.Orleans.Sample.Client
+namespace GiG.Core.Orleans.Sample.Web
 {
     internal class PlayerInformationAccessor : IPlayerInformationAccessor
     {

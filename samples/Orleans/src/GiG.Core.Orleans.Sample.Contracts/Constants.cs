@@ -1,4 +1,4 @@
-﻿namespace GiG.Core.Orleans.Sample.Contracts
+﻿namespace GiG.Core.Orleans.Sample.Grains.Contracts
 {
     /// <summary>
     /// Orleans Constants.

@@ -1,4 +1,4 @@
-﻿namespace GiG.Core.Orleans.Sample.Client.Contracts
+﻿namespace GiG.Core.Orleans.Sample.Web.Contracts
 {
     public class TransactionRequest
     {

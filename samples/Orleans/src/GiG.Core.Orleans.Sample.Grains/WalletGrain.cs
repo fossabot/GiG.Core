@@ -1,6 +1,6 @@
-﻿using GiG.Core.Orleans.Sample.Contracts;
-using GiG.Core.Orleans.Sample.Contracts.Models.Payment;
-using GiG.Core.Orleans.Sample.Contracts.Models.Wallet;
+﻿using GiG.Core.Orleans.Sample.Grains.Contracts;
+using GiG.Core.Orleans.Sample.Grains.Contracts.Models.Payment;
+using GiG.Core.Orleans.Sample.Grains.Contracts.Models.Wallet;
 using Microsoft.Extensions.Logging;
 using Orleans;
 using Orleans.Providers;

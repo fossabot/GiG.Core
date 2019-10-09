@@ -6,7 +6,7 @@ using GiG.Core.Logging.All.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace GiG.Core.Orleans.Sample.Client
+namespace GiG.Core.Orleans.Sample.Web
 {
     public static class Program
     {

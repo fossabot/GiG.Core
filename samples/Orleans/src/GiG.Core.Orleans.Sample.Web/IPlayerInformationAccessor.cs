@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GiG.Core.Orleans.Sample.Client
+namespace GiG.Core.Orleans.Sample.Web
 {
     public interface IPlayerInformationAccessor
     {
