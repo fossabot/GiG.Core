@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 namespace GiG.Core.Http.MultiTenant
 {
     /// <summary>
-    /// 
+    /// A <see cref="DelegatingHandler"/> that injects one or more X-Tenant-ID Headers into the request.
     /// </summary>
     public class TenantDelegatingHandler : DelegatingHandler
     {
         private readonly ITenantAccessor _tenantAccessor;
 
         /// <summary>
-        /// 
+        /// A <see cref="DelegatingHandler"/> that injects one or more X-Tenant-ID Headers into the request.
         /// </summary>
-        /// <param name="tenantAccessor"></param>
+        /// <param name="tenantAccessor">The <see cref="T:GiG.Core.MultiTenant.Abstractions.ITenantAccessor" /> to use.</param>
         public TenantDelegatingHandler(ITenantAccessor tenantAccessor) => _tenantAccessor = tenantAccessor;
 
         /// <inheritdoc />
