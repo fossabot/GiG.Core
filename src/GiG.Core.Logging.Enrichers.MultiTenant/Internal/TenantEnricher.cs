@@ -11,10 +11,7 @@ namespace GiG.Core.Logging.Enrichers.MultiTenant.Internal
 
         private readonly ITenantAccessor _tenantAccessor;
 
-        public TenantEnricher(ITenantAccessor tenantAccessor)
-        {
-            _tenantAccessor = tenantAccessor;
-        }
+        public TenantEnricher(ITenantAccessor tenantAccessor) => _tenantAccessor = tenantAccessor;
 
         public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
         {

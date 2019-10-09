@@ -1,12 +1,14 @@
-﻿using GiG.Core.Orleans.Sample.Contracts;
+using GiG.Core.Orleans.Sample.Contracts;
 using GiG.Core.Orleans.Sample.Contracts.Models.Payment;
 using GiG.Core.Orleans.Sample.Contracts.Models.Wallet;
+using GiG.Core.Orleans.Sample.Hubs;
 using Microsoft.Extensions.Logging;
 using Orleans;
 using Orleans.Providers;
 using Orleans.Streams;
 using System;
 using System.Threading.Tasks;
+
 
 namespace GiG.Core.Orleans.Sample.Grains
 {
@@ -16,13 +18,12 @@ namespace GiG.Core.Orleans.Sample.Grains
     {
         private IAsyncStream<WalletTransaction> _walletStream;
         private IAsyncStream<PaymentTransaction> _paymentStream;
-        
+              
         private readonly ILogger _logger;
-        private readonly decimal _balance = 0;
 
         public WalletGrain(ILogger<WalletGrain> logger)
         {
-            _logger = logger;
+            _logger = logger;            
         }
         
         public override async Task OnActivateAsync()
@@ -32,7 +33,7 @@ namespace GiG.Core.Orleans.Sample.Grains
             await _paymentStream.SubscribeOrResumeAsync(OnNextAsync);
             
             _walletStream = streamProvider.GetStream<WalletTransaction>(this.GetPrimaryKey(), Constants.WalletTransactionsStreamNamespace);
-            
+                       
             await base.OnActivateAsync();
         }
 
@@ -56,7 +57,7 @@ namespace GiG.Core.Orleans.Sample.Grains
             await _walletStream.OnNextAsync(transactionModel);
             await base.WriteStateAsync();
 
-            return _balance;
+            return State.Amount;
         }
 
         /// <summary>
@@ -84,7 +85,7 @@ namespace GiG.Core.Orleans.Sample.Grains
             await _walletStream.OnNextAsync(transactionModel);
             await base.WriteStateAsync();
             
-            return _balance;
+            return State.Amount;
         }
         
         /// <summary>
@@ -107,6 +108,9 @@ namespace GiG.Core.Orleans.Sample.Grains
                     await DebitAsync(item.Amount);
                     break;
             }
+
+            // Publish new balance to SignalR hub.
+            await GrainFactory.GetHub<NotificationsHub>().Group(this.GetPrimaryKey().ToString()).Send("BalanceChanged", State.Amount);
         }
 
         public Task OnCompletedAsync()
