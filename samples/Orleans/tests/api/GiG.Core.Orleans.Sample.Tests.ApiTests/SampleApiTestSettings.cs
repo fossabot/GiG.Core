@@ -6,5 +6,10 @@
         {
             return "http://localhost:7000/api/";
         }
+
+        public static string NotificationsUrl()
+        {
+            return "http://localhost:5000/notifications/open/";
+        }
     }
 }

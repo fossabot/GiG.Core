@@ -23,7 +23,7 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
         [Given(@"I Deposit '(.*)' on the account for player with IP '(.*)'")]
         public void GivenIDepositOnTheAccountForPlayerWithIP(decimal depositAmount, string ipAddress)
         {
-            _orleansSamplePaymentsService.SetHeaders(_sampleApiTestsFixture.RandomPlayerId, ipAddress);
+            _orleansSamplePaymentsService.SetHeaders(_sampleApiTestsFixture.PlayerId, ipAddress);
 
             Response<decimal> response = _orleansSamplePaymentsService.DepositAsync(new TransactionRequest { Amount = depositAmount }).GetAwaiter().GetResult();
             _scenarioContext.Add(SampleApiEndpointKeys.Deposit.ToString(), response);
@@ -33,7 +33,7 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
         [Then(@"I withdraw '(.*)' from account for player with IP '(.*)'")]
         public void WhenIWithdrawFromAccountForPlayerWithIP(decimal withdrawalAmount, string ipAddress)
         {
-            _orleansSamplePaymentsService.SetHeaders(_sampleApiTestsFixture.RandomPlayerId, ipAddress);
+            _orleansSamplePaymentsService.SetHeaders(_sampleApiTestsFixture.PlayerId, ipAddress);
 
             Response<decimal> response = _orleansSamplePaymentsService.WithdrawAsync(new TransactionRequest { Amount = withdrawalAmount }).GetAwaiter().GetResult();
             _scenarioContext.Add(SampleApiEndpointKeys.Withdraw.ToString(), response);
@@ -49,6 +49,12 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
         public void ThenTheBalanceIs(string operationType, decimal balance)
         {
             Assert.Equal(balance, _scenarioContext.Get<Response<decimal>>(operationType).GetContent());
+        }
+
+        [Then(@"the notified balance is '(.*)'")]
+        public void ThenTheNotifiedBalanceIs(string balanceChange)
+        {
+            Assert.Equal(balanceChange, _sampleApiTestsFixture.GetNotifiedPlayerBalance(_sampleApiTestsFixture.PlayerId).GetAwaiter().GetResult());
         }
 
         [Then(@"the error message for '(Deposit|Withdraw)' is '(.*)'")]

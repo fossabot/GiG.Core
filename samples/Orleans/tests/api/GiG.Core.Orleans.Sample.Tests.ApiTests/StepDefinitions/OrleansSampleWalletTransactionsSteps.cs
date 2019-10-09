@@ -29,7 +29,7 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
         [When(@"I request the wallet transactions of account for player with IP '(.*)'")]
         public void WhenIRequestTheWalletTransactionsOfAccountForPlayerWithIP(string ipAddress)
         {
-            _orleansSampleWalletTransactionsService.SetHeaders(_sampleApiTestsFixture.RandomPlayerId, ipAddress);
+            _orleansSampleWalletTransactionsService.SetHeaders(_sampleApiTestsFixture.PlayerId, ipAddress);
 
             Response<List<WalletTransaction>> response = _orleansSampleWalletTransactionsService.GetWalletTransactionsAsync().GetAwaiter().GetResult();
             _scenarioContext.Add(_apiEndpointKey, response);
