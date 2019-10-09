@@ -221,6 +221,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Storage.Np
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Storage.Npgsql.Tests.Integration", "tests\integration\GiG.Core.Orleans.Storage.Npgsql.Tests.Integration\GiG.Core.Orleans.Storage.Npgsql.Tests.Integration.csproj", "{46F4003E-6603-4DF8-A9DB-4694C77AD656}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Orleans.Sample.Hubs", "samples\Orleans\src\GiG.Core.Orleans.Sample.Hubs\GiG.Core.Orleans.Sample.Hubs.csproj", "{FD7CFA94-26C7-4C23-A253-2DB91FAAC618}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -442,6 +444,10 @@ Global
 		{46F4003E-6603-4DF8-A9DB-4694C77AD656}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46F4003E-6603-4DF8-A9DB-4694C77AD656}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46F4003E-6603-4DF8-A9DB-4694C77AD656}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD7CFA94-26C7-4C23-A253-2DB91FAAC618}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD7CFA94-26C7-4C23-A253-2DB91FAAC618}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD7CFA94-26C7-4C23-A253-2DB91FAAC618}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD7CFA94-26C7-4C23-A253-2DB91FAAC618}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -530,6 +536,7 @@ Global
 		{5FF2C36A-9641-48E5-A138-65B0A8785070} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
 		{40A0EEC4-72CA-486B-AE1F-E49B4EFE76F4} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
 		{46F4003E-6603-4DF8-A9DB-4694C77AD656} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
+		{FD7CFA94-26C7-4C23-A253-2DB91FAAC618} = {2AFB4E5D-843D-4DE4-A151-772FC6978A2F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}

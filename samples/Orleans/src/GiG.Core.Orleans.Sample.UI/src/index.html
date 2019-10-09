@@ -3,6 +3,7 @@
 <head>
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
 	<link rel="stylesheet" href="./site.css" />
+	<script src="./libs/signalr.min.js"></script>
 </head>
 
 <body>
@@ -205,10 +206,36 @@
 
 </html>
 
-<script type="text/javascript">
+<script type="text/javascript">	
+	const notificationsBaseUrl = "/notifications";
 	const paymentsBaseUrl = "/payments";
-	const walletsBaseUrl = "/wallets";
+	const walletsBaseUrl = "/wallets";	
 	const headers = new Headers({ 'Player-ID': getPlayerId(), 'Content-Type': 'application/json', 'Accept': 'application/json' })
+
+	function startConnection() {
+    connection.start().then(function () {
+       console.log("Signal r connected");
+	   subscribeBalanceNotification();
+    }).catch(reconnect);
+	}
+
+	function reconnect() {
+    	setTimeout(startConnection, 1000);
+	}
+
+	var connection = new signalR.HubConnectionBuilder()
+    .withUrl(`${notificationsBaseUrl}/open`)
+    .configureLogging(signalR.LogLevel.Error)
+    .build();	
+
+	connection.serverTimeoutInMilliseconds = 300000;
+
+	connection.onclose(function () {
+    	console.log("Connection closed ... Reconnecting");
+    	reconnect();
+	});
+	
+	connection.on('BalanceChanged', updateBalance);
 
 	function getBalance() {
 		fetch(`${walletsBaseUrl}/balance`, { headers })
@@ -275,7 +302,14 @@
 		}
 
 		getBalance();
+
+		startConnection();		
 	};
+
+	function subscribeBalanceNotification()
+	{
+		connection.invoke("SubscribeAsync", getPlayerId());
+	}
 
 	function getTextField() {
 		return document.querySelector("div:not(.d-none) [amount]");
@@ -300,8 +334,7 @@
 		element.classList.add("loading");
 		setTimeout(function (button) {
 			button.classList.remove("loading");
-			showTab("success");
-			updateBalance(data);
+			showTab("success");			
 
 		}, 200, element);
 	}
@@ -350,5 +383,5 @@
 		});
 	}
 
-	startupScript();
+	startupScript();	
 </script>
