@@ -16,12 +16,8 @@ namespace GiG.Core.DistributedTracing.Orleans
         /// Default constructor.
         /// </summary>
         /// <param name="correlationContextAccessor"></param>
-        public CorrelationGrainCallFilter(ICorrelationContextAccessor correlationContextAccessor)
-        {
-            _correlationContextAccessor = correlationContextAccessor;
-        }
+        public CorrelationGrainCallFilter(ICorrelationContextAccessor correlationContextAccessor) => _correlationContextAccessor = correlationContextAccessor;
 
-        
         /// <summary>
         /// Invoke Grain call context.
         /// </summary>

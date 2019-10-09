@@ -11,10 +11,7 @@ namespace GiG.Core.MultiTenant.Web.Internal
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         /// <inheritdoc />
-        public TenantAccessor(IHttpContextAccessor httpContextAccessor)
-        {
-            _httpContextAccessor = httpContextAccessor;
-        }
+        public TenantAccessor(IHttpContextAccessor httpContextAccessor) => _httpContextAccessor = httpContextAccessor;
 
         /// <inheritdoc />
         public IImmutableSet<string> Values =>

@@ -17,6 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.DistributedTracing.Web.md = docs\GiG.Core.DistributedTracing.Web.md
 		docs\GiG.Core.HealthChecks.md = docs\GiG.Core.HealthChecks.md
 		docs\GiG.Core.Hosting.md = docs\GiG.Core.Hosting.md
+		docs\GiG.Core.Http.DistributedTracing.md = docs\GiG.Core.Http.DistributedTracing.md
+		docs\GiG.Core.Http.md = docs\GiG.Core.Http.md
+		docs\GiG.Core.Http.MultiTenant.md = docs\GiG.Core.Http.MultiTenant.md
 		docs\GiG.Core.Logging.All.md = docs\GiG.Core.Logging.All.md
 		docs\GiG.Core.Logging.Enrichers.MultiTenant.md = docs\GiG.Core.Logging.Enrichers.MultiTenant.md
 		docs\GiG.Core.Logging.md = docs\GiG.Core.Logging.md
@@ -220,6 +223,16 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Storage.Npgsql", "src\GiG.Core.Orleans.Storage.Npgsql\GiG.Core.Orleans.Storage.Npgsql.csproj", "{40A0EEC4-72CA-486B-AE1F-E49B4EFE76F4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Storage.Npgsql.Tests.Integration", "tests\integration\GiG.Core.Orleans.Storage.Npgsql.Tests.Integration\GiG.Core.Orleans.Storage.Npgsql.Tests.Integration.csproj", "{46F4003E-6603-4DF8-A9DB-4694C77AD656}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Http", "Http", "{663B3F62-62DA-4B0D-81CA-156013D0C93C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Http", "src\GiG.Core.Http\GiG.Core.Http.csproj", "{2C90E3BF-202F-4184-B2E0-1D6997E16B6D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Http.Tests.Integration", "tests\integration\GiG.Core.Http.Tests.Integration\GiG.Core.Http.Tests.Integration.csproj", "{E1C737F2-6A34-4E0D-97D5-397A51598755}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Http.DistributedTracing", "src\GiG.Core.Http.DistributedTracing\GiG.Core.Http.DistributedTracing.csproj", "{1ACB0572-7B79-46E4-8D86-C849637E97BF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Http.MultiTenant", "src\GiG.Core.Http.MultiTenant\GiG.Core.Http.MultiTenant.csproj", "{C7A2FA4B-3CD7-41DB-8CF3-E1875B18A015}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Orleans.Sample.Hubs", "samples\Orleans\src\GiG.Core.Orleans.Sample.Hubs\GiG.Core.Orleans.Sample.Hubs.csproj", "{FD7CFA94-26C7-4C23-A253-2DB91FAAC618}"
 EndProject
@@ -450,6 +463,22 @@ Global
 		{FD7CFA94-26C7-4C23-A253-2DB91FAAC618}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD7CFA94-26C7-4C23-A253-2DB91FAAC618}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD7CFA94-26C7-4C23-A253-2DB91FAAC618}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C90E3BF-202F-4184-B2E0-1D6997E16B6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C90E3BF-202F-4184-B2E0-1D6997E16B6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C90E3BF-202F-4184-B2E0-1D6997E16B6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C90E3BF-202F-4184-B2E0-1D6997E16B6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1C737F2-6A34-4E0D-97D5-397A51598755}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1C737F2-6A34-4E0D-97D5-397A51598755}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1C737F2-6A34-4E0D-97D5-397A51598755}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1C737F2-6A34-4E0D-97D5-397A51598755}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ACB0572-7B79-46E4-8D86-C849637E97BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ACB0572-7B79-46E4-8D86-C849637E97BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ACB0572-7B79-46E4-8D86-C849637E97BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ACB0572-7B79-46E4-8D86-C849637E97BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7A2FA4B-3CD7-41DB-8CF3-E1875B18A015}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7A2FA4B-3CD7-41DB-8CF3-E1875B18A015}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7A2FA4B-3CD7-41DB-8CF3-E1875B18A015}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7A2FA4B-3CD7-41DB-8CF3-E1875B18A015}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5151DFD9-5195-4ABC-8F9F-D201084F81FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5151DFD9-5195-4ABC-8F9F-D201084F81FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5151DFD9-5195-4ABC-8F9F-D201084F81FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -542,6 +571,11 @@ Global
 		{5FF2C36A-9641-48E5-A138-65B0A8785070} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
 		{40A0EEC4-72CA-486B-AE1F-E49B4EFE76F4} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
 		{46F4003E-6603-4DF8-A9DB-4694C77AD656} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
+		{663B3F62-62DA-4B0D-81CA-156013D0C93C} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
+		{2C90E3BF-202F-4184-B2E0-1D6997E16B6D} = {663B3F62-62DA-4B0D-81CA-156013D0C93C}
+		{E1C737F2-6A34-4E0D-97D5-397A51598755} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
+		{1ACB0572-7B79-46E4-8D86-C849637E97BF} = {663B3F62-62DA-4B0D-81CA-156013D0C93C}
+		{C7A2FA4B-3CD7-41DB-8CF3-E1875B18A015} = {663B3F62-62DA-4B0D-81CA-156013D0C93C}
 		{FD7CFA94-26C7-4C23-A253-2DB91FAAC618} = {2AFB4E5D-843D-4DE4-A151-772FC6978A2F}
 		{5151DFD9-5195-4ABC-8F9F-D201084F81FA} = {54BD3C2B-B197-47EC-92C2-CC3EF5940ECF}
 	EndGlobalSection
