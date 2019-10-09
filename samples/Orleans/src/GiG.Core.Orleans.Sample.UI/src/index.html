@@ -216,25 +216,15 @@
 		connection.start().then(function () {
 			console.log("Signal r connected");
 			subscribeBalanceNotification();
-		}).catch(reconnect);
+		}).catch();
 	}
-
-	function reconnect() {
-		setTimeout(startConnection, 1000);
-	}
-
+	
 	var connection = new signalR.HubConnectionBuilder()
 		.withUrl(`${notificationsBaseUrl}/open`)
+		.withAutomaticReconnect()
 		.configureLogging(signalR.LogLevel.Error)
 		.build();
-
-	connection.serverTimeoutInMilliseconds = 300000;
-
-	connection.onclose(function () {
-		console.log("Connection closed ... Reconnecting");
-		reconnect();
-	});
-
+		
 	connection.on('BalanceChanged', updateBalance);
 
 	function getBalance() {
