@@ -47,7 +47,7 @@ namespace GiG.Core.Orleans.Sample.Grains
         public async Task<decimal> DebitAsync(decimal amount)
         {
             _logger.LogInformation($"Debit {amount}");
-            State.Amount += amount;
+            State.Amount -= amount;
 
             var transactionModel = new WalletTransaction()
             {
@@ -75,7 +75,7 @@ namespace GiG.Core.Orleans.Sample.Grains
             //}
             
             _logger.LogInformation($"Credit {amount}");
-            State.Amount -= amount;
+            State.Amount += amount;
 
             var transactionModel = new WalletTransaction()
             {
@@ -104,10 +104,10 @@ namespace GiG.Core.Orleans.Sample.Grains
             switch (item.TransactionType)
             {
                 case PaymentTransactionType.Deposit:
-                    await DebitAsync(item.Amount);
+                    await CreditAsync(item.Amount);
                     break;
                 case PaymentTransactionType.Withdrawal:
-                    await CreditAsync(item.Amount);
+                    await DebitAsync(item.Amount);
                     break;
             }
 
