@@ -20,6 +20,10 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 * Hosting
     * [GiG.Core.Hosting](docs/GiG.Core.Hosting.md)
 
+* Hosting
+    * [GiG.Core.Http.DistributedTracing](docs/GiG.Core.Http.DistributedTracing.md)
+	* [GiG.Core.Http.MultiTenant](docs/GiG.Core.Http.MultiTenant.md)
+		
 * Logging
     * [GiG.Core.Logging](docs/GiG.Core.Logging.md)
     * [GiG.Core.Logging.All](docs/GiG.Core.Logging.All.md)
