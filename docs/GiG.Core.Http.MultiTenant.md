@@ -10,10 +10,10 @@ Make use of `TenantDelegatingHandler()` when configuring your HttpClientFactory.
 
 ```csharp
 
-	var client = HttpClientFactory.Create(x =>
+	var client = HttpClientFactory.CreateClient(x =>
 	{
 		x.AddHttpMessageHandler(new TenantDelegatingHandler(new TenantAccessor()));
-		x.BaseAddress = new Uri("");
+		x.BaseAddress = new Uri("http://localhost");
 	});
 
 ```

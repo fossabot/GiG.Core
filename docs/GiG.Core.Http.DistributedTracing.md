@@ -10,10 +10,10 @@ Make use of `CorrelationIdDelegatingHandler()` when configuring your HttpClientF
 
 ```csharp
 
-	var client = HttpClientFactory.Create(x =>
+	var client = HttpClientFactory.CreateClient(x =>
 	{
 		x.AddHttpMessageHandler(new CorrelationIdDelegatingHandler(new CorrelationContextAccessor()));
-		x.BaseAddress = new Uri("");
+		x.BaseAddress = new Uri("http://localhost");
 	});
 
 ```
