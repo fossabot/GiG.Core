@@ -206,35 +206,35 @@
 
 </html>
 
-<script type="text/javascript">	
+<script type="text/javascript">
 	const notificationsBaseUrl = "/notifications";
 	const paymentsBaseUrl = "/payments";
-	const walletsBaseUrl = "/wallets";	
+	const walletsBaseUrl = "/wallets";
 	const headers = new Headers({ 'Player-ID': getPlayerId(), 'Content-Type': 'application/json', 'Accept': 'application/json' })
 
 	function startConnection() {
-    connection.start().then(function () {
-       console.log("Signal r connected");
-	   subscribeBalanceNotification();
-    }).catch(reconnect);
+		connection.start().then(function () {
+			console.log("Signal r connected");
+			subscribeBalanceNotification();
+		}).catch(reconnect);
 	}
 
 	function reconnect() {
-    	setTimeout(startConnection, 1000);
+		setTimeout(startConnection, 1000);
 	}
 
 	var connection = new signalR.HubConnectionBuilder()
-    .withUrl(`${notificationsBaseUrl}/open`)
-    .configureLogging(signalR.LogLevel.Error)
-    .build();	
+		.withUrl(`${notificationsBaseUrl}/open`)
+		.configureLogging(signalR.LogLevel.Error)
+		.build();
 
 	connection.serverTimeoutInMilliseconds = 300000;
 
 	connection.onclose(function () {
-    	console.log("Connection closed ... Reconnecting");
-    	reconnect();
+		console.log("Connection closed ... Reconnecting");
+		reconnect();
 	});
-	
+
 	connection.on('BalanceChanged', updateBalance);
 
 	function getBalance() {
@@ -303,11 +303,10 @@
 
 		getBalance();
 
-		startConnection();		
+		startConnection();
 	};
 
-	function subscribeBalanceNotification()
-	{
+	function subscribeBalanceNotification() {
 		connection.invoke("SubscribeAsync", getPlayerId());
 	}
 
@@ -334,7 +333,7 @@
 		element.classList.add("loading");
 		setTimeout(function (button) {
 			button.classList.remove("loading");
-			showTab("success");			
+			showTab("success");
 
 		}, 200, element);
 	}
@@ -364,20 +363,16 @@
 
 	var playerId;
 
-	function getPlayerId()
-	{
-		if (playerId == null) 
-		{
+	function getPlayerId() {
+		if (playerId == null) {
 			playerId = generatePlayerId();
 		}
-		
+
 		return playerId;
 	}
 
-	function generatePlayerId()
-	{
-		return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) 
-		{
+	function generatePlayerId() {
+		return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
 			var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
 			return v.toString(16);
 		});

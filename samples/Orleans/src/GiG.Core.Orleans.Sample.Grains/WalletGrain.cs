@@ -8,8 +8,6 @@ using Orleans.Providers;
 using Orleans.Streams;
 using System;
 using System.Threading.Tasks;
-using GiG.Core.Orleans.Sample.Hubs;
-using SignalR.Orleans.Core;
 
 
 namespace GiG.Core.Orleans.Sample.Grains
@@ -111,6 +109,7 @@ namespace GiG.Core.Orleans.Sample.Grains
                     break;
             }
 
+            // Publish new balance to SignalR hub.
             await GrainFactory.GetHub<NotificationsHub>().Group(this.GetPrimaryKey().ToString()).Send("BalanceChanged", State.Amount);
         }
 
