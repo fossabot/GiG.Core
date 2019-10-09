@@ -13,7 +13,7 @@ namespace GiG.Core.Http
         /// </summary>
         /// <param name="configureClient">A delegate that is used to configure an <see cref="HttpClientBuilder"/>.</param>
         /// <returns>An <see cref="HttpClient"/> configured with predefined actions.</returns>
-        public static HttpClient Create(Action<HttpClientBuilder> configureClient = null)
+        public static HttpClient CreateClient(Action<HttpClientBuilder> configureClient = null)
         {
             var builder = new HttpClientBuilder();
             configureClient?.Invoke(builder);
