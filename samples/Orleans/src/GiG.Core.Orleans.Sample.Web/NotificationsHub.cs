@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using GiG.Core.Orleans.Sample.Contracts;
+using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 
 namespace GiG.Core.Orleans.Sample.Hubs

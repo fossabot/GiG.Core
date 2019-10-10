@@ -1,5 +1,5 @@
-using GiG.Core.Orleans.Sample.Grains.Contracts;
-using GiG.Core.Orleans.Sample.Grains.Contracts.Models.Wallet;
+using GiG.Core.Orleans.Sample.Contracts;
+using GiG.Core.Orleans.Sample.Contracts.Models.Wallet;
 using Microsoft.Extensions.Logging;
 using Orleans;
 using Orleans.Streams;
@@ -11,8 +11,8 @@ namespace GiG.Core.Orleans.Sample.Grains
     [ImplicitStreamSubscription(Constants.WalletTransactionsStreamNamespace)]
     public class WalletBalanceUpdateReceiver : Grain, IBalanceUpdateReceiver, IAsyncObserver<WalletTransaction>
     {
-        private IAsyncStream<WalletTransaction> _stream;
         private readonly ILogger _logger;
+        private IAsyncStream<WalletTransaction> _stream;
 
         public WalletBalanceUpdateReceiver(ILogger<WalletBalanceUpdateReceiver> logger)
         {
