@@ -12,6 +12,8 @@
     <AssemblyName>$(MSBuildProjectName)</AssemblyName>
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <VersionPrefix>1.0.0</VersionPrefix>
+    <PackageIcon>gig-core.png</PackageIcon>
+    <PackageIconFullPath>$(MSBuildThisFileDirectory)gig-core.png</PackageIconFullPath>
   </PropertyGroup>
 
   <!-- CI Helpers -->
@@ -27,4 +29,7 @@
     </AssemblyAttribute>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="$(PackageIconFullPath)" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 </Project>

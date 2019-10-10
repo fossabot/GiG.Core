@@ -1,6 +1,10 @@
-# GiG Core
+![Alt text](gig-core.png)
 
 The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
+
+[![Build status](https://img.shields.io/bitbucket/pipelines/atlassian/adf-builder-javascript/master)](https://img.shields.io/bitbucket/pipelines/atlassian/adf-builder-javascript/master) 
+[![NuGet](https://img.shields.io/nuget/v/GiG.Core.svg)](https://nuget.org/packages/GiG.Core)
+
 
 ## Docs
 
