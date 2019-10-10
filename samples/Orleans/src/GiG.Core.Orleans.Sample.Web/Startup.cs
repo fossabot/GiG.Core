@@ -8,6 +8,7 @@ using GiG.Core.Orleans.Clustering.Consul.Extensions;
 using GiG.Core.Orleans.Clustering.Extensions;
 using GiG.Core.Orleans.Clustering.Kubernetes.Extensions;
 using GiG.Core.Orleans.Sample.Grains.Contracts;
+using GiG.Core.Orleans.Sample.Hubs;
 using GiG.Core.Orleans.Sample.Web.Extensions;
 using GiG.Core.Web.Docs.Extensions;
 using GiG.Core.Web.Hosting.Extensions;
@@ -35,6 +36,7 @@ namespace GiG.Core.Orleans.Sample.Web
             // Orleans Client
             services.AddClusterClient((builder, sp) =>
             {
+                builder.UseSignalR();
                 builder.AddCorrelationOutgoingFilter(sp);
                 builder.AddRequestContextOutgoingFilter(sp);
                 builder.ConfigureCluster(_configuration);
@@ -44,7 +46,12 @@ namespace GiG.Core.Orleans.Sample.Web
                     x.ConfigureKubernetesClustering(_configuration);
                 });
                 builder.AddAssemblies(typeof(IWalletGrain));
+
             });
+
+            // Signal R
+            services.AddSignalR()
+                    .AddOrleans();
 
             services.AddMessagePublisher(_configuration);
             ;
@@ -69,7 +76,11 @@ namespace GiG.Core.Orleans.Sample.Web
             app.UseApiDocs();
             app.UseInfoManagement();
             app.UseRouting();
-            app.UseEndpoints(endpoints => endpoints.MapControllers());
+            app.UseEndpoints(endpoints => 
+            {
+                endpoints.MapControllers();
+                endpoints.MapHub<NotificationsHub>("/notifications/open");
+            });            
         }
     }
 }
