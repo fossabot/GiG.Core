@@ -66,12 +66,6 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
             Assert.Equal(statusCode, _scenarioContext.Get<Response<decimal>>(operationType).ResponseMessage.StatusCode.ToString());
         }
 
-        [Then(@"the '(Deposit|Withdraw)' balance is '(.*)'")]
-        public void ThenTheBalanceIs(string operationType, decimal balance)
-        {
-            Assert.Equal(balance, _scenarioContext.Get<Response<decimal>>(operationType).GetContent());
-        }
-
         [Then(@"the '(DepositBalance|WithdrawalBalance)' is '(.*)'")]
         public void ThenTheNotifiedBalanceIs(string operationType, decimal balanceChange)
         {
