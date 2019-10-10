@@ -220,7 +220,10 @@
 	}
 	
 	var connection = new signalR.HubConnectionBuilder()
-		.withUrl(`${notificationsBaseUrl}/open`)
+		.withUrl(`${notificationsBaseUrl}/open`, {
+			skipNegotiation: true,
+			transport: signalR.HttpTransportType.WebSockets
+		})
 		.withAutomaticReconnect()
 		.configureLogging(signalR.LogLevel.Error)
 		.build();

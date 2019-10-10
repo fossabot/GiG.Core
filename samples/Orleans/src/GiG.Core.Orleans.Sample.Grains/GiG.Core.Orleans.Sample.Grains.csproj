@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GiG.Core.Orleans.Sample.Contracts\GiG.Core.Orleans.Sample.Contracts.csproj" />
-    <ProjectReference Include="..\GiG.Core.Orleans.Sample.Hubs\GiG.Core.Orleans.Sample.Hubs.csproj" />
   </ItemGroup>
   
 </Project>
