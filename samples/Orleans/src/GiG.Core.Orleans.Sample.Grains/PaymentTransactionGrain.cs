@@ -1,5 +1,5 @@
-using GiG.Core.Orleans.Sample.Grains.Contracts;
-using GiG.Core.Orleans.Sample.Grains.Contracts.Models.Payment;
+using GiG.Core.Orleans.Sample.Contracts;
+using GiG.Core.Orleans.Sample.Contracts.Models.Payment;
 using Microsoft.Extensions.Logging;
 using Orleans;
 using Orleans.Providers;
@@ -14,8 +14,8 @@ namespace GiG.Core.Orleans.Sample.Grains
     [StorageProvider]
     public class PaymentTransactionGrain : Grain<List<PaymentTransaction>>, IPaymentTransactionGrain, IAsyncObserver<PaymentTransaction>
     {
-        private IAsyncStream<PaymentTransaction> _stream;
         private readonly ILogger _logger;
+        private IAsyncStream<PaymentTransaction> _stream;
       
         public PaymentTransactionGrain(ILogger<PaymentTransactionGrain> logger)
         {

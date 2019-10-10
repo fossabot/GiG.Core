@@ -1,4 +1,4 @@
-﻿namespace GiG.Core.Orleans.Sample.Grains.Contracts.Messages
+﻿namespace GiG.Core.Orleans.Sample.Contracts.Messages
 {
     public enum TransactionType
     {

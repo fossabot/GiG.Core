@@ -1,4 +1,4 @@
-namespace GiG.Core.Orleans.Sample.Grains.Contracts.Models.Wallet
+namespace GiG.Core.Orleans.Sample.Contracts.Models.Wallet
 {
     public enum WalletTransactionType
     {

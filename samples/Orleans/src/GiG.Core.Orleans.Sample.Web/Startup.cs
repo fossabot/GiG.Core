@@ -7,7 +7,7 @@ using GiG.Core.Orleans.Client.Extensions;
 using GiG.Core.Orleans.Clustering.Consul.Extensions;
 using GiG.Core.Orleans.Clustering.Extensions;
 using GiG.Core.Orleans.Clustering.Kubernetes.Extensions;
-using GiG.Core.Orleans.Sample.Grains.Contracts;
+using GiG.Core.Orleans.Sample.Contracts;
 using GiG.Core.Orleans.Sample.Hubs;
 using GiG.Core.Orleans.Sample.Web.Extensions;
 using GiG.Core.Web.Docs.Extensions;
@@ -51,10 +51,9 @@ namespace GiG.Core.Orleans.Sample.Web
 
             // Signal R
             services.AddSignalR()
-                    .AddOrleans();
+                .AddOrleans();
 
             services.AddMessagePublisher(_configuration);
-            ;
             
             // Health Checks
             services.AddHealthChecks();

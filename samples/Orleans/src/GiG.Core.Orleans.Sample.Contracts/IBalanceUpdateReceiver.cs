@@ -1,6 +1,6 @@
 using Orleans;
 
-namespace GiG.Core.Orleans.Sample.Grains.Contracts
+namespace GiG.Core.Orleans.Sample.Contracts
 {
     public interface IBalanceUpdateReceiver : IGrainWithGuidKey
     {

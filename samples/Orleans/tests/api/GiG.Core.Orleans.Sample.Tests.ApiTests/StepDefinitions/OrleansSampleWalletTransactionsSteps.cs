@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GiG.Core.Orleans.Sample.Grains.Contracts.Models.Wallet;
+using GiG.Core.Orleans.Sample.Contracts.Models.Wallet;
 using GiG.Core.Orleans.Sample.Tests.ApiTests.Services;
 using Newtonsoft.Json;
 using RestEase;
