@@ -110,7 +110,7 @@ namespace GiG.Core.Orleans.Sample.Grains
             }
 
             // Publish new balance to SignalR hub.
-            await GrainFactory.GetHub<NotificationsHub>().Group(this.GetPrimaryKey().ToString()).Send("BalanceChanged", State.Amount);
+            await GrainFactory.GetHub<INotificationsHub>().Group(this.GetPrimaryKey().ToString()).Send("BalanceChanged", State.Amount);
         }
 
         public Task OnCompletedAsync()
