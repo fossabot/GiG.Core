@@ -30,7 +30,7 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests
             await Connection.InvokeAsync(invokedMethodName, argument);
 
             operation();
-            semaphore.Wait();
+            semaphore.Wait(1500);
 
             await Connection.DisposeAsync();
 
