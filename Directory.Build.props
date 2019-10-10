@@ -12,6 +12,7 @@
     <AssemblyName>$(MSBuildProjectName)</AssemblyName>
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <VersionPrefix>1.0.0</VersionPrefix>
+    <PackageIconUrl>https://www.gig.com/uploads/2018/06/80fd7035-gig-product-icons-08-320x320.png</PackageIconUrl>
   </PropertyGroup>
 
   <!-- CI Helpers -->
