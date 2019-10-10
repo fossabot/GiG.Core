@@ -14,7 +14,6 @@ namespace GiG.Core.Orleans.Sample.Consumer
         private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureExternalConfiguration()
-                .ConfigureExternalConfiguration()
                 .ConfigureLogging()
                 .ConfigureServices(Startup.ConfigureServices);
     }
