@@ -2,8 +2,6 @@
   <img width=150 height=150 src="gig-core.png" height="100">
 </p>
 
-[Your Link Text](gig-core.png)
-
 
 The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 
