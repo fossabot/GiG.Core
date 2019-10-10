@@ -12,9 +12,9 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests
             PlayerId = Guid.NewGuid();
         }
 
-        public async Task<string> GetNotifiedPlayerBalance(Guid playerId)
+        public async Task<decimal> GetPlayerBalanceNotification(Guid playerId, Action operation)
         {
-            return await new OrleansSampleSignalRHelper().ListenForNotification("BalanceChanged", "SubscribeAsync", playerId.ToString());
+            return await new OrleansSampleSignalRHelper().ListenForNotification("BalanceChanged", "SubscribeAsync", playerId.ToString(), operation);
         }
     }
 }

@@ -1,31 +1,38 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace GiG.Core.Orleans.Sample.Tests.ApiTests
 {
     public class OrleansSampleSignalRHelper
     {
-        private readonly HubConnection _connection;
+        public readonly HubConnection Connection;
         
         public OrleansSampleSignalRHelper()
         {
-            _connection = new HubConnectionBuilder()
+            Connection = new HubConnectionBuilder()
                 .WithUrl(SampleApiTestSettings.NotificationsUrl())
                 .Build();
         }
 
-        public async Task<string> ListenForNotification(string messageKey, string invokedMethodName, string argument)
+        public async Task<decimal> ListenForNotification(string messageKey, string invokedMethodName, string argument, Action operation)
         {
-            string message = string.Empty;
-            _connection.On<string>(messageKey, notification =>
+            SemaphoreSlim semaphore = new SemaphoreSlim(0, 1);
+            decimal message = 0;
+            Connection.On<decimal>(messageKey, notification =>
             {
                 message = notification;
+                semaphore.Release();
             });
 
-            await _connection.StartAsync();
-            await _connection.InvokeAsync(invokedMethodName, argument);
+            await Connection.StartAsync();
+            await Connection.InvokeAsync(invokedMethodName, argument);
 
-            await _connection.DisposeAsync();
+            operation();
+            semaphore.Wait();
+
+            await Connection.DisposeAsync();
 
             return message;
         }

@@ -7,7 +7,7 @@ Scenario Outline: Deposit to player account
 	Given I Deposit '<amount>' on the account for player with IP '<ipAddress>'
 	Then the status code for 'Deposit' is 'OK'
 	And the 'Deposit' balance is '<amount>'
-	And the notified balance is '<amount>'
+	And the 'DepositBalance' is '<amount>'
 
 	Examples:
     | amount | ipAddress |
@@ -20,7 +20,7 @@ Scenario Outline: Withdraw from player account
 	When I withdraw '<withdrawalAmount>' from account for player with IP '<ipAddress>'
 	Then the status code for 'Withdraw' is 'OK'
 	And the 'Withdraw' balance is '<balance>'
-	And the notified balance is '<balance>'
+	And the 'WithdrawalBalance' is '<balance>'
 
 	Examples:
     | amount | ipAddress | withdrawalAmount | balance |

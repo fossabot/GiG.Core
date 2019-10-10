@@ -13,7 +13,7 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
         private readonly ScenarioContext _scenarioContext;
         private readonly SampleApiTestsFixture _sampleApiTestsFixture;
 
-        public OrleansSamplePaymentsSteps(OrleansSamplePaymentsService orleansSamplePaymentsService, ScenarioContext scenarioContext, SampleApiTestsFixture sampleApiTestsFixture)
+        public OrleansSamplePaymentsSteps(OrleansSamplePaymentsService orleansSamplePaymentsService, ScenarioContext scenarioContext, SampleApiTestsFixture sampleApiTestsFixture, OrleansSampleSignalRHelper orleansSampleSignalRHelper)
         {
             _orleansSamplePaymentsService = orleansSamplePaymentsService;
             _scenarioContext = scenarioContext;
@@ -25,8 +25,14 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
         {
             _orleansSamplePaymentsService.SetHeaders(_sampleApiTestsFixture.PlayerId, ipAddress);
 
-            Response<decimal> response = _orleansSamplePaymentsService.DepositAsync(new TransactionRequest { Amount = depositAmount }).GetAwaiter().GetResult();
-            _scenarioContext.Add(SampleApiEndpointKeys.Deposit.ToString(), response);
+            void DepositOperation()
+            {
+                Response<decimal> response = _orleansSamplePaymentsService.DepositAsync(new TransactionRequest {Amount = depositAmount})
+                    .GetAwaiter().GetResult();
+                _scenarioContext.Add(SampleApiEndpointKeys.Deposit.ToString(), response);
+            }
+
+            _scenarioContext.Add(SampleApiEndpointKeys.DepositBalance.ToString(), _sampleApiTestsFixture.GetPlayerBalanceNotification(_sampleApiTestsFixture.PlayerId, DepositOperation).GetAwaiter().GetResult());
         }
 
         [When(@"I withdraw '(.*)' from account for player with IP '(.*)'")]
@@ -35,8 +41,13 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
         {
             _orleansSamplePaymentsService.SetHeaders(_sampleApiTestsFixture.PlayerId, ipAddress);
 
-            Response<decimal> response = _orleansSamplePaymentsService.WithdrawAsync(new TransactionRequest { Amount = withdrawalAmount }).GetAwaiter().GetResult();
-            _scenarioContext.Add(SampleApiEndpointKeys.Withdraw.ToString(), response);
+            void WithdrawOperation()
+            {
+                Response<decimal> response = _orleansSamplePaymentsService.WithdrawAsync(new TransactionRequest {Amount = withdrawalAmount}).GetAwaiter().GetResult();
+                _scenarioContext.Add(SampleApiEndpointKeys.Withdraw.ToString(), response);
+            }
+
+            _scenarioContext.Add(SampleApiEndpointKeys.WithdrawalBalance.ToString(), _sampleApiTestsFixture.GetPlayerBalanceNotification(_sampleApiTestsFixture.PlayerId, WithdrawOperation).GetAwaiter().GetResult());
         }
 
         [Then(@"the status code for '(Deposit|Withdraw)' is '(.*)'")]
@@ -51,10 +62,10 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
             Assert.Equal(balance, _scenarioContext.Get<Response<decimal>>(operationType).GetContent());
         }
 
-        [Then(@"the notified balance is '(.*)'")]
-        public void ThenTheNotifiedBalanceIs(string balanceChange)
+        [Then(@"the '(DepositBalance|WithdrawalBalance)' is '(.*)'")]
+        public void ThenTheNotifiedBalanceIs(string operationType, decimal balanceChange)
         {
-            Assert.Equal(balanceChange, _sampleApiTestsFixture.GetNotifiedPlayerBalance(_sampleApiTestsFixture.PlayerId).GetAwaiter().GetResult());
+            Assert.Equal(balanceChange, _scenarioContext.Get<decimal>(operationType));
         }
 
         [Then(@"the error message for '(Deposit|Withdraw)' is '(.*)'")]
