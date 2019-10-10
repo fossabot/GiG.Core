@@ -1,6 +1,13 @@
-# GiG Core
+<p align="center">
+  <img width=150 height=150 src="https://www.gig.com/uploads/2018/06/80fd7035-gig-product-icons-08-320x320.png" height="100">
+</p>
 
 The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
+
+<!-- Currently just placeholder. Need to be updated once we get the pipeline up and running -->
+[![Build status](https://img.shields.io/bitbucket/pipelines/atlassian/adf-builder-javascript/master)](https://img.shields.io/bitbucket/pipelines/atlassian/adf-builder-javascript/master) 
+[![NuGet](https://img.shields.io/nuget/v/GiG.Core.svg)](https://nuget.org/packages/GiG.Core)
+
 
 ## Docs
 
