@@ -1,11 +1,13 @@
-﻿using GiG.Core.Orleans.Sample.Client.Contracts;
-using GiG.Core.Orleans.Sample.Contracts;
+﻿using GiG.Core.Orleans.Sample.Grains.Contracts;
+using GiG.Core.Orleans.Sample.Grains.Contracts.Messages;
+using GiG.Core.Orleans.Sample.Web.Contracts;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using Orleans;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace GiG.Core.Orleans.Sample.Client.Controllers
+namespace GiG.Core.Orleans.Sample.Web.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -13,12 +15,12 @@ namespace GiG.Core.Orleans.Sample.Client.Controllers
     {
         private const decimal MinimumAmount = 10;
 
-        private readonly IClusterClient _clusterClient;
+        private IPublishEndpoint _publishEndpoint;
         private readonly IPlayerInformationAccessor _playerInformationAccessor;
 
-        public PaymentsController(IClusterClient clusterClient, IPlayerInformationAccessor playerInformationAccessor)
+        public PaymentsController(IPublishEndpoint publishEndpoint, IPlayerInformationAccessor playerInformationAccessor)
         {
-            _clusterClient = clusterClient;
+            _publishEndpoint = publishEndpoint;
             _playerInformationAccessor = playerInformationAccessor;
         }
 
@@ -30,20 +32,21 @@ namespace GiG.Core.Orleans.Sample.Client.Controllers
         [HttpPost("deposit")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<ActionResult<decimal>>Deposit(TransactionRequest request)
+        public async Task<ActionResult>Deposit(TransactionRequest request)
         {           
             if (request.Amount < MinimumAmount)
             {
                 return BadRequest($"Deposit Amount must be greater than {MinimumAmount}.");
             }
 
-            var paymentGrain = _clusterClient.GetGrain<IPaymentGrain>(_playerInformationAccessor.PlayerId);
-
-            await paymentGrain.DepositAsync(request.Amount);
-
-            var walletGrain = _clusterClient.GetGrain<IWalletGrain>(_playerInformationAccessor.PlayerId);
+            await _publishEndpoint.Publish(new PaymentTransactionRequested()
+            {
+                PlayerId = _playerInformationAccessor.PlayerId,
+                Amount = request.Amount,
+                TransactionType = TransactionType.Deposit
+            });
             
-            return Ok(await walletGrain.GetBalanceAsync());
+            return Ok();
         }
 
         /// <summary>
@@ -54,15 +57,16 @@ namespace GiG.Core.Orleans.Sample.Client.Controllers
         [HttpPost("withdraw")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<ActionResult<decimal>> Withdraw(TransactionRequest request)
+        public async Task<ActionResult> Withdraw(TransactionRequest request)
         {
-            var paymentGrain = _clusterClient.GetGrain<IPaymentGrain>(_playerInformationAccessor.PlayerId);
+            await _publishEndpoint.Publish(new PaymentTransactionRequested()
+            {
+                PlayerId = _playerInformationAccessor.PlayerId,
+                Amount = request.Amount,
+                TransactionType = TransactionType.Withdraw
+            });
             
-            await paymentGrain.WithdrawAsync(request.Amount);
-
-            var walletGrain = _clusterClient.GetGrain<IWalletGrain>(_playerInformationAccessor.PlayerId);
-
-            return Ok(await walletGrain.GetBalanceAsync());
+            return Ok();
         }
     }
 }

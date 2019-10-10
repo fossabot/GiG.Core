@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using GiG.Core.Orleans.Sample.Contracts.Models.Wallet;
+using GiG.Core.Orleans.Sample.Grains.Contracts.Models.Wallet;
 using RestEase;
 
 namespace GiG.Core.Orleans.Sample.Tests.ApiTests.Services

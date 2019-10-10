@@ -1,4 +1,4 @@
-namespace GiG.Core.Orleans.Sample.Contracts.Models.Payment
+namespace GiG.Core.Orleans.Sample.Grains.Contracts.Models.Payment
 {
     public class PaymentTransaction
     {

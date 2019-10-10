@@ -1,7 +1,7 @@
 ﻿using Orleans;
 using System.Threading.Tasks;
 
-namespace GiG.Core.Orleans.Sample.Contracts
+namespace GiG.Core.Orleans.Sample.Grains.Contracts
 {
     public interface IWalletGrain : IGrainWithGuidKey
     {

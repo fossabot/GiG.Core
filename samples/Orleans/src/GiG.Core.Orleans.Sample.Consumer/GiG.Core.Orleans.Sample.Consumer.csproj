@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="MassTransit" Version="5.5.5" />
+        <PackageReference Include="MassTransit.RabbitMQ" Version="5.5.5" />
+        <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="5.5.5" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0" />
+        <PackageReference Include="Microsoft.Orleans.Client" Version="3.0.0-beta1" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\..\src\GiG.Core.Messaging.MassTransit.RabbitMQ.Abstractions\GiG.Core.Messaging.MassTransit.RabbitMQ.Abstractions.csproj" />
+        <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Client\GiG.Core.Orleans.Client.csproj" />
+        <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Clustering.Consul\GiG.Core.Orleans.Clustering.Consul.csproj" />
+        <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Clustering.Kubernetes\GiG.Core.Orleans.Clustering.Kubernetes.csproj" />
+        <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Clustering\GiG.Core.Orleans.Clustering.csproj" />
+        <ProjectReference Include="..\GiG.Core.Orleans.Sample.Contracts\GiG.Core.Orleans.Sample.Contracts.csproj" />        
+        <ProjectReference Include="..\..\..\..\src\GiG.Core.Configuration\GiG.Core.Configuration.csproj" />
+        <ProjectReference Include="..\..\..\..\src\GiG.Core.Hosting\GiG.Core.Hosting.csproj" />
+        <ProjectReference Include="..\..\..\..\src\GiG.Core.Logging.All\GiG.Core.Logging.All.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <None Update="appsettings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+</Project>
