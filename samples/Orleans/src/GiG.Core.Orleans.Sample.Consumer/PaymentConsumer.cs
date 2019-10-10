@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GiG.Core.Orleans.Sample.Consumer
 {
-    public class PaymentConsumer : IConsumer<PaymentTransactionMessage>
+    public class PaymentConsumer : IConsumer<PaymentTransactionRequested>
     {
         private readonly ILogger _logger;
         private readonly IClusterClient _client;
@@ -22,7 +22,7 @@ namespace GiG.Core.Orleans.Sample.Consumer
             _client = client;
         }
         
-        public async Task Consume(ConsumeContext<PaymentTransactionMessage> context)
+        public async Task Consume(ConsumeContext<PaymentTransactionRequested> context)
         {
             _logger.LogInformation($"Consume {Enum.GetName(typeof(TransactionType), context.Message.TransactionType)} {context.Message.Amount}");
 

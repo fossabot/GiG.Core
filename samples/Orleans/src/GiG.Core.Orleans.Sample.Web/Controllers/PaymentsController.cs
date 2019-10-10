@@ -39,7 +39,7 @@ namespace GiG.Core.Orleans.Sample.Web.Controllers
                 return BadRequest($"Deposit Amount must be greater than {MinimumAmount}.");
             }
 
-            await _publishEndpoint.Publish(new PaymentTransactionMessage()
+            await _publishEndpoint.Publish(new PaymentTransactionRequested()
             {
                 PlayerId = _playerInformationAccessor.PlayerId,
                 Amount = request.Amount,
@@ -59,7 +59,7 @@ namespace GiG.Core.Orleans.Sample.Web.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult> Withdraw(TransactionRequest request)
         {
-            await _publishEndpoint.Publish(new PaymentTransactionMessage()
+            await _publishEndpoint.Publish(new PaymentTransactionRequested()
             {
                 PlayerId = _playerInformationAccessor.PlayerId,
                 Amount = request.Amount,
