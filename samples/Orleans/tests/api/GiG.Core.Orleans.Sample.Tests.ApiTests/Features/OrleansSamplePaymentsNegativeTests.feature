@@ -4,7 +4,7 @@ Feature: Orleans Sample Payments Negative Tests
 
 @Deposit
 Scenario Outline: Deposit to player account
-	Given I Deposit '<amount>' on the account for player with IP '<ipAddress>'
+	Given I attempt to Deposit '<amount>' on the account for player with IP '<ipAddress>'
 	Then the status code for 'Deposit' is '<responseCode>'
 	And the error message for 'Deposit' is '<message>'
 

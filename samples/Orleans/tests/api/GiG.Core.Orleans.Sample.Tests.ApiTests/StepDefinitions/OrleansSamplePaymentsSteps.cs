@@ -35,6 +35,16 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
             _scenarioContext.Add(SampleApiEndpointKeys.DepositBalance.ToString(), _sampleApiTestsFixture.GetPlayerBalanceNotification(_sampleApiTestsFixture.PlayerId, DepositOperation).GetAwaiter().GetResult());
         }
 
+        [Given(@"I attempt to Deposit '(.*)' on the account for player with IP '(.*)'")]
+        public void GivenIAttemptToDepositOnTheAccountForPlayerWithIP(decimal depositAmount, string ipAddress)
+        {
+            _orleansSamplePaymentsService.SetHeaders(_sampleApiTestsFixture.PlayerId, ipAddress);
+
+            Response<decimal> response = _orleansSamplePaymentsService.DepositAsync(new TransactionRequest { Amount = depositAmount })
+                .GetAwaiter().GetResult();
+            _scenarioContext.Add(SampleApiEndpointKeys.Deposit.ToString(), response);
+        }
+
         [When(@"I withdraw '(.*)' from account for player with IP '(.*)'")]
         [Then(@"I withdraw '(.*)' from account for player with IP '(.*)'")]
         public void WhenIWithdrawFromAccountForPlayerWithIP(decimal withdrawalAmount, string ipAddress)
