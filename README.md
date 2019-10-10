@@ -1,4 +1,12 @@
-![Alt text](gig-core.png)
+
+
+
+ Center 
+:-----:
+ ![Alt text](gig-core.png)
+ three
+ eleven
+
 
 The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 
