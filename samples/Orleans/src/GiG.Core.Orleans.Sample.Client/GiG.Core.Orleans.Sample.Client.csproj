@@ -27,7 +27,6 @@
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Web.Docs\GiG.Core.Web.Docs.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Web.Hosting\GiG.Core.Web.Hosting.csproj" />
     <ProjectReference Include="..\GiG.Core.Orleans.Sample.Contracts\GiG.Core.Orleans.Sample.Contracts.csproj" />
-    <ProjectReference Include="..\GiG.Core.Orleans.Sample.Hubs\GiG.Core.Orleans.Sample.Hubs.csproj" />
   </ItemGroup>
 
 </Project>
