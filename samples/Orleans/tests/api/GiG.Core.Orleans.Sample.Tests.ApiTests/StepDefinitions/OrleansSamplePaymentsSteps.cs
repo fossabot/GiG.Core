@@ -20,8 +20,8 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
             _sampleApiTestsFixture = sampleApiTestsFixture;
         }
 
-        [Given(@"I Deposit '(.*)' on the account for player with IP '(.*)'")]
-        public void GivenIDepositOnTheAccountForPlayerWithIP(decimal depositAmount, string ipAddress)
+        [Given(@"I (?:'(Successfully|Unsuccessfully)' )?Deposit '(.*)' on the account for player with IP '(.*)'")]
+        public void GivenIDepositOnTheAccountForPlayerWithIP(string depositState, decimal depositAmount, string ipAddress)
         {
             _orleansSamplePaymentsService.SetHeaders(_sampleApiTestsFixture.PlayerId, ipAddress);
 
@@ -32,22 +32,16 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
                 _scenarioContext.Add(SampleApiEndpointKeys.Deposit.ToString(), response);
             }
 
-            _scenarioContext.Add(SampleApiEndpointKeys.DepositBalance.ToString(), _sampleApiTestsFixture.GetPlayerBalanceNotification(_sampleApiTestsFixture.PlayerId, DepositOperation).GetAwaiter().GetResult());
+            if(depositState.Equals("Unsuccessfully"))
+                DepositOperation();
+            else
+                _scenarioContext.Add(SampleApiEndpointKeys.DepositBalance.ToString(), _sampleApiTestsFixture.GetPlayerBalanceNotification(_sampleApiTestsFixture.PlayerId, DepositOperation).GetAwaiter().GetResult());
+            
         }
 
-        [Given(@"I attempt to Deposit '(.*)' on the account for player with IP '(.*)'")]
-        public void GivenIAttemptToDepositOnTheAccountForPlayerWithIP(decimal depositAmount, string ipAddress)
-        {
-            _orleansSamplePaymentsService.SetHeaders(_sampleApiTestsFixture.PlayerId, ipAddress);
-
-            Response<decimal> response = _orleansSamplePaymentsService.DepositAsync(new TransactionRequest { Amount = depositAmount })
-                .GetAwaiter().GetResult();
-            _scenarioContext.Add(SampleApiEndpointKeys.Deposit.ToString(), response);
-        }
-
-        [When(@"I withdraw '(.*)' from account for player with IP '(.*)'")]
-        [Then(@"I withdraw '(.*)' from account for player with IP '(.*)'")]
-        public void WhenIWithdrawFromAccountForPlayerWithIP(decimal withdrawalAmount, string ipAddress)
+        [When(@"I (?:'(Successfully|Unsuccessfully)' )?withdraw '(.*)' from account for player with IP '(.*)'")]
+        [Then(@"I (?:'(Successfully|Unsuccessfully)' )?withdraw '(.*)' from account for player with IP '(.*)'")]
+        public void WhenIWithdrawFromAccountForPlayerWithIP(string depositState, decimal withdrawalAmount, string ipAddress)
         {
             _orleansSamplePaymentsService.SetHeaders(_sampleApiTestsFixture.PlayerId, ipAddress);
 
@@ -57,7 +51,10 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
                 _scenarioContext.Add(SampleApiEndpointKeys.Withdraw.ToString(), response);
             }
 
-            _scenarioContext.Add(SampleApiEndpointKeys.WithdrawalBalance.ToString(), _sampleApiTestsFixture.GetPlayerBalanceNotification(_sampleApiTestsFixture.PlayerId, WithdrawOperation).GetAwaiter().GetResult());
+            if (depositState.Equals("Unsuccessfully"))
+                WithdrawOperation();
+            else
+                _scenarioContext.Add(SampleApiEndpointKeys.WithdrawalBalance.ToString(), _sampleApiTestsFixture.GetPlayerBalanceNotification(_sampleApiTestsFixture.PlayerId, WithdrawOperation).GetAwaiter().GetResult());
         }
 
         [Then(@"the status code for '(Deposit|Withdraw)' is '(.*)'")]
