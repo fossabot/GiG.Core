@@ -10,27 +10,31 @@ services:
       - Logging__Sinks__Fluentd__IsEnabled=true
       - Logging__Sinks__Fluentd__Hostname=fluentd
       - Orleans__MembershipProvider__Address=http://consul:8500
+      - RabbitMQ__Host=rabbitmq
     depends_on:
       - fluentd
       - consul
+      - rabbitmq
     ports:
       - "8000:8080"
-  
-  sample-client:
-    image: ${DOCKER_REGISTRY-}gig.core.orleans.sample.client
+
+  sample-web:
+    image: ${DOCKER_REGISTRY-}gig.core.orleans.sample.web
     build:
       context: ..
-      dockerfile: samples/Orleans/src/GiG.Core.Orleans.Sample.Client/Dockerfile
+      dockerfile: samples/Orleans/src/GiG.Core.Orleans.Sample.Web/Dockerfile
     environment:
       - ASPNETCORE_URLS=http://+:8080
       - PATH_BASE=/api/transactions
       - Logging__Sinks__Fluentd__IsEnabled=true
       - Logging__Sinks__Fluentd__Hostname=fluentd
       - Orleans__MembershipProvider__Address=http://consul:8500
+      - RabbitMQ__Host=rabbitmq
     depends_on:
       - fluentd
       - sample-silo
       - consul
+      - rabbitmq
     ports:
       - "7000:8080"
     restart: on-failure
@@ -41,9 +45,26 @@ services:
       context: ../samples/Orleans/src/GiG.Core.Orleans.Sample.UI
       dockerfile: Dockerfile
     depends_on:
-      - sample-client
+      - sample-web
     ports:
       - "5000:8080"
+    restart: on-failure
+
+  sample-consumer:
+    image: ${DOCKER_REGISTRY-}gig.core.orleans.sample.consumer
+    build:
+      context: ..
+      dockerfile: samples/Orleans/src/GiG.Core.Orleans.Sample.Consumer/Dockerfile
+    environment:
+      - Logging__Sinks__Fluentd__IsEnabled=true
+      - Logging__Sinks__Fluentd__Hostname=fluentd
+      - Orleans__MembershipProvider__Address=http://consul:8500
+      - RabbitMQ__Host=rabbitmq
+    depends_on:
+      - fluentd
+      - sample-silo
+      - consul
+      - rabbitmq
     restart: on-failure
 
   consul:
@@ -54,3 +75,6 @@ services:
 
   rabbitmq:
     image: rabbitmq:management-alpine
+    ports:
+    - "5672:5672"
+    - "15672:15672"

@@ -5,7 +5,8 @@ using GiG.Core.Orleans.Clustering.Kubernetes.Extensions;
 using GiG.Core.Orleans.Sample.Consumer.Extensions;
 using GiG.Core.Orleans.Sample.Grains.Contracts;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Orleans.Hosting;
+using HostBuilderContext = Microsoft.Extensions.Hosting.HostBuilderContext;
 
 namespace GiG.Core.Orleans.Sample.Consumer
 {
@@ -21,13 +22,14 @@ namespace GiG.Core.Orleans.Sample.Consumer
             // Orleans Client
             services.AddClusterClient((builder, sp) =>
             {
-                builder.ConfigureCluster(configuration);
-                builder.UseMembershipProvider(configuration, x =>
+                builder.ConfigureCluster(configuration)
+                .UseMembershipProvider(configuration, x =>
                 {
                     x.ConfigureConsulClustering(configuration);
                     x.ConfigureKubernetesClustering(configuration);
-                });
-                builder.AddAssemblies(typeof(IPaymentGrain));
+                })
+                .AddAssemblies(typeof(IWalletGrain))
+                .AddSimpleMessageStreamProvider(Constants.StreamProviderName);
             });
 
         }

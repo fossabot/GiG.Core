@@ -10,10 +10,7 @@ namespace GiG.Core.Logging.Enrichers.DistributedTracing.Internal
      
         private readonly ICorrelationContextAccessor _correlationContextAccessor;
 
-        public CorrelationIdEnricher(ICorrelationContextAccessor correlationContextAccessor)
-        {
-            _correlationContextAccessor = correlationContextAccessor;
-        }
+        public CorrelationIdEnricher(ICorrelationContextAccessor correlationContextAccessor) => _correlationContextAccessor = correlationContextAccessor;
 
         public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
         {

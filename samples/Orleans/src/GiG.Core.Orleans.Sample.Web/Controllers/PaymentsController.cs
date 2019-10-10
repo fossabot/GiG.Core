@@ -43,7 +43,7 @@ namespace GiG.Core.Orleans.Sample.Web.Controllers
             {
                 PlayerId = _playerInformationAccessor.PlayerId,
                 Amount = request.Amount,
-                TransactionType = PaymentTransactionType.Deposit
+                TransactionType = TransactionType.Deposit
             });
             
             return Ok();
@@ -63,7 +63,7 @@ namespace GiG.Core.Orleans.Sample.Web.Controllers
             {
                 PlayerId = _playerInformationAccessor.PlayerId,
                 Amount = request.Amount,
-                TransactionType = PaymentTransactionType.Withdrawal
+                TransactionType = TransactionType.Withdraw
             });
             
             return Ok();
