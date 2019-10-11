@@ -1,4 +1,4 @@
-using GiG.Core.Orleans.Sample.Grains.Contracts;
+using GiG.Core.Orleans.Sample.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Orleans;
 using System.Threading.Tasks;
