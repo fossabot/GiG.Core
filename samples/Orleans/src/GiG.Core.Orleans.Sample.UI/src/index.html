@@ -249,14 +249,16 @@
 				amount
 			})
 		}).then(response => {
-			return response.json().then(data => {
-				if (response.ok) {
-					loadSuccess(element, data);
-				}
-				else {
-					showError(data);
-				}
-			})
+			if (response.ok)
+			{
+				loadSuccess(element);
+			}
+			else
+			{
+				response.json().then(data => {
+					showError(data)
+				});
+			}						
 		});
 	}
 
@@ -270,15 +272,17 @@
 				amount
 			})
 		}).then(response => {
-			response.json().then(data => {
-				if (response.ok) {
-					loadSuccess(element, data);
-				}
-				else {
-					showError(data);
-				}
-			});
-		})
+			if (response.ok)
+			{
+				loadSuccess(element);
+			}
+			else
+			{
+				response.json().then(data => {
+					showError(data)
+				});
+			}						
+		});
 	}
 
 	function startupScript() {
@@ -322,7 +326,7 @@
 		}
 	}
 
-	function loadSuccess(element, data) {
+	function loadSuccess(element) {
 		element.classList.add("loading");
 		setTimeout(function (button) {
 			button.classList.remove("loading");

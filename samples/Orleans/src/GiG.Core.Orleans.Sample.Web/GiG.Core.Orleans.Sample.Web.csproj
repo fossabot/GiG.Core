@@ -9,6 +9,9 @@
   <ItemGroup>    
     <PackageReference Include="Microsoft.Orleans.Client" Version="3.0.0-beta1" />
     <PackageReference Include="SignalR.Orleans" Version="1.4.3" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="5.5.5" />
+    <PackageReference Include="MassTransit" Version="5.5.5" />
+    <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="5.5.5" />
   </ItemGroup>
   
   <ItemGroup>
@@ -20,6 +23,7 @@
     <ProjectReference Include="..\..\..\..\src\GiG.Core.HealthChecks\GiG.Core.HealthChecks.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Hosting\GiG.Core.Hosting.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Logging.All\GiG.Core.Logging.All.csproj" />
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.Messaging.RabbitMQ.Abstractions\GiG.Core.Messaging.RabbitMQ.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Client\GiG.Core.Orleans.Client.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Clustering\GiG.Core.Orleans.Clustering.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Clustering.Consul\GiG.Core.Orleans.Clustering.Consul.csproj" />

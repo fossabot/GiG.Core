@@ -14,8 +14,8 @@ namespace GiG.Core.Orleans.Sample.Grains
     [StorageProvider]
     public class PaymentTransactionGrain : Grain<List<PaymentTransaction>>, IPaymentTransactionGrain, IAsyncObserver<PaymentTransaction>
     {
-        private IAsyncStream<PaymentTransaction> _stream;
         private readonly ILogger _logger;
+        private IAsyncStream<PaymentTransaction> _stream;
       
         public PaymentTransactionGrain(ILogger<PaymentTransactionGrain> logger)
         {

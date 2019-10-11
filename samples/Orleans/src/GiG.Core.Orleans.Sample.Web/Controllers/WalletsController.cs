@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Orleans;
 using System.Threading.Tasks;
 
-namespace GiG.Core.Orleans.Sample.Client.Controllers
+namespace GiG.Core.Orleans.Sample.Web.Controllers
 {
     [ApiController]
     [Route("[controller]")]

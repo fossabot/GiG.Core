@@ -1,20 +1,20 @@
 ﻿using GiG.Core.Orleans.Sample.Contracts;
-using GiG.Core.Orleans.Sample.Contracts.Models.Payment;
+using GiG.Core.Orleans.Sample.Contracts.Models.Wallet;
 using Microsoft.AspNetCore.Mvc;
 using Orleans;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace GiG.Core.Orleans.Sample.Client.Controllers
+namespace GiG.Core.Orleans.Sample.Web.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PaymentTransactionsController : ControllerBase
+    public class WalletTransactionsController : ControllerBase
     {
         private readonly IClusterClient _clusterClient;
         private readonly IPlayerInformationAccessor _playerInformationAccessor;
 
-        public PaymentTransactionsController(IClusterClient clusterClient, IPlayerInformationAccessor playerInformationAccessor)
+        public WalletTransactionsController(IClusterClient clusterClient, IPlayerInformationAccessor playerInformationAccessor)
         {
             _clusterClient = clusterClient;
             _playerInformationAccessor = playerInformationAccessor;
@@ -24,12 +24,12 @@ namespace GiG.Core.Orleans.Sample.Client.Controllers
         /// Gets the Payment Transactions.
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<PaymentTransaction>>> Get()
+        [HttpGet()]
+        public async Task<ActionResult<IEnumerable<WalletTransaction>>> Get()
         {
             var playerId = _playerInformationAccessor.PlayerId;
 
-            var transactions = await _clusterClient.GetGrain<IPaymentTransactionGrain>(playerId).GetAllAsync();
+            var transactions = await _clusterClient.GetGrain<IWalletTransactionGrain>(playerId).GetAllAsync();
             
             return Ok(transactions);
         }

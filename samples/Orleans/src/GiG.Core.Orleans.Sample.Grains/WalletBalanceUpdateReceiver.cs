@@ -11,8 +11,8 @@ namespace GiG.Core.Orleans.Sample.Grains
     [ImplicitStreamSubscription(Constants.WalletTransactionsStreamNamespace)]
     public class WalletBalanceUpdateReceiver : Grain, IBalanceUpdateReceiver, IAsyncObserver<WalletTransaction>
     {
-        private IAsyncStream<WalletTransaction> _stream;
         private readonly ILogger _logger;
+        private IAsyncStream<WalletTransaction> _stream;
 
         public WalletBalanceUpdateReceiver(ILogger<WalletBalanceUpdateReceiver> logger)
         {
