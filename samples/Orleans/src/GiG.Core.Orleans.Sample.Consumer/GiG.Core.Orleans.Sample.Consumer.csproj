@@ -14,7 +14,7 @@
     </ItemGroup>
     
     <ItemGroup>
-        <ProjectReference Include="..\..\..\..\src\GiG.Core.Messaging.MassTransit.RabbitMQ.Abstractions\GiG.Core.Messaging.MassTransit.RabbitMQ.Abstractions.csproj" />
+        <ProjectReference Include="..\..\..\..\src\GiG.Core.Messaging.RabbitMQ.Abstractions\GiG.Core.Messaging.RabbitMQ.Abstractions.csproj" />
         <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Client\GiG.Core.Orleans.Client.csproj" />
         <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Clustering.Consul\GiG.Core.Orleans.Clustering.Consul.csproj" />
         <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Clustering.Kubernetes\GiG.Core.Orleans.Clustering.Kubernetes.csproj" />

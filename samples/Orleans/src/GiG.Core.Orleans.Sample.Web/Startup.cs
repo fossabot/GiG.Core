@@ -8,7 +8,6 @@ using GiG.Core.Orleans.Clustering.Consul.Extensions;
 using GiG.Core.Orleans.Clustering.Extensions;
 using GiG.Core.Orleans.Clustering.Kubernetes.Extensions;
 using GiG.Core.Orleans.Sample.Contracts;
-using GiG.Core.Orleans.Sample.Hubs;
 using GiG.Core.Orleans.Sample.Web.Extensions;
 using GiG.Core.Web.Docs.Extensions;
 using GiG.Core.Web.Hosting.Extensions;
