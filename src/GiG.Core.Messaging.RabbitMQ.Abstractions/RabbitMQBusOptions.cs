@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GiG.Core.Messaging.MassTransit.RabbitMQ.Abstractions
+﻿namespace GiG.Core.Messaging.RabbitMQ.Abstractions
 {
     public class RabbitMQBusOptions
     {

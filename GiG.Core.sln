@@ -42,6 +42,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		Directory.Build.props = Directory.Build.props
 		Dockerfile = Dockerfile
+		gig-core.png = gig-core.png
 		NuGet.Config = NuGet.Config
 	EndProjectSection
 EndProject
@@ -238,9 +239,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Sample.Tes
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Messaging", "Messaging", "{E0BFB198-42BA-4BB6-809C-5FDF6D48D3D9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.MassTransit.RabbitMQ.Abstractions", "src\GiG.Core.Messaging.MassTransit.RabbitMQ.Abstractions\GiG.Core.Messaging.MassTransit.RabbitMQ.Abstractions.csproj", "{4A33366E-3E63-4142-B242-25BC793C716A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.RabbitMQ.Abstractions", "src\GiG.Core.Messaging.RabbitMQ.Abstractions\GiG.Core.Messaging.RabbitMQ.Abstractions.csproj", "{4A33366E-3E63-4142-B242-25BC793C716A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Sample.Consumer", "samples\Orleans\src\GiG.Core.Orleans.Sample.Consumer\GiG.Core.Orleans.Sample.Consumer.csproj", "{F5BFE4B3-0FEA-417D-BA8A-004EF9E90E63}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Messaging", "Messaging", "{1577B553-2909-4844-A422-8782E2AA0F83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -586,6 +589,8 @@ Global
 		{C7A2FA4B-3CD7-41DB-8CF3-E1875B18A015} = {663B3F62-62DA-4B0D-81CA-156013D0C93C}
 		{5151DFD9-5195-4ABC-8F9F-D201084F81FA} = {54BD3C2B-B197-47EC-92C2-CC3EF5940ECF}
 		{F5BFE4B3-0FEA-417D-BA8A-004EF9E90E63} = {2AFB4E5D-843D-4DE4-A151-772FC6978A2F}
+		{1577B553-2909-4844-A422-8782E2AA0F83} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
+		{4A33366E-3E63-4142-B242-25BC793C716A} = {1577B553-2909-4844-A422-8782E2AA0F83}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}

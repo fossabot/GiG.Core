@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 
-namespace GiG.Core.Orleans.Sample.Hubs
+namespace GiG.Core.Orleans.Sample.Web
 {
     public class NotificationsHub : Hub, INotificationsHub
     {

@@ -1,6 +1,6 @@
 ﻿using GiG.Core.Configuration.Extensions;
-using Microsoft.Extensions.Hosting;
 using GiG.Core.Logging.All.Extensions;
+using Microsoft.Extensions.Hosting;
 
 namespace GiG.Core.Orleans.Sample.Consumer
 {
