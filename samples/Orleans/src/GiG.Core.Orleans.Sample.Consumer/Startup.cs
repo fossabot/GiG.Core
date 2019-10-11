@@ -31,7 +31,6 @@ namespace GiG.Core.Orleans.Sample.Consumer
                 .AddAssemblies(typeof(IWalletGrain))
                 .AddSimpleMessageStreamProvider(Constants.StreamProviderName);
             });
-
         }
     }
 }
