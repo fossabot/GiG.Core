@@ -6,21 +6,23 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests
     {
         public static string ApiUrl()
         {
-            IConfiguration config = GetConfiguration();
-            return config["TestConfiguration:BaseUrl"]+ config["TestConfiguration:ApiPath"];
+            TestConfigurationOptions config = GetConfiguration();
+            return config.BaseUrl + config.ApiPath;
         }
 
         public static string NotificationsUrl()
         {
-            IConfiguration config = GetConfiguration();
-            return config["TestConfiguration:BaseUrl"] + config["TestConfiguration:NotificationsPath"];
+            TestConfigurationOptions config = GetConfiguration();
+            return config.BaseUrl + config.NotificationsPath;
         }
 
-        private static IConfiguration GetConfiguration()
+        private static TestConfigurationOptions GetConfiguration()
         {
-            return new ConfigurationBuilder()
+            IConfiguration configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .Build();
+
+            return configuration.GetSection(TestConfigurationOptions.DefaultSectionName).Get<TestConfigurationOptions>();
         }
     }
 }
