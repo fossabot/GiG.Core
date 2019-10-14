@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Bogus;
 
 namespace GiG.Core.Orleans.Sample.Tests.ApiTests
 {
@@ -9,7 +10,7 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests
 
         public  SampleApiTestsFixture()
         {
-            PlayerId = Guid.NewGuid();
+            PlayerId = new Faker().Random.Guid();
         }
 
         public async Task<decimal> GetPlayerBalanceNotification(Guid playerId, Action operation)

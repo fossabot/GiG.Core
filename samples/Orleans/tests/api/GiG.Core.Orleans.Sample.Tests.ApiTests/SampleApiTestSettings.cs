@@ -1,15 +1,26 @@
-﻿namespace GiG.Core.Orleans.Sample.Tests.ApiTests
+﻿using Microsoft.Extensions.Configuration;
+
+namespace GiG.Core.Orleans.Sample.Tests.ApiTests
 {
     public class SampleApiTestSettings
     {
-        public static string BaseUrl()
+        public static string ApiUrl()
         {
-            return "http://localhost:7000/api/";
+            IConfiguration config = GetConfiguration();
+            return config["TestConfiguration:BaseUrl"]+ config["TestConfiguration:ApiPath"];
         }
 
         public static string NotificationsUrl()
         {
-            return "http://localhost:7000/notifications/open/";
+            IConfiguration config = GetConfiguration();
+            return config["TestConfiguration:BaseUrl"] + config["TestConfiguration:NotificationsPath"];
+        }
+
+        private static IConfiguration GetConfiguration()
+        {
+            return new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
         }
     }
 }
