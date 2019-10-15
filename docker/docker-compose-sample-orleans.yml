@@ -62,14 +62,12 @@ services:
       - Logging__Sinks__Fluentd__IsEnabled=true
       - Logging__Sinks__Fluentd__Hostname=fluentd
       - Orleans__MembershipProvider__Address=http://consul:8500
-      - RabbitMQ__Host=rabbitmq
-      - ConnectionStrings__DefaultConnection=Host=sampledb;Username=postgres;Password=postgres;Database=sample
+      - RabbitMQ__Host=rabbitmq      
     depends_on:
       - fluentd
       - sample-silo
       - consul
-      - rabbitmq              
-      - sampledb
+      - rabbitmq
     restart: on-failure
 
   consul:
