@@ -1,5 +1,6 @@
 ﻿using GiG.Core.Configuration.Extensions;
 using GiG.Core.Context.Orleans.Extensions;
+using GiG.Core.Data.Migration.Abstractions;
 using GiG.Core.Data.Migration.Evolve.Extensions;
 using GiG.Core.DistributedTracing.Orleans.Extensions;
 using GiG.Core.Hosting.Extensions;
@@ -25,7 +26,6 @@ namespace GiG.Core.Orleans.Sample.Silo
                     services.AddRequestContextAccessor();
                     services.AddDbMigration(new NpgsqlConnection(ctx.Configuration[$"{NpgsqlOptions.DefaultSectionName}:sampleDb:ConnectionString"]))
                         .AddDefaultMigrationOptions()
-                        .AddLocation("OrleansAdoNetContent/PostgresSQL")
                         .Migrate();
                 })
                 .ConfigureExternalConfiguration()

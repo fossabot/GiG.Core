@@ -11,7 +11,7 @@ services:
       - Logging__Sinks__Fluentd__Hostname=fluentd
       - Orleans__MembershipProvider__Address=http://consul:8500
       - RabbitMQ__Host=rabbitmq
-      - StorageProviders__sampleDb__ConnectionString=Host=sampledb;Username=postgres;Password=postgres;Database=sampleDb
+      - StorageProviders__sampleDb__ConnectionString=Host=sampledb;Username=postgres;Password=postgres;Database=sample
     depends_on:
       - fluentd
       - consul
@@ -63,7 +63,7 @@ services:
       - Logging__Sinks__Fluentd__Hostname=fluentd
       - Orleans__MembershipProvider__Address=http://consul:8500
       - RabbitMQ__Host=rabbitmq
-      - ConnectionStrings__DefaultConnection=Host=sampledb;Username=postgres;Password=postgres;Database=sampleDb
+      - ConnectionStrings__DefaultConnection=Host=sampledb;Username=postgres;Password=postgres;Database=sample
     depends_on:
       - fluentd
       - sample-silo
@@ -89,6 +89,6 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: sampleDb
+      POSTGRES_DB: sample
     ports:
     - "5432:5432"

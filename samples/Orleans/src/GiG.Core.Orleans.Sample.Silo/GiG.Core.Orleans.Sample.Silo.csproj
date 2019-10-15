@@ -34,10 +34,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <CopyToPublishDirectory>Always</CopyToPublishDirectory>
     </None>
-    <None Update="OrleansAdoNetContent\PostgreSQL\PostgreSQL-Main.sql">
+    <None Update="scripts\V1__PostgreSQL-Main.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="OrleansAdoNetContent\PostgreSQL\PostgreSQL-Persistence.sql">
+    <None Update="scripts\V2__PostgreSQL-Persistence.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
