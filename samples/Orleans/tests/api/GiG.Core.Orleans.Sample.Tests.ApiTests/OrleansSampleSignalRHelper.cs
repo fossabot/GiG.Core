@@ -16,7 +16,7 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests
                 .Build();
         }
 
-        public async Task<decimal> ListenForNotification(string messageKey, string invokedMethodName, string argument, Action operation)
+        public async Task<decimal> ListenForNotification(string messageKey, string invokedMethodName, string argument, Action operation, int timeout = 1500)
         {
             SemaphoreSlim semaphore = new SemaphoreSlim(0, 1);
             decimal message = 0;
@@ -30,7 +30,7 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests
             await Connection.InvokeAsync(invokedMethodName, argument);
 
             operation();
-            semaphore.Wait(1500);
+            semaphore.Wait(timeout);
 
             await Connection.DisposeAsync();
 

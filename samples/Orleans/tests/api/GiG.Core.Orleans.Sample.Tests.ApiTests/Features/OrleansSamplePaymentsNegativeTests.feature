@@ -17,7 +17,7 @@ Scenario Outline: Deposit to player account
 
 @Withdraw
 Scenario Outline: Withdraw from player account
-	Given I Deposit '<amount>' on the account for player with IP '127.0.0.1'
+	Given I 'Successfully' Deposit '<amount>' on the account for player with IP '127.0.0.1'
 	When I 'Unsuccessfully' withdraw '<withdrawalAmount>' from account for player with IP '<ipAddress>'
 	Then the status code for 'Withdraw' is '<responseCode>'
 	And the error message for 'Withdraw' is '<message>'

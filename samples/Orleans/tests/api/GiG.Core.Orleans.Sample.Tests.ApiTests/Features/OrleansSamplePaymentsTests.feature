@@ -4,7 +4,7 @@ Feature: Orleans Sample Payments Tests
 
 @Deposit
 Scenario Outline: Deposit to player account
-	Given I Deposit '<amount>' on the account for player with IP '<ipAddress>'
+	Given I 'Successfully' Deposit '<amount>' on the account for player with IP '<ipAddress>'
 	Then the status code for 'Deposit' is 'OK'
 	And the 'DepositBalance' is '<amount>'
 
@@ -15,8 +15,8 @@ Scenario Outline: Deposit to player account
 
 @Withdraw
 Scenario Outline: Withdraw from player account
-	Given I Deposit '<amount>' on the account for player with IP '<ipAddress>'
-	When I withdraw '<withdrawalAmount>' from account for player with IP '<ipAddress>'
+	Given I 'Successfully' Deposit '<amount>' on the account for player with IP '<ipAddress>'
+	When I 'Successfully' withdraw '<withdrawalAmount>' from account for player with IP '<ipAddress>'
 	Then the status code for 'Withdraw' is 'OK'
 	And the 'WithdrawalBalance' is '<balance>'
 
