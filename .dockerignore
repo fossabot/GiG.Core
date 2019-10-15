@@ -14,3 +14,4 @@ docker-compose.*.yml
 !obj/Docker/publish/*
 !obj/Docker/empty/
 **/*.Avro.cs
+**/artifacts/nugets/*.nupkg
