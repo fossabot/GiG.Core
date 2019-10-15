@@ -309,3 +309,4 @@ OpenCover/
 **/*.feature.cs
 
 **/MasterMemory
+**/OrleansAdoNetContent
