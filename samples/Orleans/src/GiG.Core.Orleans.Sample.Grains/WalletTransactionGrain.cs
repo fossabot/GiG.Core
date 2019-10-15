@@ -2,6 +2,7 @@ using GiG.Core.Orleans.Sample.Contracts;
 using GiG.Core.Orleans.Sample.Contracts.Models.Wallet;
 using Microsoft.Extensions.Logging;
 using Orleans;
+using Orleans.Providers;
 using Orleans.Streams;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ using System.Threading.Tasks;
 namespace GiG.Core.Orleans.Sample.Grains
 {
     [ImplicitStreamSubscription(Constants.WalletTransactionsStreamNamespace)]
+    [StorageProvider(ProviderName = "sampleDb")]
+
     public class WalletTransactionGrain : Grain<List<WalletTransaction>>, IWalletTransactionGrain, IAsyncObserver<WalletTransaction>
     {
         private IAsyncStream<WalletTransaction> _stream;
