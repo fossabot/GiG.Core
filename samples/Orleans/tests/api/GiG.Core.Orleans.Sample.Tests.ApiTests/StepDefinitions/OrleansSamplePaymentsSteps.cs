@@ -58,21 +58,21 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
         }
 
         [Then(@"the status code for '(Deposit|Withdraw)' is '(.*)'")]
-        public void ThenTheStatusCodeForIs(string operationType, string statusCode)
+        public void ThenTheStatusCodeForIs(SampleApiEndpointKeys endpointKey, string statusCode)
         {
-            Assert.Equal(statusCode, _scenarioContext.Get<Response<decimal>>(operationType).ResponseMessage.StatusCode.ToString());
+            Assert.Equal(statusCode, _scenarioContext.Get<Response<decimal>>(endpointKey.ToString()).ResponseMessage.StatusCode.ToString());
         }
 
         [Then(@"the '(DepositBalance|WithdrawalBalance)' is '(.*)'")]
-        public void ThenTheNotifiedBalanceIs(string operationType, decimal balanceChange)
+        public void ThenTheNotifiedBalanceIs(SampleApiEndpointKeys endpointKey, decimal balanceChange)
         {
-            Assert.Equal(balanceChange, _scenarioContext.Get<decimal>(operationType));
+            Assert.Equal(balanceChange, _scenarioContext.Get<decimal>(endpointKey.ToString()));
         }
 
         [Then(@"the error message for '(Deposit|Withdraw)' is '(.*)'")]
-        public void ThenTheErrorMessageUsingKeyIs(string operationType, string message)
+        public void ThenTheErrorMessageUsingKeyIs(SampleApiEndpointKeys endpointKey, string message)
         {
-            Assert.Equal(message, _scenarioContext.Get<Response<decimal>>(operationType).StringContent);
+            Assert.Equal(message, _scenarioContext.Get<Response<decimal>>(endpointKey.ToString()).StringContent);
         }
     }
 }
