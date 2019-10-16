@@ -30,6 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="$(PackageIconFullPath)" Pack="true" PackagePath="\"/>
+    <None Include="$(PackageIconFullPath)" Pack="true" PackagePath="\" Visible="false" />
   </ItemGroup>
 </Project>
