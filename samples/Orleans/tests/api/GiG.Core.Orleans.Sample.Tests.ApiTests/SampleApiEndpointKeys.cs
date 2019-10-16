@@ -5,6 +5,8 @@
         Deposit,
         Withdraw,
         WalletBalance,
-        WalletTransactions
+        WalletTransactions,
+        DepositBalance,
+        WithdrawalBalance
     }
 }
