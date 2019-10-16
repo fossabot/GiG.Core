@@ -1,12 +1,15 @@
+using GiG.Core.Context.Abstractions;
 using GiG.Core.Orleans.Sample.Contracts;
 using GiG.Core.Orleans.Sample.Contracts.Models.Payment;
 using GiG.Core.Orleans.Sample.Contracts.Models.Wallet;
 using Microsoft.Extensions.Logging;
 using Orleans;
 using Orleans.Providers;
+using Orleans.Runtime;
 using Orleans.Streams;
 using System;
 using System.Threading.Tasks;
+using Constants = GiG.Core.Orleans.Sample.Contracts.Constants;
 
 
 namespace GiG.Core.Orleans.Sample.Grains
@@ -15,23 +18,25 @@ namespace GiG.Core.Orleans.Sample.Grains
     [StorageProvider]
     public class WalletGrain : Grain<BalanceState>, IWalletGrain, IAsyncObserver<PaymentTransaction>
     {
-        private IAsyncStream<WalletTransaction> _walletStream;
         private IAsyncStream<PaymentTransaction> _paymentStream;
+        private readonly IMessagePublisher<WalletTransaction> _messagePublisher;
               
         private readonly ILogger _logger;
 
-        public WalletGrain(ILogger<WalletGrain> logger)
+        public WalletGrain(ILogger<WalletGrain> logger, IMessagePublisher<WalletTransaction> messagePublisher)
         {
-            _logger = logger;            
+            _logger = logger;
+            _messagePublisher = messagePublisher;
         }
-        
+
         public override async Task OnActivateAsync()
         {
             var streamProvider = GetStreamProvider(Constants.StreamProviderName);
             _paymentStream = streamProvider.GetStream<PaymentTransaction>(this.GetPrimaryKey(), Constants.PaymentTransactionsStreamNamespace);
             await _paymentStream.SubscribeOrResumeAsync(OnNextAsync);
             
-            _walletStream = streamProvider.GetStream<WalletTransaction>(this.GetPrimaryKey(), Constants.WalletTransactionsStreamNamespace);
+            _messagePublisher.SetAsyncStream(
+                streamProvider.GetStream<WalletTransaction>(this.GetPrimaryKey(), Constants.WalletTransactionsStreamNamespace));
                        
             await base.OnActivateAsync();
         }
@@ -52,8 +57,8 @@ namespace GiG.Core.Orleans.Sample.Grains
                 NewBalance = State.Amount,
                 TransactionType = WalletTransactionType.Debit
             };
-            
-            await _walletStream.OnNextAsync(transactionModel);
+
+            await _messagePublisher.PublishEventAsync(transactionModel);
             await base.WriteStateAsync();
 
             return State.Amount;
@@ -80,8 +85,8 @@ namespace GiG.Core.Orleans.Sample.Grains
                 NewBalance = State.Amount,
                 TransactionType = WalletTransactionType.Credit
             };
-            
-            await _walletStream.OnNextAsync(transactionModel);
+
+            await _messagePublisher.PublishEventAsync(transactionModel);
             await base.WriteStateAsync();
             
             return State.Amount;
@@ -97,7 +102,7 @@ namespace GiG.Core.Orleans.Sample.Grains
         }
 
         public async Task OnNextAsync(PaymentTransaction item, StreamSequenceToken token = null)
-        {
+        {            
             switch (item.TransactionType)
             {
                 case PaymentTransactionType.Deposit:
