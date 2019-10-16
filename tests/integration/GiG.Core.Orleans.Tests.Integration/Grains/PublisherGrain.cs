@@ -1,4 +1,5 @@
 ﻿using GiG.Core.Context.Abstractions;
+using GiG.Core.Messaging.Orleans.Abstractions;
 using GiG.Core.Orleans.Tests.Integration.Contracts;
 using GiG.Core.Orleans.Tests.Integration.Mocks;
 using Orleans;

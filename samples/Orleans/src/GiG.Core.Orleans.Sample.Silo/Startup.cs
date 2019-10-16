@@ -1,5 +1,5 @@
-﻿using GiG.Core.Context.Abstractions;
-using GiG.Core.Context.Orleans.Messaging;
+﻿using GiG.Core.Messaging.Orleans;
+using GiG.Core.Messaging.Orleans.Abstractions;
 using GiG.Core.Orleans.Clustering.Consul.Extensions;
 using GiG.Core.Orleans.Clustering.Extensions;
 using GiG.Core.Orleans.Clustering.Kubernetes.Extensions;

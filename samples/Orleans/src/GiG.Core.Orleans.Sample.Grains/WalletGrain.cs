@@ -1,4 +1,5 @@
 using GiG.Core.Context.Abstractions;
+using GiG.Core.Messaging.Orleans.Abstractions;
 using GiG.Core.Orleans.Sample.Contracts;
 using GiG.Core.Orleans.Sample.Contracts.Models.Payment;
 using GiG.Core.Orleans.Sample.Contracts.Models.Wallet;

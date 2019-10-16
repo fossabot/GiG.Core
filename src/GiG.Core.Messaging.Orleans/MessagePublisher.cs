@@ -1,4 +1,4 @@
-﻿using GiG.Core.Context.Abstractions;
+﻿using GiG.Core.Messaging.Orleans.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 using Orleans.Runtime;
@@ -6,7 +6,7 @@ using Orleans.Streams;
 using System;
 using System.Threading.Tasks;
 
-namespace GiG.Core.Context.Orleans.Messaging
+namespace GiG.Core.Messaging.Orleans
 {
     /// <inheritdoc />
     public class MessagePublisher<T> : IMessagePublisher<T> where T : class
@@ -42,6 +42,6 @@ namespace GiG.Core.Context.Orleans.Messaging
             if (asyncStream == null) throw new ArgumentNullException(nameof(asyncStream));
             if (_asyncStream != null) throw new InvalidOperationException("Stream already set.");
             _asyncStream = asyncStream;
-        }        
+        }
     }
 }

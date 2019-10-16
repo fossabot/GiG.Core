@@ -1,7 +1,7 @@
 using Orleans.Streams;
 using System.Threading.Tasks;
 
-namespace GiG.Core.Context.Abstractions
+namespace GiG.Core.Messaging.Orleans.Abstractions
 {
     /// <summary>
     /// Message Publisher used to publish event messages over Orleans Streams from Grains.

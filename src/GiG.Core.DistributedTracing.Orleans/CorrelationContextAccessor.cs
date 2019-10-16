@@ -10,7 +10,7 @@ namespace GiG.Core.DistributedTracing.Orleans
     public class CorrelationContextAccessor : ICorrelationContextAccessor
     {
         /// <summary>
-        /// Correlation Id value or Empty Guid if not present. Internally represented by the Orleans ActivityId inside RequestContext
+        /// Correlation Id value or Empty Guid if not present. Internally represented by the Orleans ActivityId inside RequestContext.
         /// </summary>
         public Guid Value => RequestContext.ActivityId;               
     }
