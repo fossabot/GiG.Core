@@ -1,2 +1,3 @@
 #!/bin/sh
-dotnet nuget push --source $SOURCE --api-key $API_KEY artifacts/nugets/*.nupkg
+cd /app/artifacts/nugets/
+dotnet nuget push **/*.nupkg --source $SOURCE --api-key $API_KEY 

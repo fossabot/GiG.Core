@@ -1,12 +1,12 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0.100 as base
 WORKDIR /app
-ARG VERSION='1.0.0'
+ARG VERSION=${BUILD_VERSION:-1.0.0}
 COPY . .
 RUN dotnet restore GiG.Core.sln
 RUN dotnet build GiG.Core.sln /p:Version=$VERSION -c Release --no-restore
 
 FROM base AS publish
-ENV SOURCE=https://api.nuget.org/v3/index.json
+ENV SOURCE=https://igcproget.igc.zone/nuget/gig-core-nuget/
 COPY docker/scripts/publish.sh .
 ENTRYPOINT ./publish.sh
 
