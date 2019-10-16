@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace GiG.Core.Orleans.Sample.Grains
 {
     [ImplicitStreamSubscription(Constants.WalletTransactionsStreamNamespace)]
-    [StorageProvider(ProviderName = "sampleDb")]
+    [StorageProvider(ProviderName = Constants.StorageProviderName)]
 
     public class WalletTransactionGrain : Grain<List<WalletTransaction>>, IWalletTransactionGrain, IAsyncObserver<WalletTransaction>
     {

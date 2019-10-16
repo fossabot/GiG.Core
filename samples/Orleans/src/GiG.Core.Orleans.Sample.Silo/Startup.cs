@@ -29,7 +29,7 @@ namespace GiG.Core.Orleans.Sample.Silo
                     x.ConfigureConsulClustering(ctx.Configuration);
                     x.ConfigureKubernetesClustering(ctx.Configuration);
                 })
-                .AddNpgsqlGrainStorage("sampleDb", ctx.Configuration)
+                .AddNpgsqlGrainStorage(Constants.StorageProviderName, ctx.Configuration)
                 .AddAssemblies(typeof(WalletGrain))
                 .AddSimpleMessageStreamProvider(Constants.StreamProviderName)
                 .UseSignalR()
