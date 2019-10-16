@@ -1,5 +1,6 @@
 using GiG.Core.Context.Abstractions;
 using GiG.Core.Context.Orleans.Extensions;
+using GiG.Core.Context.Orleans.Messaging;
 using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.DistributedTracing.Orleans.Extensions;
 using GiG.Core.Orleans.Client.Extensions;
@@ -29,11 +30,15 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                     x.ConfigureEndpoints();
                     x.UseLocalhostClustering();
                     x.AddAssemblies(typeof(EchoTestGrain));
+                    x.AddAssemblies(typeof(PublisherGrain));
+                    x.AddSimpleMessageStreamProvider("SMSProvider");
+                    x.AddMemoryGrainStorage("PubSubStore");
                 })
                 .ConfigureServices(x =>
                 {
                     x.AddCorrelationAccessor();
                     x.AddRequestContextAccessor();
+                    x.AddScoped<IMessagePublisher<MockMessage>, MessagePublisher<MockMessage>>();
                 })
                 .Build();
 
@@ -50,6 +55,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                         x.AddRequestContextOutgoingFilter(sp);
                         x.UseLocalhostClustering();
                         x.AddAssemblies(typeof(IEchoTestGrain));
+                        x.AddAssemblies(typeof(IPublisherGrain));
                     });
                 })
                 .Build();
