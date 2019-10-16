@@ -1,8 +1,10 @@
-﻿using GiG.Core.Orleans.Clustering.Consul.Extensions;
+﻿using GiG.Core.Context.Orleans.Streams;
+using GiG.Core.Orleans.Clustering.Consul.Extensions;
 using GiG.Core.Orleans.Clustering.Extensions;
 using GiG.Core.Orleans.Clustering.Kubernetes.Extensions;
 using GiG.Core.Orleans.Hosting.Silo.Extensions;
 using GiG.Core.Orleans.Sample.Contracts;
+using GiG.Core.Orleans.Sample.Contracts.Models.Wallet;
 using GiG.Core.Orleans.Sample.Grains;
 using GiG.Core.Orleans.Storage.Npgsql.Extensions;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +18,7 @@ namespace GiG.Core.Orleans.Sample.Silo
         // This method gets called by the runtime. Use this method to add services to the container.
         public static void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IEventPublisher<WalletTransaction>, EventPublisher<WalletTransaction>>();
         }
 
         // This method gets called by the runtime. Use this method to configure Orleans.
