@@ -24,5 +24,10 @@
         /// The name for the in memory storage to be used for streams.
         /// </summary>
         public const string StreamsMemoryStorageName = "PubSubStore";
+
+        /// <summary>
+        /// The storage prodiver to use for grain persistance.
+        /// </summary>
+        public const string StorageProviderName = "SampleDb";
     }
 }

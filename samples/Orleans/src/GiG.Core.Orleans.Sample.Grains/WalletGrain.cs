@@ -14,7 +14,7 @@ using Constants = GiG.Core.Orleans.Sample.Contracts.Constants;
 namespace GiG.Core.Orleans.Sample.Grains
 {
     [ImplicitStreamSubscription(Constants.PaymentTransactionsStreamNamespace)]
-    [StorageProvider]
+    [StorageProvider(ProviderName = Constants.StorageProviderName)]
     public class WalletGrain : Grain<BalanceState>, IWalletGrain, IAsyncObserver<PaymentTransaction>
     {
         private IAsyncStream<PaymentTransaction> _paymentStream;                     

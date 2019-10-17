@@ -5,6 +5,7 @@ using GiG.Core.Orleans.Hosting.Silo.Extensions;
 using GiG.Core.Orleans.Sample.Contracts.Models.Wallet;
 using GiG.Core.Orleans.Sample.Grains;
 using GiG.Core.Orleans.Streams;
+using GiG.Core.Orleans.Storage.Npgsql.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Orleans.Hosting;
 using Constants = GiG.Core.Orleans.Sample.Contracts.Constants;
@@ -31,7 +32,7 @@ namespace GiG.Core.Orleans.Sample.Silo
                     x.ConfigureConsulClustering(ctx.Configuration);
                     x.ConfigureKubernetesClustering(ctx.Configuration);
                 })
-                .AddMemoryGrainStorageAsDefault()
+                .AddNpgsqlGrainStorage(Constants.StorageProviderName, ctx.Configuration)
                 .AddAssemblies(typeof(WalletGrain))
                 .AddSimpleMessageStreamProvider(Constants.StreamProviderName)
                 .UseSignalR()
