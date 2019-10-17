@@ -29,7 +29,10 @@ namespace GiG.Core.Orleans.Streams
             var correlatioId = _correlationContextAccessor.Value;
 
             //this is to ensure that the correlation id provided by the accessor is propagated in the orleans request context.
-            if (correlatioId != RequestContext.ActivityId) RequestContext.ActivityId = correlatioId;
+            if (correlatioId != RequestContext.ActivityId)
+            {
+                RequestContext.ActivityId = correlatioId;
+            }
 
             _logger.LogInformation("Correlation Id before publish {ActivityId}", _correlationContextAccessor.Value);
             await _asyncStream.OnNextAsync(message, token);

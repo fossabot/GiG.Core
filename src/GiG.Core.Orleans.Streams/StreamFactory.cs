@@ -20,9 +20,9 @@ namespace GiG.Core.Orleans.Streams
 
         public IStream<TMessage> GetStream<TMessage>(IStreamProvider streamProvider, Guid streamId, string streamNameSpace)
         {
-            var asyncStream = streamProvider.GetStream<TMessage>(streamId, streamNameSpace);
+            var stream = streamProvider.GetStream<TMessage>(streamId, streamNameSpace);
           
-            return new Stream<TMessage>(asyncStream, _logger, _correlationContextAccessor);
+            return new Stream<TMessage>(stream, _logger, _correlationContextAccessor);
         }
     }
 }

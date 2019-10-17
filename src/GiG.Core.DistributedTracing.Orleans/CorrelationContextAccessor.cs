@@ -16,7 +16,11 @@ namespace GiG.Core.DistributedTracing.Orleans
         {
             get
             {
-                if (RequestContext.ActivityId == Guid.Empty) RequestContext.ActivityId = Guid.NewGuid();
+                if (RequestContext.ActivityId == Guid.Empty)
+                {
+                    RequestContext.ActivityId = Guid.NewGuid();
+                }
+                
                 RequestContext.PropagateActivityId = true;
                 
                 return RequestContext.ActivityId;
