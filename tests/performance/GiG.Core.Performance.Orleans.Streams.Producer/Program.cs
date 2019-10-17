@@ -1,14 +1,14 @@
-using GiG.Core.Configuration.Extensions;
-using GiG.Core.Context.Web.Extensions;
-using GiG.Core.DistributedTracing.Web.Extensions;
+﻿using GiG.Core.Configuration.Extensions;
+using GiG.Core.Context.Orleans.Extensions;
+using GiG.Core.DistributedTracing.Orleans.Extensions;
 using GiG.Core.Hosting.Extensions;
 using GiG.Core.Logging.All.Extensions;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Orleans;
 
-namespace GiG.Core.Orleans.Sample.Web
+namespace GiG.Core.Performance.Orleans.Streams.Producer
 {
-    public static class Program
+    public class Program
     {
         public static void Main(string[] args)
         {
@@ -18,14 +18,14 @@ namespace GiG.Core.Orleans.Sample.Web
         private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .UseApplicationMetadata()
-                .ConfigureServices(x =>
+                .ConfigureServices(services => 
                 {
-                    x.AddCorrelationId();
-                    x.AddRequestContextAccessor();
+                    services.AddCorrelationAccessor();
+                    services.AddRequestContextAccessor();
                 })
                 .ConfigureExternalConfiguration()
                 .ConfigureLogging()
-                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
-      
+                .ConfigureServices(Startup.ConfigureServices)
+                .UseOrleans(Startup.ConfigureOrleans);
     }
 }

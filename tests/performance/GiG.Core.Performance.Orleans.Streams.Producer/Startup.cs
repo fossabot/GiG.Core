@@ -2,19 +2,20 @@
 using GiG.Core.Orleans.Clustering.Extensions;
 using GiG.Core.Orleans.Clustering.Kubernetes.Extensions;
 using GiG.Core.Orleans.Hosting.Silo.Extensions;
-using GiG.Core.Orleans.Sample.Contracts;
-using GiG.Core.Orleans.Sample.Grains;
 using Microsoft.Extensions.DependencyInjection;
 using Orleans.Hosting;
+using Orleans.Streams.Kafka.Config;
+using Constants = GiG.Core.Performance.Orleans.Streams.Contracts.Constants;
 using HostBuilderContext = Microsoft.Extensions.Hosting.HostBuilderContext;
 
-namespace GiG.Core.Orleans.Sample.Silo
+namespace GiG.Core.Performance.Orleans.Streams.Producer
 {
     public static class Startup
     {
         // This method gets called by the runtime. Use this method to add services to the container.
         public static void ConfigureServices(IServiceCollection services)
         {
+            services.AddHostedService<HostedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure Orleans.
@@ -29,11 +30,10 @@ namespace GiG.Core.Orleans.Sample.Silo
                     x.ConfigureKubernetesClustering(ctx.Configuration);
                 })
                 .AddMemoryGrainStorageAsDefault()
-                .AddAssemblies(typeof(WalletGrain))
-                .AddSimpleMessageStreamProvider(Constants.StreamProviderName)
-                .UseSignalR()
+                .AddAssemblies(typeof(ProducerGrain))
+                .AddSimpleMessageStreamProvider(Constants.SMSProviderName)
                 .AddMemoryGrainStorage(Constants.StreamsMemoryStorageName)
-                .AddKafka(Constants.StreamProviderName)
+                .AddKafka(Constants.KafkaProviderName)
                 .WithOptions(options =>
                 {
                     options.BrokerList = new[] { "kafka:9092" };
@@ -41,8 +41,7 @@ namespace GiG.Core.Orleans.Sample.Silo
                     options.ConsumeMode = ConsumeMode.StreamEnd;
 
                     options
-                        .AddTopic(Constants.PaymentTransactionsStreamNamespace)
-                        .AddTopic(Constants.WalletTransactionsStreamNamespace);
+                        .AddTopic(Constants.MessageNamespace);
                 })
                 .AddJson()
                 .Build();
