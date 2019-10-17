@@ -1,4 +1,4 @@
-﻿namespace GiG.Core.Orleans.Hosting.Silo.Configurations
+﻿namespace GiG.Core.Orleans.Silo.Configurations
 {
     /// <summary>
     /// Orleans Silo Dashboard Settings.

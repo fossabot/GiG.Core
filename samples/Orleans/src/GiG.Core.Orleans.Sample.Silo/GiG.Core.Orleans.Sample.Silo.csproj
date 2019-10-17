@@ -22,7 +22,7 @@
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Clustering.Consul\GiG.Core.Orleans.Clustering.Consul.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Clustering.Kubernetes\GiG.Core.Orleans.Clustering.Kubernetes.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Clustering\GiG.Core.Orleans.Clustering.csproj" />
-    <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Hosting.Silo\GiG.Core.Orleans.Hosting.Silo.csproj" />
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Silo\GiG.Core.Orleans.Silo.csproj" />
     <ProjectReference Include="..\GiG.Core.Orleans.Sample.Grains\GiG.Core.Orleans.Sample.Grains.csproj" />
   </ItemGroup>
 

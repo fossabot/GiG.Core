@@ -3,7 +3,7 @@ using GiG.Core.Context.Orleans.Extensions;
 using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.DistributedTracing.Orleans.Extensions;
 using GiG.Core.Orleans.Client.Extensions;
-using GiG.Core.Orleans.Hosting.Silo.Extensions;
+using GiG.Core.Orleans.Silo.Extensions;
 using GiG.Core.Orleans.Tests.Integration.Contracts;
 using GiG.Core.Orleans.Tests.Integration.Grains;
 using GiG.Core.Orleans.Tests.Integration.Mocks;

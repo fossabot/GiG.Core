@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MasterMemory" Version="1.2.2" />
-    <PackageReference Include="MasterMemory.MSBuild.Tasks" Version="1.2.2" PrivateAssets="All" />
+    <PackageReference Include="MasterMemory" Version="1.2.3" />
+    <PackageReference Include="MasterMemory.MSBuild.Tasks" Version="1.2.3" PrivateAssets="All" />
     <PackageReference Include="BenchmarkDotNet" Version="0.11.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.0" />
