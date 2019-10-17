@@ -28,12 +28,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>GiG.Core.Benchmarks</_Parameter1>      
-    </AssemblyAttribute>
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="$(PackageIconFullPath)" Pack="true" PackagePath="\" Visible="false" />
   </ItemGroup>
 </Project>

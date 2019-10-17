@@ -130,7 +130,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orleans", "Orleans", "{8372
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orleans", "Orleans", "{8047E8B5-4505-49E7-8C01-5C5FCB7B5681}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Hosting.Silo", "src\GiG.Core.Orleans.Hosting.Silo\GiG.Core.Orleans.Hosting.Silo.csproj", "{DE0CD413-1938-465C-9B41-1FCA33364749}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Silo", "src\GiG.Core.Orleans.Silo\GiG.Core.Orleans.Silo.csproj", "{DE0CD413-1938-465C-9B41-1FCA33364749}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Hosting", "src\GiG.Core.Web.Hosting\GiG.Core.Web.Hosting.csproj", "{EAF75BF4-7854-46BC-87A7-89D793079002}"
 EndProject
@@ -236,8 +236,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Http.MultiTenant", "src\GiG.Core.Http.MultiTenant\GiG.Core.Http.MultiTenant.csproj", "{C7A2FA4B-3CD7-41DB-8CF3-E1875B18A015}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Sample.Tests.ApiTests", "samples\Orleans\tests\api\GiG.Core.Orleans.Sample.Tests.ApiTests\GiG.Core.Orleans.Sample.Tests.ApiTests.csproj", "{5151DFD9-5195-4ABC-8F9F-D201084F81FA}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Messaging", "Messaging", "{E0BFB198-42BA-4BB6-809C-5FDF6D48D3D9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.RabbitMQ.Abstractions", "src\GiG.Core.Messaging.RabbitMQ.Abstractions\GiG.Core.Messaging.RabbitMQ.Abstractions.csproj", "{4A33366E-3E63-4142-B242-25BC793C716A}"
 EndProject
