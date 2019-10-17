@@ -16,7 +16,7 @@ services:
       - fluentd
       - consul
       - rabbitmq
-      - sampledb
+      - sample-db
     ports:
       - "8000:8080"
     restart: on-failure
@@ -82,7 +82,7 @@ services:
     - "5672:5672"
     - "15672:15672"
       
-  sampledb:
+  sample-db:
     image: postgres:11.5-alpine
     environment:
       POSTGRES_USER: postgres
