@@ -32,5 +32,15 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
 
             Assert.Equal(correlationId, result);
         }
+
+        [Fact]
+        public async Task GetCorrelationIdAsync_PublishGrainMessage_CorrelationIdShouldNotBeEmpty()
+        {
+            var grain = _clusterFixture.ClusterClient.GetGrain<IPublisherGrain>(123);
+            
+            var result = await grain.PublishMessage(new Mocks.MockMessage());
+
+            Assert.NotEqual(Guid.Empty, result);
+        }
     }
 }
