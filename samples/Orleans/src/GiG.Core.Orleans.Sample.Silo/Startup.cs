@@ -1,11 +1,10 @@
-﻿using GiG.Core.Messaging.Orleans;
-using GiG.Core.Messaging.Orleans.Abstractions;
-using GiG.Core.Orleans.Clustering.Consul.Extensions;
+﻿using GiG.Core.Orleans.Clustering.Consul.Extensions;
 using GiG.Core.Orleans.Clustering.Extensions;
 using GiG.Core.Orleans.Clustering.Kubernetes.Extensions;
 using GiG.Core.Orleans.Hosting.Silo.Extensions;
 using GiG.Core.Orleans.Sample.Contracts.Models.Wallet;
 using GiG.Core.Orleans.Sample.Grains;
+using GiG.Core.Orleans.Streams;
 using Microsoft.Extensions.DependencyInjection;
 using Orleans.Hosting;
 using Constants = GiG.Core.Orleans.Sample.Contracts.Constants;
@@ -18,7 +17,7 @@ namespace GiG.Core.Orleans.Sample.Silo
         // This method gets called by the runtime. Use this method to add services to the container.
         public static void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IMessagePublisher<WalletTransaction>, MessagePublisher<WalletTransaction>>();
+            services.AddStreamFactory();
         }
 
         // This method gets called by the runtime. Use this method to configure Orleans.

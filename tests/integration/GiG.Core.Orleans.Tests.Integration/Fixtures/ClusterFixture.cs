@@ -1,11 +1,11 @@
 using GiG.Core.Context.Abstractions;
 using GiG.Core.Context.Orleans.Extensions;
 using GiG.Core.DistributedTracing.Abstractions;
+using GiG.Core.DistributedTracing.Orleans;
 using GiG.Core.DistributedTracing.Orleans.Extensions;
-using GiG.Core.Messaging.Orleans;
-using GiG.Core.Messaging.Orleans.Abstractions;
 using GiG.Core.Orleans.Client.Extensions;
 using GiG.Core.Orleans.Hosting.Silo.Extensions;
+using GiG.Core.Orleans.Streams;
 using GiG.Core.Orleans.Tests.Integration.Contracts;
 using GiG.Core.Orleans.Tests.Integration.Grains;
 using GiG.Core.Orleans.Tests.Integration.Mocks;
@@ -31,7 +31,6 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                     x.ConfigureEndpoints();
                     x.UseLocalhostClustering();
                     x.AddAssemblies(typeof(EchoTestGrain));
-                    x.AddAssemblies(typeof(PublisherGrain));
                     x.AddSimpleMessageStreamProvider("SMSProvider");
                     x.AddMemoryGrainStorage("PubSubStore");
                 })
@@ -39,7 +38,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                 {
                     x.AddCorrelationAccessor();
                     x.AddRequestContextAccessor();
-                    x.AddScoped<IMessagePublisher<MockMessage>, MessagePublisher<MockMessage>>();
+                    x.AddStreamFactory();
                 })
                 .Build();
 
@@ -48,7 +47,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
             var clientHost = new HostBuilder()
                 .ConfigureServices(services =>
                 {
-                    services.AddSingleton<ICorrelationContextAccessor, MockCorrelationContextAccessor>();
+                    services.AddSingleton<ICorrelationContextAccessor, CorrelationContextAccessor>();
                     services.AddSingleton<IRequestContextAccessor, MockRequestContextAccessor>();
                     services.AddClusterClient((x, sp) =>
                     {
@@ -56,7 +55,6 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                         x.AddRequestContextOutgoingFilter(sp);
                         x.UseLocalhostClustering();
                         x.AddAssemblies(typeof(IEchoTestGrain));
-                        x.AddAssemblies(typeof(IPublisherGrain));
                     });
                 })
                 .Build();
