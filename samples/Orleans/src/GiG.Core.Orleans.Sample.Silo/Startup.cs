@@ -2,11 +2,13 @@
 using GiG.Core.Orleans.Clustering.Extensions;
 using GiG.Core.Orleans.Clustering.Kubernetes.Extensions;
 using GiG.Core.Orleans.Hosting.Silo.Extensions;
-using GiG.Core.Orleans.Sample.Contracts;
+using GiG.Core.Orleans.Sample.Contracts.Models.Wallet;
 using GiG.Core.Orleans.Sample.Grains;
+using GiG.Core.Orleans.Streams;
 using GiG.Core.Orleans.Storage.Npgsql.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Orleans.Hosting;
+using Constants = GiG.Core.Orleans.Sample.Contracts.Constants;
 using HostBuilderContext = Microsoft.Extensions.Hosting.HostBuilderContext;
 
 namespace GiG.Core.Orleans.Sample.Silo
@@ -16,6 +18,7 @@ namespace GiG.Core.Orleans.Sample.Silo
         // This method gets called by the runtime. Use this method to add services to the container.
         public static void ConfigureServices(IServiceCollection services)
         {
+            services.AddStreamFactory();
         }
 
         // This method gets called by the runtime. Use this method to configure Orleans.
