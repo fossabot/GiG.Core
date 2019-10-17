@@ -11,12 +11,15 @@ services:
       - Logging__Sinks__Fluentd__Hostname=fluentd
       - Orleans__MembershipProvider__Address=http://consul:8500
       - RabbitMQ__Host=rabbitmq
+      - StorageProviders__SampleDb__ConnectionString=Host=sampledb;Username=postgres;Password=postgres;Database=sample
     depends_on:
       - fluentd
       - consul
       - rabbitmq
+      - sample-db
     ports:
       - "8000:8080"
+    restart: on-failure
 
   sample-web:
     image: ${DOCKER_REGISTRY-}gig.core.orleans.sample.web
@@ -59,7 +62,7 @@ services:
       - Logging__Sinks__Fluentd__IsEnabled=true
       - Logging__Sinks__Fluentd__Hostname=fluentd
       - Orleans__MembershipProvider__Address=http://consul:8500
-      - RabbitMQ__Host=rabbitmq
+      - RabbitMQ__Host=rabbitmq      
     depends_on:
       - fluentd
       - sample-silo
@@ -78,3 +81,12 @@ services:
     ports:
     - "5672:5672"
     - "15672:15672"
+      
+  sample-db:
+    image: postgres:11.5-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: sample
+    ports:
+    - "5432:5432"
