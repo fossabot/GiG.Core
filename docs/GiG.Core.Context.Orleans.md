@@ -7,7 +7,7 @@ This Library provides an API to register the Request Context Accessor functional
 Add the below to your Startup class to register the Request Context accessor. 
 Note: If the client is a Web Api use the Request Context Accessor from [GiG.Core.Context.Web](../src/GiG.Core.Context.Web).
 
-..
+
 ```csharp
 
 	public void ConfigureServices(IServiceCollection services)
