@@ -11,7 +11,6 @@
     <!-- Root control Version Prefix -->
     <AssemblyName>$(MSBuildProjectName)</AssemblyName>
     <AssemblyVersion>$(Version)</AssemblyVersion>
-    <VersionPrefix>1.0.0</VersionPrefix>
     <PackageIcon>gig-core.png</PackageIcon>
     <PackageIconFullPath>$(MSBuildThisFileDirectory)gig-core.png</PackageIconFullPath>
 
