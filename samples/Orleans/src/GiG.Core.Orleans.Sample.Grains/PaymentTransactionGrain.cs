@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace GiG.Core.Orleans.Sample.Grains
 {
     [ImplicitStreamSubscription(Constants.PaymentTransactionsStreamNamespace)]
-    [StorageProvider]
+    [StorageProvider(ProviderName = Constants.StorageProviderName)]
     public class PaymentTransactionGrain : Grain<List<PaymentTransaction>>, IPaymentTransactionGrain, IAsyncObserver<PaymentTransaction>
     {
         private readonly ILogger _logger;

@@ -1,4 +1,4 @@
-﻿using GiG.Core.Orleans.Hosting.Silo.Configurations;
+﻿using GiG.Core.Orleans.Silo.Configurations;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Orleans;
@@ -11,7 +11,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
 
-namespace GiG.Core.Orleans.Hosting.Silo.Extensions
+namespace GiG.Core.Orleans.Silo.Extensions
 {
     /// <summary>
     /// Silo Builder Extensions.

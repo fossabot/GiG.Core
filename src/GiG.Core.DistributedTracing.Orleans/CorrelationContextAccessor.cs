@@ -1,4 +1,4 @@
-﻿using GiG.Core.DistributedTracing.Abstractions;
+using GiG.Core.DistributedTracing.Abstractions;
 using Orleans.Runtime;
 using System;
 
@@ -10,11 +10,21 @@ namespace GiG.Core.DistributedTracing.Orleans
     public class CorrelationContextAccessor : ICorrelationContextAccessor
     {
         /// <summary>
-        /// Correlation Id value or Empty Guid if not present.
+        /// Correlation Id value represented by the Orleans ActivityId inside RequestContextor or Empty Guid if not present.
         /// </summary>
-        public Guid Value => 
-            Guid.TryParse(RequestContext.Get(Constants.Header)?.ToString(), out var correlationId)
-                ? correlationId
-                : Guid.Empty;
+        public Guid Value
+        {
+            get
+            {
+                if (RequestContext.ActivityId == Guid.Empty)
+                {
+                    RequestContext.ActivityId = Guid.NewGuid();
+                }
+                
+                RequestContext.PropagateActivityId = true;
+                
+                return RequestContext.ActivityId;
+            }
+        }
     }
 }

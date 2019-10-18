@@ -7,13 +7,16 @@
   <ItemGroup>
     <PackageReference Include="SignalR.Orleans" Version="1.4.3" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.0.0" />
-    <PackageReference Include="Microsoft.Orleans.Core.Abstractions" Version="3.0.0-beta1" />
-    <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="3.0.0-beta1">
+    <PackageReference Include="Microsoft.Orleans.Core.Abstractions" Version="3.0.0-rc2" />
+    <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="3.0.0-rc2">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>    
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.Context.Abstractions\GiG.Core.Context.Abstractions.csproj" />
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.DistributedTracing.Abstractions\GiG.Core.DistributedTracing.Abstractions.csproj" />
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Streams.Abstractions\GiG.Core.Orleans.Streams.Abstractions.csproj" />
     <ProjectReference Include="..\GiG.Core.Orleans.Sample.Contracts\GiG.Core.Orleans.Sample.Contracts.csproj" />
   </ItemGroup>
   

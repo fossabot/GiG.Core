@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Net;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("GiG.Core.Benchmarks")]
 namespace GiG.Core.Web.FluentValidation.Internal
 {
     /// <summary>

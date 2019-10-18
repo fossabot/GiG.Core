@@ -1,5 +1,5 @@
 using GiG.Core.Orleans.Client.Extensions;
-using GiG.Core.Orleans.Hosting.Silo.Extensions;
+using GiG.Core.Orleans.Silo.Extensions;
 using GiG.Core.Orleans.Storage.Npgsql.Configurations;
 using GiG.Core.Orleans.Storage.Npgsql.Extensions;
 using GiG.Core.Orleans.Storage.Npgsql.Tests.Integration.Grains;

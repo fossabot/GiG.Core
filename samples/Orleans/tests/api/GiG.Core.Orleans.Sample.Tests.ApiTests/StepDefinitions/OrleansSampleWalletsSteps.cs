@@ -24,7 +24,7 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
         [When(@"I request the wallet balance for player with IP '(.*)'")]
         public void WhenIRequestTheWalletBalanceForPlayerWithIP(string ipAddress)
         {
-            _orleansSampleWalletsService.SetHeaders(_sampleApiTestsFixture.RandomPlayerId, ipAddress);
+            _orleansSampleWalletsService.SetHeaders(_sampleApiTestsFixture.PlayerId, ipAddress);
             Response<decimal> response = _orleansSampleWalletsService.GetBalanceAsync().GetAwaiter().GetResult();
             _scenarioContext.Add(_apiEndpointKey, response);
         }
