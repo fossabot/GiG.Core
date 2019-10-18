@@ -11,9 +11,7 @@
     <!-- Root control Version Prefix -->
     <AssemblyName>$(MSBuildProjectName)</AssemblyName>
     <AssemblyVersion>$(Version)</AssemblyVersion>
-    <PackageIcon>gig-core.png</PackageIcon>
-    <PackageIconFullPath>$(MSBuildThisFileDirectory)gig-core.png</PackageIconFullPath>
-<PackageIconUrl>https://www.gig.com/uploads/2018/06/80fd7035-gig-product-icons-08-320x320.png</PackageIconUrl>
+    <PackageIconUrl>https://www.gig.com/uploads/2018/06/80fd7035-gig-product-icons-08-320x320.png</PackageIconUrl>
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <Deterministic>False</Deterministic>
     <NoWarn>NU5105</NoWarn>
@@ -26,7 +24,4 @@
     <IncludeSymbols>true</IncludeSymbols>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Include="$(PackageIconFullPath)" Pack="true" PackagePath="\" Visible="false" />
-  </ItemGroup>
 </Project>
