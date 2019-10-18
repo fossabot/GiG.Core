@@ -1,7 +1,6 @@
 using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.Orleans.Streams.Abstractions;
 using JetBrains.Annotations;
-using Microsoft.Extensions.Logging;
 using Orleans.Runtime;
 using Orleans.Streams;
 using System;
@@ -9,32 +8,44 @@ using System.Threading.Tasks;
 
 namespace GiG.Core.Orleans.Streams
 {
+    /// <summary>
+    /// Stream to publish event messages over Orleans Streams from Grains.
+    /// </summary>
+    /// <typeparam name="TMessage">Stream Message.</typeparam>
     public class Stream<TMessage> : IStream<TMessage>
     {
-        private IAsyncStream<TMessage> _asyncStream;
-        private readonly ILogger _logger;
+        private readonly IAsyncStream<TMessage> _asyncStream;
         private readonly ICorrelationContextAccessor _correlationContextAccessor;
 
-        public Stream(IAsyncStream<TMessage> asyncStream, ILogger logger, ICorrelationContextAccessor correlationContextAccessor)
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="asyncStream">The <see cref="IAsyncStream{TMessage}"/> to use in the stream publisher./></param>
+        /// <param name="correlationContextAccessor">The <see cref="ICorrelationContextAccessor" /> to use to add correlationId within RequestContext.</param>
+        public Stream(IAsyncStream<TMessage> asyncStream, ICorrelationContextAccessor correlationContextAccessor)
         {
             _asyncStream = asyncStream;
-            _logger = logger;
             _correlationContextAccessor = correlationContextAccessor;
         }
 
+        /// <summary>
+        /// Used to publish the message using the underlying stream. Before send the message the correlation id is set if not already present.
+        /// </summary>
+        /// <param name="message">The <see cref="TMessage"/> to publish.</param>
+        /// <param name="token">The <see cref="StreamSequenceToken"/> to send with the message.</param>
+        /// <returns></returns>
         public async Task PublishAsync([NotNull] TMessage message, StreamSequenceToken token = null)
         {
             if (_asyncStream == null) throw new NullReferenceException(nameof(_asyncStream));
 
-            var correlatioId = _correlationContextAccessor.Value;
+            var correlationId = _correlationContextAccessor.Value;
 
-            //this is to ensure that the correlation id provided by the accessor is propagated in the orleans request context.
-            if (correlatioId != RequestContext.ActivityId)
+            // This is to ensure that the correlation id provided by the accessor is propagated in the orleans request context.
+            if (correlationId != RequestContext.ActivityId)
             {
-                RequestContext.ActivityId = correlatioId;
+                RequestContext.ActivityId = correlationId;
             }
-
-            _logger.LogInformation("Correlation Id before publish {ActivityId}", _correlationContextAccessor.Value);
+          
             await _asyncStream.OnNextAsync(message, token);
         }
     }

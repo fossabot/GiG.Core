@@ -11,7 +11,7 @@ services:
       - Logging__Sinks__Fluentd__Hostname=fluentd
       - Orleans__MembershipProvider__Address=http://consul:8500
       - RabbitMQ__Host=rabbitmq
-      - StorageProviders__SampleDb__ConnectionString=Host=sampledb;Username=postgres;Password=postgres;Database=sample
+      - Orleans__StorageProviders__SampleDb__ConnectionString=Host=sample-db;Username=postgres;Password=postgres;Database=sample
     depends_on:
       - fluentd
       - consul
