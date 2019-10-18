@@ -31,7 +31,7 @@ namespace GiG.Core.Orleans.Streams
         /// <summary>
         /// Used to publish the message using the underlying stream. Before send the message the correlation id is set if not already present.
         /// </summary>
-        /// <param name="message">The <see cref="TMessage"/> to publish.</param>
+        /// <param name="message">The message to publish.</param>
         /// <param name="token">The <see cref="StreamSequenceToken"/> to send with the message.</param>
         /// <returns></returns>
         public async Task PublishAsync([NotNull] TMessage message, StreamSequenceToken token = null)
