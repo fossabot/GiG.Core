@@ -126,7 +126,7 @@ namespace GiG.Core.Data.Migration.Abstractions
         /// <returns>The <see cref="T:GiG.Core.Data.Migration.Evolve.MigrationOptionsBuilder" />.</returns>
         public MigrationOptionsBuilder DisableMigration()
         {
-            _options.Enabled = false;
+            _options.IsEnabled = false;
 
             return this;
         }
@@ -136,7 +136,7 @@ namespace GiG.Core.Data.Migration.Abstractions
         /// </summary>
         public void Migrate()
         {
-            if (_options.Enabled && _options.Locations.Any())
+            if (_options.IsEnabled && _options.Locations.Any())
             {
                 _serviceProvider
                     .GetRequiredService<IDatabaseMigration>()

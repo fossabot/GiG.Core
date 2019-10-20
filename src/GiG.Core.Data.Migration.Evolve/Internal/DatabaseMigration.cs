@@ -14,7 +14,7 @@ namespace GiG.Core.Data.Migration.Evolve.Internal
 
         public void Migrate(MigrationOptions options)
         {
-            if (options.Enabled)
+            if (options.IsEnabled)
             {
                 var evolve = new global::Evolve.Evolve(options.Connection, x => _logger.LogDebug(x))
                 {
