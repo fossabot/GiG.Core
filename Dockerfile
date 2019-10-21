@@ -1,5 +1,5 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0.100 as base
-WORKDIR /app
+FROM igcproget.igc.zone/gig-core-docker/library/dotnet:3.0.100-sdk-.4.7809fed as base
+
 ARG VERSION=${BUILD_VERSION:-1.0.0}
 COPY . .
 RUN dotnet restore GiG.Core.sln

@@ -1,8 +1,7 @@
-FROM mcr.microsoft.com/dotnet/core/runtime:3.0.0 AS base
-WORKDIR /app
+FROM igcproget.igc.zone/gig-core-docker/library/dotnet:3.0.0-runtime-.4.7809fed AS base
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0.100 AS build
-WORKDIR /src
+FROM igcproget.igc.zone/gig-core-docker/library/dotnet:3.0.100-sdk-.4.7809fed AS build
+
 COPY ["samples/Data/src/GiG.Core.Data.Migration.Sample/GiG.Core.Data.Migration.Sample.csproj", "samples/Data/src/GiG.Core.Data.Migration.Sample/"]
 RUN dotnet restore "samples/Data/src/GiG.Core.Data.Migration.Sample/GiG.Core.Data.Migration.Sample.csproj"
 COPY . .

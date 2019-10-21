@@ -1,10 +1,8 @@
-FROM mcr.microsoft.com/dotnet/core/runtime:3.0.0 AS base
-ENV COMPlus_ReadyToRun=0
-WORKDIR /app
+FROM igcproget.igc.zone/gig-core-docker/library/dotnet:3.0.0-runtime-.4.7809fed AS base
 EXPOSE 8080
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0.100 AS build
-WORKDIR /src
+FROM igcproget.igc.zone/gig-core-docker/library/dotnet:3.0.100-sdk-.4.7809fed AS build
+
 COPY ["samples/Orleans/src/GiG.Core.Orleans.Sample.Silo/GiG.Core.Orleans.Sample.Silo.csproj", "samples/Orleans/src/GiG.Core.Orleans.Sample.Silo/"]
 RUN dotnet restore "samples/Orleans/src/GiG.Core.Orleans.Sample.Silo/GiG.Core.Orleans.Sample.Silo.csproj"
 COPY . .
