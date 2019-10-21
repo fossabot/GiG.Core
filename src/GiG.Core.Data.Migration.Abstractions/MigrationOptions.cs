@@ -13,7 +13,7 @@ namespace GiG.Core.Data.Migration.Abstractions
         /// <summary>
         /// Flag to indicate if the Migration is enabled or not.
         /// </summary>
-        public bool Enabled { get; set; } = true;
+        public bool IsEnabled { get; set; } = true;
 
         /// <summary>
         /// The Locations of the Scripts to be executed.

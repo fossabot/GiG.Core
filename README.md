@@ -6,56 +6,36 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 [![NuGet](https://img.shields.io/nuget/v/GiG.Core.svg)](https://nuget.org/packages/GiG.Core)
 
 
-## Docs
+## Libraries
 
-* Context    
-    * [GiG.Core.Context.Orleans](docs/GiG.Core.Context.Orleans.md)
-    * [GiG.Core.Context.Web](docs/GiG.Core.Context.Web.md)
-    
-* Data Migration
-    * [GiG.Core.Data.Migration](docs/GiG.Core.Data.Migration.md)
-
-* Distributed Tracing
-    * [GiG.Core.DistributedTracing.Web](docs/GiG.Core.DistributedTracing.Web.md)
-
-* Health Checks
-    * [GiG.Core.HealthChecks](docs/GiG.Core.HealthChecks.md)
-
-* Hosting
-    * [GiG.Core.Hosting](docs/GiG.Core.Hosting.md)
-
-* HTTP Client
-    * [GiG.Core.Http](docs/GiG.Core.Http.md)
-    * [GiG.Core.Http.DistributedTracing](docs/GiG.Core.Http.DistributedTracing.md)
-	* [GiG.Core.Http.MultiTenant](docs/GiG.Core.Http.MultiTenant.md)
-		
-* Logging
-    * [GiG.Core.Logging](docs/GiG.Core.Logging.md)
-    * [GiG.Core.Logging.All](docs/GiG.Core.Logging.All.md)
-    * [GiG.Core.Logging.Enrichers.MultiTenant](docs/GiG.Core.Logging.Enrichers.MultiTenant.md)
-
-* Multi Tenancy
-    * [GiG.Core.MultiTenant.Web](docs/GiG.Core.MultiTenant.Web.md)
-
-* Orleans
-    * Client - [GiG.Core.Orleans.Client](docs/GiG.Core.Orleans.Client.md)
-    * Silo - [GiG.Core.Orleans.Silo](docs/GiG.Core.Orleans.Silo.md)
-
-* Orleans Clustering
-	* Clustering - [GiG.Core.Orleans.Clustering](docs/GiG.Core.Orleans.Clustering.md)
-    * Consul - [GiG.Core.Orleans.Clustering.Consul](docs/GiG.Core.Orleans.Clustering.Consul.md)
-    * Kubernetes - [GiG.Core.Orleans.Clustering.Kubernetes](docs/GiG.Core.Orleans.Clustering.Kubernetes.md)
-
-* Orleans Storage
-	* Npgsql - [GiG.Core.Orleans.Storage.Npgsql](docs/GiG.Core.Orleans.Storage.Npgsql.md)
-
-* Orleans Streams
-    * Streams - [GiG.Core.Orleans.Streams](docs/GiG.Core.Orleans.Streams.md)
-
-* Web
-    * Docs - [GiG.Core.Web.Docs](docs/GiG.Core.Web.Docs.md)
-    * Hosting - [GiG.Core.Web.Hosting](docs/GiG.Core.Web.Hosting.md)
-    * Validation - [GiG.Core.Web.FluentValidation](docs/GiG.Core.Web.FluentValidation.md)
+- [GiG.Core.Configuration](docs/GiG.Core.Configuration.md)
+- [GiG.Core.Context.Orleans](docs/GiG.Core.Context.Orleans.md)
+- [GiG.Core.Context.Web](docs/GiG.Core.Context.Web.md)
+- [GiG.Core.Data.Migration](docs/GiG.Core.Data.Migration.md)
+- [GiG.Core.DistributedTracing.Orleans](docs/GiG.Core.DistributedTracing.Orleans.md)
+- [GiG.Core.DistributedTracing.Web](docs/GiG.Core.DistributedTracing.Web.md)
+- [GiG.Core.HealthChecks](docs/GiG.Core.HealthChecks.md)
+- [GiG.Core.Hosting](docs/GiG.Core.Hosting.md)
+- [GiG.Core.Http](docs/GiG.Core.Http.md)
+- [GiG.Core.Http.DistributedTracing](docs/GiG.Core.Http.DistributedTracing.md)
+- [GiG.Core.Http.MultiTenant](docs/GiG.Core.Http.MultiTenant.md)
+- [GiG.Core.Logging](docs/GiG.Core.Logging.md)
+- [GiG.Core.Logging.All](docs/GiG.Core.Logging.All.md)
+- [GiG.Core.Logging.Enrichers.ApplicationMetadata](docs/GiG.Core.Logging.Enrichers.ApplicationMetadata.md)
+- [GiG.Core.Logging.Enrichers.Context](docs/GiG.Core.Logging.Enrichers.Context.md)
+- [GiG.Core.Logging.Enrichers.DistributedTracing](docs/GiG.Core.Logging.Enrichers.DistributedTracing.md)
+- [GiG.Core.Logging.Enrichers.MultiTenant](docs/GiG.Core.Logging.Enrichers.MultiTenant.md)
+- [GiG.Core.MultiTenant.Web](docs/GiG.Core.MultiTenant.Web.md)
+- [GiG.Core.Orleans.Client](docs/GiG.Core.Orleans.Client.md)
+- [GiG.Core.Orleans.Clustering](docs/GiG.Core.Orleans.Clustering.md)
+- [GiG.Core.Orleans.Clustering.Consul](docs/GiG.Core.Orleans.Clustering.Consul.md)
+- [GiG.Core.Orleans.Clustering.Kubernetes](docs/GiG.Core.Orleans.Clustering.Kubernetes.md)
+- [GiG.Core.Orleans.Silo](docs/GiG.Core.Orleans.Silo.md)
+- [GiG.Core.Orleans.Storage.Npgsql](docs/GiG.Core.Orleans.Storage.Npgsql.md)
+- [GiG.Core.Orleans.Streams](docs/GiG.Core.Orleans.Streams.md)
+- [GiG.Core.Web.Docs](docs/GiG.Core.Web.Docs.md)
+- [GiG.Core.Web.FluentValidation](docs/GiG.Core.Web.FluentValidation.md)
+- [GiG.Core.Web.Hosting](docs/GiG.Core.Web.Hosting.md)
 
 
 ## Build
