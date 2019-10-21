@@ -6,15 +6,15 @@ using System;
 namespace GiG.Core.Configuration.Extensions
 {
     /// <summary>
-    /// Host builder extensions.
+    /// Host Builder Extensions.
     /// </summary>
     public static class HostBuilderExtensions
     {
         /// <summary>
         /// Adds external configuration via JSON File and Environment Variables.
         /// </summary>
-        /// <param name="builder">Host builder.</param>
-        /// <returns>Host builder.</returns>
+        /// <param name="builder">The <see cref="IHostBuilder"/>.</param>
+        /// <returns>The <see cref="IHostBuilder"/>.</returns>
         public static IHostBuilder ConfigureExternalConfiguration([NotNull] this IHostBuilder builder)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));

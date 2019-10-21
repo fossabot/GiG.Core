@@ -6,15 +6,15 @@ using System;
 namespace GiG.Core.DistributedTracing.Web.Extensions
 {
     /// <summary>
-    /// Application Builder extensions.
+    /// Application Builder Extensions.
     /// </summary>
     public static class ApplicationBuilderExtensions
     {
         /// <summary>
         /// Add Correlation ID Middleware.
         /// </summary>
-        /// <param name="builder">Application builder.</param>
-        /// <returns>Application builder.</returns>
+        /// <param name="builder">The <see cref="IApplicationBuilder"/>.</param>
+        /// <returns>AThe <see cref="IApplicationBuilder"/>.</returns>
         public static IApplicationBuilder UseCorrelationId([NotNull] this IApplicationBuilder builder)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));

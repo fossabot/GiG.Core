@@ -6,9 +6,9 @@ namespace GiG.Core.Data.Migration.Abstractions
     public interface IDatabaseMigration
     {
         /// <summary>
-        /// Migrate DB Script using  <see cref="MigrationOptions"/>.
+        /// Database Migration Script using <see cref="MigrationOptions"/>.
         /// </summary>
-        /// <param name="options">The Migration Options <see cref="MigrationOptions"/>.</param>
+        /// <param name="options">The <see cref="MigrationOptions"/>.</param>
         void Migrate(MigrationOptions options);
     }
 }

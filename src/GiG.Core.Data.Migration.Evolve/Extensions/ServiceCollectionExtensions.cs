@@ -14,11 +14,11 @@ namespace GiG.Core.Data.Migration.Evolve.Extensions
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Adds the <see cref="T:GiG.Core.Data.Migration.Evolve.DatabaseMigration" /> to the container.
+        /// Adds the <see cref="DatabaseMigration" /> to the container.
         /// </summary>
-        /// <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" /> to add the services to.</param>
-        /// <param name="dbConnection">The <see cref="T:System.Data.IDbConnection" /> to be used for the DataBase migration.</param>
-        /// <returns>The <see cref="T:GiG.Core.Data.Migration.Evolve.MigrationOptionsBuilder" /> to be used to build the Migration Options.</returns>
+        /// <param name="services">The <see cref=IServiceCollection" /> to add the services to.</param>
+        /// <param name="dbConnection">The <see cref="IDbConnection" /> to be used for the Database Migration.</param>
+        /// <returns>The <see cref="MigrationOptionsBuilder" /> to be used to build the Migration Options.</returns>
         public static MigrationOptionsBuilder AddDbMigration([NotNull] this IServiceCollection services, [NotNull] IDbConnection dbConnection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
