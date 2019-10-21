@@ -2,8 +2,6 @@ FROM igcproget.igc.zone/gig-core-docker/library/dotnet:3.0.0-runtime-.4.7809fed 
 
 FROM igcproget.igc.zone/gig-core-docker/library/dotnet:3.0.100-sdk-.4.7809fed AS build
 
-COPY ./NuGet.Config ./
-
 COPY ["samples/Data/src/GiG.Core.Data.Migration.Sample/GiG.Core.Data.Migration.Sample.csproj", "samples/Data/src/GiG.Core.Data.Migration.Sample/"]
 RUN dotnet restore "samples/Data/src/GiG.Core.Data.Migration.Sample/GiG.Core.Data.Migration.Sample.csproj"
 COPY . .
