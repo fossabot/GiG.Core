@@ -24,7 +24,7 @@
         <ProjectReference Include="..\..\..\src\GiG.Core.Hosting\GiG.Core.Hosting.csproj" />
         <ProjectReference Include="..\..\..\src\GiG.Core.Logging.All\GiG.Core.Logging.All.csproj" />
         <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Client\GiG.Core.Orleans.Client.csproj" />
-        <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Hosting.Silo\GiG.Core.Orleans.Hosting.Silo.csproj" />
+        <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Silo\GiG.Core.Orleans.Silo.csproj" />
         <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Streams.Kafka\GiG.Core.Orleans.Streams.Kafka.csproj" />
     </ItemGroup>  
 

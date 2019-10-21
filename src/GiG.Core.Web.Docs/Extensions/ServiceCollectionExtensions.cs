@@ -66,6 +66,11 @@ namespace GiG.Core.Web.Docs.Extensions
             var xmlFile = $"{Assembly.GetEntryAssembly()?.GetName().Name}.xml";
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
 
+            if (string.IsNullOrEmpty(xmlPath))
+            {
+                throw new ApplicationException("Following property is missing from your project; <GenerateDocumentationFile>true</GenerateDocumentationFile>.");
+            }
+
             options.IncludeXmlComments(xmlPath);
         }
 

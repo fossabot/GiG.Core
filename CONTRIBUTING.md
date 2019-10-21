@@ -21,7 +21,7 @@ Make sure the respository can build and all tests pass. Familiarize yourself wit
 
 ### Tests
 
-Tests need to be provided for every bug/feature that is completed. If there is a scenario that is far too hard to test, there does not need to be a test for it, however, keep in mind that flagging a scenario as too hard, is at the discretion of the team as a whole.
+Tests need to be provided for every bug/feature that is completed. When encountering scenarios which might hinder the test execution process, or require integrations with 3rd parties that make it almost impossible to test, then there is no need to have integration tests for this. However, as in all the other cases, it is important to at least have unit tests in place and cover most of the functionality. It is important to keep in mind that flagging a scenario as a scenario that will hinder the execution process or impossible to test, is at the discretion of the team as a whole.
 
 
 ### Feedback

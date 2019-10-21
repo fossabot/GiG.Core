@@ -11,9 +11,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5915362C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A417-4EEB-A216-4918AD56C9B5}"
 	ProjectSection(SolutionItems) = preProject
+		docs\GiG.Core.Configuration.md = docs\GiG.Core.Configuration.md
 		docs\GiG.Core.Context.Orleans.md = docs\GiG.Core.Context.Orleans.md
 		docs\GiG.Core.Context.Web.md = docs\GiG.Core.Context.Web.md
 		docs\GiG.Core.Data.Migration.md = docs\GiG.Core.Data.Migration.md
+		docs\GiG.Core.DistributedTracing.Orleans.md = docs\GiG.Core.DistributedTracing.Orleans.md
 		docs\GiG.Core.DistributedTracing.Web.md = docs\GiG.Core.DistributedTracing.Web.md
 		docs\GiG.Core.HealthChecks.md = docs\GiG.Core.HealthChecks.md
 		docs\GiG.Core.Hosting.md = docs\GiG.Core.Hosting.md
@@ -21,6 +23,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Http.md = docs\GiG.Core.Http.md
 		docs\GiG.Core.Http.MultiTenant.md = docs\GiG.Core.Http.MultiTenant.md
 		docs\GiG.Core.Logging.All.md = docs\GiG.Core.Logging.All.md
+		docs\GiG.Core.Logging.Enrichers.ApplicationMetadata.md = docs\GiG.Core.Logging.Enrichers.ApplicationMetadata.md
+		docs\GiG.Core.Logging.Enrichers.Context.md = docs\GiG.Core.Logging.Enrichers.Context.md
+		docs\GiG.Core.Logging.Enrichers.DistributedTracing.md = docs\GiG.Core.Logging.Enrichers.DistributedTracing.md
 		docs\GiG.Core.Logging.Enrichers.MultiTenant.md = docs\GiG.Core.Logging.Enrichers.MultiTenant.md
 		docs\GiG.Core.Logging.md = docs\GiG.Core.Logging.md
 		docs\GiG.Core.MultiTenant.Web.md = docs\GiG.Core.MultiTenant.Web.md
@@ -30,6 +35,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Orleans.Clustering.md = docs\GiG.Core.Orleans.Clustering.md
 		docs\GiG.Core.Orleans.Silo.md = docs\GiG.Core.Orleans.Silo.md
 		docs\GiG.Core.Orleans.Storage.Npgsql.md = docs\GiG.Core.Orleans.Storage.Npgsql.md
+		docs\GiG.Core.Orleans.Streams.Kafka.md = docs\GiG.Core.Orleans.Streams.Kafka.md
+		docs\GiG.Core.Orleans.Streams.md = docs\GiG.Core.Orleans.Streams.md
 		docs\GiG.Core.Web.Docs.md = docs\GiG.Core.Web.Docs.md
 		docs\GiG.Core.Web.FluentValidation.md = docs\GiG.Core.Web.FluentValidation.md
 		docs\GiG.Core.Web.Hosting.md = docs\GiG.Core.Web.Hosting.md
@@ -130,7 +137,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orleans", "Orleans", "{8372
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orleans", "Orleans", "{8047E8B5-4505-49E7-8C01-5C5FCB7B5681}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Hosting.Silo", "src\GiG.Core.Orleans.Hosting.Silo\GiG.Core.Orleans.Hosting.Silo.csproj", "{DE0CD413-1938-465C-9B41-1FCA33364749}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Silo", "src\GiG.Core.Orleans.Silo\GiG.Core.Orleans.Silo.csproj", "{DE0CD413-1938-465C-9B41-1FCA33364749}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Hosting", "src\GiG.Core.Web.Hosting\GiG.Core.Web.Hosting.csproj", "{EAF75BF4-7854-46BC-87A7-89D793079002}"
 EndProject
@@ -237,8 +244,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Http.MultiTenant",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Sample.Tests.ApiTests", "samples\Orleans\tests\api\GiG.Core.Orleans.Sample.Tests.ApiTests\GiG.Core.Orleans.Sample.Tests.ApiTests.csproj", "{5151DFD9-5195-4ABC-8F9F-D201084F81FA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Messaging", "Messaging", "{E0BFB198-42BA-4BB6-809C-5FDF6D48D3D9}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.RabbitMQ.Abstractions", "src\GiG.Core.Messaging.RabbitMQ.Abstractions\GiG.Core.Messaging.RabbitMQ.Abstractions.csproj", "{4A33366E-3E63-4142-B242-25BC793C716A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Sample.Consumer", "samples\Orleans\src\GiG.Core.Orleans.Sample.Consumer\GiG.Core.Orleans.Sample.Consumer.csproj", "{F5BFE4B3-0FEA-417D-BA8A-004EF9E90E63}"
@@ -248,6 +253,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Streams.Kafka", "src\GiG.Core.Orleans.Streams.Kafka\GiG.Core.Orleans.Streams.Kafka.csproj", "{25E9980C-8141-4795-A2DE-55B70ED73E66}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Benchmarks.Orleans", "tests\benchmarks\GiG.Core.Benchmarks.Orleans\GiG.Core.Benchmarks.Orleans.csproj", "{33A1C5DA-A108-47CC-918B-A612C8212314}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Streams.Abstractions", "src\GiG.Core.Orleans.Streams.Abstractions\GiG.Core.Orleans.Streams.Abstractions.csproj", "{79BCEF61-78B3-478D-8139-E38A3EB98FB8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Streams", "src\GiG.Core.Orleans.Streams\GiG.Core.Orleans.Streams.csproj", "{78BBCC65-C75D-4C4E-91E0-AA9CB8C7F451}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -506,6 +515,14 @@ Global
 		{33A1C5DA-A108-47CC-918B-A612C8212314}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33A1C5DA-A108-47CC-918B-A612C8212314}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33A1C5DA-A108-47CC-918B-A612C8212314}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79BCEF61-78B3-478D-8139-E38A3EB98FB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79BCEF61-78B3-478D-8139-E38A3EB98FB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79BCEF61-78B3-478D-8139-E38A3EB98FB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79BCEF61-78B3-478D-8139-E38A3EB98FB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78BBCC65-C75D-4C4E-91E0-AA9CB8C7F451}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78BBCC65-C75D-4C4E-91E0-AA9CB8C7F451}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78BBCC65-C75D-4C4E-91E0-AA9CB8C7F451}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78BBCC65-C75D-4C4E-91E0-AA9CB8C7F451}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -605,6 +622,8 @@ Global
 		{1577B553-2909-4844-A422-8782E2AA0F83} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
 		{25E9980C-8141-4795-A2DE-55B70ED73E66} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
 		{33A1C5DA-A108-47CC-918B-A612C8212314} = {8A64AE64-5734-41A3-9D3A-B6F2B0248ECE}
+		{79BCEF61-78B3-478D-8139-E38A3EB98FB8} = {1577B553-2909-4844-A422-8782E2AA0F83}
+		{78BBCC65-C75D-4C4E-91E0-AA9CB8C7F451} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}

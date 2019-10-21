@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bogus" Version="28.3.2" />
+    <PackageReference Include="Bogus" Version="28.4.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0" />
     <PackageReference Include="Microsoft.Orleans.Server" Version="2.4.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.3.0" />
@@ -30,7 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Client\GiG.Core.Orleans.Client.csproj" />
-    <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Hosting.Silo\GiG.Core.Orleans.Hosting.Silo.csproj" />
+    <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Silo\GiG.Core.Orleans.Silo.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Storage.Npgsql\GiG.Core.Orleans.Storage.Npgsql.csproj" />
   </ItemGroup>
 

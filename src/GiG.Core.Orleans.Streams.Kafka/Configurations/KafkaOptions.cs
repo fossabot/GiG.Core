@@ -1,4 +1,4 @@
-﻿namespace GiG.Core.Orleans.Streams.Kafka
+﻿namespace GiG.Core.Orleans.Streams.Kafka.Configurations
 {
     /// <summary>
     /// Kafka Settings for Orleans Streams.

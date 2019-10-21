@@ -1,5 +1,5 @@
 ﻿using GiG.Core.Benchmarks.Orleans.Streams.Grains;
-using GiG.Core.Orleans.Hosting.Silo.Extensions;
+using GiG.Core.Orleans.Silo.Extensions;
 using GiG.Core.Orleans.Streams.Kafka.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Orleans.Hosting;

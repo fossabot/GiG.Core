@@ -4,6 +4,11 @@ This Library provides an API to configure API Documentation.
 
 ## Basic Usage
 
+The following needs to be added to the Web project file:
+```
+<GenerateDocumentationFile>true</GenerateDocumentationFile>
+```
+
 The below code needs to be added to the `Startup.cs` to register the API Docs. 
 
 ```csharp
@@ -22,7 +27,7 @@ public void Configure(IApplicationBuilder app)
 
 ## Configuration
 
-The below table outlines the valid Configurations used to override the [ApiDocsOptions](../src/GiG.Core.Web.Docs.Abstractions/ApiDocsOptions.cs).
+The below table outlines the valid Configurations used to override the [ApiDocsOptions](../src/GiG.Core.Web.Docs/Abstractions/ApiDocsOptions.cs).
 
 | Configuration Name    | Type	  | Required | Default Value	|
 |-----------------------|---------|----------|------------------|
