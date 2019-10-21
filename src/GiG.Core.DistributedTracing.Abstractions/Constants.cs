@@ -6,7 +6,7 @@
     public static class Constants
     {
         /// <summary>
-        /// Header for Correlation ID.
+        /// The Header for Correlation ID.
         /// </summary>
         public const string Header = "X-Correlation-ID";
     }

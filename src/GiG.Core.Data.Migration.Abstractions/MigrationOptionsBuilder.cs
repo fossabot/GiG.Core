@@ -22,8 +22,8 @@ namespace GiG.Core.Data.Migration.Abstractions
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.</param>
-        /// <param name="dbConnection">The <see cref="T:System.Data.IDbConnection" /> to be used for the DataBase migration.</param>
+        /// <param name="services">The <see cref="IServiceCollection" />.</param>
+        /// <param name="dbConnection">The <see cref="IDbConnection" /> to be used for the Database Migration.</param>
         private MigrationOptionsBuilder([NotNull] IServiceCollection services, [NotNull] IDbConnection dbConnection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
@@ -36,20 +36,19 @@ namespace GiG.Core.Data.Migration.Abstractions
         /// <summary>
         /// Creates a MigrationOptionsBuilder.
         /// </summary>
-        /// <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" />.</param>
-        /// <param name="dbConnection">The <see cref="T:System.Data.IDbConnection" /> to be used for the DataBase migration.</param>
-        /// <returns>The <see cref="T:GiG.Core.Data.Migration.Evolve.MigrationOptionsBuilder" />.</returns>
-        public static MigrationOptionsBuilder CreateMigrationBuilder(IServiceCollection services,
-            IDbConnection dbConnection)
+        /// <param name="services">The <see cref="IServiceCollection" />.</param>
+        /// <param name="dbConnection">The <see cref="IDbConnection" /> to be used for the Database Migration.</param>
+        /// <returns>The <see cref="MigrationOptionsBuilder" />.</returns>
+        public static MigrationOptionsBuilder CreateMigrationBuilder(IServiceCollection services, IDbConnection dbConnection)
         {
             return new MigrationOptionsBuilder(services, dbConnection);
         }
 
         /// <summary>
         /// Sets the Default Migration Options.
-        /// Default Script locations are \Scripts and \Scripts.{EnvironmentName}
+        /// Default Script Locations are \Scripts and \Scripts.{EnvironmentName}
         /// </summary>
-        /// <returns>The <see cref="T:GiG.Core.Data.Migration.Evolve.MigrationOptionsBuilder" />.</returns>
+        /// <returns>The <see cref="MigrationOptionsBuilder" />.</returns>
         public MigrationOptionsBuilder AddDefaultMigrationOptions()
         {
             var currentEnvironment = _serviceProvider.GetRequiredService<IHostEnvironment>();
@@ -63,14 +62,15 @@ namespace GiG.Core.Data.Migration.Abstractions
         /// <summary>
         /// Adds a Location for Scripts to the Migration Options.
         /// </summary>
-        /// <param name="location">Scripts Location.</param>
-        /// <returns>The <see cref="T:GiG.Core.Data.Migration.Evolve.MigrationOptionsBuilder" />.</returns>
+        /// <param name="location">The location for the Scripts.</param>
+        /// <returns>The <see cref="MigrationOptionsBuilder" />.</returns>
         public MigrationOptionsBuilder AddLocation(string location)
         {
             var basePath = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
+
             if (string.IsNullOrEmpty(basePath))
             {
-                throw new ApplicationException("Assembly directory location cannot be NULL or empty");
+                throw new ApplicationException("Assembly directory location cannot be Null or Empty");
             }
 
             _options.Locations.Add(Path.Combine(basePath, location));
@@ -81,9 +81,9 @@ namespace GiG.Core.Data.Migration.Abstractions
         /// <summary>
         /// Adds a Location for Scripts to the Migration Options for the specified Environments.
         /// </summary>
-        /// <param name="location">Scripts Location.</param>
-        /// <param name="environments">List of Environments</param>
-        /// <returns>The <see cref="T:GiG.Core.Data.Migration.Evolve.MigrationOptionsBuilder" />.</returns>
+        /// <param name="location">The location for the Scripts.</param>
+        /// <param name="environments">The list of Environments.</param>
+        /// <returns>The <see cref="MigrationOptionsBuilder" />.</returns>
         public MigrationOptionsBuilder AddLocation(string location, params string[] environments)
         {
             var currentEnvironment = _serviceProvider.GetRequiredService<IHostEnvironment>().EnvironmentName;
@@ -97,22 +97,22 @@ namespace GiG.Core.Data.Migration.Abstractions
         }
 
         /// <summary>
-        /// Sets the MetaData Table Schema Name.
+        /// Sets the Metadata Table Schema Name.
         /// </summary>
-        /// <param name="metadataTableSchema">The Metadata Table Schema Name.</param>
-        /// <returns>The <see cref="T:GiG.Core.Data.Migration.Evolve.MigrationOptionsBuilder" />.</returns>
-        public MigrationOptionsBuilder AddMetadataTableSchema(string metadataTableSchema)
+        /// <param name="metadataTableSchemaName">The Metadata Table Schema Name.</param>
+        /// <returns>The <see cref="MigrationOptionsBuilder" />.</returns>
+        public MigrationOptionsBuilder AddMetadataTableSchema(string metadataTableSchemaName)
         {
-            _options.MetadataTableSchema = metadataTableSchema;
+            _options.MetadataTableSchema = metadataTableSchemaName;
 
             return this;
         }
 
         /// <summary>
-        /// Sets the MetaData Table Name.
+        /// Sets the Metadata Table Name.
         /// </summary>
         /// <param name="metadataTableName">The Metadata Table Name.</param>
-        /// <returns>The <see cref="T:GiG.Core.Data.Migration.Evolve.MigrationOptionsBuilder" />.</returns>
+        /// <returns>The <see cref="MigrationOptionsBuilder" />.</returns>
         public MigrationOptionsBuilder AddMetadataTableName(string metadataTableName)
         {
             _options.MetadataTableName = metadataTableName;
@@ -121,9 +121,9 @@ namespace GiG.Core.Data.Migration.Abstractions
         }
 
         /// <summary>
-        /// Disables the Migration.
+        /// Disables the Database Migration.
         /// </summary>
-        /// <returns>The <see cref="T:GiG.Core.Data.Migration.Evolve.MigrationOptionsBuilder" />.</returns>
+        /// <returns>The <see cref="MigrationOptionsBuilder" />.</returns>
         public MigrationOptionsBuilder DisableMigration()
         {
             _options.IsEnabled = false;
@@ -132,7 +132,7 @@ namespace GiG.Core.Data.Migration.Abstractions
         }
 
         /// <summary>
-        /// Perform the DataBase Migration.
+        /// Execute the Database Migration.
         /// </summary>
         public void Migrate()
         {

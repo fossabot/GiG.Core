@@ -8,7 +8,7 @@ namespace GiG.Core.DistributedTracing.Abstractions
     public interface ICorrelationContextAccessor
     {
         /// <summary>
-        /// Contains the current context's Correlation ID.
+        /// The current context's Correlation ID.
         /// </summary>
         Guid Value { get; }
     }

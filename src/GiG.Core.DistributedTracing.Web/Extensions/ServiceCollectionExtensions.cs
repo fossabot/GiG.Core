@@ -9,15 +9,15 @@ using ICorrelationContextAccessor = GiG.Core.DistributedTracing.Abstractions.ICo
 namespace GiG.Core.DistributedTracing.Web.Extensions
 {
     /// <summary>
-    /// Service Collection extensions.
+    /// Service Collection Extensions.
     /// </summary>
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Adds required services to support Correlation Id functionality.
+        /// Adds the required services to support Correlation ID functionality.
         /// </summary>
-        /// <param name="services">Service collection.</param>
-        /// <returns>Service collection.</returns>
+        /// <param name="services">The <see cref="IServiceCollection"/>.</param>
+        /// <returns>The <see cref="IServiceCollection"/>.</returns>
         public static IServiceCollection AddCorrelationId([NotNull] this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));

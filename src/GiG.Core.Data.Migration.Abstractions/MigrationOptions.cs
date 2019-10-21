@@ -11,7 +11,7 @@ namespace GiG.Core.Data.Migration.Abstractions
     public class MigrationOptions
     {
         /// <summary>
-        /// Flag to indicate if the Migration is enabled or not.
+        /// A value to indicate if the Migration is enabled or not.
         /// </summary>
         public bool IsEnabled { get; set; } = true;
 
@@ -21,7 +21,7 @@ namespace GiG.Core.Data.Migration.Abstractions
         public List<string> Locations { get; set; } = new List<string>();
 
         /// <summary>
-        /// The DB Connection to be used for the ?Migration.
+        /// The Database Connection to be used for the Migration.
         /// </summary>
         public IDbConnection Connection { get; set; }
 
@@ -31,14 +31,14 @@ namespace GiG.Core.Data.Migration.Abstractions
         public string MetadataTableSchema { get; set; } = "";
 
         /// <summary>
-        /// The Table Name for the Migration Change Log.
+        /// The table name for the Migration Change Log.
         /// </summary>
         public string MetadataTableName { get; set; } = "changelog";
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="dbConnection">The <see cref="T:System.Data.IDbConnection" /> to be used for the DataBase migration.</param>
+        /// <param name="dbConnection">The <see cref="T:System.Data.IDbConnection" /> to be used for the Database Migration.</param>
         public MigrationOptions([NotNull] IDbConnection dbConnection)
         {
             if (dbConnection == null) throw new ArgumentNullException(nameof(dbConnection));

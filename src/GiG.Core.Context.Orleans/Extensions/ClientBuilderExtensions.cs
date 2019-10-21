@@ -9,23 +9,22 @@ using System;
 namespace GiG.Core.Context.Orleans.Extensions
 {
     /// <summary>
-    /// Request Context Client Builder Extensions.
+    /// Client Builder Extensions.
     /// </summary>
     public static class ClientBuilderExtensions
     {
         /// <summary>
-        /// Add Request Context Grain call filter.
+        /// Adds Request Context Grain call filter.
         /// </summary>
-        /// <param name="builder"><see cref="IClientBuilder"/> to add filter to.</param>
-        /// <param name="serviceProvider"><see cref="IServiceProvider"/> on which to resolve request context accessor.</param>
-        /// <returns><see cref="IClientBuilder"/> to chain more methods to.</returns>
+        /// <param name="builder">The <see cref="IClientBuilder"/>.</param>
+        /// <param name="serviceProvider">The <see cref="IServiceProvider"/>.</param>
+        /// <returns>The <see cref="IClientBuilder"/>.</returns>
         public static IClientBuilder AddRequestContextOutgoingFilter([NotNull] this IClientBuilder builder, [NotNull] IServiceProvider serviceProvider)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
 
-            builder.ConfigureServices(services =>
-                services.TryAddSingleton(serviceProvider.GetRequiredService<IRequestContextAccessor>()));
+            builder.ConfigureServices(services => services.TryAddSingleton(serviceProvider.GetRequiredService<IRequestContextAccessor>()));
 
             return builder.AddOutgoingGrainCallFilter<RequestContextGrainCallFilter>();
         }
