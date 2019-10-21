@@ -1,6 +1,5 @@
 using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.Orleans.Streams.Abstractions;
-using JetBrains.Annotations;
 using Orleans.Runtime;
 using Orleans.Streams;
 using System;
@@ -24,20 +23,21 @@ namespace GiG.Core.Orleans.Streams
         /// <param name="correlationContextAccessor">The <see cref="ICorrelationContextAccessor" /> to use to add correlationId within RequestContext.</param>
         public Stream(IAsyncStream<TMessage> asyncStream, ICorrelationContextAccessor correlationContextAccessor)
         {
+            if (correlationContextAccessor == null) throw new ArgumentNullException(nameof(correlationContextAccessor));
+            if (asyncStream == null) throw new ArgumentNullException(nameof(asyncStream));
+            
             _asyncStream = asyncStream;
             _correlationContextAccessor = correlationContextAccessor;
         }
 
         /// <summary>
-        /// Used to publish the message using the underlying stream. Before send the message the correlation id is set if not already present.
+        /// Used to publish the message using the underlying stream. Before sending the message the correlation id is set if not already present.
         /// </summary>
         /// <param name="message">The message to publish.</param>
         /// <param name="token">The <see cref="StreamSequenceToken"/> to send with the message.</param>
         /// <returns></returns>
-        public async Task PublishAsync([NotNull] TMessage message, StreamSequenceToken token = null)
+        public async Task PublishAsync(TMessage message, StreamSequenceToken token = null)
         {
-            if (_asyncStream == null) throw new NullReferenceException(nameof(_asyncStream));
-
             var correlationId = _correlationContextAccessor.Value;
 
             // This is to ensure that the correlation id provided by the accessor is propagated in the orleans request context.

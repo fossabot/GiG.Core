@@ -50,7 +50,7 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 	* Npgsql - [GiG.Core.Orleans.Storage.Npgsql](docs/GiG.Core.Orleans.Storage.Npgsql.md)
 
 * Orleans Streams
-    * Streams - [GiG.Core.Orleans.Streams](docs/GiG.Core.Orleans.Streams)
+    * Streams - [GiG.Core.Orleans.Streams](docs/GiG.Core.Orleans.Streams.md)
 
 * Web
     * Docs - [GiG.Core.Web.Docs](docs/GiG.Core.Web.Docs.md)
