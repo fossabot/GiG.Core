@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace GiG.Core.DistributedTracing.Orleans
 {
     /// <summary>
-    /// Gain Filter to add correlation id in outgoing calls.
+    /// Grain Call Filter to add Correlation ID in outgoing calls.
     /// </summary>
     public class CorrelationGrainCallFilter : IOutgoingGrainCallFilter
     {
@@ -21,8 +21,8 @@ namespace GiG.Core.DistributedTracing.Orleans
         /// <summary>
         /// Invoke Grain call context.
         /// </summary>
-        /// <param name="context"><see cref="IOutgoingGrainCallContext"/></param>
-        /// <returns>M<see cref="Task"/></returns>
+        /// <param name="context">The <see cref="IOutgoingGrainCallContext"/>.</param>
+        /// <returns>A <see cref="Task"/>.</returns>
         public async Task Invoke(IOutgoingGrainCallContext context)
         {
             RequestContext.Set(Constants.Header, _correlationContextAccessor?.Value);

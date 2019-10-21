@@ -8,7 +8,7 @@ namespace GiG.Core.Context.Abstractions
     public interface IRequestContextAccessor
     {
         /// <summary>
-        /// Contains the IP Address of the originating request.
+        /// The IP Address of the originating request.
         /// </summary>
         IPAddress IPAddress { get; }
     }
