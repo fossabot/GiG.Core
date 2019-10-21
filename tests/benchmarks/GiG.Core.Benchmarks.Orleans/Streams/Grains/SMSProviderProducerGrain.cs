@@ -1,6 +1,6 @@
-﻿using Constants = GiG.Core.Performance.Orleans.Streams.Contracts.Constants;
+﻿using GiG.Core.Benchmarks.Orleans.Streams.Contracts;
 
-namespace GiG.Core.Performance.Orleans.Streams.Producer
+namespace GiG.Core.Benchmarks.Orleans.Streams.Grains
 {
     public class SMSProviderProducerGrain : ProducerGrain, ISMSProviderProducerGrain
     {

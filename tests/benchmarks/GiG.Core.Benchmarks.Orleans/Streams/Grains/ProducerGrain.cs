@@ -1,9 +1,10 @@
-﻿using GiG.Core.Performance.Orleans.Streams.Contracts;
+﻿using GiG.Core.Benchmarks.Orleans.Streams.Contracts;
+using GiG.Core.Benchmarks.Orleans.Streams.Models;
 using Orleans;
 using Orleans.Streams;
 using System.Threading.Tasks;
 
-namespace GiG.Core.Performance.Orleans.Streams.Producer
+namespace GiG.Core.Benchmarks.Orleans.Streams.Grains
 {
     public abstract class ProducerGrain : Grain, IProducerGrain
     {

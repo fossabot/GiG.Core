@@ -1,4 +1,4 @@
-﻿namespace GiG.Core.Performance.Orleans.Streams.Contracts
+﻿namespace GiG.Core.Benchmarks.Orleans.Streams.Models
 {
     public class Message
     {

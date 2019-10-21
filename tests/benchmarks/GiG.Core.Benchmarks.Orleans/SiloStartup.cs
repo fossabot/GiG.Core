@@ -1,21 +1,18 @@
-﻿using GiG.Core.Orleans.Clustering.Consul.Extensions;
-using GiG.Core.Orleans.Clustering.Extensions;
-using GiG.Core.Orleans.Clustering.Kubernetes.Extensions;
+﻿using GiG.Core.Benchmarks.Orleans.Streams.Grains;
 using GiG.Core.Orleans.Hosting.Silo.Extensions;
+using GiG.Core.Orleans.Streams.Kafka.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Orleans.Hosting;
 using Orleans.Streams.Kafka.Config;
-using Constants = GiG.Core.Performance.Orleans.Streams.Contracts.Constants;
 using HostBuilderContext = Microsoft.Extensions.Hosting.HostBuilderContext;
 
-namespace GiG.Core.Performance.Orleans.Streams.Producer
+namespace GiG.Core.Benchmarks.Orleans
 {
-    public static class Startup
+    public static class SiloStartup
     {
         // This method gets called by the runtime. Use this method to add services to the container.
         public static void ConfigureServices(IServiceCollection services)
-        {
-            services.AddHostedService<HostedService>();
+        {     
         }
 
         // This method gets called by the runtime. Use this method to configure Orleans.
@@ -24,11 +21,7 @@ namespace GiG.Core.Performance.Orleans.Streams.Producer
             builder.ConfigureCluster(ctx.Configuration)
                 .ConfigureDashboard(ctx.Configuration)
                 .ConfigureEndpoints()
-                .UseMembershipProvider(ctx.Configuration, x =>
-                {
-                    x.ConfigureConsulClustering(ctx.Configuration);
-                    x.ConfigureKubernetesClustering(ctx.Configuration);
-                })
+                .UseLocalhostClustering()
                 .AddMemoryGrainStorageAsDefault()
                 .AddAssemblies(typeof(ProducerGrain))
                 .AddSimpleMessageStreamProvider(Constants.SMSProviderName)
@@ -36,12 +29,10 @@ namespace GiG.Core.Performance.Orleans.Streams.Producer
                 .AddKafka(Constants.KafkaProviderName)
                 .WithOptions(options =>
                 {
-                    options.BrokerList = new[] { "kafka:9092" };
-                    options.ConsumerGroupId = "E2EGroup";
+                    options.FromConfiguration(ctx.Configuration);
                     options.ConsumeMode = ConsumeMode.StreamEnd;
 
-                    options
-                        .AddTopic(Constants.MessageNamespace);
+                    options.AddTopic(Constants.MessageNamespace);
                 })
                 .AddJson()
                 .Build();

@@ -1,7 +1,7 @@
 ﻿using Orleans;
 using System.Threading.Tasks;
 
-namespace GiG.Core.Performance.Orleans.Streams.Producer
+namespace GiG.Core.Benchmarks.Orleans.Streams.Contracts
 {
     public interface IProducerGrain : IGrainWithGuidKey
     {

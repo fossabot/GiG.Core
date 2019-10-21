@@ -1,4 +1,4 @@
-﻿namespace GiG.Core.Performance.Orleans.Streams.Contracts
+﻿namespace GiG.Core.Benchmarks.Orleans
 {
     public static class Constants
     {

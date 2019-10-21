@@ -32,20 +32,7 @@ namespace GiG.Core.Orleans.Sample.Silo
                 .AddAssemblies(typeof(WalletGrain))
                 .AddSimpleMessageStreamProvider(Constants.StreamProviderName)
                 .UseSignalR()
-                .AddMemoryGrainStorage(Constants.StreamsMemoryStorageName)
-                .AddKafka(Constants.StreamProviderName)
-                .WithOptions(options =>
-                {
-                    options.BrokerList = new[] { "kafka:9092" };
-                    options.ConsumerGroupId = "E2EGroup";
-                    options.ConsumeMode = ConsumeMode.StreamEnd;
-
-                    options
-                        .AddTopic(Constants.PaymentTransactionsStreamNamespace)
-                        .AddTopic(Constants.WalletTransactionsStreamNamespace);
-                })
-                .AddJson()
-                .Build();
+                .AddMemoryGrainStorage(Constants.StreamsMemoryStorageName);
         }
     }
 }

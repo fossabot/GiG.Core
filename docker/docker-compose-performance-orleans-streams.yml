@@ -1,35 +1,6 @@
 version: "3.4"
 
 services:
-  performance-orleans-streams-producer:
-    image: ${DOCKER_REGISTRY-}gig.core.performance.orleans.streams.producer
-    build:
-      context: ..
-      dockerfile: tests/performance/GiG.Core.Performance.Orleans.Streams.Producer/Dockerfile
-    environment:
-      - Logging__Sinks__Fluentd__IsEnabled=true
-      - Logging__Sinks__Fluentd__Hostname=fluentd
-      - Orleans__MembershipProvider__Address=http://consul:8500
-    depends_on:
-      - fluentd
-      - consul
-    ports:
-      - "8000:8080"
-
-  performance-orleans-streams-consumer:
-    image: ${DOCKER_REGISTRY-}gig.core.performance.orleans.streams.consumer
-    build:
-      context: ..
-      dockerfile: tests/performance/GiG.Core.Performance.Orleans.Streams.Consumer/Dockerfile
-    environment:
-      - Logging__Sinks__Fluentd__IsEnabled=true
-      - Logging__Sinks__Fluentd__Hostname=fluentd
-      - Orleans__MembershipProvider__Address=http://consul:8500
-    depends_on:
-      - fluentd
-      - performance-orleans-streams-producer
-      - consul
-    restart: on-failure
 
   consul:
     image: consul:latest
