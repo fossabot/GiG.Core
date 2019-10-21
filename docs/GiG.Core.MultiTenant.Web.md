@@ -1,18 +1,16 @@
 ﻿# GiG.Core.MultiTenant.Web
 
-This Library provides an API to register Multi Tenancy for your application.
-
+This Library provides an API to register Multi Tenancy for an application.
 
 ## Basic Usage
 
-Add the below to your Startup class and this will register the Tenant context accessor.
-
+The below code needs to be added to the `Startup.cs`. This will register the Tenant Context Accessor.
 
 ```csharp
 
-	public void ConfigureServices(IServiceCollection services)
-	{
-		services.AddTenantAccessor();
-	}
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddTenantAccessor();
+}
 
 ```

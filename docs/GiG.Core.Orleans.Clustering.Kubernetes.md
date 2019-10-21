@@ -1,52 +1,53 @@
 # GiG.Core.Orleans.Clustering.Kubernetes
 
-This Library provides APIs to register Orleans Clients and Silos running on Kubernetes.
+This Library provides an API to register Orleans Clients and Silos running on Kubernetes.
 
 ## Basic Usage
 
 ### Registering an Orleans Client
 
-Add the below to your Startup class and this will register an Orleans Client running on Kubernetes.
+The below code needs to be added to the `Startup.cs`. This will register an Orleans Client running on Kubernetes.
 
 ```csharp
 
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddClusterClient((x, sp) =>
-            {               
-                x.ConfigureCluster(_configuration);
-                x.ConfigureKubernetesClustering(_configuration);
-                x.AddAssemblies(typeof(ITransactionGrain));
-            });
-		}
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddClusterClient((x, sp) =>
+    {               
+        x.ConfigureCluster(_configuration);
+        x.ConfigureKubernetesClustering(_configuration);
+        x.AddAssemblies(typeof(ITransactionGrain));
+    });
+}
+
 ```
 
 ### Registering an Orleans Silo
 
-Add the below to your Program.cs and this will register an Orleans Silo running on Kubernetes.
+The below code needs to be added to the `Program.cs`. This will register an Orleans Silo running on Kubernetes.
 
 ```csharp
 
-	public class Program
+static class Program
+{
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+        CreateHostBuilder(args).Build().Run();
+    }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)                                
-                .ConfigureServices(Startup.ConfigureServices)
-                .UseOrleans(ConfigureOrleans);
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)                                
+            .ConfigureServices(Startup.ConfigureServices)
+            .UseOrleans(ConfigureOrleans);
 
-        private static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builder)
-        {
-            builder.ConfigureCluster(ctx.Configuration)               
-                .ConfigureEndpoints()
-                .ConfigureKubernetesClustering(ctx.Configuration)
-                .AddAssemblies(typeof(Grain));
-        }
-    } 
+    private static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builder)
+    {
+        builder.ConfigureCluster(ctx.Configuration)               
+            .ConfigureEndpoints()
+            .ConfigureKubernetesClustering(ctx.Configuration)
+            .AddAssemblies(typeof(Grain));
+    }
+} 
 
 ```
 
@@ -54,7 +55,7 @@ Add the below to your Program.cs and this will register an Orleans Silo running 
 
 #### Silo
 
-You can change the default value for the Kubernetes configuration by overriding the [KubernetesSiloOptions](..\src\GiG.Core.Orleans.Clustering.Kubernetes\Configurations\KubernetesSiloOptions.cs) by adding the following configuration settings under section `Orleans:Kubernetes`.
+The below table outlines the valid Configurations used to override the [KubernetesSiloOptions](..\src\GiG.Core.Orleans.Clustering.Kubernetes\Configurations\KubernetesSiloOptions.cs) under the Config section `Orleans:Kubernetes`.
 
 | Configuration Name  | Type   | Optional | Default Value                                                     |
 |:--------------------|:-------|:---------|:------------------------------------------------------------------|
@@ -67,7 +68,7 @@ You can change the default value for the Kubernetes configuration by overriding 
 
 #### Client
 
-You can change the default value for the Kubernetes configuration by overriding the [KubernetesClientOptions](..\src\GiG.Core.Orleans.Clustering.Kubernetes\Configurations\KubernetesClientOptions.cs) by adding the following configuration settings under section `Orleans:Kubernetes`.
+The below table outlines the valid Configurations used to override the [KubernetesClientOptions](..\src\GiG.Core.Orleans.Clustering.Kubernetes\Configurations\KubernetesClientOptions.cs) under the Config section `Orleans:Kubernetes`.
 
 | Configuration Name  | Type   | Optional | Default Value                                                     |
 |:--------------------|:-------|:---------|:------------------------------------------------------------------|

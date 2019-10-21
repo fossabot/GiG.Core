@@ -7,24 +7,23 @@ When using this Library your application will enrich logs with the Application's
 
 Make use of `EnrichWithApplicationMetadata()` when configuring logging.
 
-
 ```csharp
 
-	static class Program
+static class Program
+{
+    public static void Main()
     {
-        public static void Main()
-        {
-            CreateHostBuilder().Build().Run();
-        }
-
-        private static IHostBuilder CreateHostBuilder()
-        {
-            return Host.CreateDefaultBuilder()
-				.ConfigureLogging(x =>
-				{
-					x.EnrichWithApplicationMetadata();
-				});
-        }
+        CreateHostBuilder().Build().Run();
     }
+
+    private static IHostBuilder CreateHostBuilder()
+    {
+        return Host.CreateDefaultBuilder()
+		    .ConfigureLogging(x =>
+			{
+			    x.EnrichWithApplicationMetadata();
+			});
+    }
+}
 
 ```
