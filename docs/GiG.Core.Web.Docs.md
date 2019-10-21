@@ -27,7 +27,7 @@ public void Configure(IApplicationBuilder app)
 
 ## Configuration
 
-The below table outlines the valid Configurations used to override the [ApiDocsOptions](../src/GiG.Core.Web.Docs.Abstractions/ApiDocsOptions.cs).
+The below table outlines the valid Configurations used to override the [ApiDocsOptions](../src/GiG.Core.Web.Docs/Abstractions/ApiDocsOptions.cs).
 
 | Configuration Name    | Type	  | Required | Default Value	|
 |-----------------------|---------|----------|------------------|

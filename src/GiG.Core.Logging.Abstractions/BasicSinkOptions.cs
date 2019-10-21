@@ -6,7 +6,7 @@ namespace GiG.Core.Logging.Abstractions
     public class BasicSinkOptions
     {
         /// <summary>
-        /// Indicates whether a sink is enable or not.
+        /// Indicates whether a sink is enabled or not.
         /// </summary>
         public bool IsEnabled { get; set; }
     }
