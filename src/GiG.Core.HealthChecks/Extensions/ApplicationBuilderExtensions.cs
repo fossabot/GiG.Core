@@ -22,17 +22,16 @@ namespace GiG.Core.HealthChecks.Extensions
         /// <summary>
         /// Adds the Ready and Live HealthCheck endpoints
         /// </summary>
-        /// <param name="app">The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</param>
+        /// <param name="builder">The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</param>
         /// <returns>The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</returns>
-        public static IApplicationBuilder UseHealthChecks([NotNull] this IApplicationBuilder app)
+        public static IApplicationBuilder UseHealthChecks([NotNull] this IApplicationBuilder builder)
         {
-            if (app == null) throw new ArgumentNullException(nameof(app));
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
 
-            var options = app.ApplicationServices
-                              .GetService<IOptions<HealthChecksOptions>>()?.Value ??
-                          new HealthChecksOptions();
+            var options = builder.ApplicationServices
+                              .GetService<IOptions<HealthChecksOptions>>()?.Value ?? new HealthChecksOptions();
 
-            return app
+            return builder
                 .UseHealthChecks(options.ReadyUrl, new HealthCheckOptions
                 {
                     Predicate = check => check.Tags.Contains(Constants.ReadyTag),

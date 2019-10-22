@@ -1,6 +1,6 @@
 ﻿# GiG.Core.Logging
 
-This Library provides an API to register Logging using Serilog for your application.
+This Library provides an API to register Logging using Serilog for an application.
 
 ## Basic Usage
 
@@ -8,18 +8,19 @@ Make use of `ConfigureLogging()` when creating an `IHostBuilder`. Logging requir
 
 ```csharp
 
-	static class Program
+static class Program
+{
+    public static void Main()
     {
-        public static void Main()
-        {
-            CreateHostBuilder().Build().Run();
-        }
-
-        private static IHostBuilder CreateHostBuilder()
-        {
-            return Host.CreateDefaultBuilder()
-                .ConfigureLogging();
-        }
+        CreateHostBuilder().Build().Run();
     }
+
+    private static IHostBuilder CreateHostBuilder()
+    {
+        return Host
+            .CreateDefaultBuilder()
+            .ConfigureLogging();
+    }
+}
 
 ```

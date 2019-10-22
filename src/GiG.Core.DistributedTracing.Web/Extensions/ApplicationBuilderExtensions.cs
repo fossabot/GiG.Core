@@ -14,7 +14,7 @@ namespace GiG.Core.DistributedTracing.Web.Extensions
         /// Add Correlation ID Middleware.
         /// </summary>
         /// <param name="builder">The <see cref="IApplicationBuilder"/>.</param>
-        /// <returns>AThe <see cref="IApplicationBuilder"/>.</returns>
+        /// <returns>The <see cref="IApplicationBuilder"/>.</returns>
         public static IApplicationBuilder UseCorrelationId([NotNull] this IApplicationBuilder builder)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
