@@ -1,4 +1,4 @@
-﻿namespace GiG.Core.Orleans.Storage.Npgsql.Configurations
+﻿namespace GiG.Core.Orleans.Storage.Npgsql
 {
     /// <summary>
     /// Npgsql Options for Grain Storage.
@@ -6,7 +6,7 @@
     public class NpgsqlOptions
     {
         /// <summary>
-        /// Default Orleans Storage providers section name.
+        /// The configuration default section name.
         /// </summary>
         public const string DefaultSectionName = "Orleans:StorageProviders";
 

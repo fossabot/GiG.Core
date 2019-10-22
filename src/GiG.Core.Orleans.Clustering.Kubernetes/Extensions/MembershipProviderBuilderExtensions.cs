@@ -12,13 +12,13 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
     public static class MembershipProviderBuilderExtensions
     {
         private const string ProviderName = "Kubernetes";
-        
+
         /// <summary>
-        /// Configures Kubernetes in Orleans.
+        /// Configures Kubernetes as a Membershop Provider for an Orleans Client.
         /// </summary>
-        /// <param name="builder">Membership Provider builder of type <see cref="IClientBuilder" />.</param>
-        /// <param name="configuration">The <see cref="IConfiguration" /> which contains Kubernetes options.</param>
-        /// <returns>Returns the MembershipProviderBuilder of type<see cref="IClientBuilder" />.</returns>
+        /// <param name="builder">The <see cref="IClientBuilder" />.</param>
+        /// <param name="configuration">The <see cref="IConfiguration" />.</param>
+        /// <returns>The <see cref="IClientBuilder" />.</returns>
         public static MembershipProviderBuilder<IClientBuilder> ConfigureKubernetesClustering([NotNull] this MembershipProviderBuilder<IClientBuilder> builder, [NotNull] IConfiguration configuration)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
@@ -30,11 +30,11 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
         }
 
         /// <summary>
-        /// Configures Kubernetes in Orleans.
+        /// Configures Kubernetes as a Membershop Provider for an Orleans Client.
         /// </summary>
-        /// <param name="builder">Membership Provider builder of type <see cref="IClientBuilder" />.</param>
-        /// <param name="configurationSection">The <see cref="IConfigurationSection" /> which contains Kubernetes options.</param>
-        /// <returns>Returns the MembershipProviderBuilder of type<see cref="IClientBuilder" />.</returns>
+        /// <param name="builder">The <see cref="IClientBuilder" />.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
+        /// <returns>The <see cref="IClientBuilder" />.</returns>
         public static MembershipProviderBuilder<IClientBuilder> ConfigureKubernetesClustering([NotNull] this MembershipProviderBuilder<IClientBuilder> builder, [NotNull] IConfigurationSection configurationSection)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
@@ -46,11 +46,11 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
         }
 
         /// <summary>
-        /// Configures Kubernetes in Orleans.
+        /// Configures Kubernetes as a Membershop Provider for an Orleans Silo.
         /// </summary>
-        /// <param name="builder">Membership Provider builder of type <see cref="ISiloBuilder" />.</param>
-        /// <param name="configuration">The <see cref="IConfiguration" /> which contains Consul options.</param>
-        /// <returns>Returns the MembershipProviderBuilder of type <see cref="ISiloBuilder" />.</returns>
+        /// <param name="builder">The <see cref="ISiloBuilder" />.</param>
+        /// <param name="configuration">The <see cref="IConfiguration" />.</param>
+        /// <returns>The <see cref="ISiloBuilder" />.</returns>
         public static MembershipProviderBuilder<ISiloBuilder> ConfigureKubernetesClustering([NotNull] this MembershipProviderBuilder<ISiloBuilder> builder, [NotNull] IConfiguration configuration)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
@@ -62,11 +62,11 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
         }
 
         /// <summary>
-        /// Configures Kubernetes in Orleans.
+        /// Configures Kubernetes as a Membershop Provider for an Orleans Silo.
         /// </summary>
-        /// <param name="builder">Membership Provider builder of type <see cref="ISiloBuilder" />.</param>
-        /// <param name="configurationSection">The <see cref="IConfigurationSection" /> which contains Consul options.</param>
-        /// <returns>Returns the MembershipProviderBuilder of type <see cref="ISiloBuilder" />.</returns>
+        /// <param name="builder">The <see cref="ISiloBuilder" />.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
+        /// <returnsThe <see cref="ISiloBuilder" />.</returns>
         public static MembershipProviderBuilder<ISiloBuilder> ConfigureKubernetesClustering([NotNull] this MembershipProviderBuilder<ISiloBuilder> builder, [NotNull] IConfigurationSection configurationSection)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
@@ -76,6 +76,5 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
 
             return builder;
         }
-
     }
 }

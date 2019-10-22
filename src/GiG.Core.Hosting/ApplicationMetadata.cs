@@ -3,7 +3,7 @@
 namespace GiG.Core.Hosting
 {
     /// <summary>
-    /// Class which provides version information about the application.
+    /// Provides version information about the application.
     /// </summary>
     public static class ApplicationMetadata
     {

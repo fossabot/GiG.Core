@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace GiG.Core.Orleans.Streams
 {
     /// <summary>
-    /// Stream to publish event messages over Orleans Streams from Grains.
+    /// Stream to publish Event messages over Orleans Streams from Grains.
     /// </summary>
     /// <typeparam name="TMessage">Stream Message.</typeparam>
     public class Stream<TMessage> : IStream<TMessage>

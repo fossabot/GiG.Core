@@ -15,10 +15,10 @@ namespace GiG.Core.Web.Docs.Extensions
     public static class ApplicationBuilderExtensions
     {
         /// <summary>
-        /// Adds Documentation To API.
+        /// Adds Documentation to API.
         /// </summary>
-        /// <param name="app">The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</param>
-        /// <returns>The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</returns>
+        /// <param name="app">The <see cref="IApplicationBuilder" />.</param>
+        /// <returns>The <see cref="IApplicationBuilder" />.</returns>
         public static IApplicationBuilder UseApiDocs([NotNull] this IApplicationBuilder app)
         {
             if (app == null) throw new ArgumentNullException(nameof(app));

@@ -1,5 +1,4 @@
-﻿using GiG.Core.Orleans.Storage.Npgsql.Configurations;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Orleans.Hosting;
 using System;
@@ -62,8 +61,7 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Extensions
 
             if (npgsqlOptions == null)
             {
-                throw new ConfigurationErrorsException(
-                    $"Configuration section '{configurationSection.Path}' is not valid.");
+                throw new ConfigurationErrorsException($"Configuration section '{configurationSection.Path}' is not valid.");
             }
 
             builder.AddAdoNetGrainStorage(storageName, x =>

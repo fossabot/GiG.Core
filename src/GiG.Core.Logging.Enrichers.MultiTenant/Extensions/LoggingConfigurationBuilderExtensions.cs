@@ -8,17 +8,16 @@ using System;
 namespace GiG.Core.Logging.Enrichers.MultiTenant.Extensions
 {
     /// <summary>
-    /// Logging Configuration Builder extensions.
+    /// Logging Configuration Builder Extensions.
     /// </summary>
     public static class LoggingConfigurationBuilderExtensions
     {
         /// <summary>
-        /// Enrich log events with a Tenant ID.
+        /// Enrich Log Events with a Tenant ID.
         /// </summary>
-        /// <param name="builder">The delegate for configuring the <see cref="LoggingConfigurationBuilder" />.</param>
-        /// <returns><see cref="LoggingConfigurationBuilder" /> object allowing method chaining.</returns>
-        public static LoggingConfigurationBuilder EnrichWithTenantId(
-            [NotNull] this LoggingConfigurationBuilder builder)
+        /// <param name="builder">The <see cref="LoggingConfigurationBuilder" />.</param>
+        /// <returns>The <see cref="LoggingConfigurationBuilder" />.</returns>
+        public static LoggingConfigurationBuilder EnrichWithTenantId([NotNull] this LoggingConfigurationBuilder builder)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
 
