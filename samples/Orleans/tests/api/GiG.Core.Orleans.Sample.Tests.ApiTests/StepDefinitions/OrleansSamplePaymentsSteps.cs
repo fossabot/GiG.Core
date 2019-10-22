@@ -3,6 +3,9 @@ using GiG.Core.Orleans.Sample.Tests.ApiTests.Services;
 using Xunit;
 using RestEase;
 using TechTalk.SpecFlow;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Linq;
 
 namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
 {
@@ -72,7 +75,23 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
         [Then(@"the error message for '(Deposit|Withdraw)' is '(.*)'")]
         public void ThenTheErrorMessageUsingKeyIs(SampleApiEndpointKeys endpointKey, string message)
         {
-            Assert.Equal(message, _scenarioContext.Get<Response<decimal>>(endpointKey.ToString()).StringContent);
+            var erorrmsg = ParseErrorMessage(_scenarioContext.Get<Response<decimal>>(endpointKey.ToString()).StringContent);
+            Assert.Equal(message, erorrmsg);
+        }
+
+        private string ParseErrorMessage(string responseContent)
+        {
+            var errorMessage = string.Empty;
+            try
+            {
+                var response = JsonConvert.DeserializeObject<JObject>(responseContent);
+                errorMessage = response.SelectToken("$.errors").Values().FirstOrDefault().AsJEnumerable().FirstOrDefault().ToString();
+            } catch (JsonReaderException)
+            {
+                errorMessage = responseContent;
+            }
+
+            return errorMessage;
         }
     }
 }

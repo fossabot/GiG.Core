@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using GiG.Core.Context.Orleans.Extensions;
 using GiG.Core.DistributedTracing.Orleans.Extensions;
 using GiG.Core.DistributedTracing.Web.Extensions;
@@ -10,6 +11,7 @@ using GiG.Core.Orleans.Clustering.Kubernetes.Extensions;
 using GiG.Core.Orleans.Sample.Contracts;
 using GiG.Core.Orleans.Sample.Web.Extensions;
 using GiG.Core.Web.Docs.Extensions;
+using GiG.Core.Web.FluentValidation.Extensions;
 using GiG.Core.Web.Hosting.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -60,8 +62,13 @@ namespace GiG.Core.Orleans.Sample.Web
             // WebAPI
             services.ConfigureApiDocs(_configuration);
             services.ConfigureInfoManagement(_configuration);
-            services.AddControllers();
+            services.AddControllers()
+                .AddFluentValidation(options => options.RegisterValidatorsFromAssemblyContaining<Startup>());
+
             services.ConfigureForwardedHeaders();
+
+            // Configure Api Behavior Options
+            services.ConfigureApiBehaviorOptions();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,6 +81,7 @@ namespace GiG.Core.Orleans.Sample.Web
             app.UseApiDocs();
             app.UseInfoManagement();
             app.UseRouting();
+            app.UseFluentValidationMiddleware();
             app.UseEndpoints(endpoints => 
             {
                 endpoints.MapControllers();

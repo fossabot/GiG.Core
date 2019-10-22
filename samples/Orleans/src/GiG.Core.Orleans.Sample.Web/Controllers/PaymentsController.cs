@@ -1,4 +1,5 @@
-﻿using GiG.Core.Orleans.Sample.Contracts;
+﻿using FluentValidation.AspNetCore;
+using GiG.Core.Orleans.Sample.Contracts;
 using GiG.Core.Orleans.Sample.Contracts.Messages;
 using GiG.Core.Orleans.Sample.Web.Contracts;
 using MassTransit;
@@ -13,15 +14,17 @@ namespace GiG.Core.Orleans.Sample.Web.Controllers
     [Route("[controller]")]
     public class PaymentsController : ControllerBase
     {
-        private const decimal MinimumAmount = 10;
-
         private IPublishEndpoint _publishEndpoint;
         private readonly IPlayerInformationAccessor _playerInformationAccessor;
+        private readonly IClusterClient _clusterClient;
 
-        public PaymentsController(IPublishEndpoint publishEndpoint, IPlayerInformationAccessor playerInformationAccessor)
+        public PaymentsController(IPublishEndpoint publishEndpoint, 
+            IPlayerInformationAccessor playerInformationAccessor,
+            IClusterClient clusterClient)
         {
             _publishEndpoint = publishEndpoint;
             _playerInformationAccessor = playerInformationAccessor;
+            _clusterClient = clusterClient;
         }
 
         /// <summary>
@@ -32,13 +35,8 @@ namespace GiG.Core.Orleans.Sample.Web.Controllers
         [HttpPost("deposit")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<ActionResult>Deposit(TransactionRequest request)
+        public async Task<ActionResult>Deposit([CustomizeValidator(RuleSet = "Deposit")] TransactionRequest request)
         {           
-            if (request.Amount < MinimumAmount)
-            {
-                return BadRequest($"Deposit Amount must be greater than {MinimumAmount}.");
-            }
-
             await _publishEndpoint.Publish(new PaymentTransactionRequested()
             {
                 PlayerId = _playerInformationAccessor.PlayerId,
@@ -57,8 +55,16 @@ namespace GiG.Core.Orleans.Sample.Web.Controllers
         [HttpPost("withdraw")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<ActionResult> Withdraw(TransactionRequest request)
+        public async Task<ActionResult> Withdraw([CustomizeValidator(RuleSet ="Withdraw")]TransactionRequest request)
         {
+            var playerId = _playerInformationAccessor.PlayerId;
+            var balance = await _clusterClient.GetGrain<IWalletGrain>(playerId).GetBalanceAsync();
+
+            if (request.Amount > balance)
+            {
+                return BadRequest("Withdraw Amount must be smaller or equal to the Balance, and greater than 0.");
+            }
+
             await _publishEndpoint.Publish(new PaymentTransactionRequested()
             {
                 PlayerId = _playerInformationAccessor.PlayerId,
