@@ -1,4 +1,4 @@
-FROM igcproget.igc.zone/gig-core-docker/library/dotnet:3.0.100-sdk-.4.7809fed as base
+FROM igcproget.igc.zone/gig-core-docker/library/dotnet:3.0.100-sdk-0.1.0.11.0bb71c3 as base
 
 COPY . .
 RUN dotnet restore GiG.Core.sln

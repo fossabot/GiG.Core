@@ -1,7 +1,7 @@
-FROM igcproget.igc.zone/gig-core-docker/library/dotnet:3.0.0-aspnet-.4.7809fed AS base
+FROM igcproget.igc.zone/gig-core-docker/library/dotnet:3.0.0-aspnet-0.1.0.11.0bb71c3 AS base
 EXPOSE 8080
 
-FROM igcproget.igc.zone/gig-core-docker/library/dotnet:3.0.100-sdk-.4.7809fed AS build
+FROM igcproget.igc.zone/gig-core-docker/library/dotnet:3.0.100-sdk-0.1.0.11.0bb71c3 AS build
 
 COPY ["samples/Orleans/src/GiG.Core.Orleans.Sample.Web/GiG.Core.Orleans.Sample.Web.csproj", "samples/Orleans/src/GiG.Core.Orleans.Sample.Web/"]
 RUN dotnet restore "samples/Orleans/src/GiG.Core.Orleans.Sample.Web/GiG.Core.Orleans.Sample.Web.csproj"
