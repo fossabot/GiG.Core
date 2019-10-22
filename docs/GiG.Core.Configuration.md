@@ -4,22 +4,22 @@ This Library provides an API to add external configuration via JSON file and Env
 
 ## Basic Usage
 
-Make use of `ConfigureExternalConfiguration()` when creating an `IHostBuilder`. Logging requires configuration.
+The below code needs to be added to the `Program.cs`. Make use of `ConfigureExternalConfiguration()` when creating an `IHostBuilder`. Logging requires configuration.
 
 ```csharp
 
-	public class Program
+static class Program
+{
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
-
-        private static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-				.ConfigureExternalConfiguration()
-                .ConfigureLogging()
-				.ConfigureServices(Startup.ConfigureServices);
+        CreateHostBuilder(args).Build().Run();
     }
+
+    private static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureExternalConfiguration()
+            .ConfigureLogging()
+            .ConfigureServices(Startup.ConfigureServices);
+}
 
 ```

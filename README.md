@@ -8,35 +8,36 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 
 ## Libraries
 
-- [GiG.Core.Configuration](docs/GiG.Core.Configuration.md)
-- [GiG.Core.Context.Orleans](docs/GiG.Core.Context.Orleans.md)
-- [GiG.Core.Context.Web](docs/GiG.Core.Context.Web.md)
-- [GiG.Core.Data.Migration](docs/GiG.Core.Data.Migration.md)
-- [GiG.Core.DistributedTracing.Orleans](docs/GiG.Core.DistributedTracing.Orleans.md)
-- [GiG.Core.DistributedTracing.Web](docs/GiG.Core.DistributedTracing.Web.md)
-- [GiG.Core.HealthChecks](docs/GiG.Core.HealthChecks.md)
-- [GiG.Core.Hosting](docs/GiG.Core.Hosting.md)
-- [GiG.Core.Http](docs/GiG.Core.Http.md)
-- [GiG.Core.Http.DistributedTracing](docs/GiG.Core.Http.DistributedTracing.md)
-- [GiG.Core.Http.MultiTenant](docs/GiG.Core.Http.MultiTenant.md)
-- [GiG.Core.Logging](docs/GiG.Core.Logging.md)
-- [GiG.Core.Logging.All](docs/GiG.Core.Logging.All.md)
-- [GiG.Core.Logging.Enrichers.ApplicationMetadata](docs/GiG.Core.Logging.Enrichers.ApplicationMetadata.md)
-- [GiG.Core.Logging.Enrichers.Context](docs/GiG.Core.Logging.Enrichers.Context.md)
-- [GiG.Core.Logging.Enrichers.DistributedTracing](docs/GiG.Core.Logging.Enrichers.DistributedTracing.md)
-- [GiG.Core.Logging.Enrichers.MultiTenant](docs/GiG.Core.Logging.Enrichers.MultiTenant.md)
-- [GiG.Core.MultiTenant.Web](docs/GiG.Core.MultiTenant.Web.md)
-- [GiG.Core.Orleans.Client](docs/GiG.Core.Orleans.Client.md)
-- [GiG.Core.Orleans.Clustering](docs/GiG.Core.Orleans.Clustering.md)
-- [GiG.Core.Orleans.Clustering.Consul](docs/GiG.Core.Orleans.Clustering.Consul.md)
-- [GiG.Core.Orleans.Clustering.Kubernetes](docs/GiG.Core.Orleans.Clustering.Kubernetes.md)
-- [GiG.Core.Orleans.Silo](docs/GiG.Core.Orleans.Silo.md)
-- [GiG.Core.Orleans.Storage.Npgsql](docs/GiG.Core.Orleans.Storage.Npgsql.md)
-- [GiG.Core.Orleans.Streams](docs/GiG.Core.Orleans.Streams.md)
-- [GiG.Core.Orleans.Streams.Kafka](docs/GiG.Core.Orleans.Streams.Kafka.md)
-- [GiG.Core.Web.Docs](docs/GiG.Core.Web.Docs.md)
-- [GiG.Core.Web.FluentValidation](docs/GiG.Core.Web.FluentValidation.md)
-- [GiG.Core.Web.Hosting](docs/GiG.Core.Web.Hosting.md)
+- [GiG.Core.Configuration](docs/GiG.Core.Configuration.md) - Provides an API to add external configuration via JSON file and Environment variables.
+- [GiG.Core.Context.Orleans](docs/GiG.Core.Context.Orleans.md) - Provides an API to register the Request Context Accessor functionality for Orleans.
+- [GiG.Core.Context.Web](docs/GiG.Core.Context.Web.md) - Provides an API to register the Request Context Accessor functionality for a web application.
+- [GiG.Core.Data.Migration](docs/GiG.Core.Data.Migration.md) - Provides an API to perform Database Migrations using SQL Scripts.
+- [GiG.Core.DistributedTracing.Orleans](docs/GiG.Core.DistributedTracing.Orleans.md) - Provides an API to register Distributed Tracing for an Orleans Client.
+- [GiG.Core.DistributedTracing.Web](docs/GiG.Core.DistributedTracing.Web.md) - Provides an API to register Distributed Tracing for a web application.
+- [GiG.Core.HealthChecks](docs/GiG.Core.HealthChecks.md) - Provides an API to register Health Checks for an application.
+- [GiG.Core.Hosting](docs/GiG.Core.Hosting.md) - Provides an API to register hosting related functionailty to an application.
+- [GiG.Core.Http](docs/GiG.Core.Http.md) - Provides an API to create an `HttpClient` without using IOC.
+- [GiG.Core.Http.DistributedTracing](docs/GiG.Core.Http.DistributedTracing.md) - Provides an API to register a `CorrelationIdDelegatingHandler` onto the `HttpClient`.
+- [GiG.Core.Http.MultiTenant](docs/GiG.Core.Http.MultiTenant.md) - Provides an API to register a `TenantDelegatingHandler` onto the `HttpClient`
+- [GiG.Core.Logging](docs/GiG.Core.Logging.md) -  Provides an API to register Logging using Serilog for an application.
+- [GiG.Core.Logging.All](docs/GiG.Core.Logging.All.md) - Provides an API to register Logging using Serilog and muliple Sinks and Enrichers for an application.
+- [GiG.Core.Logging.Enrichers.ApplicationMetadata](docs/GiG.Core.Logging.Enrichers.ApplicationMetadata.md) - Provides an API to register and ApplicationMetadata Enricher for Logging when using Serilog.
+- [GiG.Core.Logging.Enrichers.Context](docs/GiG.Core.Logging.Enrichers.Context.md) - Provides an API to register the Context Enricher for Logging when using Serilog.
+- [GiG.Core.Logging.Enrichers.DistributedTracing](docs/GiG.Core.Logging.Enrichers.DistributedTracing.md) - Provides an API to register the Correlation Id Enricher for Logging when using Serilog.
+- [GiG.Core.Logging.Enrichers.MultiTenant](docs/GiG.Core.Logging.Enrichers.MultiTenant.md) - Provides an API to register Tenant Id Enricher for Logging when using Serilog.
+- [GiG.Core.MultiTenant.Web](docs/GiG.Core.MultiTenant.Web.md) - Provides an API to register Multi Tenancy for an application.
+- [GiG.Core.Orleans.Client](docs/GiG.Core.Orleans.Client.md) - Provides an API to register an Orleans Client in an application.
+- [GiG.Core.Orleans.Clustering](docs/GiG.Core.Orleans.Clustering.md) - Provides Extension Methods to register Orleans Silo Membership Providers.
+- [GiG.Core.Orleans.Clustering.Consul](docs/GiG.Core.Orleans.Clustering.Consul.md) - Provides an API to use Consul as a Membership Provider for Orleans Silos.
+- [GiG.Core.Orleans.Clustering.Kubernetes](docs/GiG.Core.Orleans.Clustering.Kubernetes.md) - Provides an API to use Kubernetes as a Membership Provider for Orleans Silos.
+- [GiG.Core.Orleans.Silo](docs/GiG.Core.Orleans.Silo.md) - Provides an API to register an Orleans Silo in an application.
+- [GiG.Core.Orleans.Storage.Npgsql](docs/GiG.Core.Orleans.Storage.Npgsql.md) - Provides an API to register PostgreSQL as a Grain Storage Provider.
+- [GiG.Core.Orleans.Streams](docs/GiG.Core.Orleans.Streams.md) - Provides an API to register an Orleans Stream Factory.
+- [GiG.Core.Orleans.Streams.Kafka](docs/GiG.Core.Orleans.Streams.Kafka.md) - Provides an API to register an Orleans Stream using Kafka.
+- [GiG.Core.Web.Docs](docs/GiG.Core.Web.Docs.md) - Provides an API to configure API Documentation.
+- [GiG.Core.Web.FluentValidation](docs/GiG.Core.Web.FluentValidation.md) - Provides an API to register the Fluent Validation Exception Middleware in an application.
+- [GiG.Core.Web.Hosting](docs/GiG.Core.Web.Hosting.md) - Provides an API to configure `BASE_PATH` and Forwarded Headers.
+
 
 ## Build
 
