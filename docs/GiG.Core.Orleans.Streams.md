@@ -23,7 +23,7 @@ The below code shows how to inject `IStreamFactory` in a class.
 
 ```csharp
 
-public class WalletGrain
+public class WalletGrain : Grain, IWalletGrain
 {
     public WalletGrain(IStreamFactory streamFactory)
     {
@@ -35,7 +35,7 @@ public class WalletGrain
 
 ```
 
-The below code shows how to get an instance of the stream from the `StreamFactory`.
+The below code shows how to get an instance of the `Stream` class from the `StreamFactory`.
 
 ```csharp
 
@@ -47,7 +47,7 @@ public override async Task OnActivateAsync()
 
 ```
  
-Calling the 'PublishAsync' method will publish messages on the Stream instance.
+Calling the 'PublishAsync' method will publish messages on the `Stream` class instance.
 
 ```csharp
 

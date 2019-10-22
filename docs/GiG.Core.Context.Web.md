@@ -1,6 +1,6 @@
 ﻿# GiG.Core.Context.Web
 
-This Library provides an API to register the Request Context Accessor functionality for an application.
+This Library provides an API to register the Request Context Accessor functionality for a web application.
 
 ## Basic Usage
 

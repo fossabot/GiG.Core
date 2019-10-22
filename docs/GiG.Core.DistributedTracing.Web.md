@@ -1,6 +1,6 @@
 ﻿# GiG.Core.DistributedTracing.Web
 
-This Library provides an API to register Distributed Tracing for an application.
+This Library provides an API to register Distributed Tracing for a web application.
 
 ## Basic Usage
 

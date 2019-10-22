@@ -10,15 +10,15 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 
 - [GiG.Core.Configuration](docs/GiG.Core.Configuration.md) - Provides an API to add external configuration via JSON file and Environment variables.
 - [GiG.Core.Context.Orleans](docs/GiG.Core.Context.Orleans.md) - Provides an API to register the Request Context Accessor functionality for Orleans.
-- [GiG.Core.Context.Web](docs/GiG.Core.Context.Web.md) - Provides an API to register the Request Context Accessor functionality for an application.
+- [GiG.Core.Context.Web](docs/GiG.Core.Context.Web.md) - Provides an API to register the Request Context Accessor functionality for a web application.
 - [GiG.Core.Data.Migration](docs/GiG.Core.Data.Migration.md) - Provides an API to perform Database Migrations using SQL Scripts.
 - [GiG.Core.DistributedTracing.Orleans](docs/GiG.Core.DistributedTracing.Orleans.md) - Provides an API to register Distributed Tracing for an Orleans Client.
-- [GiG.Core.DistributedTracing.Web](docs/GiG.Core.DistributedTracing.Web.md) - Provides an API to register Distributed Tracing for an application.
+- [GiG.Core.DistributedTracing.Web](docs/GiG.Core.DistributedTracing.Web.md) - Provides an API to register Distributed Tracing for a web application.
 - [GiG.Core.HealthChecks](docs/GiG.Core.HealthChecks.md) - Provides an API to register Health Checks for an application.
 - [GiG.Core.Hosting](docs/GiG.Core.Hosting.md) - Provides an API to register hosting related functionailty to an application.
-- [GiG.Core.Http](docs/GiG.Core.Http.md) - Provides an API to register a ```CorrelationIdDelegatingHandler``` onto the HttpClient.
-- [GiG.Core.Http.DistributedTracing](docs/GiG.Core.Http.DistributedTracing.md) - Provides an API to create an ```HttpClient``` without using IOC.
-- [GiG.Core.Http.MultiTenant](docs/GiG.Core.Http.MultiTenant.md) - Provides an API to register a ```TenantDelegatingHandler``` onto the HttpClient
+- [GiG.Core.Http](docs/GiG.Core.Http.md) - Provides an API to create an `HttpClient` without using IOC.
+- [GiG.Core.Http.DistributedTracing](docs/GiG.Core.Http.DistributedTracing.md) - Provides an API to register a `CorrelationIdDelegatingHandler` onto the `HttpClient`.
+- [GiG.Core.Http.MultiTenant](docs/GiG.Core.Http.MultiTenant.md) - Provides an API to register a `TenantDelegatingHandler` onto the `HttpClient`
 - [GiG.Core.Logging](docs/GiG.Core.Logging.md) -  Provides an API to register Logging using Serilog for an application.
 - [GiG.Core.Logging.All](docs/GiG.Core.Logging.All.md) - Provides an API to register Logging using Serilog and muliple Sinks and Enrichers for an application.
 - [GiG.Core.Logging.Enrichers.ApplicationMetadata](docs/GiG.Core.Logging.Enrichers.ApplicationMetadata.md) - Provides an API to register and ApplicationMetadata Enricher for Logging when using Serilog.
@@ -27,9 +27,9 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Logging.Enrichers.MultiTenant](docs/GiG.Core.Logging.Enrichers.MultiTenant.md) - Provides an API to register Tenant Id Enricher for Logging when using Serilog.
 - [GiG.Core.MultiTenant.Web](docs/GiG.Core.MultiTenant.Web.md) - Provides an API to register Multi Tenancy for an application.
 - [GiG.Core.Orleans.Client](docs/GiG.Core.Orleans.Client.md) - Provides an API to register an Orleans Client in an application.
-- [GiG.Core.Orleans.Clustering](docs/GiG.Core.Orleans.Clustering.md) - Provides an API to register Orleans Clients and Silos running on Consul.
-- [GiG.Core.Orleans.Clustering.Consul](docs/GiG.Core.Orleans.Clustering.Consul.md) - Provides an API to register Orleans Clients and Silos running on Kubernetes.
-- [GiG.Core.Orleans.Clustering.Kubernetes](docs/GiG.Core.Orleans.Clustering.Kubernetes.md) - Provides an API to register Membership Providers for Orleans Clients and Silos using configuration.
+- [GiG.Core.Orleans.Clustering](docs/GiG.Core.Orleans.Clustering.md) - Provides Extension Methods to register Orleans Silo Membership Providers.
+- [GiG.Core.Orleans.Clustering.Consul](docs/GiG.Core.Orleans.Clustering.Consul.md) - Provides an API to use Consul as a Membership Provider for Orleans Silos.
+- [GiG.Core.Orleans.Clustering.Kubernetes](docs/GiG.Core.Orleans.Clustering.Kubernetes.md) - Provides an API to use Kubernetes as a Membership Provider for Orleans Silos.
 - [GiG.Core.Orleans.Silo](docs/GiG.Core.Orleans.Silo.md) - Provides an API to register an Orleans Silo in an application.
 - [GiG.Core.Orleans.Storage.Npgsql](docs/GiG.Core.Orleans.Storage.Npgsql.md) - Provides an API to register PostgreSQL as a Grain Storage Provider.
 - [GiG.Core.Orleans.Streams](docs/GiG.Core.Orleans.Streams.md) - Provides an API to register an Orleans Stream Factory.

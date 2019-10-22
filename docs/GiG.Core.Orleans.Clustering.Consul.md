@@ -1,6 +1,6 @@
 # GiG.Core.Orleans.Clustering.Consul
 
-This Library provides an API to register Orleans Clients and Silos running on Consul.
+This Library provides an API to use Consul as a Membership Provider for Orleans Silos.
 
 ## Basic Usage
 

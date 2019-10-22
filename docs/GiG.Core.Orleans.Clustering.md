@@ -1,6 +1,6 @@
 # GiG.Core.Orleans.Clustering
 
-This Library provides an API to register Membership Providers for Orleans Clients and Silos using configuration.
+This Library provides Extension Methods to register Orleans Silo Membership Providers.
 
 ## Basic Usage
 

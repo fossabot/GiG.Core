@@ -1,6 +1,6 @@
 # GiG.Core.Orleans.Clustering.Kubernetes
 
-This Library provides an API to register Orleans Clients and Silos running on Kubernetes.
+This Library provides an API to use Kubernetes as a Membership Provider for Orleans Silos.
 
 ## Basic Usage
 
