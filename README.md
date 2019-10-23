@@ -33,6 +33,7 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Orleans.Silo](docs/GiG.Core.Orleans.Silo.md) - Provides an API to register an Orleans Silo in an application.
 - [GiG.Core.Orleans.Storage.Npgsql](docs/GiG.Core.Orleans.Storage.Npgsql.md) - Provides an API to register PostgreSQL as a Grain Storage Provider.
 - [GiG.Core.Orleans.Streams](docs/GiG.Core.Orleans.Streams.md) - Provides an API to register an Orleans Stream Factory.
+- [GiG.Core.Orleans.Streams.Kafka](docs/GiG.Core.Orleans.Streams.Kafka.md) - Provides an API to register an Orleans Stream using Kafka.
 - [GiG.Core.Web.Docs](docs/GiG.Core.Web.Docs.md) - Provides an API to configure API Documentation.
 - [GiG.Core.Web.FluentValidation](docs/GiG.Core.Web.FluentValidation.md) - Provides an API to register the Fluent Validation Exception Middleware in an application.
 - [GiG.Core.Web.Hosting](docs/GiG.Core.Web.Hosting.md) - Provides an API to configure `BASE_PATH` and Forwarded Headers.
