@@ -7,8 +7,8 @@
   <ItemGroup>
     <PackageReference Include="SignalR.Orleans" Version="1.4.3" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.0.0" />
-    <PackageReference Include="Microsoft.Orleans.Core.Abstractions" Version="3.0.0-rc2" />
-    <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="3.0.0-rc2">
+    <PackageReference Include="Microsoft.Orleans.Core.Abstractions" Version="2.4.3" />
+    <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="2.4.3">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>    
   </ItemGroup>
