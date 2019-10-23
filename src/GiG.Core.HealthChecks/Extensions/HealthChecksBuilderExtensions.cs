@@ -40,7 +40,7 @@ namespace GiG.Core.HealthChecks.Extensions
         /// <param name="builder">The <see cref="IHealthChecksBuilder" />.</param>
         /// <param name="name">The HealthCheck name.</param>
         /// <param name="instance">The HealthCheck instance.</param>
-        /// <param name="healthStatus">The <see cref=HealthStatus" /> that should be
+        /// <param name="healthStatus">The <see cref="HealthStatus" /> that should be
         ///     reported when the HealthCheck reports a failure. If the provided value is null,
         ///     then <see cref="HealthStatus.Unhealthy" /> will
         ///     be reported.

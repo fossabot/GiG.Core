@@ -41,9 +41,7 @@ namespace GiG.Core.Data.Migration.Abstractions
         /// <param name="dbConnection">The <see cref="T:System.Data.IDbConnection" /> to be used for the Database Migration.</param>
         public MigrationOptions([NotNull] IDbConnection dbConnection)
         {
-            if (dbConnection == null) throw new ArgumentNullException(nameof(dbConnection));
-
-            Connection = dbConnection;
+            Connection = dbConnection ?? throw new ArgumentNullException(nameof(dbConnection));
         }
     }
 }

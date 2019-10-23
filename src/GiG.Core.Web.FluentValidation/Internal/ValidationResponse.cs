@@ -11,7 +11,7 @@ namespace GiG.Core.Web.FluentValidation.Internal
     internal class ValidationResponse
     {
         /// <summary>
-        /// Thte title.
+        /// The title.
         /// </summary>
         public string Title { get; set; } = "One or more validation errors occurred.";
 

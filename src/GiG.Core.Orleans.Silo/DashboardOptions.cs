@@ -1,4 +1,4 @@
-﻿namespace GiG.Core.Orleans.Silo.Configurations
+﻿namespace GiG.Core.Orleans.Silo
 {
     /// <summary>
     /// Orleans Silo Dashboard Settings.
@@ -14,7 +14,7 @@
         /// Determines whether the Dashboard is enabled.
         /// </summary>
         public bool IsEnabled { get; set; } = false;
-        
+
         /// <summary>
         /// Sets the Dashboard port.
         /// </summary>
