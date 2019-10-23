@@ -35,7 +35,7 @@ namespace GiG.Core.Orleans.Sample.Silo
                 .AddAssemblies(typeof(WalletGrain))
                 .AddSimpleMessageStreamProvider(Constants.StreamProviderName)
                 .UseSignalR()
-                .AddMemoryGrainStorage(Constants.StreamsMemoryStorageName);               
+                .AddMemoryGrainStorage(Constants.StreamsMemoryStorageName);
         }
     }
 }

@@ -35,6 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Orleans.Clustering.md = docs\GiG.Core.Orleans.Clustering.md
 		docs\GiG.Core.Orleans.Silo.md = docs\GiG.Core.Orleans.Silo.md
 		docs\GiG.Core.Orleans.Storage.Npgsql.md = docs\GiG.Core.Orleans.Storage.Npgsql.md
+		docs\GiG.Core.Orleans.Streams.Kafka.md = docs\GiG.Core.Orleans.Streams.Kafka.md
 		docs\GiG.Core.Orleans.Streams.md = docs\GiG.Core.Orleans.Streams.md
 		docs\GiG.Core.Web.Docs.md = docs\GiG.Core.Web.Docs.md
 		docs\GiG.Core.Web.FluentValidation.md = docs\GiG.Core.Web.FluentValidation.md
@@ -248,6 +249,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Sample.Consumer", "samples\Orleans\src\GiG.Core.Orleans.Sample.Consumer\GiG.Core.Orleans.Sample.Consumer.csproj", "{F5BFE4B3-0FEA-417D-BA8A-004EF9E90E63}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Messaging", "Messaging", "{1577B553-2909-4844-A422-8782E2AA0F83}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Streams.Kafka", "src\GiG.Core.Orleans.Streams.Kafka\GiG.Core.Orleans.Streams.Kafka.csproj", "{25E9980C-8141-4795-A2DE-55B70ED73E66}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Benchmarks.Orleans", "tests\benchmarks\GiG.Core.Benchmarks.Orleans\GiG.Core.Benchmarks.Orleans.csproj", "{33A1C5DA-A108-47CC-918B-A612C8212314}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Streams.Abstractions", "src\GiG.Core.Orleans.Streams.Abstractions\GiG.Core.Orleans.Streams.Abstractions.csproj", "{79BCEF61-78B3-478D-8139-E38A3EB98FB8}"
 EndProject
@@ -504,6 +509,14 @@ Global
 		{F5BFE4B3-0FEA-417D-BA8A-004EF9E90E63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5BFE4B3-0FEA-417D-BA8A-004EF9E90E63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5BFE4B3-0FEA-417D-BA8A-004EF9E90E63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25E9980C-8141-4795-A2DE-55B70ED73E66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25E9980C-8141-4795-A2DE-55B70ED73E66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25E9980C-8141-4795-A2DE-55B70ED73E66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25E9980C-8141-4795-A2DE-55B70ED73E66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33A1C5DA-A108-47CC-918B-A612C8212314}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33A1C5DA-A108-47CC-918B-A612C8212314}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33A1C5DA-A108-47CC-918B-A612C8212314}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33A1C5DA-A108-47CC-918B-A612C8212314}.Release|Any CPU.Build.0 = Release|Any CPU
 		{79BCEF61-78B3-478D-8139-E38A3EB98FB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{79BCEF61-78B3-478D-8139-E38A3EB98FB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79BCEF61-78B3-478D-8139-E38A3EB98FB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -613,6 +626,8 @@ Global
 		{4A33366E-3E63-4142-B242-25BC793C716A} = {1577B553-2909-4844-A422-8782E2AA0F83}
 		{F5BFE4B3-0FEA-417D-BA8A-004EF9E90E63} = {2AFB4E5D-843D-4DE4-A151-772FC6978A2F}
 		{1577B553-2909-4844-A422-8782E2AA0F83} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
+		{25E9980C-8141-4795-A2DE-55B70ED73E66} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
+		{33A1C5DA-A108-47CC-918B-A612C8212314} = {8A64AE64-5734-41A3-9D3A-B6F2B0248ECE}
 		{79BCEF61-78B3-478D-8139-E38A3EB98FB8} = {1577B553-2909-4844-A422-8782E2AA0F83}
 		{78BBCC65-C75D-4C4E-91E0-AA9CB8C7F451} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
 		{ECF4320C-0B41-4D74-99AD-ACDFE69EC230} = {D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF}
