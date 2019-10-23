@@ -13,7 +13,7 @@
         public const string KafkaProviderName = "KafkaProvider";
 
         /// <summary>
-        /// The name for the Message Namespace
+        /// The name for the Message Namespace.
         /// </summary>
         public const string MessageNamespace = "Messages";
 
