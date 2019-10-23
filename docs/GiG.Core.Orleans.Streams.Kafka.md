@@ -10,27 +10,27 @@ The below code needs to be added to the `Startup.cs` to use this extension.
 
 ```csharp
 		
-     private static void ConfigureServices(Microsoft.Extensions.Hosting.HostBuilderContext ctx, IServiceCollection services)
+private static void ConfigureServices(Microsoft.Extensions.Hosting.HostBuilderContext ctx, IServiceCollection services)
+{
+    // Orleans Client
+    services.AddClusterClient((builder, sp) =>
+    {
+        builder.UseLocalhostClustering()
+        .AddAssemblies(typeof(ISMSProviderProducerGrain))
+        .AddSimpleMessageStreamProvider(Constants.SMSProviderName)
+        .AddKafka(Constants.KafkaProviderName)
+        .WithOptions(options =>
         {
-            // Orleans Client
-            services.AddClusterClient((builder, sp) =>
-            {
-                builder.UseLocalhostClustering()
-                .AddAssemblies(typeof(ISMSProviderProducerGrain))
-                .AddSimpleMessageStreamProvider(Constants.SMSProviderName)
-                .AddKafka(Constants.KafkaProviderName)
-                .WithOptions(options =>
-                {
-                    options.FromConfiguration(ctx.Configuration);
-                    options.ConsumeMode = ConsumeMode.StreamStart;
+            options.FromConfiguration(ctx.Configuration);
+            options.ConsumeMode = ConsumeMode.StreamStart;
 
-                    options
-                        .AddTopic(Constants.MessageNamespace);
-                })
-                .AddJson()
-                .Build();
-            });
-        }
+            options
+                .AddTopic(Constants.MessageNamespace);
+        })
+        .AddJson()
+        .Build();
+    });
+}
               
 ```
 

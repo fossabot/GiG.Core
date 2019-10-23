@@ -17,7 +17,7 @@
         public string Brokers { get; set; } = "localhost:9092";
 
         /// <summary>
-        /// Consumer Group Identifier
+        /// Consumer Group Identifier.
         /// </summary>
         public string ConsumerGroupId { get; set; }
     }

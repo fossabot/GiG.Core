@@ -12,7 +12,7 @@ namespace GiG.Core.Orleans.Streams.Kafka.Extensions
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Use KafkaStreamOptions from configuration section
+        /// Use KafkaStreamOptions from configuration section.
         /// </summary>
         /// <param name="options">The <see cref="KafkaStreamOptions" /> used to configure Kafka streams.</param>
         /// <param name="configurationSection">The <see cref="IConfigurationSection" /> which contains Kafka Stream options.</param>
@@ -33,8 +33,9 @@ namespace GiG.Core.Orleans.Streams.Kafka.Extensions
 
             return options;
         }
+        
         /// <summary>
-        /// Use KafkaStreamOptions from configuration
+        /// Use KafkaStreamOptions from configuration.
         /// </summary>
         /// <param name="options">The <see cref="KafkaStreamOptions" /> used to configure Kafka streams.</param>
         /// <param name="configuration">The <see cref="IConfiguration" /> which contains Kafka Streams provider's configuration options.</param>
