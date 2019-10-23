@@ -2,19 +2,24 @@
 
 This Library provides an API to register hosting related functionailty to an application.
 
-
 ## Application Metadata
 
 ### Basic Usage
 
 The below code needs to be added to the `Program.cs`. This will register the application metadata accessor.
 
-
 ```csharp
+static class Program
+{
+    public static void Main()
+    {
+        CreateHostBuilder().Build().Run();
+    }
 
-private static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .UseApplicationMetadata();
+    private static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .UseApplicationMetadata();
+}
 
 ```
 
@@ -46,7 +51,7 @@ public void Configure(IApplicationBuilder app)
 
 The below table outlines the valid Configurations.
 
-| Configuration Name  | Type	| Optional | Default Value	  |
-|---------------------|---------|----------|------------------|
-| IsEnabled			  | Boolean | No	   | `true`		      |
-| Url				  | String  | No	   | `/actuator/info` |	
+| Configuration Name  | Type	| Optional | Default Value	   |
+|---------------------|---------|----------|-------------------|
+| IsEnabled			  | Boolean | No	   | `true`		       |
+| Url				  | String  | No	   | `/actuator/info` | 	

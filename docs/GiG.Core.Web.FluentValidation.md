@@ -1,25 +1,24 @@
 ﻿# GiG.Core.Web.FluentValidation
 
-This Library provides an API to register the Fluent Validation Exception Middleware for your application.
-
+This Library provides an API to register the Fluent Validation Exception Middleware in an application.
 
 ## Basic Usage
 
-Add the below to your Startup class and this will register the Fluent Validation Exception Middleware.
-Make sure to place the `ConfigureApiBehaviorOptions` at the end of the `ConfigureServices`.
+The below code needs to be added to the `Startup.cs` class. This will register the Fluent Validation Exception Middleware.
 
+**Note**: The `ConfigureApiBehaviorOptions` method call needs to be the last one in the `ConfigureServices` method.
 
 ```csharp
 
-	public void ConfigureServices(IServiceCollection services)
-    {
-        // Configure Api Behavior Options
-        services.ConfigureApiBehaviorOptions();
-    }
+public void ConfigureServices(IServiceCollection services)
+{
+    // Configure Api Behavior Options
+    services.ConfigureApiBehaviorOptions();
+}
 
-	public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-	{
-		app.UseFluentValidationMiddleware();
-	}
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    app.UseFluentValidationMiddleware();
+}
 
 ```

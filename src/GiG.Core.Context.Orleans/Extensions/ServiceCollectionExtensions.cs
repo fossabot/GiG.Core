@@ -16,7 +16,7 @@ namespace GiG.Core.Context.Orleans.Extensions
         /// Adds required services for the Request Context Accessor functionality in Orleans.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection"/> to add services to.</param>
-        /// <returns><see cref="IServiceCollection"/> so that more methods can be chained.</returns>
+        /// <returns>The <see cref="IServiceCollection"/>.</returns>
         public static IServiceCollection AddRequestContextAccessor([NotNull] this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
