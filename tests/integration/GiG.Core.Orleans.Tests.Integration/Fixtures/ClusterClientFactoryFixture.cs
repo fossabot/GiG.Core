@@ -58,8 +58,6 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
             var clientHost = Host.CreateDefaultBuilder()
                 .ConfigureServices((ctx, services) =>
                 {
-                    services.Configure<ConsulOptions>(ctx.Configuration);
-
                     services.AddHttpClient();
 
                     OrleansClusterClientFactoryBuilder.CreateClusterClientFactoryBuilder()
