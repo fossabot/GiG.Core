@@ -11,12 +11,12 @@ release-notes
 .gitignore
 
 # Visual Studio
-*.csproj.user
-*.orig
-*.suo
-*.user
-.vs/
-.vscode
+**/*.vs
+**/*.vscode
+**/*.*proj.user
+**/*.orig
+**/*.suo
+**/*.user
 
 # Visual Studio code coverage results
 *.coverage
@@ -53,3 +53,4 @@ msbuild.log
 **/DS_Store
 
 **/BenchmarkDotNet.Artifacts/
+**/.toolstarget
