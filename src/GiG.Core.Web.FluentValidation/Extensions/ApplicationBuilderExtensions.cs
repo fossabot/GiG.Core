@@ -6,15 +6,15 @@ using System;
 namespace GiG.Core.Web.FluentValidation.Extensions
 {
     /// <summary>
-    /// Application Builder extensions.
+    /// Application Builder Extensions.
     /// </summary>
     public static class ApplicationBuilderExtensions
     {
         /// <summary>
         /// Adds the Fluent Validation Exception Middleware.
         /// </summary>
-        /// <param name="builder">Application builder.</param>
-        /// <returns>Application builder.</returns>
+        /// <param name="builder">The <see cref="IApplicationBuilder" />.</param>
+        /// <returns>The <see cref="IApplicationBuilder" />.</returns>
         public static IApplicationBuilder UseFluentValidationMiddleware([NotNull] this IApplicationBuilder builder)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));

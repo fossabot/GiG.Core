@@ -12,10 +12,10 @@ namespace GiG.Core.Web.FluentValidation.Extensions
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Configures the <see cref="ApiBehaviorOptions" />.
+        /// Registers a configuration instance which <see cref="ApiBehaviorOptions" /> will bind against.
         /// </summary>
-        /// <param name="services">The <see cref="IServiceCollection" /> to add the services to.</param>
-        /// <returns>The <see cref="IServiceCollection" /> so that additional calls can be chained.</returns>
+        /// <param name="services">The <see cref="IServiceCollection" />.</param>
+        /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection ConfigureApiBehaviorOptions([NotNull] this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));

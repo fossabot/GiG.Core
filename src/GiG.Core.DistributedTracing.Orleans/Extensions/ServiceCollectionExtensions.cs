@@ -11,7 +11,7 @@ namespace GiG.Core.DistributedTracing.Orleans.Extensions
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Adds required services to support Correlation Id functionality in Orleans.
+        /// Adds required services to support the <see cref="CorrelationContextAccessor"/> functionality in Orleans.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection"/>.</param>
         /// <returns>The <see cref="IServiceCollection"/>.</returns>

@@ -8,9 +8,9 @@ namespace GiG.Core.Logging.Abstractions
     public interface ILoggingSinkProvider
     {
         /// <summary>
-        /// Register sink provider.
+        /// Register Sink provider.
         /// </summary>
-        /// <param name="sinkConfiguration">Sink configuration.</param>
+        /// <param name="sinkConfiguration">The <see cref="LoggerSinkConfiguration"/>.</param>
         void RegisterSink(LoggerSinkConfiguration sinkConfiguration);
     }
 }

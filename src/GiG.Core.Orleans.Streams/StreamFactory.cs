@@ -7,7 +7,7 @@ namespace GiG.Core.Orleans.Streams
 {
 
     /// <summary>
-    /// Factory for Orleans Stream 
+    /// Stream Factory for Orleans
     /// </summary>
     public class StreamFactory : IStreamFactory
     {

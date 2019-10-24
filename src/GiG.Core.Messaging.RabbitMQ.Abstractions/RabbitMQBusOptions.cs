@@ -6,17 +6,17 @@
     public class RabbitMQBusOptions
     {
         /// <summary>
-        /// RabbitMQ default section name.
+        /// The configuration default section name.
         /// </summary>
         public const string DefaultSectionName = "RabbitMQ";
 
         /// <summary>
-        /// The RabbitMQ host to connect to (should be a valid hostname).
+        /// The RabbitMQ host name to connect to.
         /// </summary>
         public string Host { get; set; }
 
         /// <summary>
-        /// The RabbitMQ port to connect.
+        /// The RabbitMQ port to connect to.
         /// </summary>
         public int Port { get; set; }
 
@@ -31,7 +31,7 @@
         public string Username { get; set; }
 
         /// <summary>
-        /// The password for connection to the host.
+        /// The password for connecting to the host.
         /// </summary>
         public string Password { get; set; }
 
@@ -41,12 +41,12 @@
         public ushort Heartbeat { get; set; }
 
         /// <summary>
-        /// Indicates whether SSL is enabled or not.
+        /// A value to indicate if SSL is enabled or not.
         /// </summary>
         public bool SslEnabled { get; set; }
         
         /// <summary>
-        /// The name of the connection.
+        /// The connection name.
         /// </summary>
         public string ConnectionName { get; set; }
     }
