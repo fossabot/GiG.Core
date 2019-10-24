@@ -7,17 +7,17 @@ using System;
 namespace GiG.Core.Web.Hosting.Extensions
 {
     /// <summary>
-    /// Application Builder extensions.
+    /// Application Builder Extensions.
     /// </summary>
     public static class ApplicationBuilderExtensions
     {
         private const string DefaultPathBaseSectionName = "PATH_BASE";
      
         /// <summary>
-        /// Configure the Path Base for the application using config key "PATH_BASE".
+        /// Configures the Path Base for the application using the config key "PATH_BASE".
         /// </summary>
-        /// <param name="builder">The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</param>
-        /// <returns>The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</returns>
+        /// <param name="builder">The <see cref="IApplicationBuilder" />.</param>
+        /// <returns>The <see cref="IApplicationBuilder" />.</returns>
         public static IApplicationBuilder UsePathBaseFromConfiguration([NotNull] this IApplicationBuilder builder)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
@@ -26,11 +26,11 @@ namespace GiG.Core.Web.Hosting.Extensions
         }
 
         /// <summary>
-        /// Configure the Path Base for the application using configSectionName parameter.
+        /// Configures the Path Base for the application using configSectionName parameter.
         /// </summary>
-        /// <param name="builder">The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</param>
-        /// <param name="configSectionName">Config key name for the path base.</param>
-        /// <returns>The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</returns>
+        /// <param name="builder">The <see cref="IApplicationBuilder" />.</param>
+        /// <param name="configSectionName">The Config section name.</param>
+        /// <returns>The <see cref="IApplicationBuilder" />.</returns>
         public static IApplicationBuilder UsePathBaseFromConfiguration([NotNull] this IApplicationBuilder builder, [NotNull] string configSectionName)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
@@ -47,6 +47,5 @@ namespace GiG.Core.Web.Hosting.Extensions
 
             return builder;
         }
-        
     }
 }

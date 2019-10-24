@@ -14,11 +14,11 @@ namespace GiG.Core.Orleans.Clustering.Consul.Extensions
         private const string ProviderName = "Consul";
         
         /// <summary>
-        /// Configures Consul in Orleans.
+        /// Configures Consul as a Membershop Provider for an Orleans Client.
         /// </summary>
-        /// <param name="builder">Membership Provider builder of type <see cref="IClientBuilder" />.</param>
-        /// <param name="configuration">The <see cref="IConfiguration" /> which contains Consul options.</param>
-        /// <returns>Returns the MembershipProviderBuilder of type<see cref="IClientBuilder" />.</returns>
+        /// <param name="builder">The <see cref="IClientBuilder" />.</param>
+        /// <param name="configuration">The <see cref="IConfiguration" />.</param>
+        /// <returns>The<see cref="IClientBuilder" />.</returns>
         public static MembershipProviderBuilder<IClientBuilder> ConfigureConsulClustering([NotNull] this MembershipProviderBuilder<IClientBuilder> builder, [NotNull] IConfiguration configuration)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
@@ -30,11 +30,11 @@ namespace GiG.Core.Orleans.Clustering.Consul.Extensions
         }
 
         /// <summary>
-        /// Configures Consul in Orleans.
+        /// Configures Consul as a Membershop Provider for an Orleans Client.
         /// </summary>
-        /// <param name="builder">Membership Provider builder of type <see cref="IClientBuilder" />.</param>
-        /// <param name="configurationSection">The <see cref="IConfigurationSection" /> which contains Consul options.</param>
-        /// <returns>Returns the MembershipProviderBuilder of type<see cref="IClientBuilder" />.</returns>
+        /// <param name="builder">The <see cref="IClientBuilder" />.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
+        /// <returns>The <see cref="IClientBuilder" />.</returns>
         public static MembershipProviderBuilder<IClientBuilder> ConfigureConsulClustering([NotNull] this MembershipProviderBuilder<IClientBuilder> builder, [NotNull] IConfigurationSection configurationSection)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
@@ -44,13 +44,13 @@ namespace GiG.Core.Orleans.Clustering.Consul.Extensions
 
             return builder;
         }
-        
+
         /// <summary>
-        /// Configures Consul in Silo.
+        /// Configures Consul as a Membershop Provider for an Orleans Silo.
         /// </summary>
-        /// <param name="builder">Membership Provider builder of type <see cref="ISiloBuilder" />.</param>
-        /// <param name="configuration">The <see cref="IConfiguration" /> which contains Consul options.</param>
-        /// <returns>Returns the MembershipProviderBuilder of type <see cref="ISiloBuilder" />.</returns>
+        /// <param name="builder">The <see cref="ISiloBuilder" />.</param>
+        /// <param name="configuration">The <see cref="IConfiguration" />.</param>
+        /// <returns>The <see cref="ISiloBuilder" />.</returns>
         public static MembershipProviderBuilder<ISiloBuilder> ConfigureConsulClustering([NotNull] this MembershipProviderBuilder<ISiloBuilder> builder, [NotNull] IConfiguration configuration)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
@@ -62,11 +62,11 @@ namespace GiG.Core.Orleans.Clustering.Consul.Extensions
         }
 
         /// <summary>
-        /// Configures Consul in Orleans.
+        /// Configures Consul as a Membershop Provider for an Orleans Silo.
         /// </summary>
-        /// <param name="builder">Membership Provider builder of type <see cref="ISiloBuilder" />.</param>
-        /// <param name="configurationSection">The <see cref="IConfigurationSection" /> which contains Consul options.</param>
-        /// <returns>Returns the MembershipProviderBuilder of type <see cref="ISiloBuilder" />.</returns>
+        /// <param name="builder">The <see cref="ISiloBuilder" />.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
+        /// <returns>The <see cref="ISiloBuilder" />.</returns>
         public static MembershipProviderBuilder<ISiloBuilder> ConfigureConsulClustering([NotNull] this MembershipProviderBuilder<ISiloBuilder> builder, [NotNull] IConfigurationSection configurationSection)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));

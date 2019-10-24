@@ -258,6 +258,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Streams.Ab
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Streams", "src\GiG.Core.Orleans.Streams\GiG.Core.Orleans.Streams.csproj", "{78BBCC65-C75D-4C4E-91E0-AA9CB8C7F451}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Web.Docs.Abstractions", "src\GiG.Core.Web.Docs.Abstractions\GiG.Core.Web.Docs.Abstractions.csproj", "{ECF4320C-0B41-4D74-99AD-ACDFE69EC230}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -523,6 +525,10 @@ Global
 		{78BBCC65-C75D-4C4E-91E0-AA9CB8C7F451}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78BBCC65-C75D-4C4E-91E0-AA9CB8C7F451}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78BBCC65-C75D-4C4E-91E0-AA9CB8C7F451}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECF4320C-0B41-4D74-99AD-ACDFE69EC230}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECF4320C-0B41-4D74-99AD-ACDFE69EC230}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECF4320C-0B41-4D74-99AD-ACDFE69EC230}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECF4320C-0B41-4D74-99AD-ACDFE69EC230}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -624,6 +630,7 @@ Global
 		{33A1C5DA-A108-47CC-918B-A612C8212314} = {8A64AE64-5734-41A3-9D3A-B6F2B0248ECE}
 		{79BCEF61-78B3-478D-8139-E38A3EB98FB8} = {1577B553-2909-4844-A422-8782E2AA0F83}
 		{78BBCC65-C75D-4C4E-91E0-AA9CB8C7F451} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
+		{ECF4320C-0B41-4D74-99AD-ACDFE69EC230} = {D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}

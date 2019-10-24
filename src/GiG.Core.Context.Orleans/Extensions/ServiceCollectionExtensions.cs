@@ -8,14 +8,14 @@ using System;
 namespace GiG.Core.Context.Orleans.Extensions
 {
     /// <summary>
-    /// Service Collection extensions.
+    /// Service Collection Extensions.
     /// </summary>
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Adds required services for the Request Context Accessor functionality in Orleans.
+        /// Adds required services to support the <see cref="RequestContextAccessor"/> functionality in Orleans.
         /// </summary>
-        /// <param name="services">The <see cref="IServiceCollection"/> to add services to.</param>
+        /// <param name="services">The <see cref="IServiceCollection"/>.</param>
         /// <returns>The <see cref="IServiceCollection"/>.</returns>
         public static IServiceCollection AddRequestContextAccessor([NotNull] this IServiceCollection services)
         {

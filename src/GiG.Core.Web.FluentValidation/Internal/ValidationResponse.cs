@@ -11,18 +11,17 @@ namespace GiG.Core.Web.FluentValidation.Internal
     internal class ValidationResponse
     {
         /// <summary>
-        /// Title.
-        /// This is the default Fluent Validation title.
+        /// The title.
         /// </summary>
         public string Title { get; set; } = "One or more validation errors occurred.";
 
         /// <summary>
-        /// Http Status.
+        /// The Http Status.
         /// </summary>
         public int Status { get; set; } = (int)HttpStatusCode.BadRequest;
 
         /// <summary>
-        /// Error Messages.
+        /// The Error Messages.
         /// </summary>
         public IDictionary<string, List<string>> Errors { get; set; }
     }

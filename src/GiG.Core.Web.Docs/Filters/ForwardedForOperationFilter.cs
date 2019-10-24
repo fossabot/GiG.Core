@@ -28,8 +28,7 @@ namespace GiG.Core.Web.Docs.Filters
 
             operation.Parameters.Add(new OpenApiParameter
             {
-                Name = _forwardedHeadersOptions?.ForwardedForHeaderName ??
-                       ForwardedHeadersDefaults.XForwardedForHeaderName,
+                Name = _forwardedHeadersOptions?.ForwardedForHeaderName ?? ForwardedHeadersDefaults.XForwardedForHeaderName,
                 Description = "Remote IP Address",
                 In = ParameterLocation.Header,
                 Required = false,

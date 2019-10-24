@@ -1,9 +1,7 @@
-﻿using GiG.Core.Orleans.Sample.Contracts;
-using GiG.Core.Orleans.Sample.Contracts.Messages;
+﻿using GiG.Core.Orleans.Sample.Contracts.Messages;
 using GiG.Core.Orleans.Sample.Web.Contracts;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
-using Orleans;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -15,7 +13,7 @@ namespace GiG.Core.Orleans.Sample.Web.Controllers
     {
         private const decimal MinimumAmount = 10;
 
-        private IPublishEndpoint _publishEndpoint;
+        private readonly IPublishEndpoint _publishEndpoint;
         private readonly IPlayerInformationAccessor _playerInformationAccessor;
 
         public PaymentsController(IPublishEndpoint publishEndpoint, IPlayerInformationAccessor playerInformationAccessor)

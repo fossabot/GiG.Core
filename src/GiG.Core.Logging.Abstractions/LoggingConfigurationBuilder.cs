@@ -13,17 +13,17 @@ namespace GiG.Core.Logging.Abstractions
     public class LoggingConfigurationBuilder
     {
         /// <summary>
-        /// Sink Configuration section.
+        /// The Sink configuration section.
         /// </summary>
         public IConfigurationSection SinkConfiguration { get; }
 
         /// <summary>
-        /// Logger Configuration.
+        /// The Logger configuration.
         /// </summary>
         public LoggerConfiguration LoggerConfiguration { get; }
 
         /// <summary>
-        /// Service Collection.
+        /// The Service Collection.
         /// </summary>
         public IServiceCollection Services { get; }
 
@@ -32,12 +32,10 @@ namespace GiG.Core.Logging.Abstractions
         /// <summary>
         /// Logging Configuration builder.
         /// </summary>
-        /// <param name="services">Service collection.</param>
-        /// <param name="loggerConfiguration">Logger Configuration.</param>
-        /// <param name="configurationSection">Logging Configuration section.</param>
-        public LoggingConfigurationBuilder([NotNull] IServiceCollection services,
-            [NotNull] LoggerConfiguration loggerConfiguration,
-            [NotNull] IConfigurationSection configurationSection)
+        /// <param name="services">The <see cref="IServiceCollection"/>.</param>
+        /// <param name="loggerConfiguration">The <see cref="LoggerConfiguration"/>.</param>
+        /// <param name="configurationSection">The Logging Configuration section.</param>
+        public LoggingConfigurationBuilder([NotNull] IServiceCollection services, [NotNull] LoggerConfiguration loggerConfiguration, [NotNull] IConfigurationSection configurationSection)
         {
             _loggingOptions = configurationSection.Get<LoggingOptions>();
             if (_loggingOptions == null)
@@ -58,21 +56,19 @@ namespace GiG.Core.Logging.Abstractions
         }
 
         /// <summary>
-        /// Register sink provider.
+        /// Register Sink provider.
         /// </summary>
-        /// <param name="name">Sink provider name.</param>
+        /// <param name="name">The Sink provider name.</param>
         /// <param name="sinkProvider">Logging sink provider instance.</param>
-        /// <exception cref="ConfigurationErrorsException">Throws application exception when Sink providers are not configured.</exception>
-        public LoggingConfigurationBuilder RegisterSink([NotNull] string name,
-            [NotNull] ILoggingSinkProvider sinkProvider)
+        /// <exception cref="ConfigurationErrorsException">Throws a <see cref="ConfigurationErrorsException"/> when Sink providers are not configured.</exception>
+        public LoggingConfigurationBuilder RegisterSink([NotNull] string name, [NotNull] ILoggingSinkProvider sinkProvider)
         {
             if (string.IsNullOrEmpty(name)) throw new ArgumentException(nameof(name));
             if (sinkProvider == null) throw new ArgumentNullException(nameof(sinkProvider));
             
             if (_loggingOptions.Sinks == null)
             {
-                throw new ConfigurationErrorsException(
-                    "No sinks were configured.  Please add at least one sink provider");
+                throw new ConfigurationErrorsException("No sinks were configured.  Please add at least one sink provider");
             }
 
             if (!_loggingOptions.Sinks.TryGetValue(name, out var sinkOptions))

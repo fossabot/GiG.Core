@@ -13,12 +13,11 @@ namespace GiG.Core.Logging.Enrichers.Context.Extensions
     public static class LoggingConfigurationBuilderExtensions
     {
         /// <summary>
-        /// Enrich log events with a Request Context info.
+        /// Enrich Log Events with a Request Context.
         /// </summary>
-        /// <param name="builder">The delegate for configuring the <see cref="LoggingConfigurationBuilder" />.</param>
-        /// <returns><see cref="LoggingConfigurationBuilder" /> object allowing method chaining.</returns>
-        public static LoggingConfigurationBuilder EnrichWithRequestContext(
-            [NotNull] this LoggingConfigurationBuilder builder)
+        /// <param name="builder">The <see cref="LoggingConfigurationBuilder" />.</param>
+        /// <returns>The <see cref="LoggingConfigurationBuilder" />.</returns>
+        public static LoggingConfigurationBuilder EnrichWithRequestContext([NotNull] this LoggingConfigurationBuilder builder)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
 

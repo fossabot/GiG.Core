@@ -4,19 +4,19 @@ using System.Net.Http;
 namespace GiG.Core.Http
 {
     /// <summary>
-    /// Factory for HttpClient.
+    /// Factory Class for HttpClient.
     /// </summary>
     public static class HttpClientFactory
     {
         /// <summary>
-        /// Creates a new <see cref="HttpClient"/> with predefined actions.
+        /// Creates an instance of <see cref="HttpClient"/>.
         /// </summary>
-        /// <param name="configureClient">A delegate that is used to configure an <see cref="HttpClientBuilder"/>.</param>
-        /// <returns>An <see cref="HttpClient"/> configured with predefined actions.</returns>
-        public static HttpClient CreateClient(Action<HttpClientBuilder> configureClient = null)
+        /// <param name="configureHttpClientBuilder">A delegate that is used to configure an <see cref="HttpClientBuilder"/>.</param>
+        /// <returns>An <see cref="HttpClient"/>.</returns>
+        public static HttpClient CreateClient(Action<HttpClientBuilder> configureHttpClientBuilder = null)
         {
             var builder = new HttpClientBuilder();
-            configureClient?.Invoke(builder);
+            configureHttpClientBuilder?.Invoke(builder);
 
             var client = builder.DelegatingHandler != null
                 ? new HttpClient(builder.DelegatingHandler)

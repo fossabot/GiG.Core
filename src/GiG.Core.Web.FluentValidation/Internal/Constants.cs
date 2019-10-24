@@ -1,7 +1,7 @@
 ﻿namespace GiG.Core.Web.FluentValidation.Internal
 {
     /// <summary>
-    /// Fluent Validation Constants
+    /// Constants.
     /// </summary>
     internal static class Constants
     {

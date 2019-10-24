@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace GiG.Core.Orleans.Streams
 {
     /// <summary>
-    /// Stream to publish event messages over Orleans Streams from Grains.
+    /// Stream to publish Event messages over Orleans Streams from Grains.
     /// </summary>
     /// <typeparam name="TMessage">Stream Message.</typeparam>
     public class Stream<TMessage> : IStream<TMessage>
@@ -23,11 +23,8 @@ namespace GiG.Core.Orleans.Streams
         /// <param name="correlationContextAccessor">The <see cref="ICorrelationContextAccessor" /> to use to add correlationId within RequestContext.</param>
         public Stream(IAsyncStream<TMessage> asyncStream, ICorrelationContextAccessor correlationContextAccessor)
         {
-            if (correlationContextAccessor == null) throw new ArgumentNullException(nameof(correlationContextAccessor));
-            if (asyncStream == null) throw new ArgumentNullException(nameof(asyncStream));
-            
-            _asyncStream = asyncStream;
-            _correlationContextAccessor = correlationContextAccessor;
+            _asyncStream = asyncStream ?? throw new ArgumentNullException(nameof(asyncStream));
+            _correlationContextAccessor = correlationContextAccessor ?? throw new ArgumentNullException(nameof(correlationContextAccessor));
         }
 
         /// <summary>

@@ -1,38 +1,32 @@
-﻿namespace GiG.Core.Orleans.Clustering.Kubernetes.Configurations
+﻿namespace GiG.Core.Orleans.Clustering.Kubernetes
 {
     /// <summary>
-    /// Orleans Kubernetes Settings.
+    /// Kubernetes Options.
     /// </summary>
     public abstract class KubernetesOptions
     {
         /// <summary>
-        /// Default configuration section name.
+        /// The configuration default section name.
         /// </summary>
-        /// <remarks>
-        /// The default value is <c>"Orleans:MembershipProvider"</c>
-        /// </remarks>
         public const string DefaultSectionName = MembershipProviderOptions.DefaultSectionName;
 
         /// <summary>
-        /// Custom Resource Definition Group name.
+        /// The Custom Resource Definition Group name.
         /// </summary>
-        /// <remarks>
-        /// The default value is <c>"orleans.dot.net"</c>
-        /// </remarks>
         public string Group { get; set; } = "orleans.dot.net";
 
         /// <summary>
-        /// K8s API Endpoint Base URL.
+        /// The K8s API Endpoint Base Url.
         /// </summary>
         public string ApiEndpoint { get; set; }
 
         /// <summary>
-        /// Api Token.
+        /// The Api Token.
         /// </summary>
         public string ApiToken { get; set; }
 
         /// <summary>
-        /// Certificate Data.
+        /// The Certificate Data.
         /// </summary>
         public string CertificateData { get; set; }
     }
