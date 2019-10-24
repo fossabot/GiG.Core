@@ -8,15 +8,15 @@ using System;
 namespace GiG.Core.Context.Web.Extensions
 {
     /// <summary>
-    /// Service Collection extensions.
+    /// Service Collection Extensions.
     /// </summary>
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Adds required services for the Request Context Accessor functionality.
+        /// Adds required services to support the <see cref="RequestContextAccessor" /> functionality.
         /// </summary>
-        /// <param name="services">The <see cref="IServiceCollection" /> to add the services to.</param>        
-        /// <returns>The <see cref="IServiceCollection" /> so that additional calls can be chained.</returns>
+        /// <param name="services">The <see cref="IServiceCollection" />.</param>        
+        /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection AddRequestContextAccessor([NotNull] this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));

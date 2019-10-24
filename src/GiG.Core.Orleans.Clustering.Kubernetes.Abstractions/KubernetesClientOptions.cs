@@ -1,7 +1,7 @@
-﻿namespace GiG.Core.Orleans.Clustering.Kubernetes.Configurations
+﻿namespace GiG.Core.Orleans.Clustering.Kubernetes.Abstractions
 {
     /// <summary>
-    /// Orleans Kubernetes Settings.
+    /// Kubernetes Client Options.
     /// </summary>
     public class KubernetesClientOptions : KubernetesOptions
     {

@@ -1,20 +1,28 @@
 ﻿using JetBrains.Annotations;
 using System;
 
-namespace GiG.Core.Orleans.Clustering
+namespace GiG.Core.Orleans.Clustering.Abstractions
 {
     /// <summary>
-    /// Membership provider builder which encapsulates an orleans builder support provider's registrations.
+    /// Membership Provider Builder which encapsulates an Orleans Builder to support Membership Providers' Registrations.
     /// </summary>
-    /// <typeparam name="T"> Generic to represent host interfaces used for orleans start up.</typeparam>
+    /// <typeparam name="T"> Generic to represent host interfaces used for Orleans start up.</typeparam>
     public class MembershipProviderBuilder<T>
     {
         private readonly T _builder;
         private readonly string _providerName;
 
-        internal bool IsRegistered { get; private set; }
+        /// <summary>
+        /// A value to indicate if the Membership Provider is registered or not.
+        /// </summary>
+        public bool IsRegistered { get; private set; }
 
-        internal MembershipProviderBuilder([NotNull] T builder, [NotNull] string providerName)
+        /// <summary>
+        /// Constructor. 
+        /// </summary>
+        /// <param name="builder">Generic Provider</param>
+        /// <param name="providerName">The Membership Provider's name.</param>
+        public MembershipProviderBuilder([NotNull] T builder, [NotNull] string providerName)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             _providerName = providerName ?? throw new ArgumentNullException(nameof(providerName));
@@ -24,8 +32,8 @@ namespace GiG.Core.Orleans.Clustering
         /// <summary>
         /// Registers Membership Provider. 
         /// </summary>
-        /// <param name="providerName"> Membership provider's name.</param>
-        /// <param name="configureProvider">Action to support providers' builder extensions</param>
+        /// <param name="providerName">The Membership Provider's name.</param>
+        /// <param name="configureProvider">Action to support Membership Providers' builder extensions</param>
         public void RegisterProvider([NotNull] string providerName, [NotNull] Action<T> configureProvider)
         {
             if (providerName == null) throw new ArgumentNullException(nameof(providerName));

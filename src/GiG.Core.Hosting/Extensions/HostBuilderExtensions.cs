@@ -5,7 +5,7 @@ using System;
 namespace GiG.Core.Hosting.Extensions
 {
     /// <summary>
-    /// Host builder extensions.
+    /// Host Builder Extensions.
     /// </summary>
     public static class HostBuilderExtensions
     {

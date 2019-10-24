@@ -14,7 +14,7 @@ namespace GiG.Core.Orleans.Sample.Web.Controllers
     [Route("[controller]")]
     public class PaymentsController : ControllerBase
     {
-        private IPublishEndpoint _publishEndpoint;
+        private readonly IPublishEndpoint _publishEndpoint;
         private readonly IPlayerInformationAccessor _playerInformationAccessor;
         private readonly IClusterClient _clusterClient;
 

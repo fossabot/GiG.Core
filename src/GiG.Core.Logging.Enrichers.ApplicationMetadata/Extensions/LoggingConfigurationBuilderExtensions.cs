@@ -5,12 +5,12 @@ using System;
 namespace GiG.Core.Logging.Enrichers.ApplicationMetadata.Extensions
 {
     /// <summary>
-    /// Logging Configuration Builder extensions.
+    /// Logging Configuration Builder Extensions.
     /// </summary>
     public static class LoggingConfigurationBuilderExtensions
     {
         /// <summary>
-        /// Enrich log events with Application Metadata.
+        /// Enrich Log Events with Application Metadata.
         /// </summary>
         /// <param name="builder">The <see cref="LoggingConfigurationBuilder"/>.</param>
         /// <returns>The <see cref="LoggingConfigurationBuilder" />.</returns>

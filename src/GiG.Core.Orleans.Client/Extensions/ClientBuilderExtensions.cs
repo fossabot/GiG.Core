@@ -17,10 +17,10 @@ namespace GiG.Core.Orleans.Client.Extensions
         private const string ClusterDefaultSectionName = "Orleans:Cluster";
 
         /// <summary>
-        /// Builds and Connect the client.
+        /// Builds and connects the client.
         /// </summary>
         /// <param name="builder">The <see cref="IClientBuilder"/>.</param>
-        /// <returns>The <see cref="IClusterClient"/> so that additional calls can be chained.</returns>
+        /// <returns>The <see cref="IClusterClient"/>.</returns>
         public static IClusterClient BuildAndConnect([NotNull] this IClientBuilder builder)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
@@ -37,11 +37,11 @@ namespace GiG.Core.Orleans.Client.Extensions
         }
 
         /// <summary>
-        /// Sets the Cluster settings using an <see cref="IConfigurationSection"/>.
+        /// Configures the Cluster using an <see cref="IConfigurationSection"/>.
         /// </summary>
         /// <param name="builder">The <see cref="IClientBuilder"/>.</param>
-        /// <param name="configurationSection">An <see cref="IConfigurationSection"/> to configure the provided <see cref="IClientBuilder"/>.</param>
-        /// <returns>Returns the <see cref="IClientBuilder"/> so that more methods can be chained.</returns>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/>.</param>
+        /// <returns>The <see cref="IClientBuilder"/>.</returns>
         public static IClientBuilder ConfigureCluster([NotNull] this IClientBuilder builder, [NotNull] IConfigurationSection configurationSection)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
@@ -51,11 +51,11 @@ namespace GiG.Core.Orleans.Client.Extensions
         }
 
         /// <summary>
-        /// Sets the Cluster settings using an <see cref="IConfiguration"/>.
+        /// Configures the Cluster using an <see cref="IConfiguration"/>.
         /// </summary>
         /// <param name="builder">The <see cref="IClientBuilder"/>.</param>
-        /// <param name="configuration">An <see cref="IConfiguration"/> to configure the provided <see cref="IClientBuilder"/>.</param>
-        /// <returns>Returns the <see cref="IClientBuilder"/> so that more methods can be chained.</returns>
+        /// <param name="configuration">The <see cref="IConfiguration"/>.</param>
+        /// <returns>The <see cref="IClientBuilder"/>.</returns>
         public static IClientBuilder ConfigureCluster([NotNull] this IClientBuilder builder, [NotNull] IConfiguration configuration)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
@@ -64,8 +64,7 @@ namespace GiG.Core.Orleans.Client.Extensions
             var configurationSection = configuration.GetSection(ClusterDefaultSectionName);
             if (configurationSection == null)
             {
-                throw new ConfigurationErrorsException(
-                    $"Configuration section '{ClusterDefaultSectionName}' does not exist");
+                throw new ConfigurationErrorsException($"Configuration section '{ClusterDefaultSectionName}' does not exist");
             }
 
             builder.Configure<ClusterOptions>(configurationSection);
@@ -74,11 +73,11 @@ namespace GiG.Core.Orleans.Client.Extensions
         }
 
         /// <summary>
-        /// Adds Assemblies to Cluster Client Builder with references.
+        /// Adds Assemblies to the Cluster Client Builder.
         /// </summary>
         /// <param name="builder">The <see cref="IClientBuilder"/>.</param>
-        /// <param name="assemblies">The <see cref="Assembly"/> array which will be added to the cluster client.</param>
-        /// <returns>Returns the <see cref="IClientBuilder"/> so that more methods can be chained.</returns>
+        /// <param name="assemblies">The <see cref="Assembly"/> array which will be added to the Cluster Client.</param>
+        /// <returns>The <see cref="IClientBuilder"/>.</returns>
         public static IClientBuilder ConfigureAssemblies([NotNull] this IClientBuilder builder, [NotNull] params Assembly[] assemblies)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
@@ -97,8 +96,8 @@ namespace GiG.Core.Orleans.Client.Extensions
         /// Adds Assemblies to Cluster Client Builder with references.
         /// </summary>
         /// <param name="builder">The <see cref="IClientBuilder"/>.</param>
-        /// <param name="types">The <see cref="Type"/> array which will be added to the cluster client.</param>
-        /// <returns>Returns the <see cref="IClientBuilder"/> so that more methods can be chained.</returns>
+        /// <param name="types">The <see cref="Type"/> array which will be added to the Cluster Client.</param>
+        /// <returns>The <see cref="IClientBuilder"/>.</returns>
         public static IClientBuilder AddAssemblies([NotNull] this IClientBuilder builder, [NotNull] params Type[] types)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));

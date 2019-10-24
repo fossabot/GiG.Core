@@ -16,9 +16,9 @@ namespace GiG.Core.Data.Migration.Evolve.Extensions
         /// <summary>
         /// Adds the <see cref="DatabaseMigration" /> to the container.
         /// </summary>
-        /// <param name="services">The <see cref=IServiceCollection" /> to add the services to.</param>
+        /// <param name="services">The <see cref="IServiceCollection" />.</param>
         /// <param name="dbConnection">The <see cref="IDbConnection" /> to be used for the Database Migration.</param>
-        /// <returns>The <see cref="MigrationOptionsBuilder" /> to be used to build the Migration Options.</returns>
+        /// <returns>The <see cref="MigrationOptionsBuilder" />.</returns>
         public static MigrationOptionsBuilder AddDbMigration([NotNull] this IServiceCollection services, [NotNull] IDbConnection dbConnection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));

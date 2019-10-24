@@ -6,12 +6,12 @@
     public class InfoManagementOptions
     {
         /// <summary>
-        /// Info Management default section name.
+        /// The configuration default section name.
         /// </summary>
         public const string DefaultSectionName = "InfoManagement";
 
         /// <summary>
-        /// Indicates whether InfoManagement is enabled or not.
+        /// A value to indicate whether InfoManagement is enabled or not.
         /// </summary>
         public bool IsEnabled { get; set; } = true;
 

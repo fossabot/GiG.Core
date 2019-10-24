@@ -12,10 +12,10 @@ namespace GiG.Core.Web.Hosting.Extensions
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Configure Forward Headers.
+        /// Registers a configuration instance which <see cref="ForwardedHeadersOptions" /> will bind against.
         /// </summary>
-        /// <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" /> to add the services to.</param>
-        /// <returns>The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" /> so that additional calls can be chained.</returns>
+        /// <param name="services">The <see cref="IServiceCollection" />.</param>
+        /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection ConfigureForwardedHeaders([NotNull] this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
