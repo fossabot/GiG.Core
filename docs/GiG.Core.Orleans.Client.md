@@ -28,6 +28,85 @@ The below table outlines the valid Configurations used to override the [ClusterO
 | ClusterId          | String | Yes      | `dev`         |
 | ServiceId          | String | Yes      | `dev`         |
 
+## Cluster Client Factory
+
+The [OrleansClusterClientFactory](..\src\GiG.Core.Orleans.Client\OrleansClusterClientFactory.cs) can be used to register multiple named Orleans Cluster Clients.
+
+The below code creates and sets up and registers an [OrleansClusterClientFactory](..\src\GiG.Core.Orleans.Client\OrleansClusterClientFactory.cs).
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    OrleansClusterClientFactoryBuilder.CreateClusterClientFactoryBuilder()
+        .AddClusterClient("ClusterA", () =>
+        {
+            return services.CreateClusterClient((builder) =>
+            {
+                builder.ConfigureCluster(ctx.Configuration.GetSection("Orleans:ClusterA"));
+                builder.ConfigureConsulClustering(ctx.Configuration);
+            });
+        })
+        .AddClusterClient("ClusterB", () => {
+            return services.CreateClusterClient((builder) =>
+            {
+                builder.ConfigureCluster(ctx.Configuration.GetSection("Orleans:ClusterB"));
+                builder.ConfigureConsulClustering(ctx.Configuration);
+            });
+        })
+        .RegisterFactory(services);
+}
+```
+
+The below code is an example of how the [OrleansClusterClientFactory](..\src\GiG.Core.Orleans.Client\OrleansClusterClientFactory.cs) can be used.
+
+```csharp
+private readonly IOrleansClusterClientFactory _clusterClientFactory;
+
+public async Task<string> PingAsync(string clusterName, string graindId)
+{
+    var clusterClient = _clusterClientFactory.GetClusterClient(clusterName);
+    var grain = clusterClient.GetGrain<IEchoGrain>(grainId); 
+
+    return await grain.Ping();
+}        
+
+```
+
+
+### Configuration
+
+If you use the below extension method to configure the Cluster Client, the Builder would expect the Cluster Configuration section to be `Orleans:Cluster:{ClusterName}`.
+
+```csharp
+services.CreateClusterClient((builder) =>
+{
+    builder.ConfigureCluster("ClusterA", _configuration);
+    builder.ConfigureConsulClustering(_configuration);
+});
+
+```
+
+Sample Configuration:
+
+
+```json
+"Orleans": {
+    "Cluster": {
+        "ClusterA": {
+            "ClusterId": "dev1",
+            "ServiceId": "sample1"
+        },
+        "ClusterB": {
+            "ClusterId": "dev2",
+            "ServiceId": "sample2"
+        }
+    }
+}
+```
+
+
+
+
 ## Correlation Id
 
 Add the below to your Startup class to add CorrelationId. 

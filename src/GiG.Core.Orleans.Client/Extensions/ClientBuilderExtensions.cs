@@ -97,7 +97,7 @@ namespace GiG.Core.Orleans.Client.Extensions
         }
 
         /// <summary>
-	/// Adds Assemblies to the Cluster Client Builder.
+	    /// Adds Assemblies to the Cluster Client Builder.
         /// </summary>
         /// <param name="builder">The <see cref="IClientBuilder"/>.</param>
         /// <param name="assemblies">The <see cref="Assembly"/> array which will be added to the cluster client.</param>
