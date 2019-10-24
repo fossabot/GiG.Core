@@ -64,8 +64,7 @@ namespace GiG.Core.Orleans.Client.Extensions
             var configurationSection = configuration.GetSection(ClusterDefaultSectionName);
             if (configurationSection == null)
             {
-                throw new ConfigurationErrorsException(
-                    $"Configuration section '{ClusterDefaultSectionName}' does not exist");
+                throw new ConfigurationErrorsException($"Configuration section '{ClusterDefaultSectionName}' does not exist");
             }
 
             builder.Configure<ClusterOptions>(configurationSection);
@@ -97,7 +96,7 @@ namespace GiG.Core.Orleans.Client.Extensions
         }
 
         /// <summary>
-	    /// Adds Assemblies to the Cluster Client Builder.
+        /// Adds Assemblies to the Cluster Client Builder.
         /// </summary>
         /// <param name="builder">The <see cref="IClientBuilder"/>.</param>
         /// <param name="assemblies">The <see cref="Assembly"/> array which will be added to the cluster client.</param>
@@ -115,7 +114,7 @@ namespace GiG.Core.Orleans.Client.Extensions
                 }
             });
         }
-        
+
         /// <summary>
         /// Adds Assemblies to Cluster Client Builder with references.
         /// </summary>

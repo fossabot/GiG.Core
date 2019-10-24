@@ -1,6 +1,6 @@
 using Bogus;
 using GiG.Core.Orleans.Client.Extensions;
-using GiG.Core.Orleans.Clustering.Consul;
+using GiG.Core.Orleans.Clustering.Consul.Abstractions;
 using GiG.Core.Orleans.Clustering.Consul.Extensions;
 using GiG.Core.Orleans.Clustering.Extensions;
 using GiG.Core.Orleans.Clustering.Kubernetes.Extensions;

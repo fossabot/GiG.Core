@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using GiG.Core.Orleans.Clustering.Kubernetes.Abstractions;
+using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Orleans.Clustering.Kubernetes;
 using Orleans.Hosting;

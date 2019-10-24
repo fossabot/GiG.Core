@@ -1,4 +1,4 @@
-﻿namespace GiG.Core.Orleans.Storage.Npgsql
+﻿namespace GiG.Core.Orleans.Storage.Npgsql.Abstractions
 {
     /// <summary>
     /// Npgsql Options for Grain Storage.
