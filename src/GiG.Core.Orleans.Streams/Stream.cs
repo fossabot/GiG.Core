@@ -23,11 +23,8 @@ namespace GiG.Core.Orleans.Streams
         /// <param name="correlationContextAccessor">The <see cref="ICorrelationContextAccessor" /> to use to add the Correlation ID within RequestContext.</param>
         public Stream(IAsyncStream<TMessage> asyncStream, ICorrelationContextAccessor correlationContextAccessor)
         {
-            if (correlationContextAccessor == null) throw new ArgumentNullException(nameof(correlationContextAccessor));
-            if (asyncStream == null) throw new ArgumentNullException(nameof(asyncStream));
-            
-            _asyncStream = asyncStream;
-            _correlationContextAccessor = correlationContextAccessor;
+            _asyncStream = asyncStream ?? throw new ArgumentNullException(nameof(asyncStream));
+            _correlationContextAccessor = correlationContextAccessor ?? throw new ArgumentNullException(nameof(correlationContextAccessor));
         }
 
         /// <summary>

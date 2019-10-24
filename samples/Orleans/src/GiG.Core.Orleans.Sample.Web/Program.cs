@@ -26,5 +26,6 @@ namespace GiG.Core.Orleans.Sample.Web
                 .ConfigureExternalConfiguration()
                 .ConfigureLogging()
                 .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
+      
     }
 }

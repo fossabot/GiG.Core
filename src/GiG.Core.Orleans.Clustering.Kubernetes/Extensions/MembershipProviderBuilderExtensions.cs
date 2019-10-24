@@ -67,7 +67,7 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
         /// </summary>
         /// <param name="builder">The <see cref="ISiloBuilder" />.</param>
         /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
-        /// <returnsThe <see cref="ISiloBuilder" />.</returns>
+        /// <returns>The <see cref="ISiloBuilder" />.</returns>
         public static MembershipProviderBuilder<ISiloBuilder> ConfigureKubernetesClustering([NotNull] this MembershipProviderBuilder<ISiloBuilder> builder, [NotNull] IConfigurationSection configurationSection)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
