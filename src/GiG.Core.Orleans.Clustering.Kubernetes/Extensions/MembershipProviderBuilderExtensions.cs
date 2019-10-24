@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using GiG.Core.Orleans.Clustering.Abstractions;
+using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Orleans;
 using Orleans.Hosting;

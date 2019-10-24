@@ -1,4 +1,4 @@
-﻿using GiG.Core.Orleans.Silo.Configurations;
+﻿using GiG.Core.Orleans.Silo.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Orleans;

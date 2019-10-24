@@ -7,7 +7,7 @@ namespace GiG.Core.Orleans.Streams
 {
 
     /// <summary>
-    /// Steam Factory for Orleans
+    /// Stream Factory for Orleans.
     /// </summary>
     public class StreamFactory : IStreamFactory
     {
@@ -23,9 +23,9 @@ namespace GiG.Core.Orleans.Streams
         }
 
         /// <summary>
-        /// Get instance of stream.
+        /// Returns an instance of <see cref="IStream{TMessage}"/>.
         /// </summary>
-        /// <param name="streamProvider">The <see cref="IStreamProvider"/> provider for streaming.</param>
+        /// <param name="streamProvider">The <see cref="IStreamProvider"/>.</param>
         /// <param name="streamId">The stream identifier.</param>
         /// <param name="streamNameSpace">The stream namespace.</param>
         /// <typeparam name="TMessage">Stream Message.</typeparam>

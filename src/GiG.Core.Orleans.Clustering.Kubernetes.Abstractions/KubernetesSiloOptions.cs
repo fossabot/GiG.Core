@@ -1,4 +1,4 @@
-﻿namespace GiG.Core.Orleans.Clustering.Kubernetes
+﻿namespace GiG.Core.Orleans.Clustering.Kubernetes.Abstractions
 {
     /// <summary>
     /// Kubernetes Silo Options.

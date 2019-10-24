@@ -19,5 +19,9 @@
     <PackageReference Include="Npgsql" Version="4.1.1" PrivateAssets="compile" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.6.0" PrivateAssets="compile" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GiG.Core.Orleans.Storage.Npgsql.Abstractions\GiG.Core.Orleans.Storage.Npgsql.Abstractions.csproj" />
+  </ItemGroup>
   
 </Project>
