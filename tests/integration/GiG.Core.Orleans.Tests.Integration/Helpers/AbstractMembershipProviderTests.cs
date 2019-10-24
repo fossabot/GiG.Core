@@ -1,4 +1,4 @@
-﻿using GiG.Core.Orleans.Clustering;
+﻿using GiG.Core.Orleans.Clustering.Abstractions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using System.Collections.Generic;

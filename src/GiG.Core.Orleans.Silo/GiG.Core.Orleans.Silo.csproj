@@ -12,4 +12,8 @@
     <PackageReference Include="OrleansDashboard" Version="2.4.5" PrivateAssets="compile" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.6.0" PrivateAssets="compile" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GiG.Core.Orleans.Silo.Abstractions\GiG.Core.Orleans.Silo.Abstractions.csproj" />
+  </ItemGroup>
 </Project>

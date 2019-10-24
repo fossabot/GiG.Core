@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using GiG.Core.Orleans.Storage.Npgsql.Abstractions;
+using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Orleans.Hosting;
 using System;
@@ -16,10 +17,10 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Extensions
         /// <summary>
         /// Adds a named Npgsql Grain Storage Provider.
         /// </summary>
-        /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
-        /// <param name="storageName">The Grain Storage Instance Name.</param>
-        /// <param name="configuration">The <see cref="IConfiguration"/> containing the Grain Storage options.</param>
-        /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
+        /// <param name="builder">The <see cref="ISiloBuilder"/>.</param>
+        /// <param name="storageName">The Grain Storage name.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/>.</param>
+        /// <returns>The<see cref="ISiloBuilder"/>.</returns>
         public static ISiloBuilder AddNpgsqlGrainStorage([NotNull] this ISiloBuilder builder, string storageName, [NotNull] IConfiguration configuration)
         {
             return builder.AddNpgsqlGrainStorage(storageName, configuration, NpgsqlOptions.DefaultSectionName);
@@ -28,11 +29,11 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Extensions
         /// <summary>
         /// Adds a named Npgsql Grain Storage Provider.
         /// </summary>
-        /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
-        /// <param name="storageName">The Grain Storage Instance Name.</param>
-        /// <param name="configuration">The <see cref="IConfiguration"/> containing the Grain Storage options.</param>
+        /// <param name="builder">The <see cref="ISiloBuilder"/>.</param>
+        /// <param name="storageName">The Grain Storage name.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/>.</param>
         /// <param name="sectionName">The Storage Providers section name.</param>
-        /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
+        /// <returns>The <see cref="ISiloBuilder"/>.</returns>
         public static ISiloBuilder AddNpgsqlGrainStorage([NotNull] this ISiloBuilder builder, string storageName, [NotNull] IConfiguration configuration, string sectionName)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
@@ -48,10 +49,10 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Extensions
         /// <summary>
         /// Adds a named Npgsql Grain Storage Provider.
         /// </summary>
-        /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
-        /// <param name="storageName">The Grain Storage Instance Name.</param>
-        /// <param name="configurationSection">The <see cref="IConfigurationSection"/> containing the Grain Storage options.</param>
-        /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
+        /// <param name="builder">The <see cref="ISiloBuilder"/>.</param>
+        /// <param name="storageName">The Grain Storage name.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/>.</param>
+        /// <returns>The <see cref="ISiloBuilder"/>.</returns>
         public static ISiloBuilder AddNpgsqlGrainStorage([NotNull] this ISiloBuilder builder, string storageName, [NotNull] IConfigurationSection configurationSection)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
