@@ -10,6 +10,7 @@ services:
       - Orleans__MembershipProvider__Address=http://consul:8500
       - RabbitMQ__Host=rabbitmq
       - Orleans__Cluster__ClusterId=dev1
+      - Orleans__Cluster__ServiceId=sample1
       - Echo_Grain_Name=Grain_In_Cluster_Dev1
     depends_on:
       - consul
@@ -26,6 +27,7 @@ services:
       - Orleans__MembershipProvider__Address=http://consul:8500
       - RabbitMQ__Host=rabbitmq
       - Orleans__Cluster__ClusterId=dev2
+      - Orleans__Cluster__ServiceId=sample2
       - Echo_Grain_Name=Grain_In_Cluster_Dev2
     depends_on:
       - consul

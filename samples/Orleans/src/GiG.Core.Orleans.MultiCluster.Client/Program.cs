@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using GiG.Core.Hosting.Extensions;
+using GiG.Core.Logging.All.Extensions;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace GiG.Core.Orleans.MultiCluster.Client
 {
@@ -18,6 +14,8 @@ namespace GiG.Core.Orleans.MultiCluster.Client
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .UseApplicationMetadata()
+                .ConfigureLogging()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

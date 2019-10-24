@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using GiG.Core.Orleans.Client.Abstractions;
 using GiG.Core.Orleans.Sample.Contracts;
 using Microsoft.AspNetCore.Mvc;
-using Orleans;
+using System.Threading.Tasks;
 
 namespace GiG.Core.Orleans.MultiCluster.Client.Controllers
 {
@@ -9,11 +9,11 @@ namespace GiG.Core.Orleans.MultiCluster.Client.Controllers
     [Route("[controller]")]
     public class EchoController : ControllerBase
     {
-        //TODO: this will then be the cluster client factory
-        private readonly IClusterClient _clusterClient;
-        public EchoController(IClusterClient clusterClient)
+        private readonly IOrleansClusterClientFactory _clusterClientFactory;
+
+        public EchoController(IOrleansClusterClientFactory clusterClientFactory)
         {
-            _clusterClient = clusterClient;
+            _clusterClientFactory = clusterClientFactory;
         }
 
         /// <summary>
@@ -25,8 +25,8 @@ namespace GiG.Core.Orleans.MultiCluster.Client.Controllers
         public async Task<string> PingAsync([FromQuery] string clusterName)
         {
             var grainId = string.Format("{0}_echo_grain", clusterName);
-
-            var grain = _clusterClient.GetGrain<IEchoGrain>(grainId); //TODO: the clustername will be fed to the factory to get the correct client.
+            var clusterClient = _clusterClientFactory.GetClusterClient(clusterName);
+            var grain = clusterClient.GetGrain<IEchoGrain>(grainId); 
 
             return await grain.Ping();
         }        

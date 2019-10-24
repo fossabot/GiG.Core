@@ -74,6 +74,29 @@ namespace GiG.Core.Orleans.Client.Extensions
         }
 
         /// <summary>
+        /// Sets the Cluster settings using an <see cref="IConfiguration"/>.
+        /// </summary>
+        /// <param name="builder">The <see cref="IClientBuilder"/>.</param>
+        /// <param name="clusterName">The Name of the Cluster being Configured.</param>
+        /// <param name="configuration">An <see cref="IConfiguration"/> to configure the provided <see cref="IClientBuilder"/>.</param>
+        /// <returns>Returns the <see cref="IClientBuilder"/> so that more methods can be chained.</returns>
+        public static IClientBuilder ConfigureCluster([NotNull] this IClientBuilder builder, string clusterName, [NotNull] IConfiguration configuration)
+        {
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+
+            var configurationSection = configuration.GetSection($"{ClusterDefaultSectionName}:{clusterName}");
+            if (configurationSection == null)
+            {
+                throw new ConfigurationErrorsException(
+                    $"Configuration section '{ClusterDefaultSectionName}' does not exist");
+            }
+
+            builder.Configure<ClusterOptions>(configurationSection);
+            return builder;
+        }
+
+        /// <summary>
         /// Adds Assemblies to Cluster Client Builder with references.
         /// </summary>
         /// <param name="builder">The <see cref="IClientBuilder"/>.</param>

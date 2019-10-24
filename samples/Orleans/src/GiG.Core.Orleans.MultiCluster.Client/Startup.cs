@@ -1,7 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using GiG.Core.Hosting.Extensions;
+using GiG.Core.Orleans.Client;
+using GiG.Core.Orleans.Client.Extensions;
+using GiG.Core.Orleans.Clustering.Consul.Extensions;
+using GiG.Core.Orleans.Clustering.Extensions;
+using GiG.Core.Orleans.Clustering.Kubernetes.Extensions;
+using GiG.Core.Orleans.Sample.Contracts;
 using GiG.Core.Web.Docs.Extensions;
 using GiG.Core.Web.Hosting.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -9,7 +12,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace GiG.Core.Orleans.MultiCluster.Client
 {
@@ -21,22 +23,57 @@ namespace GiG.Core.Orleans.MultiCluster.Client
         {
             _configuration = configuration;
         }
-
         
         public void ConfigureServices(IServiceCollection services)
         {
-            services.ConfigureApiDocs(_configuration);            
+            // Orleans Client - Payments
+            var paymentsClusterClient = services.CreateClusterClient((builder) =>
+            {
+                builder.ConfigureCluster("Payments", _configuration);
+                builder.UseMembershipProvider(_configuration, x =>
+                {
+                    x.ConfigureConsulClustering(_configuration);
+                    x.ConfigureKubernetesClustering(_configuration);
+                });
+                builder.AddAssemblies(typeof(IEchoGrain));
+            });
+          
+            OrleansClusterClientFactoryBuilder.CreateClusterClientFactoryBuilder()
+                .AddClusterClient("Payments", paymentsClusterClient)
+                .AddClusterClient("Games",  () => {
+                    return services.CreateClusterClient((builder) =>
+                    {
+                        builder.ConfigureCluster("Games", _configuration);
+                        builder.UseMembershipProvider(_configuration, x =>
+                        {
+                            x.ConfigureConsulClustering(_configuration);
+                            x.ConfigureKubernetesClustering(_configuration);
+                        });
+                        builder.AddAssemblies(typeof(IEchoGrain));
+                    });
+                } )
+                .RegisterFactory(services);
+
+            // Health Checks
+            services.AddHealthChecks();
+
+            // WebAPI
+            services.ConfigureApiDocs(_configuration);
+            services.ConfigureInfoManagement(_configuration);
             services.AddControllers();
+            services.ConfigureForwardedHeaders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseForwardedHeaders();
             app.UsePathBaseFromConfiguration();
+            app.UseApiDocs();
             app.UseRouting();
-
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
                 endpoints.MapGet("/", async context =>
                 {
                     await context.Response.WriteAsync("Hello World!");
