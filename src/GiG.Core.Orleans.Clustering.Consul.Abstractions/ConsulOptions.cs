@@ -1,4 +1,6 @@
-﻿namespace GiG.Core.Orleans.Clustering.Consul
+﻿using GiG.Core.Orleans.Clustering.Abstractions;
+
+namespace GiG.Core.Orleans.Clustering.Consul.Abstractions
 {
     /// <summary>
     /// Consul Options.

@@ -1,4 +1,4 @@
-﻿namespace GiG.Core.Orleans.Clustering
+﻿namespace GiG.Core.Orleans.Clustering.Abstractions
 {
     /// <summary>
     /// Membership Provider Options.
@@ -6,12 +6,12 @@
     public class MembershipProviderOptions
     {
         /// <summary>
-        /// Default configuration section name.
+        /// The configuration default section name.
         /// </summary>
         public const string DefaultSectionName = "Orleans:MembershipProvider";
 
         /// <summary>
-        /// Membership Provider Name.
+        /// The Membership Provider name.
         /// </summary>
         public string Name { get; set; }
     }

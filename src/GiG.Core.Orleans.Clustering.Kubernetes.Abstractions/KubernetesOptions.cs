@@ -1,4 +1,6 @@
-﻿namespace GiG.Core.Orleans.Clustering.Kubernetes
+﻿using GiG.Core.Orleans.Clustering.Abstractions;
+
+namespace GiG.Core.Orleans.Clustering.Kubernetes.Abstractions
 {
     /// <summary>
     /// Kubernetes Options.

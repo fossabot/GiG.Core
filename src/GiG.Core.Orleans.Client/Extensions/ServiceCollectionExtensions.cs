@@ -13,9 +13,9 @@ namespace GiG.Core.Orleans.Client.Extensions
         /// <summary>
         /// Creates and registers a new <see cref="IClusterClient"/> with default options.
         /// </summary>
-        /// <param name="services">The <see cref="IServiceCollection" /> to add the services to.</param>
-        /// <param name="configureClient">The <see cref="Action{ClientBuilder, IServiceProvider}"/> on which will be used to set the options for the client.</param>
-        /// <returns>The <see cref="IServiceCollection" /> so that additional calls can be chained.</returns>
+        /// <param name="services">The <see cref="IServiceCollection" />.</param>
+        /// <param name="configureClient">The <see cref="Action{ClientBuilder, IServiceProvider}"/> on which will be used to set the options for the Client.</param>
+        /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection AddClusterClient([NotNull] this IServiceCollection services, [NotNull] Action<ClientBuilder, IServiceProvider> configureClient)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
@@ -30,9 +30,9 @@ namespace GiG.Core.Orleans.Client.Extensions
         /// <summary>
         /// Creates and registers a new <see cref="IClusterClient"/> with default options.
         /// </summary>
-        /// <param name="services">The <see cref="IServiceCollection" /> to add the services to.</param>
-        /// <param name="configureClient">The <see cref="Action{ClientBuilder}"/> on which will be used to set the options for the client.</param>
-        /// <returns>The <see cref="IServiceCollection" /> so that additional calls can be chained.</returns>
+        /// <param name="services">The <see cref="IServiceCollection" />.</param>
+        /// <param name="configureClient">The <see cref="Action{ClientBuilder}"/> on which will be used to set the options for the Client.</param>
+        /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection AddClusterClient([NotNull] this IServiceCollection services, [NotNull] Action<ClientBuilder> configureClient)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
