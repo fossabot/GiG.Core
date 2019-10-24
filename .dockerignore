@@ -3,37 +3,53 @@
 **/[Ll]ogs/
 
 **/*.Avro.cs
-**/artifacts/nugets/*.nupkg
 
-docs
 release-notes
 
 .env
 .git
 .gitignore
-.vs/
-.vscode
 
+# Visual Studio
 *.csproj.user
 *.orig
 *.suo
 *.user
+.vs/
+.vscode
+
+# Visual Studio code coverage results
+*.coverage
+*.coveragexml
+*.sln.DotSettings
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+**/Properties/launchSettings.json
 
 # Docker
 .dockerignore
-docker-compose.yml
-docker-compose.*.yml
-Dockerfile
+**/docker-compose*.yml
+**/Dockerfile*
 
 # Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
 _ReSharper.*
-_ReSharper.*/
 *[Rr]e[Ss]harper.user
+
+# JustCode is a .NET coding add-in
+.JustCode
 
 # Do NOT exclude these folders
 !obj/Docker/publish/*
 !obj/Docker/empty/
 
 msbuild.log
-launchSettings.json
-*DS_Store
+**/launchSettings.json
+**/DS_Store
+
+**/BenchmarkDotNet.Artifacts/
