@@ -30,9 +30,9 @@ The below table outlines the valid Configurations used to override the [ClusterO
 
 ## Cluster Client Factory
 
-The [OrleansClusterClientFactory](..\src\GiG.Core.Orleans.Client\OrleansClusterClientFactory.cs) can be used to register multiple named Orleans Cluster Clients.
+The [OrleansClusterClientFactory](../src/GiG.Core.Orleans.Client/OrleansClusterClientFactory.cs) can be used to register multiple named Orleans Cluster Clients.
 
-The below code creates and sets up and registers an [OrleansClusterClientFactory](..\src\GiG.Core.Orleans.Client\OrleansClusterClientFactory.cs).
+The below code creates, sets up and registers an [OrleansClusterClientFactory](../src/GiG.Core.Orleans.Client/OrleansClusterClientFactory.cs).
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -57,8 +57,8 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-The below code is an example of how the [OrleansClusterClientFactory](..\src\GiG.Core.Orleans.Client\OrleansClusterClientFactory.cs) can be used.
-
+The below code is an example of how the [OrleansClusterClientFactory](../src/GiG.Core.Orleans.Client/OrleansClusterClientFactory.cs) can be used.
+A sample usage can also be found in the sample controller [EchoController](../samples/Orleans/src/GiG.Core.Orleans.MultiCluster.Client/Controllers/EchoController.cs).
 ```csharp
 private readonly IOrleansClusterClientFactory _clusterClientFactory;
 
@@ -90,18 +90,20 @@ Sample Configuration:
 
 
 ```json
-"Orleans": {
-    "Cluster": {
-        "ClusterA": {
-            "ClusterId": "dev1",
-            "ServiceId": "sample1"
-        },
-        "ClusterB": {
-            "ClusterId": "dev2",
-            "ServiceId": "sample2"
+{
+    "Orleans": {
+        "Cluster": {
+            "ClusterA": {
+                "ClusterId": "dev1",
+                "ServiceId": "sample1"
+            },
+            "ClusterB": {
+                "ClusterId": "dev2",
+                "ServiceId": "sample2"
+            }
         }
     }
-}
+}   
 ```
 
 

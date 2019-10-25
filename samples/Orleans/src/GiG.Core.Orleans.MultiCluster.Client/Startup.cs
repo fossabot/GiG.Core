@@ -38,6 +38,7 @@ namespace GiG.Core.Orleans.MultiCluster.Client
                 builder.AddAssemblies(typeof(IEchoGrain));
             });
           
+            //cluster clients can be added to the factory either via a created instance or an anonymous func.
             OrleansClusterClientFactoryBuilder.CreateClusterClientFactoryBuilder()
                 .AddClusterClient("Payments", paymentsClusterClient)
                 .AddClusterClient("Games",  () => {
@@ -73,11 +74,7 @@ namespace GiG.Core.Orleans.MultiCluster.Client
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllers();             
             });
         }
     }

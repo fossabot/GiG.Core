@@ -74,6 +74,7 @@ namespace GiG.Core.Orleans.Client.Extensions
 
         /// <summary>
         /// Sets the Cluster settings using an <see cref="IConfiguration"/>.
+        /// The configuration section is loaded from the section with the specified cluster name.
         /// </summary>
         /// <param name="builder">The <see cref="IClientBuilder"/>.</param>
         /// <param name="clusterName">The Name of the Cluster being Configured.</param>
@@ -83,6 +84,7 @@ namespace GiG.Core.Orleans.Client.Extensions
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+            if (string.IsNullOrEmpty(clusterName)) throw new ArgumentNullException(nameof(clusterName));
 
             var configurationSection = configuration.GetSection($"{ClusterDefaultSectionName}:{clusterName}");
             if (configurationSection == null)
