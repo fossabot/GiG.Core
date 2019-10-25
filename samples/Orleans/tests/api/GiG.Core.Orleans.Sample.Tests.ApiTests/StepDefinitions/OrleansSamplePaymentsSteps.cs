@@ -72,8 +72,8 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
         [Then(@"the error message for '(Deposit|Withdraw)' is '(.*)'")]
         public void ThenTheErrorMessageUsingKeyIs(SampleApiEndpointKeys endpointKey, string message)
         {
-            string erorrmsg = _sampleApiTestsFixture.ParseErrorMessage(_scenarioContext.Get<Response<decimal>>(endpointKey.ToString()).StringContent);
-            Assert.Equal(message, erorrmsg);
+            string errorMessage = _sampleApiTestsFixture.ParseErrorMessage(_scenarioContext.Get<Response<decimal>>(endpointKey.ToString()).StringContent);
+            Assert.Equal(message, errorMessage);
         }
        
     }
