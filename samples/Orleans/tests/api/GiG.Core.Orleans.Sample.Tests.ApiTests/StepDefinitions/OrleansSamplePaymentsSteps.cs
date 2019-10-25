@@ -1,8 +1,8 @@
 ﻿using GiG.Core.Orleans.Sample.Tests.ApiTests.Contracts;
 using GiG.Core.Orleans.Sample.Tests.ApiTests.Services;
-using Xunit;
 using RestEase;
 using TechTalk.SpecFlow;
+using Xunit;
 
 namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
 {
@@ -72,7 +72,9 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
         [Then(@"the error message for '(Deposit|Withdraw)' is '(.*)'")]
         public void ThenTheErrorMessageUsingKeyIs(SampleApiEndpointKeys endpointKey, string message)
         {
-            Assert.Equal(message, _scenarioContext.Get<Response<decimal>>(endpointKey.ToString()).StringContent);
+            string errorMessage = _sampleApiTestsFixture.ParseErrorMessage(_scenarioContext.Get<Response<decimal>>(endpointKey.ToString()).StringContent);
+            Assert.Equal(message, errorMessage);
         }
+       
     }
 }

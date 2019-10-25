@@ -341,10 +341,12 @@
 	}
 
 	function showError(error) {
+		var msgError = error.errors == null ? error : error.errors.Amount.join('\r\n');
+		
 		document.getElementsByClassName("notifications-container")[0].innerHTML =
 			`<div class="alert alert-danger">
             <button class="close" onclick="closeNotification(this)"></button>
-            ${error}
+			${msgError}    
         </div>`;
 	}
 

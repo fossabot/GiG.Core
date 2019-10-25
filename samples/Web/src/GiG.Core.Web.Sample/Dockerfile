@@ -1,10 +1,8 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0.0 AS base
-ENV COMPlus_ReadyToRun=0
-WORKDIR /app
+FROM igcproget.igc.zone/gig-core-docker/library/dotnet:3.0.0-aspnet-0.1.0.12.eeebb22 AS base
 EXPOSE 8080
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0.100 AS build
-WORKDIR /src
+FROM igcproget.igc.zone/gig-core-docker/library/dotnet:3.0.100-sdk-0.1.0.12.eeebb22 AS build
+
 COPY ["samples/Web/src/GiG.Core.Web.Sample/GiG.Core.Web.Sample.csproj", "samples/Web/src/GiG.Core.Web.Sample/"]
 RUN dotnet restore "samples/Web/src/GiG.Core.Web.Sample/GiG.Core.Web.Sample.csproj"
 COPY . .
