@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\GiG.Core.Data.KVStores.Abstractions\GiG.Core.Data.KVStores.Abstractions.csproj" />
+    </ItemGroup>
+
+</Project>

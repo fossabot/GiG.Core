@@ -4,9 +4,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using System.IO;
 
-namespace GiG.Core.Logging.Sample
+namespace GiG.Core.Data.KVStores.Sample
 {
-    internal static class Program
+    internal class Program
     {
         public static void Main()
         {
@@ -15,7 +15,10 @@ namespace GiG.Core.Logging.Sample
 
         private static IHostBuilder CreateHostBuilder()
         {
-            return Host.CreateDefaultBuilder()
+            return new HostBuilder()
+                .ConfigureHostConfiguration(builder => builder
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json", false, true))
                 .UseApplicationMetadata()
                 .ConfigureLogging()
                 .ConfigureServices(Startup.ConfigureServices);

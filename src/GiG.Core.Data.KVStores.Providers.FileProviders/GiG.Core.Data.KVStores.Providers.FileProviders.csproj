@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\GiG.Core.Data.KVStores.Abstractions\GiG.Core.Data.KVStores.Abstractions.csproj" />
+      <ProjectReference Include="..\GiG.Core.Data.KVStores.Providers.FileProviders.Abstractions\GiG.Core.Data.KVStores.Providers.FileProviders.Abstractions.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" Version="3.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.1.0" />
+      <PackageReference Include="Microsoft.Extensions.Options" Version="2.0.0" />
+      <PackageReference Include="System.Text.Json" Version="4.6.0" />
+    </ItemGroup>
+
+</Project>
