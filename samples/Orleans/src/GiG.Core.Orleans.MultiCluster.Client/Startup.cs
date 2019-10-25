@@ -26,18 +26,6 @@ namespace GiG.Core.Orleans.MultiCluster.Client
         
         public void ConfigureServices(IServiceCollection services)
         {
-            // Orleans Client - Payments
-            var paymentsClusterClient = services.CreateClusterClient((builder) =>
-            {
-                builder.ConfigureCluster("Payments", _configuration);
-                builder.UseMembershipProvider(_configuration, x =>
-                {
-                    x.ConfigureConsulClustering(_configuration);
-                    x.ConfigureKubernetesClustering(_configuration);
-                });
-                builder.AddAssemblies(typeof(IEchoGrain));
-            });
-          
             //cluster clients can be added to the factory either via a created instance or an anonymous func.
             OrleansClusterClientFactoryBuilder.CreateClusterClientFactoryBuilder()
                 .AddClusterClient("Payments", () => {
