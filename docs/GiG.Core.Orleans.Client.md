@@ -33,10 +33,17 @@ The below table outlines the valid Configurations used to override the [ClusterO
 The [OrleansClusterClientFactory](../src/GiG.Core.Orleans.Client/OrleansClusterClientFactory.cs) can be used to register multiple named Orleans Cluster Clients.
 
 The below code creates, sets up and registers an [OrleansClusterClientFactory](../src/GiG.Core.Orleans.Client/OrleansClusterClientFactory.cs).
+Cluster Clients can be added to the factory either via a created instance or an anonymous Func.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
+    var clusterB = services.CreateClusterClient((builder) =>
+        {
+            builder.ConfigureCluster(ctx.Configuration.GetSection("Orleans:ClusterB"));
+            builder.ConfigureConsulClustering(ctx.Configuration);
+        });
+
     OrleansClusterClientFactoryBuilder.CreateClusterClientFactoryBuilder()
         .AddClusterClient("ClusterA", () =>
         {
@@ -46,13 +53,7 @@ public void ConfigureServices(IServiceCollection services)
                 builder.ConfigureConsulClustering(ctx.Configuration);
             });
         })
-        .AddClusterClient("ClusterB", () => {
-            return services.CreateClusterClient((builder) =>
-            {
-                builder.ConfigureCluster(ctx.Configuration.GetSection("Orleans:ClusterB"));
-                builder.ConfigureConsulClustering(ctx.Configuration);
-            });
-        })
+        .AddClusterClient("ClusterB", clusterB)
         .RegisterFactory(services);
 }
 ```
