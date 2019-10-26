@@ -18,7 +18,8 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders
 
         protected FileDataProvider(ILogger<FileDataProvider<T>> logger,
             IDataStore<T> dataStore, 
-            IFileProvider fileProvider, IOptions<FileProviderOptions> fileOptionsAccessor)
+            IFileProvider fileProvider, 
+            IOptions<FileProviderOptions> fileOptionsAccessor)
         {
             _logger = logger;
             _dataStore = dataStore;

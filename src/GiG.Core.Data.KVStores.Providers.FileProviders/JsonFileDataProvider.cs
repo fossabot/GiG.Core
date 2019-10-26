@@ -14,7 +14,6 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders
         public JsonFileDataProvider(ILogger<FileDataProvider<T>> logger, IDataStore<T> dataStore, IFileProvider fileProvider, IOptions<FileProviderOptions> fileOptionsAccessor) : 
             base(logger, dataStore, fileProvider, fileOptionsAccessor)
         {
-            Console.WriteLine("hey");
         }
 
         protected override T GetFromStream(Stream stream)
