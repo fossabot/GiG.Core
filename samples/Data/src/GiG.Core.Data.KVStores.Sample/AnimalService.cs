@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace GiG.Core.Data.KVStores.Sample
 {
-    public class PersonService : IHostedService
+    public class AnimalService : IHostedService
     {
         
-        private readonly IDataRetriever<IEnumerable<Person>> _dataRetriever;
+        private readonly IDataRetriever<IEnumerable<Animal>> _dataRetriever;
 
-        public PersonService(IDataRetriever<IEnumerable<Person>> dataRetriever)
+        public AnimalService(IDataRetriever<IEnumerable<Animal>> dataRetriever)
         {
             _dataRetriever = dataRetriever;
         }

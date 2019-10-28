@@ -1,6 +1,5 @@
 ﻿using GiG.Core.Data.KVStores.Abstractions;
 using Microsoft.Extensions.Hosting;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 

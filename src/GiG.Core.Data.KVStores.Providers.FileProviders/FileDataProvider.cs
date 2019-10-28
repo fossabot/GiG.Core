@@ -2,7 +2,6 @@
 using GiG.Core.Data.KVStores.Providers.FileProviders.Abstractions;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -14,17 +13,17 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders
         private readonly ILogger<FileDataProvider<T>> _logger;
         private readonly IDataStore<T> _dataStore;
         private readonly IFileProvider _fileProvider;
-        private readonly IOptions<FileProviderOptions> _fileOptionsAccessor;
+        private readonly FileProviderOptions _fileOptions;
 
         protected FileDataProvider(ILogger<FileDataProvider<T>> logger,
             IDataStore<T> dataStore, 
             IFileProvider fileProvider, 
-            IOptions<FileProviderOptions> fileOptionsAccessor)
+            IDataProviderOptions<T, FileProviderOptions> fileOptionsAccessor)
         {
             _logger = logger;
             _dataStore = dataStore;
             _fileProvider = fileProvider;
-            _fileOptionsAccessor = fileOptionsAccessor;
+            _fileOptions = fileOptionsAccessor.Value;
         }
 
         public Task StartAsync()
@@ -43,9 +42,9 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders
 
         private T Load()
         {
-            var file = _fileProvider.GetFileInfo(_fileOptionsAccessor.Value.Path);
+            var file = _fileProvider.GetFileInfo(_fileOptions.Path);
             if (file == null || !file.Exists)
-                throw new InvalidOperationException($"File '{_fileOptionsAccessor.Value.Path}' does not exist");
+                throw new InvalidOperationException($"File '{_fileOptions.Path}' does not exist");
 
             var model = default(T);
             
