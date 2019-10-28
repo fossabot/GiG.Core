@@ -5,7 +5,7 @@ using GiG.Core.DistributedTracing.Orleans.Extensions;
 using GiG.Core.Hosting.Extensions;
 using GiG.Core.Logging.All.Extensions;
 using GiG.Core.Orleans.Sample.Contracts;
-using GiG.Core.Orleans.Storage.Npgsql.Configurations;
+using GiG.Core.Orleans.Storage.Npgsql.Abstractions;
 using Microsoft.Extensions.Hosting;
 using Npgsql;
 

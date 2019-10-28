@@ -13,15 +13,15 @@ namespace GiG.Core.Http
         private DelegatingHandler _lastDelegatingHandler;
         
         /// <summary>
-        /// Get or Set BaseUrl.
+        /// The Base Address.
         /// </summary>
         public HttpClientOptionsBuilder Options { get; } = new HttpClientOptionsBuilder();
 
         /// <summary>
         /// Adds Http Message Handler.
         /// </summary>
-        /// <param name="handler">The <see cref="System.Net.Http.DelegatingHandler"/> instance to register in <see cref="HttpClientBuilder"/>. </param>
-        /// <returns>The <see cref="HttpClientBuilder"/> that can be used to configure the client.</returns>
+        /// <param name="handler">The <see cref="System.Net.Http.DelegatingHandler"/>.</param>
+        /// <returns>The <see cref="HttpClientBuilder"/>.</returns>
         public HttpClientBuilder AddHttpMessageHandler(DelegatingHandler handler)
         {
             if (handler == null) throw new ArgumentNullException(nameof(handler));

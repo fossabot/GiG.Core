@@ -1,4 +1,4 @@
-﻿using GiG.Core.Orleans.Clustering.Consul.Configurations;
+﻿using GiG.Core.Orleans.Clustering.Consul.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Orleans.Hosting;
@@ -12,11 +12,11 @@ namespace GiG.Core.Orleans.Clustering.Consul.Extensions
     public static class SiloBuilderExtensions
     {
         /// <summary>
-        /// Configures Consul in Orleans.
+        /// Registers a configuration instance which <see cref="ConsulOptions" /> will bind against.
         /// </summary>
         /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
-        /// <param name="configuration">The <see cref="IConfiguration" /> which contains Consul options.</param>
-        /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
+        /// <param name="configuration">The <see cref="IConfiguration" />.</param>
+        /// <returns>The <see cref="ISiloBuilder"/>.</returns>
         public static ISiloBuilder ConfigureConsulClustering([NotNull] this ISiloBuilder builder, [NotNull] IConfiguration configuration)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
@@ -26,11 +26,11 @@ namespace GiG.Core.Orleans.Clustering.Consul.Extensions
         }
 
         /// <summary>
-        /// Configures Consul in Orleans.
+        /// Registers a configuration instance which <see cref="ConsulOptions" /> will bind against.
         /// </summary>
         /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
-        /// <param name="configurationSection">The <see cref="IConfigurationSection" /> which contains Consul options.</param>
-        /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
+        /// <returns>The <see cref="ISiloBuilder"/>.</returns>
         public static ISiloBuilder ConfigureConsulClustering([NotNull] this ISiloBuilder builder, [NotNull] IConfigurationSection configurationSection)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));

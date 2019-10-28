@@ -11,7 +11,7 @@
         public const string DefaultSectionName = "ApiDocs";
 
         /// <summary>
-        /// Indicates whether the ApiDocs are enabled or not.
+        /// A value to indicate if the ApiDocs are enabled or not.
         /// </summary>
         public bool IsEnabled { get; set; } = true;
 
@@ -21,17 +21,17 @@
         public string Url { get; set; } = "api-docs";
 
         /// <summary>
-        /// The Docs Title.
+        /// The ApiDocs title.
         /// </summary>
         public string Title { get; set; }
 
         /// <summary>
-        /// The Docs Description.
+        /// The ApiDocs description.
         /// </summary>
         public string Description { get; set; }
 
         /// <summary>
-        /// Indicates whether the IsForwardedFor filter is enabled or not.
+        /// A value to indicate if the IsForwardedFor is enabled or not.
         /// </summary>
         public bool IsForwardedForEnabled { get; set; } = true;
     }

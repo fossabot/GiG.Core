@@ -13,7 +13,7 @@ using System;
 namespace GiG.Core.Logging.All.Extensions
 {
     /// <summary>
-    /// Host Builder extensions.
+    /// Host Builder Extensions.
     /// </summary>
     public static class HostBuilderExtensions
     {

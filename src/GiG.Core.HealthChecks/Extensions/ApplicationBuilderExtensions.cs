@@ -15,15 +15,15 @@ using System.Threading.Tasks;
 namespace GiG.Core.HealthChecks.Extensions
 {
     /// <summary>
-    /// Application Builder Extensions
+    /// Application Builder Extensions.
     /// </summary>
     public static class ApplicationBuilderExtensions
     {
         /// <summary>
-        /// Adds the Ready and Live HealthCheck endpoints
+        /// Adds the Ready and Live HealthCheck Endpoints.
         /// </summary>
-        /// <param name="builder">The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</param>
-        /// <returns>The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" />.</returns>
+        /// <param name="builder">The <see cref="IApplicationBuilder" />.</param>
+        /// <returns>The <see cref="IApplicationBuilder" />.</returns>
         public static IApplicationBuilder UseHealthChecks([NotNull] this IApplicationBuilder builder)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
@@ -48,7 +48,7 @@ namespace GiG.Core.HealthChecks.Extensions
                 });
         }
 
-        private static Task WriteJsonResponseWriter(HttpContext httpContext, HealthReport result)
+        private static Task WriteJsonResponseWriter(HttpContext httpContext, HealthReport healthReport)
         {
             httpContext.Response.ContentType = "application/json";
 
@@ -57,7 +57,7 @@ namespace GiG.Core.HealthChecks.Extensions
                 using (var writer = new Utf8JsonWriter(stream))
                 {
                     writer.WriteStartObject();
-                    writer.WriteString("status", result.Status.ToString());
+                    writer.WriteString("status", healthReport.Status.ToString());
                     writer.WriteEndObject();
                 }
 

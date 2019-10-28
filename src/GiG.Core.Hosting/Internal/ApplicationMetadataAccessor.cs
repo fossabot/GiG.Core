@@ -9,7 +9,7 @@ namespace GiG.Core.Hosting.Internal
         public string Name => ApplicationMetadata.Name;
 
         /// <inheritdoc />
-        public string Version =>ApplicationMetadata.Version;
+        public string Version => ApplicationMetadata.Version;
 
         /// <inheritdoc />
         public string InformationalVersion => ApplicationMetadata.InformationalVersion;

@@ -1,17 +1,17 @@
 ﻿namespace GiG.Core.HealthChecks.Abstractions
 {
     /// <summary>
-    /// Health Checks Constants.
+    /// Constants.
     /// </summary>
     public static class Constants
     {
         /// <summary>
-        /// Ready Health Checks default tag.
+        /// Ready HealthCheck tag.
         /// </summary>
         public const string ReadyTag = "ready";
         
         /// <summary>
-        /// Live Health Checks default tag.
+        /// Live HealthCheck tag.
         /// </summary>
         public const string LiveTag = "live";
     }

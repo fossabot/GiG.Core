@@ -1,4 +1,4 @@
-﻿using GiG.Core.Orleans.Clustering.Kubernetes.Configurations;
+﻿using GiG.Core.Orleans.Clustering.Kubernetes.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Orleans;
@@ -13,24 +13,24 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
     public static class ClientBuilderExtensions
     {
         /// <summary>
-        /// Configures Kubernetes in Orleans.
+        /// Registers a configuration instance which <see cref="KubernetesOptions" /> will bind against.
         /// </summary>
         /// <param name="builder">The Orleans <see cref="IClientBuilder"/>.</param>
-        /// <param name="configuration">The <see cref="IConfiguration" /> which contains Kubernetes options.</param>
-        /// <returns>Returns the <see cref="IClientBuilder"/> so that more methods can be chained.</returns>
+        /// <param name="configuration">The <see cref="IConfiguration" />.</param>
+        /// <returns>THe <see cref="IClientBuilder"/>.</returns>
         public static IClientBuilder ConfigureKubernetesClustering([NotNull] this IClientBuilder builder, IConfiguration configuration)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
 
             return builder.ConfigureKubernetesClustering(configuration.GetSection(KubernetesOptions.DefaultSectionName));
         }
-        
+
         /// <summary>
-        /// Configures Kubernetes in Orleans.
+        /// Registers a configuration instance which <see cref="KubernetesOptions" /> will bind against.
         /// </summary>
         /// <param name="builder">The Orleans <see cref="IClientBuilder"/>.</param>
-        /// <param name="configurationSection">The <see cref="IConfigurationSection" /> which contains Kubernetes options.</param>
-        /// <returns>Returns the <see cref="IClientBuilder"/> so that more methods can be chained.</returns>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
+        /// <returns>The <see cref="IClientBuilder"/>.</returns>
         public static IClientBuilder ConfigureKubernetesClustering([NotNull] this IClientBuilder builder, [NotNull] IConfigurationSection configurationSection)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));

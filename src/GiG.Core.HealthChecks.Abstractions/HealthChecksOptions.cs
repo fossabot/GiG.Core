@@ -1,12 +1,12 @@
 ﻿namespace GiG.Core.HealthChecks.Abstractions
 {
     /// <summary>
-    /// Health Checks Settings.
+    /// Health Checks Options.
     /// </summary>
     public class HealthChecksOptions
     {
         /// <summary>
-        /// Health Checks default section name.
+        /// The configuration default section name.
         /// </summary>
         public const string DefaultSectionName = "HealthChecks";
 
@@ -16,12 +16,12 @@
         public string CombinedUrl { get; set; } = "/actuator/health";
 
         /// <summary>
-        /// The Url for the Live Health Check.
+        /// The Url for the Live HealthCheck.
         /// </summary>
         public string LiveUrl { get; set; }
 
         /// <summary>
-        /// The Url for the Ready Health Check.
+        /// The Url for the Ready HealthCheck.
         /// </summary>
         public string ReadyUrl { get; set; }
 

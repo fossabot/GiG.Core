@@ -18,11 +18,11 @@ namespace GiG.Core.Web.Docs.Extensions
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Registers a configuration instance which <see cref="T:GiG.Core.HealthChecks.Abstractions.HealthChecksOptions" /> will bind against.
+        /// Registers a configuration instance which <see cref="ApiDocsOptions" /> will bind against.
         /// </summary>
-        /// <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" /> to add the services to.</param>
-        /// <param name="configurationSection">The configuration section <see cref="T:Microsoft.Extensions.Configuration.IConfigurationSection" />.</param>
-        /// <returns>The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" /> so that additional calls can be chained.</returns>
+        /// <param name="services">The <see cref="IServiceCollection" />.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
+        /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection ConfigureApiDocs([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
@@ -53,11 +53,11 @@ namespace GiG.Core.Web.Docs.Extensions
         }
 
         /// <summary>
-        /// Registers a configuration instance which <see cref="T:GiG.Core.Web.Docs.Abstractions.ApiDocsOptions" /> will bind against.
+        /// Registers a configuration instance which <see cref="ApiDocsOptions" /> will bind against.
         /// </summary>
-        /// <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" /> to add the services to.</param>
-        /// <param name="configuration">The configuration <see cref="T:Microsoft.Extensions.Configuration.IConfiguration" />.</param>
-        /// <returns>The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection" /> so that additional calls can be chained.</returns>
+        /// <param name="services">The <see cref="IServiceCollection" />.</param>
+        /// <param name="configuration">The <see cref="IConfiguration" />.</param>
+        /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection ConfigureApiDocs([NotNull] this IServiceCollection services, [NotNull] IConfiguration configuration)
             => services.ConfigureApiDocs(configuration.GetSection(ApiDocsOptions.DefaultSectionName));
 
@@ -68,7 +68,7 @@ namespace GiG.Core.Web.Docs.Extensions
 
             if (string.IsNullOrEmpty(xmlPath))
             {
-                throw new ApplicationException("Following property is missing from your project; <GenerateDocumentationFile>true</GenerateDocumentationFile>.");
+                throw new ApplicationException("The following property is missing from your project; <GenerateDocumentationFile>true</GenerateDocumentationFile>.");
             }
 
             options.IncludeXmlComments(xmlPath);

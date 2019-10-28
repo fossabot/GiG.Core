@@ -5,7 +5,6 @@ using GiG.Core.Http.Tests.Integration.Mocks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Refit;
-using System;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;

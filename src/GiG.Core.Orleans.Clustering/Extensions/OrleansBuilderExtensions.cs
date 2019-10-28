@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using GiG.Core.Orleans.Clustering.Abstractions;
+using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Configuration;
@@ -6,7 +7,7 @@ using System.Configuration;
 namespace GiG.Core.Orleans.Clustering.Extensions
 {
     /// <summary>
-    /// Configures builders extensions for orleans membership providers.
+    /// Configures Builders Extensions for Orleans Membership Providers.
     /// </summary>
     public static class OrleansBuilderExtensions
     {
@@ -14,9 +15,9 @@ namespace GiG.Core.Orleans.Clustering.Extensions
         /// Register Membership Provider From Configuration.
         /// </summary>
         /// <typeparam name="T">Generic to represent host interfaces used for orleans start up.</typeparam>
-        /// <param name="builder">Builder of type T used in orleans start up.</param>
-        /// <param name="configuration">The <see cref="IConfiguration" /> which contains Membership provider's configuration options.</param>
-        /// <param name="configureProvider">Action used to configure membership providers.</param>
+        /// <param name="builder">Builder of Type T used in Orleans start up.</param>
+        /// <param name="configuration">The <see cref="IConfiguration" /> which contains the Membership Provider's configuration options.</param>
+        /// <param name="configureProvider">Action used to configure the Membership Providers.</param>
         /// <returns></returns>
         internal static T UseMembershipProviderInternal<T>([NotNull] this T builder, [NotNull] IConfiguration configuration, [NotNull] Action<MembershipProviderBuilder<T>> configureProvider)
         {
