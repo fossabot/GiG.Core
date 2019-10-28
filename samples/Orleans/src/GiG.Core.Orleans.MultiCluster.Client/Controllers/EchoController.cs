@@ -25,7 +25,7 @@ namespace GiG.Core.Orleans.MultiCluster.Client.Controllers
         public async Task<string> PingAsync([FromQuery] string clusterName)
         {
             var grainId = string.Format("{0}_echo_grain", clusterName);
-            var clusterClient = _clusterClientFactory.GetClusterClient(clusterName);
+            var clusterClient = _clusterClientFactory.Get(clusterName);
             var grain = clusterClient.GetGrain<IEchoGrain>(grainId); 
 
             return await grain.Ping();

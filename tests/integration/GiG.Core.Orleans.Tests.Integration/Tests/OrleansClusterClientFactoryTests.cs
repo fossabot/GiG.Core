@@ -20,10 +20,10 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
         public async Task GetValueAsync_CallGrain_ReturnsExpectedSiloName()
         {
             //Arrange
-            var grainInSiloA = _clusterFixture.OrleansClusterClientFactory.GetClusterClient("ClusterA")
+            var grainInSiloA = _clusterFixture.OrleansClusterClientFactory.Get("ClusterA")
                 .GetGrain<IClusterClientFactoryTestGrain>(Guid.NewGuid().ToString());
 
-            var grainInSiloB = _clusterFixture.OrleansClusterClientFactory.GetClusterClient("ClusterB")
+            var grainInSiloB = _clusterFixture.OrleansClusterClientFactory.Get("ClusterB")
                 .GetGrain<IClusterClientFactoryTestGrain>(Guid.NewGuid().ToString());
 
             //Act 

@@ -20,6 +20,6 @@ namespace GiG.Core.Orleans.Client.Abstractions
         /// </summary>
         /// <param name="name">The Name of the Cluster.</param>
         /// <returns>The Orleans <see cref="IClusterClient"/>.</returns>
-        IClusterClient GetClusterClient(string name);
+        IClusterClient Get(string name);
     }
 }

@@ -60,11 +60,11 @@ public void ConfigureServices(IServiceCollection services)
 The below code is an example of how the [OrleansClusterClientFactory](../src/GiG.Core.Orleans.Client/OrleansClusterClientFactory.cs) can be used.
 A sample usage can also be found in the sample controller [EchoController](../samples/Orleans/src/GiG.Core.Orleans.MultiCluster.Client/Controllers/EchoController.cs).
 ```csharp
-private readonly IOrleansClusterClientFactory _clusterClientFactory;
+private readonly IClusterClientFactory _clusterClientFactory;
 
 public async Task<string> PingAsync(string clusterName, string graindId)
 {
-    var clusterClient = _clusterClientFactory.GetClusterClient(clusterName);
+    var clusterClient = _clusterClientFactory.Get(clusterName);
     var grain = clusterClient.GetGrain<IEchoGrain>(grainId); 
 
     return await grain.Ping();
