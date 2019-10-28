@@ -15,7 +15,7 @@ namespace GiG.Core.Http
         /// <summary>
         /// Get or Set BaseUrl.
         /// </summary>
-        public Uri BaseAddress { get; set; }
+        public HttpClientOptionsBuilder Options { get; } = new HttpClientOptionsBuilder();
 
         /// <summary>
         /// Adds Http Message Handler.

@@ -22,7 +22,7 @@ namespace GiG.Core.Http
                 ? new HttpClient(builder.DelegatingHandler)
                 : new HttpClient();
 
-            client.BaseAddress = builder.BaseAddress;
+            client.BaseAddress = builder.Options.BaseAddress;
 
             return client;
         }
