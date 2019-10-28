@@ -18,7 +18,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
 {
     public class ClusterClientFactoryFixture
     {
-        internal readonly IOrleansClusterClientFactory OrleansClusterClientFactory;
+        internal readonly IClusterClientFactory OrleansClusterClientFactory;
 
         internal readonly IServiceProvider ClientServiceProvider;
 
@@ -60,7 +60,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                 {
                     services.AddHttpClient();
 
-                    OrleansClusterClientFactoryBuilder.CreateClusterClientFactoryBuilder()
+                    services.AddClusterClientFactory()
                         .AddClusterClient("ClusterA", () =>
                         {
                             return services.CreateClusterClient((builder) =>
@@ -77,13 +77,12 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                                 builder.ConfigureConsulClustering(ctx.Configuration);
                                 builder.AddAssemblies(typeof(IClusterClientFactoryTestGrain));
                             });
-                        })
-                        .RegisterFactory(services);
+                        });
                 })
                 .Build();
 
             ClientServiceProvider = clientHost.Services;
-            OrleansClusterClientFactory = ClientServiceProvider.GetRequiredService<IOrleansClusterClientFactory>();
+            OrleansClusterClientFactory = ClientServiceProvider.GetRequiredService<IClusterClientFactory>();
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using JetBrains.Annotations;
+﻿using GiG.Core.Orleans.Client.Abstractions;
+using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Orleans;
 using System;
 
@@ -20,11 +22,14 @@ namespace GiG.Core.Orleans.Client.Extensions
         {
             var clusterClient = services.CreateClusterClient(configureClient);
 
-            return services.AddSingleton(clusterClient);
+            services.TryAddSingleton(clusterClient);
+
+            return services;
         }
 
         /// <summary>
-        /// Creates and registers a new <see cref="IClusterClient"/> with default options.
+        /// Creates and registers a new <see cref="IClusterClient"/> with default options. This method is meant to register a single, not named cluster
+        /// client int the application.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" /> to add the services to.</param>
         /// <param name="configureClient">The <see cref="Action{ClientBuilder}"/> on which will be used to set the options for the client.</param>
@@ -33,7 +38,9 @@ namespace GiG.Core.Orleans.Client.Extensions
         {
             var clusterClient = services.CreateClusterClient(configureClient);
 
-            return services.AddSingleton(clusterClient);
+            services.TryAddSingleton(clusterClient);
+
+            return services;
         }
 
         /// <summary>
@@ -68,6 +75,16 @@ namespace GiG.Core.Orleans.Client.Extensions
             configureClient.Invoke(builder);
 
             return builder.BuildAndConnect();
+        }
+
+        /// <summary>
+        /// Creates and registers a new <see cref="IClusterClientFactory" />.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection" /> to add register and factory on.</param>
+        /// <returns>A <see cref="ClusterClientFactoryBuilder"/> on which to add Cluster Clients.</returns>
+        public static ClusterClientFactoryBuilder AddClusterClientFactory(this IServiceCollection services)
+        {
+            return new ClusterClientFactoryBuilder(services);
         }
     }
 }

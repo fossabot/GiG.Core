@@ -7,12 +7,13 @@ using System.Linq;
 namespace GiG.Core.Orleans.Client
 {
     /// <inheritdoc />
-    public sealed class OrleansClusterClientFactory : IOrleansClusterClientFactory
+    public sealed class ClusterClientFactory : IClusterClientFactory
     {
         private readonly Dictionary<string, IClusterClient> _clusterClients = new Dictionary<string, IClusterClient>();
+        private bool _isDisposing;
 
         /// <inheritdoc />
-        public void AddClusterClient(string name, IClusterClient clusterClient)
+        public void Add(string name, IClusterClient clusterClient)
         {
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             if (clusterClient == null) throw new ArgumentNullException(nameof(clusterClient));
@@ -23,7 +24,11 @@ namespace GiG.Core.Orleans.Client
         /// <inheritdoc />
         public void Dispose()
         {
-            _clusterClients.Values.ToList().ForEach(x => x.Close().Wait());
+            if (!_isDisposing)
+            {
+                _isDisposing = true;
+                _clusterClients.Values.ToList().ForEach(x => x.Close().Wait());
+            }                        
         }
 
         /// <inheritdoc />

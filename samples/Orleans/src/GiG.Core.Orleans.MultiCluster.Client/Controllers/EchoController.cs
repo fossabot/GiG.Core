@@ -9,9 +9,9 @@ namespace GiG.Core.Orleans.MultiCluster.Client.Controllers
     [Route("[controller]")]
     public class EchoController : ControllerBase
     {
-        private readonly IOrleansClusterClientFactory _clusterClientFactory;
+        private readonly IClusterClientFactory _clusterClientFactory;
 
-        public EchoController(IOrleansClusterClientFactory clusterClientFactory)
+        public EchoController(IClusterClientFactory clusterClientFactory)
         {
             _clusterClientFactory = clusterClientFactory;
         }

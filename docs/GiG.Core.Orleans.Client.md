@@ -44,7 +44,7 @@ public void ConfigureServices(IServiceCollection services)
             builder.ConfigureConsulClustering(ctx.Configuration);
         });
 
-    OrleansClusterClientFactoryBuilder.CreateClusterClientFactoryBuilder()
+    services.AddClusterClientFactory()
         .AddClusterClient("ClusterA", () =>
         {
             return services.CreateClusterClient((builder) =>
@@ -53,8 +53,7 @@ public void ConfigureServices(IServiceCollection services)
                 builder.ConfigureConsulClustering(ctx.Configuration);
             });
         })
-        .AddClusterClient("ClusterB", clusterB)
-        .RegisterFactory(services);
+        .AddClusterClient("ClusterB", clusterB);
 }
 ```
 

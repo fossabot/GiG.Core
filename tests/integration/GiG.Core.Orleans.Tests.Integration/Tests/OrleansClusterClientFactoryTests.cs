@@ -17,7 +17,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
         }
 
         [Fact]
-        public async Task GetValueAsync_CallGrain_ReturnsExpectedInteger()
+        public async Task GetValueAsync_CallGrain_ReturnsExpectedSiloName()
         {
             //Arrange
             var grainInSiloA = _clusterFixture.OrleansClusterClientFactory.GetClusterClient("ClusterA")

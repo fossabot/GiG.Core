@@ -27,8 +27,9 @@ namespace GiG.Core.Orleans.MultiCluster.Client
         public void ConfigureServices(IServiceCollection services)
         {
             //cluster clients can be added to the factory either via a created instance or an anonymous func.
-            OrleansClusterClientFactoryBuilder.CreateClusterClientFactoryBuilder()
-                .AddClusterClient("Payments", () => {
+            services.AddClusterClientFactory()
+                .AddClusterClient("Payments", () =>
+                {
                     return services.CreateClusterClient((builder) =>
                     {
                         builder.ConfigureCluster("Payments", _configuration);
@@ -39,8 +40,9 @@ namespace GiG.Core.Orleans.MultiCluster.Client
                         });
                         builder.AddAssemblies(typeof(IEchoGrain));
                     });
-                } )
-                .AddClusterClient("Games", () => {
+                })
+                .AddClusterClient("Games", () =>
+                {
                     return services.CreateClusterClient((builder) =>
                     {
                         builder.ConfigureCluster("Games", _configuration);
@@ -51,9 +53,8 @@ namespace GiG.Core.Orleans.MultiCluster.Client
                         });
                         builder.AddAssemblies(typeof(IEchoGrain));
                     });
-                })
-                .RegisterFactory(services);
-
+                });
+               
             // Health Checks
             services.AddHealthChecks();
 
