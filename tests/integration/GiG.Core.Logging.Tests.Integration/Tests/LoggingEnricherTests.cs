@@ -26,14 +26,14 @@ using Xunit;
 namespace GiG.Core.Logging.Tests.Integration.Tests
 {
     [Trait("Category", "Integration")]
-    public class EnricherTests
+    public class LoggingEnricherTests
     {
         private readonly TestServer _server;
 
         public LogEvent LogEvent;
         public ILogger Logger;
 
-        public EnricherTests()
+        public LoggingEnricherTests()
         {
             var host = Host.CreateDefaultBuilder()
                 .ConfigureWebHost(webBuilder =>
@@ -63,7 +63,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
             host.StartAsync().GetAwaiter().GetResult();
 
             _server = host.GetTestServer();
-            Logger = host.Services.GetRequiredService<ILogger<EnricherTests>>();
+            Logger = host.Services.GetRequiredService<ILogger<LoggingEnricherTests>>();
         }
 
         [Fact]
@@ -83,7 +83,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
         } 
 
         [Fact]
-        public async Task TestEnrichers()
+        public async Task Logging_Enrichers_Validations()
         {
             // Arrange
             var client = _server.CreateClient();
@@ -93,9 +93,11 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
             client.DefaultRequestHeaders.Add(MultiTenant.Abstractions.Constants.Header, "1");
             client.DefaultRequestHeaders.Add(MultiTenant.Abstractions.Constants.Header, "2");
 
+            // Act
             using var request = new HttpRequestMessage(HttpMethod.Get, "/api/mock");
             await client.SendAsync(request);
 
+            // Assert
             Assert.NotNull(LogEvent);
             var applicationName = (string)LogEvent.Properties["ApplicationName"].LiteralValue();
             var applicationVersion = (string)LogEvent.Properties["ApplicationVersion"].LiteralValue();
