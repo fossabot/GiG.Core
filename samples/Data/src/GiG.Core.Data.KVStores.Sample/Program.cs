@@ -8,20 +8,15 @@ namespace GiG.Core.Data.KVStores.Sample
 {
     internal class Program
     {
-        public static void Main()
+        public static void Main(string[] args)
         {
-            CreateHostBuilder().Build().Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
-        private static IHostBuilder CreateHostBuilder()
-        {
-            return new HostBuilder()
-                .ConfigureHostConfiguration(builder => builder
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json", false, true))
+        private static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
                 .UseApplicationMetadata()
                 .ConfigureLogging()
                 .ConfigureServices(Startup.ConfigureServices);
-        }
     }
 }

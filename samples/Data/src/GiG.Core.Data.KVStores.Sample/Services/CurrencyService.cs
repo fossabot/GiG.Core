@@ -1,27 +1,32 @@
 using GiG.Core.Data.KVStores.Abstractions;
 using GiG.Core.Data.KVStores.Sample.Models;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GiG.Core.Data.KVStores.Sample
+namespace GiG.Core.Data.KVStores.Sample.Services
 {
-    public class AnimalService : IHostedService
+    public class CurrencyService : IHostedService
     {
-        
-        private readonly IDataRetriever<IEnumerable<Animal>> _dataRetriever;
+        private readonly IDataRetriever<IEnumerable<Currency>> _dataRetriever;
+        private readonly ILogger<CurrencyService> _logger;
 
-        public AnimalService(IDataRetriever<IEnumerable<Animal>> dataRetriever)
+        public CurrencyService(IDataRetriever<IEnumerable<Currency>> dataRetriever, ILogger<CurrencyService> logger)
         {
             _dataRetriever = dataRetriever;
+            _logger = logger;
         }
         
         public Task StartAsync(CancellationToken cancellationToken)
         {
+            _logger.LogInformation("Retrieving Currencies...");
+           
             var data = _dataRetriever.Get();
-            Console.WriteLine(data);
+            _logger.LogInformation(String.Join(", ", data.Select(x=>$"Name: {x.Name}").ToArray()));
 
             return Task.CompletedTask;
         }

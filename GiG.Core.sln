@@ -265,6 +265,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Data.KVStores.Samp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Data.KVStores.Providers.Hosting", "src\GiG.Core.Data.KVStores.Providers.Hosting\GiG.Core.Data.KVStores.Providers.Hosting.csproj", "{E8F39612-5DB7-410F-BF1D-1DFA8DEF9DE1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Data.KVStores.Tests.Integration", "tests\integration\GiG.Core.Data.KVStores.Tests.Integration\GiG.Core.Data.KVStores.Tests.Integration.csproj", "{7164EEB5-5B40-4E50-BB3A-3B9D7D524480}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -546,6 +548,10 @@ Global
 		{E8F39612-5DB7-410F-BF1D-1DFA8DEF9DE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8F39612-5DB7-410F-BF1D-1DFA8DEF9DE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8F39612-5DB7-410F-BF1D-1DFA8DEF9DE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7164EEB5-5B40-4E50-BB3A-3B9D7D524480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7164EEB5-5B40-4E50-BB3A-3B9D7D524480}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7164EEB5-5B40-4E50-BB3A-3B9D7D524480}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7164EEB5-5B40-4E50-BB3A-3B9D7D524480}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -651,6 +657,7 @@ Global
 		{78FBEB08-E65B-4201-BD51-8EEE4B0C0A1C} = {412AB606-A56E-4B9E-A9C1-E2C7E02D0CF5}
 		{6C887E3F-86EF-44DD-BDA9-4D1C191CE09F} = {088A9253-942E-4C4E-9A2A-1C5B51BEAC83}
 		{E8F39612-5DB7-410F-BF1D-1DFA8DEF9DE1} = {412AB606-A56E-4B9E-A9C1-E2C7E02D0CF5}
+		{7164EEB5-5B40-4E50-BB3A-3B9D7D524480} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}

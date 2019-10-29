@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace GiG.Core.Data.KVStores.Providers.FileProviders
 {
+    /// <inheritdoc />
     public abstract class FileDataProvider<T> : IDataProvider<T>
     {
         private readonly ILogger<FileDataProvider<T>> _logger;
@@ -40,6 +41,11 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders
             return Task.CompletedTask;
         }
 
+        /// <summary>
+        /// Loads File Into Model.
+        /// </summary>
+        /// <returns>Generic to define type of model.</returns>
+        /// <exception cref="InvalidOperationException"></exception>
         private T Load()
         {
             var file = _fileProvider.GetFileInfo(_fileOptions.Path);

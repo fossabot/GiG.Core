@@ -1,5 +1,9 @@
 namespace GiG.Core.Data.KVStores.Abstractions
 {
+    /// <summary>
+    /// Data Retriever. 
+    /// </summary>
+    /// <typeparam name="T">Generic to define type of retriever.</typeparam>
     public interface IDataRetriever<T>
     {
         /// <summary>

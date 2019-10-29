@@ -5,6 +5,10 @@ using System.Threading.Tasks;
 
 namespace GiG.Core.Data.KVStores.Providers.Hosting
 {
+    /// <summary>
+    /// ProviderHostedService.
+    /// </summary>
+    /// <typeparam name="T">Generic to define type of hosted service.</typeparam>
     public class ProviderHostedService<T> : IHostedService
     {
         private readonly IDataProvider<T> _dataProvider;
