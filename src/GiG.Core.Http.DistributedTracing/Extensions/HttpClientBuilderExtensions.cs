@@ -15,7 +15,7 @@ namespace GiG.Core.Http.DistributedTracing.Extensions
         /// </summary>
         /// <param name="httpClientBuilder">The <see cref="IHttpClientBuilder"/>.</param>
         /// <returns>The <see cref="IHttpClientBuilder"/>.</returns>
-        public static IHttpClientBuilder AddCorrelationIdDelegateHandler(
+        public static IHttpClientBuilder AddCorrelationContextDelegatingHandler(
             [NotNull] this IHttpClientBuilder httpClientBuilder)
         {
             if (httpClientBuilder == null) throw new ArgumentNullException(nameof(httpClientBuilder));

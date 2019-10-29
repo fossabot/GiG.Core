@@ -18,12 +18,12 @@ namespace GiG.Core.Orleans.Sample.Http
               
             services.AddRefitClient<IWalletsClient>()
                 .ConfigureHttpClient(c => c.FromConfiguration(ctx.Configuration, "Wallets"))
-                .AddCorrelationIdDelegateHandler()
+                .AddCorrelationContextDelegatingHandler()
                 .AddTransientHttpErrorPolicy(p => p.RetryAsync(3));
 
             services.AddRefitClient<IPaymentsClient>()
                 .ConfigureHttpClient(c => c.FromConfiguration(ctx.Configuration, "Payments"))
-                .AddCorrelationIdDelegateHandler()
+                .AddCorrelationContextDelegatingHandler()
                 .AddTransientHttpErrorPolicy(p => p.RetryAsync(3));
         }
     }

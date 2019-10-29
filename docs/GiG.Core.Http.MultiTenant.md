@@ -15,3 +15,19 @@ var client = HttpClientFactory.CreateClient(x =>
 });
 
 ```
+
+Make use of `AddTenantDelegatingHandler` when configuring your `HttpClient`.
+
+```csharp
+public static void ConfigureServices(HostBuilderContext ctx, IServiceCollection services)
+{
+    services
+        .AddHttpClient("Payments", 
+            client => 
+            {
+                client.FromConfiguration(ctx.Configuration, "Payments"); 
+            })
+        .AddTenantDelegatingHandler();
+}
+
+```
