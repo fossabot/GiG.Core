@@ -57,7 +57,7 @@ namespace GiG.Core.Web.Sample
         {
             app.UseForwardedHeaders();
             app.UsePathBaseFromConfiguration();
-            app.UseCorrelationId();
+            app.UseCorrelation();
             app.UseRouting();
             app.UseFluentValidationMiddleware();
             app.UseHealthChecks();

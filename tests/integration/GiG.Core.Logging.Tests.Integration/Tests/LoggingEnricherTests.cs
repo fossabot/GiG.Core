@@ -1,5 +1,7 @@
 ﻿using GiG.Core.Context.Web.Extensions;
 using GiG.Core.DistributedTracing.Web.Extensions;
+using GiG.Core.Hosting.Abstractions;
+using GiG.Core.Hosting.Extensions;
 using GiG.Core.Logging.Enrichers.ApplicationMetadata.Extensions;
 using GiG.Core.Logging.Enrichers.Context.Extensions;
 using GiG.Core.Logging.Enrichers.DistributedTracing.Extensions;
@@ -29,6 +31,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
     public class LoggingEnricherTests
     {
         private readonly TestServer _server;
+        private readonly IApplicationMetadataAccessor _applicationMetadataAccessor;
 
         public LogEvent LogEvent;
         public ILogger Logger;
@@ -36,13 +39,14 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
         public LoggingEnricherTests()
         {
             var host = Host.CreateDefaultBuilder()
+                .UseApplicationMetadata()
                 .ConfigureWebHost(webBuilder =>
                 {
                     webBuilder.UseTestServer();
                     webBuilder.Configure(app =>
                     {
                         app.UseForwardedHeaders();
-                        app.UseCorrelationId();
+                        app.UseCorrelation();
                     });
                     webBuilder.ConfigureServices(x =>
                     {
@@ -64,6 +68,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
 
             _server = host.GetTestServer();
             Logger = host.Services.GetRequiredService<ILogger<LoggingEnricherTests>>();
+            _applicationMetadataAccessor = host.Services.GetRequiredService<IApplicationMetadataAccessor>();
         }
 
         [Fact]
@@ -88,7 +93,8 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
             // Arrange
             var client = _server.CreateClient();
             const string expectedIPAddress = "192.168.0.1";
-
+            
+            client.DefaultRequestHeaders.Add(DistributedTracing.Abstractions.Constants.Header, Guid.NewGuid().ToString());
             client.DefaultRequestHeaders.Add(ForwardedHeadersDefaults.XForwardedForHeaderName, expectedIPAddress);
             client.DefaultRequestHeaders.Add(MultiTenant.Abstractions.Constants.Header, "1");
             client.DefaultRequestHeaders.Add(MultiTenant.Abstractions.Constants.Header, "2");
@@ -111,6 +117,8 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
             Assert.NotNull(ipAddress);
             Assert.NotNull(tenantIds);
 
+            Assert.Equal(_applicationMetadataAccessor.Name, applicationName);
+            Assert.Equal(_applicationMetadataAccessor.Version, applicationVersion);
             Assert.True(Guid.TryParse(correlationId, out _));
             Assert.Equal(expectedIPAddress, ipAddress);
             Assert.True(tenantIds.Length == 2);

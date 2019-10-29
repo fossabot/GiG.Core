@@ -75,7 +75,7 @@ namespace GiG.Core.Orleans.Sample.Web
         {
             app.UseForwardedHeaders();
             app.UsePathBaseFromConfiguration();
-            app.UseCorrelationId();
+            app.UseCorrelation();
             app.UseHealthChecks();
             app.UseApiDocs();
             app.UseInfoManagement();
