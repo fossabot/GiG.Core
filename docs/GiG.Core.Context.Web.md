@@ -1,4 +1,4 @@
-﻿# GiG.Core.Context.Web
+# GiG.Core.Context.Web
 
 This Library provides an API to register the Request Context Accessor functionality for a web application.
 
@@ -10,7 +10,7 @@ The below code needs to be added to the `Startup.cs`. This will register the Req
 
 public void ConfigureServices(IServiceCollection services)
 {
-    services.AddRequestContext();
+    services.AddRequestContextAccessor();
 }
 
 ```

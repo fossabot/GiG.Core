@@ -261,15 +261,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Streams", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Docs.Abstractions", "src\GiG.Core.Web.Docs.Abstractions\GiG.Core.Web.Docs.Abstractions.csproj", "{ECF4320C-0B41-4D74-99AD-ACDFE69EC230}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Orleans.Clustering.Kubernetes.Abstractions", "src\GiG.Core.Orleans.Clustering.Kubernetes.Abstractions\GiG.Core.Orleans.Clustering.Kubernetes.Abstractions.csproj", "{FA43C5F8-CF14-476B-B147-5A1412B54CAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Clustering.Kubernetes.Abstractions", "src\GiG.Core.Orleans.Clustering.Kubernetes.Abstractions\GiG.Core.Orleans.Clustering.Kubernetes.Abstractions.csproj", "{FA43C5F8-CF14-476B-B147-5A1412B54CAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Orleans.Clustering.Consul.Abstractions", "src\GiG.Core.Orleans.Clustering.Consul.Abstractions\GiG.Core.Orleans.Clustering.Consul.Abstractions.csproj", "{27E1501C-F6CF-4D88-AFD3-64AB4F573D8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Clustering.Consul.Abstractions", "src\GiG.Core.Orleans.Clustering.Consul.Abstractions\GiG.Core.Orleans.Clustering.Consul.Abstractions.csproj", "{27E1501C-F6CF-4D88-AFD3-64AB4F573D8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Orleans.Clustering.Abstractions", "src\GiG.Core.Orleans.Clustering.Abstractions\GiG.Core.Orleans.Clustering.Abstractions.csproj", "{5E77E9F0-95F0-47E7-BEDA-4DDCC2C9DBD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Clustering.Abstractions", "src\GiG.Core.Orleans.Clustering.Abstractions\GiG.Core.Orleans.Clustering.Abstractions.csproj", "{5E77E9F0-95F0-47E7-BEDA-4DDCC2C9DBD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Orleans.Silo.Abstractions", "src\GiG.Core.Orleans.Silo.Abstractions\GiG.Core.Orleans.Silo.Abstractions.csproj", "{4E44028E-F87A-4C11-B953-F104DE7E36F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Silo.Abstractions", "src\GiG.Core.Orleans.Silo.Abstractions\GiG.Core.Orleans.Silo.Abstractions.csproj", "{4E44028E-F87A-4C11-B953-F104DE7E36F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Orleans.Storage.Npgsql.Abstractions", "src\GiG.Core.Orleans.Storage.Npgsql.Abstractions\GiG.Core.Orleans.Storage.Npgsql.Abstractions.csproj", "{3E1FF6DA-ABD3-4B46-AA6A-C1694BD715C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Storage.Npgsql.Abstractions", "src\GiG.Core.Orleans.Storage.Npgsql.Abstractions\GiG.Core.Orleans.Storage.Npgsql.Abstractions.csproj", "{3E1FF6DA-ABD3-4B46-AA6A-C1694BD715C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Logging.Tests.Integration", "tests\integration\GiG.Core.Logging.Tests.Integration\GiG.Core.Logging.Tests.Integration.csproj", "{40161FF2-C190-4F1B-AACE-080BDB007976}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -561,6 +563,10 @@ Global
 		{3E1FF6DA-ABD3-4B46-AA6A-C1694BD715C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E1FF6DA-ABD3-4B46-AA6A-C1694BD715C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E1FF6DA-ABD3-4B46-AA6A-C1694BD715C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40161FF2-C190-4F1B-AACE-080BDB007976}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40161FF2-C190-4F1B-AACE-080BDB007976}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40161FF2-C190-4F1B-AACE-080BDB007976}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40161FF2-C190-4F1B-AACE-080BDB007976}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -668,6 +674,7 @@ Global
 		{5E77E9F0-95F0-47E7-BEDA-4DDCC2C9DBD4} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
 		{4E44028E-F87A-4C11-B953-F104DE7E36F2} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
 		{3E1FF6DA-ABD3-4B46-AA6A-C1694BD715C7} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
+		{40161FF2-C190-4F1B-AACE-080BDB007976} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}
