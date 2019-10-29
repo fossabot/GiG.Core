@@ -8,10 +8,7 @@ namespace GiG.Core.Context.Web.Internal
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public RequestContextAccessor(IHttpContextAccessor httpContextAccessor)
-        {
-            _httpContextAccessor = httpContextAccessor;
-        }
+        public RequestContextAccessor(IHttpContextAccessor httpContextAccessor) => _httpContextAccessor = httpContextAccessor;
 
         public IPAddress IPAddress => _httpContextAccessor?.HttpContext?.Connection?.RemoteIpAddress;
     }

@@ -1,4 +1,4 @@
-﻿using GiG.Core.Context.Web.Extensions;
+﻿using GiG.Core.Context.Abstractions;
 using GiG.Core.DistributedTracing.Web.Extensions;
 using GiG.Core.Hosting.Abstractions;
 using GiG.Core.Hosting.Extensions;
@@ -13,7 +13,6 @@ using GiG.Core.MultiTenant.Web.Extensions;
 using GiG.Core.Web.Hosting.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -32,6 +31,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
     {
         private readonly TestServer _server;
         private readonly IApplicationMetadataAccessor _applicationMetadataAccessor;
+        private readonly IRequestContextAccessor _requestContextAccessor;
 
         public LogEvent LogEvent;
         public ILogger Logger;
@@ -69,6 +69,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
             _server = host.GetTestServer();
             Logger = host.Services.GetRequiredService<ILogger<LoggingEnricherTests>>();
             _applicationMetadataAccessor = host.Services.GetRequiredService<IApplicationMetadataAccessor>();
+            _requestContextAccessor = host.Services.GetRequiredService<IRequestContextAccessor>();
         }
 
         [Fact]
@@ -92,17 +93,15 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
         {
             // Arrange
             var client = _server.CreateClient();
-            const string expectedIPAddress = "192.168.0.1";
             
             client.DefaultRequestHeaders.Add(DistributedTracing.Abstractions.Constants.Header, Guid.NewGuid().ToString());
-            client.DefaultRequestHeaders.Add(ForwardedHeadersDefaults.XForwardedForHeaderName, expectedIPAddress);
             client.DefaultRequestHeaders.Add(MultiTenant.Abstractions.Constants.Header, "1");
             client.DefaultRequestHeaders.Add(MultiTenant.Abstractions.Constants.Header, "2");
 
             // Act
             using var request = new HttpRequestMessage(HttpMethod.Get, "/api/mock");
             await client.SendAsync(request);
-
+            
             // Assert
             Assert.NotNull(LogEvent);
             var applicationName = (string)LogEvent.Properties["ApplicationName"].LiteralValue();
@@ -120,7 +119,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
             Assert.Equal(_applicationMetadataAccessor.Name, applicationName);
             Assert.Equal(_applicationMetadataAccessor.Version, applicationVersion);
             Assert.True(Guid.TryParse(correlationId, out _));
-            Assert.Equal(expectedIPAddress, ipAddress);
+            Assert.Equal(_requestContextAccessor.IPAddress.ToString(), ipAddress);
             Assert.True(tenantIds.Length == 2);
             Assert.True(Array.Exists(tenantIds, e=>e.ToString().Equals("1")));
             Assert.True(Array.Exists(tenantIds, e=>e.ToString().Equals("2")));
