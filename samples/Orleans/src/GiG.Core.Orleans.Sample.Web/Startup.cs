@@ -47,13 +47,12 @@ namespace GiG.Core.Orleans.Sample.Web
                     x.ConfigureKubernetesClustering(_configuration);
                 });
                 builder.AddAssemblies(typeof(IWalletGrain));
-
             });
 
-            // Signal R
-            services.AddSignalR()
-                .AddOrleans();
+            // SignalR
+            services.AddSignalR().AddOrleans();
 
+            // MassTransit
             services.AddMessagePublisher(_configuration);
             
             // Health Checks
