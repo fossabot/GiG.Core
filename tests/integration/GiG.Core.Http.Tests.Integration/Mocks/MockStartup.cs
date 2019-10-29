@@ -12,14 +12,14 @@ namespace GiG.Core.Http.Tests.Integration.Mocks
         {
             services.AddControllers();
             services.AddRouting();
-            services.AddCorrelationId();
+            services.AddCorrelationAccessor();
             services.AddTenantAccessor();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseRouting();
-            app.UseCorrelationId();
+            app.UseCorrelation();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

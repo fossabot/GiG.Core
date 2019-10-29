@@ -1,6 +1,6 @@
 # GiG.Core.Http
 
-This Library provides an API to create an `HttpClient` without using IOC. Alternatively you can use the built-in `IHttpClientFactory` found in `Microsoft.Extensions.Http` when `ServiceCollection` can be used.
+This Library provides an API to create an `HttpClient` without using IOC.  Alternatively you can use the built-in `IHttpClientFactory` found in `Microsoft.Extensions.Http` when `ServiceCollection` can be used.  It also provides extensions to configure the client from `IConfiguration` and `IConfigurationSection`.
 
 ## Basic Usage
 
@@ -16,3 +16,28 @@ var client = HttpClientFactory.CreateClient(x =>
 });
 
 ```
+
+ Alternatively you can use the built-in `IHttpClientFactory` found in `Microsoft.Extensions.Http` when `ServiceCollection` can be used.  The extension to configure the client from `IConfiguration` can be used as below.
+
+```csharp
+
+services.AddHttpClient("Payments", client =>
+{
+    client.FromConfiguration(ctx.Configuration, "Payments");
+});
+
+```
+
+### Configuration
+
+The below table outlines the valid Configurations for [DefaultClientOptions](../src/GiG.Core.Http/DefaultClientOptions.cs). By default the Configuration for the provider is expected to be under the section "HttpClient". 
+
+| Configuration Name | Type   | Required | Default Value |
+|:-------------------|:-------|:---------|:--------------|
+| BaseUrl            | String | Yes      |               |
+
+The below table outlines the valid Configurations for [HttpClientOptions](../src/GiG.Core.Http/HttpClientOptions.cs).
+
+| Configuration Name | Type   | Required | Default Value |
+|:-------------------|:-------|:---------|:--------------|
+| Url                | String | Yes      |               |

@@ -20,7 +20,7 @@ namespace GiG.Core.Web.Sample
             Host.CreateDefaultBuilder(args)
                 .UseApplicationMetadata()
                 .ConfigureServices(x => {
-                    x.AddCorrelationId();
+                    x.AddCorrelationAccessor();
                     x.AddTenantAccessor();
                     x.AddRequestContextAccessor();
                 })
