@@ -13,7 +13,7 @@ namespace GiG.Core.DistributedTracing.Web.Tests.Integration.Mocks
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseCorrelationId();
+            app.UseCorrelation();
         }
     }
 }
