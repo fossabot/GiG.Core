@@ -14,7 +14,7 @@
     <PackageIconUrl>https://www.gig.com/uploads/2018/06/80fd7035-gig-product-icons-08-320x320.png</PackageIconUrl>
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <Deterministic>False</Deterministic>
-    <NoWarn>NU5105</NoWarn>
+    <NoWarn>NU5105;NU5048</NoWarn>
   </PropertyGroup>
 
   <!-- CI Helpers -->
