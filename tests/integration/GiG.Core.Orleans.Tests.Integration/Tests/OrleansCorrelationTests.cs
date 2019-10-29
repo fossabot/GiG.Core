@@ -2,8 +2,6 @@
 using GiG.Core.Orleans.Tests.Integration.Fixtures;
 using Orleans.Runtime;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 

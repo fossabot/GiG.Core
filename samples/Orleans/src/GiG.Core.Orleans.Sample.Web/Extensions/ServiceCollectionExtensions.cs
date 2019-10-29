@@ -1,5 +1,4 @@
 using GiG.Core.Messaging.RabbitMQ.Abstractions;
-using GiG.Core.Orleans.Sample.Contracts.Messages;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
