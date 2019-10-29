@@ -24,7 +24,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
             var tenantAccessor = new MockTenantAccessor();
             var client = HttpClientFactory.CreateClient(x =>
             {
-                x.AddHttpMessageHandler(new CorrelationIdDelegatingHandler(correlationContextAccessor));
+                x.AddHttpMessageHandler(new CorrelationContextDelegatingHandler(correlationContextAccessor));
                 x.AddHttpMessageHandler(new TenantDelegatingHandler(tenantAccessor));
                 x.AddHttpMessageHandler(new LoggingDelegatingHandler(testServer.CreateHandler()));
                 x.Options.WithBaseAddress(testServer.BaseAddress);
@@ -52,7 +52,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
             var tenantAccessor = new MockTenantAccessor();
             var client = HttpClientFactory.CreateClient(x =>
             {
-                x.AddHttpMessageHandler(new CorrelationIdDelegatingHandler(correlationContextAccessor));
+                x.AddHttpMessageHandler(new CorrelationContextDelegatingHandler(correlationContextAccessor));
                 x.AddHttpMessageHandler(new TenantDelegatingHandler(tenantAccessor));
                 x.AddHttpMessageHandler(new LoggingDelegatingHandler(testServer.CreateHandler()));
                 x.Options.WithBaseAddress(testServer.BaseAddress.ToString());
@@ -80,7 +80,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
             var tenantAccessor = new MockTenantAccessor();
             var client = HttpClientFactory.CreateClient(x =>
             {
-                x.AddHttpMessageHandler(new CorrelationIdDelegatingHandler(correlationContextAccessor));
+                x.AddHttpMessageHandler(new CorrelationContextDelegatingHandler(correlationContextAccessor));
                 x.AddHttpMessageHandler(new TenantDelegatingHandler(tenantAccessor));
                 x.AddHttpMessageHandler(new LoggingDelegatingHandler(testServer.CreateHandler()));
                 x.Options.WithBaseAddress(testServer.BaseAddress.ToString(), "/relative");

@@ -21,8 +21,8 @@ namespace GiG.Core.Http.DistributedTracing.Extensions
             if (httpClientBuilder == null) throw new ArgumentNullException(nameof(httpClientBuilder));
 
             httpClientBuilder
-                .AddHttpMessageHandler<CorrelationIdDelegatingHandler>()
-                .Services.TryAddTransient<CorrelationIdDelegatingHandler>();
+                .AddHttpMessageHandler<CorrelationContextDelegatingHandler>()
+                .Services.TryAddTransient<CorrelationContextDelegatingHandler>();
 
             return httpClientBuilder;
         }

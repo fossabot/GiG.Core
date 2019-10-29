@@ -8,7 +8,7 @@ namespace GiG.Core.Http.DistributedTracing
     /// <summary>
     /// A <see cref="DelegatingHandler"/> that injects an X-Correlation-ID Header into the request.
     /// </summary>
-    public class CorrelationIdDelegatingHandler : DelegatingHandler
+    public class CorrelationContextDelegatingHandler : DelegatingHandler
     {
         private readonly ICorrelationContextAccessor _correlationContextAccessor;
 
@@ -16,7 +16,7 @@ namespace GiG.Core.Http.DistributedTracing
         /// A <see cref="DelegatingHandler"/> that injects an X-Correlation-ID Header into the request.
         /// </summary>
         /// <param name="correlationContextAccessor">The <see cref="T:GiG.Core.DistributedTracing.Abstractions.ICorrelationContextAccessor" /> to use.</param>
-        public CorrelationIdDelegatingHandler(ICorrelationContextAccessor correlationContextAccessor)
+        public CorrelationContextDelegatingHandler(ICorrelationContextAccessor correlationContextAccessor)
         {
             _correlationContextAccessor = correlationContextAccessor;
         }

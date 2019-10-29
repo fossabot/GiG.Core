@@ -5,9 +5,5 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="System.Security.Permissions" Version="4.6.0" PrivateAssets="compile" />
-  </ItemGroup>
-
+  
 </Project>

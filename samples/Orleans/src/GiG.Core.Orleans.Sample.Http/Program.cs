@@ -1,6 +1,8 @@
-﻿using GiG.Core.DistributedTracing.Web.Extensions;
+﻿using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.Logging.All.Extensions;
+using GiG.Core.Orleans.Sample.Http.Services;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -37,7 +39,7 @@ namespace GiG.Core.Orleans.Sample.Http
 
         private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureServices(services => services.AddCorrelationId())
+                .ConfigureServices(services => services.TryAddSingleton<ICorrelationContextAccessor, CorrelationContextAccessor>())
                 .ConfigureLogging()
                 .ConfigureServices(Startup.ConfigureServices);
     }

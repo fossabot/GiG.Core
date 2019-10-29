@@ -14,7 +14,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\..\src\GiG.Core.DistributedTracing.Abstractions\GiG.Core.DistributedTracing.Abstractions.csproj" />
       <ProjectReference Include="..\..\..\..\src\GiG.Core.Http.DistributedTracing\GiG.Core.Http.DistributedTracing.csproj" />
       <ProjectReference Include="..\..\..\..\src\GiG.Core.Http.Extensions\GiG.Core.Http.Extensions.csproj" />
       <ProjectReference Include="..\GiG.Core.Orleans.Sample.Web\GiG.Core.Orleans.Sample.Web.csproj" />

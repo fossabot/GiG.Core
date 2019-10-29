@@ -1,4 +1,5 @@
-﻿using GiG.Core.Orleans.Sample.Http.Contracts;
+﻿using GiG.Core.DistributedTracing.Abstractions;
+using GiG.Core.Orleans.Sample.Http.Contracts;
 using GiG.Core.Orleans.Sample.Web.Contracts;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -29,7 +30,7 @@ namespace GiG.Core.Orleans.Sample.Http.Services
             var transactionRequest = new TransactionRequest() {Amount = 50};
 
             var paymentsResponse = await _paymentsClient.DepositAsync(playerId, transactionRequest);
-            var paymentsCorrelationId = paymentsResponse.Headers.GetValues("X-Correlation-ID").First();
+            var paymentsCorrelationId = paymentsResponse.Headers.GetValues(Constants.Header).First();
 
             _logger.LogInformation("Deposit: {depositAmount}; Correlation ID: {paymentsCorrelationId}",
                 transactionRequest.Amount, paymentsCorrelationId);
@@ -37,7 +38,7 @@ namespace GiG.Core.Orleans.Sample.Http.Services
             var walletsResponse = await _walletsClient.GetBalanceAsync(playerId);
 
             var balance = await walletsResponse.Content.ReadAsStringAsync();
-            var walletsCorrelationId = walletsResponse.Headers.GetValues("X-Correlation-ID").First();
+            var walletsCorrelationId = walletsResponse.Headers.GetValues(Constants.Header).First();
 
             _logger.LogInformation("Balance: {balance}; Correlation ID: {walletsCorrelationId}",
                 balance, walletsCorrelationId);
