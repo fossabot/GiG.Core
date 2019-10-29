@@ -1,4 +1,4 @@
-﻿# GiG.Core.DistributedTracing.Web
+# GiG.Core.DistributedTracing.Web
 
 This Library provides an API to register Distributed Tracing for a web application.
 
@@ -10,7 +10,7 @@ The below code needs to be added to the `Program.cs`. This will register the Cor
 
 public void ConfigureServices(IServiceCollection services)
 {
-    services.AddCorrelationId();
+    services.AddCorrelationAccessor();
 }
 
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

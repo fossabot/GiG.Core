@@ -18,11 +18,11 @@ namespace GiG.Core.DistributedTracing.Web.Extensions
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection"/>.</param>
         /// <returns>The <see cref="IServiceCollection"/>.</returns>
-        public static IServiceCollection AddCorrelationId([NotNull] this IServiceCollection services)
+        public static IServiceCollection AddCorrelationAccessor([NotNull] this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            CorrelationIdServiceExtensions.AddCorrelationId(services);
+            services.AddCorrelationId();
             services.TryAddSingleton<ICorrelationContextAccessor, CorrelationContextAccessor>();
 
             return services;

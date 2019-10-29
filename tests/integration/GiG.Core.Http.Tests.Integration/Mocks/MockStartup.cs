@@ -12,7 +12,7 @@ namespace GiG.Core.Http.Tests.Integration.Mocks
         {
             services.AddControllers();
             services.AddRouting();
-            services.AddCorrelationId();
+            services.AddCorrelationAccessor();
             services.AddTenantAccessor();
         }
 
