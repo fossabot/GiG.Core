@@ -20,6 +20,9 @@ namespace GiG.Core.Orleans.Client.Extensions
         /// <returns>The <see cref="IServiceCollection" /> so that additional calls can be chained.</returns>
         public static IServiceCollection AddClusterClient([NotNull] this IServiceCollection services, [NotNull] Action<ClientBuilder, IServiceProvider> configureClient)
         {
+            if (services == null) throw new ArgumentNullException(nameof(services));
+            if (configureClient == null) throw new ArgumentNullException(nameof(configureClient));
+
             var clusterClient = services.CreateClusterClient(configureClient);
 
             services.TryAddSingleton(clusterClient);
@@ -36,6 +39,9 @@ namespace GiG.Core.Orleans.Client.Extensions
         /// <returns>The <see cref="IServiceCollection" /> so that additional calls can be chained.</returns>
         public static IServiceCollection AddClusterClient([NotNull] this IServiceCollection services, [NotNull] Action<ClientBuilder> configureClient)
         {
+            if (services == null) throw new ArgumentNullException(nameof(services));
+            if (configureClient == null) throw new ArgumentNullException(nameof(configureClient));
+
             var clusterClient = services.CreateClusterClient(configureClient);
 
             services.TryAddSingleton(clusterClient);
@@ -52,6 +58,7 @@ namespace GiG.Core.Orleans.Client.Extensions
         public static IClusterClient CreateClusterClient([NotNull] this IServiceCollection services, [NotNull] Action<ClientBuilder, IServiceProvider> configureClient)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
+            if (configureClient == null) throw new ArgumentNullException(nameof(configureClient));
 
             var builder = new ClientBuilder();
 
@@ -69,6 +76,7 @@ namespace GiG.Core.Orleans.Client.Extensions
         public static IClusterClient CreateClusterClient([NotNull] this IServiceCollection services, [NotNull] Action<ClientBuilder> configureClient)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
+            if (configureClient == null) throw new ArgumentNullException(nameof(configureClient));
 
             var builder = new ClientBuilder();
 
@@ -82,8 +90,10 @@ namespace GiG.Core.Orleans.Client.Extensions
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" /> to add register and factory on.</param>
         /// <returns>A <see cref="ClusterClientFactoryBuilder"/> on which to add Cluster Clients.</returns>
-        public static ClusterClientFactoryBuilder AddClusterClientFactory(this IServiceCollection services)
+        public static ClusterClientFactoryBuilder AddClusterClientFactory([NotNull] this IServiceCollection services)
         {
+            if (services == null) throw new ArgumentNullException(nameof(services));
+
             return new ClusterClientFactoryBuilder(services);
         }
     }

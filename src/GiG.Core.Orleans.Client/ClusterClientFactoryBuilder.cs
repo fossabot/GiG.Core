@@ -1,4 +1,5 @@
 ﻿using GiG.Core.Orleans.Client.Abstractions;
+using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Orleans;
@@ -28,8 +29,11 @@ namespace GiG.Core.Orleans.Client
         /// <param name="name">The Name of the Orleans Cluster Client.</param>
         /// <param name="clusterClient">The Orleans <see cref="IClusterClient"/>.</param>
         /// <returns>The <see cref="ClusterClientFactoryBuilder"/>.</returns>
-        public ClusterClientFactoryBuilder AddClusterClient(string name, IClusterClient clusterClient)
+        public ClusterClientFactoryBuilder AddClusterClient(string name, [NotNull] IClusterClient clusterClient)
         {
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
+            if (clusterClient == null) throw new ArgumentNullException(nameof(clusterClient));
+
             factory.Add(name, clusterClient);
 
             return this;
@@ -41,8 +45,11 @@ namespace GiG.Core.Orleans.Client
         /// <param name="name">The Name of the Orleans Cluster Client.</param>
         /// <param name="createClient">The <see cref="Func{IClusterClient}"/> which will be used to create the Orleans Cluster Client</param>
         /// <returns>The <see cref="ClusterClientFactoryBuilder"/>.</returns>
-        public ClusterClientFactoryBuilder AddClusterClient(string name, Func<IClusterClient> createClient)
+        public ClusterClientFactoryBuilder AddClusterClient(string name, [NotNull] Func<IClusterClient> createClient)
         {
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
+            if (createClient == null) throw new ArgumentNullException(nameof(createClient));
+
             return AddClusterClient(name, createClient.Invoke());
         }              
     }

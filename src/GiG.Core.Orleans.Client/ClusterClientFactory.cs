@@ -1,4 +1,5 @@
 ﻿using GiG.Core.Orleans.Client.Abstractions;
+using JetBrains.Annotations;
 using Orleans;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace GiG.Core.Orleans.Client
         private bool _isDisposing;
 
         /// <inheritdoc />
-        public void Add(string name, IClusterClient clusterClient)
+        public void Add(string name, [NotNull] IClusterClient clusterClient)
         {
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
             if (clusterClient == null) throw new ArgumentNullException(nameof(clusterClient));
