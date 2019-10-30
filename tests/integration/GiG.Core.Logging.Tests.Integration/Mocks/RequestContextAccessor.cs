@@ -6,10 +6,8 @@ namespace GiG.Core.Logging.Tests.Integration.Mocks
 {
     internal class RequestContextAccessor : IRequestContextAccessor
     {
-        private static IPAddress _ipAddress;
-        public IPAddress IPAddress
-        {
-            get { return _ipAddress ??= new Faker().Internet.IpAddress(); }
-        }
+        public IPAddress IPAddress { get; }
+
+        public RequestContextAccessor() => IPAddress = new Faker().Internet.IpAddress();
     }
 }

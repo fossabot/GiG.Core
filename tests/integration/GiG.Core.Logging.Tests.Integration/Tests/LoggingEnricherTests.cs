@@ -48,13 +48,13 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
                         app.UseForwardedHeaders();
                         app.UseCorrelation();
                     });
-                    webBuilder.ConfigureServices(x =>
-                    {
-                        x.ConfigureForwardedHeaders();
-                        x.AddCorrelationAccessor();
-                        x.AddTenantAccessor();
-                        x.AddRequestContextAccessor();
-                    });
+                })
+                .ConfigureServices(x =>
+                {
+                    x.ConfigureForwardedHeaders();
+                    x.AddCorrelationAccessor();
+                    x.AddTenantAccessor();
+                    x.AddRequestContextAccessor();
                 })
                 .ConfigureLogging(x => x
                     .WriteToSink(new DelegatingSink(e => LogEvent = e))
@@ -83,17 +83,17 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
                         .Configure(app => { });
                 })
                 .StartAsync();
-  
-            var response = await host.GetTestServer().CreateClient().GetAsync("/"); 
-            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode); 
-        } 
+
+            var response = await host.GetTestServer().CreateClient().GetAsync("/");
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+        }
 
         [Fact]
         public async Task Logging_Enrichers_Validations()
         {
             // Arrange
             var client = _server.CreateClient();
-            
+
             client.DefaultRequestHeaders.Add(DistributedTracing.Abstractions.Constants.Header, Guid.NewGuid().ToString());
             client.DefaultRequestHeaders.Add(MultiTenant.Abstractions.Constants.Header, "1");
             client.DefaultRequestHeaders.Add(MultiTenant.Abstractions.Constants.Header, "2");
@@ -101,7 +101,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
             // Act
             using var request = new HttpRequestMessage(HttpMethod.Get, "/api/mock");
             await client.SendAsync(request);
-            
+
             // Assert
             Assert.NotNull(LogEvent);
             var applicationName = (string)LogEvent.Properties["ApplicationName"].LiteralValue();
@@ -121,8 +121,8 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
             Assert.True(Guid.TryParse(correlationId, out _));
             Assert.Equal(_requestContextAccessor.IPAddress.ToString(), ipAddress);
             Assert.True(tenantIds.Length == 2);
-            Assert.True(Array.Exists(tenantIds, e=>e.ToString().Equals("1")));
-            Assert.True(Array.Exists(tenantIds, e=>e.ToString().Equals("2")));
+            Assert.True(Array.Exists(tenantIds, e => e.ToString().Equals("1")));
+            Assert.True(Array.Exists(tenantIds, e => e.ToString().Equals("2")));
         }
     }
 }

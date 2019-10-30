@@ -12,9 +12,7 @@ namespace GiG.Core.Logging.Tests.Integration.Extensions
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services
-                .AddHttpContextAccessor()
-                .TryAddSingleton<IRequestContextAccessor, RequestContextAccessor>();
+            services.TryAddSingleton<IRequestContextAccessor>(new RequestContextAccessor());
 
             return services;
         }
