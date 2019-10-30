@@ -7,98 +7,98 @@ using System;
 namespace GiG.Core.HealthChecks.Extensions
 {
     /// <summary>
-    /// Health Checks Builder Extensions
+    /// Health Checks Builder Extensions.
     /// </summary>
     public static class HealthChecksBuilderExtensions
     {
         /// <summary>
-        ///  Adds a new health check with the specified name and implementation.
-        ///  Adds the ready tag to the health check automatically.
+        ///  Adds a new HealthCheck with the specified name and implementation.
+        ///  Adds the Ready Tag to the HealthCheck automatically.
         /// </summary>
-        /// <typeparam name="T">The health check implementation type.</typeparam>
-        /// <param name="builder">The <see cref="T:Microsoft.Extensions.DependencyInjection.IHealthChecksBuilder" />.</param>
-        /// <param name="name">The name of the health check.</param>
-        /// <param name="failureStatus">The <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus" /> that should be
-        ///     reported when the health check reports a failure. If the provided value is null,
-        ///     then <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Unhealthy" /> will
+        /// <typeparam name="T">The HealthCheck type.</typeparam>
+        /// <param name="builder">The <see cref="IHealthChecksBuilder" />.</param>
+        /// <param name="name">The HealthCheck name.</param>
+        /// <param name="healthStatus">The <see cref="HealthStatus" /> that should be
+        ///     reported when the HealthCheck reports a failure. If the provided value is null,
+        ///     then <see cref="HealthStatus.Unhealthy" /> will
         ///     be reported.
         ///</param>
-        /// <returns>The <see cref="T:Microsoft.Extensions.DependencyInjection.IHealthChecksBuilder" />.</returns>
+        /// <returns>The <see cref="IHealthChecksBuilder" />.</returns>
         public static IHealthChecksBuilder AddReadyCheck<T>([NotNull] this IHealthChecksBuilder builder, [NotNull] string name, 
-            HealthStatus? failureStatus = null) where T : class, IHealthCheck
+            HealthStatus? healthStatus = null) where T : class, IHealthCheck
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (name == null) throw new ArgumentNullException(nameof(name));
 
-            return builder.AddCheck<T>(name, failureStatus, new [] { Constants.ReadyTag });
+            return builder.AddCheck<T>(name, healthStatus, new [] { Constants.ReadyTag });
         }
 
         /// <summary>
-        ///  Adds a new health check with the specified name and implementation.
-        ///  Adds the ready tag to the health check automatically.
+        ///  Adds a new HealthCheck with the specified name and implementation.
+        ///  Adds the Ready Tag to the HealthCheck automatically.
         /// </summary>
-        /// <param name="builder">The <see cref="T:Microsoft.Extensions.DependencyInjection.IHealthChecksBuilder" />.</param>
-        /// <param name="name">The name of the health check.</param>
-        /// <param name="instance">The Health Check Instance</param>
-        /// <param name="failureStatus">The <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus" /> that should be
-        ///     reported when the health check reports a failure. If the provided value is null,
-        ///     then <see cref="Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Unhealthy" /> will
+        /// <param name="builder">The <see cref="IHealthChecksBuilder" />.</param>
+        /// <param name="name">The HealthCheck name.</param>
+        /// <param name="instance">The HealthCheck instance.</param>
+        /// <param name="healthStatus">The <see cref="HealthStatus" /> that should be
+        ///     reported when the HealthCheck reports a failure. If the provided value is null,
+        ///     then <see cref="HealthStatus.Unhealthy" /> will
         ///     be reported.
         ///</param>
-        /// <returns>The <see cref="T:Microsoft.Extensions.DependencyInjection.IHealthChecksBuilder" />.</returns>
+        /// <returns>The <see cref="IHealthChecksBuilder" />.</returns>
         public static IHealthChecksBuilder AddReadyCheck([NotNull] this IHealthChecksBuilder builder, [NotNull] string name,
-            IHealthCheck instance, HealthStatus? failureStatus = null)
+            IHealthCheck instance, HealthStatus? healthStatus = null)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (name == null) throw new ArgumentNullException(nameof(name));
             if (instance == null) throw new ArgumentNullException(nameof(instance));
 
-            return builder.AddCheck(name, instance, failureStatus, new [] { Constants.ReadyTag });
+            return builder.AddCheck(name, instance, healthStatus, new [] { Constants.ReadyTag });
         }
-        
+
         /// <summary>
-        ///  Adds a new health check with the specified name and implementation.
-        ///  Adds the live tag to the health check automatically.
+        ///  Adds a new HealthCheck with the specified name and implementation.
+        ///  Adds the Live Tag to the HealthCheck automatically.
         /// </summary>
-        /// <typeparam name="T">The health check implementation type.</typeparam>
-        /// <param name="builder">The <see cref="T:Microsoft.Extensions.DependencyInjection.IHealthChecksBuilder" />.</param>
-        /// <param name="name">The name of the health check.</param>
-        /// <param name="failureStatus">The <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus" /> that should be
-        ///     reported when the health check reports a failure. If the provided value is null,
-        ///     then <see cref="Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Unhealthy" /> will
+        /// <typeparam name="T">The HealthCheck type.</typeparam>
+        /// <param name="builder">The <see cref="IHealthChecksBuilder" />.</param>
+        /// <param name="name">The HealthCheck name.</param>
+        /// <param name="healthStatus">The <see cref="HealthStatus" /> that should be
+        ///     reported when the HealthCheck reports a failure. If the provided value is null,
+        ///     then <see cref="HealthStatus.Unhealthy" /> will
         ///     be reported.
         ///</param>
-        /// <returns>The <see cref="T:Microsoft.Extensions.DependencyInjection.IHealthChecksBuilder" />.</returns>
+        /// <returns>The <see cref="IHealthChecksBuilder" />.</returns>
         public static IHealthChecksBuilder AddLiveCheck<T>([NotNull] this IHealthChecksBuilder builder, [NotNull] string name, 
-            HealthStatus? failureStatus = null) where T : class, IHealthCheck
+            HealthStatus? healthStatus = null) where T : class, IHealthCheck
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (name == null) throw new ArgumentNullException(nameof(name));
             
-            return builder.AddCheck<T>(name, failureStatus, new [] { Constants.LiveTag });
+            return builder.AddCheck<T>(name, healthStatus, new [] { Constants.LiveTag });
         }
 
         /// <summary>
-        ///  Adds a new health check with the specified name and implementation.
-        ///  Adds the live tag to the health check automatically.
+        ///  Adds a new HealthCheck with the specified name and implementation.
+        ///  Adds the Live Tag to the HealthCheck automatically.
         /// </summary>
-        /// <param name="builder">The <see cref="T:Microsoft.Extensions.DependencyInjection.IHealthChecksBuilder" />.</param>
-        /// <param name="name">The name of the health check.</param>
-        /// <param name="instance">The Health Check Instance</param>
-        /// <param name="failureStatus">The <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus" /> that should be
-        ///     reported when the health check reports a failure. If the provided value is null,
-        ///     then <see cref="Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Unhealthy" /> will
+        /// <param name="builder">The <see cref="IHealthChecksBuilder" />.</param>
+        /// <param name="name">The HealthCheck name.</param>
+        /// <param name="instance">The HealthCheck instance.</param>
+        /// <param name="healthStatus">The <see cref="HealthStatus" /> that should be
+        ///     reported when the HealthCheck reports a failure. If the provided value is null,
+        ///     then <see cref="HealthStatus.Unhealthy" /> will
         ///     be reported.
         ///</param>
-        /// <returns>The <see cref="T:Microsoft.Extensions.DependencyInjection.IHealthChecksBuilder" />.</returns>
+        /// <returns>The <see cref="IHealthChecksBuilder" />.</returns>
         public static IHealthChecksBuilder AddLiveCheck([NotNull] this IHealthChecksBuilder builder, [NotNull] string name,
-            IHealthCheck instance, HealthStatus? failureStatus = null)
+            IHealthCheck instance, HealthStatus? healthStatus = null)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (name == null) throw new ArgumentNullException(nameof(name));
             if (instance == null) throw new ArgumentNullException(nameof(instance));
 
-            return builder.AddCheck(name, instance, failureStatus, new [] { Constants.LiveTag });
+            return builder.AddCheck(name, instance, healthStatus, new [] { Constants.LiveTag });
         }
     }
 }

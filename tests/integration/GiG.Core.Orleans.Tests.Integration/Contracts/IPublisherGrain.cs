@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using GiG.Core.Orleans.Tests.Integration.Mocks;
+﻿using GiG.Core.Orleans.Tests.Integration.Mocks;
 using Orleans;
+using System;
+using System.Threading.Tasks;
 
 namespace GiG.Core.Orleans.Tests.Integration.Contracts
 {

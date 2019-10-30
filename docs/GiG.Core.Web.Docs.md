@@ -4,7 +4,8 @@ This Library provides an API to configure API Documentation.
 
 ## Basic Usage
 
-The following needs to be added to the Web project file:
+The below code needs to be added to the Web project file.
+
 ```
 <GenerateDocumentationFile>true</GenerateDocumentationFile>
 ```
@@ -12,6 +13,7 @@ The following needs to be added to the Web project file:
 The below code needs to be added to the `Startup.cs` to register the API Docs. 
 
 ```csharp
+
 private readonly IConfiguration _configuration;
 
 public void ConfigureServices(IServiceCollection services)
@@ -23,6 +25,7 @@ public void Configure(IApplicationBuilder app)
 {
     app.UseApiDocs();
 }
+
 ```
 
 ## Configuration

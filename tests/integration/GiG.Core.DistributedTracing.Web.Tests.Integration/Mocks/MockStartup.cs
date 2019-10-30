@@ -8,12 +8,12 @@ namespace GiG.Core.DistributedTracing.Web.Tests.Integration.Mocks
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCorrelationId();
+            services.AddCorrelationAccessor();
         }
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseCorrelationId();
+            app.UseCorrelation();
         }
     }
 }

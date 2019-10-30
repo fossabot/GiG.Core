@@ -13,8 +13,8 @@ namespace GiG.Core.Orleans.Streams.Extensions
         /// <summary>
         /// Creates and registers a new <see cref="IStreamFactory"/>.
         /// </summary>
-        /// <param name="services">The <see cref="IServiceCollection"/> to add services to.</param>
-        /// <returns>The <see cref="IServiceCollection"/> so that more methods can be chained.</returns>
+        /// <param name="services">The <see cref="IServiceCollection"/>.</param>
+        /// <returns>The <see cref="IServiceCollection"/>.</returns>
         public static IServiceCollection AddStreamFactory([NotNull] this IServiceCollection services)
         {
             services.TryAddSingleton<IStreamFactory, StreamFactory>();

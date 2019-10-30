@@ -8,12 +8,12 @@ namespace GiG.Core.Logging.Abstractions
     public class LoggingOptions
     {
         /// <summary>
-        /// Logging default section name.
+        /// The configuration default section name.
         /// </summary>
         public const string DefaultSectionName = "Logging";
         
         /// <summary>
-        /// Sink providers for logging.
+        /// The Sink providers.
         /// </summary>
         public IDictionary<string, BasicSinkOptions> Sinks { get; set; } = new Dictionary<string, BasicSinkOptions>();
     }

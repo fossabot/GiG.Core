@@ -1,4 +1,4 @@
-﻿using GiG.Core.Orleans.Clustering.Kubernetes.Configurations;
+﻿using GiG.Core.Orleans.Clustering.Kubernetes.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Orleans.Clustering.Kubernetes;
@@ -13,11 +13,11 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
     public static class SiloBuilderExtensions
     {
         /// <summary>
-        /// Configures Kubernetes in Orleans.
+        /// Registers a configuration instance which <see cref="KubernetesOptions" /> will bind against.
         /// </summary>
         /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
-        /// <param name="configuration">The <see cref="IConfiguration" /> which contains Kubernetes options.</param>
-        /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
+        /// <param name="configuration">The <see cref="IConfiguration" />.</param>
+        /// <returns>The <see cref="ISiloBuilder"/>.</returns>
         public static ISiloBuilder ConfigureKubernetesClustering([NotNull] this ISiloBuilder builder, [NotNull] IConfiguration configuration)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
@@ -27,11 +27,11 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
         }
 
         /// <summary>
-        /// Configures Kubernetes in Orleans.
+        /// Registers a configuration instance which <see cref="KubernetesOptions" /> will bind against.
         /// </summary>
         /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
-        /// <param name="configurationSection">The <see cref="IConfigurationSection" /> which contains Kubernetes options.</param>
-        /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
+        /// <returns>The <see cref="ISiloBuilder"/>.</returns>
         public static ISiloBuilder ConfigureKubernetesClustering([NotNull] this ISiloBuilder builder, [NotNull] IConfigurationSection configurationSection)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));

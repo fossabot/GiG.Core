@@ -6,7 +6,7 @@
     public static class Constants
     {
         /// <summary>
-        /// Header for Tenant ID.
+        /// The Header for Tenant ID.
         /// </summary>
         public const string Header = "X-Tenant-ID";
     }

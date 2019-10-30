@@ -6,17 +6,17 @@ using System;
 namespace GiG.Core.Logging.Sinks.Console.Extensions
 {
     /// <summary>
-    /// Logging Configuration builder extensions.
+    /// Logging Configuration Builder Extensions.
     /// </summary>
     public static class LoggingConfigurationBuilderExtensions
     {
         private const string SinkName = "Console";
 
         /// <summary>
-        /// Writes log events to <see cref="T:System.Console"/>.
+        /// Writes Log Events to <see cref="System.Console"/>.
         /// </summary>
-        /// <param name="builder">Logging sink configuration.</param>
-        /// <returns>Configuration object allowing method chaining.</returns>
+        /// <param name="builder">The <see cref="LoggingConfigurationBuilder" />.</param>
+        /// <returns>The <see cref="LoggingConfigurationBuilder" />.</returns>
         public static LoggingConfigurationBuilder WriteToConsole([NotNull] this LoggingConfigurationBuilder builder)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));

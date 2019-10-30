@@ -1,5 +1,6 @@
 ﻿using GiG.Core.Orleans.Tests.Integration.Contracts;
 using GiG.Core.Orleans.Tests.Integration.Fixtures;
+using GiG.Core.Orleans.Tests.Integration.Mocks;
 using Orleans.Runtime;
 using System;
 using System.Threading.Tasks;
@@ -26,7 +27,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
 
             RequestContext.ActivityId = correlationId;
 
-            var result = await grain.PublishMessage(new Mocks.MockMessage());
+            var result = await grain.PublishMessage(new MockMessage());
 
             Assert.Equal(correlationId, result);
         }
@@ -36,7 +37,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
         {
             var grain = _clusterFixture.ClusterClient.GetGrain<IPublisherGrain>(123);
             
-            var result = await grain.PublishMessage(new Mocks.MockMessage());
+            var result = await grain.PublishMessage(new MockMessage());
 
             Assert.NotEqual(Guid.Empty, result);
         }
