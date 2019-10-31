@@ -12,6 +12,7 @@ using Xunit;
 
 namespace GiG.Core.Web.Security.Hmac.Tests.Unit
 {
+    [Trait("Category","Unit")]
     public class HmacAuthenticationHandlerTests
     {
         private readonly Mock<IOptionsMonitor<HmacRequirement>> _hmacRequirement;

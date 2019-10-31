@@ -8,6 +8,7 @@ using Xunit;
 
 namespace GiG.Core.Web.Security.Hmac.Tests.Unit
 {
+    [Trait("Category","Unit")]
     public class HttpRequestExtensionsTests
     {
         private readonly string _nonceHeader;

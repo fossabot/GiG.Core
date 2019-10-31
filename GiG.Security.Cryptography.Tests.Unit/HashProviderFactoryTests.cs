@@ -5,6 +5,7 @@ using Xunit;
 
 namespace GiG.Security.Cryptography.Tests.Unit
 {
+    [Trait("Category","Unit")]
     public class HashProviderFactoryTests
     {
         private readonly Mock<IHashProvider> _signatureProvider;

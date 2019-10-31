@@ -6,6 +6,7 @@ using Xunit;
 
 namespace GiG.Security.Cryptography.Tests.Unit
 {
+    [Trait("Category","Unit")]
     public class SHA256HashProviderTests
     {
         [Fact]
