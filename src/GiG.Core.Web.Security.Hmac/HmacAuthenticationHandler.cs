@@ -17,7 +17,11 @@ namespace GiG.Core.Web.Security.Hmac
         private readonly IHmacOptionsProvider _hmacOptionsProvider;
         private readonly IHashProviderFactory _signatureProviderFactory;
         private const string AuthHeader = "Authorization";
-        private const string NonceHeader = "X-Nonce";
+        private const string NonceHeader = "Nonce";
+
+        /// <summary>
+        /// <see cref="AuthenticationHandler{TOptions}"/> using Hmac.
+        /// </summary>
         public HmacAuthenticationHandler(
             IOptionsMonitor<HmacRequirement> optionsMonitor, 
             ILoggerFactory logger, 
@@ -35,20 +39,26 @@ namespace GiG.Core.Web.Security.Hmac
         {
             var hmacOptions = _hmacOptionsProvider.GetHmacOptions();
             var hashProvider = _signatureProviderFactory.GetHashProvider(hmacOptions.HashAlgorithm);
+
+            if (!Request.Headers.ContainsKey(NonceHeader))
+            {
+                return AuthenticateResult.Fail($"{NonceHeader} not set.");
+            }
+
             var signature = hashProvider.Hash(await Request.AsSignatureStringAsync(NonceHeader,hmacOptions.Secret));
             Request.Headers.TryGetValue(AuthHeader, out var headerSignature);
 
             if (string.IsNullOrEmpty(headerSignature))
             {
                 
-                return AuthenticateResult.Fail("Hmac does not match");
+                return AuthenticateResult.Fail("Hmac does not match.");
             }
 
             var authHeader = AuthenticationHeaderValue.Parse(headerSignature);
 
             if (!signature.Equals(authHeader.Parameter))
             {
-                return AuthenticateResult.Fail("Hmac does not match");
+                return AuthenticateResult.Fail("Hmac does not match.");
             }
 
             var identity = new ClaimsIdentity(Scheme.Name); // the name of our auth scheme

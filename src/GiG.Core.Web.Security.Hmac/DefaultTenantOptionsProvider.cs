@@ -1,9 +1,7 @@
-﻿using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using GiG.Core.Web.Security.Hmac.Abstractions;
+using Microsoft.Extensions.Options;
 
-namespace GiG.Core.Web.Security.Hmac.Abstractions
+namespace GiG.Core.Web.Security.Hmac
 {
     public class DefaultTenantOptionsProvider : IHmacOptionsProvider
     {

@@ -93,14 +93,14 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
         }
 
         [Fact]
-        public async Task HmacAuthenticationHandler_MatchHmacHeader_ReturnsNoResult()
+        public async Task HmacAuthenticationHandler_MatchHmacHeader_ReturnsFailed()
         {
             var hmacAuthHandler = await BuildHandlerAsync();
 
             var result = await hmacAuthHandler.AuthenticateAsync();
 
             Assert.False(result.Succeeded);
-            Assert.True(result.None);
+            Assert.NotNull(result.Failure);
             VerifyCalls();
 
         }

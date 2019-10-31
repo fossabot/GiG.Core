@@ -40,12 +40,12 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration
         [Fact]
         public async Task AuthenticateAsync_GetValidHmacHeader_ReturnsOK()
         {
-            var c = _server.CreateClient();
+            var testHttpClient = _server.CreateClient();
             
             var client = HttpClientFactory.CreateClient(x =>
             {
                 x.AddHttpMessageHandler(_server.Services.GetRequiredService<HmacDelegatingHandler>());
-                x.AddHttpMessageHandler(new MockDelegatingHandler(c));
+                x.AddHttpMessageHandler(new MockDelegatingHandler(testHttpClient));
             });
             
             using var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/mock");

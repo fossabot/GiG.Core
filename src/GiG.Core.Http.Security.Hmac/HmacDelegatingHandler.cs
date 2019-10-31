@@ -1,5 +1,6 @@
 ﻿using GiG.Core.Http.Security.Hmac.Extensions;
 using GiG.Core.Security.Cryptography;
+using System.Configuration;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace GiG.Core.Http.Security.Hmac
             var options = _optionsProvider.GetHmacOptions();
             if (options == null)
             {
-                //
+                throw new ConfigurationErrorsException("Options not set for HMAC.");
             }
             var hashProvider = _hashProviderFactory.GetHashProvider(options.HashAlgorithm);
             var hmacHeaderClear = await request.AsSignatureStringAsync("X-Nonce", options.Secret);
