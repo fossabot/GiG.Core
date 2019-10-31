@@ -33,9 +33,9 @@ namespace GiG.Core.Orleans.Client
         }
 
         /// <inheritdoc />
-        public IClusterClient Get(string name) 
+        public IClusterClient Get([NotNull] string name) 
         {
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
+            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException(nameof(name));
 
             if (!_clusterClients.TryGetValue(name, out var clusterClient))
             {

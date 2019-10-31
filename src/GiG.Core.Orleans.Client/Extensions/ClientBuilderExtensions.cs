@@ -80,11 +80,11 @@ namespace GiG.Core.Orleans.Client.Extensions
         /// <param name="clusterName">The Name of the Cluster being Configured.</param>
         /// <param name="configuration">An <see cref="IConfiguration"/> to configure the provided <see cref="IClientBuilder"/>.</param>
         /// <returns>Returns the <see cref="IClientBuilder"/> so that more methods can be chained.</returns>
-        public static IClientBuilder ConfigureCluster([NotNull] this IClientBuilder builder, string clusterName, [NotNull] IConfiguration configuration)
+        public static IClientBuilder ConfigureCluster([NotNull] this IClientBuilder builder, [NotNull] string clusterName, [NotNull] IConfiguration configuration)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-            if (string.IsNullOrEmpty(clusterName)) throw new ArgumentNullException(nameof(clusterName));
+            if (string.IsNullOrWhiteSpace(clusterName)) throw new ArgumentException(nameof(clusterName));
 
             var configurationSection = configuration.GetSection($"{ClusterDefaultSectionName}:{clusterName}");
             if (configurationSection == null)
