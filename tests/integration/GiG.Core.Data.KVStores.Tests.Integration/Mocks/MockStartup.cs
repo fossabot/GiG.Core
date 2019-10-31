@@ -12,7 +12,7 @@ namespace GiG.Core.Data.KVStores.Tests.Integration.Mocks
         {
             var configuration = hostContext.Configuration;
 
-            services.AddDataProvider<IEnumerable<MockLanguage>>()
+            services.AddKVStores<IEnumerable<MockLanguage>>()
                 .AddJsonFile(configuration, "Languages");
         }
     }
