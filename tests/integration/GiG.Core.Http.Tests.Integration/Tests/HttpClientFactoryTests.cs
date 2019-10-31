@@ -26,7 +26,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
             _correlationContextAccessor = fixture.CorrelationContextAccessor;
             _tenantAccessor = fixture.TenantAccessor;
         }
-        
+
         [Fact]
         private async Task GetAsync_Create_ReturnsHttpResponseMessage()
         {
@@ -53,7 +53,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
             Assert.Equal(_correlationContextAccessor.Value.ToString(), correlation.First());
             Assert.Equal(_tenantAccessor.Values, tenants);
         }
-        
+
         [Fact]
         private async Task GetAsync_Create_UseBaseAddressAsString_ReturnsHttpResponseMessage()
         {
@@ -80,7 +80,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
             Assert.Equal(_correlationContextAccessor.Value.ToString(), correlation.First());
             Assert.Equal(_tenantAccessor.Values, tenants);
         }
-        
+
         [Fact]
         private async Task GetAsync_Create_UseBaseAddressWithRelativePath_ReturnsHttpNotFound()
         {
@@ -107,7 +107,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
             Assert.Equal(_correlationContextAccessor.Value.ToString(), correlation.First());
             Assert.NotEqual(_tenantAccessor.Values, tenants);
         }
-        
+
         [Fact]
         private async Task GetAsync_GetOrAddWithType_ReturnsHttpResponseMessage()
         {
@@ -126,7 +126,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
             Assert.Equal(_correlationContextAccessor.Value.ToString(), correlation.First());
             Assert.Equal(_tenantAccessor.Values, tenants);
         }
-        
+
         [Fact]
         private async Task GetAsync_GetOrAddWithName_ReturnsHttpResponseMessage()
         {
@@ -145,13 +145,13 @@ namespace GiG.Core.Http.Tests.Integration.Tests
             Assert.Equal(_correlationContextAccessor.Value.ToString(), correlation.First());
             Assert.Equal(_tenantAccessor.Values, tenants);
         }
-        
+
         [Fact]
         private void GetAsync_GetOrAddWithType_ReturnsSameInstance()
         {
             // Arrange
             var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
-            
+
             // Act
             var clientInstance1 = CreateClientWithType(testServer);
             var clientInstance2 = CreateClientWithType(testServer);
@@ -161,13 +161,13 @@ namespace GiG.Core.Http.Tests.Integration.Tests
             Assert.NotNull(clientInstance1);
             Assert.NotNull(clientInstance2);
         }
-        
+
         [Fact]
         private void GetAsync_GetOrAddWithName_ReturnsSameInstance()
         {
             // Arrange
             var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
-            
+
             // Act
             var clientInstance1 = CreateClientWithName(testServer);
             var clientInstance2 = CreateClientWithName(testServer);
