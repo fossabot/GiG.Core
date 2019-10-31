@@ -15,7 +15,7 @@ namespace GiG.Core.DistributedTracing.Web.Extensions
         /// </summary>
         /// <param name="builder">The <see cref="IApplicationBuilder"/>.</param>
         /// <returns>The <see cref="IApplicationBuilder"/>.</returns>
-        public static IApplicationBuilder UseCorrelationId([NotNull] this IApplicationBuilder builder)
+        public static IApplicationBuilder UseCorrelation([NotNull] this IApplicationBuilder builder)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
 

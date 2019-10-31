@@ -15,8 +15,11 @@ namespace GiG.Core.Http.MultiTenant
         /// <summary>
         /// A <see cref="DelegatingHandler"/> that injects one or more X-Tenant-ID Headers into the request.
         /// </summary>
-        /// <param name="tenantAccessor">The <see cref="ITenantAccessor" />.</param>
-        public TenantDelegatingHandler(ITenantAccessor tenantAccessor) => _tenantAccessor = tenantAccessor;
+        /// <param name="tenantAccessor">The <see cref="T:GiG.Core.MultiTenant.Abstractions.ITenantAccessor" /> to use.</param>
+        public TenantDelegatingHandler(ITenantAccessor tenantAccessor)
+        {
+            _tenantAccessor = tenantAccessor;   
+        }
 
         /// <inheritdoc />
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)

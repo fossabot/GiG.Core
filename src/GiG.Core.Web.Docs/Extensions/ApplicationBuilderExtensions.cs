@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.SwaggerUI;
 using System;
 using System.Configuration;
 using System.Text;
@@ -18,8 +19,10 @@ namespace GiG.Core.Web.Docs.Extensions
         /// Adds Documentation to API.
         /// </summary>
         /// <param name="app">The <see cref="IApplicationBuilder" />.</param>
+        /// <param name="configureOptions">A delegate that is used to configure the <see cref="SwaggerUIOptions" />.</param>
         /// <returns>The <see cref="IApplicationBuilder" />.</returns>
-        public static IApplicationBuilder UseApiDocs([NotNull] this IApplicationBuilder app)
+        public static IApplicationBuilder UseApiDocs([NotNull] this IApplicationBuilder app,
+            Action<SwaggerUIOptions> configureOptions = null)
         {
             if (app == null) throw new ArgumentNullException(nameof(app));
 
@@ -30,7 +33,7 @@ namespace GiG.Core.Web.Docs.Extensions
             {
                 return app;
             }
-            
+
             if (string.IsNullOrEmpty(options.Url))
             {
                 throw new ConfigurationErrorsException($"{nameof(options.Url)} cannot be null or empty");
@@ -40,7 +43,7 @@ namespace GiG.Core.Web.Docs.Extensions
             {
                 throw new ConfigurationErrorsException($"{nameof(options.Url)} must not start with a slash");
             }
-            
+
             // Temporary fix until Swagger bug is fixed - https://github.com/aspnet/AspNetCore/issues/10514
             var endpointPrefix = new StringBuilder();
             for (var i = 0; i < options.Url.Split('/').Length; i++)
@@ -56,6 +59,7 @@ namespace GiG.Core.Web.Docs.Extensions
                     c.RoutePrefix = options.Url;
                     c.SwaggerEndpoint($"{endpointPrefix}swagger/v1/swagger.json", "V1 Docs");
                     c.DisplayRequestDuration();
+                    configureOptions?.Invoke(c);
                 });
         }
     }

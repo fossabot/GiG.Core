@@ -10,7 +10,7 @@ namespace GiG.Core.Benchmarks.Orleans.Streams.Grains
     {
         private IAsyncStream<Message> _stream;
 
-        private string _providerName;
+        private readonly string _providerName;
 
         public ProducerGrain(string providerName)
         {

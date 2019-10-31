@@ -5,7 +5,6 @@ using GiG.Core.DistributedTracing.Orleans;
 using GiG.Core.DistributedTracing.Orleans.Extensions;
 using GiG.Core.Orleans.Client.Extensions;
 using GiG.Core.Orleans.Silo.Extensions;
-using GiG.Core.Orleans.Streams;
 using GiG.Core.Orleans.Streams.Extensions;
 using GiG.Core.Orleans.Tests.Integration.Contracts;
 using GiG.Core.Orleans.Tests.Integration.Grains;

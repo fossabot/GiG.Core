@@ -8,8 +8,6 @@ using Orleans.Providers;
 using Orleans.Streams;
 using System;
 using System.Threading.Tasks;
-using Constants = GiG.Core.Orleans.Sample.Contracts.Constants;
-
 
 namespace GiG.Core.Orleans.Sample.Grains
 {

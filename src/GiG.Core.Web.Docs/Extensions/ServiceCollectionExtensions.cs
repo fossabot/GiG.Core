@@ -22,8 +22,10 @@ namespace GiG.Core.Web.Docs.Extensions
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
         /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
+        /// <param name="configureOptions">A delegate that is used to configure the <see cref="SwaggerGenOptions" />.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
-        public static IServiceCollection ConfigureApiDocs([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection)
+        public static IServiceCollection ConfigureApiDocs([NotNull] this IServiceCollection services,
+            [NotNull] IConfigurationSection configurationSection, Action<SwaggerGenOptions> configureOptions = null)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
             if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
@@ -49,6 +51,7 @@ namespace GiG.Core.Web.Docs.Extensions
                         Description = docOptions.Description,
                         Version = ApplicationMetadata.Version
                     });
+                    configureOptions?.Invoke(c);
                 });
         }
 
@@ -57,9 +60,11 @@ namespace GiG.Core.Web.Docs.Extensions
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
         /// <param name="configuration">The <see cref="IConfiguration" />.</param>
+        /// <param name="configureOptions">A delegate that is used to configure the <see cref="SwaggerGenOptions" />.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
-        public static IServiceCollection ConfigureApiDocs([NotNull] this IServiceCollection services, [NotNull] IConfiguration configuration)
-            => services.ConfigureApiDocs(configuration.GetSection(ApiDocsOptions.DefaultSectionName));
+        public static IServiceCollection ConfigureApiDocs([NotNull] this IServiceCollection services,
+            [NotNull] IConfiguration configuration, Action<SwaggerGenOptions> configureOptions = null)
+            => services.ConfigureApiDocs(configuration.GetSection(ApiDocsOptions.DefaultSectionName), configureOptions);
 
         private static void IncludeXmlComments(this SwaggerGenOptions options)
         {
@@ -68,7 +73,8 @@ namespace GiG.Core.Web.Docs.Extensions
 
             if (string.IsNullOrEmpty(xmlPath))
             {
-                throw new ApplicationException("The following property is missing from your project; <GenerateDocumentationFile>true</GenerateDocumentationFile>.");
+                throw new ApplicationException(
+                    "The following property is missing from your project; <GenerateDocumentationFile>true</GenerateDocumentationFile>.");
             }
 
             options.IncludeXmlComments(xmlPath);

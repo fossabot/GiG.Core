@@ -20,7 +20,7 @@ namespace GiG.Core.Orleans.Sample.Web
                 .UseApplicationMetadata()
                 .ConfigureServices(x =>
                 {
-                    x.AddCorrelationId();
+                    x.AddCorrelationAccessor();
                     x.AddRequestContextAccessor();
                 })
                 .ConfigureExternalConfiguration()
