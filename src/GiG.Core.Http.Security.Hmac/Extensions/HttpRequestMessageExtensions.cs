@@ -26,7 +26,7 @@ namespace GiG.Core.Http.Security.Hmac.Extensions
             {
                 throw new ArgumentException("Nonce value is empty", "nonceHeader");
             }
-            return $"{secret}{nonceValue.FirstOrDefault()}{httpRequest.Method.ToString().ToUpper()}{httpRequest.RequestUri}{body}";
+            return $"{secret}{nonceValue.FirstOrDefault()}{httpRequest.Method.ToString().ToUpper()}{httpRequest.RequestUri.LocalPath}{body}";
         }
     }
 }

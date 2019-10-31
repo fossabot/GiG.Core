@@ -40,7 +40,8 @@ namespace GiG.Core.Web.Security.Hmac
 
             if (string.IsNullOrEmpty(headerSignature))
             {
-                return AuthenticateResult.NoResult();
+                
+                return AuthenticateResult.Fail("Hmac does not match");
             }
 
             var authHeader = AuthenticationHeaderValue.Parse(headerSignature);

@@ -30,7 +30,7 @@ namespace GiG.Core.Http.Security.Hmac
             {
                 //
             }
-            var hashProvider = _hashProviderFactory.GetHashProvider(options.Hash);
+            var hashProvider = _hashProviderFactory.GetHashProvider(options.HashAlgorithm);
             var hmacHeaderClear = await request.AsSignatureStringAsync("X-Nonce", options.Secret);
 
             var hashedHmacHeader = hashProvider.Hash(hmacHeaderClear);
