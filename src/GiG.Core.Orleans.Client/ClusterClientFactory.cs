@@ -36,9 +36,13 @@ namespace GiG.Core.Orleans.Client
         public IClusterClient Get(string name) 
         {
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
-            if (!_clusterClients.ContainsKey(name)) throw new KeyNotFoundException($"No cluster client is registered with name [{name}]");
 
-            return _clusterClients[name];
+            if (!_clusterClients.TryGetValue(name, out var clusterClient))
+            {
+                throw new KeyNotFoundException($"No cluster client is registered with name [{name}]");
+            }
+
+            return clusterClient;
         }
     }
 }
