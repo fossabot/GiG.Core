@@ -1,7 +1,7 @@
 namespace GiG.Core.Data.KVStores.Abstractions
 {
     /// <summary>
-    /// DataStore.
+    /// Provides functionality to store and retrieve data.
     /// </summary>
     /// <typeparam name="T">Generic to define type of data store.</typeparam>
     public interface IDataStore<T>
