@@ -9,8 +9,8 @@ Make use of `Create()` factory method to initialise a new `HttpClient`. You can 
 ```csharp
 var client = HttpClientFactory.Create(x =>
 {
-    x.AddDelegateHandler(new LoggingDelegatingHandler());
-    x.AddDelegateHandler(new CorrelationIdDelegatingHandler(new CorrelationContextAccessor()));
+    x.AddDelegatingHandler(new LoggingDelegatingHandler());
+    x.AddDelegatingHandler(new CorrelationIdDelegatingHandler(new CorrelationContextAccessor()));
     x.BaseAddress = new Uri("http://localhost");
 });
 ```
@@ -20,8 +20,8 @@ You can also use the `GetOrAdd()` factory method to create a single instance of 
 ```csharp
 var client = HttpClientFactory.GetOrAdd<PaymentClient>(x =>
 {
-    x.AddDelegateHandler(new LoggingDelegatingHandler());
-    x.AddDelegateHandler(new CorrelationIdDelegatingHandler(new CorrelationContextAccessor()));
+    x.AddDelegatingHandler(new LoggingDelegatingHandler());
+    x.AddDelegatingHandler(new CorrelationIdDelegatingHandler(new CorrelationContextAccessor()));
     x.BaseAddress = new Uri("http://localhost");
 });
 ```
@@ -30,8 +30,8 @@ or using named instance
 ```csharp
 var client = HttpClientFactory.GetOrAdd("Payments", x =>
 {
-    x.AddDelegateHandler(new LoggingDelegatingHandler());
-    x.AddDelegateHandler(new CorrelationIdDelegatingHandler(new CorrelationContextAccessor()));
+    x.AddDelegatingHandler(new LoggingDelegatingHandler());
+    x.AddDelegatingHandler(new CorrelationIdDelegatingHandler(new CorrelationContextAccessor()));
     x.BaseAddress = new Uri("http://localhost");
 });
 ```

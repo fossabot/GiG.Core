@@ -21,11 +21,11 @@ namespace GiG.Core.Http
         public HttpClientOptionsBuilder Options { get; } = new HttpClientOptionsBuilder();
 
         /// <summary>
-        /// Adds Delegate Handler.
+        /// Adds Delegating Handler.
         /// </summary>
         /// <param name="handler">The <see cref="DelegatingHandler"/>.</param>
         /// <returns>The <see cref="HttpClientBuilder"/>.</returns>
-        public HttpClientBuilder AddDelegateHandler(DelegatingHandler handler)
+        public HttpClientBuilder AddDelegatingHandler(DelegatingHandler handler)
         {
             if (handler == null) throw new ArgumentNullException(nameof(handler));
             

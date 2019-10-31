@@ -34,9 +34,9 @@ namespace GiG.Core.Http.Tests.Integration.Tests
             var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
             var client = HttpClientFactory.Create(x =>
             {
-                x.AddDelegateHandler(new CorrelationContextDelegatingHandler(_correlationContextAccessor));
-                x.AddDelegateHandler(new TenantDelegatingHandler(_tenantAccessor));
-                x.AddDelegateHandler(new LoggingDelegatingHandler());
+                x.AddDelegatingHandler(new CorrelationContextDelegatingHandler(_correlationContextAccessor));
+                x.AddDelegatingHandler(new TenantDelegatingHandler(_tenantAccessor));
+                x.AddDelegatingHandler(new LoggingDelegatingHandler());
                 x.WithMessageHandler(testServer.CreateHandler());
                 x.Options.WithBaseAddress(testServer.BaseAddress);
             });
@@ -61,9 +61,9 @@ namespace GiG.Core.Http.Tests.Integration.Tests
             var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
             var client = HttpClientFactory.Create(x =>
             {
-                x.AddDelegateHandler(new CorrelationContextDelegatingHandler(_correlationContextAccessor));
-                x.AddDelegateHandler(new TenantDelegatingHandler(_tenantAccessor));
-                x.AddDelegateHandler(new LoggingDelegatingHandler());
+                x.AddDelegatingHandler(new CorrelationContextDelegatingHandler(_correlationContextAccessor));
+                x.AddDelegatingHandler(new TenantDelegatingHandler(_tenantAccessor));
+                x.AddDelegatingHandler(new LoggingDelegatingHandler());
                 x.WithMessageHandler(testServer.CreateHandler());
                 x.Options.WithBaseAddress(testServer.BaseAddress.ToString());
             });
@@ -88,9 +88,9 @@ namespace GiG.Core.Http.Tests.Integration.Tests
             var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
             var client = HttpClientFactory.Create(x =>
             {
-                x.AddDelegateHandler(new CorrelationContextDelegatingHandler(_correlationContextAccessor));
-                x.AddDelegateHandler(new TenantDelegatingHandler(_tenantAccessor));
-                x.AddDelegateHandler(new LoggingDelegatingHandler());
+                x.AddDelegatingHandler(new CorrelationContextDelegatingHandler(_correlationContextAccessor));
+                x.AddDelegatingHandler(new TenantDelegatingHandler(_tenantAccessor));
+                x.AddDelegatingHandler(new LoggingDelegatingHandler());
                 x.WithMessageHandler(testServer.CreateHandler());
                 x.Options.WithBaseAddress(testServer.BaseAddress.ToString(), "/relative");
             });
@@ -181,9 +181,9 @@ namespace GiG.Core.Http.Tests.Integration.Tests
         private HttpClient CreateClientWithName(TestServer testServer) =>
             HttpClientFactory.GetOrAdd(nameof(IMockRestClient), x =>
             {
-                x.AddDelegateHandler(new CorrelationContextDelegatingHandler(_correlationContextAccessor));
-                x.AddDelegateHandler(new TenantDelegatingHandler(_tenantAccessor));
-                x.AddDelegateHandler(new LoggingDelegatingHandler());
+                x.AddDelegatingHandler(new CorrelationContextDelegatingHandler(_correlationContextAccessor));
+                x.AddDelegatingHandler(new TenantDelegatingHandler(_tenantAccessor));
+                x.AddDelegatingHandler(new LoggingDelegatingHandler());
                 x.WithMessageHandler(testServer.CreateHandler());
                 x.Options.WithBaseAddress(testServer.BaseAddress);
             });
@@ -191,9 +191,9 @@ namespace GiG.Core.Http.Tests.Integration.Tests
         private HttpClient CreateClientWithType(TestServer testServer) =>
             HttpClientFactory.GetOrAdd<IMockRestClient>(x =>
             {
-                x.AddDelegateHandler(new CorrelationContextDelegatingHandler(_correlationContextAccessor));
-                x.AddDelegateHandler(new TenantDelegatingHandler(_tenantAccessor));
-                x.AddDelegateHandler(new LoggingDelegatingHandler());
+                x.AddDelegatingHandler(new CorrelationContextDelegatingHandler(_correlationContextAccessor));
+                x.AddDelegatingHandler(new TenantDelegatingHandler(_tenantAccessor));
+                x.AddDelegatingHandler(new LoggingDelegatingHandler());
                 x.WithMessageHandler(testServer.CreateHandler());
                 x.Options.WithBaseAddress(testServer.BaseAddress);
             });
