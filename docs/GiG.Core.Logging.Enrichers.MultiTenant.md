@@ -21,11 +21,11 @@ static class Program
             .ConfigureServices(x => 
             {
                 x.AddTenantAccessor();
-			 })
-			 .ConfigureLogging(x =>
-			 {
-			     x.EnrichWithTenant();
-			 });
+			})
+			.ConfigureLogging(x =>
+			{
+			    x.EnrichWithTenant();
+			});
     }
 }
 
