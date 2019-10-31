@@ -28,12 +28,27 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders.Extensions
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
             if (string.IsNullOrWhiteSpace(configurationSectionName)) throw new ArgumentNullException(nameof(configurationSectionName));
+
+            return builder.AddJsonFile(configuration.GetSection(configurationSectionName));
+        }
+        
+        /// <summary>
+        /// AddJsonFile.
+        /// </summary>
+        /// <param name="builder">The <see cref="IKVStoreBuilder{T}" /> to add the services to.</param>        
+        /// <param name="configurationSection">The <see cref="IConfigurationSection" /> which contains data to be consumed.</param>
+        /// <typeparam name="T">Generic to define type of KVStoreBuilder. </typeparam>
+        /// <returns>The <see cref="IKVStoreBuilder{T}" /> so that additional calls can be chained.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static IKVStoreBuilder<T> AddJsonFile<T>([NotNull] this IKVStoreBuilder<T> builder, [NotNull] IConfigurationSection configurationSection)
+        {
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
             
             builder.Services.AddFileDataProvider();
 
             builder.Services.AddSingleton<IDataProviderOptions<T, FileProviderOptions>>(
-                new DataProviderOptions<T, FileProviderOptions>(configuration.GetSection(configurationSectionName)
-                    .Get<FileProviderOptions>()));
+                new DataProviderOptions<T, FileProviderOptions>(configurationSection.Get<FileProviderOptions>()));
 
             builder.Services.AddSingleton<IDataProvider<T>, JsonFileDataProvider<T>>();
             
