@@ -11,6 +11,7 @@
   <ItemGroup>
     <None Include="docker-compose-sample-dbmigrations.yml" />
     <None Include="docker-compose-performance-orleans-streams.yml" />
+    <None Include="docker-compose-sample-orleans-multi-cluster.yml" />
     <None Include="docker-compose-sample-orleans.yml" />
     <None Include="docker-compose-sample-web.yml" />
     <None Include="docker-compose.yml" />

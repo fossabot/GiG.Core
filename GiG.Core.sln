@@ -265,9 +265,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Http", "Http", "{478DEC56-C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2B8C9DCF-462C-4C3C-BA7A-320F57EC2190}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Http.Extensions", "src\GiG.Core.Http.Extensions\GiG.Core.Http.Extensions.csproj", "{6A9B9A62-7E56-426D-83E3-5E1F9F673550}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Http.Extensions", "src\GiG.Core.Http.Extensions\GiG.Core.Http.Extensions.csproj", "{6A9B9A62-7E56-426D-83E3-5E1F9F673550}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Orleans.Sample.Http", "samples\Orleans\src\GiG.Core.Orleans.Sample.Http\GiG.Core.Orleans.Sample.Http.csproj", "{945CA93F-25BC-4B45-9013-F4B15047B881}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Sample.Http", "samples\Orleans\src\GiG.Core.Orleans.Sample.Http\GiG.Core.Orleans.Sample.Http.csproj", "{945CA93F-25BC-4B45-9013-F4B15047B881}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Docs.Abstractions", "src\GiG.Core.Web.Docs.Abstractions\GiG.Core.Web.Docs.Abstractions.csproj", "{ECF4320C-0B41-4D74-99AD-ACDFE69EC230}"
 EndProject
@@ -281,7 +281,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Silo.Abstr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Storage.Npgsql.Abstractions", "src\GiG.Core.Orleans.Storage.Npgsql.Abstractions\GiG.Core.Orleans.Storage.Npgsql.Abstractions.csproj", "{3E1FF6DA-ABD3-4B46-AA6A-C1694BD715C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Logging.Tests.Integration", "tests\integration\GiG.Core.Logging.Tests.Integration\GiG.Core.Logging.Tests.Integration.csproj", "{40161FF2-C190-4F1B-AACE-080BDB007976}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Logging.Tests.Integration", "tests\integration\GiG.Core.Logging.Tests.Integration\GiG.Core.Logging.Tests.Integration.csproj", "{40161FF2-C190-4F1B-AACE-080BDB007976}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.MultiCluster.Silo", "samples\Orleans\src\GiG.Core.Orleans.MultiCluster.Silo\GiG.Core.Orleans.MultiCluster.Silo.csproj", "{7D836F14-0DE2-4AA5-B84B-C04F7FB6FB33}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.MultiCluster.Client", "samples\Orleans\src\GiG.Core.Orleans.MultiCluster.Client\GiG.Core.Orleans.MultiCluster.Client.csproj", "{ED920311-FDF3-4AFD-8ECB-E3D74D14BC2D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Data.KVStores.Abstractions", "src\GiG.Core.Data.KVStores.Abstractions\GiG.Core.Data.KVStores.Abstractions.csproj", "{8A14C9DA-47A3-4C02-B8CF-81CD57C9AF9C}"
 EndProject
@@ -599,6 +603,14 @@ Global
 		{40161FF2-C190-4F1B-AACE-080BDB007976}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40161FF2-C190-4F1B-AACE-080BDB007976}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40161FF2-C190-4F1B-AACE-080BDB007976}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D836F14-0DE2-4AA5-B84B-C04F7FB6FB33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D836F14-0DE2-4AA5-B84B-C04F7FB6FB33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D836F14-0DE2-4AA5-B84B-C04F7FB6FB33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D836F14-0DE2-4AA5-B84B-C04F7FB6FB33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED920311-FDF3-4AFD-8ECB-E3D74D14BC2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED920311-FDF3-4AFD-8ECB-E3D74D14BC2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED920311-FDF3-4AFD-8ECB-E3D74D14BC2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED920311-FDF3-4AFD-8ECB-E3D74D14BC2D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8A14C9DA-47A3-4C02-B8CF-81CD57C9AF9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8A14C9DA-47A3-4C02-B8CF-81CD57C9AF9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A14C9DA-47A3-4C02-B8CF-81CD57C9AF9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -746,6 +758,8 @@ Global
 		{6C887E3F-86EF-44DD-BDA9-4D1C191CE09F} = {088A9253-942E-4C4E-9A2A-1C5B51BEAC83}
 		{E8F39612-5DB7-410F-BF1D-1DFA8DEF9DE1} = {412AB606-A56E-4B9E-A9C1-E2C7E02D0CF5}
 		{7164EEB5-5B40-4E50-BB3A-3B9D7D524480} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
+		{7D836F14-0DE2-4AA5-B84B-C04F7FB6FB33} = {2AFB4E5D-843D-4DE4-A151-772FC6978A2F}
+		{ED920311-FDF3-4AFD-8ECB-E3D74D14BC2D} = {2AFB4E5D-843D-4DE4-A151-772FC6978A2F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}
