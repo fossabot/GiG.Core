@@ -31,8 +31,8 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration
         public async Task AuthenticateAsync_NoHmacHeader_ReturnsUnauthorized()
         {
             var client = _server.CreateClient();
-            using var request = new HttpRequestMessage(HttpMethod.Get, "/api/mock");
-            request.Headers.Add("X-Nonce", "123");
+            using var request = new HttpRequestMessage(HttpMethod.Get, "api/mock");
+            request.Headers.Add("Nonce", "123");
 
             using var response = await client.SendAsync(request);
             Assert.Equal(HttpStatusCode.Unauthorized,response.StatusCode);
@@ -40,16 +40,15 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration
         [Fact]
         public async Task AuthenticateAsync_GetValidHmacHeader_ReturnsOK()
         {
-            var testHttpClient = _server.CreateClient();
-            
-            var client = HttpClientFactory.CreateClient(x =>
+            var client = HttpClientFactory.Create(x =>
             {
-                x.AddHttpMessageHandler(_server.Services.GetRequiredService<HmacDelegatingHandler>());
-                x.AddHttpMessageHandler(new MockDelegatingHandler(testHttpClient));
+                x.AddDelegatingHandler(_server.Services.GetRequiredService<HmacDelegatingHandler>());
+                x.WithMessageHandler(_server.CreateHandler());
+                x.Options.WithBaseAddress(_server.BaseAddress);
             });
             
-            using var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost/api/mock");
-            request.Headers.Add("X-Nonce", "123");
+            using var request = new HttpRequestMessage(HttpMethod.Get, "api/mock");
+            request.Headers.Add("Nonce", "123");
 
             using var response = await client.SendAsync(request);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -58,16 +57,15 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration
         [Fact]
         public async Task AuthenticateAsync_PostValidHmacHeader_ReturnsOK()
         {
-            var testHttpClient = _server.CreateClient();
-
-            var client = HttpClientFactory.CreateClient(x =>
+            var client = HttpClientFactory.Create(x =>
             {
-                x.AddHttpMessageHandler(_server.Services.GetRequiredService<HmacDelegatingHandler>());
-                x.AddHttpMessageHandler(new MockDelegatingHandler(testHttpClient));
+                x.AddDelegatingHandler(_server.Services.GetRequiredService<HmacDelegatingHandler>());
+                x.WithMessageHandler(_server.CreateHandler());
+                x.Options.WithBaseAddress(_server.BaseAddress);
             });
 
-            using var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost/api/mock");
-            request.Headers.Add("X-Nonce", "123");
+            using var request = new HttpRequestMessage(HttpMethod.Post, "api/mock");
+            request.Headers.Add("Nonce", "123");
             request.Content = new StringContent("{\"text\":\"abccccc\"}",Encoding.UTF8,"application/json");
 
             using var response = await client.SendAsync(request);
