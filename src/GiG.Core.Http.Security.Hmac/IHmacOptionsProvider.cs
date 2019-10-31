@@ -1,11 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GiG.Core.Http.Security.Hmac
+﻿namespace GiG.Core.Http.Security.Hmac
 {
+    /// <summary>
+    /// <see cref="IHmacOptionsProvider"/> for <see cref="HmacDelegatingHandler"/>.
+    /// </summary>
     public interface IHmacOptionsProvider
     {
+        /// <summary>
+        /// Gets the current hmac settings
+        /// </summary>
+        /// <returns><see cref="HmacOptions"/> for the current context.</returns>
         HmacOptions GetHmacOptions();
     }
 }

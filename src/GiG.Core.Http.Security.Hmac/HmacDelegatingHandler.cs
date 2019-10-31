@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace GiG.Core.Http.Security.Hmac
 {
+    /// <summary>
+    /// <see cref="HmacDelegatingHandler"/> to handle Hmac header injection for Hmac Authentication.
+    /// </summary>
     public class HmacDelegatingHandler : DelegatingHandler
     {
         private readonly IHmacOptionsProvider _optionsProvider;
@@ -15,8 +18,8 @@ namespace GiG.Core.Http.Security.Hmac
         /// <summary>
         /// A <see cref="DelegatingHandler"/> that injects an HMAC Authorization Header into the request.
         /// </summary>
-        /// <param name="optionsProvider">HMAC configuration provider which should return hash and secret</param>
-        /// <param name="hashProviderFactory"><see cref="IHashProviderFactory"> that returns <see cref="IHashProvider"></c></param>
+        /// <param name="optionsProvider">HMAC configuration provider which should return <see cref="HmacOptions"/>.</param>
+        /// <param name="hashProviderFactory"><see cref="IHashProviderFactory" /> that returns <see cref="IHashProvider" />.</param>
         public HmacDelegatingHandler(
             IHmacOptionsProvider optionsProvider,
             IHashProviderFactory hashProviderFactory)
@@ -24,6 +27,7 @@ namespace GiG.Core.Http.Security.Hmac
             _optionsProvider = optionsProvider;
             _hashProviderFactory = hashProviderFactory;
         }
+        /// <inheritdoc />
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             var options = _optionsProvider.GetHmacOptions();

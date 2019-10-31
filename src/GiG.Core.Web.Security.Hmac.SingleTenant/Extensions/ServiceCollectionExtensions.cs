@@ -7,13 +7,15 @@ using System;
 
 namespace GiG.Core.Web.Security.Hmac.MultiTenant.Extensions
 {
+    /// <summary>
+    /// <see cref="IServiceCollection"></see> extensions for HmacAuthenticationHandler.
+    /// </summary>
     public static class ServiceCollectionExtensions
     {
        
         /// <summary>
-         /// Adds multitenant option provider for <see cref="HmacAuthenticationHandler" /> functionality.
+         /// Adds multi-tenant option provider for HmacAuthenticationHandler functionality.
          /// </summary>
-         /// <param name="services">The <see cref="IServiceCollection" />.</param>        
          /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection ConfigureDefaultHmacOptionProvider([NotNull]this IServiceCollection services, [NotNull]IConfigurationSection configurationSection)
         {

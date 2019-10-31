@@ -1,9 +1,9 @@
-﻿using GiG.Core.Web.Security.Hmac.Extensions;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
-using System;
+﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using GiG.Core.Web.Security.Hmac.Extensions;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 using Xunit;
 
 namespace GiG.Core.Web.Security.Hmac.Tests.Unit

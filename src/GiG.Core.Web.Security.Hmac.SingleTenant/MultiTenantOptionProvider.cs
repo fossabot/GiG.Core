@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace GiG.Core.Web.Security.Hmac.MultiTenant
 {
+    /// <summary>
+    /// <see cref="MultiTenantOptionProvider"/> for HmacAuthenticationHandler.
+    /// </summary>
     public class MultiTenantOptionProvider : IHmacOptionsProvider
     {
         private readonly ITenantAccessor _tenantAccessor;
@@ -14,11 +17,8 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant
         private readonly ILogger<MultiTenantOptionProvider> _logger;
 
         /// <summary>
-        /// <see cref="IHmacOptionsProvider"/> which handles multitenancy for HmacAuthenticationHandler
+        /// <see cref="IHmacOptionsProvider"/> which handles multi-tenancy for HmacAuthenticationHandler.
         /// </summary>
-        /// <param name="tenantAccessor"></param>
-        /// <param name="optionsAccessor"></param>
-        /// <param name="logger"></param>
         public MultiTenantOptionProvider(
             ITenantAccessor tenantAccessor,
             IOptionsSnapshot<Dictionary<string, HmacOptions>> optionsAccessor,
@@ -29,7 +29,7 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant
             _logger = logger;
         }
         /// <summary>
-        /// Get <see cref="HmacOptions"/> for multitenancy. This has a limitation that it only accepts the first tenant in the HttpHeaders.
+        /// Get <see cref="HmacOptions"/> for multi-tenancy. This has a limitation that it only accepts the first tenant in the HttpHeaders.
         /// </summary>
         /// <returns>Options for the current tenant.</returns>
         public HmacOptions GetHmacOptions()

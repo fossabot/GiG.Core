@@ -9,6 +9,9 @@ using System.Linq;
 
 namespace GiG.Core.Web.Security.Hmac.Extensions
 {
+    /// <summary>
+    /// <see cref="IServiceCollection"/> for <see cref="HmacAuthenticationHandler"/>.
+    /// </summary>
     public static class ServiceCollectionExtensions
     {
         /// <summary>
@@ -31,10 +34,11 @@ namespace GiG.Core.Web.Security.Hmac.Extensions
             return services;
         }
         /// <summary>
-         /// Adds option provider for <see cref="HmacAuthenticationHandler" /> functionality.
-         /// </summary>
-         /// <param name="services">The <see cref="IServiceCollection" />.</param>        
-         /// <returns>The <see cref="IServiceCollection" />.</returns>
+        /// Adds option provider for <see cref="HmacAuthenticationHandler" /> functionality.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection" />.</param>        
+        /// <param name="configurationSection">The <see cref="IConfigurationSection" />Configuration section for hmac settings.</param>        
+        /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection ConfigureDefaultHmacOptionProvider([NotNull]this IServiceCollection services, [NotNull]IConfigurationSection configurationSection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));

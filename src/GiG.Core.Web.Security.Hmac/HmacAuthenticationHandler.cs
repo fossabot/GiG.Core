@@ -2,7 +2,6 @@
 using GiG.Core.Web.Security.Hmac.Abstractions;
 using GiG.Core.Web.Security.Hmac.Extensions;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Net.Http.Headers;
@@ -12,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace GiG.Core.Web.Security.Hmac
 {
+    /// <summary>
+    /// <see cref="HmacAuthenticationHandler"/> for hmac authentication header.
+    /// </summary>
     public class HmacAuthenticationHandler : AuthenticationHandler<HmacRequirement>
     {
         private readonly IHmacOptionsProvider _hmacOptionsProvider;
@@ -35,6 +37,7 @@ namespace GiG.Core.Web.Security.Hmac
             _signatureProviderFactory = signatureProviderFactory;
         }
 
+        /// <inheritdoc />
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
             var hmacOptions = _hmacOptionsProvider.GetHmacOptions();
