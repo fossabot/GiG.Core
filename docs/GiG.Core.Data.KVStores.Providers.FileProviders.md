@@ -14,7 +14,7 @@ public static void ConfigureServices(HostBuilderContext hostContext, IServiceCol
     
     services
         .AddKVStores<IEnumerable<MyModel>>()
-        .AddJsonFile(configuration, "MyData");
+        .FromJsonFile(configuration, "MyData");
 }
 
 ```
