@@ -45,7 +45,7 @@ namespace GiG.Core.Orleans.Client
         /// <param name="name">The Name of the Orleans Cluster Client.</param>
         /// <param name="createClient">The <see cref="Func{IClusterClient}"/> which will be used to create the Orleans Cluster Client</param>
         /// <returns>The <see cref="ClusterClientFactoryBuilder"/>.</returns>
-        public ClusterClientFactoryBuilder AddClusterClient(string name, [NotNull] Func<IClusterClient> createClient)
+        public ClusterClientFactoryBuilder AddClusterClient([NotNull] string name, [NotNull] Func<IClusterClient> createClient)
         {
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException(nameof(name));
             if (createClient == null) throw new ArgumentNullException(nameof(createClient));
