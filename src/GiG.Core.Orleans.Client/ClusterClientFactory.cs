@@ -14,9 +14,9 @@ namespace GiG.Core.Orleans.Client
         private bool _isDisposing;
 
         /// <inheritdoc />
-        public void Add(string name, [NotNull] IClusterClient clusterClient)
+        public void Add([NotNull] string name, [NotNull] IClusterClient clusterClient)
         {
-            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
+            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException(nameof(name));
             if (clusterClient == null) throw new ArgumentNullException(nameof(clusterClient));
 
             _clusterClients.Add(name, clusterClient);
