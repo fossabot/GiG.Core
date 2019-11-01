@@ -8,6 +8,9 @@ namespace GiG.Core.Web.Mock
     {
         public IPAddress IPAddress { get; }
 
-        public MockRequestContextAccessor() => IPAddress = new Faker().Internet.IpAddress();
+        public MockRequestContextAccessor()
+        {
+            IPAddress = new Faker().Internet.IpAddress();
+        }
     }
 }

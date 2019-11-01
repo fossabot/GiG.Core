@@ -4,7 +4,7 @@ This Library provides an API to register Tenant Id Enricher for Logging when usi
 
 ## Basic Usage
 
-Make use of `EnrichWithTenantId()` when configuring logging. The Enricher depends on 'GiG.Core.MultiTenant.Abstractions.ITenantAccessor'.
+Make use of `EnrichWithTenant()` when configuring logging. The Enricher depends on 'GiG.Core.MultiTenant.Abstractions.ITenantAccessor'.
 
 ```csharp
 
@@ -21,11 +21,11 @@ static class Program
             .ConfigureServices(x => 
             {
                 x.AddTenantAccessor();
-			 })
-			 .ConfigureLogging(x =>
-			 {
-			     x.EnrichWithTenantId();
-			 });
+			})
+			.ConfigureLogging(x =>
+			{
+			    x.EnrichWithTenant();
+			});
     }
 }
 

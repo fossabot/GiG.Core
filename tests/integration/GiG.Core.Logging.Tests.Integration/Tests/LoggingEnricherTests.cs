@@ -1,5 +1,5 @@
 ﻿using GiG.Core.Context.Abstractions;
-using GiG.Core.DistributedTracing.Web.Extensions;
+using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.Hosting.Abstractions;
 using GiG.Core.Hosting.Extensions;
 using GiG.Core.Logging.Enrichers.ApplicationMetadata.Extensions;
@@ -9,20 +9,12 @@ using GiG.Core.Logging.Enrichers.MultiTenant.Extensions;
 using GiG.Core.Logging.Extensions;
 using GiG.Core.Logging.Tests.Integration.Extensions;
 using GiG.Core.Logging.Tests.Integration.Helpers;
-using GiG.Core.MultiTenant.Web.Extensions;
-using GiG.Core.Web.Hosting.Extensions;
 using GiG.Core.Web.Mock.Extensions;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog.Events;
 using System;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace GiG.Core.Logging.Tests.Integration.Tests
@@ -30,86 +22,55 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
     [Trait("Category", "Integration")]
     public class LoggingEnricherTests
     {
-        private readonly TestServer _server;
+        private readonly string _logMessageTest = Guid.NewGuid().ToString();
+        private readonly IHost _host;
         private readonly IApplicationMetadataAccessor _applicationMetadataAccessor;
         private readonly IRequestContextAccessor _requestContextAccessor;
+        private readonly ICorrelationContextAccessor _correlationContextAccessor;
 
-        public LogEvent LogEvent;
-        public ILogger Logger;
+        private LogEvent _logEvent;
 
         public LoggingEnricherTests()
         {
-            var host = Host.CreateDefaultBuilder()
-                .UseApplicationMetadata()
-                .ConfigureWebHost(webBuilder =>
-                {
-                    webBuilder.UseTestServer();
-                    webBuilder.Configure(app =>
-                    {
-                        app.UseForwardedHeaders();
-                        app.UseCorrelation();
-                    });
-                })
+            _host = Host.CreateDefaultBuilder()
                 .ConfigureServices(x =>
                 {
-                    x.ConfigureForwardedHeaders();
-                    x.AddCorrelationAccessor();
-                    x.AddTenantAccessor();
+                    x.AddMockCorrelationContextAccessor();
+                    x.AddMockTenantAccessor();
                     x.AddMockRequestContextAccessor();
                 })
+                .UseApplicationMetadata()
                 .ConfigureLogging(x => x
-                    .WriteToSink(new DelegatingSink(e => LogEvent = e))
+                    .WriteToSink(new DelegatingSink(WriteLog))
                     .EnrichWithApplicationMetadata()
-                    .EnrichWithCorrelationId()
-                    .EnrichWithTenantId()
+                    .EnrichWithCorrelation()
+                    .EnrichWithTenant()
                     .EnrichWithRequestContext()
-                ).Build();
+                )
+                .Build();
 
-            host.StartAsync().GetAwaiter().GetResult();
-
-            _server = host.GetTestServer();
-            Logger = host.Services.GetRequiredService<ILogger<LoggingEnricherTests>>();
-            _applicationMetadataAccessor = host.Services.GetRequiredService<IApplicationMetadataAccessor>();
-            _requestContextAccessor = host.Services.GetRequiredService<IRequestContextAccessor>();
+            _host.Start();
+            _applicationMetadataAccessor = _host.Services.GetRequiredService<IApplicationMetadataAccessor>();
+            _requestContextAccessor = _host.Services.GetRequiredService<IRequestContextAccessor>();
+            _correlationContextAccessor = _host.Services.GetRequiredService<ICorrelationContextAccessor>();
         }
 
         [Fact]
-        public async Task GenericCreateAndStartHost_GetTestServer()
-        {
-            using var host = await new HostBuilder()
-                .ConfigureWebHost(webBuilder =>
-                {
-                    webBuilder
-                        .UseTestServer()
-                        .Configure(app => { });
-                })
-                .StartAsync();
-
-            var response = await host.GetTestServer().CreateClient().GetAsync("/");
-            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
-        }
-
-        [Fact]
-        public async Task Logging_Enrichers_Validations()
+        public void Logging_Enrichers_Validations()
         {
             // Arrange
-            var client = _server.CreateClient();
-
-            client.DefaultRequestHeaders.Add(DistributedTracing.Abstractions.Constants.Header, Guid.NewGuid().ToString());
-            client.DefaultRequestHeaders.Add(MultiTenant.Abstractions.Constants.Header, "1");
-            client.DefaultRequestHeaders.Add(MultiTenant.Abstractions.Constants.Header, "2");
+            var logger = _host.Services.GetRequiredService<ILogger<LoggingEnricherTests>>();
 
             // Act
-            using var request = new HttpRequestMessage(HttpMethod.Get, "/api/mock");
-            await client.SendAsync(request);
-
+            logger.LogInformation(_logMessageTest);
+                
             // Assert
-            Assert.NotNull(LogEvent);
-            var applicationName = (string)LogEvent.Properties["ApplicationName"].LiteralValue();
-            var applicationVersion = (string)LogEvent.Properties["ApplicationVersion"].LiteralValue();
-            var correlationId = (string)LogEvent.Properties["CorrelationId"].LiteralValue();
-            var ipAddress = (string)LogEvent.Properties["IPAddress"].LiteralValue();
-            var tenantIds = LogEvent.Properties["TenantId"].SequenceValues();
+            Assert.NotNull(_logEvent);
+            var applicationName = (string) _logEvent.Properties["ApplicationName"].LiteralValue();
+            var applicationVersion = (string) _logEvent.Properties["ApplicationVersion"].LiteralValue();
+            var correlationId = (string) _logEvent.Properties["CorrelationId"].LiteralValue();
+            var ipAddress = (string) _logEvent.Properties["IPAddress"].LiteralValue();
+            var tenantIds = _logEvent.Properties["TenantId"].SequenceValues();
 
             Assert.NotNull(applicationName);
             Assert.NotNull(applicationVersion);
@@ -119,11 +80,19 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
 
             Assert.Equal(_applicationMetadataAccessor.Name, applicationName);
             Assert.Equal(_applicationMetadataAccessor.Version, applicationVersion);
-            Assert.True(Guid.TryParse(correlationId, out _));
+            Assert.Equal(_correlationContextAccessor.Value.ToString(), correlationId);
             Assert.Equal(_requestContextAccessor.IPAddress.ToString(), ipAddress);
-            Assert.True(tenantIds.Length == 2);
-            Assert.True(Array.Exists(tenantIds, e => e.ToString().Equals("1")));
-            Assert.True(Array.Exists(tenantIds, e => e.ToString().Equals("2")));
+            Assert.Equal(2, tenantIds.Length);
+            Assert.Contains("1", tenantIds);
+            Assert.Contains("2", tenantIds);
+        }
+
+        private void WriteLog(LogEvent log)
+        {
+            if (log.MessageTemplate.Text == _logMessageTest)
+            {
+                _logEvent = log;
+            }
         }
     }
 }

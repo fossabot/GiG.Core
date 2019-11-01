@@ -1,4 +1,6 @@
 ﻿using GiG.Core.Context.Abstractions;
+using GiG.Core.DistributedTracing.Abstractions;
+using GiG.Core.MultiTenant.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
@@ -12,6 +14,24 @@ namespace GiG.Core.Web.Mock.Extensions
             if (services == null) throw new ArgumentNullException(nameof(services));
 
             services.TryAddSingleton<IRequestContextAccessor>(new MockRequestContextAccessor());
+
+            return services;
+        }
+        
+        public static IServiceCollection AddMockTenantAccessor(this IServiceCollection services)
+        {
+            if (services == null) throw new ArgumentNullException(nameof(services));
+
+            services.TryAddSingleton<ITenantAccessor>(new MockTenantAccessor());
+
+            return services;
+        }
+        
+        public static IServiceCollection AddMockCorrelationContextAccessor(this IServiceCollection services)
+        {
+            if (services == null) throw new ArgumentNullException(nameof(services));
+
+            services.TryAddSingleton<ICorrelationContextAccessor>(new MockCorrelationContextAccessor());
 
             return services;
         }

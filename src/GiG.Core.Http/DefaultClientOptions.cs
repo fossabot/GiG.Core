@@ -6,7 +6,7 @@
     public class DefaultClientOptions
     {
         /// <summary>
-        /// Default Section Name
+        /// Default Section Name.
         /// </summary>
         public const string DefaultSectionName = "HttpClient";
         

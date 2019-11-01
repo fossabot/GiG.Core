@@ -17,7 +17,7 @@ namespace GiG.Core.Logging.Enrichers.DistributedTracing.Extensions
         /// </summary>
         /// <param name="builder">The <see cref="LoggingConfigurationBuilder" />.</param>
         /// <returns>The <see cref="LoggingConfigurationBuilder" />.</returns>
-        public static LoggingConfigurationBuilder EnrichWithCorrelationId([NotNull] this LoggingConfigurationBuilder builder)
+        public static LoggingConfigurationBuilder EnrichWithCorrelation([NotNull] this LoggingConfigurationBuilder builder)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
 
