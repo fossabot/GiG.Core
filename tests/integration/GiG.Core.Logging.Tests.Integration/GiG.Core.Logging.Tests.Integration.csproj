@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="Bogus" Version="28.4.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.3.0" />
     <PackageReference Include="Serilog" Version="2.9.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
@@ -17,13 +18,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Abstractions\GiG.Core.Logging.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Enrichers.ApplicationMetadata\GiG.Core.Logging.Enrichers.ApplicationMetadata.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Enrichers.Context\GiG.Core.Logging.Enrichers.Context.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Enrichers.DistributedTracing\GiG.Core.Logging.Enrichers.DistributedTracing.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Enrichers.MultiTenant\GiG.Core.Logging.Enrichers.MultiTenant.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Sinks.File\GiG.Core.Logging.Sinks.File.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging\GiG.Core.Logging.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
