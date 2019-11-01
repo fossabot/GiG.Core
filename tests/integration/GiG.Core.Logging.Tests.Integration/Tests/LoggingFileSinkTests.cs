@@ -13,7 +13,7 @@ using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace GiG.Core.Logging.Tests.Integration.Tests
 {
-    [Trait("Category", "Integration")]
+    [Trait("Category", "IntegrationWithDependency")]
     public class LoggingFileSinkTests : IDisposable
     {
         private readonly ILogger _logger;
