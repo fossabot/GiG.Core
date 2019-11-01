@@ -17,6 +17,7 @@ namespace GiG.Core.Web.Security.Hmac
         {
             _options = options;
         }
+
         /// <summary>
         /// Gets the configured hmac settings.
         /// </summary>

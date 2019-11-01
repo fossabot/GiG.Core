@@ -15,6 +15,7 @@ namespace GiG.Core.Http.Security.Hmac
         {
             _options = options;
         }
+
         /// <inheritdoc />
         public HmacOptions GetHmacOptions() => _options.Value;
     }
