@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <PackageReference Include="Bogus" Version="28.4.1" />
-    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.3.0" />
     <PackageReference Include="Serilog" Version="2.9.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
@@ -18,8 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\GiG.Core.Context.Web\GiG.Core.Context.Web.csproj" />
-    <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Web\GiG.Core.DistributedTracing.Web.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Abstractions\GiG.Core.Logging.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Enrichers.ApplicationMetadata\GiG.Core.Logging.Enrichers.ApplicationMetadata.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Enrichers.Context\GiG.Core.Logging.Enrichers.Context.csproj" />
@@ -27,8 +24,6 @@
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Enrichers.MultiTenant\GiG.Core.Logging.Enrichers.MultiTenant.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Sinks.File\GiG.Core.Logging.Sinks.File.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging\GiG.Core.Logging.csproj" />
-    <ProjectReference Include="..\..\..\src\GiG.Core.MultiTenant.Web\GiG.Core.MultiTenant.Web.csproj" />
-    <ProjectReference Include="..\..\..\src\GiG.Core.Web.Hosting\GiG.Core.Web.Hosting.csproj" />
   </ItemGroup>
 
 </Project>
