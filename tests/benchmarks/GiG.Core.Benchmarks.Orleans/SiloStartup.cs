@@ -10,11 +10,6 @@ namespace GiG.Core.Benchmarks.Orleans
 {
     public static class SiloStartup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public static void ConfigureServices(IServiceCollection services)
-        {     
-        }
-
         // This method gets called by the runtime. Use this method to configure Orleans.
         public static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builder)
         {
