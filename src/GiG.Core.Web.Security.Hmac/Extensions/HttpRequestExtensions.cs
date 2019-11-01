@@ -28,7 +28,7 @@ namespace GiG.Core.Web.Security.Hmac.Extensions
                     await httpRequest.Body.CopyToAsync(bodyStream);
                     bodyStream.Seek(0, SeekOrigin.Begin);
 
-                    body = await new StreamReader(bodyStream).ReadToEndAsync();
+                    body = await new StreamReader(bodyStream).ReadToEndAsync(); //StreamReader cannot be disposed because it would dispose the HttpRequest Stream
 
                     bodyStream.Seek(0, SeekOrigin.Begin);
                     httpRequest.Body = bodyStream;

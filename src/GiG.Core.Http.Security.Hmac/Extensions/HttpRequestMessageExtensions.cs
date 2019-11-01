@@ -19,7 +19,7 @@ namespace GiG.Core.Http.Security.Hmac.Extensions
         /// <returns>The string to be used to HMAC hashing.</returns>
         public static async System.Threading.Tasks.Task<string> AsSignatureStringAsync(this HttpRequestMessage httpRequest, string nonceHeader, string secret)
         {
-            var body = string.Empty;
+            string body;
             switch (httpRequest.Method.Method.ToUpper())
             {
                 case "POST":

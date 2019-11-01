@@ -24,9 +24,11 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
         {
             //Arrange
             var context = new DefaultHttpContext();
-            var request = new DefaultHttpRequest(context);
-            request.Method = "GET";
-            request.Path = new PathString("/api/test");
+            var request = new DefaultHttpRequest(context)
+            {
+                Method = "GET",
+                Path = new PathString("/api/test")
+            };
             request.Headers.Add(_nonceHeader, _nonceValue);
             var secret = "test";
 
@@ -41,9 +43,11 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
         {
             //Arrange
             var context = new DefaultHttpContext();
-            var request = new DefaultHttpRequest(context);
-            request.Method = "GET";
-            request.Path = new PathString("/api/test");
+            var request = new DefaultHttpRequest(context)
+            {
+                Method = "GET",
+                Path = new PathString("/api/test")
+            };
             var secret = "test";
 
             //Act & Assert
@@ -56,15 +60,16 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
         {
             //Arrange
             var context = new DefaultHttpContext();
-            var request = new DefaultHttpRequest(context);
-
-            request.Method = "POST";
-            request.Path = new PathString("/api/test");
+            var request = new DefaultHttpRequest(context)
+            {
+                Method = "POST",
+                Path = new PathString("/api/test")
+            };
             request.Headers.Add(_nonceHeader, _nonceValue);
             var secret = "test";
             var body = "woop woop I unit tested the body woop woop";
             request.Body = new MemoryStream();
-            StreamWriter bodyWriter = new StreamWriter(request.Body);
+            using StreamWriter bodyWriter = new StreamWriter(request.Body);
             bodyWriter.Write(body);
             bodyWriter.Flush();
             request.Body.Position = 0;
@@ -82,16 +87,17 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
         {
             //Arrange
             var context = new DefaultHttpContext();
-            var request = new DefaultHttpRequest(context);
-
-            request.Method = "PATCH";
-            request.Path = new PathString("/api/test");
+            var request = new DefaultHttpRequest(context)
+            {
+                Method = "PATCH",
+                Path = new PathString("/api/test")
+            };
             request.Headers.Add(_nonceHeader, _nonceValue);
 
             var secret = "test";
             var body = "woop woop I unit tested the body woop woop";
             request.Body = new MemoryStream();
-            StreamWriter bodyWriter = new StreamWriter(request.Body);
+            using StreamWriter bodyWriter = new StreamWriter(request.Body);
             bodyWriter.Write(body);
             bodyWriter.Flush();
             request.Body.Position = 0;
@@ -109,16 +115,17 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
         {
             //Arrange
             var context = new DefaultHttpContext();
-            var request = new DefaultHttpRequest(context);
-
-            request.Method = "PUT";
-            request.Path = new PathString("/api/test"); 
+            var request = new DefaultHttpRequest(context)
+            {
+                Method = "PUT",
+                Path = new PathString("/api/test")
+            };
             request.Headers.Add(_nonceHeader, _nonceValue);
 
             var secret = "test";
             var body = "woop woop I unit tested the body woop woop";
             request.Body = new MemoryStream();
-            StreamWriter bodyWriter = new StreamWriter(request.Body);
+            using StreamWriter bodyWriter = new StreamWriter(request.Body);
             bodyWriter.Write(body);
             bodyWriter.Flush();
             request.Body.Position = 0;
