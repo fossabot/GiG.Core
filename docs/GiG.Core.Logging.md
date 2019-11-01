@@ -1,4 +1,4 @@
-﻿# GiG.Core.Logging.Console
+﻿# GiG.Core.Logging
 
 This Library provides an API to register Logging using Serilog for an application.
 

@@ -31,6 +31,6 @@ The below table outlines the valid Configurations used to override the [FluentdS
 
 | Configuration Name | Type   | Optional | Default Value |
 |:-------------------|:-------|:---------|:--------------|
-| Enabled            | bool   | Yes      | 'false'       |
+| Enabled            | bool   | Yes      | false         |
 | Hostname           | string | Yes      | 'localhost'   |
 | Port               | int    | Yes      | 24224         |

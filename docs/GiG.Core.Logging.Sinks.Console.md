@@ -31,4 +31,4 @@ The below table outlines the valid Configurations under the Config section `Logg
 
 | Configuration Name | Type | Optional | Default Value |
 |:-------------------|:-----|:---------|:--------------|
-| Enabled            | bool | Yes      | 'false'       |
+| Enabled            | bool | Yes      | false         |

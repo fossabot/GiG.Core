@@ -31,10 +31,10 @@ The below table outlines the valid Configurations used to override the [FileSink
 
 | Configuration Name     | Type   | Optional | Default Value           |
 |:-----------------------|:-------|:---------|:------------------------|
-| Enabled                | bool   | Yes      | 'false'                 |
+| Enabled                | bool   | Yes      | false                   |
 | FilePath               | string | Yes      | 'logs\\log-.txt'        |
 | RollingInterval        | string | Yes      | 'RollingInterval.Day'   |
 | FileSizeLimitBytes     | long   | Yes      | 1L * 1024 * 1024 * 1024 |
 | RetainedFileCountLimit | int    | Yes      | 31                      |
-| RollOnFileSizeLimit    | bool   | Yes      | 'true'                  |
+| RollOnFileSizeLimit    | bool   | Yes      | true                    |
 

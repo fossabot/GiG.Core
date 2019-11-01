@@ -9,7 +9,7 @@ using Xunit;
 
 namespace GiG.Core.Logging.Tests.Integration.Tests
 {
-    [Trait("Category", "IntegrationWithDependency")]
+    [Trait("Category", "Integration")]
     public class LoggingFileSinkTests
     {
         private readonly IHost _host;
@@ -29,7 +29,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
         }
 
         [Fact]
-        public async Task GenericCreateAndStartHost_GetTestServer()
+        public async Task LoggingFileSinkTests_WriteLog()
         {
             // Arrange
             var path = $"logs\\logs.txt";
