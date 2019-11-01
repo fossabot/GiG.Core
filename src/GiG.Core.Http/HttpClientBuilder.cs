@@ -1,5 +1,5 @@
+using JetBrains.Annotations;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
 
@@ -25,7 +25,7 @@ namespace GiG.Core.Http
         /// </summary>
         /// <param name="handler">The <see cref="DelegatingHandler"/>.</param>
         /// <returns>The <see cref="HttpClientBuilder"/>.</returns>
-        public HttpClientBuilder AddDelegatingHandler(DelegatingHandler handler)
+        public HttpClientBuilder AddDelegatingHandler([NotNull] DelegatingHandler handler)
         {
             if (handler == null) throw new ArgumentNullException(nameof(handler));
             
@@ -35,11 +35,11 @@ namespace GiG.Core.Http
         }
         
         /// <summary>
-        /// Adds Http Message Handler.
+        /// Adds HTTP Message Handler.
         /// </summary>
         /// <param name="handler">The <see cref="HttpMessageHandler"/>.</param>
         /// <returns>The <see cref="HttpClientBuilder"/>.</returns>
-        public HttpClientBuilder WithMessageHandler(HttpMessageHandler handler)
+        public HttpClientBuilder WithMessageHandler([NotNull] HttpMessageHandler handler)
         {
             if (handler == null) throw new ArgumentNullException(nameof(handler));
             

@@ -1,12 +1,12 @@
 ﻿namespace GiG.Core.Http
 {
     /// <summary>
-    /// Http Client Options.
+    /// HTTP Client Options.
     /// </summary>
     public class HttpClientOptions
     {
         /// <summary>
-        /// Absolute or Relative Url.
+        /// Absolute or Relative URI.
         /// </summary>
         public string Url { get; set; } 
     }
