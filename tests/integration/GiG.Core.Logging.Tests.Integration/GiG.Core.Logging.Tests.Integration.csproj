@@ -22,6 +22,7 @@
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Enrichers.Context\GiG.Core.Logging.Enrichers.Context.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Enrichers.DistributedTracing\GiG.Core.Logging.Enrichers.DistributedTracing.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Enrichers.MultiTenant\GiG.Core.Logging.Enrichers.MultiTenant.csproj" />
+    <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Sinks.File\GiG.Core.Logging.Sinks.File.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging\GiG.Core.Logging.csproj" />
   </ItemGroup>
 

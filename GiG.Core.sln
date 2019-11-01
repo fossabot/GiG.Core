@@ -27,7 +27,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Logging.Enrichers.Context.md = docs\GiG.Core.Logging.Enrichers.Context.md
 		docs\GiG.Core.Logging.Enrichers.DistributedTracing.md = docs\GiG.Core.Logging.Enrichers.DistributedTracing.md
 		docs\GiG.Core.Logging.Enrichers.MultiTenant.md = docs\GiG.Core.Logging.Enrichers.MultiTenant.md
-		docs\GiG.Core.Logging.md = docs\GiG.Core.Logging.md
+		docs\GiG.Core.Logging.Sinks.Console.md = docs\GiG.Core.Logging.Sinks.Console.md
+		docs\GiG.Core.Logging.Sinks.File.md = docs\GiG.Core.Logging.Sinks.File.md
+		docs\GiG.Core.Logging.Sinks.Fluentd.md = docs\GiG.Core.Logging.Sinks.Fluentd.md
 		docs\GiG.Core.MultiTenant.Web.md = docs\GiG.Core.MultiTenant.Web.md
 		docs\GiG.Core.Orleans.Client.md = docs\GiG.Core.Orleans.Client.md
 		docs\GiG.Core.Orleans.Clustering.Consul.md = docs\GiG.Core.Orleans.Clustering.Consul.md
@@ -300,6 +302,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Data.KVStores.Providers.Hosting", "src\GiG.Core.Data.KVStores.Providers.Hosting\GiG.Core.Data.KVStores.Providers.Hosting.csproj", "{E8F39612-5DB7-410F-BF1D-1DFA8DEF9DE1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Data.KVStores.Tests.Integration", "tests\integration\GiG.Core.Data.KVStores.Tests.Integration\GiG.Core.Data.KVStores.Tests.Integration.csproj", "{7164EEB5-5B40-4E50-BB3A-3B9D7D524480}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Logging.Sinks.File", "src\GiG.Core.Logging.Sinks.File\GiG.Core.Logging.Sinks.File.csproj", "{A479D4F7-2F54-44EF-9A56-B04927E86F60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -603,6 +607,10 @@ Global
 		{40161FF2-C190-4F1B-AACE-080BDB007976}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40161FF2-C190-4F1B-AACE-080BDB007976}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40161FF2-C190-4F1B-AACE-080BDB007976}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A479D4F7-2F54-44EF-9A56-B04927E86F60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A479D4F7-2F54-44EF-9A56-B04927E86F60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A479D4F7-2F54-44EF-9A56-B04927E86F60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A479D4F7-2F54-44EF-9A56-B04927E86F60}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7D836F14-0DE2-4AA5-B84B-C04F7FB6FB33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7D836F14-0DE2-4AA5-B84B-C04F7FB6FB33}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D836F14-0DE2-4AA5-B84B-C04F7FB6FB33}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -751,6 +759,7 @@ Global
 		{4E44028E-F87A-4C11-B953-F104DE7E36F2} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
 		{3E1FF6DA-ABD3-4B46-AA6A-C1694BD715C7} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
 		{40161FF2-C190-4F1B-AACE-080BDB007976} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
+		{A479D4F7-2F54-44EF-9A56-B04927E86F60} = {52AEF79F-C056-404A-9AC9-155CE8A17721}
 		{8A14C9DA-47A3-4C02-B8CF-81CD57C9AF9C} = {412AB606-A56E-4B9E-A9C1-E2C7E02D0CF5}
 		{A49C4BAE-71AA-4E79-89D8-DBB08C990AEA} = {412AB606-A56E-4B9E-A9C1-E2C7E02D0CF5}
 		{4B194F9D-2CA7-46C5-8CBF-31B5DE812D7A} = {412AB606-A56E-4B9E-A9C1-E2C7E02D0CF5}
