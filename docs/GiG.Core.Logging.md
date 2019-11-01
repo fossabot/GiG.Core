@@ -1,4 +1,4 @@
-﻿# GiG.Core.Logging
+﻿# GiG.Core.Logging.Console
 
 This Library provides an API to register Logging using Serilog for an application.
 
@@ -24,3 +24,4 @@ static class Program
 }
 
 ```
+
