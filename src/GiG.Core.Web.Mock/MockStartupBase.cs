@@ -9,12 +9,12 @@ using Microsoft.Extensions.DependencyInjection;
 namespace GiG.Core.Web.Mock
 {
     /// <summary>
-    /// 
+    /// Mock Startup base class
     /// </summary>
     public abstract class MockStartupBase
     {
         /// <summary>
-        /// 
+        /// This method gets called by the runtime. Use this method to add services to the container.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
         public virtual void ConfigureServices(IServiceCollection services)
@@ -30,7 +30,7 @@ namespace GiG.Core.Web.Mock
         }
 
         /// <summary>
-        /// 
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         /// </summary>
         /// <param name="app">The <see cref="IApplicationBuilder"/>.</param>
         public virtual void Configure(IApplicationBuilder app)
