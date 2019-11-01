@@ -14,6 +14,10 @@
         /// The Nonce header for HmacAuthentication.
         /// </summary>
         public const string NonceHeader = "Nonce";
+
+        /// <summary>
+        /// The HMAC scheme.
+        /// </summary>
         public const string Scheme = "hmac";
     }
 }
