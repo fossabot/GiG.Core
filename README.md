@@ -11,11 +11,13 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Configuration](docs/GiG.Core.Configuration.md) - Provides an API to add external configuration via JSON file and Environment variables.
 - [GiG.Core.Context.Orleans](docs/GiG.Core.Context.Orleans.md) - Provides an API to register the Request Context Accessor functionality for Orleans.
 - [GiG.Core.Context.Web](docs/GiG.Core.Context.Web.md) - Provides an API to register the Request Context Accessor functionality for a web application.
+- [GiG.Core.Data.KVStores](docs/GiG.Core.Data.KVStores.md) - Provides an API to register the required services needed by the KV Stores Data Providers.
+- [GiG.Core.Data.KVStores.Providers.FileProviders](docs/GiG.Core.Data.KVStores.Providers.FileProviders.md) - Provides an API to register data providers which will read data from file.
 - [GiG.Core.Data.Migration](docs/GiG.Core.Data.Migration.md) - Provides an API to perform Database Migrations using SQL Scripts.
 - [GiG.Core.DistributedTracing.Orleans](docs/GiG.Core.DistributedTracing.Orleans.md) - Provides an API to register Distributed Tracing for an Orleans Client.
 - [GiG.Core.DistributedTracing.Web](docs/GiG.Core.DistributedTracing.Web.md) - Provides an API to register Distributed Tracing for a web application.
 - [GiG.Core.HealthChecks](docs/GiG.Core.HealthChecks.md) - Provides an API to register Health Checks for an application.
-- [GiG.Core.Hosting](docs/GiG.Core.Hosting.md) - Provides an API to   register hosting related functionality to an application.
+- [GiG.Core.Hosting](docs/GiG.Core.Hosting.md) - Provides an API to register hosting related functionality to an application.
 - [GiG.Core.Http](docs/GiG.Core.Http.md) - Provides an API to create or customise an `HttpClient` without using IOC.
 - [GiG.Core.Http.DistributedTracing](docs/GiG.Core.Http.DistributedTracing.md) - Provides an API to register a `CorrelationIdDelegatingHandler` onto the `HttpClient`.
 - [GiG.Core.Http.MultiTenant](docs/GiG.Core.Http.MultiTenant.md) - Provides an API to register a `TenantDelegatingHandler` onto the `HttpClient`

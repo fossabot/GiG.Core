@@ -1,8 +1,6 @@
 ﻿using GiG.Core.Hosting.Extensions;
 using GiG.Core.Logging.All.Extensions;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using System.IO;
 
 namespace GiG.Core.Logging.Sample
 {
@@ -15,10 +13,7 @@ namespace GiG.Core.Logging.Sample
 
         private static IHostBuilder CreateHostBuilder()
         {
-            return new HostBuilder()
-                .ConfigureHostConfiguration(builder => builder
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json", false, true))
+            return Host.CreateDefaultBuilder()
                 .UseApplicationMetadata()
                 .ConfigureLogging()
                 .ConfigureServices(Startup.ConfigureServices);

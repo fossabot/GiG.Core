@@ -9,7 +9,10 @@ namespace GiG.Core.DistributedTracing.Web.Internal
         private readonly CorrelationId.ICorrelationContextAccessor _correlationContextAccessor;
 
         /// <inheritdoc />
-        public CorrelationContextAccessor(CorrelationId.ICorrelationContextAccessor correlationContextAccessor) => _correlationContextAccessor = correlationContextAccessor;
+        public CorrelationContextAccessor(CorrelationId.ICorrelationContextAccessor correlationContextAccessor)
+        {
+            _correlationContextAccessor = correlationContextAccessor;   
+        }
 
         /// <inheritdoc />
         public Guid Value =>

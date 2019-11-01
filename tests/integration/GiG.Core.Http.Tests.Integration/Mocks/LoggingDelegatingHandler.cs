@@ -7,11 +7,6 @@ namespace GiG.Core.Http.Tests.Integration.Mocks
 {
     internal class LoggingDelegatingHandler : DelegatingHandler
     {
-        public LoggingDelegatingHandler(HttpMessageHandler innerHandler)
-        {
-            InnerHandler = innerHandler;
-        }
-        
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
             CancellationToken cancellationToken)
         {
