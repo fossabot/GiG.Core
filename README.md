@@ -21,6 +21,7 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Http](docs/GiG.Core.Http.md) - Provides an API to create or customise an `HttpClient` without using IOC.
 - [GiG.Core.Http.DistributedTracing](docs/GiG.Core.Http.DistributedTracing.md) - Provides an API to register a `CorrelationIdDelegatingHandler` onto the `HttpClient`.
 - [GiG.Core.Http.MultiTenant](docs/GiG.Core.Http.MultiTenant.md) - Provides an API to register a `TenantDelegatingHandler` onto the `HttpClient`
+- [GiG.Core.Http.Security.Hmac](docs/GiG.Core.Http.Security.Hmac.md) - Provides an API to register an `HmacDelegatingHandler` onto the `HttpClient`.
 - [GiG.Core.Logging](docs/GiG.Core.Logging.md) -  Provides an API to register Logging using Serilog for an application.
 - [GiG.Core.Logging.All](docs/GiG.Core.Logging.All.md) - Provides an API to register Logging using Serilog and multiple Sinks and Enrichers for an application.
 - [GiG.Core.Logging.Enrichers.ApplicationMetadata](docs/GiG.Core.Logging.Enrichers.ApplicationMetadata.md) - Provides an API to register and ApplicationMetadata Enricher for Logging when using Serilog.
@@ -39,6 +40,7 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Web.Docs](docs/GiG.Core.Web.Docs.md) - Provides an API to configure API Documentation.
 - [GiG.Core.Web.FluentValidation](docs/GiG.Core.Web.FluentValidation.md) - Provides an API to register the Fluent Validation Exception Middleware in an application.
 - [GiG.Core.Web.Hosting](docs/GiG.Core.Web.Hosting.md) - Provides an API to configure `BASE_PATH` and Forwarded Headers.
+- [GiG.Core.Web.Security.Hmac]()docs/GiG.Core.Web.Security.Hmac.md) - Provides an API to configure `HmacAuthenticationHandler`.
 
 
 ## Build

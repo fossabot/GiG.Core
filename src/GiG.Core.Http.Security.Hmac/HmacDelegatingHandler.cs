@@ -34,6 +34,7 @@ namespace GiG.Core.Http.Security.Hmac
             _hashProviderFactory = hashProviderFactory;
             _signatureProvider = signatureProvider;
         }
+
         /// <inheritdoc />
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {

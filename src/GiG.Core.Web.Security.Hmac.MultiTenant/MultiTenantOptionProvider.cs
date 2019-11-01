@@ -44,7 +44,6 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant
             var options = _optionAccessor.Value;
             if(!options.TryGetValue(tenantId, out var tenantOptions))
             {
-                //throw exception
                 _logger.LogWarning("No config found for {@tenantId}.",tenantId);
                 return null;
             }
