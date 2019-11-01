@@ -31,6 +31,23 @@ The below table outlines the valid Configurations used to override the [FluentdS
 
 | Configuration Name | Type   | Optional | Default Value |
 |:-------------------|:-------|:---------|:--------------|
-| Enabled            | bool   | Yes      | false         |
+| IsEnabled          | bool   | Yes      | false         |
 | Hostname           | string | Yes      | 'localhost'   |
 | Port               | int    | Yes      | 24224         |
+
+#### Sample Configuration
+
+```json
+ {
+   "Logging": {
+     "MinimumLevel": "Debug",
+     "Sinks": {
+      "Fluentd": {
+        "IsEnabled": true, 
+        "Hostname": "localhost",
+        "Port": "24224"
+      }
+     }
+   }
+ }
+```

@@ -22,7 +22,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Http.DistributedTracing.md = docs\GiG.Core.Http.DistributedTracing.md
 		docs\GiG.Core.Http.md = docs\GiG.Core.Http.md
 		docs\GiG.Core.Http.MultiTenant.md = docs\GiG.Core.Http.MultiTenant.md
-		docs\GiG.Core.Logging.md = docs\GiG.Core.Logging.md
 		docs\GiG.Core.Logging.All.md = docs\GiG.Core.Logging.All.md
 		docs\GiG.Core.Logging.Enrichers.ApplicationMetadata.md = docs\GiG.Core.Logging.Enrichers.ApplicationMetadata.md
 		docs\GiG.Core.Logging.Enrichers.Context.md = docs\GiG.Core.Logging.Enrichers.Context.md
