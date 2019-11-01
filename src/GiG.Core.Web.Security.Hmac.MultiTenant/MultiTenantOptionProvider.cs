@@ -10,7 +10,7 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant
     /// <summary>
     /// <see cref="MultiTenantOptionProvider"/> for HmacAuthenticationHandler.
     /// </summary>
-    public class MultiTenantOptionProvider : IHmacOptionsProvider
+    internal class MultiTenantOptionProvider : IHmacOptionsProvider
     {
         private readonly ITenantAccessor _tenantAccessor;
         private readonly IOptions<Dictionary<string, HmacOptions>> _optionAccessor;

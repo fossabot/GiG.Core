@@ -1,4 +1,5 @@
 ﻿using GiG.Core.Http.Security.Hmac;
+using GiG.Core.Http.Security.Hmac.Extensions;
 using GiG.Core.Security.Http;
 using GiG.Core.Web.Security.Hmac.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -19,10 +20,9 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration.Mocks
         {
             services.AddControllers();
             services.AddHmacAuthentication();
-            services.ConfigureDefaultHmacOptionProvider(_configuration.GetSection("Hmac"));
-            services.AddSingleton<HmacDelegatingHandler>();
-            services.AddSingleton<IHmacOptionsProvider, DefaultHmacOptionsProvider>();
-            services.AddSingleton<IHmacSignatureProvider, HmacSignatureProvider>();
+            services.AddClientHmacAuthentication();
+            services.ConfigureDefaultHmacAuthenticationHandlerOptionProvider(_configuration.GetSection("Hmac"));
+            services.ConfigureDefaultHmacDelegatingHandlerOptionProvider(_configuration.GetSection("Hmac"));
             services.Configure<HmacOptions>(_configuration.GetSection("Hmac"));
         }
 

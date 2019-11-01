@@ -1,15 +1,16 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using System;
-
-namespace GiG.Core.Web.Security.Hmac.Abstractions
+﻿namespace GiG.Core.Web.Security.Hmac.Abstractions
 {
     /// <summary>
-    /// Options for HmacAuthentication
+    /// Options for HmacAuthentication.
     /// </summary>
     public class HmacOptions
     {
         /// <summary>
-        /// Secret used for Hmac Authentication
+        /// <see cref="HmacOptions"/> default section name.
+        /// </summary>
+        public const string DefaultSectionName = "Authentication:Hmac";
+        /// <summary>
+        /// Secret used for Hmac Authentication.
         /// </summary>
         public string Secret { get; set; }
 
