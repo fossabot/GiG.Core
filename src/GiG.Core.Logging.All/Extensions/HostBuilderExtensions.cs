@@ -32,8 +32,8 @@ namespace GiG.Core.Logging.All.Extensions
                 .WriteToConsole()
                 .WriteToFluentd()
                 .EnrichWithApplicationMetadata()
-                .EnrichWithCorrelationId()
-                .EnrichWithTenantId()
+                .EnrichWithCorrelation()
+                .EnrichWithTenant()
                 .EnrichWithRequestContext()
                 , sectionName);
         }
