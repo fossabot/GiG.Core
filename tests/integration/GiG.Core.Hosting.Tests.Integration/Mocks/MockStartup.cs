@@ -17,15 +17,15 @@ namespace GiG.Core.Hosting.Tests.Integration.Mocks
 
         public override void ConfigureServices(IServiceCollection services)
         {
-            base.ConfigureServices(services);
             services.ConfigureInfoManagement(_configuration);
+            base.ConfigureServices(services);
         }
 
         /// <inheritdoc />
         public override void Configure(IApplicationBuilder app)
         {
-            base.Configure(app);
             app.UseInfoManagement();
+            base.Configure(app);
         }
     }
 }
