@@ -88,7 +88,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
 
             Assert.False(result.Succeeded);
             Assert.NotNull(result.Failure);
-            Assert.Equal("Hmac does not match", result.Failure.Message);
+            Assert.Equal("Hmac does not match.", result.Failure.Message);
             VerifyCalls();
 
         }
