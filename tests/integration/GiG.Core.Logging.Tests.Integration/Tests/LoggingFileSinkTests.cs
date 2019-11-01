@@ -1,63 +1,62 @@
 ﻿using GiG.Core.Logging.Extensions;
 using GiG.Core.Logging.Sinks.File.Extensions;
-using GiG.Core.Logging.Tests.Integration.Mocks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Serilog;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using Xunit;
+using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace GiG.Core.Logging.Tests.Integration.Tests
 {
     [Trait("Category", "Integration")]
-    public class LoggingFileSinkTests
+    public class LoggingFileSinkTests : IDisposable
     {
+        private readonly ILogger _logger;
+        private readonly string _filePath;
         private readonly IHost _host;
 
         public LoggingFileSinkTests()
         {
-            var host = Host.CreateDefaultBuilder()
+            _host = Host.CreateDefaultBuilder()
                 .ConfigureServices(services =>
-                    services.AddSingleton<MockClass>()
+                    services.AddLogging()
                 )
                 .ConfigureLogging(x => x.WriteToFile())
                 .Build();
 
-            host.StartAsync().GetAwaiter().GetResult();
+            var configuration = _host.Services.GetRequiredService<IConfiguration>();
+            _filePath = configuration["Logging:Sinks:File:FilePath"];
+            File.Delete(_filePath);
+            _host.Start();
 
-            _host = host;
+            _logger = _host.Services.GetRequiredService<ILogger<LoggingFileSinkTests>>();
         }
 
         [Fact]
         public async Task LoggingFileSinkTests_WriteLog()
         {
             // Arrange
-            var path = $"logs\\logs.txt";
-
+            var logString = Guid.NewGuid().ToString();
+ 
             // Act
-            _host.Services.GetRequiredService<MockClass>().WriteLog();
+            _logger.LogInformation(logString);
+            Log.CloseAndFlush();
 
             //Assert
-            Assert.True(File.Exists(path));
-            while (CanReadFile(path) is true)
-            {
-                Assert.Contains(await File.ReadAllTextAsync(path), "This is a test");
-                File.Delete(path);
-            }
+            Assert.True(File.Exists(_filePath));
+            Assert.Contains(logString, await File.ReadAllTextAsync(_filePath));
         }
-
-        // verify if file can be read
-        private static bool CanReadFile(string path)
+        
+        public void Dispose()
         {
-            try
-            {
-                File.Open(path, FileMode.Open, FileAccess.Read).Dispose();
-                return true;
-            }
-            catch (IOException)
-            {
-                return false;
-            }
+            _host.StopAsync().Wait();
+            _host.Dispose();
+            File.Delete(_filePath);
         }
     }
 }
