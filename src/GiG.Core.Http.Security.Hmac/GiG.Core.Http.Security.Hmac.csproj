@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\GiG.Core.Security.Http\GiG.Core.Security.Http.csproj" />
     <ProjectReference Include="..\GiG.Security.Cryptography\GiG.Core.Security.Cryptography.csproj" />
   </ItemGroup>
 

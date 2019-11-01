@@ -1,4 +1,5 @@
 using GiG.Core.Security.Cryptography;
+using GiG.Core.Security.Http;
 using GiG.Core.Web.Security.Hmac.Abstractions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
@@ -39,7 +40,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
             _httpContext = new DefaultHttpContext();
 
             _request = new DefaultHttpRequest(_httpContext);
-            _request.Headers.Add("X-Nonce", "test");
+            _request.Headers.Add(HmacConstants.NonceHeader, "test");
             _loggerFactory.Setup(x => x.CreateLogger(It.IsAny<string>())).Returns(_logger.Object);
             _hmacOptionsProvider.Setup(x => x.GetHmacOptions()).Returns(new HmacOptions());
             _signatureProviderFactory.Setup(x => x.GetHashProvider(It.IsAny<string>())).Returns(_signatureProvider.Object);
@@ -65,7 +66,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
         [Fact]
         public async Task HmacAuthenticationHandler_MatchHmacHeader_ReturnsSuccess()
         {            
-            _request.Headers.Add("Authorization", $"hmac abc");
+            _request.Headers.Add(HmacConstants.AuthHeader, $"hmac abc");
             _signatureProvider.Setup(x => x.Hash(It.IsAny<string>())).Returns("abc");
             var hmacAuthHandler = await BuildHandlerAsync();
 
@@ -79,7 +80,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
         public async Task HmacAuthenticationHandler_MatchHmacHeader_ReturnsFail()
         {
 
-            _request.Headers.Add("Authorization", $"hmac abc");
+            _request.Headers.Add(HmacConstants.AuthHeader, $"hmac abc");
             _signatureProvider.Setup(x => x.Hash(It.IsAny<string>())).Returns("abcd");
             var hmacAuthHandler = await BuildHandlerAsync();
 

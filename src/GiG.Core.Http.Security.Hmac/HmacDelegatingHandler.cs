@@ -1,5 +1,6 @@
 ﻿using GiG.Core.Http.Security.Hmac.Extensions;
 using GiG.Core.Security.Cryptography;
+using GiG.Core.Security.Http;
 using System.Configuration;
 using System.Net.Http;
 using System.Threading;
@@ -36,7 +37,7 @@ namespace GiG.Core.Http.Security.Hmac
                 throw new ConfigurationErrorsException("Options not set for HMAC.");
             }
             var hashProvider = _hashProviderFactory.GetHashProvider(options.HashAlgorithm);
-            var hmacHeaderClear = await request.AsSignatureStringAsync("Nonce", options.Secret);
+            var hmacHeaderClear = await request.AsSignatureStringAsync(HmacConstants.NonceHeader, options.Secret);
 
             var hashedHmacHeader = hashProvider.Hash(hmacHeaderClear);
             request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("hmac", hashedHmacHeader);

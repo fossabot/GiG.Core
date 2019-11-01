@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GiG.Core.Http;
 using GiG.Core.Http.Security.Hmac;
+using GiG.Core.Security.Http;
 using GiG.Core.Web.Security.Hmac.Tests.Integration.Mocks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
@@ -32,7 +33,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration
         {
             var client = _server.CreateClient();
             using var request = new HttpRequestMessage(HttpMethod.Get, "api/mock");
-            request.Headers.Add("Nonce", "123");
+            request.Headers.Add(HmacConstants.NonceHeader, "123");
 
             using var response = await client.SendAsync(request);
             Assert.Equal(HttpStatusCode.Unauthorized,response.StatusCode);
@@ -48,7 +49,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration
             });
             
             using var request = new HttpRequestMessage(HttpMethod.Get, "api/mock");
-            request.Headers.Add("Nonce", "123");
+            request.Headers.Add(HmacConstants.NonceHeader, "123");
 
             using var response = await client.SendAsync(request);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -65,7 +66,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration
             });
 
             using var request = new HttpRequestMessage(HttpMethod.Post, "api/mock");
-            request.Headers.Add("Nonce", "123");
+            request.Headers.Add(HmacConstants.NonceHeader, "123");
             request.Content = new StringContent("{\"text\":\"abccccc\"}",Encoding.UTF8,"application/json");
 
             using var response = await client.SendAsync(request);

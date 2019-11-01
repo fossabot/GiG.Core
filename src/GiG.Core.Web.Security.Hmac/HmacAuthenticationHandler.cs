@@ -1,4 +1,5 @@
 ﻿using GiG.Core.Security.Cryptography;
+using GiG.Core.Security.Http;
 using GiG.Core.Web.Security.Hmac.Abstractions;
 using GiG.Core.Web.Security.Hmac.Extensions;
 using Microsoft.AspNetCore.Authentication;
@@ -18,8 +19,6 @@ namespace GiG.Core.Web.Security.Hmac
     {
         private readonly IHmacOptionsProvider _hmacOptionsProvider;
         private readonly IHashProviderFactory _signatureProviderFactory;
-        private const string AuthHeader = "Authorization";
-        private const string NonceHeader = "Nonce";
 
         /// <summary>
         /// <see cref="AuthenticationHandler{TOptions}"/> using Hmac.
@@ -43,13 +42,13 @@ namespace GiG.Core.Web.Security.Hmac
             var hmacOptions = _hmacOptionsProvider.GetHmacOptions();
             var hashProvider = _signatureProviderFactory.GetHashProvider(hmacOptions.HashAlgorithm);
 
-            if (!Request.Headers.ContainsKey(NonceHeader))
+            if (!Request.Headers.ContainsKey(HmacConstants.NonceHeader))
             {
-                return AuthenticateResult.Fail($"{NonceHeader} not set.");
+                return AuthenticateResult.Fail($"{HmacConstants.NonceHeader} not set.");
             }
 
-            var signature = hashProvider.Hash(await Request.AsSignatureStringAsync(NonceHeader,hmacOptions.Secret));
-            Request.Headers.TryGetValue(AuthHeader, out var headerSignature);
+            var signature = hashProvider.Hash(await Request.AsSignatureStringAsync(HmacConstants.NonceHeader, hmacOptions.Secret));
+            Request.Headers.TryGetValue(HmacConstants.AuthHeader, out var headerSignature);
 
             if (string.IsNullOrEmpty(headerSignature))
             {

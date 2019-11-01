@@ -289,6 +289,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Security.Hmac.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Security.Hmac.Tests.Unit", "tests\unit\GiG.Core.Web.Security.Hmac.Tests.Unit\GiG.Core.Web.Security.Hmac.Tests.Unit.csproj", "{389C75F1-6EBC-4230-88E5-2C4565E36CAA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Security.Http", "GiG.Core.Security.Http\GiG.Core.Security.Http.csproj", "{55963518-D86B-4C80-B0AA-F3AA23FD3F7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -610,6 +612,10 @@ Global
 		{389C75F1-6EBC-4230-88E5-2C4565E36CAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{389C75F1-6EBC-4230-88E5-2C4565E36CAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{389C75F1-6EBC-4230-88E5-2C4565E36CAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55963518-D86B-4C80-B0AA-F3AA23FD3F7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55963518-D86B-4C80-B0AA-F3AA23FD3F7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55963518-D86B-4C80-B0AA-F3AA23FD3F7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55963518-D86B-4C80-B0AA-F3AA23FD3F7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -726,6 +732,7 @@ Global
 		{9C67E16B-823D-491C-9EF6-770AEF4438C0} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
 		{49293FBD-F783-4C18-9828-FEA3CBBA0696} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 		{389C75F1-6EBC-4230-88E5-2C4565E36CAA} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
+		{55963518-D86B-4C80-B0AA-F3AA23FD3F7D} = {AE93F6BF-87CC-420D-B14A-2F5B369DEFD0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}
