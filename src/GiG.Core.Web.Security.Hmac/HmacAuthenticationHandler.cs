@@ -24,13 +24,13 @@ namespace GiG.Core.Web.Security.Hmac
         /// <see cref="AuthenticationHandler{TOptions}"/> using Hmac.
         /// </summary>
         public HmacAuthenticationHandler(
-            IOptionsMonitor<HmacRequirement> optionsMonitor, 
-            ILoggerFactory logger, 
-            UrlEncoder encoder, 
-            ISystemClock clock, 
+            IOptionsMonitor<HmacRequirement> optionsMonitor,
+            ILoggerFactory logger,
+            UrlEncoder encoder,
+            ISystemClock clock,
             IHmacOptionsProvider hmacOptionsProvider,
             IHashProviderFactory signatureProviderFactory)
-            : base(optionsMonitor,logger,encoder,clock)
+            : base(optionsMonitor, logger, encoder, clock)
         {
             _hmacOptionsProvider = hmacOptionsProvider;
             _signatureProviderFactory = signatureProviderFactory;
@@ -40,6 +40,12 @@ namespace GiG.Core.Web.Security.Hmac
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
             var hmacOptions = _hmacOptionsProvider.GetHmacOptions();
+
+            if (hmacOptions == null)
+            {
+                return AuthenticateResult.Fail($"Hmac configuration not set.");
+            }
+
             var hashProvider = _signatureProviderFactory.GetHashProvider(hmacOptions.HashAlgorithm);
 
             if (!Request.Headers.ContainsKey(HmacConstants.NonceHeader))
@@ -52,7 +58,6 @@ namespace GiG.Core.Web.Security.Hmac
 
             if (string.IsNullOrEmpty(headerSignature))
             {
-                
                 return AuthenticateResult.Fail("Hmac does not match.");
             }
 
@@ -65,7 +70,7 @@ namespace GiG.Core.Web.Security.Hmac
 
             var identity = new ClaimsIdentity(Scheme.Name); // the name of our auth scheme
             identity.AddClaim(new Claim("HMAC", authHeader.Parameter));
-            
+
             var authTicket = new AuthenticationTicket(
                 new System.Security.Claims.ClaimsPrincipal(identity),
                 Scheme.Name);

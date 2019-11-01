@@ -11,9 +11,9 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration.Controllers
     {
 
         [HttpGet]
-        public ActionResult<string> Get()
+        public ActionResult Get()
         {
-            return Ok("");
+            return Ok();
         }
 
         [HttpPost]

@@ -12,11 +12,13 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant.Extensions
     /// </summary>
     public static class ServiceCollectionExtensions
     {
-       
+
         /// <summary>
-         /// Adds multi-tenant option provider for HmacAuthenticationHandler functionality.
-         /// </summary>
-         /// <returns>The <see cref="IServiceCollection" />.</returns>
+        /// Adds multi-tenant option provider for HmacAuthenticationHandler functionality.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection" />.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection" /> for Hmac Multitenant configuration.</param>
+        /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection ConfigureDefaultHmacOptionProvider([NotNull]this IServiceCollection services, [NotNull]IConfigurationSection configurationSection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));

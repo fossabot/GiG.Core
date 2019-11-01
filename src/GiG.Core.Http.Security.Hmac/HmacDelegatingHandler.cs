@@ -19,7 +19,7 @@ namespace GiG.Core.Http.Security.Hmac
         /// <summary>
         /// A <see cref="DelegatingHandler"/> that injects an HMAC Authorization Header into the request.
         /// </summary>
-        /// <param name="optionsProvider">HMAC configuration provider which should return <see cref="HmacOptions"/>.</param>
+        /// <param name="optionsProvider">The <see cref="IHmacOptionsProvider"/> which should return <see cref="HmacOptions"/>.</param>
         /// <param name="hashProviderFactory"><see cref="IHashProviderFactory" /> that returns <see cref="IHashProvider" />.</param>
         public HmacDelegatingHandler(
             IHmacOptionsProvider optionsProvider,

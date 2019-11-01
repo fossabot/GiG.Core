@@ -12,6 +12,7 @@ namespace GiG.Core.Security.Cryptography
         {
             _signatureProviderFactory = signatureProviderFactory;
         }
+
         /// <inheritdoc />
         public IHashProvider GetHashProvider(string hashAlgorithm)
         {
