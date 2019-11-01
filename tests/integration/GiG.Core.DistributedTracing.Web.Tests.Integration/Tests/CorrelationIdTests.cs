@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using System;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
@@ -33,6 +34,8 @@ namespace GiG.Core.DistributedTracing.Web.Tests.Integration.Tests
             var headerValues = response.Headers.GetValues(Constants.Header);
 
             // Assert
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
             Assert.NotNull(headerValues);
             Assert.NotEmpty(headerValues);
 
@@ -54,6 +57,8 @@ namespace GiG.Core.DistributedTracing.Web.Tests.Integration.Tests
             var headerValues = response.Headers.GetValues(Constants.Header);
 
             // Assert
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
             Assert.NotNull(headerValues);
             Assert.NotEmpty(headerValues);
             Assert.Equal(requestCorrelationId, headerValues.First());

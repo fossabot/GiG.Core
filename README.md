@@ -22,8 +22,10 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Http.DistributedTracing](docs/GiG.Core.Http.DistributedTracing.md) - Provides an API to register a `CorrelationIdDelegatingHandler` onto the `HttpClient`.
 - [GiG.Core.Http.MultiTenant](docs/GiG.Core.Http.MultiTenant.md) - Provides an API to register a `TenantDelegatingHandler` onto the `HttpClient`
 - [GiG.Core.Http.Security.Hmac](docs/GiG.Core.Http.Security.Hmac.md) - Provides an API to register an `HmacDelegatingHandler` onto the `HttpClient`.
-- [GiG.Core.Logging](docs/GiG.Core.Logging.md) -  Provides an API to register Logging using Serilog for an application.
 - [GiG.Core.Logging.All](docs/GiG.Core.Logging.All.md) - Provides an API to register Logging using Serilog and multiple Sinks and Enrichers for an application.
+- [GiG.Core.Logging.Sinks.Console](docs/GiG.Core.Logging.Console.md) - Provides an API to register Logging to a Console using Serilog for an application.
+- [GiG.Core.Logging.Sinks.File](docs/GiG.Core.Logging.Sinks.File.md) - Provides an API to register Logging to a File using Serilog for an application.
+- [GiG.Core.Logging.Sinks.Fluent](docs/GiG.Core.Logging.Sinks.Fluent.md) - Provides an API to register Logging to a File using Serilog for an application.
 - [GiG.Core.Logging.Enrichers.ApplicationMetadata](docs/GiG.Core.Logging.Enrichers.ApplicationMetadata.md) - Provides an API to register and ApplicationMetadata Enricher for Logging when using Serilog.
 - [GiG.Core.Logging.Enrichers.Context](docs/GiG.Core.Logging.Enrichers.Context.md) - Provides an API to register the Context Enricher for Logging when using Serilog.
 - [GiG.Core.Logging.Enrichers.DistributedTracing](docs/GiG.Core.Logging.Enrichers.DistributedTracing.md) - Provides an API to register the Correlation Id Enricher for Logging when using Serilog.

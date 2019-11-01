@@ -4,7 +4,7 @@ This Library provides an API to register the Correlation Id Enricher for Logging
 
 ## Basic Usage
 
-Make use of `EnrichWithCorrelationId()` when configuring logging. The Enricher depends on 'GiG.Core.DistributedTracing.Abstractions.ICorrelationContextAccessor'.
+Make use of `EnrichWithCorrelation()` when configuring logging. The Enricher depends on 'GiG.Core.DistributedTracing.Abstractions.ICorrelationContextAccessor'.
 
 ```csharp
 
@@ -24,7 +24,7 @@ static class Program
 			 })
 			 .ConfigureLogging(x =>
 			 {
-			     x.EnrichWithCorrelationId();
+			     x.EnrichWithCorrelation();
 			 });
     }
 }

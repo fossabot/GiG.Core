@@ -17,7 +17,7 @@ namespace GiG.Core.Logging.Enrichers.MultiTenant.Extensions
         /// </summary>
         /// <param name="builder">The <see cref="LoggingConfigurationBuilder" />.</param>
         /// <returns>The <see cref="LoggingConfigurationBuilder" />.</returns>
-        public static LoggingConfigurationBuilder EnrichWithTenantId([NotNull] this LoggingConfigurationBuilder builder)
+        public static LoggingConfigurationBuilder EnrichWithTenant([NotNull] this LoggingConfigurationBuilder builder)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
 

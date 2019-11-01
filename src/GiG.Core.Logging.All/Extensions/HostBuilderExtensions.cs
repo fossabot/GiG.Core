@@ -5,6 +5,7 @@ using GiG.Core.Logging.Enrichers.DistributedTracing.Extensions;
 using GiG.Core.Logging.Enrichers.MultiTenant.Extensions;
 using GiG.Core.Logging.Extensions;
 using GiG.Core.Logging.Sinks.Console.Extensions;
+using GiG.Core.Logging.Sinks.File.Extensions;
 using GiG.Core.Logging.Sinks.Fluentd.Extensions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Hosting;
@@ -18,7 +19,7 @@ namespace GiG.Core.Logging.All.Extensions
     public static class HostBuilderExtensions
     {
         /// <summary>
-        /// Configures the default logging sinks (Console and Fluentd) and enrichers (Application metadata and Correlation ID).
+        /// Configures the default logging sinks (Console, Fluentd and File) and enrichers (Application metadata and Correlation ID).
         /// </summary>
         /// <param name="builder">Host builder.</param>
         /// <param name="sectionName">Configuration section name.</param>
@@ -31,9 +32,10 @@ namespace GiG.Core.Logging.All.Extensions
             return builder.ConfigureLogging(x => x
                 .WriteToConsole()
                 .WriteToFluentd()
+                .WriteToFile()
                 .EnrichWithApplicationMetadata()
-                .EnrichWithCorrelationId()
-                .EnrichWithTenantId()
+                .EnrichWithCorrelation()
+                .EnrichWithTenant()
                 .EnrichWithRequestContext()
                 , sectionName);
         }

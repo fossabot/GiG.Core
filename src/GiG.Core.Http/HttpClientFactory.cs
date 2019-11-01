@@ -1,17 +1,19 @@
 using JetBrains.Annotations;
 using System;
-using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Net.Http;
 
 namespace GiG.Core.Http
 {
     /// <summary>
-    /// Factory Class for HttpClient.
+    /// Factory Class for <see cref="HttpClient"/>.
     /// </summary>
     public class HttpClientFactory : IDisposable
     {
-        private static readonly ConcurrentDictionary<string, HttpClient> Instances =
-            new ConcurrentDictionary<string, HttpClient>();
+        private static readonly Dictionary<string, HttpClient> Instances =
+            new Dictionary<string, HttpClient>();
+
+        private static readonly object InstancesLock = new object();
 
         private bool _isDisposing;
 
@@ -43,9 +45,26 @@ namespace GiG.Core.Http
         {
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException(nameof(name));
 
-            return Instances.GetOrAdd(name, Create(configureHttpClientBuilder));
+            if (Instances.TryGetValue(name, out var instance))
+            {
+                return instance;
+            }
+
+            lock (InstancesLock)
+            {
+                if (Instances.TryGetValue(name, out var lockInstance))
+                {
+                    return lockInstance;
+                }
+
+                var httpClient = Create(configureHttpClientBuilder);
+
+                Instances.Add(name, httpClient);
+
+                return httpClient;
+            }
         }
-        
+
         /// <summary>
         /// Creates or Gets an instance of <see cref="HttpClient"/> according to the type.
         /// </summary>
