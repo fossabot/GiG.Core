@@ -1,6 +1,7 @@
 ﻿using CorrelationId;
 using GiG.Core.Context.Abstractions;
 using GiG.Core.MultiTenant.Abstractions;
+using GiG.Core.Web.Mock.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;

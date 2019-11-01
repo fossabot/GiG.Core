@@ -8,8 +8,15 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace GiG.Core.Web.Mock
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class MockStartupBase
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="services"></param>
         public virtual void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddFluentValidation();
@@ -22,6 +29,10 @@ namespace GiG.Core.Web.Mock
             services.AddMockTenantAccessor();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="app"></param>
         public virtual void Configure(IApplicationBuilder app)
         {
             app.UseForwardedHeaders();

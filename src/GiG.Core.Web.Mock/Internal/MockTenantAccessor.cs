@@ -1,9 +1,9 @@
 using GiG.Core.MultiTenant.Abstractions;
 using System.Collections.Immutable;
 
-namespace GiG.Core.Web.Mock
+namespace GiG.Core.Web.Mock.Internal
 {
-    public class MockTenantAccessor : ITenantAccessor
+    internal class MockTenantAccessor : ITenantAccessor
     {
         public IImmutableSet<string> Values => ImmutableHashSet.Create("1", "2");
     }

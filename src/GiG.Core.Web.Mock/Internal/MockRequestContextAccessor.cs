@@ -2,7 +2,7 @@
 using GiG.Core.Context.Abstractions;
 using System.Net;
 
-namespace GiG.Core.Web.Mock
+namespace GiG.Core.Web.Mock.Internal
 {
     internal class MockRequestContextAccessor : IRequestContextAccessor
     {
