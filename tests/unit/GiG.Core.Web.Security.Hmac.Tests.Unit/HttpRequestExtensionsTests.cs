@@ -22,33 +22,39 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
         [Fact]
         public async Task AsSignatureStringAsync_Get_ReturnsSecretMethodUrl()
         {
+            //Arrange
             var context = new DefaultHttpContext();
             var request = new DefaultHttpRequest(context);
-
             request.Method = "GET";
             request.Path = new PathString("/api/test");
             request.Headers.Add(_nonceHeader, _nonceValue);
             var secret = "test";
+
+            //Act
             var result = await request.AsSignatureStringAsync(_nonceHeader, secret);
 
+            //Assert
             Assert.Equal($"{secret}{_nonceValue}{request.Method}{request.Path.Value}", result);
         }
         [Fact]
         public async Task AsSignatureStringAsync_GetNonceNotAdded_ReturnsSecretMethodUrl()
         {
+            //Arrange
             var context = new DefaultHttpContext();
             var request = new DefaultHttpRequest(context);
-
             request.Method = "GET";
             request.Path = new PathString("/api/test");
             var secret = "test";
-            await Assert.ThrowsAsync<ArgumentException>("nonceHeader",async ()=> await request.AsSignatureStringAsync(_nonceHeader, secret));
+
+            //Act & Assert
+            await Assert.ThrowsAsync<ArgumentException>("nonceHeader", async ()=> await request.AsSignatureStringAsync(_nonceHeader, secret));
 
         }
 
         [Fact]
         public async Task AsSignatureStringAsync_Post_ReturnsSecretMethodUrl()
         {
+            //Arrange
             var context = new DefaultHttpContext();
             var request = new DefaultHttpRequest(context);
 
@@ -63,8 +69,10 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
             bodyWriter.Flush();
             request.Body.Position = 0;
 
+            //Act
             var result = await request.AsSignatureStringAsync(_nonceHeader,secret);
 
+            //Assert
             Assert.Equal(0, request.Body.Position);
             Assert.Equal($"{secret}{_nonceValue}{request.Method}{request.Path.Value}{body}", result);
         }
@@ -72,6 +80,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
         [Fact]
         public async Task AsSignatureStringAsync_Patch_ReturnsSecretMethodUrl()
         {
+            //Arrange
             var context = new DefaultHttpContext();
             var request = new DefaultHttpRequest(context);
 
@@ -87,8 +96,10 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
             bodyWriter.Flush();
             request.Body.Position = 0;
 
+            //Act
             var result = await request.AsSignatureStringAsync(_nonceHeader,secret);
 
+            //Assert
             Assert.Equal(0, request.Body.Position);
             Assert.Equal($"{secret}{_nonceValue}{request.Method}{request.Path.Value}{body}", result);
         }
@@ -96,6 +107,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
         [Fact]
         public async Task AsSignatureStringAsync_Put_ReturnsSecretMethodUrl()
         {
+            //Arrange
             var context = new DefaultHttpContext();
             var request = new DefaultHttpRequest(context);
 
@@ -111,8 +123,10 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
             bodyWriter.Flush();
             request.Body.Position = 0;
 
+            //Act
             var result = await request.AsSignatureStringAsync(_nonceHeader,secret);
 
+            //Assert
             Assert.Equal(0, request.Body.Position);
             Assert.Equal($"{secret}{_nonceValue}{request.Method}{request.Path.Value}{body}", result);
         }

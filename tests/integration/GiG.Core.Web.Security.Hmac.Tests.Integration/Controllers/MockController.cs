@@ -13,13 +13,13 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration.Controllers
         [HttpGet]
         public ActionResult<string> Get()
         {
-            return "";
+            return Ok("");
         }
 
         [HttpPost]
         public ActionResult<string> Post(RequestModel model)
         {
-            return model.Text;
+            return Ok(model.Text);
         }
     }
 

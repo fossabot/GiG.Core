@@ -46,6 +46,57 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
             _signatureProviderFactory.Setup(x => x.GetHashProvider(It.IsAny<string>())).Returns(_signatureProvider.Object);
         }
 
+        [Fact]
+        public async Task HmacAuthenticationHandler_MatchHmacHeader_ReturnsSuccess()
+        {           
+            //Arrange
+            _request.Headers.Add(HmacConstants.AuthHeader, $"hmac abc");
+            _signatureProvider.Setup(x => x.Hash(It.IsAny<string>())).Returns("abc");
+            var hmacAuthHandler = await BuildHandlerAsync();
+
+            //Act
+            var result = await hmacAuthHandler.AuthenticateAsync();
+
+            //Assert
+            Assert.True(result.Succeeded);
+            VerifyCalls();
+        }
+
+        [Fact]
+        public async Task HmacAuthenticationHandler_MatchHmacHeader_ReturnsFail()
+        {
+            //Arrange
+            _request.Headers.Add(HmacConstants.AuthHeader, $"hmac abc");
+            _signatureProvider.Setup(x => x.Hash(It.IsAny<string>())).Returns("abcd");
+            var hmacAuthHandler = await BuildHandlerAsync();
+
+            //Act
+            var result = await hmacAuthHandler.AuthenticateAsync();
+
+            //Assert
+            Assert.False(result.Succeeded);
+            Assert.NotNull(result.Failure);
+            Assert.Equal("Hmac does not match.", result.Failure.Message);
+            VerifyCalls();
+
+        }
+
+        [Fact]
+        public async Task HmacAuthenticationHandler_MatchHmacHeader_ReturnsFailed()
+        {
+            //Arrange
+            var hmacAuthHandler = await BuildHandlerAsync();
+
+            //Act
+            var result = await hmacAuthHandler.AuthenticateAsync();
+
+            //Assert
+            Assert.False(result.Succeeded);
+            Assert.NotNull(result.Failure);
+            VerifyCalls();
+
+        }
+
         private async Task<HmacAuthenticationHandler> BuildHandlerAsync()
         {
             var authHandler = new HmacAuthenticationHandler(_hmacRequirement.Object, _loggerFactory.Object, _urlEncoder.Object, _systemClock.Object, _hmacOptionsProvider.Object, _signatureProviderFactory.Object);
@@ -61,49 +112,6 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
             _signatureProviderFactory.VerifyNoOtherCalls();
             _hmacOptionsProvider.Verify(x => x.GetHmacOptions(), Times.Once);
             _hmacOptionsProvider.VerifyNoOtherCalls();
-        }
-
-        [Fact]
-        public async Task HmacAuthenticationHandler_MatchHmacHeader_ReturnsSuccess()
-        {            
-            _request.Headers.Add(HmacConstants.AuthHeader, $"hmac abc");
-            _signatureProvider.Setup(x => x.Hash(It.IsAny<string>())).Returns("abc");
-            var hmacAuthHandler = await BuildHandlerAsync();
-
-            var result = await hmacAuthHandler.AuthenticateAsync();
-
-            Assert.True(result.Succeeded);
-            VerifyCalls();
-        }
-
-        [Fact]
-        public async Task HmacAuthenticationHandler_MatchHmacHeader_ReturnsFail()
-        {
-
-            _request.Headers.Add(HmacConstants.AuthHeader, $"hmac abc");
-            _signatureProvider.Setup(x => x.Hash(It.IsAny<string>())).Returns("abcd");
-            var hmacAuthHandler = await BuildHandlerAsync();
-
-            var result = await hmacAuthHandler.AuthenticateAsync();
-
-            Assert.False(result.Succeeded);
-            Assert.NotNull(result.Failure);
-            Assert.Equal("Hmac does not match.", result.Failure.Message);
-            VerifyCalls();
-
-        }
-
-        [Fact]
-        public async Task HmacAuthenticationHandler_MatchHmacHeader_ReturnsFailed()
-        {
-            var hmacAuthHandler = await BuildHandlerAsync();
-
-            var result = await hmacAuthHandler.AuthenticateAsync();
-
-            Assert.False(result.Succeeded);
-            Assert.NotNull(result.Failure);
-            VerifyCalls();
-
         }
     }
 }
