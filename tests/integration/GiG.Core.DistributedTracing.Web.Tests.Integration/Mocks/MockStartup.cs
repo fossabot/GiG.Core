@@ -9,11 +9,17 @@ namespace GiG.Core.DistributedTracing.Web.Tests.Integration.Mocks
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCorrelationAccessor();
+            services.AddControllers();
         }
 
         public void Configure(IApplicationBuilder app)
         {
             app.UseCorrelation();
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }
