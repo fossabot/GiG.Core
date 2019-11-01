@@ -5,7 +5,7 @@ using Xunit;
 
 namespace GiG.Security.Cryptography.Tests.Unit
 {
-    [Trait("Category","Unit")]
+    [Trait("Category", "Unit")]
     public class HashProviderFactoryTests
     {
         private readonly Mock<IHashProvider> _signatureProvider;
@@ -36,7 +36,7 @@ namespace GiG.Security.Cryptography.Tests.Unit
             Assert.Equal(_signatureProvider.Object, signatureProvider);
         }
 
-        [Fact]        
+        [Fact]
         public void SignatureProviderFactory_ExistingHash_ThrowsNotImplementedException()
         {
             //Arrange

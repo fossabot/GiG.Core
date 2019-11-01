@@ -1,4 +1,5 @@
-﻿using GiG.Core.Web.Security.Hmac.Extensions;
+﻿using GiG.Core.Security.Http;
+using GiG.Core.Web.Security.Hmac.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
 using System.IO;
@@ -7,7 +8,7 @@ using Xunit;
 
 namespace GiG.Core.Web.Security.Hmac.Tests.Unit
 {
-    [Trait("Category","Unit")]
+    [Trait("Category", "Unit")]
     public class HttpRequestExtensionsTests
     {
         private readonly string _nonceHeader;
@@ -15,7 +16,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
 
         public HttpRequestExtensionsTests()
         {
-            _nonceHeader = "X-Nonce";
+            _nonceHeader = HmacConstants.NonceHeader;
             _nonceValue = "abc";
         }
         [Fact]

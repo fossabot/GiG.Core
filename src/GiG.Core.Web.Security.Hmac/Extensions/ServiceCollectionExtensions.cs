@@ -23,10 +23,10 @@ namespace GiG.Core.Web.Security.Hmac.Extensions
         public static IServiceCollection AddHmacAuthentication([NotNull]this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            services.AddAuthentication("hmac").AddScheme<HmacRequirement, HmacAuthenticationHandler>("hmac",x=> new HmacOptions());
-            
+            services.AddAuthentication("hmac").AddScheme<HmacRequirement, HmacAuthenticationHandler>("hmac", x => new HmacOptions());
+
             services
-                .TryAddTransient<IHashProvider, SHA256HashProvider>();
+                .TryAddSingleton<IHashProvider, SHA256HashProvider>();
             services.TryAddSingleton<IHmacSignatureProvider, HmacSignatureProvider>();
             services.TryAddTransient<IHashProviderFactory, HashProviderFactory>();
             services.TryAddSingleton<Func<string, IHashProvider>>(x =>
@@ -62,7 +62,7 @@ namespace GiG.Core.Web.Security.Hmac.Extensions
             if (services == null) throw new ArgumentNullException(nameof(services));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            ConfigureDefaultHmacOptionProvider(services,configuration.GetSection(HmacOptions.DefaultSectionName));
+            ConfigureDefaultHmacOptionProvider(services, configuration.GetSection(HmacOptions.DefaultSectionName));
 
             return services;
         }

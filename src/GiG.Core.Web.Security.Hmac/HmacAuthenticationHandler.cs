@@ -6,16 +6,18 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Net.Http.Headers;
+using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
+[assembly: InternalsVisibleTo("GiG.Core.Web.Security.Hmac.Tests.Unit")]
 namespace GiG.Core.Web.Security.Hmac
 {
     /// <summary>
     /// <see cref="HmacAuthenticationHandler"/> for hmac authentication header.
     /// </summary>
-    public class HmacAuthenticationHandler : AuthenticationHandler<HmacRequirement>
+    internal class HmacAuthenticationHandler : AuthenticationHandler<HmacRequirement>
     {
         private readonly IHmacOptionsProvider _hmacOptionsProvider;
         private readonly IHashProviderFactory _signatureProviderFactory;

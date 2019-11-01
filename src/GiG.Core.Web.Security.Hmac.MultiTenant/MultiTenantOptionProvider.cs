@@ -28,6 +28,7 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant
             _optionAccessor = optionsAccessor;
             _logger = logger;
         }
+
         /// <summary>
         /// Get <see cref="HmacOptions"/> for multi-tenancy. This has a limitation that it only accepts the first tenant in the HttpHeaders.
         /// </summary>
@@ -35,18 +36,19 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant
         public HmacOptions GetHmacOptions()
         {
             var tenantId = _tenantAccessor.Values.FirstOrDefault();
-            
+
             if (tenantId == null)
             {
                 _logger.LogWarning("No tenantId found.");
                 return null;
             }
             var options = _optionAccessor.Value;
-            if(!options.TryGetValue(tenantId, out var tenantOptions))
+            if (!options.TryGetValue(tenantId, out var tenantOptions))
             {
-                _logger.LogWarning("No config found for {@tenantId}.",tenantId);
+                _logger.LogWarning("No config found for {@tenantId}.", tenantId);
                 return null;
             }
+
             return tenantOptions;
         }
     }

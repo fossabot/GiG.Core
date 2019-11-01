@@ -9,7 +9,7 @@
         /// Gets the <see cref="IHashProvider"/> for the <paramref name="hashAlgorithm"/> argument.
         /// </summary>
         /// <param name="hashAlgorithm">The unique name of the <see cref="IHashProvider"/>.</param>
-        /// <returns></returns>
+        /// <returns><see cref="IHashProvider"/>.</returns>
         IHashProvider GetHashProvider(string hashAlgorithm);
     }
 }

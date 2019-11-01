@@ -13,7 +13,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration.Controllers
         [HttpGet]
         public ActionResult Get()
         {
-            return Ok();
+            return NoContent();
         }
 
         [HttpPost]
@@ -21,10 +21,5 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration.Controllers
         {
             return Ok(model.Text);
         }
-    }
-
-    public class RequestModel
-    {
-        public string Text { get; set; }
-    }
+    }    
 }

@@ -12,7 +12,6 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant.Extensions
     /// </summary>
     public static class ServiceCollectionExtensions
     {
-
         /// <summary>
         /// Adds multi-tenant option provider for HmacAuthenticationHandler functionality.
         /// </summary>

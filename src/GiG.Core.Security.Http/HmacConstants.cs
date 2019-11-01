@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GiG.Core.Security.Http
+﻿namespace GiG.Core.Security.Http
 {
     /// <summary>
     /// The Hmac Constants.
@@ -11,6 +9,7 @@ namespace GiG.Core.Security.Http
         /// The Header for HmacAuthentication.
         /// </summary>
         public const string AuthHeader = "Authorization";
+
         /// <summary>
         /// The Nonce header for HmacAuthentication.
         /// </summary>

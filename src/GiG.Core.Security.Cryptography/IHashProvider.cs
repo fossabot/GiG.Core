@@ -9,6 +9,7 @@
         /// The name of the <see cref="IHashProvider"/>.
         /// </summary>
         string Name { get; }
+
         /// <summary>
         /// Hashes the <see cref="string"/> argument.
         /// </summary>

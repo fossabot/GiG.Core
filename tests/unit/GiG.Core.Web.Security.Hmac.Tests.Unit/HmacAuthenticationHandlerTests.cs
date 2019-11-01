@@ -62,8 +62,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
 
             //Assert
             Assert.True(result.Succeeded);
-            VerifyCallsWithHeader();
-        }
+            VerifyCallsWithHeader();        }
 
         [Fact]
         public async Task HmacAuthenticationHandler_MatchHmacHeader_ReturnsFail()
@@ -81,7 +80,6 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
             Assert.NotNull(result.Failure);
             Assert.Equal("Hmac does not match.", result.Failure.Message);
             VerifyCallsWithHeader();
-
         }
 
         [Fact]
@@ -97,7 +95,6 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
             Assert.False(result.Succeeded);
             Assert.NotNull(result.Failure);
             VerifyCallsNoHeader();
-
         }
 
         private async Task<HmacAuthenticationHandler> BuildHandlerAsync()

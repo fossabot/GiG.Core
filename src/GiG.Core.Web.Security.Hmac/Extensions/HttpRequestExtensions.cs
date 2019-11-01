@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace GiG.Core.Web.Security.Hmac.Extensions
 {
     /// <summary>
-    /// HttpRequest extension methods for <see cref="HmacAuthenticationHandler"/>
+    /// HttpRequest extension methods for <see cref="HmacAuthenticationHandler"/>.
     /// </summary>
     public static class HttpRequestExtensions
     {
@@ -13,7 +14,7 @@ namespace GiG.Core.Web.Security.Hmac.Extensions
         /// </summary>
         /// <param name="httpRequest">The <see cref="HttpRequest"/>.</param>
         /// <returns>The <see cref="HttpRequest"/> body.</returns>
-        public static async System.Threading.Tasks.Task<string> GetBodyAsync(this HttpRequest httpRequest)
+        public static async Task<string> GetBodyAsync(this HttpRequest httpRequest)
         {
             string body;
             switch (httpRequest.Method)

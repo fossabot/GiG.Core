@@ -34,6 +34,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration.Tests
                  ;
 
         }
+
         [Fact]
         public async Task AuthenticateAsync_NoHmacHeader_ReturnsUnauthorized()
         {
@@ -48,6 +49,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration.Tests
             //Assert
             Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
         }
+
         [Fact]
         public async Task AuthenticateAsync_GetValidHmacHeader_ReturnsOK()
         {
