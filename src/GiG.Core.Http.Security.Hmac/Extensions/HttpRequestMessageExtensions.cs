@@ -3,7 +3,7 @@
 namespace GiG.Core.Http.Security.Hmac.Extensions
 {
     /// <summary>
-    /// HttpRequestMessage extension methods for <see cref="HmacDelegatingHandler"/>
+    /// HttpRequestMessage extension methods for <see cref="HmacDelegatingHandler"/>.
     /// </summary>
     public static class HttpRequestMessageExtensions
     {
