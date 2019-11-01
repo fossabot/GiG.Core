@@ -16,7 +16,7 @@ namespace GiG.Core.Web.Mock
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="services"></param>
+        /// <param name="services">The <see cref="IServiceCollection" />.</param>
         public virtual void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddFluentValidation();
@@ -32,7 +32,7 @@ namespace GiG.Core.Web.Mock
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="app"></param>
+        /// <param name="app">The <see cref="IApplicationBuilder"/>.</param>
         public virtual void Configure(IApplicationBuilder app)
         {
             app.UseForwardedHeaders();
