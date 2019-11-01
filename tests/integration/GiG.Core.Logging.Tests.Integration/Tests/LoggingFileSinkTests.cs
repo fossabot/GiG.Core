@@ -31,14 +31,19 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
 
             var configuration = _host.Services.GetRequiredService<IConfiguration>();
             _filePath = configuration["Logging:Sinks:File:FilePath"];
-            File.Delete(_filePath);
+
+            if (File.Exists(_filePath))
+            {
+                File.Delete(_filePath);
+            }
+
             _host.Start();
 
             _logger = _host.Services.GetRequiredService<ILogger<LoggingFileSinkTests>>();
         }
 
         [Fact]
-        public async Task LoggingFileSinkTests_WriteLog()
+        public async Task LogInformation_WriteLog_VerifyContents()
         {
             // Arrange
             var logString = Guid.NewGuid().ToString();
