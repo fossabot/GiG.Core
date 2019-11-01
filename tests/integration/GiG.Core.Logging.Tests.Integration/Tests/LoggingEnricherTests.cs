@@ -9,7 +9,7 @@ using GiG.Core.Logging.Enrichers.MultiTenant.Extensions;
 using GiG.Core.Logging.Extensions;
 using GiG.Core.Logging.Tests.Integration.Extensions;
 using GiG.Core.Logging.Tests.Integration.Helpers;
-using GiG.Core.Web.Mock.Extensions;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -33,12 +33,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
         public LoggingEnricherTests()
         {
             _host = Host.CreateDefaultBuilder()
-                .ConfigureServices(x =>
-                {
-                    x.AddMockCorrelationContextAccessor();
-                    x.AddMockTenantAccessor();
-                    x.AddMockRequestContextAccessor();
-                })
+                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Mocks.MockStartup>())
                 .UseApplicationMetadata()
                 .ConfigureLogging(x => x
                     .WriteToSink(new DelegatingSink(WriteLog))

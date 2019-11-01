@@ -1,9 +1,8 @@
 ﻿using FluentValidation.AspNetCore;
-using GiG.Core.Context.Web.Extensions;
 using GiG.Core.DistributedTracing.Web.Extensions;
-using GiG.Core.MultiTenant.Web.Extensions;
 using GiG.Core.Web.FluentValidation.Extensions;
 using GiG.Core.Web.Hosting.Extensions;
+using GiG.Core.Web.Mock.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,10 +16,10 @@ namespace GiG.Core.Web.Mock
             services.ConfigureForwardedHeaders();
             services.ConfigureApiBehaviorOptions();
             services.AddRouting();
-            
-            services.AddRequestContextAccessor();
-            services.AddCorrelationAccessor();
-            services.AddTenantAccessor();
+
+            services.AddMockRequestContextAccessor();
+            services.AddMockCorrelationAccessor();
+            services.AddMockTenantAccessor();
         }
 
         public virtual void Configure(IApplicationBuilder app)
