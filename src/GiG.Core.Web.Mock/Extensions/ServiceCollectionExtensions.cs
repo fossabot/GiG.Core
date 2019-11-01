@@ -8,8 +8,16 @@ using ICorrelationContextAccessor = GiG.Core.DistributedTracing.Abstractions.ICo
 
 namespace GiG.Core.Web.Mock.Extensions
 {
+    /// <summary>
+    /// Service Collection Extensions.
+    /// </summary>
     public static class ServiceCollectionExtensions
     {
+        /// <summary>
+        /// Adds required services to support the <see cref="MockRequestContextAccessor" /> functionality.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection" />.</param>        
+        /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection AddMockRequestContextAccessor(this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
@@ -19,6 +27,11 @@ namespace GiG.Core.Web.Mock.Extensions
             return services;
         }
         
+        /// <summary>
+        /// Adds required services to support the <see cref="MockTenantAccessor" /> functionality.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection" />.</param>        
+        /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection AddMockTenantAccessor(this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
@@ -28,6 +41,11 @@ namespace GiG.Core.Web.Mock.Extensions
             return services;
         }
         
+        /// <summary>
+        /// Adds required services to support the <see cref="MockCorrelationContextAccessor" /> functionality.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection" />.</param>        
+        /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection AddMockCorrelationAccessor(this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
