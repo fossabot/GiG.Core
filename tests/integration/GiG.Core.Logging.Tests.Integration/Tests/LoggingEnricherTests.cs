@@ -11,6 +11,7 @@ using GiG.Core.Logging.Tests.Integration.Extensions;
 using GiG.Core.Logging.Tests.Integration.Helpers;
 using GiG.Core.MultiTenant.Web.Extensions;
 using GiG.Core.Web.Hosting.Extensions;
+using GiG.Core.Web.Mock.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
@@ -54,7 +55,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
                     x.ConfigureForwardedHeaders();
                     x.AddCorrelationAccessor();
                     x.AddTenantAccessor();
-                    x.AddRequestContextAccessor();
+                    x.AddMockRequestContextAccessor();
                 })
                 .ConfigureLogging(x => x
                     .WriteToSink(new DelegatingSink(e => LogEvent = e))
