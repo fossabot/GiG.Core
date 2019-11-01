@@ -50,7 +50,7 @@ namespace GiG.Core.Http.Security.Hmac
             }
 
             var hashProvider = _hashProviderFactory.GetHashProvider(options.HashAlgorithm);
-            var hmacHeaderClear = _signatureProvider.GetSignature(request.Method.ToString().ToUpper(), request.RequestUri.LocalPath, await request.GetBodyAsync(), nonceValue.First(), options.Secret);//await request.AsSignatureStringAsync(HmacConstants.NonceHeader, options.Secret);
+            var hmacHeaderClear = _signatureProvider.GetSignature(request.Method.ToString().ToUpper(), request.RequestUri.LocalPath, await request.GetBodyAsync(), nonceValue.First(), options.Secret);
 
             var hashedHmacHeader = hashProvider.Hash(hmacHeaderClear);
             request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("hmac", hashedHmacHeader);

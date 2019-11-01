@@ -31,7 +31,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration.Tests
             .AddClientHmacAuthentication()
             .ConfigureDefaultHmacDelegatingHandlerOptionProvider(ctx.Configuration.GetSection("Hmac")))
                 .ConfigureAppConfiguration(appConfig => appConfig.AddJsonFile("appsettings.json")));
-                 ;
+            ;
 
         }
 
@@ -63,7 +63,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration.Tests
             using var response = await client.SendAsync(request);
 
             //Assert
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
         }
 
         [Fact]

@@ -28,7 +28,7 @@ namespace GiG.Core.Http.Security.Hmac.Extensions
             httpClientBuilder.Services
                 .TryAddTransient<IHashProvider, SHA256HashProvider>();
             httpClientBuilder.Services.TryAddSingleton<IHmacSignatureProvider, HmacSignatureProvider>();
-            httpClientBuilder.Services.TryAddTransient<IHashProviderFactory, HashProviderFactory>();
+            httpClientBuilder.Services.TryAddSingleton<IHashProviderFactory, HashProviderFactory>();
             httpClientBuilder.Services.TryAddSingleton<Func<string, IHashProvider>>(x => 
                 (hash) => x.GetServices<IHashProvider>().FirstOrDefault(sp => sp.Name.Equals(hash)));
 
@@ -45,7 +45,7 @@ namespace GiG.Core.Http.Security.Hmac.Extensions
             if (httpClientBuilder == null) throw new ArgumentNullException(nameof(httpClientBuilder));
             if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
 
-            httpClientBuilder.Services.TryAddTransient<IHmacOptionsProvider, DefaultHmacOptionsProvider>();
+            httpClientBuilder.Services.TryAddSingleton<IHmacOptionsProvider, DefaultHmacOptionsProvider>();
             httpClientBuilder.Services.Configure<HmacOptions>(configurationSection);
 
             return httpClientBuilder;

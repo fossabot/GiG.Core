@@ -51,12 +51,11 @@ namespace GiG.Core.Web.Security.Hmac
                 return AuthenticateResult.Fail($"Hmac configuration not set.");
             }
 
-            var hashProvider = _signatureProviderFactory.GetHashProvider(hmacOptions.HashAlgorithm);
-
             if (!Request.Headers.TryGetValue(HmacConstants.NonceHeader,out var nonceValue))
             {
                 return AuthenticateResult.Fail($"{HmacConstants.NonceHeader} not set.");
             }
+
             Request.Headers.TryGetValue(HmacConstants.AuthHeader, out var headerSignature);
 
             if (string.IsNullOrEmpty(headerSignature))
@@ -66,6 +65,7 @@ namespace GiG.Core.Web.Security.Hmac
 
             var body = await Request.GetBodyAsync();
             var clearSignature = _hmacSignatureProvider.GetSignature(Request.Method.ToUpper(), Request.Path.Value, body, nonceValue, hmacOptions.Secret);
+            var hashProvider = _signatureProviderFactory.GetHashProvider(hmacOptions.HashAlgorithm);
             var signature = hashProvider.Hash(clearSignature);
             var authHeader = AuthenticationHeaderValue.Parse(headerSignature);
 
@@ -78,7 +78,7 @@ namespace GiG.Core.Web.Security.Hmac
             identity.AddClaim(new Claim("HMAC", authHeader.Parameter));
 
             var authTicket = new AuthenticationTicket(
-                new System.Security.Claims.ClaimsPrincipal(identity),
+                new ClaimsPrincipal(identity),
                 Scheme.Name);
 
             return AuthenticateResult.Success(authTicket);
