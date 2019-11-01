@@ -1,9 +1,8 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-using GiG.Core.Web.Security.Hmac.Extensions;
+﻿using GiG.Core.Web.Security.Hmac.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
+using System.IO;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace GiG.Core.Web.Security.Hmac.Tests.Unit
@@ -20,7 +19,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
             _nonceValue = "abc";
         }
         [Fact]
-        public async Task AsSignatureStringAsync_Get_ReturnsSecretMethodUrl()
+        public async Task GetBody_Get_ReturnsSecretMethodUrl()
         {
             //Arrange
             var context = new DefaultHttpContext();
@@ -30,33 +29,16 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
                 Path = new PathString("/api/test")
             };
             request.Headers.Add(_nonceHeader, _nonceValue);
-            var secret = "test";
 
             //Act
-            var result = await request.AsSignatureStringAsync(_nonceHeader, secret);
+            var result = await request.GetBodyAsync();
 
             //Assert
-            Assert.Equal($"{secret}{_nonceValue}{request.Method}{request.Path.Value}", result);
-        }
-        [Fact]
-        public async Task AsSignatureStringAsync_GetNonceNotAdded_ReturnsSecretMethodUrl()
-        {
-            //Arrange
-            var context = new DefaultHttpContext();
-            var request = new DefaultHttpRequest(context)
-            {
-                Method = "GET",
-                Path = new PathString("/api/test")
-            };
-            var secret = "test";
-
-            //Act & Assert
-            await Assert.ThrowsAsync<ArgumentException>("nonceHeader", async ()=> await request.AsSignatureStringAsync(_nonceHeader, secret));
-
+            Assert.Equal(string.Empty, result);
         }
 
         [Fact]
-        public async Task AsSignatureStringAsync_Post_ReturnsSecretMethodUrl()
+        public async Task GetBody_Post_ReturnsSecretMethodUrl()
         {
             //Arrange
             var context = new DefaultHttpContext();
@@ -66,7 +48,6 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
                 Path = new PathString("/api/test")
             };
             request.Headers.Add(_nonceHeader, _nonceValue);
-            var secret = "test";
             var body = "woop woop I unit tested the body woop woop";
             request.Body = new MemoryStream();
             using StreamWriter bodyWriter = new StreamWriter(request.Body);
@@ -75,15 +56,15 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
             request.Body.Position = 0;
 
             //Act
-            var result = await request.AsSignatureStringAsync(_nonceHeader,secret);
+            var result = await request.GetBodyAsync();
 
             //Assert
             Assert.Equal(0, request.Body.Position);
-            Assert.Equal($"{secret}{_nonceValue}{request.Method}{request.Path.Value}{body}", result);
+            Assert.Equal(body, result);
         }
 
         [Fact]
-        public async Task AsSignatureStringAsync_Patch_ReturnsSecretMethodUrl()
+        public async Task GetBody_Patch_ReturnsSecretMethodUrl()
         {
             //Arrange
             var context = new DefaultHttpContext();
@@ -93,8 +74,6 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
                 Path = new PathString("/api/test")
             };
             request.Headers.Add(_nonceHeader, _nonceValue);
-
-            var secret = "test";
             var body = "woop woop I unit tested the body woop woop";
             request.Body = new MemoryStream();
             using StreamWriter bodyWriter = new StreamWriter(request.Body);
@@ -103,15 +82,15 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
             request.Body.Position = 0;
 
             //Act
-            var result = await request.AsSignatureStringAsync(_nonceHeader,secret);
+            var result = await request.GetBodyAsync();
 
             //Assert
             Assert.Equal(0, request.Body.Position);
-            Assert.Equal($"{secret}{_nonceValue}{request.Method}{request.Path.Value}{body}", result);
+            Assert.Equal(body, result);
         }
 
         [Fact]
-        public async Task AsSignatureStringAsync_Put_ReturnsSecretMethodUrl()
+        public async Task GetBody_Put_ReturnsSecretMethodUrl()
         {
             //Arrange
             var context = new DefaultHttpContext();
@@ -121,8 +100,6 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
                 Path = new PathString("/api/test")
             };
             request.Headers.Add(_nonceHeader, _nonceValue);
-
-            var secret = "test";
             var body = "woop woop I unit tested the body woop woop";
             request.Body = new MemoryStream();
             using StreamWriter bodyWriter = new StreamWriter(request.Body);
@@ -131,11 +108,11 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
             request.Body.Position = 0;
 
             //Act
-            var result = await request.AsSignatureStringAsync(_nonceHeader,secret);
+            var result = await request.GetBodyAsync();
 
             //Assert
             Assert.Equal(0, request.Body.Position);
-            Assert.Equal($"{secret}{_nonceValue}{request.Method}{request.Path.Value}{body}", result);
+            Assert.Equal(body, result);
         }
     }
 }

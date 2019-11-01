@@ -6,14 +6,14 @@ namespace GiG.Core.Web.Security.Hmac
     /// <summary>
     /// Default Options provider for <see cref="HmacAuthenticationHandler"/>
     /// </summary>
-    public class DefaultTenantOptionsProvider : IHmacOptionsProvider
+    public class DefaultOptionsProvider : IHmacOptionsProvider
     {
         private readonly IOptionsSnapshot<HmacOptions> _options;
 
         /// <summary>
         /// Default Options provider for <see cref="HmacAuthenticationHandler"/>
         /// </summary>
-        public DefaultTenantOptionsProvider(IOptionsSnapshot<HmacOptions> options)
+        public DefaultOptionsProvider(IOptionsSnapshot<HmacOptions> options)
         {
             _options = options;
         }

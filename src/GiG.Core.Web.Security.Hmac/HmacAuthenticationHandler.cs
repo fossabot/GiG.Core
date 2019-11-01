@@ -19,6 +19,7 @@ namespace GiG.Core.Web.Security.Hmac
     {
         private readonly IHmacOptionsProvider _hmacOptionsProvider;
         private readonly IHashProviderFactory _signatureProviderFactory;
+        private readonly IHmacSignatureProvider _hmacSignatureProvider;
 
         /// <summary>
         /// <see cref="AuthenticationHandler{TOptions}"/> using Hmac.
@@ -29,11 +30,13 @@ namespace GiG.Core.Web.Security.Hmac
             UrlEncoder encoder,
             ISystemClock clock,
             IHmacOptionsProvider hmacOptionsProvider,
-            IHashProviderFactory signatureProviderFactory)
+            IHashProviderFactory signatureProviderFactory,
+            IHmacSignatureProvider hmacSignatureProvider)
             : base(optionsMonitor, logger, encoder, clock)
         {
             _hmacOptionsProvider = hmacOptionsProvider;
             _signatureProviderFactory = signatureProviderFactory;
+            _hmacSignatureProvider = hmacSignatureProvider;
         }
 
         /// <inheritdoc />
@@ -48,12 +51,10 @@ namespace GiG.Core.Web.Security.Hmac
 
             var hashProvider = _signatureProviderFactory.GetHashProvider(hmacOptions.HashAlgorithm);
 
-            if (!Request.Headers.ContainsKey(HmacConstants.NonceHeader))
+            if (!Request.Headers.TryGetValue(HmacConstants.NonceHeader,out var nonceValue))
             {
                 return AuthenticateResult.Fail($"{HmacConstants.NonceHeader} not set.");
             }
-
-            var signature = hashProvider.Hash(await Request.AsSignatureStringAsync(HmacConstants.NonceHeader, hmacOptions.Secret));
             Request.Headers.TryGetValue(HmacConstants.AuthHeader, out var headerSignature);
 
             if (string.IsNullOrEmpty(headerSignature))
@@ -61,6 +62,9 @@ namespace GiG.Core.Web.Security.Hmac
                 return AuthenticateResult.Fail("Hmac does not match.");
             }
 
+            var body = await Request.GetBodyAsync();
+            var clearSignature = _hmacSignatureProvider.GetSignature(Request.Method.ToUpper(), Request.Path.Value, body, nonceValue, hmacOptions.Secret);
+            var signature = hashProvider.Hash(clearSignature);
             var authHeader = AuthenticationHeaderValue.Parse(headerSignature);
 
             if (!signature.Equals(authHeader.Parameter))

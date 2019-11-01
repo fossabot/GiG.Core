@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
 using System.IO;
 
 namespace GiG.Core.Web.Security.Hmac.Extensions
@@ -10,13 +9,11 @@ namespace GiG.Core.Web.Security.Hmac.Extensions
     public static class HttpRequestExtensions
     {
         /// <summary>
-        /// Gets the signature string to be used to HMAC hashing.
+        /// Gets the <see cref="HttpRequest"/> body.
         /// </summary>
         /// <param name="httpRequest">The <see cref="HttpRequest"/>.</param>
-        /// <param name="nonceHeader">The header key to the Nonce value.</param>
-        /// <param name="secret">The secret to use for hashing.</param>
-        /// <returns>The string to be used to HMAC hashing.</returns>
-        public static async System.Threading.Tasks.Task<string> AsSignatureStringAsync(this HttpRequest httpRequest, string nonceHeader, string secret)
+        /// <returns>The <see cref="HttpRequest"/> body.</returns>
+        public static async System.Threading.Tasks.Task<string> GetBodyAsync(this HttpRequest httpRequest)
         {
             string body;
             switch (httpRequest.Method)
@@ -38,11 +35,7 @@ namespace GiG.Core.Web.Security.Hmac.Extensions
                     body = "";
                     break;
             }
-            if (!httpRequest.Headers.TryGetValue(nonceHeader, out var nonceValue))
-            {
-                throw new ArgumentException("Nonce value is empty",nameof(nonceHeader));
-            }
-            return $"{secret}{nonceValue}{httpRequest.Method}{httpRequest.Path}{body}";
+            return body;
         }
     }
 }

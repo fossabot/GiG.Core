@@ -13,7 +13,7 @@ using Xunit;
 
 namespace GiG.Core.Web.Security.Hmac.Tests.Unit
 {
-    [Trait("Category","Unit")]
+    [Trait("Category", "Unit")]
     public class HmacAuthenticationHandlerTests
     {
         private readonly Mock<IOptionsMonitor<HmacRequirement>> _hmacRequirement;
@@ -21,9 +21,10 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
         private readonly Mock<ILogger> _logger;
         private readonly Mock<UrlEncoder> _urlEncoder;
         private readonly Mock<ISystemClock> _systemClock;
-        private readonly Mock<IHmacOptionsProvider> _hmacOptionsProvider;
-        private readonly Mock<IHashProviderFactory> _signatureProviderFactory;
-        private readonly Mock<IHashProvider> _signatureProvider;
+        private readonly Mock<IHmacOptionsProvider> _optionsProvider;
+        private readonly Mock<IHashProviderFactory> _hashProviderFactory;
+        private readonly Mock<IHashProvider> _hashProvider;
+        private readonly Mock<IHmacSignatureProvider> _signatureProvider;
         private readonly DefaultHttpContext _httpContext;
         private readonly DefaultHttpRequest _request;
 
@@ -34,24 +35,26 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
             _logger = new Mock<ILogger>();
             _urlEncoder = new Mock<UrlEncoder>();
             _systemClock = new Mock<ISystemClock>();
-            _hmacOptionsProvider = new Mock<IHmacOptionsProvider>();
-            _signatureProviderFactory = new Mock<IHashProviderFactory>();
-            _signatureProvider = new Mock<IHashProvider>();
+            _optionsProvider = new Mock<IHmacOptionsProvider>();
+            _hashProviderFactory = new Mock<IHashProviderFactory>();
+            _hashProvider = new Mock<IHashProvider>();
+            _signatureProvider = new Mock<IHmacSignatureProvider>();
             _httpContext = new DefaultHttpContext();
 
+            _signatureProvider.Setup(x => x.GetSignature(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns("abc");
             _request = new DefaultHttpRequest(_httpContext);
             _request.Headers.Add(HmacConstants.NonceHeader, "test");
             _loggerFactory.Setup(x => x.CreateLogger(It.IsAny<string>())).Returns(_logger.Object);
-            _hmacOptionsProvider.Setup(x => x.GetHmacOptions()).Returns(new HmacOptions());
-            _signatureProviderFactory.Setup(x => x.GetHashProvider(It.IsAny<string>())).Returns(_signatureProvider.Object);
+            _optionsProvider.Setup(x => x.GetHmacOptions()).Returns(new HmacOptions());
+            _hashProviderFactory.Setup(x => x.GetHashProvider(It.IsAny<string>())).Returns(_hashProvider.Object);
         }
 
         [Fact]
         public async Task HmacAuthenticationHandler_MatchHmacHeader_ReturnsSuccess()
-        {           
+        {
             //Arrange
             _request.Headers.Add(HmacConstants.AuthHeader, $"hmac abc");
-            _signatureProvider.Setup(x => x.Hash(It.IsAny<string>())).Returns("abc");
+            _hashProvider.Setup(x => x.Hash(It.IsAny<string>())).Returns("abc");
             var hmacAuthHandler = await BuildHandlerAsync();
 
             //Act
@@ -59,7 +62,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
 
             //Assert
             Assert.True(result.Succeeded);
-            VerifyCalls();
+            VerifyCallsWithHeader();
         }
 
         [Fact]
@@ -67,7 +70,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
         {
             //Arrange
             _request.Headers.Add(HmacConstants.AuthHeader, $"hmac abc");
-            _signatureProvider.Setup(x => x.Hash(It.IsAny<string>())).Returns("abcd");
+            _hashProvider.Setup(x => x.Hash(It.IsAny<string>())).Returns("abcd");
             var hmacAuthHandler = await BuildHandlerAsync();
 
             //Act
@@ -77,7 +80,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
             Assert.False(result.Succeeded);
             Assert.NotNull(result.Failure);
             Assert.Equal("Hmac does not match.", result.Failure.Message);
-            VerifyCalls();
+            VerifyCallsWithHeader();
 
         }
 
@@ -93,25 +96,33 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
             //Assert
             Assert.False(result.Succeeded);
             Assert.NotNull(result.Failure);
-            VerifyCalls();
+            VerifyCallsNoHeader();
 
         }
 
         private async Task<HmacAuthenticationHandler> BuildHandlerAsync()
         {
-            var authHandler = new HmacAuthenticationHandler(_hmacRequirement.Object, _loggerFactory.Object, _urlEncoder.Object, _systemClock.Object, _hmacOptionsProvider.Object, _signatureProviderFactory.Object);
+            var authHandler = new HmacAuthenticationHandler(_hmacRequirement.Object, _loggerFactory.Object, _urlEncoder.Object, _systemClock.Object, _optionsProvider.Object, _hashProviderFactory.Object, _signatureProvider.Object);
             await authHandler.InitializeAsync(new AuthenticationScheme("hmac", "HMAC", typeof(HmacAuthenticationHandler)), _httpContext);
             return authHandler;
         }
 
-        private void VerifyCalls()
+        private void VerifyCallsNoHeader()
         {
-            _signatureProvider.Verify(x => x.Hash(It.IsAny<string>()), Times.Once);
-            _signatureProvider.VerifyNoOtherCalls();
-            _signatureProviderFactory.Verify(x => x.GetHashProvider(It.IsAny<string>()), Times.Once);
-            _signatureProviderFactory.VerifyNoOtherCalls();
-            _hmacOptionsProvider.Verify(x => x.GetHmacOptions(), Times.Once);
-            _hmacOptionsProvider.VerifyNoOtherCalls();
+            _hashProviderFactory.Verify(x => x.GetHashProvider(It.IsAny<string>()), Times.Once);
+            _hashProviderFactory.VerifyNoOtherCalls();
+            _optionsProvider.Verify(x => x.GetHmacOptions(), Times.Once);
+            _optionsProvider.VerifyNoOtherCalls();
+        }
+
+        private void VerifyCallsWithHeader()
+        {
+            _hashProvider.Verify(x => x.Hash(It.IsAny<string>()), Times.Once);
+            _hashProvider.VerifyNoOtherCalls();
+            _hashProviderFactory.Verify(x => x.GetHashProvider(It.IsAny<string>()), Times.Once);
+            _hashProviderFactory.VerifyNoOtherCalls();
+            _optionsProvider.Verify(x => x.GetHmacOptions(), Times.Once);
+            _optionsProvider.VerifyNoOtherCalls();
         }
     }
 }
