@@ -1,19 +1,6 @@
-﻿using GiG.Core.DistributedTracing.Web.Extensions;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
+﻿using GiG.Core.Web.Mock;
 
 namespace GiG.Core.DistributedTracing.Web.Tests.Integration.Mocks
 {
-    internal class MockStartup
-    {
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddCorrelationAccessor();
-        }
-
-        public void Configure(IApplicationBuilder app)
-        {
-            app.UseCorrelation();
-        }
-    }
+    internal class MockStartup : MockStartupBase { }
 }

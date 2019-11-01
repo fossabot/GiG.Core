@@ -1,12 +1,12 @@
 using GiG.Core.Hosting.Extensions;
+using GiG.Core.Web.Mock;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GiG.Core.Hosting.Tests.Integration.Mocks
 {
-    internal class MockStartup
+    internal class MockStartup : MockStartupBase
     {
         private readonly IConfiguration _configuration;
 
@@ -15,21 +15,17 @@ namespace GiG.Core.Hosting.Tests.Integration.Mocks
             _configuration = configuration;
         }
 
-        public void ConfigureServices(IServiceCollection services)
+        public override void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            services.AddRouting();
+            base.ConfigureServices(services);
             services.ConfigureInfoManagement(_configuration);
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        /// <inheritdoc />
+        public override void Configure(IApplicationBuilder app)
         {
-            app.UseRouting();
+            base.Configure(app);
             app.UseInfoManagement();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
         }
     }
 }
