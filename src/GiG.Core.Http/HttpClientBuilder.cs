@@ -41,9 +41,7 @@ namespace GiG.Core.Http
         /// <returns>The <see cref="HttpClientBuilder"/>.</returns>
         public HttpClientBuilder WithMessageHandler([NotNull] HttpMessageHandler handler)
         {
-            if (handler == null) throw new ArgumentNullException(nameof(handler));
-            
-            MessageHandler = handler;
+            MessageHandler = handler ?? throw new ArgumentNullException(nameof(handler));
             
             return this;
         }

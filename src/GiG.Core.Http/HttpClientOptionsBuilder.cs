@@ -54,9 +54,7 @@ namespace GiG.Core.Http
         /// <exception cref="ArgumentNullException">.</exception>
         public HttpClientOptionsBuilder WithBaseAddress([NotNull] Uri baseUri)
         {
-            if (baseUri == null) throw new ArgumentNullException(nameof(baseUri));
-
-            BaseAddress = baseUri;
+            BaseAddress = baseUri ?? throw new ArgumentNullException(nameof(baseUri));
 
             return this;
         }
