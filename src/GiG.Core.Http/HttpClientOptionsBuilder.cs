@@ -30,7 +30,7 @@ namespace GiG.Core.Http
 
             return this;
         }
-        
+
         /// <summary>
         /// Configures an <see cref="HttpClientOptionsBuilder"/> with base address.
         /// </summary>
@@ -45,7 +45,7 @@ namespace GiG.Core.Http
 
             return this;
         }
-        
+
         /// <summary>
         /// Configures an <see cref="HttpClientOptionsBuilder"/> with base address.
         /// </summary>
@@ -54,7 +54,9 @@ namespace GiG.Core.Http
         /// <exception cref="ArgumentNullException">.</exception>
         public HttpClientOptionsBuilder WithBaseAddress([NotNull] Uri baseUri)
         {
-            BaseAddress = baseUri ?? throw new ArgumentNullException(nameof(baseUri));
+            if (baseUri == null) throw new ArgumentNullException(nameof(baseUri));
+
+            BaseAddress = baseUri;
 
             return this;
         }

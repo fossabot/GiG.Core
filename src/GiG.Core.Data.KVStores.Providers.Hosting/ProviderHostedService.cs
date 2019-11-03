@@ -14,9 +14,9 @@ namespace GiG.Core.Data.KVStores.Providers.Hosting
         private readonly IDataProvider<T> _dataProvider;
 
         /// <summary>
-        /// ProviderHostedService Constructor.
+        /// Provider Hosted Service Constructor.
         /// </summary>
-        /// <param name="dataProvider"></param>
+        /// <param name="dataProvider">The <see cref="IDataProvider{T}" /> used to fetch data from source.</param>
         public ProviderHostedService(IDataProvider<T> dataProvider)
         {
             _dataProvider = dataProvider;
