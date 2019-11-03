@@ -1,5 +1,4 @@
-﻿using FluentValidation.AspNetCore;
-using GiG.Core.DistributedTracing.Web.Extensions;
+﻿using GiG.Core.DistributedTracing.Web.Extensions;
 using GiG.Core.Web.FluentValidation.Extensions;
 using GiG.Core.Web.Hosting.Extensions;
 using GiG.Core.Web.Mock.Extensions;
@@ -19,7 +18,7 @@ namespace GiG.Core.Web.Mock
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
         public virtual void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddFluentValidation();
+            services.AddControllers();
             services.ConfigureForwardedHeaders();
             services.ConfigureApiBehaviorOptions();
             services.AddRouting();

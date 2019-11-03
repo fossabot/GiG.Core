@@ -2,6 +2,7 @@
 using GiG.Core.Context.Abstractions;
 using GiG.Core.MultiTenant.Abstractions;
 using GiG.Core.Web.Mock.Internal;
+using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
@@ -19,7 +20,7 @@ namespace GiG.Core.Web.Mock.Extensions
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>        
         /// <returns>The <see cref="IServiceCollection" />.</returns>
-        public static IServiceCollection AddMockRequestContextAccessor(this IServiceCollection services)
+        public static IServiceCollection AddMockRequestContextAccessor([NotNull] this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
@@ -33,7 +34,7 @@ namespace GiG.Core.Web.Mock.Extensions
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>        
         /// <returns>The <see cref="IServiceCollection" />.</returns>
-        public static IServiceCollection AddMockTenantAccessor(this IServiceCollection services)
+        public static IServiceCollection AddMockTenantAccessor([NotNull] this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
@@ -47,7 +48,7 @@ namespace GiG.Core.Web.Mock.Extensions
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>        
         /// <returns>The <see cref="IServiceCollection" />.</returns>
-        public static IServiceCollection AddMockCorrelationAccessor(this IServiceCollection services)
+        public static IServiceCollection AddMockCorrelationAccessor([NotNull] this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
