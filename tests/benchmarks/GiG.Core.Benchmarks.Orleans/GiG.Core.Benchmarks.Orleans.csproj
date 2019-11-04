@@ -9,12 +9,12 @@
         <PackageReference Include="BenchmarkDotNet" Version="0.11.5" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0" />
-        <PackageReference Include="Microsoft.Orleans.Runtime.Abstractions" Version="2.4.3" />
-        <PackageReference Include="Microsoft.Orleans.Server" Version="2.4.3" />
-        <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="2.4.3">
+        <PackageReference Include="Microsoft.Orleans.Runtime.Abstractions" Version="3.0.0" />
+        <PackageReference Include="Microsoft.Orleans.Server" Version="3.0.0" />
+        <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="3.0.0">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Orleans.Streams.Kafka" Version="2.0.2" />
+        <PackageReference Include="Orleans.Streams.Kafka" Version="4.0.0-dev-118" />
     </ItemGroup>  
 
     <ItemGroup>
