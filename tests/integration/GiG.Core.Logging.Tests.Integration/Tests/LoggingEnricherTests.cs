@@ -10,7 +10,7 @@ using GiG.Core.Logging.Extensions;
 using GiG.Core.Logging.Sinks.File.Extensions;
 using GiG.Core.Logging.Tests.Integration.Extensions;
 using GiG.Core.Logging.Tests.Integration.Helpers;
-using Microsoft.AspNetCore.Hosting;
+using GiG.Core.Web.Mock.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -22,7 +22,7 @@ using Xunit;
 namespace GiG.Core.Logging.Tests.Integration.Tests
 {
     [Trait("Category", "Integration")]
-    public class LoggingEnricherTests : IDisposable
+    public sealed class LoggingEnricherTests : IDisposable
     {
         private readonly string _logMessageTest = Guid.NewGuid().ToString();
         private readonly IHost _host;
@@ -35,7 +35,12 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
         public LoggingEnricherTests()
         {
             _host = Host.CreateDefaultBuilder()
-                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Mocks.MockStartup>())
+                .ConfigureServices(x =>
+                {
+                    x.AddMockCorrelationAccessor();
+                    x.AddMockTenantAccessor();
+                    x.AddMockRequestContextAccessor();
+                })
                 .UseApplicationMetadata()
                 .ConfigureLogging(x => x
                     .WriteToFile()
