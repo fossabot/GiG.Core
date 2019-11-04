@@ -1,8 +1,8 @@
 using GiG.Core.DistributedTracing.Abstractions;
-using GiG.Core.Http.Tests.Integration.Mocks;
 using GiG.Core.MultiTenant.Abstractions;
+using GiG.Core.Web.Mock;
 
-namespace GiG.Core.Http.Tests.Integration.Tests
+namespace GiG.Core.Http.Tests.Integration.Mocks
 {
     public class TestFixture
     {

@@ -1,5 +1,4 @@
-﻿using GiG.Core.DistributedTracing.Web.Extensions;
-using GiG.Core.Web.FluentValidation.Extensions;
+﻿using GiG.Core.Web.FluentValidation.Extensions;
 using GiG.Core.Web.Hosting.Extensions;
 using GiG.Core.Web.Mock.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -36,7 +35,6 @@ namespace GiG.Core.Web.Mock
         {
             app.UseForwardedHeaders();
             app.UsePathBaseFromConfiguration();
-            app.UseCorrelation();
             app.UseRouting();
             app.UseFluentValidationMiddleware();
             

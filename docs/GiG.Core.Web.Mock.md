@@ -2,36 +2,20 @@
 
 This Library provides a MockStartupBase class to be used for Testing.
 
-This Base class registers the following:
+This Base class configures the following in `ConfigureServices(IServiceCollection services)`:
+ * AddControllers()
+ * ConfigureForwardedHeaders()
+ * ConfigureApiBehaviorOptions()
+ * AddRouting()
+ * AddMockRequestContextAccessor()
+ * AddMockCorrelationAccessor()
+ * AddMockTenantAccessor()
 
-```csharp
-public virtual void ConfigureServices(IServiceCollection services)
-{
-    services.AddControllers().AddFluentValidation();
-    services.ConfigureForwardedHeaders();
-    services.ConfigureApiBehaviorOptions();
-    services.AddRouting();
-
-    services.AddMockRequestContextAccessor();
-    services.AddMockCorrelationAccessor();
-    services.AddMockTenantAccessor();
-}
-
-/// <summary>
-/// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-/// </summary>
-/// <param name="app">The <see cref="IApplicationBuilder"/>.</param>
-public virtual void Configure(IApplicationBuilder app)
-{
-    app.UseForwardedHeaders();
-    app.UsePathBaseFromConfiguration();
-    app.UseCorrelation();
-    app.UseRouting();
-    app.UseFluentValidationMiddleware();
-    
-    app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-}
-```
+And the following in `Configure(IApplicationBuilder app)`:
+ * UseForwardedHeaders()
+ * UsePathBaseFromConfiguration()
+ * UseRouting()
+ * UseEndpoints(endpoints => { endpoints.MapControllers(); })
 
 ## Basic Usage
 

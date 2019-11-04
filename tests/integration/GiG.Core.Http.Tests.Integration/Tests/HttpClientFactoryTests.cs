@@ -32,6 +32,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
         {
             // Arrange
             var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
+            
             var client = HttpClientFactory.Create(x =>
             {
                 x.AddDelegatingHandler(new CorrelationContextDelegatingHandler(_correlationContextAccessor));
@@ -59,6 +60,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
         {
             // Arrange
             var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
+
             var client = HttpClientFactory.Create(x =>
             {
                 x.AddDelegatingHandler(new CorrelationContextDelegatingHandler(_correlationContextAccessor));
@@ -86,6 +88,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
         {
             // Arrange
             var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
+
             var client = HttpClientFactory.Create(x =>
             {
                 x.AddDelegatingHandler(new CorrelationContextDelegatingHandler(_correlationContextAccessor));
@@ -113,9 +116,9 @@ namespace GiG.Core.Http.Tests.Integration.Tests
         {
             // Arrange
             var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
-            var client = CreateClientWithName(testServer);
+            var client = CreateClientWithType(testServer);
             var service = RestService.For<IMockRestClient>(client);
-
+            
             // Act
             var actual = await service.GetAsync();
             actual.Headers.TryGetValues(Constants.Header, out var correlation);

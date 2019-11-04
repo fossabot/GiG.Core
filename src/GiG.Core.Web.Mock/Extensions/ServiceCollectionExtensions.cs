@@ -1,7 +1,5 @@
-﻿using CorrelationId;
-using GiG.Core.Context.Abstractions;
+﻿using GiG.Core.Context.Abstractions;
 using GiG.Core.MultiTenant.Abstractions;
-using GiG.Core.Web.Mock.Internal;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -52,7 +50,6 @@ namespace GiG.Core.Web.Mock.Extensions
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services.AddCorrelationId();
             services.TryAddSingleton<ICorrelationContextAccessor>(new MockCorrelationContextAccessor());
 
             return services;
