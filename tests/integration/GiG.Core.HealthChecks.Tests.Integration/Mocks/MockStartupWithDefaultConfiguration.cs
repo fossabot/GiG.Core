@@ -6,10 +6,6 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Mocks
 {
     internal  class MockStartupWithDefaultConfiguration
     {
-        public void ConfigureServices(IServiceCollection services)
-        {
-        }
-
         public void Configure(IApplicationBuilder app)
         {
             app.UseHealthChecks();

@@ -30,7 +30,7 @@ namespace GiG.Core.Http
 
             return this;
         }
-        
+
         /// <summary>
         /// Configures an <see cref="HttpClientOptionsBuilder"/> with base address.
         /// </summary>
@@ -45,7 +45,7 @@ namespace GiG.Core.Http
 
             return this;
         }
-        
+
         /// <summary>
         /// Configures an <see cref="HttpClientOptionsBuilder"/> with base address.
         /// </summary>

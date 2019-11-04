@@ -7,12 +7,14 @@ using GiG.Core.Logging.Enrichers.Context.Extensions;
 using GiG.Core.Logging.Enrichers.DistributedTracing.Extensions;
 using GiG.Core.Logging.Enrichers.MultiTenant.Extensions;
 using GiG.Core.Logging.Extensions;
+using GiG.Core.Logging.Sinks.File.Extensions;
 using GiG.Core.Logging.Tests.Integration.Extensions;
 using GiG.Core.Logging.Tests.Integration.Helpers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
 using Serilog.Events;
 using System;
 using Xunit;
@@ -20,7 +22,7 @@ using Xunit;
 namespace GiG.Core.Logging.Tests.Integration.Tests
 {
     [Trait("Category", "Integration")]
-    public class LoggingEnricherTests
+    public class LoggingEnricherTests : IDisposable
     {
         private readonly string _logMessageTest = Guid.NewGuid().ToString();
         private readonly IHost _host;
@@ -36,6 +38,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
                 .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Mocks.MockStartup>())
                 .UseApplicationMetadata()
                 .ConfigureLogging(x => x
+                    .WriteToFile()
                     .WriteToSink(new DelegatingSink(WriteLog))
                     .EnrichWithApplicationMetadata()
                     .EnrichWithCorrelation()
@@ -45,20 +48,21 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
                 .Build();
 
             _host.Start();
+
             _applicationMetadataAccessor = _host.Services.GetRequiredService<IApplicationMetadataAccessor>();
             _requestContextAccessor = _host.Services.GetRequiredService<IRequestContextAccessor>();
             _correlationContextAccessor = _host.Services.GetRequiredService<ICorrelationContextAccessor>();
         }
 
         [Fact]
-        public void Logging_Enrichers_Validations()
+        public void LogInformation_WriteLogWithEnrichers_VerifyContents()
         {
             // Arrange
             var logger = _host.Services.GetRequiredService<ILogger<LoggingEnricherTests>>();
 
             // Act
             logger.LogInformation(_logMessageTest);
-                
+
             // Assert
             Assert.NotNull(_logEvent);
             var applicationName = (string) _logEvent.Properties["ApplicationName"].LiteralValue();
@@ -88,6 +92,13 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
             {
                 _logEvent = log;
             }
+        }
+
+        public void Dispose()
+        {
+            Log.CloseAndFlush();
+            _host.StopAsync().Wait();
+            _host.Dispose();
         }
     }
 }

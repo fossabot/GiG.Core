@@ -16,6 +16,7 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders
         private readonly IFileProvider _fileProvider;
         private readonly FileProviderOptions _fileOptions;
 
+        /// <inheritdoc />
         protected FileDataProvider(ILogger<FileDataProvider<T>> logger,
             IDataStore<T> dataStore, 
             IFileProvider fileProvider, 
@@ -27,6 +28,7 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders
             _fileOptions = fileOptionsAccessor.Value;
         }
 
+        /// <inheritdoc/>
         public Task StartAsync()
         {
             var model = Load();
@@ -36,6 +38,7 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders
             return Task.CompletedTask;
         }
 
+        /// <inheritdoc/>
         public Task StopAsync()
         {
             return Task.CompletedTask;
@@ -69,6 +72,11 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders
             return model;
         }
 
+        /// <summary>
+        /// Get Model from Stream.
+        /// </summary>
+        /// <param name="stream">The <see cref="Stream"/>.</param>
+        /// <returns>Generic to define type of model.</returns>
         protected abstract T GetFromStream(Stream stream);
     }
 }
