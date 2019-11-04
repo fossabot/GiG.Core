@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Threading.Tasks;
+using GiG.Core.Web.Security.Hmac.Internal;
 
 namespace GiG.Core.Web.Security.Hmac.Extensions
 {

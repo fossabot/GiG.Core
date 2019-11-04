@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
+using GiG.Core.Web.Security.Hmac.MultiTenant.Internal;
 
 namespace GiG.Core.Web.Security.Hmac.MultiTenant.Extensions
 {

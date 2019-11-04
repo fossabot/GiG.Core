@@ -1,9 +1,8 @@
-﻿using GiG.Core.Security.Cryptography;
+﻿using System;
 using Moq;
-using System;
 using Xunit;
 
-namespace GiG.Security.Cryptography.Tests.Unit
+namespace GiG.Core.Security.Cryptography.Tests.Unit
 {
     [Trait("Category", "Unit")]
     public class HashProviderFactoryTests

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
-using GiG.Core.Security.Cryptography;
 using Xunit;
 
-namespace GiG.Security.Cryptography.Tests.Unit
+namespace GiG.Core.Security.Cryptography.Tests.Unit
 {
-    [Trait("Category","Unit")]
+    [Trait("Category", "Unit")]
     public class SHA256HashProviderTests
     {
         [Fact]

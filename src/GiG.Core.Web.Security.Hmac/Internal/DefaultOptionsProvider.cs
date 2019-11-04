@@ -1,7 +1,7 @@
 ﻿using GiG.Core.Web.Security.Hmac.Abstractions;
 using Microsoft.Extensions.Options;
 
-namespace GiG.Core.Web.Security.Hmac
+namespace GiG.Core.Web.Security.Hmac.Internal
 {
     /// <summary>
     /// Default Options provider for <see cref="HmacAuthenticationHandler"/>.

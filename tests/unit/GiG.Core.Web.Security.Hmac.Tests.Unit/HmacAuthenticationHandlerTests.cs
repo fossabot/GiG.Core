@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 using Moq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using GiG.Core.Web.Security.Hmac.Internal;
 using Xunit;
 
 namespace GiG.Core.Web.Security.Hmac.Tests.Unit
@@ -62,7 +63,8 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
 
             //Assert
             Assert.True(result.Succeeded);
-            VerifyCallsWithHeader();        }
+            VerifyCallsWithHeader();
+        }
 
         [Fact]
         public async Task HmacAuthenticationHandler_MatchHmacHeader_ReturnsFail()

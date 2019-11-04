@@ -1,11 +1,11 @@
-﻿using GiG.Core.MultiTenant.Abstractions;
+﻿using System.Collections.Generic;
+using System.Linq;
+using GiG.Core.MultiTenant.Abstractions;
 using GiG.Core.Web.Security.Hmac.Abstractions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace GiG.Core.Web.Security.Hmac.MultiTenant
+namespace GiG.Core.Web.Security.Hmac.MultiTenant.Internal
 {
     /// <summary>
     /// <see cref="MultiTenantOptionProvider"/> for HmacAuthenticationHandler.

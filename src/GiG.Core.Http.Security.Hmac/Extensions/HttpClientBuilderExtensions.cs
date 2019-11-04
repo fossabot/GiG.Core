@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Linq;
+using GiG.Core.Http.Security.Hmac.Internal;
 
 namespace GiG.Core.Http.Security.Hmac.Extensions
 {

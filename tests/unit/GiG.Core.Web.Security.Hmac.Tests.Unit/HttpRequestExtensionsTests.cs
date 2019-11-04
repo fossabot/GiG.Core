@@ -19,6 +19,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
             _nonceHeader = HmacConstants.NonceHeader;
             _nonceValue = "abc";
         }
+
         [Fact]
         public async Task GetBody_Get_ReturnsSecretMethodUrl()
         {

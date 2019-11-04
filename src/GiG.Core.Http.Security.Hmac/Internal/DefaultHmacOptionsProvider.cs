@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 
-namespace GiG.Core.Http.Security.Hmac
+namespace GiG.Core.Http.Security.Hmac.Internal
 {
     /// <inheritdoc />
     internal class DefaultHmacOptionsProvider : IHmacOptionsProvider
