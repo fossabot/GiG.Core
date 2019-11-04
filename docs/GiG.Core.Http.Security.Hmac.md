@@ -17,7 +17,7 @@ var client = HttpClientFactory.CreateClient(x =>
 
 ```
 
-Make use of `AddClientHmacAuthentication` when configuring your HttpClient.
+Make use of `AddHmacDelegatingHandler` when configuring your HttpClient.
 
 ```charp
 public static void ConfigureServices(HostBuilderContext ctx, IServiceCollection services)
@@ -28,7 +28,7 @@ public static void ConfigureServices(HostBuilderContext ctx, IServiceCollection 
             {
                 client.FromConfiguration(ctx.Configuration, "Payments"); 
             })
-        .AddClientHmacAuthentication()
-		.ConfigureDefaultHmacOptionProvider(_configuration);
+        .AddHmacDelegatingHandler()
+		.ConfigureDefaultHmacDelegatingHandlerOptionProvider(_configuration);
 }
 ```

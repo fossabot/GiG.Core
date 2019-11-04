@@ -8,14 +8,14 @@ namespace GiG.Core.Web.Security.Hmac
     /// </summary>
     internal class DefaultOptionsProvider : IHmacOptionsProvider
     {
-        private readonly IOptionsSnapshot<HmacOptions> _options;
+        private readonly IOptionsSnapshot<HmacOptions> _optionsAccessor;
 
         /// <summary>
         /// Default Options provider for <see cref="HmacAuthenticationHandler"/>.
         /// </summary>
-        public DefaultOptionsProvider(IOptionsSnapshot<HmacOptions> options)
+        public DefaultOptionsProvider(IOptionsSnapshot<HmacOptions> optionsAccessorAccessor)
         {
-            _options = options;
+            _optionsAccessor = optionsAccessorAccessor;
         }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace GiG.Core.Web.Security.Hmac
         /// <returns><see cref="HmacOptions"/></returns>
         public HmacOptions GetHmacOptions()
         {
-            return _options.Value;
+            return _optionsAccessor.Value;
         }
     }
 }

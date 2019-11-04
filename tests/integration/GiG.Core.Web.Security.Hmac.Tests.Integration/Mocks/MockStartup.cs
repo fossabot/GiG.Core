@@ -18,7 +18,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration.Mocks
         {
             services.AddControllers();
             services.AddHmacAuthentication();
-            services.ConfigureDefaultHmacAuthenticationHandlerOptionProvider(_configuration.GetSection("Hmac"));
+            services.ConfigureDefaultHmacOptionProvider(_configuration.GetSection("Hmac"));
         }
 
         public void Configure(IApplicationBuilder app)

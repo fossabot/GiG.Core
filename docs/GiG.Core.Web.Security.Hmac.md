@@ -12,7 +12,7 @@ public void ConfigureServices(IServiceCollection services)
 {
     // Configure Api Behavior Options
     services.AddHmacAuthentication();
-    services.ConfigureDefaultHmacAuthenticationHandlerOptionProvider(_configuration.GetSection("Hmac"));
+    services.ConfigureDefaultHmacOptionProvider(_configuration);
 }
 
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

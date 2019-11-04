@@ -19,7 +19,7 @@ namespace GiG.Core.Http.Security.Hmac.Extensions
         /// </summary>
         /// <param name="httpClientBuilder">The <see cref="IHttpClientBuilder" />.</param>        
         /// <returns>The <see cref="IHttpClientBuilder" />.</returns>
-        public static IHttpClientBuilder AddClientHmacAuthentication([NotNull]this IHttpClientBuilder httpClientBuilder)
+        public static IHttpClientBuilder AddHmacDelegatingHandler([NotNull]this IHttpClientBuilder httpClientBuilder)
         {
             httpClientBuilder.AddHttpMessageHandler<HmacDelegatingHandler>();
             httpClientBuilder.Services.TryAddTransient<HmacDelegatingHandler>();
@@ -56,12 +56,12 @@ namespace GiG.Core.Http.Security.Hmac.Extensions
         /// <param name="httpClientBuilder">The <see cref="IHttpClientBuilder" />.</param>        
         /// <param name="configuration">The <see cref="IConfigurationSection" />Configuration section for hmac settings.</param>        
         /// <returns>The <see cref="IHttpClientBuilder" />.</returns>
-        public static IHttpClientBuilder ConfigureDefaultHmacOptionProvider([NotNull]this IHttpClientBuilder httpClientBuilder, [NotNull]IConfiguration configuration)
+        public static IHttpClientBuilder ConfigureDefaultHmacDelegatingHandlerOptionProvider([NotNull]this IHttpClientBuilder httpClientBuilder, [NotNull]IConfiguration configuration)
         {
             if (httpClientBuilder == null) throw new ArgumentNullException(nameof(httpClientBuilder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            ConfigureDefaultHmacOptionProvider(httpClientBuilder, configuration.GetSection(HmacOptions.DefaultSectionName));
+            ConfigureDefaultHmacDelegatingHandlerOptionProvider(httpClientBuilder, configuration.GetSection(HmacOptions.DefaultSectionName));
 
             return httpClientBuilder;
         }

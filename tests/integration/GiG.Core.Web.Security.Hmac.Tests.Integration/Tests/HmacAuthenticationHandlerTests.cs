@@ -29,13 +29,13 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration.Tests
                     services.AddHttpClient("Default")
                     .ConfigurePrimaryHttpMessageHandler(x => _server.CreateHandler())
                     .ConfigureHttpClient(x => x.BaseAddress = _server.BaseAddress)
-                    .AddClientHmacAuthentication()
+                    .AddHmacDelegatingHandler()
                     .ConfigureDefaultHmacDelegatingHandlerOptionProvider(ctx.Configuration.GetSection("Hmac"));
 
                     services.AddHttpClient("Default2")
                     .ConfigurePrimaryHttpMessageHandler(x => _server.CreateHandler())
                     .ConfigureHttpClient(x => x.BaseAddress = _server.BaseAddress)
-                    .AddClientHmacAuthentication()
+                    .AddHmacDelegatingHandler()
                     .ConfigureDefaultHmacDelegatingHandlerOptionProvider(ctx.Configuration.GetSection("Hmac"));
                 })
                 .ConfigureAppConfiguration(appConfig => appConfig.AddJsonFile("appsettings.json")));
