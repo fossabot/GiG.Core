@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GiG.Core.Security.Http
+﻿namespace GiG.Core.Security.Hmac.Abstractions
 {
     /// <summary>
     /// Signature provider for Hmac.

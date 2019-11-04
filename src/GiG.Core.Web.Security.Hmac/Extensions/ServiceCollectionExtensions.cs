@@ -1,5 +1,5 @@
 ﻿using GiG.Core.Security.Cryptography;
-using GiG.Core.Security.Http;
+using GiG.Core.Security.Hmac.Abstractions;
 using GiG.Core.Web.Security.Hmac.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;

@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\GiG.Core.Security.Cryptography\GiG.Core.Security.Cryptography.csproj" />
-    <ProjectReference Include="..\..\..\src\GiG.Core.Security.Http\GiG.Core.Security.Http.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Web.Security.Hmac.Abstractions\GiG.Core.Web.Security.Hmac.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Web.Security.Hmac\GiG.Core.Web.Security.Hmac.csproj" />
   </ItemGroup>

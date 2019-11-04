@@ -1,4 +1,4 @@
-﻿using GiG.Core.Security.Http;
+﻿using GiG.Core.Security.Hmac.Abstractions;
 using GiG.Core.Web.Security.Hmac.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;

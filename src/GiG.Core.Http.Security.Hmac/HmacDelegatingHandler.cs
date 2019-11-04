@@ -1,6 +1,6 @@
 ﻿using GiG.Core.Http.Security.Hmac.Extensions;
 using GiG.Core.Security.Cryptography;
-using GiG.Core.Security.Http;
+using GiG.Core.Security.Hmac.Abstractions;
 using System;
 using System.Configuration;
 using System.Linq;

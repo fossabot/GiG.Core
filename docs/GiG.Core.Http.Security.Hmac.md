@@ -4,7 +4,7 @@ This Library provides an API to register an HmacDelegatingHandler onto the HttpC
 
 ## Basic Usage
 
-Make use of the `HmacDelegatingHandler()` when configuring your HttpClientFactory. The Handler  depends on `GiG.Core.Http.Security.Hmac.IHmacOptionsProvider`,`GiG.Core.Security.Cryptography.IHashProviderFactory`,`GiG.Core.Security.Http.IHmacSignatureProvider`.
+Make use of the `HmacDelegatingHandler()` when configuring your HttpClientFactory. The Handler depends on `GiG.Core.Http.Security.Hmac.IHmacOptionsProvider`,`GiG.Core.Security.Cryptography.IHashProviderFactory`,`GiG.Core.Security.Http.IHmacSignatureProvider`.
 
 ```csharp
 var client = HttpClientFactory.CreateClient(x => 

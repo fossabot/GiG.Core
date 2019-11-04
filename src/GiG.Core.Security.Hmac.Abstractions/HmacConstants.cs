@@ -1,4 +1,4 @@
-﻿namespace GiG.Core.Security.Http
+﻿namespace GiG.Core.Security.Hmac.Abstractions
 {
     /// <summary>
     /// The Hmac Constants.

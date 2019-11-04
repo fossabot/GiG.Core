@@ -1,4 +1,5 @@
 ﻿using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace GiG.Core.Http.Security.Hmac.Extensions
 {
@@ -12,12 +13,13 @@ namespace GiG.Core.Http.Security.Hmac.Extensions
         /// </summary>
         /// <param name="httpRequest">The <see cref="HttpRequestMessage"/>.</param>
         /// <returns>The <see cref="HttpRequestMessage"/> body.</returns>
-        public static async System.Threading.Tasks.Task<string> GetBodyAsync(this HttpRequestMessage httpRequest)
+        public static async Task<string> GetBodyAsync(this HttpRequestMessage httpRequest)
         {
             if (httpRequest.Content == null)
             {
                 return string.Empty;
             }
+
             return await httpRequest.Content.ReadAsStringAsync();
         }
     }

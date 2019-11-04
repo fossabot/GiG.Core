@@ -1,7 +1,7 @@
 using GiG.Core.Http;
 using GiG.Core.Http.Security.Hmac;
 using GiG.Core.Http.Security.Hmac.Extensions;
-using GiG.Core.Security.Http;
+using GiG.Core.Security.Hmac.Abstractions;
 using GiG.Core.Web.Security.Hmac.Tests.Integration.Mocks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
