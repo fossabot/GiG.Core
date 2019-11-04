@@ -44,7 +44,7 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Tests.Integration.Fixtures
             var clientHost = Host.CreateDefaultBuilder()
                 .ConfigureServices(services =>
                 {
-                    services.AddClusterClient((x, sp) =>
+                    services.AddDefaultClusterClient((x, sp) =>
                     {
                         x.UseLocalhostClustering();
                         x.AddAssemblies(typeof(StorageTestGrain));

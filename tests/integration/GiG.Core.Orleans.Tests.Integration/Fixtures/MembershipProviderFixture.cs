@@ -55,7 +55,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                 .ConfigureServices((ctx, services) =>
                 {                 
                     services.AddHttpClient();
-                    services.AddClusterClient(x =>
+                    services.AddDefaultClusterClient(x =>
                     {
                         x.ConfigureCluster(ctx.Configuration);
                         x.UseMembershipProvider(ctx.Configuration, builder =>
