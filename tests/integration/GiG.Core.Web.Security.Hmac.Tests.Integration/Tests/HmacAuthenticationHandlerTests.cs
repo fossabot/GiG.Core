@@ -25,11 +25,19 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration.Tests
             _server = new TestServer(new WebHostBuilder()
                 .UseStartup<MockStartup>()
                 .ConfigureServices((ctx, services) =>
-            services.AddHttpClient("Default")
-            .ConfigurePrimaryHttpMessageHandler(x => _server.CreateHandler())
-            .ConfigureHttpClient(x => x.BaseAddress = _server.BaseAddress)
-            .AddClientHmacAuthentication()
-            .ConfigureDefaultHmacDelegatingHandlerOptionProvider(ctx.Configuration.GetSection("Hmac")))
+                {
+                    services.AddHttpClient("Default")
+                    .ConfigurePrimaryHttpMessageHandler(x => _server.CreateHandler())
+                    .ConfigureHttpClient(x => x.BaseAddress = _server.BaseAddress)
+                    .AddClientHmacAuthentication()
+                    .ConfigureDefaultHmacDelegatingHandlerOptionProvider(ctx.Configuration.GetSection("Hmac"));
+
+                    services.AddHttpClient("Default2")
+                    .ConfigurePrimaryHttpMessageHandler(x => _server.CreateHandler())
+                    .ConfigureHttpClient(x => x.BaseAddress = _server.BaseAddress)
+                    .AddClientHmacAuthentication()
+                    .ConfigureDefaultHmacDelegatingHandlerOptionProvider(ctx.Configuration.GetSection("Hmac"));
+                })
                 .ConfigureAppConfiguration(appConfig => appConfig.AddJsonFile("appsettings.json")));
             ;
 
@@ -87,6 +95,28 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration.Tests
             //Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal("abccccc", await response.Content.ReadAsStringAsync());
+        }
+
+
+
+        [Fact]
+        public async Task AuthenticateAsync_MultipleInstances_ReturnsOK()
+        {
+            //Arrange
+            var client = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient("Default");
+            var clientNew = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient("Default2");
+
+            using var request = new HttpRequestMessage(HttpMethod.Get, "api/mock");
+            request.Headers.Add(HmacConstants.NonceHeader, "123");
+            using var requestNew = new HttpRequestMessage(HttpMethod.Get, "api/mock");
+            requestNew.Headers.Add(HmacConstants.NonceHeader, "123");
+
+            //Act
+            using var response = await client.SendAsync(request);
+            using var responseNew = await clientNew.SendAsync(requestNew);
+
+            //Assert
+            Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
         }
     }
 }

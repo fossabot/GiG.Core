@@ -22,7 +22,7 @@ namespace GiG.Core.Http.Security.Hmac.Extensions
         public static IHttpClientBuilder AddClientHmacAuthentication([NotNull]this IHttpClientBuilder httpClientBuilder)
         {
             httpClientBuilder.AddHttpMessageHandler<HmacDelegatingHandler>();
-            httpClientBuilder.Services.TryAddSingleton<HmacDelegatingHandler>();
+            httpClientBuilder.Services.TryAddTransient<HmacDelegatingHandler>();
             httpClientBuilder.Services.TryAddSingleton<IHmacOptionsProvider, DefaultHmacOptionsProvider>();
             httpClientBuilder.Services.TryAddSingleton<IHmacSignatureProvider, HmacSignatureProvider>();
             httpClientBuilder.Services
