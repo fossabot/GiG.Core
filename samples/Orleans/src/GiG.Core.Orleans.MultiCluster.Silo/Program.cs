@@ -1,9 +1,9 @@
 ﻿using GiG.Core.Configuration.Extensions;
-using Microsoft.Extensions.Hosting;
 using GiG.Core.Logging.All.Extensions;
+using Microsoft.Extensions.Hosting;
 
 namespace GiG.Core.Orleans.MultiCluster.Silo
-{    
+{
     public class Program
     {
         public static void Main(string[] args)
