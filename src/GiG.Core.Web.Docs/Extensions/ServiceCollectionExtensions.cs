@@ -2,6 +2,8 @@
 using GiG.Core.Web.Docs.Abstractions;
 using GiG.Core.Web.Docs.Filters;
 using JetBrains.Annotations;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
@@ -38,19 +40,41 @@ namespace GiG.Core.Web.Docs.Extensions
                 return services;
             }
 
+            services.AddVersionedApiExplorer(options =>
+            {
+                //The format of the version added to the route URL: "'v'major"
+                options.GroupNameFormat = "'v'V";
+
+                //Tells swagger to replace the version in the controller route  
+                options.SubstituteApiVersionInUrl = true;
+            });
+
+            services.AddApiVersioning(options =>
+            {
+                // reporting api versions will return the headers "api-supported-versions" and "api-deprecated-versions"
+                options.ReportApiVersions = true;
+            });
+
             return services
                 .Configure<ApiDocsOptions>(configurationSection)
                 .AddSwaggerGen(c =>
                 {
+                    // Resolve the temporary IApiVersionDescriptionProvider service  
+                    var provider = services.BuildServiceProvider().GetRequiredService<IApiVersionDescriptionProvider>();
+
                     c.IncludeXmlComments();
                     c.IncludeFullNameCustomSchemaId();
                     c.IncludeForwardedForFilter(docOptions.IsForwardedForEnabled);
-                    c.SwaggerDoc("v1", new OpenApiInfo
+                    foreach (var description in provider.ApiVersionDescriptions)
                     {
-                        Title = docOptions.Title ?? ApplicationMetadata.Name,
-                        Description = docOptions.Description,
-                        Version = ApplicationMetadata.Version
-                    });
+                        c.SwaggerDoc(description.GroupName, new OpenApiInfo
+                        {
+                            Title = docOptions.Title ?? ApplicationMetadata.Name,
+                            Description = $"{docOptions.Description} {(description.IsDeprecated ? " - DEPRECATED." : "")}",
+                            Version = ApplicationMetadata.Version
+                        });
+                    }
+
                     configureOptions?.Invoke(c);
                 });
         }
@@ -63,8 +87,8 @@ namespace GiG.Core.Web.Docs.Extensions
         /// <param name="configureOptions">A delegate that is used to configure the <see cref="SwaggerGenOptions" />.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection ConfigureApiDocs([NotNull] this IServiceCollection services,
-            [NotNull] IConfiguration configuration, Action<SwaggerGenOptions> configureOptions = null)
-            => services.ConfigureApiDocs(configuration.GetSection(ApiDocsOptions.DefaultSectionName), configureOptions);
+            [NotNull] IConfiguration configuration, Action<SwaggerGenOptions> configureOptions = null) =>
+            services.ConfigureApiDocs(configuration.GetSection(ApiDocsOptions.DefaultSectionName), configureOptions);
 
         private static void IncludeXmlComments(this SwaggerGenOptions options)
         {

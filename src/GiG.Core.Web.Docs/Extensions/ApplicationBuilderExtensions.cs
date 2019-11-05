@@ -1,6 +1,7 @@
 ﻿using GiG.Core.Web.Docs.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerUI;
@@ -21,8 +22,7 @@ namespace GiG.Core.Web.Docs.Extensions
         /// <param name="app">The <see cref="IApplicationBuilder" />.</param>
         /// <param name="configureOptions">A delegate that is used to configure the <see cref="SwaggerUIOptions" />.</param>
         /// <returns>The <see cref="IApplicationBuilder" />.</returns>
-        public static IApplicationBuilder UseApiDocs([NotNull] this IApplicationBuilder app,
-            Action<SwaggerUIOptions> configureOptions = null)
+        public static IApplicationBuilder UseApiDocs([NotNull] this IApplicationBuilder app, Action<SwaggerUIOptions> configureOptions = null)
         {
             if (app == null) throw new ArgumentNullException(nameof(app));
 
@@ -55,9 +55,15 @@ namespace GiG.Core.Web.Docs.Extensions
                 .UseSwagger()
                 .UseSwaggerUI(c =>
                 {
+                    var provider = app.ApplicationServices.GetRequiredService<IApiVersionDescriptionProvider>();
+                    // build a swagger endpoint for each discovered API version
+                    foreach (var description in provider.ApiVersionDescriptions)
+                    {
+                        c.SwaggerEndpoint( $"{endpointPrefix}swagger/{description.GroupName}/swagger.json", $"{description.GroupName.ToUpperInvariant()} Docs" );
+                        
+                    }
                     c.ShowExtensions();
                     c.RoutePrefix = options.Url;
-                    c.SwaggerEndpoint($"{endpointPrefix}swagger/v1/swagger.json", "V1 Docs");
                     c.DisplayRequestDuration();
                     configureOptions?.Invoke(c);
                 });
