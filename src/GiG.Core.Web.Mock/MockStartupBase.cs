@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace GiG.Core.Web.Mock
 {
     /// <summary>
-    /// Mock Startup base class
+    /// Mock Startup base class.
     /// </summary>
     public abstract class MockStartupBase
     {
