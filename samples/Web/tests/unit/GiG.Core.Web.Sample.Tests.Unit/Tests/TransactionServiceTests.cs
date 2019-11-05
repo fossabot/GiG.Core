@@ -1,4 +1,3 @@
-using Bogus;
 using GiG.Core.Context.Abstractions;
 using GiG.Core.Web.Sample.Services;
 using Microsoft.Extensions.Logging;
@@ -9,13 +8,13 @@ using Xunit;
 namespace GiG.Core.Web.Sample.Tests.Unit.Tests
 {
     [Trait("Category", "Unit")]
-    public class WebSampleServiceTests
+    public class TransactionServiceTests
     {
         private readonly Mock<AbstractLogger<TransactionService>> _logger;
         private readonly Mock<IRequestContextAccessor> _requestContextAccessor;
         private readonly TransactionService _sut;
 
-        public WebSampleServiceTests()
+        public TransactionServiceTests()
         {
             _logger = new Mock<AbstractLogger<TransactionService>>();
             _requestContextAccessor = new Mock<IRequestContextAccessor>();
@@ -23,35 +22,45 @@ namespace GiG.Core.Web.Sample.Tests.Unit.Tests
             _sut = new TransactionService(_logger.Object, _requestContextAccessor.Object);
         }
 
-        [Fact]
-        public void Deposit_Success()
+        [Theory]
+        [InlineData(-1.23)]
+        [InlineData(0)]
+        [InlineData(1.23)]
+        public void Deposit_MultipleAmounts_ReturnsCorrectBalance(decimal depositAmount)
         {
             // Arrange
-            var amount = new Randomizer().Decimal();
             var initialBalance = _sut.Balance;
 
             // Act
-            var response = _sut.Deposit(amount);
+            var response = _sut.Deposit(depositAmount);
 
             // Assert
-            Assert.Equal(initialBalance + amount, response);
+            Assert.Equal(initialBalance + depositAmount, response);
             _logger.Verify(x => x.Log(LogLevel.Information, It.IsAny<Exception>(), It.IsAny<string>()), Times.Exactly(2));
             _requestContextAccessor.Verify(x => x.IPAddress, Times.Once);
+
+            _logger.VerifyNoOtherCalls();
+            _requestContextAccessor.VerifyNoOtherCalls();
         }
 
-        [Fact]
-        public void Withdraw_Success()
+        [Theory]
+        [InlineData(-1.23)]
+        [InlineData(0)]
+        [InlineData(1.23)]
+        public void Withdraw_MultipleAmounts_ReturnsCorrectBalance(decimal withdrawalAmount)
         {
             // Arrange
-            var amount = new Randomizer().Decimal();
             var initialBalance = _sut.Balance;
 
             // Act
-            var response = _sut.Withdraw(amount);
+            var response = _sut.Withdraw(withdrawalAmount);
 
             // Assert
-            Assert.Equal(initialBalance - amount, response);
+            Assert.Equal(initialBalance - withdrawalAmount, response);
             _logger.Verify(x => x.Log(LogLevel.Information, It.IsAny<Exception>(), It.IsAny<string>()), Times.Once);
+
+            _logger.VerifyNoOtherCalls();
+            _requestContextAccessor.VerifyNoOtherCalls();
         }
     }
 }
