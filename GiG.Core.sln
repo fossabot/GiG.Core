@@ -41,6 +41,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Orleans.Clustering.Consul.md = docs\GiG.Core.Orleans.Clustering.Consul.md
 		docs\GiG.Core.Orleans.Clustering.Kubernetes.md = docs\GiG.Core.Orleans.Clustering.Kubernetes.md
 		docs\GiG.Core.Orleans.Clustering.md = docs\GiG.Core.Orleans.Clustering.md
+		docs\GiG.Core.Orleans.Silo.Dashboard.md = docs\GiG.Core.Orleans.Silo.Dashboard.md
 		docs\GiG.Core.Orleans.Silo.md = docs\GiG.Core.Orleans.Silo.md
 		docs\GiG.Core.Orleans.Storage.Npgsql.md = docs\GiG.Core.Orleans.Storage.Npgsql.md
 		docs\GiG.Core.Orleans.Streams.Kafka.md = docs\GiG.Core.Orleans.Streams.Kafka.md
@@ -48,6 +49,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Web.Docs.md = docs\GiG.Core.Web.Docs.md
 		docs\GiG.Core.Web.FluentValidation.md = docs\GiG.Core.Web.FluentValidation.md
 		docs\GiG.Core.Web.Hosting.md = docs\GiG.Core.Web.Hosting.md
+		docs\GiG.Core.Web.Mock.md = docs\GiG.Core.Web.Mock.md
 		docs\GiG.Core.Web.Security.Hmac.md = docs\GiG.Core.Web.Security.Hmac.md
 		README.md = README.md
 	EndProjectSection
@@ -308,7 +310,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Data.KVStores.Prov
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Data.KVStores.Tests.Integration", "tests\integration\GiG.Core.Data.KVStores.Tests.Integration\GiG.Core.Data.KVStores.Tests.Integration.csproj", "{7164EEB5-5B40-4E50-BB3A-3B9D7D524480}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Mock", "src\GiG.Core.Web.Mock\GiG.Core.Web.Mock.csproj", "{CA0EC278-E7BC-4C52-842C-0D737663FE23}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Security.Hmac", "src\GiG.Core.Web.Security.Hmac\GiG.Core.Web.Security.Hmac.csproj", "{56305F63-41CB-4BCD-9408-0AAD8ADF7DF9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Logging.Sinks.File", "src\GiG.Core.Logging.Sinks.File\GiG.Core.Logging.Sinks.File.csproj", "{A479D4F7-2F54-44EF-9A56-B04927E86F60}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Security.Hmac.Abstractions", "src\GiG.Core.Web.Security.Hmac.Abstractions\GiG.Core.Web.Security.Hmac.Abstractions.csproj", "{A5C23765-DBC3-4998-AAB5-F28452D28047}"
 EndProject
@@ -326,9 +332,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Http.Security.Hmac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Security.Cryptography.Tests.Unit", "tests\unit\GiG.Core.Security.Cryptography.Tests.Unit\GiG.Core.Security.Cryptography.Tests.Unit.csproj", "{B4DE1B91-2BD4-4617-8AE9-C9BC47C77C64}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Logging.Sinks.File", "src\GiG.Core.Logging.Sinks.File\GiG.Core.Logging.Sinks.File.csproj", "{A479D4F7-2F54-44EF-9A56-B04927E86F60}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Security.Hmac.Abstractions", "src\GiG.Core.Security.Hmac.Abstractions\GiG.Core.Security.Hmac.Abstractions.csproj", "{66D3F817-EC0C-4C20-AB5D-CA2D20492B81}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Silo.Dashboard", "src\GiG.Core.Orleans.Silo.Dashboard\GiG.Core.Orleans.Silo.Dashboard.csproj", "{7FAA49E4-CA3F-4F03-A86A-4481CB80D0C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -668,10 +674,18 @@ Global
 		{7164EEB5-5B40-4E50-BB3A-3B9D7D524480}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7164EEB5-5B40-4E50-BB3A-3B9D7D524480}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7164EEB5-5B40-4E50-BB3A-3B9D7D524480}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA0EC278-E7BC-4C52-842C-0D737663FE23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA0EC278-E7BC-4C52-842C-0D737663FE23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA0EC278-E7BC-4C52-842C-0D737663FE23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA0EC278-E7BC-4C52-842C-0D737663FE23}.Release|Any CPU.Build.0 = Release|Any CPU
 		{56305F63-41CB-4BCD-9408-0AAD8ADF7DF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{56305F63-41CB-4BCD-9408-0AAD8ADF7DF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56305F63-41CB-4BCD-9408-0AAD8ADF7DF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56305F63-41CB-4BCD-9408-0AAD8ADF7DF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A479D4F7-2F54-44EF-9A56-B04927E86F60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A479D4F7-2F54-44EF-9A56-B04927E86F60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A479D4F7-2F54-44EF-9A56-B04927E86F60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A479D4F7-2F54-44EF-9A56-B04927E86F60}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A5C23765-DBC3-4998-AAB5-F28452D28047}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A5C23765-DBC3-4998-AAB5-F28452D28047}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5C23765-DBC3-4998-AAB5-F28452D28047}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -700,14 +714,14 @@ Global
 		{B4DE1B91-2BD4-4617-8AE9-C9BC47C77C64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4DE1B91-2BD4-4617-8AE9-C9BC47C77C64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4DE1B91-2BD4-4617-8AE9-C9BC47C77C64}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A479D4F7-2F54-44EF-9A56-B04927E86F60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A479D4F7-2F54-44EF-9A56-B04927E86F60}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A479D4F7-2F54-44EF-9A56-B04927E86F60}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A479D4F7-2F54-44EF-9A56-B04927E86F60}.Release|Any CPU.Build.0 = Release|Any CPU
 		{66D3F817-EC0C-4C20-AB5D-CA2D20492B81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{66D3F817-EC0C-4C20-AB5D-CA2D20492B81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66D3F817-EC0C-4C20-AB5D-CA2D20492B81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66D3F817-EC0C-4C20-AB5D-CA2D20492B81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FAA49E4-CA3F-4F03-A86A-4481CB80D0C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FAA49E4-CA3F-4F03-A86A-4481CB80D0C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FAA49E4-CA3F-4F03-A86A-4481CB80D0C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FAA49E4-CA3F-4F03-A86A-4481CB80D0C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -829,7 +843,9 @@ Global
 		{6C887E3F-86EF-44DD-BDA9-4D1C191CE09F} = {088A9253-942E-4C4E-9A2A-1C5B51BEAC83}
 		{E8F39612-5DB7-410F-BF1D-1DFA8DEF9DE1} = {412AB606-A56E-4B9E-A9C1-E2C7E02D0CF5}
 		{7164EEB5-5B40-4E50-BB3A-3B9D7D524480} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
+		{CA0EC278-E7BC-4C52-842C-0D737663FE23} = {D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF}
 		{56305F63-41CB-4BCD-9408-0AAD8ADF7DF9} = {D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF}
+		{A479D4F7-2F54-44EF-9A56-B04927E86F60} = {52AEF79F-C056-404A-9AC9-155CE8A17721}
 		{A5C23765-DBC3-4998-AAB5-F28452D28047} = {D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF}
 		{8214A649-31D1-4D0C-9038-24F835EAF4AB} = {D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF}
 		{C052B84C-DFF7-409F-A8D9-97023D0596E8} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
@@ -838,8 +854,8 @@ Global
 		{F629C7DA-949A-45EC-B835-ADF4B7936111} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
 		{1FAA2E06-7A8B-4734-91C0-19896F384513} = {663B3F62-62DA-4B0D-81CA-156013D0C93C}
 		{B4DE1B91-2BD4-4617-8AE9-C9BC47C77C64} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
-		{A479D4F7-2F54-44EF-9A56-B04927E86F60} = {52AEF79F-C056-404A-9AC9-155CE8A17721}
 		{66D3F817-EC0C-4C20-AB5D-CA2D20492B81} = {C052B84C-DFF7-409F-A8D9-97023D0596E8}
+		{7FAA49E4-CA3F-4F03-A86A-4481CB80D0C0} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}

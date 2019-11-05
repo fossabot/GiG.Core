@@ -19,5 +19,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\GiG.Core.MultiTenant.Abstractions\GiG.Core.MultiTenant.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.MultiTenant.Web\GiG.Core.MultiTenant.Web.csproj" />
+    <ProjectReference Include="..\..\..\src\GiG.Core.Web.Mock\GiG.Core.Web.Mock.csproj" />
   </ItemGroup>
 </Project>

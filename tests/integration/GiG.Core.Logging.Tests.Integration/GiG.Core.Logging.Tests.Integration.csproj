@@ -24,6 +24,7 @@
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Enrichers.MultiTenant\GiG.Core.Logging.Enrichers.MultiTenant.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Sinks.File\GiG.Core.Logging.Sinks.File.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging\GiG.Core.Logging.csproj" />
+    <ProjectReference Include="..\..\..\src\GiG.Core.Web.Mock\GiG.Core.Web.Mock.csproj" />
   </ItemGroup>
   
   <ItemGroup>

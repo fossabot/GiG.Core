@@ -23,9 +23,9 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Http.MultiTenant](docs/GiG.Core.Http.MultiTenant.md) - Provides an API to register a `TenantDelegatingHandler` onto the `HttpClient`
 - [GiG.Core.Http.Security.Hmac](docs/GiG.Core.Http.Security.Hmac.md) - Provides an API to register an `HmacDelegatingHandler` onto the `HttpClient`.
 - [GiG.Core.Logging.All](docs/GiG.Core.Logging.All.md) - Provides an API to register Logging using Serilog and multiple Sinks and Enrichers for an application.
-- [GiG.Core.Logging.Sinks.Console](docs/GiG.Core.Logging.Console.md) - Provides an API to register Logging to a Console using Serilog for an application.
+- [GiG.Core.Logging.Sinks.Console](docs/GiG.Core.Logging.Sinks.Console.md) - Provides an API to register Logging to a Console using Serilog for an application.
 - [GiG.Core.Logging.Sinks.File](docs/GiG.Core.Logging.Sinks.File.md) - Provides an API to register Logging to a File using Serilog for an application.
-- [GiG.Core.Logging.Sinks.Fluent](docs/GiG.Core.Logging.Sinks.Fluent.md) - Provides an API to register Logging to a File using Serilog for an application.
+- [GiG.Core.Logging.Sinks.Fluentd](docs/GiG.Core.Logging.Sinks.Fluentd.md) - Provides an API to register Logging to Fluentd using Serilog for an application.
 - [GiG.Core.Logging.Enrichers.ApplicationMetadata](docs/GiG.Core.Logging.Enrichers.ApplicationMetadata.md) - Provides an API to register and ApplicationMetadata Enricher for Logging when using Serilog.
 - [GiG.Core.Logging.Enrichers.Context](docs/GiG.Core.Logging.Enrichers.Context.md) - Provides an API to register the Context Enricher for Logging when using Serilog.
 - [GiG.Core.Logging.Enrichers.DistributedTracing](docs/GiG.Core.Logging.Enrichers.DistributedTracing.md) - Provides an API to register the Correlation Id Enricher for Logging when using Serilog.
@@ -36,6 +36,7 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Orleans.Clustering.Consul](docs/GiG.Core.Orleans.Clustering.Consul.md) - Provides an API to use Consul as a Membership Provider for Orleans Silos.
 - [GiG.Core.Orleans.Clustering.Kubernetes](docs/GiG.Core.Orleans.Clustering.Kubernetes.md) - Provides an API to use Kubernetes as a Membership Provider for Orleans Silos.
 - [GiG.Core.Orleans.Silo](docs/GiG.Core.Orleans.Silo.md) - Provides an API to register an Orleans Silo in an application.
+- [GiG.Core.Orleans.Silo.Dashboard](docs/GiG.Core.Orleans.Silo.Dashboard.md) - Provides an API to register the Orleans Silo Dashboard.
 - [GiG.Core.Orleans.Storage.Npgsql](docs/GiG.Core.Orleans.Storage.Npgsql.md) - Provides an API to register PostgreSQL as a Grain Storage Provider.
 - [GiG.Core.Orleans.Streams](docs/GiG.Core.Orleans.Streams.md) - Provides an API to register an Orleans Stream Factory.
 - [GiG.Core.Orleans.Streams.Kafka](docs/GiG.Core.Orleans.Streams.Kafka.md) - Provides an API to register an Orleans Stream using Kafka.
@@ -43,6 +44,7 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Web.FluentValidation](docs/GiG.Core.Web.FluentValidation.md) - Provides an API to register the Fluent Validation Exception Middleware in an application.
 - [GiG.Core.Web.Hosting](docs/GiG.Core.Web.Hosting.md) - Provides an API to configure `BASE_PATH` and Forwarded Headers.
 - [GiG.Core.Web.Security.Hmac](docs/GiG.Core.Web.Security.Hmac.md) - Provides an API to configure `HmacAuthenticationHandler`.
+- [GiG.Core.Web.Mock](docs/GiG.Core.Web.Mock.md) - Provides a MockStartupBase class to be used for Testing.
 
 
 ## Build

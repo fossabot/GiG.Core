@@ -1,7 +1,7 @@
 ﻿using GiG.Core.Benchmarks.Orleans.Streams.Grains;
+using GiG.Core.Orleans.Silo.Dashboard.Extensions;
 using GiG.Core.Orleans.Silo.Extensions;
 using GiG.Core.Orleans.Streams.Kafka.Extensions;
-using Microsoft.Extensions.DependencyInjection;
 using Orleans.Hosting;
 using Orleans.Streams.Kafka.Config;
 using HostBuilderContext = Microsoft.Extensions.Hosting.HostBuilderContext;
