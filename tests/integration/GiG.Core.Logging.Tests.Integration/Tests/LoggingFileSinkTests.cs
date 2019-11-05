@@ -13,7 +13,7 @@ using Xunit;
 namespace GiG.Core.Logging.Tests.Integration.Tests
 {
     [Trait("Category", "Integration")]
-    public class LoggingFileSinkTests : IDisposable
+    public sealed class LoggingFileSinkTests : IDisposable
     {
         private readonly string _logMessageTest = Guid.NewGuid().ToString();
         private readonly string _filePath;
