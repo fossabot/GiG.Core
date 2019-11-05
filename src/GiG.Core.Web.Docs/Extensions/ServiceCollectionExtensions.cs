@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
@@ -65,6 +66,7 @@ namespace GiG.Core.Web.Docs.Extensions
                     c.IncludeXmlComments();
                     c.IncludeFullNameCustomSchemaId();
                     c.IncludeForwardedForFilter(docOptions.IsForwardedForEnabled);
+                    c.OperationFilter<DeprecatedOperationFilter>();
                     foreach (var description in provider.ApiVersionDescriptions)
                     {
                         c.SwaggerDoc(description.GroupName, new OpenApiInfo
