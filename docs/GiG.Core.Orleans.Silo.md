@@ -16,7 +16,6 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
     Host.CreateDefaultBuilder(args)
         .UseOrleans((hostBuilder, siloBuilder) =>
             siloBuilder.ConfigureCluster(hostBuilder.Configuration)
-                .ConfigureDashboard(hostBuilder.Configuration)
                 .ConfigureEndpoints()
                 .ConfigureConsulClustering(hostBuilder.Configuration)
                 .AddAssemblies(typeof(TransactionGrain)));
@@ -32,10 +31,3 @@ The below table outlines the valid Configurations used to override the [ClusterO
 | ClusterId          | String | No       | `dev`         |
 | ServiceId          | String | No       | `dev`         |
 
-The below table outlines the valid Configurations used to override the [DashboardOptions](..\GiG.Core.Orleans.Abstractions\Configuration\DashboardOptions.cs) under the Config section `Dashboard`.
-
-| Configuration Name | Type    | Required | Default Value |
-|:-------------------|:--------|:---------|:--------------|
-| IsEnabled          | Boolean | Yes      | `false`       |
-| Port               | String  | Yes      | `8080`        |
-| Path               | String  | No       |               |
