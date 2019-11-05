@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using System.Runtime.CompilerServices;
+using Microsoft.AspNetCore.Authentication;
+
+[assembly: InternalsVisibleTo("GiG.Core.Web.Security.Hmac.Tests.Unit")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 
 namespace GiG.Core.Web.Security.Hmac.Internal
 {
