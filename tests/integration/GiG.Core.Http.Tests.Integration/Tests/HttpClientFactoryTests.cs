@@ -28,7 +28,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
         }
 
         [Fact]
-        private async Task GetAsync_Create_ReturnsHttpResponseMessage()
+        public async Task GetAsync_Create_ReturnsHttpResponseMessage()
         {
             // Arrange
             var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
@@ -55,7 +55,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
         }
 
         [Fact]
-        private async Task GetAsync_Create_UseBaseAddressAsString_ReturnsHttpResponseMessage()
+        public async Task GetAsync_Create_UseBaseAddressAsString_ReturnsHttpResponseMessage()
         {
             // Arrange
             var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
@@ -82,7 +82,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
         }
 
         [Fact]
-        private async Task GetAsync_Create_UseBaseAddressWithRelativePath_ReturnsHttpNotFound()
+        public async Task GetAsync_Create_UseBaseAddressWithRelativePath_ReturnsHttpNotFound()
         {
             // Arrange
             var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
@@ -109,7 +109,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
         }
 
         [Fact]
-        private async Task GetAsync_GetOrAddWithType_ReturnsHttpResponseMessage()
+        public async Task GetAsync_GetOrAddWithType_ReturnsHttpResponseMessage()
         {
             // Arrange
             var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
@@ -128,7 +128,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
         }
 
         [Fact]
-        private async Task GetAsync_GetOrAddWithName_ReturnsHttpResponseMessage()
+        public async Task GetAsync_GetOrAddWithName_ReturnsHttpResponseMessage()
         {
             // Arrange
             var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
@@ -147,7 +147,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
         }
 
         [Fact]
-        private void GetAsync_GetOrAddWithType_ReturnsSameInstance()
+        public void GetAsync_GetOrAddWithType_ReturnsSameInstance()
         {
             // Arrange
             var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
@@ -163,7 +163,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
         }
 
         [Fact]
-        private void GetAsync_GetOrAddWithName_ReturnsSameInstance()
+        public void GetAsync_GetOrAddWithName_ReturnsSameInstance()
         {
             // Arrange
             var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
