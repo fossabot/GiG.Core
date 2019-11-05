@@ -32,7 +32,7 @@ services:
     depends_on:
       - consul
     ports:
-      - "8001:8081"
+      - "8001:8080"
     restart: on-failure
 
   sample-client:

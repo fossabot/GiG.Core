@@ -1,4 +1,4 @@
-FROM igcproget.igc.zone/gig-core-docker/library/dotnet:3.0.0-runtime-0.1.0.14.c3386f2 AS base
+FROM igcproget.igc.zone/gig-core-docker/library/dotnet:3.0.0-aspnet-0.1.0.14.c3386f2 AS base
 EXPOSE 8080
 
 FROM igcproget.igc.zone/gig-core-docker/library/dotnet:3.0.100-sdk-0.1.0.14.c3386f2 AS build
