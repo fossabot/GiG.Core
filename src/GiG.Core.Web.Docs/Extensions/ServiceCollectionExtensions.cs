@@ -1,15 +1,11 @@
-﻿using GiG.Core.Hosting;
-using GiG.Core.Web.Docs.Abstractions;
+﻿using GiG.Core.Web.Docs.Abstractions;
 using GiG.Core.Web.Docs.Filters;
 using JetBrains.Annotations;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
@@ -41,6 +37,12 @@ namespace GiG.Core.Web.Docs.Extensions
                 return services;
             }
 
+            services.AddApiVersioning(options =>
+            {
+                // reporting api versions will return the headers "api-supported-versions" and "api-deprecated-versions"
+                options.ReportApiVersions = true;
+            });
+
             services.AddVersionedApiExplorer(options =>
             {
                 //The format of the version added to the route URL: "'v'major"
@@ -50,35 +52,15 @@ namespace GiG.Core.Web.Docs.Extensions
                 options.SubstituteApiVersionInUrl = true;
             });
 
-            services.AddApiVersioning(options =>
-            {
-                // reporting api versions will return the headers "api-supported-versions" and "api-deprecated-versions"
-                options.ReportApiVersions = true;
-            });
-
             return services
                 .Configure<ApiDocsOptions>(configurationSection)
+                .AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>()
                 .AddSwaggerGen(c =>
                 {
                     c.IncludeXmlComments();
                     c.IncludeFullNameCustomSchemaId();
                     c.IncludeForwardedForFilter(docOptions.IsForwardedForEnabled);
                     c.OperationFilter<DeprecatedOperationFilter>();
-
-                    // Resolve the temporary IApiVersionDescriptionProvider service  
-                    var provider = services.BuildServiceProvider().GetService<IApiVersionDescriptionProvider>();
-                    if (provider != null)
-                    {
-                        foreach (var description in provider.ApiVersionDescriptions)
-                        {
-                            c.SwaggerDoc(description.GroupName, new OpenApiInfo
-                            {
-                                Title = docOptions.Title ?? ApplicationMetadata.Name,
-                                Description = $"{docOptions.Description} {(description.IsDeprecated ? " - DEPRECATED." : "")}",
-                                Version = ApplicationMetadata.Version
-                            });
-                        }   
-                    }
 
                     configureOptions?.Invoke(c);
                 });
