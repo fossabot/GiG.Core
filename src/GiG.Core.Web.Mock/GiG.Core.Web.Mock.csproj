@@ -16,7 +16,6 @@
   <ItemGroup>
     <ProjectReference Include="..\GiG.Core.Context.Abstractions\GiG.Core.Context.Abstractions.csproj" />
     <ProjectReference Include="..\GiG.Core.DistributedTracing.Abstractions\GiG.Core.DistributedTracing.Abstractions.csproj" />
-    <ProjectReference Include="..\GiG.Core.DistributedTracing.Web\GiG.Core.DistributedTracing.Web.csproj" />
     <ProjectReference Include="..\GiG.Core.MultiTenant.Abstractions\GiG.Core.MultiTenant.Abstractions.csproj" />
     <ProjectReference Include="..\GiG.Core.Web.FluentValidation\GiG.Core.Web.FluentValidation.csproj" />
     <ProjectReference Include="..\GiG.Core.Web.Hosting\GiG.Core.Web.Hosting.csproj" />
