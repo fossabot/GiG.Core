@@ -8,7 +8,6 @@ using Orleans.Hosting;
 using Constants = GiG.Core.Orleans.Sample.Contracts.Constants;
 using HostBuilderContext = Microsoft.Extensions.Hosting.HostBuilderContext;
 
-
 namespace GiG.Core.Orleans.MultiCluster.Silo
 {
     public static class Startup
