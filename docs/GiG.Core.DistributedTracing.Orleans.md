@@ -37,7 +37,7 @@ Add the below to your Startup class and this will add the Correlation Id Grain c
 public void ConfigureServices(IServiceCollection services)
 {
     // Orleans Client
-    services.AddClusterClient((builder, sp) =>
+    services.AddDefaultClusterClient((builder, sp) =>
     {
         builder.AddCorrelationOutgoingFilter(sp);
         builder.ConfigureCluster(_configuration);

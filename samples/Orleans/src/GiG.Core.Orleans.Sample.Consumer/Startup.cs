@@ -20,7 +20,7 @@ namespace GiG.Core.Orleans.Sample.Consumer
             services.AddMessageConsumer(configuration);
             
             // Orleans Client
-            services.AddClusterClient((builder, sp) =>
+            services.AddDefaultClusterClient((builder, sp) =>
             {
                 builder.ConfigureCluster(configuration)
                 .UseMembershipProvider(configuration, x =>

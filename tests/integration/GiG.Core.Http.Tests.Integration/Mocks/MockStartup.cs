@@ -1,28 +1,24 @@
 using GiG.Core.DistributedTracing.Web.Extensions;
 using GiG.Core.MultiTenant.Web.Extensions;
+using GiG.Core.Web.Mock;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GiG.Core.Http.Tests.Integration.Mocks
 {
-    internal class MockStartup
+    internal class MockStartup : MockStartupBase
     {
-        public void ConfigureServices(IServiceCollection services)
+        public override void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            services.AddRouting();
             services.AddCorrelationAccessor();
             services.AddTenantAccessor();
+            base.ConfigureServices(services);
         }
 
-        public void Configure(IApplicationBuilder app)
+        public override void Configure(IApplicationBuilder app)
         {
-            app.UseRouting();
             app.UseCorrelation();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            base.Configure(app);
         }
     }
 }

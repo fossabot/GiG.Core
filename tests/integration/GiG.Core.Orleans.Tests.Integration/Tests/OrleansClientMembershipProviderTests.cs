@@ -17,7 +17,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             HostBuilder = Host.CreateDefaultBuilder()
              .ConfigureServices((ctx, services) =>
              {
-                 services.AddClusterClient(x =>
+                 services.AddDefaultClusterClient(x =>
                  {
                      x.ConfigureCluster(ctx.Configuration);
                      x.UseMembershipProvider(ctx.Configuration, builder =>

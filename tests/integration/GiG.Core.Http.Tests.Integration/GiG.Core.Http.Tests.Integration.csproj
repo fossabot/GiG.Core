@@ -23,6 +23,7 @@
     <ProjectReference Include="..\..\..\src\GiG.Core.Http.MultiTenant\GiG.Core.Http.MultiTenant.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Http\GiG.Core.Http.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.MultiTenant.Web\GiG.Core.MultiTenant.Web.csproj" />
+    <ProjectReference Include="..\..\..\src\GiG.Core.Web.Mock\GiG.Core.Web.Mock.csproj" />
   </ItemGroup>
 
 </Project>

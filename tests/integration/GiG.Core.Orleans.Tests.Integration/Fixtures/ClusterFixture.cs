@@ -49,7 +49,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                 {
                     services.AddSingleton<ICorrelationContextAccessor, CorrelationContextAccessor>();
                     services.AddSingleton<IRequestContextAccessor, MockRequestContextAccessor>();
-                    services.AddClusterClient((x, sp) =>
+                    services.AddDefaultClusterClient((x, sp) =>
                     {
                         x.AddCorrelationOutgoingFilter(sp);
                         x.AddRequestContextOutgoingFilter(sp);

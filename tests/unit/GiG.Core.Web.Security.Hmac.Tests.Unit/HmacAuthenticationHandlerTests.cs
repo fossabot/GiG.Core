@@ -108,8 +108,6 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
 
         private void VerifyCallsNoHeader()
         {
-            _hashProviderFactory.Verify(x => x.GetHashProvider(It.IsAny<string>()), Times.Once);
-            _hashProviderFactory.VerifyNoOtherCalls();
             _optionsProvider.Verify(x => x.GetHmacOptions(), Times.Once);
             _optionsProvider.VerifyNoOtherCalls();
         }

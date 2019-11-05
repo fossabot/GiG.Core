@@ -23,7 +23,7 @@ namespace GiG.Core.Benchmarks.Orleans
         private static void ConfigureServices(Microsoft.Extensions.Hosting.HostBuilderContext ctx, IServiceCollection services)
         {
             // Orleans Client
-            services.AddClusterClient((builder, sp) =>
+            services.AddDefaultClusterClient((builder, sp) =>
             {
                 builder.UseLocalhostClustering()
                 .AddAssemblies(typeof(ISMSProviderProducerGrain))

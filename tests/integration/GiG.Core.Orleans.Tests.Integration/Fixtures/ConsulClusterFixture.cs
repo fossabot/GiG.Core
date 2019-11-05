@@ -51,7 +51,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                     services.Configure<ConsulOptions>(ctx.Configuration);
 
                     services.AddHttpClient();
-                    services.AddClusterClient(x =>
+                    services.AddDefaultClusterClient(x =>
                     {
                         x.ConfigureCluster(ctx.Configuration);
                         x.ConfigureConsulClustering(ctx.Configuration);
