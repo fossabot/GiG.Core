@@ -55,13 +55,16 @@ namespace GiG.Core.Web.Docs.Extensions
                 .UseSwagger()
                 .UseSwaggerUI(c =>
                 {
-                    var provider = app.ApplicationServices.GetRequiredService<IApiVersionDescriptionProvider>();
-                    // build a swagger endpoint for each discovered API version
-                    foreach (var description in provider.ApiVersionDescriptions)
+                    var provider = app.ApplicationServices.GetService<IApiVersionDescriptionProvider>();
+                    if (provider != null)
                     {
-                        c.SwaggerEndpoint( $"{endpointPrefix}swagger/{description.GroupName}/swagger.json", $"{description.GroupName.ToUpperInvariant()} Docs" );
-                        
+                        foreach (var description in provider.ApiVersionDescriptions)
+                        {
+                            // build a swagger endpoint for each discovered API version
+                            c.SwaggerEndpoint( $"{endpointPrefix}swagger/{description.GroupName}/swagger.json", $"{description.GroupName.ToUpperInvariant()} Docs" );
+                        }
                     }
+                    
                     c.ShowExtensions();
                     c.RoutePrefix = options.Url;
                     c.DisplayRequestDuration();

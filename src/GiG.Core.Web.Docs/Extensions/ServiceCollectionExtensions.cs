@@ -60,21 +60,24 @@ namespace GiG.Core.Web.Docs.Extensions
                 .Configure<ApiDocsOptions>(configurationSection)
                 .AddSwaggerGen(c =>
                 {
-                    // Resolve the temporary IApiVersionDescriptionProvider service  
-                    var provider = services.BuildServiceProvider().GetRequiredService<IApiVersionDescriptionProvider>();
-
                     c.IncludeXmlComments();
                     c.IncludeFullNameCustomSchemaId();
                     c.IncludeForwardedForFilter(docOptions.IsForwardedForEnabled);
                     c.OperationFilter<DeprecatedOperationFilter>();
-                    foreach (var description in provider.ApiVersionDescriptions)
+
+                    // Resolve the temporary IApiVersionDescriptionProvider service  
+                    var provider = services.BuildServiceProvider().GetService<IApiVersionDescriptionProvider>();
+                    if (provider != null)
                     {
-                        c.SwaggerDoc(description.GroupName, new OpenApiInfo
+                        foreach (var description in provider.ApiVersionDescriptions)
                         {
-                            Title = docOptions.Title ?? ApplicationMetadata.Name,
-                            Description = $"{docOptions.Description} {(description.IsDeprecated ? " - DEPRECATED." : "")}",
-                            Version = ApplicationMetadata.Version
-                        });
+                            c.SwaggerDoc(description.GroupName, new OpenApiInfo
+                            {
+                                Title = docOptions.Title ?? ApplicationMetadata.Name,
+                                Description = $"{docOptions.Description} {(description.IsDeprecated ? " - DEPRECATED." : "")}",
+                                Version = ApplicationMetadata.Version
+                            });
+                        }   
                     }
 
                     configureOptions?.Invoke(c);
