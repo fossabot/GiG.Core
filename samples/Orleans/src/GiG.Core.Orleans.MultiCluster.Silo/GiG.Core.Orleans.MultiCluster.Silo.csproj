@@ -8,7 +8,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0" />
-    <PackageReference Include="Microsoft.Orleans.Server" Version="2.4.3" />
+    <PackageReference Include="Microsoft.Orleans.Server" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,6 +16,7 @@
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Logging.All\GiG.Core.Logging.All.csproj" />    
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Clustering.Consul\GiG.Core.Orleans.Clustering.Consul.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Clustering\GiG.Core.Orleans.Clustering.csproj" />
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Silo.Dashboard\GiG.Core.Orleans.Silo.Dashboard.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Silo\GiG.Core.Orleans.Silo.csproj" />
     <ProjectReference Include="..\GiG.Core.Orleans.Sample.Grains\GiG.Core.Orleans.Sample.Grains.csproj" />
   </ItemGroup>

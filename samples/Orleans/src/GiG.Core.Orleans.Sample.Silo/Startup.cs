@@ -3,6 +3,7 @@ using GiG.Core.Orleans.Clustering.Extensions;
 using GiG.Core.Orleans.Clustering.Kubernetes.Extensions;
 using GiG.Core.Orleans.Sample.Contracts;
 using GiG.Core.Orleans.Sample.Grains;
+using GiG.Core.Orleans.Silo.Dashboard.Extensions;
 using GiG.Core.Orleans.Silo.Extensions;
 using GiG.Core.Orleans.Storage.Npgsql.Extensions;
 using GiG.Core.Orleans.Streams.Extensions;
