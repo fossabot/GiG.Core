@@ -2,14 +2,11 @@
   
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" />
-    <PackageReference Include="Orleans.Streams.Kafka" Version="4.0.0-dev-118" />
+    <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" PrivateAssets="compile" />
+    <PackageReference Include="Orleans.Streams.Kafka" Version="4.0.0-dev-118" PrivateAssets="compile" />
   </ItemGroup>
 
 </Project>

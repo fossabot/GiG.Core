@@ -4,24 +4,14 @@
     <DefaultLanguage>en-GB</DefaultLanguage>
     <Authors>Gaming Innovation Group</Authors>
     <Copyright>© $([System.DateTime]::Now.Year) Gaming Innovation Group</Copyright>
-    <PackageProjectUrl>https://bitbucket.org/gaminginnovationgroup/gig.core</PackageProjectUrl>
     <RepositoryUrl>https://bitbucket.org/gaminginnovationgroup/gig.core</RepositoryUrl>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <RepositoryType>git</RepositoryType>
     <!-- Root control Version Prefix -->
     <AssemblyName>$(MSBuildProjectName)</AssemblyName>
     <AssemblyVersion>$(Version)</AssemblyVersion>
-    <PackageIconUrl>https://www.gig.com/uploads/2018/06/80fd7035-gig-product-icons-08-320x320.png</PackageIconUrl>
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
     <Deterministic>False</Deterministic>
-    <NoWarn>NU5105;NU5048</NoWarn>
-  </PropertyGroup>
-
-  <!-- CI Helpers -->
-  <PropertyGroup>
-    <PackageOutputPath>$(MSBuildThisFileDirectory)artifacts/nugets</PackageOutputPath>
-    <PackageOutputPath Condition=" $(BUILD_ARTIFACTS_NUGET_DIRECTORY) != '' ">$(BUILD_ARTIFACTS_NUGET_DIRECTORY)</PackageOutputPath>
-    <IncludeSymbols>true</IncludeSymbols>
+    <NoWarn>NU5105</NoWarn>
   </PropertyGroup>
 
 </Project>
