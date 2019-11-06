@@ -43,7 +43,8 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Web.Docs](docs/GiG.Core.Web.Docs.md) - Provides an API to configure API Documentation.
 - [GiG.Core.Web.FluentValidation](docs/GiG.Core.Web.FluentValidation.md) - Provides an API to register the Fluent Validation Exception Middleware in an application.
 - [GiG.Core.Web.Hosting](docs/GiG.Core.Web.Hosting.md) - Provides an API to configure `BASE_PATH` and Forwarded Headers.
-- [GiG.Core.Web.Security.Hmac](docs/GiG.Core.Web.Security.Hmac.md) - Provides an API to configure `HmacAuthenticationHandler`.
+- [GiG.Core.Web.Security.Hmac](docs/GiG.Core.Web.Security.Hmac.md) - Provides an API to configure `HmacAuthenticationHandler`
+- [GiG.Core.Web.Security.Hmac.MultiTenant](docs/GiG.Core.Web.Security.Hmac.MultiTenant.md) - Provides an API to configure `HmacAuthenticationHandler` for multitenancy.
 - [GiG.Core.Web.Mock](docs/GiG.Core.Web.Mock.md) - Provides a MockStartupBase class to be used for Testing.
 
 
