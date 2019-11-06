@@ -24,7 +24,7 @@ namespace GiG.Core.Orleans.Sample.Consumer
         
         public async Task Consume(ConsumeContext<PaymentTransactionRequested> context)
         {
-            _logger.LogInformation($"Consume {Enum.GetName(typeof(TransactionType), context.Message.TransactionType)} {context.Message.Amount}");
+            _logger.LogInformation($"Consume {Enum.GetName(typeof(TransactionType), context.Message.TransactionType)} {context.Message.Amount} CorrelationId:{context.CorrelationId.GetValueOrDefault().ToString()}");
 
             var streamProvider = _client.GetStreamProvider(Constants.StreamProviderName);
             _stream = streamProvider.GetStream<PaymentTransaction>(context.Message.PlayerId, Constants.PaymentTransactionsStreamNamespace);
