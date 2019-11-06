@@ -1,25 +1,16 @@
 ﻿using GiG.Core.MultiTenant.Web.Extensions;
-using Microsoft.AspNetCore.Builder;
+using GiG.Core.Web.Mock;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GiG.Core.MultiTenant.Web.Tests.Integration.Mocks
 {
-    internal class MockStartup
+    internal class MockStartup : MockStartupBase
     {
-        public void ConfigureServices(IServiceCollection services)
+        /// <inheritdoc />
+        public override void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();           
             services.AddTenantAccessor();
-          
-        }
-        public void Configure(IApplicationBuilder app)
-        {
-            app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-            });
+            base.ConfigureServices(services);
         }
     }
 }

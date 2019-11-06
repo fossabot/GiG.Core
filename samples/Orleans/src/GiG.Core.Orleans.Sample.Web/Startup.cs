@@ -35,7 +35,7 @@ namespace GiG.Core.Orleans.Sample.Web
             services.AddSingleton<IPlayerInformationAccessor, PlayerInformationAccessor>();
 
             // Orleans Client
-            services.AddClusterClient((builder, sp) =>
+            services.AddDefaultClusterClient((builder, sp) =>
             {
                 builder.UseSignalR();
                 builder.AddCorrelationOutgoingFilter(sp);

@@ -1,29 +1,16 @@
 ﻿using GiG.Core.Context.Web.Extensions;
-using GiG.Core.Web.Hosting.Extensions;
-using Microsoft.AspNetCore.Builder;
+using GiG.Core.Web.Mock;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GiG.Core.Context.Web.Tests.Integration.Mocks
 {
-    internal class MockStartup
+    internal class MockStartup : MockStartupBase
     {
-        public void ConfigureServices(IServiceCollection services)
+        /// <inheritdoc />
+        public override void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
             services.AddRequestContextAccessor();
-            // Forwarded Headers
-            services.ConfigureForwardedHeaders();
-        }
-
-        public void Configure(IApplicationBuilder app)
-        {
-            app.UseForwardedHeaders();
-            app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            base.ConfigureServices(services);
         }
     }
 }

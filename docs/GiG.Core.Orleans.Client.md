@@ -10,7 +10,7 @@ The below code needs to be added to the `Startup.cs`. This will register an Orle
 
 public void ConfigureServices(IServiceCollection services)
 {
-    services.AddClusterClient((x, sp) =>
+    services.AddDefaultClusterClient((x, sp) =>
     {
         x.ConfigureCluster(_configuration);              
         x.AddAssemblies(typeof(IGrain));
