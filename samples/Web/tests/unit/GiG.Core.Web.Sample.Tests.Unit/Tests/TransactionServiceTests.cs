@@ -1,5 +1,6 @@
 using GiG.Core.Context.Abstractions;
 using GiG.Core.Web.Sample.Services;
+using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
 
@@ -13,7 +14,7 @@ namespace GiG.Core.Web.Sample.Tests.Unit.Tests
 
         public TransactionServiceTests()
         {
-            var logger = new Mock<AbstractLogger<TransactionService>>();
+            var logger = new Mock<ILogger<TransactionService>>();
             _requestContextAccessor = new Mock<IRequestContextAccessor>();
 
             _sut = new TransactionService(logger.Object, _requestContextAccessor.Object);
