@@ -46,6 +46,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Web.FluentValidation.md = docs\GiG.Core.Web.FluentValidation.md
 		docs\GiG.Core.Web.Hosting.md = docs\GiG.Core.Web.Hosting.md
 		docs\GiG.Core.Web.Security.Hmac.md = docs\GiG.Core.Web.Security.Hmac.md
+		docs\GiG.Core.Web.Security.Hmac.MultiTenant.md = docs\GiG.Core.Web.Security.Hmac.MultiTenant.md
 		README.md = README.md
 	EndProjectSection
 EndProject
