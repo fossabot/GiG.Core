@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Collections.Generic;
+using GiG.Core.MultiTenant.Web.Extensions;
 using GiG.Core.Web.Security.Hmac.MultiTenant.Internal;
 
 namespace GiG.Core.Web.Security.Hmac.MultiTenant.Extensions
@@ -25,6 +26,7 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant.Extensions
             if (services == null) throw new ArgumentNullException(nameof(services));
             if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
 
+            services.AddTenantAccessor();
             services.TryAddSingleton<IHmacOptionsProvider, MultiTenantOptionProvider>();
             services.Configure<Dictionary<string,HmacOptions>>(configurationSection);
 
