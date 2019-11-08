@@ -1,12 +1,12 @@
-﻿using GiG.Core.Web.Security.Hmac.Abstractions;
+﻿using GiG.Core.MultiTenant.Web.Extensions;
+using GiG.Core.Web.Security.Hmac.Abstractions;
+using GiG.Core.Web.Security.Hmac.MultiTenant.Internal;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Collections.Generic;
-using GiG.Core.MultiTenant.Web.Extensions;
-using GiG.Core.Web.Security.Hmac.MultiTenant.Internal;
 
 namespace GiG.Core.Web.Security.Hmac.MultiTenant.Extensions
 {

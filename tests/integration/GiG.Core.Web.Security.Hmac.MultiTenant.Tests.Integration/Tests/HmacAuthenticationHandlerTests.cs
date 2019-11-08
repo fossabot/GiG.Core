@@ -1,9 +1,3 @@
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using GiG.Core.Http;
-using GiG.Core.Http.Security.Hmac;
 using GiG.Core.Http.Security.Hmac.Extensions;
 using GiG.Core.MultiTenant.Abstractions;
 using GiG.Core.Security.Hmac.Abstractions;
@@ -12,6 +6,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace GiG.Core.Web.Security.Hmac.MultiTenant.Tests.Integration.Tests
