@@ -327,6 +327,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Logging.Sinks.File
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Security.Hmac.Abstractions", "src\GiG.Core.Security.Hmac.Abstractions\GiG.Core.Security.Hmac.Abstractions.csproj", "{66D3F817-EC0C-4C20-AB5D-CA2D20492B81}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MassTransit", "MassTransit", "{504661D4-FA8C-46BC-9CA7-90D30B353431}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.DistributedTracing.MassTransit", "src\GiG.Core.DistributedTracing.MassTransit\GiG.Core.DistributedTracing.MassTransit.csproj", "{BDB373D2-FAA8-4E98-B9B2-D620DEE28A0D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.MassTransit", "src\GiG.Core.MassTransit\GiG.Core.MassTransit.csproj", "{0746BC69-7706-4882-9A52-FB2A5688D7F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -705,6 +711,14 @@ Global
 		{66D3F817-EC0C-4C20-AB5D-CA2D20492B81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66D3F817-EC0C-4C20-AB5D-CA2D20492B81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66D3F817-EC0C-4C20-AB5D-CA2D20492B81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDB373D2-FAA8-4E98-B9B2-D620DEE28A0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDB373D2-FAA8-4E98-B9B2-D620DEE28A0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDB373D2-FAA8-4E98-B9B2-D620DEE28A0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDB373D2-FAA8-4E98-B9B2-D620DEE28A0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0746BC69-7706-4882-9A52-FB2A5688D7F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0746BC69-7706-4882-9A52-FB2A5688D7F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0746BC69-7706-4882-9A52-FB2A5688D7F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0746BC69-7706-4882-9A52-FB2A5688D7F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -837,6 +851,9 @@ Global
 		{B4DE1B91-2BD4-4617-8AE9-C9BC47C77C64} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
 		{A479D4F7-2F54-44EF-9A56-B04927E86F60} = {52AEF79F-C056-404A-9AC9-155CE8A17721}
 		{66D3F817-EC0C-4C20-AB5D-CA2D20492B81} = {C052B84C-DFF7-409F-A8D9-97023D0596E8}
+		{504661D4-FA8C-46BC-9CA7-90D30B353431} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
+		{BDB373D2-FAA8-4E98-B9B2-D620DEE28A0D} = {F3E4EB54-9129-4327-9A32-89ABD4ADA6C5}
+		{0746BC69-7706-4882-9A52-FB2A5688D7F2} = {504661D4-FA8C-46BC-9CA7-90D30B353431}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}

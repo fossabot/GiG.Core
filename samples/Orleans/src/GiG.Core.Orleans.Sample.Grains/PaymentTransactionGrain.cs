@@ -3,6 +3,7 @@ using GiG.Core.Orleans.Sample.Contracts.Models.Payment;
 using Microsoft.Extensions.Logging;
 using Orleans;
 using Orleans.Providers;
+using Orleans.Runtime;
 using Orleans.Streams;
 using System;
 using System.Collections.Generic;
@@ -35,8 +36,7 @@ namespace GiG.Core.Orleans.Sample.Grains
         public Task OnNextAsync(PaymentTransaction item, StreamSequenceToken token = null)
         {
             State.Add(item);
-            
-            _logger.LogInformation($"New {item.TransactionType.ToString()}. Amount: {item.Amount}.");
+            _logger.LogInformation($"New {item.TransactionType.ToString()}. Amount: {item.Amount}. CorrelationId : {RequestContext.ActivityId.ToString()}");
 
             return Task.CompletedTask;
         }
