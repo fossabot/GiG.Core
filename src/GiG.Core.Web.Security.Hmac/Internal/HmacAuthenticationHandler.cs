@@ -22,6 +22,7 @@ namespace GiG.Core.Web.Security.Hmac.Internal
         private readonly IHmacOptionsProvider _hmacOptionsProvider;
         private readonly IHashProviderFactory _signatureProviderFactory;
         private readonly IHmacSignatureProvider _hmacSignatureProvider;
+        private readonly ILogger<HmacAuthenticationHandler> _logger;
 
         /// <summary>
         /// <see cref="AuthenticationHandler{TOptions}"/> using Hmac.
@@ -39,6 +40,7 @@ namespace GiG.Core.Web.Security.Hmac.Internal
             _hmacOptionsProvider = hmacOptionsProvider;
             _signatureProviderFactory = signatureProviderFactory;
             _hmacSignatureProvider = hmacSignatureProvider;
+            _logger = logger.CreateLogger<HmacAuthenticationHandler>();
         }
 
         /// <inheritdoc />
@@ -60,7 +62,7 @@ namespace GiG.Core.Web.Security.Hmac.Internal
 
             if (string.IsNullOrEmpty(headerSignature))
             {
-                return AuthenticateResult.Fail("Hmac does not match.");
+                return AuthenticateResult.Fail("Hmac header is empty.");
             }
 
             var body = await Request.GetBodyAsync();
@@ -71,7 +73,8 @@ namespace GiG.Core.Web.Security.Hmac.Internal
 
             if (!signature.Equals(authHeader.Parameter))
             {
-                return AuthenticateResult.Fail("Hmac does not match.");
+                _logger.LogDebug("Signature {signature}",clearSignature);
+                return AuthenticateResult.Fail($"Hmac does not match.");
             }
 
             var identity = new ClaimsIdentity(Scheme.Name); // the name of our auth scheme

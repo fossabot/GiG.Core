@@ -6,7 +6,9 @@ using System.Net;
 namespace GiG.Core.Web.Sample.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("v{version:apiVersion}/[controller]")]
+    [ApiVersion("1", Deprecated = true)]
+    [ApiVersion("2")]
     public class TransactionsController : ControllerBase
     {
         private readonly ITransactionService _transactionService;
