@@ -1,4 +1,8 @@
 ﻿using GiG.Core.Http.Extensions;
+using GiG.Core.Http.Tests.Integration.Mocks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Refit;
 using System;
 using System.Net.Http;
 using Xunit;
@@ -27,5 +31,30 @@ namespace GiG.Core.Http.Tests.Integration.Tests
         {
             Assert.Throws<ArgumentNullException>(() => new HttpClient().FromConfiguration("", null));
         }
+
+        [Fact]
+        public void FromConfiguration_BaseUriIsNull_ThrowsArgumentNullException()
+        {
+            var host = Host.CreateDefaultBuilder()
+                   .ConfigureServices((x, y) =>
+                   {
+                       y.AddRefitClient<IMockRestClient>()
+                           .ConfigureHttpClient(c => c.FromConfiguration(null, x.Configuration.GetSection("")));
+                   }).Build();
+
+            Assert.Throws<ArgumentNullException>(() => host.Services.GetRequiredService<IMockRestClient>());
+        }
+
+        [Fact]
+        public void FromConfiguration_SectionNameIsNull_ThrowsArgumentNullException()
+        {
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureServices((x, y) =>
+                {
+                    y.AddRefitClient<IMockRestClient>()
+                        .ConfigureHttpClient(c => c.FromConfiguration(x.Configuration, null));
+                }).Build();
+
+            Assert.Throws<ArgumentNullException>(() => host.Services.GetRequiredService<IMockRestClient>());        }
     }
 }
