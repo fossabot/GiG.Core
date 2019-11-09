@@ -28,7 +28,8 @@ namespace GiG.Core.Http.Security.Hmac
         public HmacDelegatingHandler(
             IHmacOptionsProvider optionsProvider,
             IHashProviderFactory hashProviderFactory,
-            IHmacSignatureProvider signatureProvider)
+            IHmacSignatureProvider signatureProvider
+            )
         {
             _optionsProvider = optionsProvider;
             _hashProviderFactory = hashProviderFactory;
@@ -54,7 +55,7 @@ namespace GiG.Core.Http.Security.Hmac
 
             var hashedHmacHeader = hashProvider.Hash(hmacHeaderClear);
             request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("hmac", hashedHmacHeader);
-
+            
             return await base.SendAsync(request, cancellationToken);
         }
     }

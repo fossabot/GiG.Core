@@ -9,6 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using GiG.Core.Http;
+using GiG.Core.Http.Security.Hmac;
+using GiG.Core.Security.Cryptography;
 using Xunit;
 
 namespace GiG.Core.Web.Security.Hmac.MultiTenant.Tests.Integration.Tests
@@ -17,20 +20,21 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant.Tests.Integration.Tests
     public class HmacAuthenticationHandlerTests
     {
         private readonly TestServer _server;
-
+        const string DefaultClientName = "Default";
+        const string DefaultClient2Name = "Default2";
         public HmacAuthenticationHandlerTests()
         {
             _server = new TestServer(new WebHostBuilder()
                 .UseStartup<MockStartup>()
                 .ConfigureServices((ctx, services) =>
                 {
-                    services.AddHttpClient("Default")
+                    services.AddHttpClient(DefaultClientName)
                     .ConfigurePrimaryHttpMessageHandler(x => _server.CreateHandler())
                     .ConfigureHttpClient(x => x.BaseAddress = _server.BaseAddress)
                     .AddHmacDelegatingHandler()
                     .ConfigureDefaultHmacDelegatingHandlerOptionProvider(ctx.Configuration.GetSection("HmacClientDefault"));
 
-                    services.AddHttpClient("Default2")
+                    services.AddHttpClient(DefaultClient2Name)
                     .ConfigurePrimaryHttpMessageHandler(x => _server.CreateHandler())
                     .ConfigureHttpClient(x => x.BaseAddress = _server.BaseAddress)
                     .AddHmacDelegatingHandler()
@@ -45,7 +49,7 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant.Tests.Integration.Tests
         public async Task AuthenticateAsync_WithRespectiveHmac_ReturnsNoContent()
         {
             //Arrange
-            var client = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient("Default");
+            var client = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient(DefaultClientName);
             using var request = new HttpRequestMessage(HttpMethod.Get, "api/mock");
             request.Headers.Add(HmacConstants.NonceHeader, "123");
             request.Headers.Add(Constants.Header,"1");
@@ -63,7 +67,7 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant.Tests.Integration.Tests
         public async Task AuthenticateAsync_WithInvalidHmac_ReturnsUnauthorized()
         {
             //Arrange
-            var client = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient("Default");
+            var client = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient(DefaultClientName);
             using var request = new HttpRequestMessage(HttpMethod.Get, "api/mock");
             request.Headers.Add(HmacConstants.NonceHeader, "123");
             request.Headers.Add(Constants.Header, "2");
@@ -79,8 +83,8 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant.Tests.Integration.Tests
         public async Task AuthenticateAsync_TwoClientsDifferentSecret_ReturnsNoContent()
         {
             //Arrange
-            var clientDefault = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient("Default");
-            var clientDefault2 = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient("Default2");
+            var clientDefault = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient(DefaultClientName);
+            var clientDefault2 = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient(DefaultClient2Name);
             using var request = new HttpRequestMessage(HttpMethod.Get, "api/mock");
             request.Headers.Add(HmacConstants.NonceHeader, "123");
             request.Headers.Add(Constants.Header, "1");
@@ -91,11 +95,11 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant.Tests.Integration.Tests
 
             //Act
             using var response = await clientDefault.SendAsync(request);
-            using var response2 = await clientDefault.SendAsync(request2);
+            using var response2 = await clientDefault2.SendAsync(request2);
 
             //Assert
             Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
-            Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
+            Assert.Equal(HttpStatusCode.NoContent, response2.StatusCode);
 
         }
     }
