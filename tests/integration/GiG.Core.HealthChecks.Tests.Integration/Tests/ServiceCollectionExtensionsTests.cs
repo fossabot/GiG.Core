@@ -15,6 +15,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
         public void ConfigureHealthChecks_ServiceCollectionIsNull_ThrowsArgumentNullException()
         {
             Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.ConfigureHealthChecks(null, null));
+            Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.ConfigureHealthChecks(null, configuration: null));
         }
 
         [Fact]
