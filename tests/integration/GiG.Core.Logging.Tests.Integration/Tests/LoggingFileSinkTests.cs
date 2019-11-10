@@ -9,6 +9,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using Xunit;
+// ReSharper disable AssignNullToNotNullAttribute
 
 namespace GiG.Core.Logging.Tests.Integration.Tests
 {
