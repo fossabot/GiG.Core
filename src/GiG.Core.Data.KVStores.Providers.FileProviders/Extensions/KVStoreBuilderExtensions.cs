@@ -6,7 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.FileProviders;
 using System;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("GiG.Core.Data.KVStores.Tests.Integration")]
 namespace GiG.Core.Data.KVStores.Providers.FileProviders.Extensions
 {
     /// <summary>
@@ -61,7 +63,7 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders.Extensions
         /// <param name="services">The <see cref="IServiceCollection" /> to add the services to.</param>        
         /// <returns>The <see cref="IServiceCollection" /> so that additional calls can be chained.</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        private static IServiceCollection AddFileDataProvider([NotNull] this IServiceCollection services)
+        internal static IServiceCollection AddFileDataProvider([NotNull] this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
             

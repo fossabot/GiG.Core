@@ -60,5 +60,12 @@ namespace GiG.Core.Data.KVStores.Tests.Integration.Tests
                     y.AddKVStores<object>().FromJsonFile(x.Configuration, "");
                 }).Build());
         }
+
+        [Fact]
+        public void AddFileDataProvider_ServiceCollectionIsNull_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(
+                () => FileProvidersKVStoreBuilderExtensions.AddFileDataProvider(null));
+        }
     }
 }

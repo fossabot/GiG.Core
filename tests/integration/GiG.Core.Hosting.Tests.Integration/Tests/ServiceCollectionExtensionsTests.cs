@@ -36,6 +36,14 @@ namespace GiG.Core.Hosting.Tests.Integration.Tests
                 () => Host.CreateDefaultBuilder().ConfigureServices(x =>
                 {
                     x.ConfigureInfoManagement(configurationSection: null);
-                }).Build());        }
+                }).Build());
+        }
+
+        [Fact]
+        public void AddApplicationMetadataAccessor_ServiceCollectionIsNull_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(
+                () => ServiceCollectionExtensions.AddApplicationMetadataAccessor(null));
+        }
     }
 }
