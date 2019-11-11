@@ -7,7 +7,7 @@ namespace GiG.Core.DistributedTracing.MassTransit
     /// <inheritdoc />
     public class CorrelationContextAccessor : ICorrelationContextAccessor
     {
-        private IMassTransitContextAccessor _massTransitContextAccessor;
+        private readonly IMassTransitContextAccessor _massTransitContextAccessor;
 
         /// <inheritdoc />
         public CorrelationContextAccessor(IMassTransitContextAccessor massTransitContextAccessor)

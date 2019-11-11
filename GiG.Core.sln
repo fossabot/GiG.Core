@@ -347,6 +347,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MassTransit", "MassTransit"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.MassTransit", "src\GiG.Core.MassTransit\GiG.Core.MassTransit.csproj", "{7DE7CA94-B9B1-472D-9B04-178B2663F6CC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.DistributedTracing.MassTransit.Tests.Integration", "tests\integration\GiG.Core.DistributedTracing.MassTransit.Tests.Integration\GiG.Core.DistributedTracing.MassTransit.Tests.Integration.csproj", "{B0C3C1A2-D51F-44AE-A36C-ABDCA7128220}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -745,6 +747,10 @@ Global
 		{7DE7CA94-B9B1-472D-9B04-178B2663F6CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DE7CA94-B9B1-472D-9B04-178B2663F6CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DE7CA94-B9B1-472D-9B04-178B2663F6CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0C3C1A2-D51F-44AE-A36C-ABDCA7128220}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0C3C1A2-D51F-44AE-A36C-ABDCA7128220}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0C3C1A2-D51F-44AE-A36C-ABDCA7128220}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0C3C1A2-D51F-44AE-A36C-ABDCA7128220}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -884,6 +890,7 @@ Global
 		{15FCEA19-341C-4AA3-BCDF-FB8740963C6C} = {F3E4EB54-9129-4327-9A32-89ABD4ADA6C5}
 		{254FD734-ED21-4D1A-A49F-C9D82159E964} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
 		{7DE7CA94-B9B1-472D-9B04-178B2663F6CC} = {254FD734-ED21-4D1A-A49F-C9D82159E964}
+		{B0C3C1A2-D51F-44AE-A36C-ABDCA7128220} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}

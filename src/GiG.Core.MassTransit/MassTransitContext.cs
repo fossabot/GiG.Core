@@ -10,10 +10,10 @@ namespace GiG.Core.MassTransit
         /// <summary>
         /// The <see cref="MassTransitContext"/> constructor.
         /// </summary>
-        /// <param name="correlationId">The CorrelationId of the message. </param>
+        /// <param name="correlationId">The CorrelationId of the message.</param>
         public MassTransitContext(Guid correlationId)
         {
-            CorrelationId = correlationId;
+            CorrelationId = correlationId == Guid.Empty ? Guid.NewGuid() : correlationId;
         }
 
         /// <summary>

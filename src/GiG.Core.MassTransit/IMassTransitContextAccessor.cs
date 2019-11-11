@@ -6,7 +6,7 @@
     public interface IMassTransitContextAccessor
     {
         /// <summary>
-        /// The <see cref="MassTransitContext"/> for the current request.
+        /// The <see cref="MassTransitContext"/> for the current message.
         /// </summary>
         MassTransitContext MassTransitContext { get; set; }
     }

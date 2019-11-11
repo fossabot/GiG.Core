@@ -5,7 +5,7 @@ namespace GiG.Core.MassTransit
     /// <summary>
     /// The MassTransitContext Factory.
     /// </summary>
-    public interface IMassTransitContextFactory : IDisposable
+    internal interface IMassTransitContextFactory : IDisposable
     {
         /// <summary>
         /// Creates a new <see cref="MassTransitContext"/> with the correlation Id set for the current message.

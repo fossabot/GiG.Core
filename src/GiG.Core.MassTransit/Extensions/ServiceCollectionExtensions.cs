@@ -1,6 +1,7 @@
 ﻿using GiG.Core.MassTransit;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 
 namespace GiG.Core.DistributedTracing.Web.Extensions
@@ -19,8 +20,8 @@ namespace GiG.Core.DistributedTracing.Web.Extensions
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services.AddTransient<IMassTransitContextFactory, MassTransitContextFactory>();
-            services.AddSingleton<IMassTransitContextAccessor, MassTransitContextAccessor>();
+            services.TryAddTransient<IMassTransitContextFactory, MassTransitContextFactory>();
+            services.TryAddSingleton<IMassTransitContextAccessor, MassTransitContextAccessor>();
 
             return services;
         }

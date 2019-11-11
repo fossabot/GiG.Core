@@ -2,7 +2,7 @@
 
 namespace GiG.Core.MassTransit
 {
-    class MassTransitContextFactory : IMassTransitContextFactory
+    internal class MassTransitContextFactory : IMassTransitContextFactory
     {
         private readonly IMassTransitContextAccessor _massTransitContextAccessor;
 
@@ -16,7 +16,7 @@ namespace GiG.Core.MassTransit
         /// <summary>
         /// Initializes a new instance of the <see cref="MassTransitContextFactory"/>.
         /// </summary>
-        /// <param name="massTransitContextAccessor">The <see cref="IMassTransitContextAccessor"/> through which the <see cref="CorrelationContext"/> will be set.</param>
+        /// <param name="massTransitContextAccessor">The <see cref="IMassTransitContextAccessor"/> through which the <see cref="MassTransitContext"/> will be set.</param>
         public MassTransitContextFactory(IMassTransitContextAccessor massTransitContextAccessor)
         {
             _massTransitContextAccessor = massTransitContextAccessor;

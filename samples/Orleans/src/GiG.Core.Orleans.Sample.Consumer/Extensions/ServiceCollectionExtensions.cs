@@ -1,4 +1,4 @@
-using GiG.Core.MassTransit;
+using GiG.Core.DistributedTracing.Web.Extensions;
 using GiG.Core.Messaging.RabbitMQ.Abstractions;
 using GreenPipes;
 using MassTransit;
@@ -17,8 +17,7 @@ namespace GiG.Core.Orleans.Sample.Consumer.Extensions
 
             services.AddMassTransit(x =>
             {
-                var contextFactory = x.Collection.BuildServiceProvider().GetRequiredService<IMassTransitContextFactory>();
-
+                var serviceProvider = x.Collection.BuildServiceProvider();
                 x.AddConsumer<PaymentConsumer>();
                 x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {
@@ -35,9 +34,8 @@ namespace GiG.Core.Orleans.Sample.Consumer.Extensions
                                 configurator.UseSsl(context => { context.Protocol = SslProtocols.Tls12; });
                             }
                         });
-
-                    host.ConnectConsumeObserver(new MassTransitObserver(contextFactory));
-
+                    
+                    host.AddDefaultConsumerObserver(serviceProvider);
                     cfg.ReceiveEndpoint(host,
                         typeof(PaymentConsumer).FullName, e =>
                         {

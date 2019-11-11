@@ -5,7 +5,7 @@ namespace GiG.Core.MassTransit
     /// <inheritdoc />
     public class MassTransitContextAccessor : IMassTransitContextAccessor
     {
-        private static AsyncLocal<MassTransitContext> _masssTransitContext = new AsyncLocal<MassTransitContext>();
+        private readonly static AsyncLocal<MassTransitContext> _masssTransitContext = new AsyncLocal<MassTransitContext>();
 
         /// <inheritdoc />
         public MassTransitContext MassTransitContext
