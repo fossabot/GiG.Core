@@ -24,7 +24,7 @@ namespace GiG.Core.Web.Security.Hmac.Extensions
         public static IServiceCollection AddHmacAuthentication([NotNull]this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            services.AddAuthentication(HmacConstants.Scheme).AddScheme<HmacRequirement, HmacAuthenticationHandler>("hmac", x => new HmacOptions());
+            services.AddAuthentication(Constants.Scheme).AddScheme<HmacRequirement, HmacAuthenticationHandler>("hmac", x => new HmacOptions());
 
             services
                 .TryAddSingleton<IHashProvider, SHA256HashProvider>();
