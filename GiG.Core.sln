@@ -20,6 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Data.KVStores.md = docs\GiG.Core.Data.KVStores.md
 		docs\GiG.Core.Data.KVStores.Providers.FileProviders.md = docs\GiG.Core.Data.KVStores.Providers.FileProviders.md
 		docs\GiG.Core.Data.Migration.md = docs\GiG.Core.Data.Migration.md
+		docs\GiG.Core.DistributedTracing.MassTransit.md = docs\GiG.Core.DistributedTracing.MassTransit.md
 		docs\GiG.Core.DistributedTracing.Orleans.md = docs\GiG.Core.DistributedTracing.Orleans.md
 		docs\GiG.Core.DistributedTracing.Web.md = docs\GiG.Core.DistributedTracing.Web.md
 		docs\GiG.Core.HealthChecks.md = docs\GiG.Core.HealthChecks.md
@@ -347,7 +348,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MassTransit", "MassTransit"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.MassTransit", "src\GiG.Core.MassTransit\GiG.Core.MassTransit.csproj", "{7DE7CA94-B9B1-472D-9B04-178B2663F6CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.DistributedTracing.MassTransit.Tests.Integration", "tests\integration\GiG.Core.DistributedTracing.MassTransit.Tests.Integration\GiG.Core.DistributedTracing.MassTransit.Tests.Integration.csproj", "{B0C3C1A2-D51F-44AE-A36C-ABDCA7128220}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing.MassTransit.Tests.Integration", "tests\integration\GiG.Core.DistributedTracing.MassTransit.Tests.Integration\GiG.Core.DistributedTracing.MassTransit.Tests.Integration.csproj", "{B0C3C1A2-D51F-44AE-A36C-ABDCA7128220}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
