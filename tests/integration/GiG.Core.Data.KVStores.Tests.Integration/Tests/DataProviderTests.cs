@@ -2,13 +2,11 @@
 using GiG.Core.Data.KVStores.Providers.FileProviders.Abstractions;
 using GiG.Core.Data.KVStores.Providers.Hosting;
 using GiG.Core.Data.KVStores.Tests.Integration.Mocks;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading;
