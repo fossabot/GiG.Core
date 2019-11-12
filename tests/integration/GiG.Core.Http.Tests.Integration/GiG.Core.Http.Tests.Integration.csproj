@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.0.0" />
+    <PackageReference Include="Refit.HttpClientFactory" Version="4.7.51" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.3.0" />
     <PackageReference Include="refit" Version="4.7.51" />
     <PackageReference Include="xunit" Version="2.4.1" />
@@ -20,6 +21,7 @@
     <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Abstractions\GiG.Core.DistributedTracing.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Web\GiG.Core.DistributedTracing.Web.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Http.DistributedTracing\GiG.Core.Http.DistributedTracing.csproj" />
+    <ProjectReference Include="..\..\..\src\GiG.Core.Http.Extensions\GiG.Core.Http.Extensions.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Http.MultiTenant\GiG.Core.Http.MultiTenant.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Http\GiG.Core.Http.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.MultiTenant.Web\GiG.Core.MultiTenant.Web.csproj" />

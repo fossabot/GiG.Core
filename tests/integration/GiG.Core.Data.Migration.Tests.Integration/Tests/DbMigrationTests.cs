@@ -3,14 +3,29 @@ using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Hosting.Internal;
+using System;
 using System.IO;
 using Xunit;
+// ReSharper disable AssignNullToNotNullAttribute
 
 namespace GiG.Core.Data.Migration.Tests.Integration.Tests
 {
     [Trait("Category", "Integration")]
     public class DbMigrationTests
     {
+        [Fact]
+        public void AddDbMigration_ServiceCollectionIsNull__ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(
+                () => ServiceCollectionExtensions.AddDbMigration(null, null));
+        }
+
+        [Fact]
+        public void AddDbMigration_DbConnectionIsNull__ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => SetupServiceCollection().AddDbMigration(null));
+        }
+
         [Fact]
         public void Migrate_DefaultMigration()
         {
