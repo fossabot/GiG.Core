@@ -3,8 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using IObjectMapper = GiG.Core.ObjectMapping.Abstractions.IObjectMapper;
 
+[assembly: InternalsVisibleTo("GiG.Core.ObjectMapping.AutoMapper.Tests.Unit")]
 namespace GiG.Core.ObjectMapping.AutoMapper
 {
     internal class AutoMapperObjectMapper : IObjectMapper
