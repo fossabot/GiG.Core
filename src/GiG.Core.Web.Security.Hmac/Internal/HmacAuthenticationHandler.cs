@@ -53,12 +53,12 @@ namespace GiG.Core.Web.Security.Hmac.Internal
                 return AuthenticateResult.Fail($"Hmac configuration not set.");
             }
 
-            if (!Request.Headers.TryGetValue(HmacConstants.NonceHeader,out var nonceValue))
+            if (!Request.Headers.TryGetValue(Constants.NonceHeader,out var nonceValue))
             {
-                return AuthenticateResult.Fail($"{HmacConstants.NonceHeader} not set.");
+                return AuthenticateResult.Fail($"{Constants.NonceHeader} not set.");
             }
 
-            Request.Headers.TryGetValue(HmacConstants.AuthHeader, out var headerSignature);
+            Request.Headers.TryGetValue(Constants.AuthHeader, out var headerSignature);
 
             if (string.IsNullOrEmpty(headerSignature))
             {
