@@ -1,14 +1,9 @@
 ﻿using GiG.Core.Hosting.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
-using System.IO;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace GiG.Core.Hosting.Extensions
 {
@@ -32,29 +27,8 @@ namespace GiG.Core.Hosting.Extensions
 
             return app.Map(options.Url, appBuilder =>
             {                    
-                appBuilder.Run(WriteJsonResponseWriter);
+                appBuilder.Run(InfoManagementWriter.WriteJsonResponseWriter);
             });
-        }
-
-        private static Task WriteJsonResponseWriter(HttpContext httpContext)
-        {
-            httpContext.Response.ContentType = "application/json";
-
-            using (var stream = new MemoryStream())
-            {
-                using (var writer = new Utf8JsonWriter(stream))
-                {
-                    writer.WriteStartObject();
-                    writer.WriteString(nameof(ApplicationMetadata.Name), ApplicationMetadata.Name);
-                    writer.WriteString(nameof(ApplicationMetadata.Version), ApplicationMetadata.Version);
-                    writer.WriteString(nameof(ApplicationMetadata.InformationalVersion), ApplicationMetadata.InformationalVersion);
-                    writer.WriteEndObject();
-                }
-
-                var json = Encoding.UTF8.GetString(stream.ToArray());
-
-                return httpContext.Response.WriteAsync(json);
-            }
         }
     }
 }
