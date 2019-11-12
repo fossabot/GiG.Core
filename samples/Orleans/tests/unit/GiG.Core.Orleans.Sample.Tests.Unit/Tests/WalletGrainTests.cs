@@ -57,6 +57,7 @@ namespace GiG.Core.Orleans.Sample.Tests.Unit.Tests
             Assert.Equal(0, storageStats.Reads);
             Assert.Equal(amount, actualBalance);
             mockStream.Verify(x => x.PublishAsync(It.IsAny<WalletTransaction>(), It.IsAny<StreamSequenceToken>()), Times.Once());
+            mockStream.VerifyNoOtherCalls();
         }
 
         [Fact]
@@ -81,6 +82,7 @@ namespace GiG.Core.Orleans.Sample.Tests.Unit.Tests
             Assert.Equal(0, storageStats.Reads);
             Assert.Equal(amount * -1, actualBalance);
             mockStream.Verify(x => x.PublishAsync(It.IsAny<WalletTransaction>(), It.IsAny<StreamSequenceToken>()), Times.Once());
+            mockStream.VerifyNoOtherCalls();
         }
 
         [Fact]
@@ -109,6 +111,7 @@ namespace GiG.Core.Orleans.Sample.Tests.Unit.Tests
             Assert.Equal(0, storageStats.Reads);
             Assert.Equal(transactionMessage.Amount, balanceState.Amount);
             mockStream.Verify(x => x.PublishAsync(It.Is<WalletTransaction>(x => x.TransactionType == WalletTransactionType.Credit), It.IsAny<StreamSequenceToken>()), Times.Once());
+            mockStream.VerifyNoOtherCalls();
         }
 
         [Fact]
@@ -137,6 +140,7 @@ namespace GiG.Core.Orleans.Sample.Tests.Unit.Tests
             Assert.Equal(0, storageStats.Reads);
             Assert.Equal(transactionMessage.Amount * -1, balanceState.Amount);
             mockStream.Verify(x => x.PublishAsync(It.Is<WalletTransaction>(x => x.TransactionType == WalletTransactionType.Debit), It.IsAny<StreamSequenceToken>()), Times.Once());
+            mockStream.VerifyNoOtherCalls();
         }
     }
 }
