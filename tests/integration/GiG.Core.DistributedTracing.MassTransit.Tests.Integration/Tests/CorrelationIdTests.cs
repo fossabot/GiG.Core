@@ -1,6 +1,6 @@
 using GiG.Core.DistributedTracing.MassTransit.Extensions;
 using GiG.Core.DistributedTracing.MassTransit.Tests.Integration.Mocks;
-using GiG.Core.DistributedTracing.Web.Extensions;
+using GiG.Core.MassTransit.Extensions;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -30,6 +30,7 @@ namespace GiG.Core.DistributedTracing.MassTransit.Tests.Integration.Tests
             var messageId = Guid.NewGuid();
             var correlationId = Guid.NewGuid();
 
+            // Act
             await busControl.Publish<MockMessage>(new MockMessage { Id = messageId }, x => x.CorrelationId = correlationId);
             Thread.Sleep(500);
             
@@ -47,8 +48,10 @@ namespace GiG.Core.DistributedTracing.MassTransit.Tests.Integration.Tests
 
             var messageId = Guid.NewGuid();
 
+            // Act
             await busControl.Publish<MockMessage>(new MockMessage { Id = messageId });
             Thread.Sleep(500);
+            
             // Assert
             Assert.Contains(messageId, State.Messages.Keys);
             Assert.NotEqual(Guid.Empty, State.Messages[messageId]);

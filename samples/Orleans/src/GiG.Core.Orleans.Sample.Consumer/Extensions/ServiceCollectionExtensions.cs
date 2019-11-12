@@ -1,4 +1,4 @@
-using GiG.Core.DistributedTracing.Web.Extensions;
+using GiG.Core.MassTransit.Extensions;
 using GiG.Core.Messaging.RabbitMQ.Abstractions;
 using GreenPipes;
 using MassTransit;

@@ -1,17 +1,17 @@
 ﻿using System.Threading;
 
 namespace GiG.Core.MassTransit
-{ 
+{
     /// <inheritdoc />
     public class MassTransitContextAccessor : IMassTransitContextAccessor
     {
-        private readonly static AsyncLocal<MassTransitContext> _masssTransitContext = new AsyncLocal<MassTransitContext>();
+        private readonly static AsyncLocal<MassTransitContext> _massTransitContext = new AsyncLocal<MassTransitContext>();
 
         /// <inheritdoc />
         public MassTransitContext MassTransitContext
         {
-            get => _masssTransitContext.Value;
-            set => _masssTransitContext.Value = value;
+            get => _massTransitContext.Value;
+            set => _massTransitContext.Value = value;
         }
     }
 }

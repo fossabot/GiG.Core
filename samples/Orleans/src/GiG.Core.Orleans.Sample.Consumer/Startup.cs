@@ -1,5 +1,5 @@
 using GiG.Core.DistributedTracing.MassTransit.Extensions;
-using GiG.Core.DistributedTracing.Web.Extensions;
+using GiG.Core.MassTransit.Extensions;
 using GiG.Core.Orleans.Client.Extensions;
 using GiG.Core.Orleans.Clustering.Consul.Extensions;
 using GiG.Core.Orleans.Clustering.Extensions;

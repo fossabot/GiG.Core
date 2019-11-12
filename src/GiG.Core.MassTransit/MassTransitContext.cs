@@ -20,6 +20,5 @@ namespace GiG.Core.MassTransit
         /// The Correlation Id of the current message.
         /// </summary>
         public Guid CorrelationId { get; }
-
     }
 }
