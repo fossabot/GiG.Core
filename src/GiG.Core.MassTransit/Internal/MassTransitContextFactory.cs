@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GiG.Core.MassTransit
+namespace GiG.Core.MassTransit.Internal
 {
     internal class MassTransitContextFactory : IMassTransitContextFactory
     {

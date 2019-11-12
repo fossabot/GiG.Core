@@ -1,10 +1,10 @@
-﻿using GiG.Core.MassTransit;
+﻿using GiG.Core.MassTransit.Internal;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 
-namespace GiG.Core.DistributedTracing.Web.Extensions
+namespace GiG.Core.MassTransit.Extensions
 {
     /// <summary>
     /// Service Collection Extensions.

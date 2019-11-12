@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace GiG.Core.MassTransit
+namespace GiG.Core.MassTransit.Internal
 {
     /// <inheritdoc />
     internal class MassTransitConsumerObserver : IConsumeObserver

@@ -1,11 +1,11 @@
-﻿using GiG.Core.MassTransit;
+﻿using GiG.Core.MassTransit.Internal;
 using JetBrains.Annotations;
 using MassTransit;
 using MassTransit.Pipeline;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace GiG.Core.DistributedTracing.Web.Extensions
+namespace GiG.Core.MassTransit.Extensions
 {
     /// <summary>
     /// Consumer Observer Connector Extensions.
