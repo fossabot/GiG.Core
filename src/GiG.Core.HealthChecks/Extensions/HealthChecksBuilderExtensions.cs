@@ -47,7 +47,7 @@ namespace GiG.Core.HealthChecks.Extensions
         ///</param>
         /// <returns>The <see cref="IHealthChecksBuilder" />.</returns>
         public static IHealthChecksBuilder AddReadyCheck([NotNull] this IHealthChecksBuilder builder, [NotNull] string name,
-            IHealthCheck instance, HealthStatus? healthStatus = null)
+            [NotNull] IHealthCheck instance, HealthStatus? healthStatus = null)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (name == null) throw new ArgumentNullException(nameof(name));
@@ -92,7 +92,7 @@ namespace GiG.Core.HealthChecks.Extensions
         ///</param>
         /// <returns>The <see cref="IHealthChecksBuilder" />.</returns>
         public static IHealthChecksBuilder AddLiveCheck([NotNull] this IHealthChecksBuilder builder, [NotNull] string name,
-            IHealthCheck instance, HealthStatus? healthStatus = null)
+            [NotNull] IHealthCheck instance, HealthStatus? healthStatus = null)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (name == null) throw new ArgumentNullException(nameof(name));
