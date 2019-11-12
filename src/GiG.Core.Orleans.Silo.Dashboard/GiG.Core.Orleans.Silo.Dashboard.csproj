@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GiG.Core.Orleans.Silo.Abstractions\GiG.Core.Orleans.Silo.Abstractions.csproj" />
+    <ProjectReference Include="..\GiG.Core.Orleans.Silo\GiG.Core.Orleans.Silo.csproj" />
   </ItemGroup>
 
 </Project>

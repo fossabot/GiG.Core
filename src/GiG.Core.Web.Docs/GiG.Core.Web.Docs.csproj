@@ -18,6 +18,5 @@
   <ItemGroup>
     <ProjectReference Include="..\GiG.Core.Hosting.Abstractions\GiG.Core.Hosting.Abstractions.csproj" />
     <ProjectReference Include="..\GiG.Core.Hosting\GiG.Core.Hosting.csproj" />
-    <ProjectReference Include="..\GiG.Core.Web.Docs.Abstractions\GiG.Core.Web.Docs.Abstractions.csproj" />
   </ItemGroup>
 </Project>
