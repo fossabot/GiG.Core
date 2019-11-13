@@ -24,20 +24,16 @@ namespace GiG.Core.Http.Security.Hmac.Extensions
         public static IHttpClientBuilder AddHmacDelegatingHandler([NotNull]this IHttpClientBuilder httpClientBuilder)
         {
             var services = httpClientBuilder.Services;
-            httpClientBuilder.ConfigureHttpClient((serviceProvider,x) =>
+            httpClientBuilder.AddHttpMessageHandler(x=>
             {
-                x.DefaultRequestHeaders.Add("name", httpClientBuilder.Name);
-            }).ConfigureHttpMessageHandlerBuilder(x=>
-            {
-                var optionsAccessor = x.Services.GetRequiredService<IOptionsSnapshot<HmacOptions>>();
+                var optionsAccessor = x.GetRequiredService<IOptionsSnapshot<HmacOptions>>();
                 var options = optionsAccessor.Get(httpClientBuilder.Name);
-                x.AdditionalHandlers.Add(new HmacDelegatingHandler(
-                    new DefaultHmacOptionsProvider(options),
-                    x.Services.GetRequiredService<IHashProviderFactory>(),
-                    x.Services.GetRequiredService<IHmacSignatureProvider>()));
+                return new HmacDelegatingHandler(
+                    Options.Create(options),
+                    x.GetRequiredService<IHashProviderFactory>(),
+                    x.GetRequiredService<IHmacSignatureProvider>());
             });
            
-            services.TryAddScoped<IHmacOptionsProvider, DefaultHmacOptionsProvider>();
             services.TryAddSingleton<IHmacSignatureProvider, HmacSignatureProvider>();
             services.TryAddTransient<IHashProvider, SHA256HashProvider>();
             services.TryAddSingleton<IHmacSignatureProvider, HmacSignatureProvider>();

@@ -5,15 +5,15 @@ namespace GiG.Core.Http.Security.Hmac.Internal
     /// <inheritdoc />
     internal class DefaultHmacOptionsProvider : IHmacOptionsProvider
     {
-        private readonly HmacOptions _options;
+        private readonly IOptions<HmacOptions> _options;
 
         /// <inheritdoc />
-        public DefaultHmacOptionsProvider(HmacOptions options)
+        public DefaultHmacOptionsProvider(IOptions<HmacOptions> options)
         {
             _options = options;
         }
 
         /// <inheritdoc />
-        public HmacOptions GetHmacOptions() => _options;
+        public HmacOptions GetHmacOptions() => _options.Value;
     }
 }

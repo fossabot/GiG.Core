@@ -11,6 +11,8 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using GiG.Core.Security.Cryptography;
+using Microsoft.Extensions.Options;
 using Xunit;
 
 namespace GiG.Core.Web.Security.Hmac.Tests.Integration.Tests
@@ -78,12 +80,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration.Tests
         public async Task AuthenticateAsync_PostValidHmacHeader_ReturnsOK()
         {
             //Arrange
-            var client = HttpClientFactory.Create(x =>
-            {
-                x.AddDelegatingHandler(_server.Services.GetRequiredService<HmacDelegatingHandler>());
-                x.WithMessageHandler(_server.CreateHandler());
-                x.Options.WithBaseAddress(_server.BaseAddress);
-            });
+            var client = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient("Default"); 
 
             using var request = new HttpRequestMessage(HttpMethod.Post, "api/mock");
             request.Headers.Add(HmacConstants.NonceHeader, "123");
@@ -117,6 +114,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration.Tests
 
             //Assert
             Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
+            Assert.Equal(HttpStatusCode.NoContent, responseNew .StatusCode);
         }
     }
 }
