@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GiG.Core.Orleans.Clustering.Consul.Abstractions\GiG.Core.Orleans.Clustering.Consul.Abstractions.csproj" />
     <ProjectReference Include="..\GiG.Core.Orleans.Clustering\GiG.Core.Orleans.Clustering.csproj" />
   </ItemGroup>
 </Project>
