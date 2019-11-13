@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GiG.Core.Orleans.Clustering.Kubernetes.Abstractions\GiG.Core.Orleans.Clustering.Kubernetes.Abstractions.csproj" />
     <ProjectReference Include="..\GiG.Core.Orleans.Clustering\GiG.Core.Orleans.Clustering.csproj" />
   </ItemGroup>
 

@@ -1,11 +1,14 @@
+using GiG.Core.Context.Web.Extensions;
 using GiG.Core.Context.Web.Tests.Integration.Mocks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.TestHost;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
+// ReSharper disable AssignNullToNotNullAttribute
 
 namespace GiG.Core.Context.Web.Tests.Integration.Tests
 {
@@ -18,6 +21,12 @@ namespace GiG.Core.Context.Web.Tests.Integration.Tests
         {
             _server = new TestServer(new WebHostBuilder()
                 .UseStartup<MockStartup>());
+        }
+
+        [Fact]
+        public void AddRequestContextAccessor_ServiceCollectionIsNull_ThrowsArgumentNullException()
+        {
+            Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddRequestContextAccessor(null));
         }
 
         [Fact]

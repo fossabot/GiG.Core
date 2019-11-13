@@ -15,7 +15,7 @@ namespace GiG.Core.Benchmarks.Orleans
         {
             builder.ConfigureCluster(ctx.Configuration)
                 .ConfigureDashboard(ctx.Configuration)
-                .ConfigureEndpoints()
+                .ConfigureEndpoints(ctx.Configuration)
                 .UseLocalhostClustering()
                 .AddMemoryGrainStorageAsDefault()
                 .AddAssemblies(typeof(ProducerGrain))

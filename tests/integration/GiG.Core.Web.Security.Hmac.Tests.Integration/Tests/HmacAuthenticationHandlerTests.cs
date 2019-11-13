@@ -51,7 +51,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration.Tests
             //Arrange
             var client = _server.CreateClient();
             using var request = new HttpRequestMessage(HttpMethod.Get, "api/mock");
-            request.Headers.Add(HmacConstants.NonceHeader, "123");
+            request.Headers.Add(Constants.NonceHeader, "123");
 
             //Act
             using var response = await client.SendAsync(request);
@@ -67,7 +67,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration.Tests
             var client = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient("Default");
 
             using var request = new HttpRequestMessage(HttpMethod.Get, "api/mock");
-            request.Headers.Add(HmacConstants.NonceHeader, "123");
+            request.Headers.Add(Constants.NonceHeader, "123");
 
             //Act
             using var response = await client.SendAsync(request);
@@ -83,7 +83,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration.Tests
             var client = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient("Default"); 
 
             using var request = new HttpRequestMessage(HttpMethod.Post, "api/mock");
-            request.Headers.Add(HmacConstants.NonceHeader, "123");
+            request.Headers.Add(Constants.NonceHeader, "123");
             request.Content = new StringContent("{\"text\":\"abccccc\"}", Encoding.UTF8, "application/json");
 
             //Act
@@ -104,9 +104,9 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration.Tests
             var clientNew = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient("Default2");
 
             using var request = new HttpRequestMessage(HttpMethod.Get, "api/mock");
-            request.Headers.Add(HmacConstants.NonceHeader, "123");
+            request.Headers.Add(Constants.NonceHeader, "123");
             using var requestNew = new HttpRequestMessage(HttpMethod.Get, "api/mock");
-            requestNew.Headers.Add(HmacConstants.NonceHeader, "123");
+            requestNew.Headers.Add(Constants.NonceHeader, "123");
 
             //Act
             using var response = await client.SendAsync(request);
