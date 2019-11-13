@@ -7,7 +7,6 @@ using GiG.Core.Orleans.Streams.Abstractions;
 using Moq;
 using Orleans.Streams;
 using Orleans.TestKit;
-using System;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -15,6 +14,15 @@ namespace GiG.Core.Orleans.Sample.Tests.Unit.Tests
 {
     public class WalletGrainTests : TestKitBase
     {
+        private readonly Mock<IStreamFactory> _streamFactoryMock;
+        private readonly Mock<IStream<WalletTransaction>> _streamMock;
+
+        public WalletGrainTests()
+        {
+            _streamFactoryMock = Silo.AddServiceProbe<IStreamFactory>();
+            _streamMock = new Mock<IStream<WalletTransaction>>();
+        }
+
         [Fact]
         public async Task Wallet_GetBalance()
         {
@@ -33,6 +41,8 @@ namespace GiG.Core.Orleans.Sample.Tests.Unit.Tests
             Assert.Equal(amount, actualBalance);
             Assert.Equal(0, storageStats.Writes);
             Assert.Equal(0, storageStats.Reads);
+            _streamFactoryMock.Verify(x => x.GetStream<WalletTransaction>(It.IsAny<IStreamProvider>(), grainId, Constants.WalletTransactionsStreamNamespace), Times.Once);
+            VerifyNoOtherCalls();
         }
 
         [Fact]
@@ -41,11 +51,9 @@ namespace GiG.Core.Orleans.Sample.Tests.Unit.Tests
             // Arrange
             var grainId = new Randomizer().Guid();
             var amount = new Randomizer().Decimal(0, 1000);
-
-            var mockStream = new Mock<IStream<WalletTransaction>>();
-            var streamFactoryMock = Silo.AddServiceProbe<IStreamFactory>();
-            streamFactoryMock.Setup(x => x.GetStream<WalletTransaction>(It.IsAny<IStreamProvider>(), grainId, Constants.WalletTransactionsStreamNamespace))
-                .Returns(mockStream.Object);
+     
+            _streamFactoryMock.Setup(x => x.GetStream<WalletTransaction>(It.IsAny<IStreamProvider>(), grainId, Constants.WalletTransactionsStreamNamespace))
+                .Returns(_streamMock.Object);
 
             // Act
             var grain = await Silo.CreateGrainAsync<WalletGrain>(grainId);
@@ -56,8 +64,9 @@ namespace GiG.Core.Orleans.Sample.Tests.Unit.Tests
             Assert.Equal(1, storageStats.Writes);
             Assert.Equal(0, storageStats.Reads);
             Assert.Equal(amount, actualBalance);
-            mockStream.Verify(x => x.PublishAsync(It.IsAny<WalletTransaction>(), It.IsAny<StreamSequenceToken>()), Times.Once());
-            mockStream.VerifyNoOtherCalls();
+            _streamFactoryMock.Verify(x => x.GetStream<WalletTransaction>(It.IsAny<IStreamProvider>(), grainId, Constants.WalletTransactionsStreamNamespace), Times.Once);
+            _streamMock.Verify(x => x.PublishAsync(It.IsAny<WalletTransaction>(), It.IsAny<StreamSequenceToken>()), Times.Once());
+            VerifyNoOtherCalls();
         }
 
         [Fact]
@@ -67,10 +76,8 @@ namespace GiG.Core.Orleans.Sample.Tests.Unit.Tests
             var grainId = new Randomizer().Guid();
             var amount = new Randomizer().Decimal(0, 1000);
 
-            var mockStream = new Mock<IStream<WalletTransaction>>();
-            var streamFactoryMock = Silo.AddServiceProbe<IStreamFactory>();
-            streamFactoryMock.Setup(x => x.GetStream<WalletTransaction>(It.IsAny<IStreamProvider>(), grainId, Constants.WalletTransactionsStreamNamespace))
-                .Returns(mockStream.Object);
+            _streamFactoryMock.Setup(x => x.GetStream<WalletTransaction>(It.IsAny<IStreamProvider>(), grainId, Constants.WalletTransactionsStreamNamespace))
+                .Returns(_streamMock.Object);
 
             // Act
             var grain = await Silo.CreateGrainAsync<WalletGrain>(grainId);
@@ -81,8 +88,9 @@ namespace GiG.Core.Orleans.Sample.Tests.Unit.Tests
             Assert.Equal(1, storageStats.Writes);
             Assert.Equal(0, storageStats.Reads);
             Assert.Equal(amount * -1, actualBalance);
-            mockStream.Verify(x => x.PublishAsync(It.IsAny<WalletTransaction>(), It.IsAny<StreamSequenceToken>()), Times.Once());
-            mockStream.VerifyNoOtherCalls();
+            _streamFactoryMock.Verify(x => x.GetStream<WalletTransaction>(It.IsAny<IStreamProvider>(), grainId, Constants.WalletTransactionsStreamNamespace), Times.Once);
+            _streamMock.Verify(x => x.PublishAsync(It.IsAny<WalletTransaction>(), It.IsAny<StreamSequenceToken>()), Times.Once());
+            VerifyNoOtherCalls();
         }
 
         [Fact]
@@ -95,10 +103,8 @@ namespace GiG.Core.Orleans.Sample.Tests.Unit.Tests
                    .RuleFor(x => x.TransactionType, PaymentTransactionType.Deposit)
                    .Generate();
 
-            var mockStream = new Mock<IStream<WalletTransaction>>();
-            var streamFactoryMock = Silo.AddServiceProbe<IStreamFactory>();
-            streamFactoryMock.Setup(x => x.GetStream<WalletTransaction>(It.IsAny<IStreamProvider>(), grainId, Constants.WalletTransactionsStreamNamespace))
-                .Returns(mockStream.Object);
+            _streamFactoryMock.Setup(x => x.GetStream<WalletTransaction>(It.IsAny<IStreamProvider>(), grainId, Constants.WalletTransactionsStreamNamespace))
+                .Returns(_streamMock.Object);
 
             // Act
             var grain = await Silo.CreateGrainAsync<WalletGrain>(grainId);
@@ -110,8 +116,9 @@ namespace GiG.Core.Orleans.Sample.Tests.Unit.Tests
             Assert.Equal(1, storageStats.Writes);
             Assert.Equal(0, storageStats.Reads);
             Assert.Equal(transactionMessage.Amount, balanceState.Amount);
-            mockStream.Verify(x => x.PublishAsync(It.Is<WalletTransaction>(x => x.TransactionType == WalletTransactionType.Credit), It.IsAny<StreamSequenceToken>()), Times.Once());
-            mockStream.VerifyNoOtherCalls();
+            _streamFactoryMock.Verify(x => x.GetStream<WalletTransaction>(It.IsAny<IStreamProvider>(), grainId, Constants.WalletTransactionsStreamNamespace), Times.Once);
+            _streamMock.Verify(x => x.PublishAsync(It.Is<WalletTransaction>(x => x.TransactionType == WalletTransactionType.Credit), It.IsAny<StreamSequenceToken>()), Times.Once());
+            VerifyNoOtherCalls();
         }
 
         [Fact]
@@ -124,10 +131,8 @@ namespace GiG.Core.Orleans.Sample.Tests.Unit.Tests
                    .RuleFor(x => x.TransactionType, PaymentTransactionType.Withdrawal)
                    .Generate();
 
-            var mockStream = new Mock<IStream<WalletTransaction>>();
-            var streamFactoryMock = Silo.AddServiceProbe<IStreamFactory>();
-            streamFactoryMock.Setup(x => x.GetStream<WalletTransaction>(It.IsAny<IStreamProvider>(), grainId, Constants.WalletTransactionsStreamNamespace))
-                .Returns(mockStream.Object);
+            _streamFactoryMock.Setup(x => x.GetStream<WalletTransaction>(It.IsAny<IStreamProvider>(), grainId, Constants.WalletTransactionsStreamNamespace))
+                .Returns(_streamMock.Object);
 
             // Act
             var grain = await Silo.CreateGrainAsync<WalletGrain>(grainId);
@@ -139,8 +144,15 @@ namespace GiG.Core.Orleans.Sample.Tests.Unit.Tests
             Assert.Equal(1, storageStats.Writes);
             Assert.Equal(0, storageStats.Reads);
             Assert.Equal(transactionMessage.Amount * -1, balanceState.Amount);
-            mockStream.Verify(x => x.PublishAsync(It.Is<WalletTransaction>(x => x.TransactionType == WalletTransactionType.Debit), It.IsAny<StreamSequenceToken>()), Times.Once());
-            mockStream.VerifyNoOtherCalls();
+            _streamFactoryMock.Verify(x => x.GetStream<WalletTransaction>(It.IsAny<IStreamProvider>(), grainId, Constants.WalletTransactionsStreamNamespace), Times.Once);
+            _streamMock.Verify(x => x.PublishAsync(It.Is<WalletTransaction>(x => x.TransactionType == WalletTransactionType.Debit), It.IsAny<StreamSequenceToken>()), Times.Once());
+            VerifyNoOtherCalls();
+        }
+
+        private void VerifyNoOtherCalls()
+        {
+            _streamFactoryMock.VerifyNoOtherCalls();
+            _streamMock.VerifyNoOtherCalls();
         }
     }
 }
