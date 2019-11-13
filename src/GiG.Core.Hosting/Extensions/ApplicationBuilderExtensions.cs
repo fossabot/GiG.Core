@@ -23,8 +23,6 @@ namespace GiG.Core.Hosting.Extensions
 
             var options = app.ApplicationServices.GetService<IOptions<InfoManagementOptions>>()?.Value ?? new InfoManagementOptions();
 
-            if (!options.IsEnabled) return app;
-
             return app.Map(options.Url, appBuilder =>
             {                    
                 appBuilder.Run(InfoManagementWriter.WriteJsonResponseWriter);

@@ -23,7 +23,6 @@ namespace GiG.Core.Hosting.AspNetCore.Extensions
             if (endpointRouteBuilder == null) throw new ArgumentNullException(nameof(endpointRouteBuilder));
 
             var options = endpointRouteBuilder.ServiceProvider.GetService<IOptions<InfoManagementOptions>>()?.Value ?? new InfoManagementOptions();
-            //if (!options.IsEnabled) return new DefaultEndpointConventionBuilder();
 
             return endpointRouteBuilder.Map(options.Url, InfoManagementWriter.WriteJsonResponseWriter);
         }
