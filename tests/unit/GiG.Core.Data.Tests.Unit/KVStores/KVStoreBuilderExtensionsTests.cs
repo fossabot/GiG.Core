@@ -7,9 +7,9 @@ using FileProvidersKVStoreBuilderExtensions = GiG.Core.Data.KVStores.Providers.F
 using KVStoreBuilderExtensions = GiG.Core.Data.KVStores.Extensions.KVStoreBuilderExtensions;
 // ReSharper disable AssignNullToNotNullAttribute
 
-namespace GiG.Core.Data.KVStores.Tests.Integration.Tests
+namespace GiG.Core.Data.Tests.Unit.KVStores
 {
-    [Trait("Category", "Integration")]
+    [Trait("Category", "Unit")]
     public class KVStoreBuilderExtensionsTests
     {
         [Fact]
@@ -36,29 +36,31 @@ namespace GiG.Core.Data.KVStores.Tests.Integration.Tests
         [Fact]
         public void FromJsonFile_ConfigurationIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => Host.CreateDefaultBuilder()
-                .ConfigureServices(x =>
-                    x.AddKVStores<object>().FromJsonFile(null, ""))
-                .Build());
+            Assert.Throws<ArgumentNullException>(() =>
+                Host.CreateDefaultBuilder()
+                    .ConfigureServices(x =>
+                        x.AddKVStores<object>().FromJsonFile(null, ""))
+                    .Build());
         }
 
         [Fact]
         public void FromJsonFile_ConfigurationSectionIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => Host.CreateDefaultBuilder()
-                .ConfigureServices(x =>
-                    x.AddKVStores<object>().FromJsonFile(null))
-                .Build());
+            Assert.Throws<ArgumentNullException>(() =>
+                Host.CreateDefaultBuilder()
+                    .ConfigureServices(x =>
+                        x.AddKVStores<object>().FromJsonFile(null))
+                    .Build());
         }
 
         [Fact]
         public void FromJsonFile_ConfigurationSectionNameIsNullOrEmpty_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => Host.CreateDefaultBuilder()
-                .ConfigureServices((x, y) =>
-                {
-                    y.AddKVStores<object>().FromJsonFile(x.Configuration, "");
-                }).Build());
+            Assert.Throws<ArgumentException>(() =>
+                Host.CreateDefaultBuilder()
+                    .ConfigureServices((x, y) =>
+                        y.AddKVStores<object>().FromJsonFile(x.Configuration, ""))
+                    .Build());
         }
 
         [Fact]

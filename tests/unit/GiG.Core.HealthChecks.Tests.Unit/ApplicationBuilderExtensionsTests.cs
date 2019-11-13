@@ -3,9 +3,9 @@ using System;
 using Xunit;
 // ReSharper disable AssignNullToNotNullAttribute
 
-namespace GiG.Core.HealthChecks.Tests.Integration.Tests
+namespace GiG.Core.HealthChecks.Tests.Unit
 {
-    [Trait("Category", "Integration")]
+    [Trait("Category", "Unit")]
     public class ApplicationBuilderExtensionsTests
     {
         [Fact]

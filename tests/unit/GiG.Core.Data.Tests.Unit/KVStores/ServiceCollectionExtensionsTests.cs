@@ -3,9 +3,9 @@ using System;
 using Xunit;
 // ReSharper disable AssignNullToNotNullAttribute
 
-namespace GiG.Core.Data.KVStores.Tests.Integration.Tests
+namespace GiG.Core.Data.Tests.Unit.KVStores
 {
-    [Trait("Category", "Integration")]
+    [Trait("Category", "Unit")]
     public class ServiceCollectionExtensionsTests
     {
         [Fact]

@@ -3,16 +3,15 @@ using System;
 using Xunit;
 // ReSharper disable AssignNullToNotNullAttribute
 
-namespace GiG.Core.Hosting.Tests.Integration.Tests
+namespace GiG.Core.Hosting.Tests.Unit
 {
-    [Trait("Category", "Integration")]
+    [Trait("Category", "Unit")]
     public class HostBuilderExtensionsTests
     {
         [Fact]
         public void UseApplicationMetadata_HostBuilderIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => HostBuilderExtensions.UseApplicationMetadata(null));
+            Assert.Throws<ArgumentNullException>(() => HostBuilderExtensions.UseApplicationMetadata(null));
         }
     }
 }

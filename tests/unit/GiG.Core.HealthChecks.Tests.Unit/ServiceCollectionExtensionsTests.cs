@@ -1,14 +1,12 @@
 ﻿using GiG.Core.HealthChecks.Extensions;
-using GiG.Core.HealthChecks.Tests.Integration.Mocks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using Xunit;
 // ReSharper disable AssignNullToNotNullAttribute
 
-namespace GiG.Core.HealthChecks.Tests.Integration.Tests
+namespace GiG.Core.HealthChecks.Tests.Unit
 {
-    [Trait("Category", "Integration")]
+    [Trait("Category", "Unit")]
     public class ServiceCollectionExtensionsTests
     {
         [Fact]
@@ -21,17 +19,13 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
         [Fact]
         public void ConfigureHealthChecks_ConfigurationIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new TestServer(
-                new WebHostBuilder().UseStartup<MockStartupWithDefaultConfiguration>()
-                    .ConfigureServices(x => x.ConfigureHealthChecks(configuration: null))));
+            Assert.Throws<ArgumentNullException>(() => new ServiceCollection().ConfigureHealthChecks(configuration: null));
         }
 
         [Fact]
         public void ConfigureHealthChecks_ConfigurationSectionIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new TestServer(
-                new WebHostBuilder().UseStartup<MockStartupWithDefaultConfiguration>()
-                    .ConfigureServices(x => x.ConfigureHealthChecks(configurationSection: null))));
+            Assert.Throws<ArgumentNullException>(() => new ServiceCollection().ConfigureHealthChecks(configurationSection: null));
         }
 
         [Fact]

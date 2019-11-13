@@ -28,7 +28,7 @@ namespace GiG.Core.HealthChecks.Extensions
             HealthStatus? healthStatus = null) where T : class, IHealthCheck
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
-            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException(nameof(name));
 
             return builder.AddCheck<T>(name, healthStatus, new [] { Constants.ReadyTag });
         }
@@ -50,7 +50,7 @@ namespace GiG.Core.HealthChecks.Extensions
             [NotNull] IHealthCheck instance, HealthStatus? healthStatus = null)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
-            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException(nameof(name));
             if (instance == null) throw new ArgumentNullException(nameof(instance));
 
             return builder.AddCheck(name, instance, healthStatus, new [] { Constants.ReadyTag });
@@ -73,7 +73,7 @@ namespace GiG.Core.HealthChecks.Extensions
             HealthStatus? healthStatus = null) where T : class, IHealthCheck
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
-            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException(nameof(name));
             
             return builder.AddCheck<T>(name, healthStatus, new [] { Constants.LiveTag });
         }
@@ -95,7 +95,7 @@ namespace GiG.Core.HealthChecks.Extensions
             [NotNull] IHealthCheck instance, HealthStatus? healthStatus = null)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
-            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException(nameof(name));
             if (instance == null) throw new ArgumentNullException(nameof(instance));
 
             return builder.AddCheck(name, instance, healthStatus, new [] { Constants.LiveTag });

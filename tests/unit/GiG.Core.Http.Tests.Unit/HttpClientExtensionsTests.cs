@@ -1,16 +1,16 @@
 ﻿using GiG.Core.Http.Extensions;
-using GiG.Core.Http.Tests.Integration.Mocks;
+using GiG.Core.Http.Tests.Unit.Mocks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Refit;
 using System;
 using System.Net.Http;
 using Xunit;
 // ReSharper disable AssignNullToNotNullAttribute
 
-namespace GiG.Core.Http.Tests.Integration.Tests
+namespace GiG.Core.Http.Tests.Unit
 {
-    [Trait("Category", "Integration")]
+    [Trait("Category", "Unit")]
     public class HttpClientExtensionsTests
     {
         [Fact]
@@ -35,26 +35,15 @@ namespace GiG.Core.Http.Tests.Integration.Tests
         [Fact]
         public void FromConfiguration_BaseUriIsNull_ThrowsArgumentNullException()
         {
-            var host = Host.CreateDefaultBuilder()
-                   .ConfigureServices((x, y) =>
-                   {
-                       y.AddRefitClient<IMockRestClient>()
-                           .ConfigureHttpClient(c => c.FromConfiguration(null, x.Configuration.GetSection("")));
-                   }).Build();
-
-            Assert.Throws<ArgumentNullException>(() => host.Services.GetRequiredService<IMockRestClient>());
+            Assert.Throws<ArgumentException>(() => new ServiceCollection().AddRefitClient<IMockRestClient>()
+                .ConfigureHttpClient(c => c.FromConfiguration(null, new ConfigurationBuilder().Build().GetSection(""))));
         }
 
         [Fact]
         public void FromConfiguration_SectionNameIsNull_ThrowsArgumentNullException()
         {
-            var host = Host.CreateDefaultBuilder()
-                .ConfigureServices((x, y) =>
-                {
-                    y.AddRefitClient<IMockRestClient>()
-                        .ConfigureHttpClient(c => c.FromConfiguration(x.Configuration, null));
-                }).Build();
-
-            Assert.Throws<ArgumentNullException>(() => host.Services.GetRequiredService<IMockRestClient>());        }
+            Assert.Throws<ArgumentException>(() => new ServiceCollection().AddRefitClient<IMockRestClient>()
+                .ConfigureHttpClient(c => c.FromConfiguration(new ConfigurationBuilder().Build(), null)));
+        }
     }
 }

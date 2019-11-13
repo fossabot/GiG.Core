@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("GiG.Core.Hosting.Tests.Integration")]
+[assembly: InternalsVisibleTo("GiG.Core.Hosting.Tests.Unit")]
 namespace GiG.Core.Hosting.Extensions
 {
     /// <summary>

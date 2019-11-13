@@ -8,7 +8,7 @@ using Microsoft.Extensions.FileProviders;
 using System;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("GiG.Core.Data.KVStores.Tests.Integration")]
+[assembly: InternalsVisibleTo("GiG.Core.Data.Tests.Unit")]
 namespace GiG.Core.Data.KVStores.Providers.FileProviders.Extensions
 {
     /// <summary>
@@ -29,7 +29,7 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders.Extensions
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-            if (string.IsNullOrWhiteSpace(configurationSectionName)) throw new ArgumentNullException(nameof(configurationSectionName));
+            if (string.IsNullOrWhiteSpace(configurationSectionName)) throw new ArgumentException(nameof(configurationSectionName));
 
             return builder.FromJsonFile(configuration.GetSection(configurationSectionName));
         }

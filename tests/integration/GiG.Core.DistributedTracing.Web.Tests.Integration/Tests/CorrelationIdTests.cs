@@ -1,5 +1,4 @@
 using GiG.Core.DistributedTracing.Abstractions;
-using GiG.Core.DistributedTracing.Web.Extensions;
 using GiG.Core.DistributedTracing.Web.Tests.Integration.Mocks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
@@ -22,18 +21,6 @@ namespace GiG.Core.DistributedTracing.Web.Tests.Integration.Tests
         {
             _server = new TestServer(new WebHostBuilder()
                 .UseStartup<MockStartup>());
-        }
-
-        [Fact]
-        public void UseCorrelation_ApplicationBuilderIsNull_ThrowsArgumentNullException()
-        {
-            Assert.Throws<ArgumentNullException>(() => ApplicationBuilderExtensions.UseCorrelation(null));
-        }
-
-        [Fact]
-        public void AddCorrelationAccessor_ServiceCollectionIsNull_ThrowsArgumentNullException()
-        {
-            Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddCorrelationAccessor(null));
         }
 
         [Fact]
