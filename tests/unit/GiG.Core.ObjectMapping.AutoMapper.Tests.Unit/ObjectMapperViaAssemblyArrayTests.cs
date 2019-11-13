@@ -1,9 +1,4 @@
-﻿using GiG.Core.ObjectMapping.Abstractions;
-using GiG.Core.ObjectMapping.AutoMapper.Extensions;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System.Reflection;
-using Xunit;
+﻿using Xunit;
 
 namespace GiG.Core.ObjectMapping.AutoMapper.Tests.Unit
 {
