@@ -9,7 +9,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
-using GiG.Core.Orleans.Silo.Abstractions;
 using SiloOptions = GiG.Core.Orleans.Silo.Abstractions.SiloOptions;
 
 namespace GiG.Core.Orleans.Silo.Extensions
