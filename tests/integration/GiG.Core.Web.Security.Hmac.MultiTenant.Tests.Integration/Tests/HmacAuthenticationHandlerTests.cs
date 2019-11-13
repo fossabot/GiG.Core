@@ -13,6 +13,7 @@ using GiG.Core.Http;
 using GiG.Core.Http.Security.Hmac;
 using GiG.Core.Security.Cryptography;
 using Xunit;
+using Constants = GiG.Core.Security.Hmac.Abstractions.Constants;
 
 namespace GiG.Core.Web.Security.Hmac.MultiTenant.Tests.Integration.Tests
 {
@@ -32,13 +33,19 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant.Tests.Integration.Tests
                     .ConfigurePrimaryHttpMessageHandler(x => _server.CreateHandler())
                     .ConfigureHttpClient(x => x.BaseAddress = _server.BaseAddress)
                     .AddHmacDelegatingHandler()
-                    .ConfigureDefaultHmacDelegatingHandlerOptionProvider(ctx.Configuration.GetSection("HmacClientDefault"));
+                    .ConfigureDefaultHmacDelegatingHandlerOptionProvider(ctx.Configuration.GetSection("HmacClientDefault"))
+                    .ConfigureHttpClient(x=>x.DefaultRequestHeaders.Add(Core.MultiTenant.Abstractions.Constants.Header,"1"));
 
                     services.AddHttpClient(DefaultClient2Name)
                     .ConfigurePrimaryHttpMessageHandler(x => _server.CreateHandler())
                     .ConfigureHttpClient(x => x.BaseAddress = _server.BaseAddress)
                     .AddHmacDelegatingHandler()
-                    .ConfigureDefaultHmacDelegatingHandlerOptionProvider(ctx.Configuration.GetSection("HmacClientDefault2"));
+                    .ConfigureDefaultHmacDelegatingHandlerOptionProvider(ctx.Configuration.GetSection("HmacClientDefault2"))
+                    .ConfigureHttpClient(x=>x.DefaultRequestHeaders.Add(Core.MultiTenant.Abstractions.Constants.Header,"2"));
+
+                    services.AddHttpClient("NonHmacClient")
+                        .ConfigurePrimaryHttpMessageHandler(x => _server.CreateHandler())
+                        .ConfigureHttpClient(x => x.BaseAddress = _server.BaseAddress);
                 })
                 .ConfigureAppConfiguration(appConfig => appConfig.AddJsonFile("appsettings.json")));
             ;
@@ -51,8 +58,7 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant.Tests.Integration.Tests
             //Arrange
             var client = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient(DefaultClientName);
             using var request = new HttpRequestMessage(HttpMethod.Get, "api/mock");
-            request.Headers.Add(HmacConstants.NonceHeader, "123");
-            request.Headers.Add(Constants.Header,"1");
+            request.Headers.Add(Constants.NonceHeader, "123");
 
             //Act
             using var response = await client.SendAsync(request);
@@ -67,10 +73,9 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant.Tests.Integration.Tests
         public async Task AuthenticateAsync_WithInvalidHmac_ReturnsUnauthorized()
         {
             //Arrange
-            var client = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient(DefaultClientName);
+            var client = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient("NonHmacClient");
             using var request = new HttpRequestMessage(HttpMethod.Get, "api/mock");
-            request.Headers.Add(HmacConstants.NonceHeader, "123");
-            request.Headers.Add(Constants.Header, "2");
+            request.Headers.Add(Constants.NonceHeader, "123");
 
             //Act
             using var response = await client.SendAsync(request);
@@ -86,12 +91,10 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant.Tests.Integration.Tests
             var clientDefault = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient(DefaultClientName);
             var clientDefault2 = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient(DefaultClient2Name);
             using var request = new HttpRequestMessage(HttpMethod.Get, "api/mock");
-            request.Headers.Add(HmacConstants.NonceHeader, "123");
-            request.Headers.Add(Constants.Header, "1");
+            request.Headers.Add(Constants.NonceHeader, "123");
 
             using var request2 = new HttpRequestMessage(HttpMethod.Get, "api/mock");
-            request2.Headers.Add(HmacConstants.NonceHeader, "123");
-            request2.Headers.Add(Constants.Header, "2");
+            request2.Headers.Add(Constants.NonceHeader, "123");
 
             //Act
             using var response = await clientDefault.SendAsync(request);
