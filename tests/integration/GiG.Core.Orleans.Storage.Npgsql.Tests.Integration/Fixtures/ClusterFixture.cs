@@ -28,7 +28,7 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Tests.Integration.Fixtures
             var siloHost = Host.CreateDefaultBuilder()
                 .UseOrleans((ctx, x) =>
                 {
-                    x.ConfigureEndpoints();
+                    x.ConfigureEndpoints(ctx.Configuration);
                     x.UseLocalhostClustering();
                     x.AddAssemblies(typeof(StorageTestGrain));
                     x.AddNpgsqlGrainStorage("testDB", ctx.Configuration);

@@ -36,7 +36,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                 .UseOrleans((ctx, sb) =>
                 {
                     sb.ConfigureCluster(ctx.Configuration);
-                    sb.ConfigureEndpoints();
+                    sb.ConfigureEndpoints(ctx.Configuration);
                     sb.ConfigureConsulClustering(ctx.Configuration);
                     sb.AddAssemblies(typeof(EchoTestGrain));
                     sb.Configure<SiloOptions>(options => options.SiloName = SiloName);

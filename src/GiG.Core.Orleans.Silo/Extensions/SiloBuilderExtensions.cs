@@ -9,6 +9,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
+using GiG.Core.Orleans.Silo.Abstractions;
+using SiloOptions = GiG.Core.Orleans.Silo.Abstractions.SiloOptions;
 
 namespace GiG.Core.Orleans.Silo.Extensions
 {
@@ -29,7 +31,7 @@ namespace GiG.Core.Orleans.Silo.Extensions
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (assemblies == null) throw new ArgumentNullException(nameof(assemblies));
-            
+
             builder.ConfigureApplicationParts(parts =>
             {
                 foreach (var assembly in assemblies)
@@ -40,7 +42,7 @@ namespace GiG.Core.Orleans.Silo.Extensions
 
             return builder;
         }
-        
+
         /// <summary>
         /// Adds Assemblies to Silo Builder with references.
         /// </summary>
@@ -51,7 +53,7 @@ namespace GiG.Core.Orleans.Silo.Extensions
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (types == null) throw new ArgumentNullException(nameof(types));
-            
+
             builder.ConfigureApplicationParts(parts =>
             {
                 foreach (var type in types)
@@ -73,7 +75,7 @@ namespace GiG.Core.Orleans.Silo.Extensions
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
-            
+
             builder.Configure<ClusterOptions>(configurationSection);
 
             return builder;
@@ -89,7 +91,7 @@ namespace GiG.Core.Orleans.Silo.Extensions
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-  
+
             var configurationSection = configuration.GetSection(ClusterOptionsDefaultSection);
             if (configurationSection == null)
             {
@@ -103,29 +105,47 @@ namespace GiG.Core.Orleans.Silo.Extensions
         /// Configures the Silo's endpoint.
         /// </summary>
         /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
-        /// <param name="siloPort">Silo port which are default set to the default provided by in endpoint options.</param>
-        /// <param name="gatewayPort">Gateway port which are default set to the default provided by endpoint options.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/> containing the Silo options.</param>
         /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
-        public static ISiloBuilder ConfigureEndpoints([NotNull] this ISiloBuilder builder, int siloPort = EndpointOptions.DEFAULT_SILO_PORT, int gatewayPort = EndpointOptions.DEFAULT_GATEWAY_PORT)
+        public static ISiloBuilder ConfigureEndpoints([NotNull] this ISiloBuilder builder, [NotNull] IConfiguration configuration)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
-            
+
+            var configurationSection = configuration.GetSection(SiloOptions.DefaultSectionName);
+
+            return builder.ConfigureEndpoints(configurationSection);
+        }
+        
+        /// <summary>
+        /// Configures the Silo's endpoint.
+        /// </summary>
+        /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/> containing the Silo options.</param>
+        /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
+        public static ISiloBuilder ConfigureEndpoints([NotNull] this ISiloBuilder builder, [NotNull] IConfigurationSection configurationSection)
+        {
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
+         
+            var siloOptions = configurationSection.Get<SiloOptions>() ?? new SiloOptions();
+          
             var siloAddress = Dns.GetHostEntry(Dns.GetHostName()).AddressList
-                   .First(a => a.AddressFamily == AddressFamily.InterNetwork);
+                .First(a => a.AddressFamily == AddressFamily.InterNetwork);
 
             return builder.Configure((EndpointOptions options) =>
             {
                 options.AdvertisedIPAddress = siloAddress;
-                options.SiloPort = siloPort;
-                options.GatewayPort = gatewayPort;
+                options.SiloPort = siloOptions.SiloPort;
+                options.GatewayPort = siloOptions.GatewayPort;
             });
         }
+
 
         /// <summary>
         /// Configures the Silo Builder with default configurations.
         /// </summary>
         /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
-        /// <param name="configuration">The <see cref="IConfiguration"/> containing the Cluster options.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/> containing the Cluster and Silo options.</param>
         /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
         public static ISiloBuilder ConfigureDefaults([NotNull] this ISiloBuilder builder, [NotNull] IConfiguration configuration)
         {
@@ -134,7 +154,7 @@ namespace GiG.Core.Orleans.Silo.Extensions
 
             return builder
                 .ConfigureCluster(configuration)
-                .ConfigureEndpoints();
+                .ConfigureEndpoints(configuration);
         }
     }
 }
