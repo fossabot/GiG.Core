@@ -1,9 +1,9 @@
 ﻿namespace GiG.Core.Security.Hmac.Abstractions
 {
     /// <summary>
-    /// The Hmac Constants.
+    /// Constants.
     /// </summary>
-    public class HmacConstants
+    public class Constants
     {
         /// <summary>
         /// The Header for HmacAuthentication.

@@ -44,9 +44,9 @@ namespace GiG.Core.Http.Security.Hmac
                 throw new ConfigurationErrorsException("Options not set for HMAC.");
             }
 
-            if(!request.Headers.TryGetValues(HmacConstants.NonceHeader,out var nonceValue) || nonceValue.Count() == 0)
+            if(!request.Headers.TryGetValues(Constants.NonceHeader,out var nonceValue) || nonceValue.Count() == 0)
             {
-                throw new ArgumentException($"Missing {HmacConstants.NonceHeader}.");
+                throw new ArgumentException($"Missing {Constants.NonceHeader}.");
             }
 
             var hashProvider = _hashProviderFactory.GetHashProvider(options.HashAlgorithm);

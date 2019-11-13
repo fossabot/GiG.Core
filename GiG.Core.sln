@@ -279,17 +279,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Http.Extensions", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Sample.Http", "samples\Orleans\src\GiG.Core.Orleans.Sample.Http\GiG.Core.Orleans.Sample.Http.csproj", "{945CA93F-25BC-4B45-9013-F4B15047B881}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Docs.Abstractions", "src\GiG.Core.Web.Docs.Abstractions\GiG.Core.Web.Docs.Abstractions.csproj", "{ECF4320C-0B41-4D74-99AD-ACDFE69EC230}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Clustering.Kubernetes.Abstractions", "src\GiG.Core.Orleans.Clustering.Kubernetes.Abstractions\GiG.Core.Orleans.Clustering.Kubernetes.Abstractions.csproj", "{FA43C5F8-CF14-476B-B147-5A1412B54CAB}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Clustering.Consul.Abstractions", "src\GiG.Core.Orleans.Clustering.Consul.Abstractions\GiG.Core.Orleans.Clustering.Consul.Abstractions.csproj", "{27E1501C-F6CF-4D88-AFD3-64AB4F573D8D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Clustering.Abstractions", "src\GiG.Core.Orleans.Clustering.Abstractions\GiG.Core.Orleans.Clustering.Abstractions.csproj", "{5E77E9F0-95F0-47E7-BEDA-4DDCC2C9DBD4}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Silo.Abstractions", "src\GiG.Core.Orleans.Silo.Abstractions\GiG.Core.Orleans.Silo.Abstractions.csproj", "{4E44028E-F87A-4C11-B953-F104DE7E36F2}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Storage.Npgsql.Abstractions", "src\GiG.Core.Orleans.Storage.Npgsql.Abstractions\GiG.Core.Orleans.Storage.Npgsql.Abstractions.csproj", "{3E1FF6DA-ABD3-4B46-AA6A-C1694BD715C7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Logging.Tests.Integration", "tests\integration\GiG.Core.Logging.Tests.Integration\GiG.Core.Logging.Tests.Integration.csproj", "{40161FF2-C190-4F1B-AACE-080BDB007976}"
 EndProject
@@ -343,7 +333,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Sample.Tests.U
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit", "unit", "{2F278225-A808-4DD5-804F-A0A33522FA52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Orleans.Sample.Tests.Unit", "samples\Orleans\tests\unit\GiG.Core.Orleans.Sample.Tests.Unit\GiG.Core.Orleans.Sample.Tests.Unit.csproj", "{05484D7B-47CA-4FCE-80B4-03B0C0C853D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Sample.Tests.Unit", "samples\Orleans\tests\unit\GiG.Core.Orleans.Sample.Tests.Unit\GiG.Core.Orleans.Sample.Tests.Unit.csproj", "{05484D7B-47CA-4FCE-80B4-03B0C0C853D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -619,30 +609,10 @@ Global
 		{945CA93F-25BC-4B45-9013-F4B15047B881}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{945CA93F-25BC-4B45-9013-F4B15047B881}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{945CA93F-25BC-4B45-9013-F4B15047B881}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ECF4320C-0B41-4D74-99AD-ACDFE69EC230}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ECF4320C-0B41-4D74-99AD-ACDFE69EC230}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ECF4320C-0B41-4D74-99AD-ACDFE69EC230}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ECF4320C-0B41-4D74-99AD-ACDFE69EC230}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FA43C5F8-CF14-476B-B147-5A1412B54CAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA43C5F8-CF14-476B-B147-5A1412B54CAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FA43C5F8-CF14-476B-B147-5A1412B54CAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FA43C5F8-CF14-476B-B147-5A1412B54CAB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{27E1501C-F6CF-4D88-AFD3-64AB4F573D8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{27E1501C-F6CF-4D88-AFD3-64AB4F573D8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{27E1501C-F6CF-4D88-AFD3-64AB4F573D8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{27E1501C-F6CF-4D88-AFD3-64AB4F573D8D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5E77E9F0-95F0-47E7-BEDA-4DDCC2C9DBD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5E77E9F0-95F0-47E7-BEDA-4DDCC2C9DBD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E77E9F0-95F0-47E7-BEDA-4DDCC2C9DBD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E77E9F0-95F0-47E7-BEDA-4DDCC2C9DBD4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4E44028E-F87A-4C11-B953-F104DE7E36F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4E44028E-F87A-4C11-B953-F104DE7E36F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4E44028E-F87A-4C11-B953-F104DE7E36F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4E44028E-F87A-4C11-B953-F104DE7E36F2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3E1FF6DA-ABD3-4B46-AA6A-C1694BD715C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3E1FF6DA-ABD3-4B46-AA6A-C1694BD715C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3E1FF6DA-ABD3-4B46-AA6A-C1694BD715C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3E1FF6DA-ABD3-4B46-AA6A-C1694BD715C7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{40161FF2-C190-4F1B-AACE-080BDB007976}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{40161FF2-C190-4F1B-AACE-080BDB007976}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40161FF2-C190-4F1B-AACE-080BDB007976}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -844,12 +814,7 @@ Global
 		{2B8C9DCF-462C-4C3C-BA7A-320F57EC2190} = {478DEC56-C4B1-41D2-91BE-9E2B56B8B261}
 		{6A9B9A62-7E56-426D-83E3-5E1F9F673550} = {663B3F62-62DA-4B0D-81CA-156013D0C93C}
 		{945CA93F-25BC-4B45-9013-F4B15047B881} = {2AFB4E5D-843D-4DE4-A151-772FC6978A2F}
-		{ECF4320C-0B41-4D74-99AD-ACDFE69EC230} = {D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF}
-		{FA43C5F8-CF14-476B-B147-5A1412B54CAB} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
-		{27E1501C-F6CF-4D88-AFD3-64AB4F573D8D} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
 		{5E77E9F0-95F0-47E7-BEDA-4DDCC2C9DBD4} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
-		{4E44028E-F87A-4C11-B953-F104DE7E36F2} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
-		{3E1FF6DA-ABD3-4B46-AA6A-C1694BD715C7} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
 		{40161FF2-C190-4F1B-AACE-080BDB007976} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 		{7D836F14-0DE2-4AA5-B84B-C04F7FB6FB33} = {2AFB4E5D-843D-4DE4-A151-772FC6978A2F}
 		{ED920311-FDF3-4AFD-8ECB-E3D74D14BC2D} = {2AFB4E5D-843D-4DE4-A151-772FC6978A2F}
