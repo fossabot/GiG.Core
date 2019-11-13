@@ -22,6 +22,8 @@ namespace GiG.Core.Http.Security.Hmac.Extensions
         /// <returns>The <see cref="IHttpClientBuilder" />.</returns>
         public static IHttpClientBuilder AddHmacDelegatingHandler([NotNull]this IHttpClientBuilder httpClientBuilder)
         {
+            if (httpClientBuilder == null) throw new ArgumentNullException(nameof(httpClientBuilder));
+
             var services = httpClientBuilder.Services;
             httpClientBuilder.AddHttpMessageHandler(x=>
             {
