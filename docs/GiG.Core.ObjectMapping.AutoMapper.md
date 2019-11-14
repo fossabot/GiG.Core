@@ -16,11 +16,20 @@ public void ConfigureServices(IServiceCollection services)
 Now you can inject AutoMapper at runtime into your services/controllers:
 
 ```csharp
-public class EmployeesController {
-	private readonly IObjectMapper _mapper;
+public class EmployeesController
+{
+    private readonly IObjectMapper _mapper;
 
-	public EmployeesController(IObjectMapper mapper) => _mapper = mapper;
+    public EmployeesController(IObjectMapper mapper) => _mapper = mapper;
 
-	// use _mapper.Map or _mapper.ProjectTo
+    [ProducesResponseType((int)HttpStatusCode.Created)]
+    [ProducesResponseType((int)HttpStatusCode.Conflict)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    public async Task<ActionResult<EmployeeResponse>> Post(EmployeeRequest request)
+    {
+	    var model = _mapper.Map<Employee>(request);
+            ...
+            ...
+    }
 }
 ```

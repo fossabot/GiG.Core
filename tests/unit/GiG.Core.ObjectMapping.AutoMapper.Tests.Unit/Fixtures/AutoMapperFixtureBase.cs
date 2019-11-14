@@ -2,7 +2,7 @@
 
 namespace GiG.Core.ObjectMapping.AutoMapper.Tests.Unit.Fixtures
 {
-    public class AutoMapperFixtureBase
+    public abstract class AutoMapperFixtureBase
     {
         public IObjectMapper ObjectMapper;
     }

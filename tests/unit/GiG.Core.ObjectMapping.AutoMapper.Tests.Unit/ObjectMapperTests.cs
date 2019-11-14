@@ -8,6 +8,7 @@ using Person = GiG.Core.ObjectMapping.AutoMapper.Tests.Unit.Models.Person;
 
 namespace GiG.Core.ObjectMapping.AutoMapper.Tests.Unit
 {
+    [Trait("Category", "Unit")]
     public abstract class ObjectMapperTests
     {
         private readonly IObjectMapper _objectMapper;
