@@ -18,7 +18,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
                  .UseOrleans((ctx, sb) =>
                  {
                      sb.ConfigureCluster(ctx.Configuration);
-                     sb.ConfigureEndpoints();
+                     sb.ConfigureEndpoints(ctx.Configuration);
                      sb.UseMembershipProvider(ctx.Configuration, x =>
                      {
                          x.ConfigureConsulClustering(ctx.Configuration);

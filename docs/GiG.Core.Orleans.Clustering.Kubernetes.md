@@ -43,7 +43,7 @@ static class Program
     private static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builder)
     {
         builder.ConfigureCluster(ctx.Configuration)               
-            .ConfigureEndpoints()
+            .ConfigureEndpoints(ctx.Configuration)
             .ConfigureKubernetesClustering(ctx.Configuration)
             .AddAssemblies(typeof(Grain));
     }
