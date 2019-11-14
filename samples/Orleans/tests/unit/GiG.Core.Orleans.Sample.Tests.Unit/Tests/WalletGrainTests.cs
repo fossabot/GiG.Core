@@ -12,6 +12,7 @@ using Xunit;
 
 namespace GiG.Core.Orleans.Sample.Tests.Unit.Tests
 {
+    [Trait("Category", "Unit")]
     public class WalletGrainTests : TestKitBase
     {
         private readonly Mock<IStreamFactory> _streamFactoryMock;

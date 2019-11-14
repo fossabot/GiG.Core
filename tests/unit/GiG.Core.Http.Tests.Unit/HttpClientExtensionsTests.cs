@@ -1,8 +1,5 @@
 ﻿using GiG.Core.Http.Extensions;
-using GiG.Core.Http.Tests.Unit.Mocks;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Refit;
 using System;
 using System.Net.Http;
 using Xunit;
@@ -35,15 +32,13 @@ namespace GiG.Core.Http.Tests.Unit
         [Fact]
         public void FromConfiguration_BaseUriIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentException>(() => new ServiceCollection().AddRefitClient<IMockRestClient>()
-                .ConfigureHttpClient(c => c.FromConfiguration(null, new ConfigurationBuilder().Build().GetSection(""))));
+            Assert.Throws<ArgumentException>(() => new HttpClient().FromConfiguration(null, new ConfigurationBuilder().Build().GetSection("HttpClient")));
         }
 
         [Fact]
         public void FromConfiguration_SectionNameIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentException>(() => new ServiceCollection().AddRefitClient<IMockRestClient>()
-                .ConfigureHttpClient(c => c.FromConfiguration(new ConfigurationBuilder().Build(), null)));
+            Assert.Throws<ArgumentException>(() => new HttpClient().FromConfiguration(new ConfigurationBuilder().Build(), null));
         }
     }
 }
