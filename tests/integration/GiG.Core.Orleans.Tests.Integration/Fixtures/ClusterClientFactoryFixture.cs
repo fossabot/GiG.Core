@@ -1,8 +1,6 @@
 using Bogus;
-using GiG.Core.Orleans.Client;
 using GiG.Core.Orleans.Client.Abstractions;
 using GiG.Core.Orleans.Client.Extensions;
-using GiG.Core.Orleans.Clustering.Consul;
 using GiG.Core.Orleans.Clustering.Consul.Extensions;
 using GiG.Core.Orleans.Silo.Extensions;
 using GiG.Core.Orleans.Tests.Integration.Contracts;
