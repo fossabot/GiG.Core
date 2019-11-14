@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GiG.Core.Context.Web.Extensions;
+using System;
 using Xunit;
 // ReSharper disable AssignNullToNotNullAttribute
 
@@ -10,8 +11,7 @@ namespace GiG.Core.Context.Tests.Unit
         [Fact]
         public void AddRequestContextAccessor_ServiceCollectionIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => Web.Extensions.ServiceCollectionExtensions.AddRequestContextAccessor(null));
-            Assert.Throws<ArgumentNullException>(() => Orleans.Extensions.ServiceCollectionExtensions.AddRequestContextAccessor(null));
+            Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddRequestContextAccessor(null));
         }
     }
 }

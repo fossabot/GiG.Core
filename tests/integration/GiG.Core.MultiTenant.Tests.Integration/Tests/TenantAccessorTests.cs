@@ -1,16 +1,14 @@
 using GiG.Core.MultiTenant.Abstractions;
-using GiG.Core.MultiTenant.Web.Extensions;
 using GiG.Core.MultiTenant.Web.Tests.Integration.Mocks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Xunit; 
+using Xunit;
 // ReSharper disable AssignNullToNotNullAttribute
 
 namespace GiG.Core.MultiTenant.Web.Tests.Integration.Tests
@@ -24,13 +22,6 @@ namespace GiG.Core.MultiTenant.Web.Tests.Integration.Tests
         {
             _server = new TestServer(new WebHostBuilder()
                 .UseStartup<MockStartup>());
-        }
-
-        [Fact]
-        public void AddTenantAccessor_ServiceCollectionIsNull_ThrowsArgumentNullException()
-        {
-            Assert.Throws<ArgumentNullException>(
-                () => ServiceCollectionExtensions.AddTenantAccessor(null));
         }
 
         [Fact]
