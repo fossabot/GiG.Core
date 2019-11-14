@@ -19,7 +19,7 @@ namespace GiG.Core.Orleans.MultiCluster.Silo
         public static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builder)
         {
             builder.ConfigureCluster(ctx.Configuration)
-                .ConfigureEndpoints()
+                .ConfigureEndpoints(ctx.Configuration)
                 .UseMembershipProvider(ctx.Configuration, x =>
                 {
                     x.ConfigureConsulClustering(ctx.Configuration);

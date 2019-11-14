@@ -25,7 +25,7 @@ public class Program
     public static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builder)
     {
         builder.ConfigureCluster(ctx.Configuration)
-            .ConfigureEndpoints()
+            .ConfigureEndpoints(ctx.Configuration)
             .AddAssemblies(typeof(Grain))
 			 .AddNpgsqlGrainStorage("NpgsqlProvider", ctx.Configuration);
     }

@@ -26,7 +26,7 @@ namespace GiG.Core.Orleans.Sample.Silo
         {
             builder.ConfigureCluster(ctx.Configuration)
                 .ConfigureDashboard(ctx.Configuration)
-                .ConfigureEndpoints()
+                .ConfigureEndpoints(ctx.Configuration)
                 .UseMembershipProvider(ctx.Configuration, x =>
                 {
                     x.ConfigureConsulClustering(ctx.Configuration);

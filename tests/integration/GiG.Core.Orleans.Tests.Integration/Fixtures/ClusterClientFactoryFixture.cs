@@ -34,7 +34,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                 .UseOrleans((ctx, sb) =>
                 {
                     sb.ConfigureCluster(ctx.Configuration.GetSection("Orleans:ClusterA"));
-                    sb.ConfigureEndpoints();
+                    sb.ConfigureEndpoints(ctx.Configuration.GetSection("Orleans:ClusterA:Silo"));
                     sb.ConfigureConsulClustering(ctx.Configuration);
                     sb.AddAssemblies(typeof(ClusterClientFactoryTestGrain));
                     sb.Configure<SiloOptions>(options => options.SiloName = SiloNameA);
@@ -47,7 +47,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                .UseOrleans((ctx, sb) =>
                {
                    sb.ConfigureCluster(ctx.Configuration.GetSection("Orleans:ClusterB"));
-                   sb.ConfigureEndpoints(11112, 30002);
+                   sb.ConfigureEndpoints(ctx.Configuration.GetSection("Orleans:ClusterB:Silo"));
                    sb.ConfigureConsulClustering(ctx.Configuration);
                    sb.AddAssemblies(typeof(ClusterClientFactoryTestGrain));
                    sb.Configure<SiloOptions>(options => options.SiloName = SiloNameB);
