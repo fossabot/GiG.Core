@@ -18,18 +18,18 @@
   </ItemGroup>
 
   <ItemGroup>
-
     <ProjectReference Include="..\..\..\src\GiG.Core.Http.DistributedTracing\GiG.Core.Http.DistributedTracing.csproj" />
-
     <ProjectReference Include="..\..\..\src\GiG.Core.Http.Extensions\GiG.Core.Http.Extensions.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Http.MultiTenant\GiG.Core.Http.MultiTenant.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Http.Security.Hmac\GiG.Core.Http.Security.Hmac.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Microsoft.Extensions.Http">
-      <HintPath>..\..\..\..\..\Program Files\dotnet\packs\Microsoft.AspNetCore.App.Ref\3.0.0\ref\netcoreapp3.0\Microsoft.Extensions.Http.dll</HintPath>
-    </Reference>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

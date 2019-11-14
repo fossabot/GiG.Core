@@ -15,10 +15,4 @@
     <ProjectReference Include="..\GiG.Core.Http\GiG.Core.Http.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
