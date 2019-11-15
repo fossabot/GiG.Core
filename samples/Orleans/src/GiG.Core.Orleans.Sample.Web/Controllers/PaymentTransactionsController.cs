@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace GiG.Core.Orleans.Sample.Web.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("v{version:apiVersion}/[controller]")]
+    [ApiVersion("1")]
     public class PaymentTransactionsController : ControllerBase
     {
         private readonly IClusterClient _clusterClient;

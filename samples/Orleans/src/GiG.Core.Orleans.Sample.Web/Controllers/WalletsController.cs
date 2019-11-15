@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 namespace GiG.Core.Orleans.Sample.Web.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("v{version:apiVersion}/[controller]")]
+    [ApiVersion("1")]
     public class WalletsController: ControllerBase
     {
         private readonly IClusterClient _clusterClient;
