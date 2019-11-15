@@ -43,7 +43,7 @@ static class Program
     public static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builder)
     {
         builder.ConfigureCluster(ctx.Configuration)
-            .ConfigureEndpoints()
+            .ConfigureEndpoints(ctx.Configuration)
             .ConfigureConsulClustering(ctx.Configuration)
             .AddAssemblies(typeof(Grain));
     }

@@ -53,5 +53,4 @@ The below table outlines the valid Configurations.
 
 | Configuration Name  | Type	| Optional | Default Value	   |
 |---------------------|---------|----------|-------------------|
-| IsEnabled			  | Boolean | No	   | `true`		       |
 | Url				  | String  | No	   | `/actuator/info` | 	
