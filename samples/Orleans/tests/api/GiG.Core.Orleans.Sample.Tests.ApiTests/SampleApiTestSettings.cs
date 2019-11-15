@@ -7,7 +7,7 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests
         public static string ApiUrl()
         {
             TestConfigurationOptions config = GetConfiguration();
-            return config.BaseUrl + config.ApiPath;
+            return config.BaseUrl + config.ApiPath + config.ApiVersion;
         }
 
         public static string NotificationsUrl()
