@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\src\GiG.Core.Hosting.AspNetCore\GiG.Core.Hosting.AspNetCore.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Hosting\GiG.Core.Hosting.csproj" />
   </ItemGroup>
 

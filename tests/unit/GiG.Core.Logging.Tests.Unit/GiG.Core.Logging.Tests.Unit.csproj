@@ -6,6 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="3.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
@@ -15,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\src\GiG.Core.Logging.All\GiG.Core.Logging.All.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Enrichers.ApplicationMetadata\GiG.Core.Logging.Enrichers.ApplicationMetadata.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Enrichers.Context\GiG.Core.Logging.Enrichers.Context.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Enrichers.DistributedTracing\GiG.Core.Logging.Enrichers.DistributedTracing.csproj" />
@@ -22,6 +25,7 @@
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Sinks.Console\GiG.Core.Logging.Sinks.Console.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Sinks.File\GiG.Core.Logging.Sinks.File.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Sinks.Fluentd\GiG.Core.Logging.Sinks.Fluentd.csproj" />
+    <ProjectReference Include="..\..\..\src\GiG.Core.Logging\GiG.Core.Logging.csproj" />
   </ItemGroup>
 
 </Project>
