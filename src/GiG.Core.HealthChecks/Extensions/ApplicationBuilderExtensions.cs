@@ -2,15 +2,9 @@
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
 using System;
-using System.IO;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace GiG.Core.HealthChecks.Extensions
 {
@@ -35,36 +29,17 @@ namespace GiG.Core.HealthChecks.Extensions
                 .UseHealthChecks(options.ReadyUrl, new HealthCheckOptions
                 {
                     Predicate = check => check.Tags.Contains(Constants.ReadyTag),
-                    ResponseWriter = WriteJsonResponseWriter
+                    ResponseWriter = HealthCheckEndpointWriter.WriteJsonResponseWriter
                 })
                 .UseHealthChecks(options.LiveUrl, new HealthCheckOptions
                 {
                     Predicate = check => check.Tags.Contains(Constants.LiveTag),
-                    ResponseWriter = WriteJsonResponseWriter
+                    ResponseWriter = HealthCheckEndpointWriter.WriteJsonResponseWriter
                 })
                 .UseHealthChecks(options.CombinedUrl, new HealthCheckOptions
                 {
-                    ResponseWriter = WriteJsonResponseWriter
+                    ResponseWriter = HealthCheckEndpointWriter.WriteJsonResponseWriter
                 });
-        }
-
-        private static Task WriteJsonResponseWriter(HttpContext httpContext, HealthReport healthReport)
-        {
-            httpContext.Response.ContentType = "application/json";
-
-            using (var stream = new MemoryStream())
-            {
-                using (var writer = new Utf8JsonWriter(stream))
-                {
-                    writer.WriteStartObject();
-                    writer.WriteString("status", healthReport.Status.ToString());
-                    writer.WriteEndObject();
-                }
-
-                var json = Encoding.UTF8.GetString(stream.ToArray());
-
-                return httpContext.Response.WriteAsync(json);
-            }
         }
     }
 }
