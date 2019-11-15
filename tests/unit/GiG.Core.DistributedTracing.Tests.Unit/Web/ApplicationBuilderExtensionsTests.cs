@@ -11,7 +11,8 @@ namespace GiG.Core.DistributedTracing.Tests.Unit
         [Fact]
         public void UseCorrelation_ApplicationBuilderIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => ApplicationBuilderExtensions.UseCorrelation(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => ApplicationBuilderExtensions.UseCorrelation(null));
+            Assert.Equal("builder", exception.ParamName);
         }
     }
 }

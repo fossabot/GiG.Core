@@ -13,13 +13,15 @@ namespace GiG.Core.Context.Tests.Unit.Orleans
         [Fact]
         public void AddRequestContextOutgoingFilter_ClientBuilderIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => ClientBuilderExtensions.AddRequestContextOutgoingFilter(null, null));
+            var exception = Assert.Throws<ArgumentNullException>(() => ClientBuilderExtensions.AddRequestContextOutgoingFilter(null, null));
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]
         public void AddRequestContextOutgoingFilter_ServiceCollectionIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new ClientBuilder().AddRequestContextOutgoingFilter(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => new ClientBuilder().AddRequestContextOutgoingFilter(null));
+            Assert.Equal("serviceProvider", exception.ParamName);
         }
     }
 }

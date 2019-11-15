@@ -12,14 +12,15 @@ namespace GiG.Core.Data.Tests.Unit.DataMigration
         [Fact]
         public void AddDbMigration_ServiceCollectionIsNull__ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => ServiceCollectionExtensions.AddDbMigration(null, null));
+            var exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddDbMigration(null, null));
+            Assert.Equal("services", exception.ParamName);
         }
 
         [Fact]
         public void AddDbMigration_DbConnectionIsNull__ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new ServiceCollection().AddDbMigration(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => new ServiceCollection().AddDbMigration(null));
+            Assert.Equal("dbConnection", exception.ParamName);
         }
     }
 }

@@ -11,8 +11,8 @@ namespace GiG.Core.Data.Tests.Unit.KVStores
         [Fact]
         public void AddKVStores_ServiceCollectionIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => ServiceCollectionExtensions.AddKVStores<object>(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddKVStores<object>(null));
+            Assert.Equal("services", exception.ParamName);
         }
     }
 }

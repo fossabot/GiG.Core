@@ -23,7 +23,7 @@ namespace GiG.Core.Logging.Extensions
         public static IHostBuilder ConfigureLogging([NotNull] this IHostBuilder builder, Action<LoggingConfigurationBuilder> configureLoggingConfigurationBuilder, [NotNull] string sectionName = LoggingOptions.DefaultSectionName)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
-            if (string.IsNullOrWhiteSpace(sectionName)) throw new ArgumentException(nameof(sectionName));
+            if (string.IsNullOrWhiteSpace(sectionName)) throw new ArgumentException($"Missing {nameof(sectionName)}.");
 
             return builder
                 .ConfigureServices((context, services) => ConfigureLoggingInternal(context, services, configureLoggingConfigurationBuilder, sectionName))

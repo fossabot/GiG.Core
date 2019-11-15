@@ -23,7 +23,7 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Extensions
         /// <returns>The<see cref="ISiloBuilder"/>.</returns>
         public static ISiloBuilder AddNpgsqlGrainStorage([NotNull] this ISiloBuilder builder, [NotNull] string storageName, [NotNull] IConfiguration configuration)
         {
-            if (string.IsNullOrWhiteSpace(storageName)) throw new ArgumentException(nameof(storageName));
+            if (string.IsNullOrWhiteSpace(storageName)) throw new ArgumentException($"Missing {nameof(storageName)}.");
 
             return builder.AddNpgsqlGrainStorage(storageName, configuration, NpgsqlOptions.DefaultSectionName);
         }
@@ -40,8 +40,8 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Extensions
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-            if (string.IsNullOrWhiteSpace(storageName)) throw new ArgumentException(nameof(storageName));
-            if (string.IsNullOrWhiteSpace(sectionName)) throw new ArgumentException(nameof(sectionName));
+            if (string.IsNullOrWhiteSpace(storageName)) throw new ArgumentException($"Missing {nameof(storageName)}.");
+            if (string.IsNullOrWhiteSpace(sectionName)) throw new ArgumentException($"Missing {nameof(sectionName)}.");
 
             var namedStorageSectionName = $"{sectionName}:{storageName}";
             var storageConfigSection = configuration.GetSection(namedStorageSectionName);
@@ -61,7 +61,7 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Extensions
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
-            if (string.IsNullOrWhiteSpace(storageName)) throw new ArgumentException(nameof(storageName));
+            if (string.IsNullOrWhiteSpace(storageName)) throw new ArgumentException($"Missing {nameof(storageName)}.");
 
             var npgsqlOptions = configurationSection.Get<NpgsqlOptions>();
 

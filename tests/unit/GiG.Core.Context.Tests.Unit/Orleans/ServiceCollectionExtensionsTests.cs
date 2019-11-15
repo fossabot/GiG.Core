@@ -11,7 +11,8 @@ namespace GiG.Core.Context.Tests.Unit.Orleans
         [Fact]
         public void AddRequestContextAccessor_ServiceCollectionIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddRequestContextAccessor(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddRequestContextAccessor(null));
+            Assert.Equal("services", exception.ParamName);
         }
     }
 }

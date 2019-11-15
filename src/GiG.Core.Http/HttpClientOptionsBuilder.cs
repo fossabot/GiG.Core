@@ -22,7 +22,7 @@ namespace GiG.Core.Http
         /// <exception cref="ArgumentNullException">.</exception>
         public HttpClientOptionsBuilder WithBaseAddress(string baseUri, [NotNull] string relativeUri)
         {
-            if (string.IsNullOrWhiteSpace(relativeUri)) throw new ArgumentException(nameof(relativeUri));
+            if (string.IsNullOrWhiteSpace(relativeUri)) throw new ArgumentException($"Missing {nameof(relativeUri)}.");
 
             BaseAddress = string.IsNullOrEmpty(baseUri)
                 ? new Uri(relativeUri)
@@ -39,7 +39,7 @@ namespace GiG.Core.Http
         /// <exception cref="ArgumentNullException">.</exception>
         public HttpClientOptionsBuilder WithBaseAddress([NotNull] string baseUri)
         {
-            if (string.IsNullOrWhiteSpace(baseUri)) throw new ArgumentException(nameof(baseUri));
+            if (string.IsNullOrWhiteSpace(baseUri)) throw new ArgumentException($"Missing {nameof(baseUri)}.");
 
             BaseAddress = new Uri(baseUri);
 

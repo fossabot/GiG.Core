@@ -15,59 +15,62 @@ namespace GiG.Core.Data.Tests.Unit.KVStores
         [Fact]
         public void AddMemoryDataStore_KVStoreBuilderIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => KVStoreBuilderExtensions.AddMemoryDataStore<object>(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => KVStoreBuilderExtensions.AddMemoryDataStore<object>(null));
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]
         public void FromJsonFile_KVStoreBuilderIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => FileProvidersKVStoreBuilderExtensions.FromJsonFile<object>(null, null, ""));
+            var exception = Assert.Throws<ArgumentNullException>(() => FileProvidersKVStoreBuilderExtensions.FromJsonFile<object>(null, null, ""));
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]
         public void FromJsonFileWithConfigurationSection_KVStoreBuilderIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => FileProvidersKVStoreBuilderExtensions.FromJsonFile<object>(null, null));
+            var exception = Assert.Throws<ArgumentNullException>(() => FileProvidersKVStoreBuilderExtensions.FromJsonFile<object>(null, null));
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]
         public void FromJsonFile_ConfigurationIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() =>
+            var exception = Assert.Throws<ArgumentNullException>(() =>
                 Host.CreateDefaultBuilder()
                     .ConfigureServices(x =>
                         x.AddKVStores<object>().FromJsonFile(null, ""))
                     .Build());
+            Assert.Equal("configuration", exception.ParamName);
         }
 
         [Fact]
         public void FromJsonFile_ConfigurationSectionIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() =>
+            var exception = Assert.Throws<ArgumentNullException>(() =>
                 Host.CreateDefaultBuilder()
                     .ConfigureServices(x =>
                         x.AddKVStores<object>().FromJsonFile(null))
                     .Build());
+            Assert.Equal("configurationSection", exception.ParamName);
         }
 
         [Fact]
         public void FromJsonFile_ConfigurationSectionNameIsNullOrEmpty_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentException>(() =>
+            var exception = Assert.Throws<ArgumentException>(() =>
                 Host.CreateDefaultBuilder()
                     .ConfigureServices((x, y) =>
                         y.AddKVStores<object>().FromJsonFile(x.Configuration, ""))
                     .Build());
+            Assert.Equal("Missing configurationSectionName.", exception.Message);
         }
 
         [Fact]
         public void AddFileDataProvider_ServiceCollectionIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => FileProvidersKVStoreBuilderExtensions.AddFileDataProvider(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => FileProvidersKVStoreBuilderExtensions.AddFileDataProvider(null));
+            Assert.Equal("services", exception.ParamName);
         }
     }
 }

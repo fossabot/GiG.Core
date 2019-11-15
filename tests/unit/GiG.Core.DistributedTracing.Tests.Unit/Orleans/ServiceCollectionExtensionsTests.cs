@@ -11,7 +11,8 @@ namespace GiG.Core.DistributedTracing.Tests.Unit.Orleans
         [Fact]
         public void AddCorrelationAccessor_ServiceCollectionIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddCorrelationAccessor(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddCorrelationAccessor(null));
+            Assert.Equal("services", exception.ParamName);
         }
     }
 }

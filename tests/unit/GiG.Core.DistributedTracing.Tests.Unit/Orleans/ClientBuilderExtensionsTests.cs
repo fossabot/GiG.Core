@@ -13,13 +13,15 @@ namespace GiG.Core.DistributedTracing.Tests.Unit.Orleans
         [Fact]
         public void AddCorrelationOutgoingFilter_ClientBuilderIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => ClientBuilderExtensions.AddCorrelationOutgoingFilter(null, null));
+            var exception = Assert.Throws<ArgumentNullException>(() => ClientBuilderExtensions.AddCorrelationOutgoingFilter(null, null));
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]
         public void AddCorrelationOutgoingFilter_ServiceProviderIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new ClientBuilder().AddCorrelationOutgoingFilter(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => new ClientBuilder().AddCorrelationOutgoingFilter(null));
+            Assert.Equal("serviceProvider", exception.ParamName);
         }
     }
 }
