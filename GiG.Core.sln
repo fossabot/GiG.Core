@@ -22,6 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Data.Migration.md = docs\GiG.Core.Data.Migration.md
 		docs\GiG.Core.DistributedTracing.Orleans.md = docs\GiG.Core.DistributedTracing.Orleans.md
 		docs\GiG.Core.DistributedTracing.Web.md = docs\GiG.Core.DistributedTracing.Web.md
+		docs\GiG.Core.HealthChecks.AspNetCore.md = docs\GiG.Core.HealthChecks.AspNetCore.md
 		docs\GiG.Core.HealthChecks.md = docs\GiG.Core.HealthChecks.md
 		docs\GiG.Core.Hosting.AspNetCore.md = docs\GiG.Core.Hosting.AspNetCore.md
 		docs\GiG.Core.Hosting.md = docs\GiG.Core.Hosting.md
@@ -362,6 +363,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Sample.Tests.Unit", "samples\Orleans\tests\unit\GiG.Core.Orleans.Sample.Tests.Unit\GiG.Core.Orleans.Sample.Tests.Unit.csproj", "{29A924DF-B5A5-4FE7-803E-8A49C1A16586}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Logging.Tests.Unit", "tests\unit\GiG.Core.Logging.Tests.Unit\GiG.Core.Logging.Tests.Unit.csproj", "{E24C1050-9798-498D-8C1E-A67AC2C0BDC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.HealthChecks.AspNetCore", "src\GiG.Core.HealthChecks.AspNetCore\GiG.Core.HealthChecks.AspNetCore.csproj", "{BC852A3D-EBC0-43A4-9A24-EE50F0518A60}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.MultiTenant.Tests.Unit", "tests\unit\GiG.Core.MultiTenant.Tests.Unit\GiG.Core.MultiTenant.Tests.Unit.csproj", "{1B2C3816-D7C1-47FF-B1C7-1F72D37130ED}"
 EndProject
@@ -793,6 +796,10 @@ Global
 		{E24C1050-9798-498D-8C1E-A67AC2C0BDC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E24C1050-9798-498D-8C1E-A67AC2C0BDC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E24C1050-9798-498D-8C1E-A67AC2C0BDC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC852A3D-EBC0-43A4-9A24-EE50F0518A60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC852A3D-EBC0-43A4-9A24-EE50F0518A60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC852A3D-EBC0-43A4-9A24-EE50F0518A60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC852A3D-EBC0-43A4-9A24-EE50F0518A60}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1B2C3816-D7C1-47FF-B1C7-1F72D37130ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1B2C3816-D7C1-47FF-B1C7-1F72D37130ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B2C3816-D7C1-47FF-B1C7-1F72D37130ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -951,6 +958,7 @@ Global
 		{BB87C6AB-BA88-4881-BC3D-9BCB340A7462} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
 		{29A924DF-B5A5-4FE7-803E-8A49C1A16586} = {078D868E-6AA0-474B-816E-72542826255D}
 		{E24C1050-9798-498D-8C1E-A67AC2C0BDC0} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
+		{BC852A3D-EBC0-43A4-9A24-EE50F0518A60} = {64FBDA2C-D499-4EE1-AAA9-DFF1BCF8C465}
 		{1B2C3816-D7C1-47FF-B1C7-1F72D37130ED} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
 		{9AB4C175-D4ED-4C44-B81C-AB63FDED9034} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
 		{4F75CCAD-1172-4F81-B99C-DBE7C76FA853} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}

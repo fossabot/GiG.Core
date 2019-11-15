@@ -8,7 +8,7 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.Services
     [AllowAnyStatusCode]
     public interface IOrleansSampleWalletTransactionsService : IOrleansSampleCommonService
     {
-        [Get("WalletTransactions")]
+        [Get]
         Task<Response<List<WalletTransaction>>> GetWalletTransactionsAsync();
     }
 }
