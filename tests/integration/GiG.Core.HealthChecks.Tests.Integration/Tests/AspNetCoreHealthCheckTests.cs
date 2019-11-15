@@ -29,7 +29,10 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
         [Fact]
         public async Task HealthChecks_CombinedUrlEndpoint_ReturnsOkStatusCode()
         {
+            // Arrange
             using var request = new HttpRequestMessage(HttpMethod.Get, _healthChecksOptions.CombinedUrl);
+            
+            // Act
             using var response = await _httpClient.SendAsync(request);
 
             // Assert
@@ -40,7 +43,10 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
         [Fact]
         public async Task HealthChecks_ReadyUrlEndpoint_ReturnsOkStatusCode()
         {
+            // Arrange
             using var request = new HttpRequestMessage(HttpMethod.Get, _healthChecksOptions.ReadyUrl);
+            
+            // Act
             using var response = await _httpClient.SendAsync(request);
 
             // Assert
@@ -51,7 +57,10 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
         [Fact]
         public async Task HealthChecks_LiveUrlEndpoint_ReturnsOkStatusCode()
         {
+            // Arrange
             using var request = new HttpRequestMessage(HttpMethod.Get, _healthChecksOptions.LiveUrl);
+
+            // Act
             using var response = await _httpClient.SendAsync(request);
 
             // Assert

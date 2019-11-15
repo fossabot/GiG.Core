@@ -5,7 +5,7 @@ namespace GiG.Core.Web.Sample.Tests.Component.Services
 {
     public class WebSampleService
     {
-        private const string MicroserviceUrl = "http://localhost:5000/v2/transactions";
+        private const string MicroserviceUrl = "http://localhost:5000/transactions";
         private readonly ITransaction _transactions;
 
         public WebSampleService() => _transactions = RestClient.For<ITransaction>(MicroserviceUrl);
