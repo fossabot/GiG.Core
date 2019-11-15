@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 
-namespace GiG.Core.MassTransit
+namespace GiG.Core.Messaging.MassTransit
 {
     /// <inheritdoc />
     public class MassTransitContextAccessor : IMassTransitContextAccessor

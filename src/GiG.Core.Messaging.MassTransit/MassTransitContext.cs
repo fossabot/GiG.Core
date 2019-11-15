@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GiG.Core.MassTransit
+namespace GiG.Core.Messaging.MassTransit
 {
     /// <summary>
     /// The MassTransit Context.

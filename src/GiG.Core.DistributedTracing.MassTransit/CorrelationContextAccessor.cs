@@ -1,5 +1,5 @@
 ﻿using GiG.Core.DistributedTracing.Abstractions;
-using GiG.Core.MassTransit;
+using GiG.Core.Messaging.MassTransit;
 using System;
 
 namespace GiG.Core.DistributedTracing.MassTransit

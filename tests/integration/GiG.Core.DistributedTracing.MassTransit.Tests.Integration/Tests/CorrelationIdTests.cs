@@ -1,6 +1,6 @@
 using GiG.Core.DistributedTracing.MassTransit.Extensions;
 using GiG.Core.DistributedTracing.MassTransit.Tests.Integration.Mocks;
-using GiG.Core.MassTransit.Extensions;
+using GiG.Core.Messaging.MassTransit.Extensions;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -60,7 +60,6 @@ namespace GiG.Core.DistributedTracing.MassTransit.Tests.Integration.Tests
         private void SetupServices()
         {
             var services = new ServiceCollection();
-            services.AddMassTransitContext();
             services.AddCorrelationAccessor();
             AddMessageConsumer(services);
 

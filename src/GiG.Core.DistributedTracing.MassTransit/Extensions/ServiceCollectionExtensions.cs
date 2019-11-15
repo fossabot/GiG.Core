@@ -1,4 +1,5 @@
 ﻿using GiG.Core.DistributedTracing.Abstractions;
+using GiG.Core.Messaging.MassTransit.Extensions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -20,6 +21,7 @@ namespace GiG.Core.DistributedTracing.MassTransit.Extensions
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
+            services.AddMassTransitContext();
             services.TryAddSingleton<ICorrelationContextAccessor, CorrelationContextAccessor>();
 
             return services;

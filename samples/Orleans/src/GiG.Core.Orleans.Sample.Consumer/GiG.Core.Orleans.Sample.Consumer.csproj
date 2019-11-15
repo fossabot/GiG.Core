@@ -14,8 +14,8 @@
     </ItemGroup>
     
     <ItemGroup>
-        <ProjectReference Include="..\..\..\..\src\GiG.Core.MassTransit\GiG.Core.MassTransit.csproj" />
         <ProjectReference Include="..\..\..\..\src\GiG.Core.DistributedTracing.MassTransit\GiG.Core.DistributedTracing.MassTransit.csproj" />
+        <ProjectReference Include="..\..\..\..\src\GiG.Core.Messaging.MassTransit\GiG.Core.Messaging.MassTransit.csproj" />
         <ProjectReference Include="..\..\..\..\src\GiG.Core.Messaging.RabbitMQ.Abstractions\GiG.Core.Messaging.RabbitMQ.Abstractions.csproj" />
         <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Client\GiG.Core.Orleans.Client.csproj" />
         <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Clustering.Consul\GiG.Core.Orleans.Clustering.Consul.csproj" />

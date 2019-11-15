@@ -10,8 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GiG.Core.MassTransit\GiG.Core.MassTransit.csproj" />
     <ProjectReference Include="..\GiG.Core.DistributedTracing.Abstractions\GiG.Core.DistributedTracing.Abstractions.csproj" />
+    <ProjectReference Include="..\GiG.Core.Messaging.MassTransit\GiG.Core.Messaging.MassTransit.csproj" />
   </ItemGroup>
   
 </Project>

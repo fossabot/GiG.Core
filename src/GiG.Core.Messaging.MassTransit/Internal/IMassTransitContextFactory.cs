@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GiG.Core.MassTransit.Internal
+namespace GiG.Core.Messaging.MassTransit.Internal
 {
     /// <summary>
     /// The MassTransitContext Factory.

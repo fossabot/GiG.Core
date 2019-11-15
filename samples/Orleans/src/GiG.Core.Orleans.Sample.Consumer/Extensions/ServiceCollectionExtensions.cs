@@ -1,4 +1,4 @@
-using GiG.Core.MassTransit.Extensions;
+using GiG.Core.Messaging.MassTransit.Extensions;
 using GiG.Core.Messaging.RabbitMQ.Abstractions;
 using GreenPipes;
 using MassTransit;
