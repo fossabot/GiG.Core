@@ -30,6 +30,10 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
             SiloName = new Faker().Random.String2(5);
 
             var siloHost = Host.CreateDefaultBuilder()
+                .ConfigureServices((ctx, services) =>
+                {
+                    services.Configure<KubernetesSiloOptions>(ctx.Configuration.GetSection("Orleans:KubernetesMembershipProvider"));
+                })
                 .UseOrleans((ctx, sb) =>
                 {
                     sb.ConfigureCluster(ctx.Configuration);
@@ -45,8 +49,6 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
             var clientHost = Host.CreateDefaultBuilder()
                 .ConfigureServices((ctx, services) =>
                 {
-                    services.Configure<KubernetesSiloOptions>(ctx.Configuration.GetSection("Orleans:KubernetesMembershipProvider"));
-
                     services.AddHttpClient();
                     services.AddDefaultClusterClient(x =>
                     {
@@ -61,7 +63,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
 
             ClusterClient = ClientServiceProvider.GetRequiredService<IClusterClient>();
 
-            KubernetesOptions = ClientServiceProvider.GetRequiredService<IOptions<KubernetesSiloOptions>>();
+            KubernetesOptions = siloHost.Services.GetRequiredService<IOptions<KubernetesSiloOptions>>();
         }
     }
 }
