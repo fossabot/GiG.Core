@@ -1,10 +1,10 @@
 using Xunit;
 // ReSharper disable AssignNullToNotNullAttribute
 
-namespace GiG.Core.Orleans.Tests.Integration.Tests
+namespace GiG.Core.Orleans.Tests.Unit.Client
 {
     [Trait("Category", "Unit")]
-    public class ClientBuilderExtensionsTests
+    public class ServiceCollectionExtensionsTests
     {
 
     }
