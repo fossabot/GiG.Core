@@ -1,6 +1,7 @@
 using GiG.Core.Security.Cryptography;
 using GiG.Core.Security.Hmac.Abstractions;
 using GiG.Core.Web.Security.Hmac.Abstractions;
+using GiG.Core.Web.Security.Hmac.Internal;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
@@ -9,7 +10,6 @@ using Microsoft.Extensions.Options;
 using Moq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using GiG.Core.Web.Security.Hmac.Internal;
 using Xunit;
 
 namespace GiG.Core.Web.Security.Hmac.Tests.Unit

@@ -12,27 +12,32 @@ namespace GiG.Core.Hosting.Tests.Unit
         [Fact]
         public void ConfigureInfoManagement_ServiceCollectionIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.ConfigureInfoManagement(null, null));
+            var exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.ConfigureInfoManagement(null, null));
+            Assert.Equal("services", exception.ParamName);
 
-            Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.ConfigureInfoManagement(null, configuration: null));
+            exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.ConfigureInfoManagement(null, configuration: null));
+            Assert.Equal("services", exception.ParamName);
         }
 
         [Fact]
         public void ConfigureInfoManagement_ConfigurationIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new ServiceCollection().ConfigureInfoManagement(configuration: null));
+            var exception = Assert.Throws<ArgumentNullException>(() => new ServiceCollection().ConfigureInfoManagement(configuration: null));
+            Assert.Equal("configuration", exception.ParamName);
         }
 
         [Fact]
         public void ConfigureInfoManagement_ConfigurationSectionIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new ServiceCollection().ConfigureInfoManagement(configurationSection: null));
+            var exception = Assert.Throws<ArgumentNullException>(() => new ServiceCollection().ConfigureInfoManagement(configurationSection: null));
+            Assert.Equal("configurationSection", exception.ParamName);
         }
 
         [Fact]
         public void AddApplicationMetadataAccessor_ServiceCollectionIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddApplicationMetadataAccessor(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddApplicationMetadataAccessor(null));
+            Assert.Equal("services", exception.ParamName);
         }
     }
 }

@@ -12,14 +12,18 @@ namespace GiG.Core.Logging.Tests.Unit
         [Fact]
         public void ConfigureLogging_HostBuilderIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => HostBuilderExtensions.ConfigureLogging(null, null));
-            Assert.Throws<ArgumentNullException>(() => All.Extensions.HostBuilderExtensions.ConfigureLogging(null, null));
+            var exception = Assert.Throws<ArgumentNullException>(() => HostBuilderExtensions.ConfigureLogging(null, null));
+            Assert.Equal("builder", exception.ParamName);
+
+            exception = Assert.Throws<ArgumentNullException>(() => All.Extensions.HostBuilderExtensions.ConfigureLogging(null, null));
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]
         public void ConfigureLogging_SectionNameIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new HostBuilder().ConfigureLogging(null, null));
+            var exception = Assert.Throws<ArgumentException>(() => new HostBuilder().ConfigureLogging(null, null));
+            Assert.Equal("Missing sectionName.", exception.Message);
         }
     }
 }

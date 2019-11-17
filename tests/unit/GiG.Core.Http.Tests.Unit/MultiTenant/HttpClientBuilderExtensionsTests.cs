@@ -11,7 +11,8 @@ namespace GiG.Core.Http.Tests.Unit.MultiTenant
         [Fact]
         public void AddTenantDelegatingHandler_HttpClientBuilderIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => HttpClientBuilderExtensions.AddTenantDelegatingHandler(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => HttpClientBuilderExtensions.AddTenantDelegatingHandler(null));
+            Assert.Equal("httpClientBuilder", exception.ParamName);
         }
     }
 }

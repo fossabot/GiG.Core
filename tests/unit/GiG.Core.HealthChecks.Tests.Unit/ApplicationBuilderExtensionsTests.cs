@@ -11,7 +11,8 @@ namespace GiG.Core.HealthChecks.Tests.Unit
         [Fact]
         public void UseHealthChecks_ApplicationBuilderIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => ApplicationBuilderExtensions.UseHealthChecks(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => ApplicationBuilderExtensions.UseHealthChecks(null));
+            Assert.Equal("builder", exception.ParamName);
         }
     }
 }

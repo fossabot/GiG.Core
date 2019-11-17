@@ -13,28 +13,34 @@ namespace GiG.Core.Http.Tests.Unit.Security
         [Fact]
         public void AddHmacDelegatingHandler_HttpClientBuilderIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => HttpClientBuilderExtensions.AddHmacDelegatingHandler(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => HttpClientBuilderExtensions.AddHmacDelegatingHandler(null));
+            Assert.Equal("httpClientBuilder", exception.ParamName);
         }
 
         [Fact]
         public void ConfigureDefaultHmacDelegatingHandlerOptionProvider_HttpClientBuilderIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => HttpClientBuilderExtensions.ConfigureDefaultHmacDelegatingHandlerOptionProvider(null, configuration: null));
-            Assert.Throws<ArgumentNullException>(() => HttpClientBuilderExtensions.ConfigureDefaultHmacDelegatingHandlerOptionProvider(null, configurationSection: null));
+            var exception = Assert.Throws<ArgumentNullException>(() => HttpClientBuilderExtensions.ConfigureDefaultHmacDelegatingHandlerOptionProvider(null, configuration: null));
+            Assert.Equal("httpClientBuilder", exception.ParamName);
+
+            exception = Assert.Throws<ArgumentNullException>(() => HttpClientBuilderExtensions.ConfigureDefaultHmacDelegatingHandlerOptionProvider(null, configurationSection: null));
+            Assert.Equal("httpClientBuilder", exception.ParamName);
         }
 
         [Fact]
         public void ConfigureDefaultHmacDelegatingHandlerOptionProvider_ConfigurationIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() =>
+            var exception = Assert.Throws<ArgumentNullException>(() =>
                     new ServiceCollection().AddHttpClient("Default").ConfigureDefaultHmacDelegatingHandlerOptionProvider(configuration: null));
+            Assert.Equal("configuration", exception.ParamName);
         }
 
         [Fact]
         public void ConfigureDefaultHmacDelegatingHandlerOptionProvider_ConfigurationSectionIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() =>
+            var exception = Assert.Throws<ArgumentNullException>(() =>
                     new ServiceCollection().AddHttpClient("Default").ConfigureDefaultHmacDelegatingHandlerOptionProvider(configurationSection: null));
+            Assert.Equal("configurationSection", exception.ParamName);
         }
     }
 }

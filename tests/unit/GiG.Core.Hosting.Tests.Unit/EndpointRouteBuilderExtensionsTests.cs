@@ -11,7 +11,8 @@ namespace GiG.Core.Hosting.Tests.Unit
         [Fact]
         public void MapInfoManagement_EndpointRouteBuilderIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => EndpointRouteBuilderExtensions.MapInfoManagement(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => EndpointRouteBuilderExtensions.MapInfoManagement(null));
+            Assert.Equal("endpointRouteBuilder", exception.ParamName);
         }
     }
 }

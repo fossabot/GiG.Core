@@ -11,7 +11,8 @@ namespace GiG.Core.MultiTenant.Tests.Unit
         [Fact]
         public void AddTenantAccessor_ServiceCollectionIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddTenantAccessor(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddTenantAccessor(null));
+            Assert.Equal("services", exception.ParamName);
         }
     }
 }

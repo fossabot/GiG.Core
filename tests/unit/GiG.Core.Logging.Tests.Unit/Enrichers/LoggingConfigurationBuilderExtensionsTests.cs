@@ -14,25 +14,29 @@ namespace GiG.Core.Logging.Tests.Unit.Enrichers
         [Fact]
         public void EnrichWithTenant_LoggingConfigurationBuilderIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => MultiTenantExtensions.LoggingConfigurationBuilderExtensions.EnrichWithTenant(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => MultiTenantExtensions.LoggingConfigurationBuilderExtensions.EnrichWithTenant(null));
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]
         public void EnrichWithRequestContext_LoggingConfigurationBuilderIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => ContextExtensions.LoggingConfigurationBuilderExtensions.EnrichWithRequestContext(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => ContextExtensions.LoggingConfigurationBuilderExtensions.EnrichWithRequestContext(null));
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]
         public void EnrichWithCorrelation_LoggingConfigurationBuilderIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => DistributedTracingExtensions.LoggingConfigurationBuilderExtensions.EnrichWithCorrelation(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => DistributedTracingExtensions.LoggingConfigurationBuilderExtensions.EnrichWithCorrelation(null));
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]
         public void EnrichWithApplicationMetadata_LoggingConfigurationBuilderIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => ApplicationMetadataExtensions.LoggingConfigurationBuilderExtensions.EnrichWithApplicationMetadata(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => ApplicationMetadataExtensions.LoggingConfigurationBuilderExtensions.EnrichWithApplicationMetadata(null));
+            Assert.Equal("builder", exception.ParamName);
         }
     }
 }

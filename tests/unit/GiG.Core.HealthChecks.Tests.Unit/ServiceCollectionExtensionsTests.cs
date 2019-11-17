@@ -12,26 +12,32 @@ namespace GiG.Core.HealthChecks.Tests.Unit
         [Fact]
         public void ConfigureHealthChecks_ServiceCollectionIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.ConfigureHealthChecks(null, null));
-            Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.ConfigureHealthChecks(null, configuration: null));
+            var exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.ConfigureHealthChecks(null, null));
+            Assert.Equal("services", exception.ParamName);
+
+            exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.ConfigureHealthChecks(null, configuration: null));
+            Assert.Equal("services", exception.ParamName);
         }
 
         [Fact]
         public void ConfigureHealthChecks_ConfigurationIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new ServiceCollection().ConfigureHealthChecks(configuration: null));
+            var exception = Assert.Throws<ArgumentNullException>(() => new ServiceCollection().ConfigureHealthChecks(configuration: null));
+            Assert.Equal("configuration", exception.ParamName);
         }
 
         [Fact]
         public void ConfigureHealthChecks_ConfigurationSectionIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new ServiceCollection().ConfigureHealthChecks(configurationSection: null));
+            var exception = Assert.Throws<ArgumentNullException>(() => new ServiceCollection().ConfigureHealthChecks(configurationSection: null));
+            Assert.Equal("configurationSection", exception.ParamName);
         }
 
         [Fact]
         public void AddCachedHealthChecks_ServiceCollectionIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddCachedHealthChecks(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddCachedHealthChecks(null));
+            Assert.Equal("services", exception.ParamName);
         }
     }
 }

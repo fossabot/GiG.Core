@@ -13,19 +13,22 @@ namespace GiG.Core.Logging.Tests.Unit.Sinks
         [Fact]
         public void WriteToConsole_LoggingConfigurationBuilderIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => Console.LoggingConfigurationBuilderExtensions.WriteToConsole(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => Console.LoggingConfigurationBuilderExtensions.WriteToConsole(null));
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]
         public void WriteToFile_LoggingConfigurationBuilderIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => File.LoggingConfigurationBuilderExtensions.WriteToFile(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => File.LoggingConfigurationBuilderExtensions.WriteToFile(null));
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]
         public void WriteToFluentd_LoggingConfigurationBuilderIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => Fluentd.LoggingConfigurationBuilderExtensions.WriteToFluentd(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => Fluentd.LoggingConfigurationBuilderExtensions.WriteToFluentd(null));
+            Assert.Equal("builder", exception.ParamName);
         }
     }
 }

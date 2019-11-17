@@ -13,32 +13,39 @@ namespace GiG.Core.Http.Tests.Unit
         [Fact]
         public void FromConfiguration_HttpClientIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => HttpClientExtensions.FromConfiguration(null, null, ""));
-            Assert.Throws<ArgumentNullException>(() => HttpClientExtensions.FromConfiguration(null, "", null));
+            var exception = Assert.Throws<ArgumentNullException>(() => HttpClientExtensions.FromConfiguration(null, null, ""));
+            Assert.Equal("client", exception.ParamName);
+
+            exception = Assert.Throws<ArgumentNullException>(() => HttpClientExtensions.FromConfiguration(null, "", null));
+            Assert.Equal("client", exception.ParamName);
         }
 
         [Fact]
         public void FromConfiguration_ConfigurationIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new HttpClient().FromConfiguration(null, ""));
+            var exception = Assert.Throws<ArgumentNullException>(() => new HttpClient().FromConfiguration(null, ""));
+            Assert.Equal("configuration", exception.ParamName);
         }
 
         [Fact]
         public void FromConfiguration_ConfigurationSectionIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new HttpClient().FromConfiguration("", null));
+            var exception = Assert.Throws<ArgumentNullException>(() => new HttpClient().FromConfiguration("", null));
+            Assert.Equal("configurationSection", exception.ParamName);
         }
 
         [Fact]
         public void FromConfiguration_BaseUriIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentException>(() => new HttpClient().FromConfiguration(null, new ConfigurationBuilder().Build().GetSection("HttpClient")));
+            var exception = Assert.Throws<ArgumentException>(() => new HttpClient().FromConfiguration(null, new ConfigurationBuilder().Build().GetSection("HttpClient")));
+            Assert.Equal("Missing baseUri.", exception.Message);
         }
 
         [Fact]
         public void FromConfiguration_SectionNameIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentException>(() => new HttpClient().FromConfiguration(new ConfigurationBuilder().Build(), null));
+            var exception = Assert.Throws<ArgumentException>(() => new HttpClient().FromConfiguration(new ConfigurationBuilder().Build(), null));
+            Assert.Equal("Missing sectionName.", exception.Message);
         }
     }
 }

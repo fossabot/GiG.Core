@@ -11,7 +11,8 @@ namespace GiG.Core.Http.Tests.Unit.DistributedTracing
         [Fact]
         public void AddCorrelationContextDelegatingHandler_HttpClientBuilderIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => HttpClientBuilderExtensions.AddCorrelationContextDelegatingHandler(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => HttpClientBuilderExtensions.AddCorrelationContextDelegatingHandler(null));
+            Assert.Equal("httpClientBuilder", exception.ParamName);
         }
     }
 }

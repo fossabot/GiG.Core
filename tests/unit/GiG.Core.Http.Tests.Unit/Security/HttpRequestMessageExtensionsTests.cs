@@ -11,7 +11,8 @@ namespace GiG.Core.Http.Tests.Unit.Security
         [Fact]
         public void GetBodyAsync_HttpRequestMessageIsNull_ThrowsArgumentNullException()
         {
-            Assert.ThrowsAsync<ArgumentNullException>(() => HttpRequestMessageExtensions.GetBodyAsync(null));
+            var exception = Assert.ThrowsAsync<ArgumentNullException>(() => HttpRequestMessageExtensions.GetBodyAsync(null));
+            Assert.Equal("httpRequest", exception.Result.ParamName);
         }
     }
 }

@@ -11,7 +11,8 @@ namespace GiG.Core.Hosting.Tests.Unit
         [Fact]
         public void UseApplicationMetadata_HostBuilderIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => HostBuilderExtensions.UseApplicationMetadata(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => HostBuilderExtensions.UseApplicationMetadata(null));
+            Assert.Equal("builder", exception.ParamName);
         }
     }
 }
