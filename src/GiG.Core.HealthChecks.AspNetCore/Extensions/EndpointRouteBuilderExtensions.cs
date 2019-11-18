@@ -1,5 +1,4 @@
 ﻿using GiG.Core.HealthChecks.Abstractions;
-using GiG.Core.HealthChecks.AspNetCore.Internal;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
