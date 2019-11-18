@@ -18,6 +18,7 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.DistributedTracing.Orleans](docs/GiG.Core.DistributedTracing.Orleans.md) - Provides an API to register Distributed Tracing for an Orleans Client.
 - [GiG.Core.DistributedTracing.Web](docs/GiG.Core.DistributedTracing.Web.md) - Provides an API to register Distributed Tracing for a web application.
 - [GiG.Core.HealthChecks](docs/GiG.Core.HealthChecks.md) - Provides an API to register Health Checks for an application.
+- [GiG.Core.HealthChecks.AspNetCore](docs/GiG.Core.HealthChecks.AspNetCore.md) - Provides an API to register Health Check endpoints using the EndpointRouteBuilder.
 - [GiG.Core.Hosting](docs/GiG.Core.Hosting.md) - Provides an API to register hosting related functionality to an application.
 - [GiG.Core.Hosting.AspNetCore](docs/GiG.Core.Hosting.AspNetCore.md) - Provides an API to register an information endpoint using the EndpointRouteBuilder.
 - [GiG.Core.Http](docs/GiG.Core.Http.md) - Provides an API to create or customise an `HttpClient` without using IOC.

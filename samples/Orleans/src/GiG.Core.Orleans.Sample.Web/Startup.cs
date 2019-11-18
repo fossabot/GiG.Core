@@ -2,7 +2,7 @@ using FluentValidation.AspNetCore;
 using GiG.Core.Context.Orleans.Extensions;
 using GiG.Core.DistributedTracing.Orleans.Extensions;
 using GiG.Core.DistributedTracing.Web.Extensions;
-using GiG.Core.HealthChecks.Extensions;
+using GiG.Core.HealthChecks.AspNetCore.Extensions;
 using GiG.Core.Hosting.AspNetCore.Extensions;
 using GiG.Core.Hosting.Extensions;
 using GiG.Core.Orleans.Client.Extensions;
@@ -77,7 +77,6 @@ namespace GiG.Core.Orleans.Sample.Web
             app.UseForwardedHeaders();
             app.UsePathBaseFromConfiguration();
             app.UseCorrelation();
-            app.UseHealthChecks();
             app.UseApiDocs();
             app.UseRouting();
             app.UseFluentValidationMiddleware();
@@ -86,6 +85,7 @@ namespace GiG.Core.Orleans.Sample.Web
                 endpoints.MapControllers();
                 endpoints.MapHub<NotificationsHub>("/notifications/open");
                 endpoints.MapInfoManagement();
+                endpoints.MapHealthChecks();
             });            
         }
     }
