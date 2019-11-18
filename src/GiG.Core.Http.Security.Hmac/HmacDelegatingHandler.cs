@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 
 namespace GiG.Core.Http.Security.Hmac
 {
@@ -15,22 +16,23 @@ namespace GiG.Core.Http.Security.Hmac
     /// </summary>
     public class HmacDelegatingHandler : DelegatingHandler
     {
-        private readonly IHmacOptionsProvider _optionsProvider;
+        private readonly IOptions<HmacOptions> _options;
         private readonly IHashProviderFactory _hashProviderFactory;
         private readonly IHmacSignatureProvider _signatureProvider;
 
         /// <summary>
         /// A <see cref="DelegatingHandler"/> that injects an HMAC Authorization Header into the request.
         /// </summary>
-        /// <param name="optionsProvider">The <see cref="IHmacOptionsProvider"/> which should return <see cref="HmacOptions"/>.</param>
+        /// <param name="options">The <see cref="IOptions{TOptions}"/> which should return <see cref="HmacOptions"/>.</param>
         /// <param name="hashProviderFactory"><see cref="IHashProviderFactory" /> that returns <see cref="IHashProvider" />.</param>
         /// <param name="signatureProvider">The <see cref="IHmacSignatureProvider" />.</param>
         public HmacDelegatingHandler(
-            IHmacOptionsProvider optionsProvider,
+            IOptions<HmacOptions> options,
             IHashProviderFactory hashProviderFactory,
-            IHmacSignatureProvider signatureProvider)
+            IHmacSignatureProvider signatureProvider
+            )
         {
-            _optionsProvider = optionsProvider;
+            _options = options;
             _hashProviderFactory = hashProviderFactory;
             _signatureProvider = signatureProvider;
         }
@@ -38,7 +40,7 @@ namespace GiG.Core.Http.Security.Hmac
         /// <inheritdoc />
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            var options = _optionsProvider.GetHmacOptions();
+            var options = _options.Value;
             if (options == null)
             {
                 throw new ConfigurationErrorsException("Options not set for HMAC.");
@@ -54,7 +56,7 @@ namespace GiG.Core.Http.Security.Hmac
 
             var hashedHmacHeader = hashProvider.Hash(hmacHeaderClear);
             request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("hmac", hashedHmacHeader);
-
+            
             return await base.SendAsync(request, cancellationToken);
         }
     }
