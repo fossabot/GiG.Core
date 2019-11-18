@@ -1,10 +1,10 @@
-﻿using GiG.Core.Logging.Extensions;
+﻿using GiG.Core.Logging.All.Extensions;
 using Microsoft.Extensions.Hosting;
 using System;
 using Xunit;
 // ReSharper disable AssignNullToNotNullAttribute
 
-namespace GiG.Core.Logging.Tests.Unit
+namespace GiG.Core.Logging.Tests.Unit.Logging.All
 {
     [Trait("Category", "Unit")]
     public class HostBuilderExtensionsTests
@@ -19,7 +19,7 @@ namespace GiG.Core.Logging.Tests.Unit
         [Fact]
         public void ConfigureLogging_SectionNameIsNull_ThrowsArgumentNullException()
         {
-            var exception = Assert.Throws<ArgumentException>(() => new HostBuilder().ConfigureLogging(null, null));
+            var exception = Assert.Throws<ArgumentException>(() => new HostBuilder().ConfigureLogging(""));
             Assert.Equal("Missing sectionName.", exception.Message);
         }
     }

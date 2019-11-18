@@ -16,14 +16,14 @@ namespace GiG.Core.Orleans.Client.Extensions
         /// Creates and registers a new <see cref="IClusterClient"/> with default options.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" /> to add the services to.</param>
-        /// <param name="configureClient">The <see cref="Action{ClientBuilder, IServiceProvider}"/> on which will be used to set the options for the client.</param>
+        /// <param name="configureClientWithServiceProvider">The <see cref="Action{ClientBuilder, IServiceProvider}"/> on which will be used to set the options for the client.</param>
         /// <returns>The <see cref="IServiceCollection" /> so that additional calls can be chained.</returns>
-        public static IServiceCollection AddDefaultClusterClient([NotNull] this IServiceCollection services, [NotNull] Action<ClientBuilder, IServiceProvider> configureClient)
+        public static IServiceCollection AddDefaultClusterClient([NotNull] this IServiceCollection services, [NotNull] Action<ClientBuilder, IServiceProvider> configureClientWithServiceProvider)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            if (configureClient == null) throw new ArgumentNullException(nameof(configureClient));
+            if (configureClientWithServiceProvider == null) throw new ArgumentNullException(nameof(configureClientWithServiceProvider));
 
-            var clusterClient = services.CreateClusterClient(configureClient);
+            var clusterClient = services.CreateClusterClient(configureClientWithServiceProvider);
 
             services.TryAddSingleton(clusterClient);
 
@@ -53,16 +53,16 @@ namespace GiG.Core.Orleans.Client.Extensions
         /// Creates a new <see cref="IClusterClient"/> with default options.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" /> to add the services to.</param>
-        /// <param name="configureClient">The <see cref="Action{ClientBuilder, IServiceProvider}"/> on which will be used to set the options for the client.</param>
+        /// <param name="configureClientWithServiceProvider">The <see cref="Action{ClientBuilder, IServiceProvider}"/> on which will be used to set the options for the client.</param>
         /// <returns>The <see cref="IServiceCollection" /> so that additional calls can be chained.</returns>
-        public static IClusterClient CreateClusterClient([NotNull] this IServiceCollection services, [NotNull] Action<ClientBuilder, IServiceProvider> configureClient)
+        public static IClusterClient CreateClusterClient([NotNull] this IServiceCollection services, [NotNull] Action<ClientBuilder, IServiceProvider> configureClientWithServiceProvider)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            if (configureClient == null) throw new ArgumentNullException(nameof(configureClient));
+            if (configureClientWithServiceProvider == null) throw new ArgumentNullException(nameof(configureClientWithServiceProvider));
 
             var builder = new ClientBuilder();
 
-            configureClient.Invoke(builder, services.BuildServiceProvider());
+            configureClientWithServiceProvider.Invoke(builder, services.BuildServiceProvider());
 
             return builder.BuildAndConnect();
         }
