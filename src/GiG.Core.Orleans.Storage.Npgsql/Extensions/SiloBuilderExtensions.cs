@@ -23,8 +23,6 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Extensions
         /// <returns>The<see cref="ISiloBuilder"/>.</returns>
         public static ISiloBuilder AddNpgsqlGrainStorage([NotNull] this ISiloBuilder builder, [NotNull] string storageName, [NotNull] IConfiguration configuration)
         {
-            if (string.IsNullOrWhiteSpace(storageName)) throw new ArgumentException($"Missing {nameof(storageName)}.");
-
             return builder.AddNpgsqlGrainStorage(storageName, configuration, NpgsqlOptions.DefaultSectionName);
         }
 

@@ -9,7 +9,7 @@ namespace GiG.Core.Orleans.Streams.Kafka.Extensions
     /// <summary>
     ///   Kafka Streams Service Collection Extensions.
     /// </summary>  
-    public static class ServiceCollectionExtensions
+    public static class KafkaStreamOptionsExtensions
     {
         /// <summary>
         /// Use KafkaStreamOptions from configuration section.

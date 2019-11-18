@@ -109,6 +109,7 @@ namespace GiG.Core.Orleans.Silo.Extensions
         public static ISiloBuilder ConfigureEndpoints([NotNull] this ISiloBuilder builder, [NotNull] IConfiguration configuration)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
             var configurationSection = configuration.GetSection(SiloOptions.DefaultSectionName);
 
@@ -138,7 +139,6 @@ namespace GiG.Core.Orleans.Silo.Extensions
                 options.GatewayPort = siloOptions.GatewayPort;
             });
         }
-
 
         /// <summary>
         /// Configures the Silo Builder with default configurations.
