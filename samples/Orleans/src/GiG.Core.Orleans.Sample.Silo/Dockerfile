@@ -13,7 +13,7 @@ RUN ["/scripts/checksum.sh", "checksum.artifacts.list.txt"]
 
 FROM build AS publish
 WORKDIR "/sln/samples/Orleans/src/GiG.Core.Orleans.Sample.Silo"
-RUN dotnet publish "GiG.Core.Orleans.Sample.Silo.csproj" -c Release -o /app/publish --no-build
+RUN dotnet publish "GiG.Core.Orleans.Sample.Silo.csproj" -c Release -o /app/publish
 WORKDIR "/app/publish"
 RUN ["/scripts/checksum.sh", "checksum.app.list.txt"]
 
