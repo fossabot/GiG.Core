@@ -7,7 +7,7 @@ using ClientBuilderExtensions = GiG.Core.Context.Orleans.Extensions.ClientBuilde
 
 namespace GiG.Core.Context.Tests.Unit.Orleans
 {
-    [Trait("Category", "Integration")]
+    [Trait("Category", "Unit")]
     public class ClientBuilderExtensionsTests
     {
         [Fact]

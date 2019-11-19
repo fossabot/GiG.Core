@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 
 namespace GiG.Core.ObjectMapping.Abstractions
 {
@@ -56,26 +53,5 @@ namespace GiG.Core.ObjectMapping.Abstractions
         /// <param name="destinationType">Destination type to use</param>
         /// <returns>Mapped destination object, same instance as the <paramref name="destination"/> object</returns>
         object Map(object source, object destination, Type sourceType, Type destinationType);
-
-        /// <summary>
-        /// Project the input queryable.
-        /// </summary>
-        /// <remarks>Projections are only calculated once and cached</remarks>
-        /// <typeparam name="TDestination">Destination type</typeparam>
-        /// <param name="source">Queryable source</param>
-        /// <param name="parameters">Optional parameter object for parameterized mapping expressions</param>
-        /// <param name="membersToExpand">Explicit members to expand</param>
-        /// <returns>Queryable result, use queryable extension methods to project and execute result</returns>
-        IQueryable<TDestination> ProjectTo<TDestination>(IQueryable source, object parameters = null, params Expression<Func<TDestination, object>>[] membersToExpand);
-
-        /// <summary>
-        /// Project the input queryable.
-        /// </summary>
-        /// <typeparam name="TDestination">Destination type to map to</typeparam>
-        /// <param name="source">Queryable source</param>
-        /// <param name="parameters">Optional parameter object for parameterized mapping expressions</param>
-        /// <param name="membersToExpand">Explicit members to expand</param>
-        /// <returns>Queryable result, use queryable extension methods to project and execute result</returns>
-        IQueryable<TDestination> ProjectTo<TDestination>(IQueryable source, IDictionary<string, object> parameters, params string[] membersToExpand);
     }
 }
