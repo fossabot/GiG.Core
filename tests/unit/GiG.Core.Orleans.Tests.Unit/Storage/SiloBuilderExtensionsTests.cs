@@ -48,13 +48,6 @@ namespace GiG.Core.Orleans.Tests.Unit.Storage
             var exception = Assert.Throws<ArgumentException>(() => Host.CreateDefaultBuilder()
                 .UseOrleans((ctx, x) =>
                 {
-                    x.AddNpgsqlGrainStorage("", ctx.Configuration);
-                }).Build());
-            Assert.Equal("Missing storageName.", exception.Message);
-
-            exception = Assert.Throws<ArgumentException>(() => Host.CreateDefaultBuilder()
-                .UseOrleans((ctx, x) =>
-                {
                     x.AddNpgsqlGrainStorage("", ctx.Configuration, "CustomStorageSection");
                 }).Build());
             Assert.Equal("Missing storageName.", exception.Message);
