@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿ <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -22,6 +22,7 @@
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Hosting\GiG.Core.Hosting.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Logging.All\GiG.Core.Logging.All.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Silo.Dashboard\GiG.Core.Orleans.Silo.Dashboard.csproj" />
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Streams.Abstractions\GiG.Core.Orleans.Streams.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Streams\GiG.Core.Orleans.Streams.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Clustering.Consul\GiG.Core.Orleans.Clustering.Consul.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Clustering.Kubernetes\GiG.Core.Orleans.Clustering.Kubernetes.csproj" />
