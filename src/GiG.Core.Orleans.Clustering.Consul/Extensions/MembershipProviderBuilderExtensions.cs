@@ -15,7 +15,7 @@ namespace GiG.Core.Orleans.Clustering.Consul.Extensions
         private const string ProviderName = "Consul";
         
         /// <summary>
-        /// Configures Consul as a Membershop Provider for an Orleans Client.
+        /// Configures Consul as a Membership Provider for an Orleans Client.
         /// </summary>
         /// <param name="builder">The <see cref="IClientBuilder" />.</param>
         /// <param name="configuration">The <see cref="IConfiguration" />.</param>
@@ -31,7 +31,7 @@ namespace GiG.Core.Orleans.Clustering.Consul.Extensions
         }
 
         /// <summary>
-        /// Configures Consul as a Membershop Provider for an Orleans Client.
+        /// Configures Consul as a Membership Provider for an Orleans Client.
         /// </summary>
         /// <param name="builder">The <see cref="IClientBuilder" />.</param>
         /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
@@ -47,7 +47,7 @@ namespace GiG.Core.Orleans.Clustering.Consul.Extensions
         }
 
         /// <summary>
-        /// Configures Consul as a Membershop Provider for an Orleans Silo.
+        /// Configures Consul as a Membership Provider for an Orleans Silo.
         /// </summary>
         /// <param name="builder">The <see cref="ISiloBuilder" />.</param>
         /// <param name="configuration">The <see cref="IConfiguration" />.</param>
@@ -63,7 +63,7 @@ namespace GiG.Core.Orleans.Clustering.Consul.Extensions
         }
 
         /// <summary>
-        /// Configures Consul as a Membershop Provider for an Orleans Silo.
+        /// Configures Consul as a Membership Provider for an Orleans Silo.
         /// </summary>
         /// <param name="builder">The <see cref="ISiloBuilder" />.</param>
         /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>

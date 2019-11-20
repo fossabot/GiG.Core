@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 
-namespace GiG.Core.HealthChecks.AspNetCore.Internal
+namespace GiG.Core.HealthChecks.AspNetCore
 {
     /// <summary>
     /// Health Check Endpoints.

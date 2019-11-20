@@ -6,20 +6,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Content Include="appsettings.json">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      </Content>
-    </ItemGroup>
-
-    <ItemGroup>
         <PackageReference Include="Bogus" Version="28.4.1" />
         <PackageReference Include="KubernetesClient" Version="1.6.4" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0" />
         <PackageReference Include="Microsoft.Extensions.Http" Version="3.0.0" />
         <PackageReference Include="Microsoft.Orleans.Server" Version="3.0.0" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.3.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
         <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.6.0" />
         <PackageReference Include="System.Text.Json" Version="4.6.0" />
         <PackageReference Include="xunit" Version="2.4.1" />
@@ -41,4 +33,11 @@
       <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Silo\GiG.Core.Orleans.Silo.csproj" />
     </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
 </Project>
