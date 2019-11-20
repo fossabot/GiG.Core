@@ -1,17 +1,26 @@
-FROM igcproget.igc.zone/gig-core-docker/library/dotnet:3.0.0-aspnet-0.1.0.15.e3885ad AS base
+FROM igcproget.igc.zone/gig-common-docker/dotnet/aspnet:3.0.0-0.1.0.2 AS base
 EXPOSE 8080
 
-FROM igcproget.igc.zone/gig-core-docker/library/dotnet:3.0.100-sdk-0.1.0.15.e3885ad AS build
+FROM igcproget.igc.zone/gig-common-docker/dotnet/sdk:3.0.100-0.1.0.2 AS build
 
 COPY ["samples/Web/src/GiG.Core.Web.Sample/GiG.Core.Web.Sample.csproj", "samples/Web/src/GiG.Core.Web.Sample/"]
 RUN dotnet restore "samples/Web/src/GiG.Core.Web.Sample/GiG.Core.Web.Sample.csproj"
 COPY . .
-WORKDIR "samples/Web/src/GiG.Core.Web.Sample/"
-RUN dotnet build "GiG.Core.Web.Sample.csproj" -c Release -o /app/build
+RUN dotnet build /p:Version=$VERSION -c Release 
+
+WORKDIR "/sln/artifacts/nugets"
+RUN ["/scripts/checksum.sh", "checksum.artifacts.list.txt"]
+
 FROM build AS publish
-RUN dotnet publish "GiG.Core.Web.Sample.csproj" -c Release -o /app/publish
+WORKDIR "/sln/samples/Web/src/GiG.Core.Web.Sample"
+RUN dotnet publish "GiG.Core.Web.Sample.csproj" -c Release -o /app/publish --no-build
+WORKDIR "/app/publish"
+RUN ["/scripts/checksum.sh", "checksum.app.list.txt"]
+
+FROM publish AS push
+ENTRYPOINT ["/scripts/push.sh"]
 
 FROM base AS final
-WORKDIR /app
 COPY --from=publish /app/publish .
+COPY --from=publish /app/checksum /checksum
 ENTRYPOINT ["dotnet", "GiG.Core.Web.Sample.dll"]

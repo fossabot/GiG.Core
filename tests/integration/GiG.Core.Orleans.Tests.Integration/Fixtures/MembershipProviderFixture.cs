@@ -3,6 +3,7 @@ using GiG.Core.Orleans.Client.Extensions;
 using GiG.Core.Orleans.Clustering.Consul.Abstractions;
 using GiG.Core.Orleans.Clustering.Consul.Extensions;
 using GiG.Core.Orleans.Clustering.Extensions;
+using GiG.Core.Orleans.Clustering.Kubernetes.Abstractions;
 using GiG.Core.Orleans.Clustering.Kubernetes.Extensions;
 using GiG.Core.Orleans.Silo.Extensions;
 using GiG.Core.Orleans.Tests.Integration.Contracts;
@@ -18,9 +19,11 @@ using System.Net.Http;
 
 namespace GiG.Core.Orleans.Tests.Integration.Fixtures
 {
-    public class MembershipProviderFixture
+    public abstract class MembershipProviderFixture
     {
         internal readonly IOptions<ConsulOptions> ConsulOptions;
+
+        internal readonly IOptions<KubernetesSiloOptions> KubernetesOptions;
 
         internal readonly IClusterClient ClusterClient;
 
@@ -30,19 +33,26 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
 
         internal readonly string SiloName;
 
-        public MembershipProviderFixture()
+        public MembershipProviderFixture(string membershipProviderSectionName)
         {
             SiloName = new Faker().Random.String2(5);
 
             var siloHost = Host.CreateDefaultBuilder()
+                 .ConfigureServices((ctx, services) => 
+                 {
+                     var membershipProviderSection = ctx.Configuration.GetSection(membershipProviderSectionName);
+                     services.Configure<KubernetesSiloOptions>(membershipProviderSection);
+                 })
                  .UseOrleans((ctx, sb) =>
                  {
+                     var membershipProviderSection = ctx.Configuration.GetSection(membershipProviderSectionName);
+                     
                      sb.ConfigureCluster(ctx.Configuration);
                      sb.ConfigureEndpoints(ctx.Configuration);
-                     sb.UseMembershipProvider(ctx.Configuration, x =>
+                     sb.UseMembershipProvider(membershipProviderSection, x =>
                       {
-                          x.ConfigureConsulClustering(ctx.Configuration);
-                          x.ConfigureKubernetesClustering(ctx.Configuration);
+                          x.ConfigureConsulClustering(membershipProviderSection);
+                          x.ConfigureKubernetesClustering(membershipProviderSection);
                       });
                      sb.AddAssemblies(typeof(EchoTestGrain));
                      sb.Configure<SiloOptions>(options => options.SiloName = SiloName);
@@ -53,15 +63,17 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
 
             var clientHost = Host.CreateDefaultBuilder()
                 .ConfigureServices((ctx, services) =>
-                {                 
+                {
+                    var membershipProviderSection = ctx.Configuration.GetSection(membershipProviderSectionName);
+
                     services.AddHttpClient();
                     services.AddDefaultClusterClient(x =>
                     {
                         x.ConfigureCluster(ctx.Configuration);
-                        x.UseMembershipProvider(ctx.Configuration, builder =>
+                        x.UseMembershipProvider(membershipProviderSection, builder =>
                         {
-                            builder.ConfigureConsulClustering(ctx.Configuration);
-                            builder.ConfigureKubernetesClustering(ctx.Configuration);
+                            builder.ConfigureConsulClustering(membershipProviderSection);
+                            builder.ConfigureKubernetesClustering(membershipProviderSection);
                         });
                         x.AddAssemblies(typeof(IEchoTestGrain));
                     });
@@ -75,6 +87,8 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
             ClusterClient = ClientServiceProvider.GetRequiredService<IClusterClient>();
 
             ConsulOptions = ClientServiceProvider.GetRequiredService<IOptions<ConsulOptions>>();
+
+            KubernetesOptions = siloHost.Services.GetRequiredService<IOptions<KubernetesSiloOptions>>();
         }
     }
 }

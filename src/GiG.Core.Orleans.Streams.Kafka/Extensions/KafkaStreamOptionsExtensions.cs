@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Orleans.Streams.Kafka.Config;
 using System;
+using System.Configuration;
 
 namespace GiG.Core.Orleans.Streams.Kafka.Extensions
 {
@@ -23,6 +24,11 @@ namespace GiG.Core.Orleans.Streams.Kafka.Extensions
             if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
 
             var kafkaOptions = configurationSection.Get<KafkaOptions>();
+
+            if (kafkaOptions == null)
+            {
+                throw new ConfigurationErrorsException($"Configuration section '{configurationSection.Path}' is not valid.");
+            }
 
             if (kafkaOptions.Brokers != null)
             {
