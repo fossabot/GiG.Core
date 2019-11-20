@@ -369,8 +369,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Logging.Tests.Unit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.HealthChecks.AspNetCore", "src\GiG.Core.HealthChecks.AspNetCore\GiG.Core.HealthChecks.AspNetCore.csproj", "{BC852A3D-EBC0-43A4-9A24-EE50F0518A60}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.HealthChecks.AspNetCore", "src\GiG.Core.HealthChecks.AspNetCore\GiG.Core.HealthChecks.AspNetCore.csproj", "{BC852A3D-EBC0-43A4-9A24-EE50F0518A60}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.MultiTenant.Tests.Unit", "tests\unit\GiG.Core.MultiTenant.Tests.Unit\GiG.Core.MultiTenant.Tests.Unit.csproj", "{1B2C3816-D7C1-47FF-B1C7-1F72D37130ED}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Tests.Unit", "tests\unit\GiG.Core.Orleans.Tests.Unit\GiG.Core.Orleans.Tests.Unit.csproj", "{9AB4C175-D4ED-4C44-B81C-AB63FDED9034}"
