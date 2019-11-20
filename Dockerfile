@@ -9,4 +9,4 @@ ENTRYPOINT ["/scripts/push.sh"]
 
 FROM base AS test
 ENTRYPOINT ["/scripts/test.sh"]
-CMD ["-u", "-i", "-f", "Category=Unit|Category=Integration", "/test/"]
+CMD ["-u", "-i", "-f", "Category=Unit|Category=Integration", "/tests/"]
