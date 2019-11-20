@@ -16,15 +16,25 @@ namespace GiG.Core.Orleans.Tests.Unit.Clustering
         {
             var exception = Assert.Throws<ArgumentNullException>(() => ClientBuilderExtensions.UseMembershipProvider(null, null, null));
             Assert.Equal("builder", exception.ParamName);
+            
+            exception = Assert.Throws<ArgumentNullException>(() => ClientBuilderExtensions.UseMembershipProvider(null, configuration: null, null));
+            Assert.Equal("builder", exception.ParamName);
         }
         
         [Fact]
-        public void UseMembershipProvider_ConfigurationIsNull_ThrowsArgumentNullException()
+        public void UseMembershipProvider_ConfigurationSectionIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => new ClientBuilder().UseMembershipProvider(null, null));
-            Assert.Equal("configuration", exception.ParamName);
+            Assert.Equal("configurationSection", exception.ParamName);
         }
 
+        [Fact]
+        public void UseMembershipProvider_ConfigurationIsNull_ThrowsArgumentNullException()
+        {
+            var exception = Assert.Throws<ArgumentNullException>(() => new ClientBuilder().UseMembershipProvider(configuration: null, null));
+            Assert.Equal("configuration", exception.ParamName);
+        }
+        
         [Fact]
         public void UseMembershipProvider_ConfigureProviderIsNull_ThrowsArgumentNullException()
         {
