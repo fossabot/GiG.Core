@@ -53,7 +53,7 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders.Extensions
             var fileProviderOptions = configurationSection.Get<FileProviderOptions>();
             if (fileProviderOptions == null)
             {
-                throw new ConfigurationErrorsException($"Configuration section '{configurationSection.Path}' does not exist");
+                throw new ConfigurationErrorsException($"Configuration section '{configurationSection.Path}' is not valid.");
             }
 
             builder.Services.AddSingleton<IDataProviderOptions<T, FileProviderOptions>>(
