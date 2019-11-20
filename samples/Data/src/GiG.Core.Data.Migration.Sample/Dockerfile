@@ -1,16 +1,25 @@
-FROM igcproget.igc.zone/gig-core-docker/library/dotnet:3.0.0-runtime-0.1.0.15.e3885ad AS base
+FROM igcproget.igc.zone/gig-common-docker/dotnet/runtime:3.0.0-0.1.0.2 AS base
 
-FROM igcproget.igc.zone/gig-core-docker/library/dotnet:3.0.100-sdk-0.1.0.15.e3885ad AS build
+FROM igcproget.igc.zone/gig-common-docker/dotnet/sdk:3.0.100-0.1.0.2 AS build
 
 COPY ["samples/Data/src/GiG.Core.Data.Migration.Sample/GiG.Core.Data.Migration.Sample.csproj", "samples/Data/src/GiG.Core.Data.Migration.Sample/"]
 RUN dotnet restore "samples/Data/src/GiG.Core.Data.Migration.Sample/GiG.Core.Data.Migration.Sample.csproj"
 COPY . .
-WORKDIR "samples/Data/src/GiG.Core.Data.Migration.Sample/"
-RUN dotnet build "GiG.Core.Data.Migration.Sample.csproj" -c Release -o /app/build
+RUN dotnet build /p:Version=$VERSION -c Release 
+
+WORKDIR "/sln/artifacts/nugets"
+RUN ["/scripts/checksum.sh", "checksum.artifacts.list.txt"]
+
 FROM build AS publish
-RUN dotnet publish "GiG.Core.Data.Migration.Sample.csproj" -c Release -o /app/publish
+WORKDIR "/sln/samples/Data/src/GiG.Core.Data.Migration.Sample"
+RUN dotnet publish "GiG.Core.Data.Migration.Sample.csproj" -c Release -o /app/publish --no-build
+WORKDIR "/app/publish"
+RUN ["/scripts/checksum.sh", "checksum.app.list.txt"]
+
+FROM publish AS push
+ENTRYPOINT ["/scripts/push.sh"]
 
 FROM base AS final
-WORKDIR /app
 COPY --from=publish /app/publish .
+COPY --from=publish /app/checksum /checksum
 ENTRYPOINT ["dotnet", "GiG.Core.Data.Migration.Sample.dll"]
