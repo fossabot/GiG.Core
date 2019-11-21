@@ -19,9 +19,5 @@ namespace GiG.Core.Logging.Tests.Unit
                     .Build());
             Assert.Equal("Configuration section 'Logging' is not valid", exception.Message);
         }
-
-
-
-
     }
 }

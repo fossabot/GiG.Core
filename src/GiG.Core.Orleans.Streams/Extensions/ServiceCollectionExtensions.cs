@@ -16,7 +16,7 @@ namespace GiG.Core.Orleans.Streams.Extensions
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection"/>.</param>
         /// <returns>The <see cref="IServiceCollection"/>.</returns>
-        public static IServiceCollection AddStreamFactory([NotNull] this IServiceCollection services)
+        public static IServiceCollection AddStream([NotNull] this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 

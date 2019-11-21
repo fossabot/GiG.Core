@@ -15,10 +15,10 @@ namespace GiG.Core.Orleans.Tests.Unit.Clustering.Consul
         public void ConfigureConsulClustering_ClientBuilderIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => ClientBuilderExtensions.ConfigureConsulClustering(null, null));
-            Assert.Equal("builder", exception.ParamName);
+            Assert.Equal("clientBuilder", exception.ParamName);
 
             exception = Assert.Throws<ArgumentNullException>(() => ClientBuilderExtensions.ConfigureConsulClustering(null, configuration: null));
-            Assert.Equal("builder", exception.ParamName);
+            Assert.Equal("clientBuilder", exception.ParamName);
         }
 
         [Fact]

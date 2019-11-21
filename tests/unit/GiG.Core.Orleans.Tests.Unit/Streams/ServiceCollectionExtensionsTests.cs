@@ -11,7 +11,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Streams
         [Fact]
         public void AddStreamFactory_ServiceCollectionIsNull_ThrowsArgumentNullException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddStreamFactory(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddStream(null));
             Assert.Equal("services", exception.ParamName);
         }
     }

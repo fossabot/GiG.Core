@@ -13,13 +13,13 @@ namespace GiG.Core.Orleans.Tests.Unit.Storage
         public void AddNpgsqlGrainStorage_SiloBuilderIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.AddNpgsqlGrainStorage(null, storageName: null, configuration: null));
-            Assert.Equal("builder", exception.ParamName);
+            Assert.Equal("siloBuilder", exception.ParamName);
 
             exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.AddNpgsqlGrainStorage(null, storageName: null, configurationSection: null));
-            Assert.Equal("builder", exception.ParamName);
+            Assert.Equal("siloBuilder", exception.ParamName);
 
             exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.AddNpgsqlGrainStorage(null, storageName: null, configuration: null, sectionName: null));
-            Assert.Equal("builder", exception.ParamName);
+            Assert.Equal("siloBuilder", exception.ParamName);
         }
 
         [Fact]
