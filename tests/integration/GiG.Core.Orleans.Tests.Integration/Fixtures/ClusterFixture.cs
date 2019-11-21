@@ -26,9 +26,9 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
         public ClusterFixture()
         {
             var siloHost = new HostBuilder()
-                .UseOrleans(x =>
+                .UseOrleans((ctx, x) =>
                 {
-                    x.ConfigureEndpoints();
+                    x.ConfigureEndpoints(ctx.Configuration);
                     x.UseLocalhostClustering();
                     x.AddAssemblies(typeof(EchoTestGrain));
                     x.AddSimpleMessageStreamProvider("SMSProvider");
@@ -38,7 +38,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                 {
                     x.AddCorrelationAccessor();
                     x.AddRequestContextAccessor();
-                    x.AddStreamFactory();
+                    x.AddStream();
                 })
                 .Build();
 

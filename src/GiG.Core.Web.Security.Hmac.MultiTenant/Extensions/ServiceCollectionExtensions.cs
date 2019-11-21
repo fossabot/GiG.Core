@@ -1,12 +1,12 @@
-﻿using GiG.Core.Web.Security.Hmac.Abstractions;
+﻿using GiG.Core.MultiTenant.Web.Extensions;
+using GiG.Core.Web.Security.Hmac.Abstractions;
+using GiG.Core.Web.Security.Hmac.MultiTenant.Internal;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Collections.Generic;
-using GiG.Core.MultiTenant.Web.Extensions;
-using GiG.Core.Web.Security.Hmac.MultiTenant.Internal;
 
 namespace GiG.Core.Web.Security.Hmac.MultiTenant.Extensions
 {
@@ -19,9 +19,9 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant.Extensions
         /// Adds multi-tenant option provider for HmacAuthenticationHandler functionality.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
-        /// <param name="configurationSection">The <see cref="IConfigurationSection" /> for Hmac Multitenant configuration.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection" /> for Hmac MultiTenant configuration.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
-        public static IServiceCollection ConfigureMultiTenantHmacOptionProvider([NotNull] this IServiceCollection services, [NotNull]IConfigurationSection configurationSection)
+        public static IServiceCollection ConfigureMultiTenantHmacOptionProvider([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
             if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
@@ -38,7 +38,7 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant.Extensions
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
         /// <param name="configuration">The <see cref="IConfiguration" />.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
-        public static IServiceCollection ConfigureMultiTenantHmacOptionProvider([NotNull] this IServiceCollection services, [NotNull]IConfiguration configuration)
+        public static IServiceCollection ConfigureMultiTenantHmacOptionProvider([NotNull] this IServiceCollection services, [NotNull] IConfiguration configuration)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));

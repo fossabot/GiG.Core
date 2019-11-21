@@ -16,7 +16,7 @@ namespace GiG.Core.Orleans.Client
         /// <inheritdoc />
         public void Add([NotNull] string name, [NotNull] IClusterClient clusterClient)
         {
-            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException(nameof(name));
+            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException($"Missing {nameof(name)}.");
             if (clusterClient == null) throw new ArgumentNullException(nameof(clusterClient));
 
             _clusterClients.Add(name, clusterClient);
@@ -35,7 +35,7 @@ namespace GiG.Core.Orleans.Client
         /// <inheritdoc />
         public IClusterClient Get([NotNull] string name) 
         {
-            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException(nameof(name));
+            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException($"Missing {nameof(name)}.");
 
             if (!_clusterClients.TryGetValue(name, out var clusterClient))
             {

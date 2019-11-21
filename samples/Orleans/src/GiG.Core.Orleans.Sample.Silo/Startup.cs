@@ -18,7 +18,7 @@ namespace GiG.Core.Orleans.Sample.Silo
         // This method gets called by the runtime. Use this method to add services to the container.
         public static void ConfigureServices(IServiceCollection services)
         {
-            services.AddStreamFactory();
+            services.AddStream();
         }
 
         // This method gets called by the runtime. Use this method to configure Orleans.
@@ -26,7 +26,7 @@ namespace GiG.Core.Orleans.Sample.Silo
         {
             builder.ConfigureCluster(ctx.Configuration)
                 .ConfigureDashboard(ctx.Configuration)
-                .ConfigureEndpoints()
+                .ConfigureEndpoints(ctx.Configuration)
                 .UseMembershipProvider(ctx.Configuration, x =>
                 {
                     x.ConfigureConsulClustering(ctx.Configuration);

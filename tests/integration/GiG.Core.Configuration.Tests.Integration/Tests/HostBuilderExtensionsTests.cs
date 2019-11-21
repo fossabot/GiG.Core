@@ -17,13 +17,6 @@ namespace GiG.Core.Configuration.Tests.Integration.Tests
             Environment.SetEnvironmentVariable(ConfigurationSectionName, null);
         }
 
-        [Fact]
-        public void ConfigureExternalConfiguration_HostBuilderIsNull_ThrowsArgumentNullException()
-        {
-            // ReSharper disable once AssignNullToNotNullAttribute
-            Assert.Throws<ArgumentNullException>(() => HostBuilderExtensions.ConfigureExternalConfiguration(null));
-        }
-
         [Fact] 
         public void GetValue_ConfigurationWithEnvironmentVariablesOverride_ReturnsOverride()
         {

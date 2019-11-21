@@ -1,6 +1,8 @@
 using FluentValidation.AspNetCore;
 using GiG.Core.DistributedTracing.Web.Extensions;
+using GiG.Core.HealthChecks.AspNetCore.Extensions;
 using GiG.Core.HealthChecks.Extensions;
+using GiG.Core.Hosting.AspNetCore.Extensions;
 using GiG.Core.Hosting.Extensions;
 using GiG.Core.Web.Docs.Extensions;
 using GiG.Core.Web.FluentValidation.Extensions;
@@ -60,10 +62,12 @@ namespace GiG.Core.Web.Sample
             app.UseCorrelation();
             app.UseRouting();
             app.UseFluentValidationMiddleware();
-            app.UseHealthChecks();
-            app.UseInfoManagement();
             app.UseApiDocs();
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints => { 
+                endpoints.MapControllers();
+                endpoints.MapInfoManagement();
+                endpoints.MapHealthChecks();
+            });
         }
     }
 }

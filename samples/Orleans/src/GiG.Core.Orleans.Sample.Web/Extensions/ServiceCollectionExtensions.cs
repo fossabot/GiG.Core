@@ -1,5 +1,8 @@
+using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.Messaging.RabbitMQ.Abstractions;
+using GiG.Core.Orleans.Sample.Contracts.Messages;
 using MassTransit;
+using MassTransit.Context;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Security.Authentication;
@@ -11,10 +14,13 @@ namespace GiG.Core.Orleans.Sample.Web.Extensions
         public static void AddMessagePublisher(this IServiceCollection services, IConfiguration configuration)
         {
             var rabbitConfiguration = configuration.GetSection(RabbitMQBusOptions.DefaultSectionName)
-                .Get<RabbitMQBusOptions>();
+                .Get<RabbitMQBusOptions>(); 
 
             services.AddMassTransit(x =>
             {
+                var contextAccessor = services.BuildServiceProvider().GetService<ICorrelationContextAccessor>();
+                MessageCorrelation.UseCorrelationId<PaymentTransactionRequested>(x => contextAccessor.Value);
+
                 x.AddBus(provider=> Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {
                     var host = cfg.Host(rabbitConfiguration.Host, (ushort)rabbitConfiguration.Port,
@@ -24,13 +30,13 @@ namespace GiG.Core.Orleans.Sample.Web.Extensions
                             configurator.Password(rabbitConfiguration.Password);
                             configurator.Heartbeat(rabbitConfiguration.Heartbeat);
                             configurator.PublisherConfirmation = true;
-
+                            
                             if (rabbitConfiguration.SslEnabled)
                             {
                                 configurator.UseSsl(context => { context.Protocol = SslProtocols.Tls12; });
                             }
                         });
-                    
+
                     cfg.ConfigureEndpoints(provider);
                 }));
             });

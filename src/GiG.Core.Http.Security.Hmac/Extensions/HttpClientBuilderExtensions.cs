@@ -4,9 +4,9 @@ using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 using System;
 using System.Linq;
-using GiG.Core.Http.Security.Hmac.Internal;
 
 namespace GiG.Core.Http.Security.Hmac.Extensions
 {
@@ -22,20 +22,28 @@ namespace GiG.Core.Http.Security.Hmac.Extensions
         /// <returns>The <see cref="IHttpClientBuilder" />.</returns>
         public static IHttpClientBuilder AddHmacDelegatingHandler([NotNull]this IHttpClientBuilder httpClientBuilder)
         {
+            if (httpClientBuilder == null) throw new ArgumentNullException(nameof(httpClientBuilder));
 
             var services = httpClientBuilder.Services;
-            httpClientBuilder.AddHttpMessageHandler<HmacDelegatingHandler>();
-            services.TryAddTransient<HmacDelegatingHandler>();
-            services.TryAddSingleton<IHmacOptionsProvider, DefaultHmacOptionsProvider>();
+            httpClientBuilder.AddHttpMessageHandler(x=>
+            {
+                var optionsAccessor = x.GetRequiredService<IOptionsSnapshot<HmacOptions>>();
+                var options = optionsAccessor.Get(httpClientBuilder.Name);
+                return new HmacDelegatingHandler(
+                    Options.Create(options),
+                    x.GetRequiredService<IHashProviderFactory>(),
+                    x.GetRequiredService<IHmacSignatureProvider>());
+            });
+           
             services.TryAddSingleton<IHmacSignatureProvider, HmacSignatureProvider>();
             services.TryAddTransient<IHashProvider, SHA256HashProvider>();
-            services.TryAddSingleton<IHmacSignatureProvider, HmacSignatureProvider>();
             services.TryAddSingleton<IHashProviderFactory, HashProviderFactory>();
-            services.TryAddSingleton<Func<string, IHashProvider>>(x => 
-                (hash) => x.GetServices<IHashProvider>().FirstOrDefault(sp => sp.Name.Equals(hash)));
-
+            services.TryAddSingleton<Func<string, IHashProvider>>(x =>
+                hash => x.GetServices<IHashProvider>().FirstOrDefault(sp => sp.Name.Equals(hash)));
+            
             return httpClientBuilder;
         }
+
         /// <summary>
         /// Adds option provider for <see cref="HmacDelegatingHandler" /> functionality.
         /// </summary>
@@ -47,11 +55,12 @@ namespace GiG.Core.Http.Security.Hmac.Extensions
             if (httpClientBuilder == null) throw new ArgumentNullException(nameof(httpClientBuilder));
             if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
 
-            httpClientBuilder.Services.TryAddSingleton<IHmacOptionsProvider, DefaultHmacOptionsProvider>();
-            httpClientBuilder.Services.Configure<HmacOptions>(configurationSection);
+            httpClientBuilder.Services.Configure<HmacOptions>(httpClientBuilder.Name,configurationSection);
+
 
             return httpClientBuilder;
         }
+
         /// <summary>
         /// Adds option provider for <see cref="HmacDelegatingHandler" /> functionality.
         /// </summary>
