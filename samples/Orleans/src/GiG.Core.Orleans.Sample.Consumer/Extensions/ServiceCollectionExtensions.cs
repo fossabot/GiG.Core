@@ -4,6 +4,7 @@ using GreenPipes;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Security.Authentication;
 
 namespace GiG.Core.Orleans.Sample.Consumer.Extensions
@@ -40,12 +41,12 @@ namespace GiG.Core.Orleans.Sample.Consumer.Extensions
                         typeof(PaymentConsumer).FullName, e =>
                         {
                             e.Consumer<PaymentConsumer>(provider);
+                            e.UseMessageRetry(r =>
+                            {
+                                r.Ignore(new Type[] { typeof(NullReferenceException), typeof(ArgumentException), typeof(ArgumentNullException) });
+                                r.Incremental(5, TimeSpan.FromMilliseconds(200), TimeSpan.FromMilliseconds(200));
+                            });
                         });
-
-                    cfg.UseMessageRetry(r =>
-                    {
-                        r.Intervals(new int[] { 250, 500, 1000 });
-                    });
                 }));
             });
 
