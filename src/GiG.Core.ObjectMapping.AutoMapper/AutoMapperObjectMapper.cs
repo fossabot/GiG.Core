@@ -1,8 +1,5 @@
 ﻿using AutoMapper;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using IObjectMapper = GiG.Core.ObjectMapping.Abstractions.IObjectMapper;
 
@@ -41,16 +38,6 @@ namespace GiG.Core.ObjectMapping.AutoMapper
         public object Map(object source, object destination, Type sourceType, Type destinationType)
         {
             return _mapper.Map(source, destination, sourceType, destinationType);
-        }
-
-        public IQueryable<TDestination> ProjectTo<TDestination>(IQueryable source, object parameters = null, params Expression<Func<TDestination, object>>[] membersToExpand)
-        {
-            return _mapper.ProjectTo(source, parameters, membersToExpand);
-        }
-
-        public IQueryable<TDestination> ProjectTo<TDestination>(IQueryable source, IDictionary<string, object> parameters, params string[] membersToExpand)
-        {
-            return _mapper.ProjectTo<TDestination>(source, parameters, membersToExpand);
         }
     }
 }

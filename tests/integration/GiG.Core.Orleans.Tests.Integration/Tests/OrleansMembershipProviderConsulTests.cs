@@ -5,9 +5,9 @@ using Xunit;
 namespace GiG.Core.Orleans.Tests.Integration.Tests
 {
     [Trait("Category", "IntegrationWithDependency")]
-    public class OrleansMembershipProviderConsulTests : AbstractConsulTests, IClassFixture<MembershipProviderFixture>
+    public class OrleansMembershipProviderConsulTests : AbstractConsulTests, IClassFixture<ConsulMembershipProviderFixture>
     {
-        public OrleansMembershipProviderConsulTests(MembershipProviderFixture consulClusterFixture)
+        public OrleansMembershipProviderConsulTests(ConsulMembershipProviderFixture consulClusterFixture)
         {
             SiloName = consulClusterFixture.SiloName;
             ClusterClient = consulClusterFixture.ClusterClient;

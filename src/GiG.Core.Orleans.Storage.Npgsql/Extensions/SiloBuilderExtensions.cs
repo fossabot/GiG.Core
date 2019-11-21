@@ -12,7 +12,7 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Extensions
     /// </summary>
     public static class SiloBuilderExtensions
     {
-        internal const string InvariantNamePostgreSql = "Npgsql";
+        internal const string InvariantNamePostgreSQL = "Npgsql";
 
         /// <summary>
         /// Adds a named Npgsql Grain Storage Provider.
@@ -21,8 +21,10 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Extensions
         /// <param name="storageName">The Grain Storage name.</param>
         /// <param name="configuration">The <see cref="IConfiguration"/>.</param>
         /// <returns>The<see cref="ISiloBuilder"/>.</returns>
-        public static ISiloBuilder AddNpgsqlGrainStorage([NotNull] this ISiloBuilder builder, string storageName, [NotNull] IConfiguration configuration)
+        public static ISiloBuilder AddNpgsqlGrainStorage([NotNull] this ISiloBuilder builder, [NotNull] string storageName, [NotNull] IConfiguration configuration)
         {
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+
             return builder.AddNpgsqlGrainStorage(storageName, configuration, NpgsqlOptions.DefaultSectionName);
         }
 
@@ -34,13 +36,15 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Extensions
         /// <param name="configuration">The <see cref="IConfiguration"/>.</param>
         /// <param name="sectionName">The Storage Providers section name.</param>
         /// <returns>The <see cref="ISiloBuilder"/>.</returns>
-        public static ISiloBuilder AddNpgsqlGrainStorage([NotNull] this ISiloBuilder builder, string storageName, [NotNull] IConfiguration configuration, string sectionName)
+        public static ISiloBuilder AddNpgsqlGrainStorage([NotNull] this ISiloBuilder builder, [NotNull] string storageName, [NotNull] IConfiguration configuration, [NotNull] string sectionName)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+            if (string.IsNullOrWhiteSpace(storageName)) throw new ArgumentException($"Missing {nameof(storageName)}.");
+            if (string.IsNullOrWhiteSpace(sectionName)) throw new ArgumentException($"Missing {nameof(sectionName)}.");
 
-            var namedStoreageSectionName = $"{sectionName}:{storageName}";
-            var storageConfigSection = configuration.GetSection(namedStoreageSectionName);
+            var namedStorageSectionName = $"{sectionName}:{storageName}";
+            var storageConfigSection = configuration.GetSection(namedStorageSectionName);
 
             return builder.AddNpgsqlGrainStorage(storageName, storageConfigSection);
         }
@@ -53,10 +57,11 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Extensions
         /// <param name="storageName">The Grain Storage name.</param>
         /// <param name="configurationSection">The <see cref="IConfigurationSection"/>.</param>
         /// <returns>The <see cref="ISiloBuilder"/>.</returns>
-        public static ISiloBuilder AddNpgsqlGrainStorage([NotNull] this ISiloBuilder builder, string storageName, [NotNull] IConfigurationSection configurationSection)
+        public static ISiloBuilder AddNpgsqlGrainStorage([NotNull] this ISiloBuilder builder, [NotNull] string storageName, [NotNull] IConfigurationSection configurationSection)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
+            if (string.IsNullOrWhiteSpace(storageName)) throw new ArgumentException($"Missing {nameof(storageName)}.");
 
             var npgsqlOptions = configurationSection.Get<NpgsqlOptions>();
 
@@ -68,7 +73,7 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Extensions
             builder.AddAdoNetGrainStorage(storageName, x =>
             {
                 x.ConnectionString = npgsqlOptions.ConnectionString;
-                x.Invariant = InvariantNamePostgreSql;
+                x.Invariant = InvariantNamePostgreSQL;
                 x.UseJsonFormat = true;
             });
 

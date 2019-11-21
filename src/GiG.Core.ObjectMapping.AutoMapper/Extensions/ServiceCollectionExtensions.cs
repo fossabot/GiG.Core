@@ -22,7 +22,7 @@ namespace GiG.Core.ObjectMapping.AutoMapper.Extensions
         public static IServiceCollection AddObjectMapper([NotNull] this IServiceCollection services, [NotNull] params Assembly[] assemblies)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            if (assemblies == null || assemblies.Length == 0) throw new ArgumentException(nameof(assemblies));
+            if (assemblies == null || assemblies.Length == 0) throw new ArgumentException($"Missing {nameof(assemblies)}.");
 
             services.AddAutoMapper(assemblies);
             services.TryAddScoped<IObjectMapper, AutoMapperObjectMapper>();
@@ -38,7 +38,7 @@ namespace GiG.Core.ObjectMapping.AutoMapper.Extensions
         public static IServiceCollection AddObjectMapper([NotNull] this IServiceCollection services, [NotNull] params Type[] profileAssemblyMarkerTypes)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            if (profileAssemblyMarkerTypes == null || profileAssemblyMarkerTypes.Length == 0) throw new ArgumentException(nameof(profileAssemblyMarkerTypes));
+            if (profileAssemblyMarkerTypes == null || profileAssemblyMarkerTypes.Length == 0) throw new ArgumentException($"Missing {nameof(profileAssemblyMarkerTypes)}.");
 
             services.AddAutoMapper(profileAssemblyMarkerTypes);
             services.TryAddScoped<IObjectMapper, AutoMapperObjectMapper>();

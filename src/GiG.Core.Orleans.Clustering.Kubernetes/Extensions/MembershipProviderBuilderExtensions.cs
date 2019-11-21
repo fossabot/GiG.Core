@@ -15,7 +15,7 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
         private const string ProviderName = "Kubernetes";
 
         /// <summary>
-        /// Configures Kubernetes as a Membershop Provider for an Orleans Client.
+        /// Configures Kubernetes as a Membership Provider for an Orleans Client.
         /// </summary>
         /// <param name="builder">The <see cref="IClientBuilder" />.</param>
         /// <param name="configuration">The <see cref="IConfiguration" />.</param>
@@ -31,7 +31,7 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
         }
 
         /// <summary>
-        /// Configures Kubernetes as a Membershop Provider for an Orleans Client.
+        /// Configures Kubernetes as a Membership Provider for an Orleans Client.
         /// </summary>
         /// <param name="builder">The <see cref="IClientBuilder" />.</param>
         /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
@@ -47,7 +47,7 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
         }
 
         /// <summary>
-        /// Configures Kubernetes as a Membershop Provider for an Orleans Silo.
+        /// Configures Kubernetes as a Membership Provider for an Orleans Silo.
         /// </summary>
         /// <param name="builder">The <see cref="ISiloBuilder" />.</param>
         /// <param name="configuration">The <see cref="IConfiguration" />.</param>
@@ -63,7 +63,7 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
         }
 
         /// <summary>
-        /// Configures Kubernetes as a Membershop Provider for an Orleans Silo.
+        /// Configures Kubernetes as a Membership Provider for an Orleans Silo.
         /// </summary>
         /// <param name="builder">The <see cref="ISiloBuilder" />.</param>
         /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>

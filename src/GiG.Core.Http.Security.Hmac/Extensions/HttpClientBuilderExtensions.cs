@@ -38,11 +38,12 @@ namespace GiG.Core.Http.Security.Hmac.Extensions
             services.TryAddSingleton<IHmacSignatureProvider, HmacSignatureProvider>();
             services.TryAddTransient<IHashProvider, SHA256HashProvider>();
             services.TryAddSingleton<IHashProviderFactory, HashProviderFactory>();
-            services.TryAddSingleton<Func<string, IHashProvider>>(x => 
-                (hash) => x.GetServices<IHashProvider>().FirstOrDefault(sp => sp.Name.Equals(hash)));
+            services.TryAddSingleton<Func<string, IHashProvider>>(x =>
+                hash => x.GetServices<IHashProvider>().FirstOrDefault(sp => sp.Name.Equals(hash)));
             
             return httpClientBuilder;
         }
+
         /// <summary>
         /// Adds option provider for <see cref="HmacDelegatingHandler" /> functionality.
         /// </summary>
@@ -59,6 +60,7 @@ namespace GiG.Core.Http.Security.Hmac.Extensions
 
             return httpClientBuilder;
         }
+
         /// <summary>
         /// Adds option provider for <see cref="HmacDelegatingHandler" /> functionality.
         /// </summary>

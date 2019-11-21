@@ -31,7 +31,7 @@ namespace GiG.Core.Orleans.Client
         /// <returns>The <see cref="ClusterClientFactoryBuilder"/>.</returns>
         public ClusterClientFactoryBuilder AddClusterClient([NotNull] string name, [NotNull] IClusterClient clusterClient)
         {
-            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException(nameof(name));
+            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException($"Missing {nameof(name)}.");
             if (clusterClient == null) throw new ArgumentNullException(nameof(clusterClient));
 
             factory.Add(name, clusterClient);
@@ -47,7 +47,7 @@ namespace GiG.Core.Orleans.Client
         /// <returns>The <see cref="ClusterClientFactoryBuilder"/>.</returns>
         public ClusterClientFactoryBuilder AddClusterClient([NotNull] string name, [NotNull] Func<IClusterClient> createClient)
         {
-            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException(nameof(name));
+            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException($"Missing {nameof(name)}.");
             if (createClient == null) throw new ArgumentNullException(nameof(createClient));
 
             return AddClusterClient(name, createClient.Invoke());

@@ -1,5 +1,5 @@
-﻿using System;
-using Moq;
+﻿using Moq;
+using System;
 using Xunit;
 
 namespace GiG.Core.Security.Cryptography.Tests.Unit

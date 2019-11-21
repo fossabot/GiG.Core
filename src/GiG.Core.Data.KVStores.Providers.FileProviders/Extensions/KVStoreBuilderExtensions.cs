@@ -6,9 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.FileProviders;
 using System;
+using System.Configuration;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("GiG.Core.Data.KVStores.Tests.Integration")]
+[assembly: InternalsVisibleTo("GiG.Core.Data.Tests.Unit")]
 namespace GiG.Core.Data.KVStores.Providers.FileProviders.Extensions
 {
     /// <summary>
@@ -29,7 +30,7 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders.Extensions
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-            if (string.IsNullOrWhiteSpace(configurationSectionName)) throw new ArgumentNullException(nameof(configurationSectionName));
+            if (string.IsNullOrWhiteSpace(configurationSectionName)) throw new ArgumentException($"Missing {nameof(configurationSectionName)}.");
 
             return builder.FromJsonFile(configuration.GetSection(configurationSectionName));
         }
@@ -49,8 +50,14 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders.Extensions
             
             builder.Services.AddFileDataProvider();
 
+            var fileProviderOptions = configurationSection.Get<FileProviderOptions>();
+            if (fileProviderOptions == null)
+            {
+                throw new ConfigurationErrorsException($"Configuration section '{configurationSection.Path}' is not valid.");
+            }
+
             builder.Services.AddSingleton<IDataProviderOptions<T, FileProviderOptions>>(
-                new DataProviderOptions<T, FileProviderOptions>(configurationSection.Get<FileProviderOptions>()));
+                new DataProviderOptions<T, FileProviderOptions>(fileProviderOptions));
 
             builder.Services.AddSingleton<IDataProvider<T>, JsonFileDataProvider<T>>();
             
