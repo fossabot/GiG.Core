@@ -1,6 +1,6 @@
 ﻿using System;
 using Xunit;
-using Tracing = GiG.Core.Http.DistributedTracing.Extensions;
+using DistributedTracing = GiG.Core.Http.DistributedTracing.Extensions;
 using Tenant = GiG.Core.Http.MultiTenant.Extensions;
 // ReSharper disable AssignNullToNotNullAttribute
 
@@ -12,7 +12,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
         [Fact]
         public void AddCorrelationContextDelegatingHandler_HttpClientBuilderIsNull_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => Tracing.HttpClientBuilderExtensions.AddCorrelationContextDelegatingHandler(null));
+            Assert.Throws<ArgumentNullException>(() => DistributedTracing.Extensions.HttpClientBuilderExtensions.AddCorrelationContextDelegatingHandler(null));
         }
 
         [Fact]
