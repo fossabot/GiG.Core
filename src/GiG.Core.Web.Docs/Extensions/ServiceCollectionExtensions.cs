@@ -74,8 +74,12 @@ namespace GiG.Core.Web.Docs.Extensions
         /// <param name="configureOptions">A delegate that is used to configure the <see cref="SwaggerGenOptions" />.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection ConfigureApiDocs([NotNull] this IServiceCollection services,
-            [NotNull] IConfiguration configuration, Action<SwaggerGenOptions> configureOptions = null) =>
-            services.ConfigureApiDocs(configuration.GetSection(ApiDocsOptions.DefaultSectionName), configureOptions);
+            [NotNull] IConfiguration configuration, Action<SwaggerGenOptions> configureOptions = null)
+        {
+            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+
+            return services.ConfigureApiDocs(configuration.GetSection(ApiDocsOptions.DefaultSectionName), configureOptions);
+        }
 
         private static void IncludeXmlComments(this SwaggerGenOptions options)
         {

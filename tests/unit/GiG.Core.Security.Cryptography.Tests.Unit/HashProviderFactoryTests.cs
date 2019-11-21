@@ -13,13 +13,7 @@ namespace GiG.Core.Security.Cryptography.Tests.Unit
         public HashProviderFactoryTests()
         {
             _signatureProvider = new Mock<IHashProvider>();
-            _factoryFunction = new Func<string, IHashProvider>(x =>
-            {
-                if (x.Equals("sha256"))
-                    return _signatureProvider.Object;
-                else
-                    return null;
-            });
+            _factoryFunction = x => x.Equals("sha256") ? _signatureProvider.Object : null;
         }
 
         [Fact]

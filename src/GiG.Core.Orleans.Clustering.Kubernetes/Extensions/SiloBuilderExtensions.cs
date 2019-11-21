@@ -15,32 +15,32 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
         /// <summary>
         /// Registers a configuration instance which <see cref="KubernetesOptions" /> will bind against.
         /// </summary>
-        /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
+        /// <param name="siloBuilder">The Orleans <see cref="ISiloBuilder"/>.</param>
         /// <param name="configuration">The <see cref="IConfiguration" />.</param>
         /// <returns>The <see cref="ISiloBuilder"/>.</returns>
-        public static ISiloBuilder ConfigureKubernetesClustering([NotNull] this ISiloBuilder builder, [NotNull] IConfiguration configuration)
+        public static ISiloBuilder ConfigureKubernetesClustering([NotNull] this ISiloBuilder siloBuilder, [NotNull] IConfiguration configuration)
         {
-            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            return builder.ConfigureKubernetesClustering(configuration.GetSection(KubernetesOptions.DefaultSectionName));
+            return siloBuilder.ConfigureKubernetesClustering(configuration.GetSection(KubernetesOptions.DefaultSectionName));
         }
 
         /// <summary>
         /// Registers a configuration instance which <see cref="KubernetesOptions" /> will bind against.
         /// </summary>
-        /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
+        /// <param name="siloBuilder">The Orleans <see cref="ISiloBuilder"/>.</param>
         /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
         /// <returns>The <see cref="ISiloBuilder"/>.</returns>
-        public static ISiloBuilder ConfigureKubernetesClustering([NotNull] this ISiloBuilder builder, [NotNull] IConfigurationSection configurationSection)
+        public static ISiloBuilder ConfigureKubernetesClustering([NotNull] this ISiloBuilder siloBuilder, [NotNull] IConfigurationSection configurationSection)
         {
-            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
             if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
 
             var kubernetesOptions = configurationSection.Get<KubernetesSiloOptions>() ?? new KubernetesSiloOptions();
 
             return
-                  builder.UseKubeMembership(options =>
+                  siloBuilder.UseKubeMembership(options =>
                   {
                       options.Group = kubernetesOptions.Group;
                       options.CertificateData = kubernetesOptions.CertificateData;

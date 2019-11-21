@@ -1,6 +1,4 @@
 using GiG.Core.Http.Security.Hmac.Extensions;
-using GiG.Core.MultiTenant.Abstractions;
-using GiG.Core.Security.Hmac.Abstractions;
 using GiG.Core.Web.Security.Hmac.MultiTenant.Tests.Integration.Mocks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
@@ -9,9 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using GiG.Core.Http;
-using GiG.Core.Http.Security.Hmac;
-using GiG.Core.Security.Cryptography;
 using Xunit;
 using Constants = GiG.Core.Security.Hmac.Abstractions.Constants;
 
@@ -21,8 +16,9 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant.Tests.Integration.Tests
     public class HmacAuthenticationHandlerTests
     {
         private readonly TestServer _server;
-        const string DefaultClientName = "Default";
-        const string DefaultClient2Name = "Default2";
+        private const string DefaultClientName = "Default";
+        private const string DefaultClient2Name = "Default2";
+
         public HmacAuthenticationHandlerTests()
         {
             _server = new TestServer(new WebHostBuilder()
@@ -48,8 +44,6 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant.Tests.Integration.Tests
                         .ConfigureHttpClient(x => x.BaseAddress = _server.BaseAddress);
                 })
                 .ConfigureAppConfiguration(appConfig => appConfig.AddJsonFile("appsettings.json")));
-            ;
-
         }
 
         [Fact]
@@ -66,8 +60,6 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant.Tests.Integration.Tests
             //Assert
             Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
         }
-
-
 
         [Fact]
         public async Task AuthenticateAsync_WithInvalidHmac_ReturnsUnauthorized()
@@ -103,7 +95,6 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant.Tests.Integration.Tests
             //Assert
             Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
             Assert.Equal(HttpStatusCode.NoContent, response2.StatusCode);
-
         }
     }
 }

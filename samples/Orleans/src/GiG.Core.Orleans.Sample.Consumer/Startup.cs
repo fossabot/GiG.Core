@@ -23,7 +23,7 @@ namespace GiG.Core.Orleans.Sample.Consumer
 
             services.AddMassTransitContext();
             services.AddCorrelationAccessor();
-            services.AddStreamFactory();
+            services.AddStream();
 
             services.AddMessageConsumer(configuration);
             

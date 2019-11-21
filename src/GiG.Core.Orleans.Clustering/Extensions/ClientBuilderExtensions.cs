@@ -14,25 +14,25 @@ namespace GiG.Core.Orleans.Clustering.Extensions
         /// <summary>
         /// Register Membership Provider From Configuration.
         /// </summary>       
-        /// <param name="builder">The <see cref="IClientBuilder"/>.</param>
+        /// <param name="clientBuilder">The <see cref="IClientBuilder"/>.</param>
         /// <param name="configuration">The <see cref="IConfiguration" /> which contains the Membership Provider's configuration options.</param>
         /// <param name="configureProvider">Action used to configure Membership Providers of type <see cref="IClientBuilder"/>.</param>
         /// <returns>The <see cref="IClientBuilder"/>.</returns>
-        public static IClientBuilder UseMembershipProvider([NotNull] this IClientBuilder builder, [NotNull] IConfiguration configuration, [NotNull] Action<MembershipProviderBuilder<IClientBuilder>> configureProvider)
+        public static IClientBuilder UseMembershipProvider([NotNull] this IClientBuilder clientBuilder, [NotNull] IConfiguration configuration, [NotNull] Action<MembershipProviderBuilder<IClientBuilder>> configureProvider)
         {
-            return builder.UseMembershipProviderInternal(configuration, configureProvider);
+            return clientBuilder.UseMembershipProviderInternal(configuration, configureProvider);
         }
 
         /// <summary>
         /// Register Membership Provider From Configuration Section.
         /// </summary>       
-        /// <param name="builder">The <see cref="IClientBuilder"/>.</param>
+        /// <param name="clientBuilder">The <see cref="IClientBuilder"/>.</param>
         /// <param name="configurationSection">The <see cref="IConfigurationSection" /> which contains the Membership Provider's configuration options.</param>
         /// <param name="configureProvider">Action used to configure Membership Providers of type <see cref="IClientBuilder"/>.</param>
         /// <returns>The <see cref="IClientBuilder"/>.</returns>
-        public static IClientBuilder UseMembershipProvider([NotNull] this IClientBuilder builder, [NotNull] IConfigurationSection configurationSection, [NotNull] Action<MembershipProviderBuilder<IClientBuilder>> configureProvider)
+        public static IClientBuilder UseMembershipProvider([NotNull] this IClientBuilder clientBuilder, [NotNull] IConfigurationSection configurationSection, [NotNull] Action<MembershipProviderBuilder<IClientBuilder>> configureProvider)
         {
-            return builder.UseMembershipProviderInternal(configurationSection, configureProvider);
+            return clientBuilder.UseMembershipProviderInternal(configurationSection, configureProvider);
         }
     }
 }

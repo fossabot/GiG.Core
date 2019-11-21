@@ -38,7 +38,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                 {
                     x.AddCorrelationAccessor();
                     x.AddRequestContextAccessor();
-                    x.AddStreamFactory();
+                    x.AddStream();
                 })
                 .Build();
 

@@ -19,7 +19,6 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
     {
         private readonly Mock<IOptionsMonitor<HmacRequirement>> _hmacRequirement;
         private readonly Mock<ILoggerFactory> _loggerFactory;
-        private readonly Mock<ILogger> _logger;
         private readonly Mock<UrlEncoder> _urlEncoder;
         private readonly Mock<ISystemClock> _systemClock;
         private readonly Mock<IHmacOptionsProvider> _optionsProvider;
@@ -33,7 +32,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
         {
             _hmacRequirement = new Mock<IOptionsMonitor<HmacRequirement>>();
             _loggerFactory = new Mock<ILoggerFactory>();
-            _logger = new Mock<ILogger>();
+            var logger = new Mock<ILogger>();
             _urlEncoder = new Mock<UrlEncoder>();
             _systemClock = new Mock<ISystemClock>();
             _optionsProvider = new Mock<IHmacOptionsProvider>();
@@ -45,7 +44,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
             _signatureProvider.Setup(x => x.GetSignature(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns("abc");
             _request = new DefaultHttpRequest(_httpContext);
             _request.Headers.Add(Constants.NonceHeader, "test");
-            _loggerFactory.Setup(x => x.CreateLogger(It.IsAny<string>())).Returns(_logger.Object);
+            _loggerFactory.Setup(x => x.CreateLogger(It.IsAny<string>())).Returns(logger.Object);
             _optionsProvider.Setup(x => x.GetHmacOptions()).Returns(new HmacOptions());
             _hashProviderFactory.Setup(x => x.GetHashProvider(It.IsAny<string>())).Returns(_hashProvider.Object);
         }
@@ -54,7 +53,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
         public async Task HmacAuthenticationHandler_MatchHmacHeader_ReturnsSuccess()
         {
             //Arrange
-            _request.Headers.Add(Constants.AuthHeader, $"hmac abc");
+            _request.Headers.Add(Constants.AuthHeader, "hmac abc");
             _hashProvider.Setup(x => x.Hash(It.IsAny<string>())).Returns("abc");
             var hmacAuthHandler = await BuildHandlerAsync();
 
@@ -70,7 +69,7 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
         public async Task HmacAuthenticationHandler_MatchHmacHeader_ReturnsFail()
         {
             //Arrange
-            _request.Headers.Add(Constants.AuthHeader, $"hmac abc");
+            _request.Headers.Add(Constants.AuthHeader, "hmac abc");
             _hashProvider.Setup(x => x.Hash(It.IsAny<string>())).Returns("abcd");
             var hmacAuthHandler = await BuildHandlerAsync();
 
