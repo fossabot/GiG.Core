@@ -4,9 +4,9 @@ COPY . .
 RUN dotnet restore GiG.Core.sln
 RUN dotnet build GiG.Core.sln /p:Version=$VERSION -c Release --no-restore
 
-FROM publish AS push
+FROM base AS push
 ENTRYPOINT ["/scripts/push.sh"]
 
 FROM base AS test
 ENTRYPOINT ["/scripts/test.sh"]
-CMD ["-u", "-i", "-f", "Category=Unit|Category=Integration", "/src/tests/"]
+CMD ["-u", "-i", "-f", "Category=Unit|Category=Integration", "/sln/tests"]
