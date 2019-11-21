@@ -3,7 +3,6 @@ using Orleans;
 using System;
 using Xunit;
 using ClientBuilderExtensions = GiG.Core.Orleans.Clustering.Consul.Extensions.ClientBuilderExtensions;
-
 // ReSharper disable AssignNullToNotNullAttribute
 
 namespace GiG.Core.Orleans.Tests.Unit.Clustering.Consul

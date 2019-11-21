@@ -18,7 +18,7 @@ namespace GiG.Core.Http.Tests.Unit
         }
 
         [Fact]
-        public void WithBaseAddress_RelativeUriIsNull_ThrowsArgumentNullException()
+        public void WithBaseAddress_RelativeUriIsNull_ThrowsArgumentException()
         {
             var exception = Assert.Throws<ArgumentException>(() => new HttpClientOptionsBuilder().WithBaseAddress("", ""));
             Assert.Equal("Missing relativeUri.", exception.Message);

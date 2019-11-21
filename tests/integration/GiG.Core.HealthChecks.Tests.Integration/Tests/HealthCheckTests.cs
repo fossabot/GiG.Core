@@ -32,6 +32,8 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             var client = testServer.CreateClient();
 
             using var request = new HttpRequestMessage(HttpMethod.Get, _healthChecksOptions.CombinedUrl);
+            
+            // Act
             using var response = await client.SendAsync(request);
 
             // Assert
@@ -50,6 +52,8 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             var client = testServer.CreateClient();
 
             using var request = new HttpRequestMessage(HttpMethod.Get, _healthChecksOptions.LiveUrl);
+            
+            // Act
             using var response = await client.SendAsync(request);
 
             // Assert
@@ -68,6 +72,8 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             var client = testServer.CreateClient();
 
             using var request = new HttpRequestMessage(HttpMethod.Get, _healthChecksOptions.ReadyUrl);
+            
+            // Act
             using var response = await client.SendAsync(request);
 
             // Assert
@@ -86,6 +92,8 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             var client = testServer.CreateClient();
 
             using var request = new HttpRequestMessage(HttpMethod.Get, MockStartupWithCustomConfiguration.CombinedUrl);
+            
+            // Act
             using var response = await client.SendAsync(request);
 
             // Assert
@@ -104,6 +112,8 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             var client = testServer.CreateClient();
 
             using var request = new HttpRequestMessage(HttpMethod.Get, MockStartupWithCustomConfiguration.LiveUrl);
+            
+            // Act
             using var response = await client.SendAsync(request);
 
             // Assert
@@ -122,6 +132,8 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             var client = testServer.CreateClient();
 
             using var request = new HttpRequestMessage(HttpMethod.Get, MockStartupWithCustomConfiguration.ReadyUrl);
+            
+            // Act
             using var response = await client.SendAsync(request);
 
             // Assert
@@ -141,6 +153,8 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             var client = testServer.CreateClient();
 
             using var request = new HttpRequestMessage(HttpMethod.Get, _healthChecksOptions.ReadyUrl);
+            
+            // Act
             using var response = await client.SendAsync(request);
 
             // Assert
@@ -160,6 +174,8 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             var client = testServer.CreateClient();
 
             using var request = new HttpRequestMessage(HttpMethod.Get, _healthChecksOptions.ReadyUrl);
+            
+            // Act
             using var response = await client.SendAsync(request);
 
             // Assert
@@ -179,6 +195,8 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             var client = testServer.CreateClient();
 
             using var request = new HttpRequestMessage(HttpMethod.Get, _healthChecksOptions.LiveUrl);
+            
+            // Act
             using var response = await client.SendAsync(request);
 
             // Assert
@@ -198,6 +216,8 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             var client = testServer.CreateClient();
 
             using var request = new HttpRequestMessage(HttpMethod.Get, _healthChecksOptions.LiveUrl);
+            
+            // Act
             using var response = await client.SendAsync(request);
 
             // Assert
@@ -217,6 +237,8 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             var client = testServer.CreateClient();
 
             using var request = new HttpRequestMessage(HttpMethod.Get, _healthChecksOptions.CombinedUrl);
+            
+            // Act
             using var response = await client.SendAsync(request);
 
             // Assert
@@ -236,6 +258,8 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             var client = testServer.CreateClient();
 
             using var request = new HttpRequestMessage(HttpMethod.Get, _healthChecksOptions.CombinedUrl);
+            
+            // Act
             using var response = await client.SendAsync(request);
 
             // Assert

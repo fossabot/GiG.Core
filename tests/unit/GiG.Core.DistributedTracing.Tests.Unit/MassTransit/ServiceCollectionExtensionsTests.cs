@@ -1,7 +1,6 @@
 ﻿using GiG.Core.DistributedTracing.MassTransit.Extensions;
 using System;
 using Xunit;
-
 // ReSharper disable AssignNullToNotNullAttribute
 
 namespace GiG.Core.DistributedTracing.Tests.Unit.MassTransit

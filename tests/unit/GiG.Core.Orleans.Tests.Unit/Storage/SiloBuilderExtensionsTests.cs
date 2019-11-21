@@ -43,7 +43,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Storage
         }
 
         [Fact]
-        public void AddNpgsqlGrainStorage_StorageNameIsNull_ThrowsArgumentNullException()
+        public void AddNpgsqlGrainStorage_StorageNameIsNull_ThrowsArgumentException()
         {
             var exception = Assert.Throws<ArgumentException>(() => Host.CreateDefaultBuilder()
                 .UseOrleans((ctx, x) =>
@@ -54,7 +54,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Storage
         }
 
         [Fact]
-        public void AddNpgsqlGrainStorage_SectionNameIsNull_ThrowsArgumentNullException()
+        public void AddNpgsqlGrainStorage_SectionNameIsNull_ThrowsArgumentException()
         {
             var exception = Assert.Throws<ArgumentException>(() => Host.CreateDefaultBuilder()
                 .UseOrleans((ctx, x) =>

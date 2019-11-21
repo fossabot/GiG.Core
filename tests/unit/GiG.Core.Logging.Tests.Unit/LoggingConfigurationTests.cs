@@ -11,7 +11,7 @@ namespace GiG.Core.Logging.Tests.Unit
     public class LoggingConfigurationTests
     {
         [Fact]
-        public void ConfigureLogging_HostBuilderIsNull_ThrowsArgumentNullException()
+        public void ConfigureLogging_HostBuilderIsNull_ThrowsConfigurationErrorsException()
         {
             var exception = Assert.Throws<ConfigurationErrorsException>(() =>
                 Host.CreateDefaultBuilder()
