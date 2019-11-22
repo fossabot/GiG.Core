@@ -11,21 +11,21 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
 {
     [Trait("Category", "Integration")]
     public class OrleansSiloMembershipProviderTests : AbstractMembershipProviderTests
-    {       
+    {
         public OrleansSiloMembershipProviderTests()
         {
             HostBuilder = Host.CreateDefaultBuilder()
-                 .UseOrleans((ctx, sb) =>
-                 {
-                     sb.ConfigureCluster(ctx.Configuration);
-                     sb.ConfigureEndpoints(ctx.Configuration);
-                     sb.UseMembershipProvider(ctx.Configuration, x =>
-                     {
-                         x.ConfigureConsulClustering(ctx.Configuration);
-                         x.ConfigureKubernetesClustering(ctx.Configuration);
-                     });
-                     sb.AddAssemblies(typeof(EchoTestGrain));
-                 });
-        } 
+                .UseOrleans((ctx, sb) =>
+                {
+                    sb.ConfigureCluster(ctx.Configuration);
+                    sb.ConfigureEndpoints(ctx.Configuration.GetSection("Orleans:ClusterA:Silo"));
+                    sb.UseMembershipProvider(ctx.Configuration, x =>
+                    {
+                        x.ConfigureConsulClustering(ctx.Configuration);
+                        x.ConfigureKubernetesClustering(ctx.Configuration);
+                    });
+                    sb.AddAssemblies(typeof(EchoTestGrain));
+                });
+        }
     }
 }

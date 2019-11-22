@@ -27,7 +27,7 @@ namespace GiG.Core.Orleans.Clustering.Extensions
 
             var membershipProviderSection = configuration.GetSection(MembershipProviderOptions.DefaultSectionName);
 
-            return builder.UseMembershipProviderInternal<T>(membershipProviderSection, configureProvider);
+            return builder.UseMembershipProviderInternal(membershipProviderSection, configureProvider);
         }
 
         /// <summary>
