@@ -6,7 +6,7 @@ namespace GiG.Core.DistributedTracing.Abstractions
     public class BasicExporterOptions
     {
         /// <summary>
-        /// Tracing Exporter Name
+        /// Tracing Exporter Name.
         /// </summary>
         public string Exporter { get; set; }
     }

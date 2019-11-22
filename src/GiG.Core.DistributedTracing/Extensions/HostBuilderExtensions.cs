@@ -37,11 +37,7 @@ namespace GiG.Core.DistributedTracing.Extensions
             var configuration = context.Configuration;
 
             var configurationSection = configuration.GetSection(sectionName);
-            if (configurationSection == null)
-            {
-                throw new ConfigurationErrorsException($"Configuration section '{sectionName}' does not exist");
-            }
-            
+        
             var tracingOptions = configurationSection.Get<TracingOptions>();
             
             if (tracingOptions?.IsEnabled != true)
@@ -49,7 +45,7 @@ namespace GiG.Core.DistributedTracing.Extensions
                 return;
             }
             
-            if (tracingOptions.Exporters == null)
+            if (tracingOptions?.Exporters?.Count < 1)
             {
                 throw new ConfigurationErrorsException("No tracing exporters were configured.  Please add at least one tracing exporter");
             }
