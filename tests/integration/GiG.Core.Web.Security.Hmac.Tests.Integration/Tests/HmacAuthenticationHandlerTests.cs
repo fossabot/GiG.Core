@@ -41,8 +41,6 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration.Tests
                     .ConfigureDefaultHmacDelegatingHandlerOptionProvider(ctx.Configuration.GetSection("Hmac"));
                 })
                 .ConfigureAppConfiguration(appConfig => appConfig.AddJsonFile("appsettings.json")));
-            ;
-
         }
 
         [Fact]

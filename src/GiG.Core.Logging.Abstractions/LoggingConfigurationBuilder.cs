@@ -41,14 +41,14 @@ namespace GiG.Core.Logging.Abstractions
             if (_loggingOptions == null)
             {
                 throw new ConfigurationErrorsException(
-                    $"Configuration section '{configurationSection.Key}' is not valid");
+                    $"Configuration section '{configurationSection.Key}' is not valid.");
             }
 
             const string sectionName = nameof(_loggingOptions.Sinks);
             SinkConfiguration = configurationSection.GetSection(sectionName);
             if (SinkConfiguration == null)
             {
-                throw new ConfigurationErrorsException($"Configuration section '{sectionName}' does not exist");
+                throw new ConfigurationErrorsException($"Configuration section '{sectionName}' does not exist.");
             }
 
             Services = services ?? throw new ArgumentNullException(nameof(services));
@@ -68,7 +68,7 @@ namespace GiG.Core.Logging.Abstractions
             
             if (_loggingOptions.Sinks == null)
             {
-                throw new ConfigurationErrorsException("No sinks were configured.  Please add at least one sink provider");
+                throw new ConfigurationErrorsException("No sinks were configured. Please add at least one sink provider.");
             }
 
             if (!_loggingOptions.Sinks.TryGetValue(name, out var sinkOptions))

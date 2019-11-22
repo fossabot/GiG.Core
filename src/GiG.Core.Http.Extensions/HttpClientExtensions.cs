@@ -31,7 +31,7 @@ namespace GiG.Core.Http.Extensions
             if (httpClientOptions == null)
             {
                 throw new ConfigurationErrorsException(
-                    $"Configuration section '{configurationSection.Key}' does not exist");
+                    $"Configuration section '{configurationSection.Key}' does not exist.");
             }
 
             var options = new HttpClientOptionsBuilder();

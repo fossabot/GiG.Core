@@ -35,18 +35,12 @@ namespace GiG.Core.Logging.Extensions
         {
             var configuration = context.Configuration;
 
-            var configurationSection = configuration.GetSection(sectionName);
-            if (configurationSection == null)
-            {
-                throw new ConfigurationErrorsException($"Configuration section '{sectionName}' does not exist");
-            }
-
             var loggerConfiguration = new LoggerConfiguration()
                 .Enrich.FromLogContext()
                 .ReadFrom.Configuration(configuration, sectionName);
 
             var loggerConfigurationBuilder =
-                new LoggingConfigurationBuilder(services, loggerConfiguration, configurationSection);
+                new LoggingConfigurationBuilder(services, loggerConfiguration, configuration.GetSection(sectionName));
 
             configureLogging?.Invoke(loggerConfigurationBuilder);
 

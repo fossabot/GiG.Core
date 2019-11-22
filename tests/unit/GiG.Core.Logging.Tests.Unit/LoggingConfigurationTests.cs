@@ -1,6 +1,5 @@
 ﻿using GiG.Core.Logging.Extensions;
 using Microsoft.Extensions.Hosting;
-using System;
 using System.Configuration;
 using Xunit;
 // ReSharper disable AssignNullToNotNullAttribute
@@ -11,13 +10,13 @@ namespace GiG.Core.Logging.Tests.Unit
     public class LoggingConfigurationTests
     {
         [Fact]
-        public void ConfigureLogging_HostBuilderIsNull_ThrowsConfigurationErrorsException()
+        public void ConfigureLogging_ConfigurationSectionIsWrong_ThrowsConfigurationErrorsException()
         {
             var exception = Assert.Throws<ConfigurationErrorsException>(() =>
                 Host.CreateDefaultBuilder()
                 .ConfigureLogging(null, "Logging")
                     .Build());
-            Assert.Equal("Configuration section 'Logging' is not valid", exception.Message);
+            Assert.Equal("Configuration section 'Logging' is not valid.", exception.Message);
         }
     }
 }
