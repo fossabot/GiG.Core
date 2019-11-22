@@ -14,7 +14,7 @@ namespace GiG.Core.DistributedTracing.Extensions
     public static class HostBuilderExtensions
     {
         /// <summary>
-        /// Configures Tracing Providers.
+        /// Configures Tracing Exporters.
         /// </summary>
         /// <param name="builder">The <see cref="IHostBuilder"/>.</param>
         /// <param name="tracingConfigurationBuilder">>A delegate that is used to configure the <see cref="TracingConfigurationBuilder" />.</param>
@@ -24,7 +24,7 @@ namespace GiG.Core.DistributedTracing.Extensions
             [NotNull] string sectionName = TracingOptions.DefaultSectionName)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
-            if (sectionName == null) throw new ArgumentException($"Missing {nameof(sectionName)}.");
+            if (sectionName == null) throw new ArgumentNullException(nameof(sectionName));
             
             return builder
                 .ConfigureServices((context, services) => ConfigureTracingInternal(context, services, tracingConfigurationBuilder, sectionName));
@@ -44,18 +44,23 @@ namespace GiG.Core.DistributedTracing.Extensions
             
             var tracingOptions = configurationSection.Get<TracingOptions>();
             
-            if (tracingOptions.Providers == null)
+            if (tracingOptions?.IsEnabled != true)
             {
-                throw new ConfigurationErrorsException("No tracing providers were configured.  Please add at least one tracing provider");
+                return;
+            }
+            
+            if (tracingOptions.Exporters == null)
+            {
+                throw new ConfigurationErrorsException("No tracing exporters were configured.  Please add at least one tracing exporter");
             }
 
-            var builder = new TracingConfigurationBuilder(services, tracingOptions.Providers);
+            var builder = new TracingConfigurationBuilder(services, tracingOptions.Exporters);
 
             configureTracing?.Invoke(builder);
 
-            if (!builder.IsProviderConfigured && tracingOptions.IsEnabled)
+            if (!builder.IsExporterConfigured)
             {
-                throw new ConfigurationErrorsException("Tracing is enabled but no tracing providers were configured.");
+                throw new ConfigurationErrorsException("Tracing is enabled but no tracing exporters were configured.");
             }
         }
     }

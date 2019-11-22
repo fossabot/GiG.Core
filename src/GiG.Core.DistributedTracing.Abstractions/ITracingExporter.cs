@@ -3,13 +3,13 @@ using Microsoft.Extensions.DependencyInjection;
 namespace GiG.Core.DistributedTracing.Abstractions
 {
     /// <summary>
-    /// Tracing Provider.
+    /// Tracing Exporter.
     /// </summary>
-    public interface ITracingProvider
+    public interface ITracingExporter
     {
         /// <summary>
-        /// Register Tracing Provider.
+        /// Register Tracing Exporter.
         /// </summary>
-        void RegisterProvider(string provider);
+        void RegisterExporter(string exporter);
     }
 }

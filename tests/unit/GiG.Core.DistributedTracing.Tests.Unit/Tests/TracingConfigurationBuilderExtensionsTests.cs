@@ -24,10 +24,10 @@ namespace GiG.Core.DistributedTracing.Tests.Unit.Tests
         public void ConfigureTracing_SectionNameMissing_ThrowsArgumentException()
         {
             // Act
-            var exception = Assert.Throws<ArgumentException>(() => Host.CreateDefaultBuilder().ConfigureTracing(null, null));
+            var exception = Assert.Throws<ArgumentNullException>(() => Host.CreateDefaultBuilder().ConfigureTracing(null, null));
 
             // Assert
-            Assert.Equal("Missing sectionName.", exception.Message);
+            Assert.Equal("sectionName", exception.ParamName);
         }
     }
 }

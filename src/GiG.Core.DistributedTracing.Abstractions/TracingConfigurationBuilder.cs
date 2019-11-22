@@ -11,9 +11,9 @@ namespace GiG.Core.DistributedTracing.Abstractions
     public class TracingConfigurationBuilder
     {
         /// <summary>
-        /// The Providers.
+        /// The Exporters.
         /// </summary>
-        public IDictionary<string, BasicProviderOptions> Providers { get; }
+        public IDictionary<string, BasicExporterOptions> Exporters { get; }
 
         /// <summary>
         /// The Service Collection.
@@ -21,43 +21,43 @@ namespace GiG.Core.DistributedTracing.Abstractions
         public IServiceCollection Services { get; }
 
         /// <summary>
-        /// Is Provider Configured
+        /// Is Exporter Configured
         /// </summary>
-        public bool IsProviderConfigured { get; private set; }
+        public bool IsExporterConfigured { get; private set; }
 
         /// <summary>
         /// Tracing Configuration builder.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection"/>.</param>
-        /// <param name="providers">List of providers.</param>
-        public TracingConfigurationBuilder([NotNull] IServiceCollection services, [NotNull] IDictionary<string, BasicProviderOptions> providers)
+        /// <param name="exporters">List of exporters.</param>
+        public TracingConfigurationBuilder([NotNull] IServiceCollection services, [NotNull] IDictionary<string, BasicExporterOptions> exporters)
         {
-            Providers = providers ?? throw new ArgumentNullException(nameof(providers));
+            Exporters = exporters ?? throw new ArgumentNullException(nameof(exporters));
             Services = services ?? throw new ArgumentNullException(nameof(services));
         }
 
         /// <summary>
-        /// Register Tracing Provider.
+        /// Register Tracing Exporter.
         /// </summary>
-        /// <param name="name">The Tracing Provider name.</param>
-        /// <param name="tracingProvider">The <see cref="ITracingProvider"/>.</param>
-        public TracingConfigurationBuilder RegisterProvider([NotNull] string name, [NotNull] ITracingProvider tracingProvider)
+        /// <param name="name">The Tracing Exporter name.</param>
+        /// <param name="tracingExporter">The <see cref="ITracingExporter"/>.</param>
+        public TracingConfigurationBuilder RegisterExporter([NotNull] string name, [NotNull] ITracingExporter tracingExporter)
         {
             if (string.IsNullOrEmpty(name)) throw new ArgumentException(nameof(name));
-            if (tracingProvider == null) throw new ArgumentNullException(nameof(tracingProvider));
+            if (tracingExporter == null) throw new ArgumentNullException(nameof(tracingExporter));
 
-            if (IsProviderConfigured)
+            if (IsExporterConfigured)
             {
                 return this;
             }
 
-            if (!Providers.TryGetValue(name, out var providerOptions))
+            if (!Exporters.TryGetValue(name, out var exporterOptions))
             {
                 return this;
             }
 
-            tracingProvider.RegisterProvider(providerOptions.Provider);
-            IsProviderConfigured = true;
+            tracingExporter.RegisterExporter(exporterOptions.Exporter);
+            IsExporterConfigured = true;
 
             return this;
         }

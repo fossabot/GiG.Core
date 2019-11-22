@@ -13,13 +13,13 @@ namespace GiG.Core.DistributedTracing.Abstractions
         public const string DefaultSectionName = "Tracing";
         
         /// <summary>
-        /// A value to indicates whether a Provider is enabled or not.
+        /// A value to indicates whether a Exporter is enabled or not.
         /// </summary>
         public bool IsEnabled { get; set; }
         
         /// <summary>
-        /// The Tracing providers.
+        /// The Tracing Exporters.
         /// </summary>
-        public IDictionary<string, BasicProviderOptions> Providers { get; set; } = new Dictionary<string, BasicProviderOptions>();
+        public IDictionary<string, BasicExporterOptions> Exporters { get; set; } = new Dictionary<string, BasicExporterOptions>();
     }
 }
