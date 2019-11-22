@@ -39,7 +39,7 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
         public static MembershipProviderBuilder<IClientBuilder> ConfigureKubernetesClustering([NotNull] this MembershipProviderBuilder<IClientBuilder> clientBuilder, [NotNull] IConfigurationSection configurationSection)
         {
             if (clientBuilder == null) throw new ArgumentNullException(nameof(clientBuilder));
-            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
+            if (configurationSection?.Exists() != true) throw new ArgumentNullException(nameof(configurationSection));
 
             clientBuilder.RegisterProvider(ProviderName, x => x.ConfigureKubernetesClustering(configurationSection));
 
@@ -71,7 +71,7 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
         public static MembershipProviderBuilder<ISiloBuilder> ConfigureKubernetesClustering([NotNull] this MembershipProviderBuilder<ISiloBuilder> siloBuilder, [NotNull] IConfigurationSection configurationSection)
         {
             if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
-            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
+            if (configurationSection?.Exists() != true) throw new ArgumentNullException(nameof(configurationSection));
 
             siloBuilder.RegisterProvider(ProviderName, x => x.ConfigureKubernetesClustering(configurationSection));
 

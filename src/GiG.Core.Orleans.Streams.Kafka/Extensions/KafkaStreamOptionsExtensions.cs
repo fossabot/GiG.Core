@@ -21,7 +21,7 @@ namespace GiG.Core.Orleans.Streams.Kafka.Extensions
         public static KafkaStreamOptions FromConfiguration([NotNull] this KafkaStreamOptions options, [NotNull] IConfigurationSection configurationSection)
         {
             if (options == null) throw new ArgumentNullException(nameof(options));
-            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
+            if (configurationSection?.Exists() != true) throw new ArgumentNullException(nameof(configurationSection));
 
             var kafkaOptions = configurationSection.Get<KafkaOptions>();
 

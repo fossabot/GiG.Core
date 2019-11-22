@@ -40,13 +40,12 @@ namespace GiG.Core.Logging.Abstractions
             _loggingOptions = configurationSection.Get<LoggingOptions>();
             if (_loggingOptions == null)
             {
-                throw new ConfigurationErrorsException(
-                    $"Configuration section '{configurationSection.Key}' is not valid.");
+                throw new ConfigurationErrorsException($"Configuration section '{configurationSection.Key}' is not valid.");
             }
 
             const string sectionName = nameof(_loggingOptions.Sinks);
             SinkConfiguration = configurationSection.GetSection(sectionName);
-            if (SinkConfiguration == null)
+            if (SinkConfiguration?.Exists() != true)
             {
                 throw new ConfigurationErrorsException($"Configuration section '{sectionName}' does not exist.");
             }

@@ -53,9 +53,9 @@ namespace GiG.Core.Http.Security.Hmac.Extensions
         public static IHttpClientBuilder ConfigureDefaultHmacDelegatingHandlerOptionProvider([NotNull]this IHttpClientBuilder httpClientBuilder, [NotNull]IConfigurationSection configurationSection)
         {
             if (httpClientBuilder == null) throw new ArgumentNullException(nameof(httpClientBuilder));
-            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
+            if (configurationSection?.Exists() != true) throw new ArgumentNullException(nameof(configurationSection));
 
-            httpClientBuilder.Services.Configure<HmacOptions>(httpClientBuilder.Name,configurationSection);
+            httpClientBuilder.Services.Configure<HmacOptions>(httpClientBuilder.Name, configurationSection);
 
 
             return httpClientBuilder;

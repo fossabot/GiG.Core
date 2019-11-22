@@ -24,7 +24,7 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant.Extensions
         public static IServiceCollection ConfigureMultiTenantHmacOptionProvider([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
+            if (configurationSection?.Exists() != true) throw new ArgumentNullException(nameof(configurationSection));
 
             services.AddTenantAccessor();
             services.TryAddSingleton<IHmacOptionsProvider, MultiTenantOptionProvider>();

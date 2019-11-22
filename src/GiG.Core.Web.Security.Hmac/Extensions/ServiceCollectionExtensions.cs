@@ -44,7 +44,7 @@ namespace GiG.Core.Web.Security.Hmac.Extensions
         public static IServiceCollection ConfigureDefaultHmacOptionProvider([NotNull]this IServiceCollection services, [NotNull]IConfigurationSection configurationSection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
+            if (configurationSection?.Exists() != true) throw new ArgumentNullException(nameof(configurationSection));
 
             services.TryAddTransient<IHmacOptionsProvider, DefaultOptionsProvider>();
             services.Configure<HmacOptions>(configurationSection);

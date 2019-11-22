@@ -73,7 +73,7 @@ namespace GiG.Core.Orleans.Silo.Extensions
         public static ISiloBuilder ConfigureCluster([NotNull] this ISiloBuilder siloBuilder, [NotNull] IConfigurationSection configurationSection)
         {
             if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
-            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
+            if (configurationSection?.Exists() != true) throw new ArgumentNullException(nameof(configurationSection));
 
             siloBuilder.Configure<ClusterOptions>(configurationSection);
 
@@ -91,13 +91,7 @@ namespace GiG.Core.Orleans.Silo.Extensions
             if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            var configurationSection = configuration.GetSection(ClusterOptionsDefaultSection);
-            if (configurationSection == null)
-            {
-                throw new ConfigurationErrorsException($"Configuration section '{ClusterOptionsDefaultSection}' does not exist");
-            }
-
-            return ConfigureCluster(siloBuilder, configurationSection);
+            return ConfigureCluster(siloBuilder, configuration.GetSection(ClusterOptionsDefaultSection));
         }
 
         /// <summary>
@@ -111,9 +105,7 @@ namespace GiG.Core.Orleans.Silo.Extensions
             if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            var configurationSection = configuration.GetSection(SiloOptions.DefaultSectionName);
-
-            return siloBuilder.ConfigureEndpoints(configurationSection);
+            return siloBuilder.ConfigureEndpoints(configuration.GetSection(SiloOptions.DefaultSectionName));
         }
         
         /// <summary>
@@ -125,7 +117,7 @@ namespace GiG.Core.Orleans.Silo.Extensions
         public static ISiloBuilder ConfigureEndpoints([NotNull] this ISiloBuilder siloBuilder, [NotNull] IConfigurationSection configurationSection)
         {
             if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
-            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
+            if (configurationSection?.Exists() != true) throw new ArgumentNullException(nameof(configurationSection));
          
             var siloOptions = configurationSection.Get<SiloOptions>() ?? new SiloOptions();
           

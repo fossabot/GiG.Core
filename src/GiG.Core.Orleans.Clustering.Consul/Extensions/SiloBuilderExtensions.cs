@@ -34,7 +34,7 @@ namespace GiG.Core.Orleans.Clustering.Consul.Extensions
         public static ISiloBuilder ConfigureConsulClustering([NotNull] this ISiloBuilder siloBuilder, [NotNull] IConfigurationSection configurationSection)
         {
             if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
-            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
+            if (configurationSection?.Exists() != true) throw new ArgumentNullException(nameof(configurationSection));
                  
             var consulOptions = configurationSection.Get<ConsulOptions>() ?? new ConsulOptions();
 

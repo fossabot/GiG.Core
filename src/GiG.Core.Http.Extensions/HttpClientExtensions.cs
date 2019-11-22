@@ -24,7 +24,7 @@ namespace GiG.Core.Http.Extensions
             [NotNull] IConfigurationSection configurationSection)
         {
             if (client == null) throw new ArgumentNullException(nameof(client));
-            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
+            if (configurationSection?.Exists() != true) throw new ArgumentNullException(nameof(configurationSection));
             if (string.IsNullOrWhiteSpace(baseUri)) throw new ArgumentException($"Missing {nameof(baseUri)}.");
 
             var httpClientOptions = configurationSection.Get<HttpClientOptions>();
