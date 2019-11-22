@@ -19,7 +19,7 @@ using System.Net.Http;
 
 namespace GiG.Core.Orleans.Tests.Integration.Fixtures
 {
-    public abstract class MembershipProviderFixture
+    public abstract class MembershipProviderFixture : IDisposable
     {
         internal readonly IOptions<ConsulOptions> ConsulOptions;
 
@@ -31,35 +31,37 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
 
         internal readonly IServiceProvider ClientServiceProvider;
 
+        protected readonly IHost SiloHost;
+
         internal readonly string SiloName;
 
         public MembershipProviderFixture(string membershipProviderSectionName)
         {
             SiloName = new Faker().Random.String2(5);
 
-            var siloHost = Host.CreateDefaultBuilder()
-                 .ConfigureServices((ctx, services) => 
-                 {
-                     var membershipProviderSection = ctx.Configuration.GetSection(membershipProviderSectionName);
-                     services.Configure<KubernetesSiloOptions>(membershipProviderSection);
-                 })
-                 .UseOrleans((ctx, sb) =>
-                 {
-                     var membershipProviderSection = ctx.Configuration.GetSection(membershipProviderSectionName);
-                     
-                     sb.ConfigureCluster(ctx.Configuration);
-                     sb.ConfigureEndpoints(ctx.Configuration);
-                     sb.UseMembershipProvider(membershipProviderSection, x =>
-                      {
-                          x.ConfigureConsulClustering(membershipProviderSection);
-                          x.ConfigureKubernetesClustering(membershipProviderSection);
-                      });
-                     sb.AddAssemblies(typeof(EchoTestGrain));
-                     sb.Configure<SiloOptions>(options => options.SiloName = SiloName);
-                 })
-                 .Build();
+            SiloHost = Host.CreateDefaultBuilder()
+                .ConfigureServices((ctx, services) =>
+                {
+                    var membershipProviderSection = ctx.Configuration.GetSection(membershipProviderSectionName);
+                    services.Configure<KubernetesSiloOptions>(membershipProviderSection);
+                })
+                .UseOrleans((ctx, sb) =>
+                {
+                    var membershipProviderSection = ctx.Configuration.GetSection(membershipProviderSectionName);
 
-            siloHost.StartAsync().GetAwaiter().GetResult();
+                    sb.ConfigureCluster(ctx.Configuration);
+                    sb.ConfigureEndpoints(11112, 30001);
+                    sb.UseMembershipProvider(membershipProviderSection, x =>
+                    {
+                        x.ConfigureConsulClustering(membershipProviderSection);
+                        x.ConfigureKubernetesClustering(membershipProviderSection);
+                    });
+                    sb.AddAssemblies(typeof(EchoTestGrain));
+                    sb.Configure<SiloOptions>(options => options.SiloName = SiloName);
+                })
+                .Build();
+
+            SiloHost.StartAsync().GetAwaiter().GetResult();
 
             var clientHost = Host.CreateDefaultBuilder()
                 .ConfigureServices((ctx, services) =>
@@ -88,7 +90,14 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
 
             ConsulOptions = ClientServiceProvider.GetRequiredService<IOptions<ConsulOptions>>();
 
-            KubernetesOptions = siloHost.Services.GetRequiredService<IOptions<KubernetesSiloOptions>>();
+            KubernetesOptions = SiloHost.Services.GetRequiredService<IOptions<KubernetesSiloOptions>>();
+        }
+
+        public void Dispose()
+        {
+            SiloHost?.StopAsync();
+            SiloHost?.WaitForShutdown();
+            ClusterClient?.Close();
         }
     }
 }
