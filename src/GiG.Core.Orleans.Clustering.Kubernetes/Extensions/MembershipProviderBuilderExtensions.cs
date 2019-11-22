@@ -17,65 +17,65 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
         /// <summary>
         /// Configures Kubernetes as a Membership Provider for an Orleans Client.
         /// </summary>
-        /// <param name="builder">The <see cref="IClientBuilder" />.</param>
+        /// <param name="clientBuilder">The <see cref="IClientBuilder" />.</param>
         /// <param name="configuration">The <see cref="IConfiguration" />.</param>
         /// <returns>The <see cref="IClientBuilder" />.</returns>
-        public static MembershipProviderBuilder<IClientBuilder> ConfigureKubernetesClustering([NotNull] this MembershipProviderBuilder<IClientBuilder> builder, [NotNull] IConfiguration configuration)
+        public static MembershipProviderBuilder<IClientBuilder> ConfigureKubernetesClustering([NotNull] this MembershipProviderBuilder<IClientBuilder> clientBuilder, [NotNull] IConfiguration configuration)
         {
-            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (clientBuilder == null) throw new ArgumentNullException(nameof(clientBuilder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            builder.RegisterProvider(ProviderName, x => x.ConfigureKubernetesClustering(configuration));
+            clientBuilder.RegisterProvider(ProviderName, x => x.ConfigureKubernetesClustering(configuration));
 
-            return builder;
+            return clientBuilder;
         }
 
         /// <summary>
         /// Configures Kubernetes as a Membership Provider for an Orleans Client.
         /// </summary>
-        /// <param name="builder">The <see cref="IClientBuilder" />.</param>
+        /// <param name="clientBuilder">The <see cref="IClientBuilder" />.</param>
         /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
         /// <returns>The <see cref="IClientBuilder" />.</returns>
-        public static MembershipProviderBuilder<IClientBuilder> ConfigureKubernetesClustering([NotNull] this MembershipProviderBuilder<IClientBuilder> builder, [NotNull] IConfigurationSection configurationSection)
+        public static MembershipProviderBuilder<IClientBuilder> ConfigureKubernetesClustering([NotNull] this MembershipProviderBuilder<IClientBuilder> clientBuilder, [NotNull] IConfigurationSection configurationSection)
         {
-            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (clientBuilder == null) throw new ArgumentNullException(nameof(clientBuilder));
             if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
 
-            builder.RegisterProvider(ProviderName, x => x.ConfigureKubernetesClustering(configurationSection));
+            clientBuilder.RegisterProvider(ProviderName, x => x.ConfigureKubernetesClustering(configurationSection));
 
-            return builder;
+            return clientBuilder;
         }
 
         /// <summary>
         /// Configures Kubernetes as a Membership Provider for an Orleans Silo.
         /// </summary>
-        /// <param name="builder">The <see cref="ISiloBuilder" />.</param>
+        /// <param name="siloBuilder">The <see cref="ISiloBuilder" />.</param>
         /// <param name="configuration">The <see cref="IConfiguration" />.</param>
         /// <returns>The <see cref="ISiloBuilder" />.</returns>
-        public static MembershipProviderBuilder<ISiloBuilder> ConfigureKubernetesClustering([NotNull] this MembershipProviderBuilder<ISiloBuilder> builder, [NotNull] IConfiguration configuration)
+        public static MembershipProviderBuilder<ISiloBuilder> ConfigureKubernetesClustering([NotNull] this MembershipProviderBuilder<ISiloBuilder> siloBuilder, [NotNull] IConfiguration configuration)
         {
-            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            builder.RegisterProvider(ProviderName, x => x.ConfigureKubernetesClustering(configuration));
+            siloBuilder.RegisterProvider(ProviderName, x => x.ConfigureKubernetesClustering(configuration));
 
-            return builder;
+            return siloBuilder;
         }
 
         /// <summary>
         /// Configures Kubernetes as a Membership Provider for an Orleans Silo.
         /// </summary>
-        /// <param name="builder">The <see cref="ISiloBuilder" />.</param>
+        /// <param name="siloBuilder">The <see cref="ISiloBuilder" />.</param>
         /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
         /// <returns>The <see cref="ISiloBuilder" />.</returns>
-        public static MembershipProviderBuilder<ISiloBuilder> ConfigureKubernetesClustering([NotNull] this MembershipProviderBuilder<ISiloBuilder> builder, [NotNull] IConfigurationSection configurationSection)
+        public static MembershipProviderBuilder<ISiloBuilder> ConfigureKubernetesClustering([NotNull] this MembershipProviderBuilder<ISiloBuilder> siloBuilder, [NotNull] IConfigurationSection configurationSection)
         {
-            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
             if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
 
-            builder.RegisterProvider(ProviderName, x => x.ConfigureKubernetesClustering(configurationSection));
+            siloBuilder.RegisterProvider(ProviderName, x => x.ConfigureKubernetesClustering(configurationSection));
 
-            return builder;
+            return siloBuilder;
         }
     }
 }

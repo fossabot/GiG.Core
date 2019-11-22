@@ -15,31 +15,31 @@ namespace GiG.Core.Orleans.Clustering.Consul.Extensions
         /// <summary>
         /// Registers a configuration instance which <see cref="ConsulOptions" /> will bind against.
         /// </summary>
-        /// <param name="builder">The Orleans <see cref="IClientBuilder"/>.</param>
+        /// <param name="clientBuilder">The Orleans <see cref="IClientBuilder"/>.</param>
         /// <param name="configuration">The <see cref="IConfiguration" />.</param>
         /// <returns>The <see cref="IClientBuilder"/>.</returns>
-        public static IClientBuilder ConfigureConsulClustering([NotNull] this IClientBuilder builder, [NotNull] IConfiguration configuration)
+        public static IClientBuilder ConfigureConsulClustering([NotNull] this IClientBuilder clientBuilder, [NotNull] IConfiguration configuration)
         {
-            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (clientBuilder == null) throw new ArgumentNullException(nameof(clientBuilder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            return builder.ConfigureConsulClustering(configuration.GetSection(ConsulOptions.DefaultSectionName));
+            return clientBuilder.ConfigureConsulClustering(configuration.GetSection(ConsulOptions.DefaultSectionName));
         }
 
         /// <summary>
         /// Registers a configuration instance which <see cref="ConsulOptions" /> will bind against.
         /// </summary>
-        /// <param name="builder">The Orleans <see cref="IClientBuilder"/>.</param>
+        /// <param name="clientBuilder">The Orleans <see cref="IClientBuilder"/>.</param>
         /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
         /// <returns>The <see cref="IClientBuilder"/>.</returns>
-        public static IClientBuilder ConfigureConsulClustering([NotNull] this IClientBuilder builder, [NotNull] IConfigurationSection configurationSection)
+        public static IClientBuilder ConfigureConsulClustering([NotNull] this IClientBuilder clientBuilder, [NotNull] IConfigurationSection configurationSection)
         {
-            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (clientBuilder == null) throw new ArgumentNullException(nameof(clientBuilder));
             if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
 
             var consulOptions = configurationSection.Get<ConsulOptions>() ?? new ConsulOptions();
 
-            return builder.UseConsulClustering(options =>
+            return clientBuilder.UseConsulClustering(options =>
                   {
                       options.Address = new Uri(consulOptions.Address);
                       options.KvRootFolder = consulOptions.KvRootFolder;

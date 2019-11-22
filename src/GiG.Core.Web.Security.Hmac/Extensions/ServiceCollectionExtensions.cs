@@ -1,13 +1,13 @@
 ﻿using GiG.Core.Security.Cryptography;
 using GiG.Core.Security.Hmac.Abstractions;
 using GiG.Core.Web.Security.Hmac.Abstractions;
+using GiG.Core.Web.Security.Hmac.Internal;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Linq;
-using GiG.Core.Web.Security.Hmac.Internal;
 
 namespace GiG.Core.Web.Security.Hmac.Extensions
 {
