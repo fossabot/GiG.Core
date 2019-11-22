@@ -5,7 +5,6 @@
     /// </summary>
     public class KafkaOptions
     {
-      
         /// <summary>
         /// Default Section Name.
         /// </summary>

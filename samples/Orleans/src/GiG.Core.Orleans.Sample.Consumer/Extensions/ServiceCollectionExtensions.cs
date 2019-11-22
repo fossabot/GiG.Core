@@ -1,8 +1,10 @@
+using GiG.Core.Messaging.MassTransit.Extensions;
 using GiG.Core.Messaging.RabbitMQ.Abstractions;
 using GreenPipes;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Security.Authentication;
 
 namespace GiG.Core.Orleans.Sample.Consumer.Extensions
@@ -16,6 +18,7 @@ namespace GiG.Core.Orleans.Sample.Consumer.Extensions
 
             services.AddMassTransit(x =>
             {
+                var serviceProvider = x.Collection.BuildServiceProvider();
                 x.AddConsumer<PaymentConsumer>();
                 x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {
@@ -32,17 +35,18 @@ namespace GiG.Core.Orleans.Sample.Consumer.Extensions
                                 configurator.UseSsl(context => { context.Protocol = SslProtocols.Tls12; });
                             }
                         });
-
+                    
+                    host.AddDefaultConsumerObserver(serviceProvider);
                     cfg.ReceiveEndpoint(host,
                         typeof(PaymentConsumer).FullName, e =>
                         {
                             e.Consumer<PaymentConsumer>(provider);
+                            e.UseMessageRetry(r =>
+                            {
+                                r.Ignore(new Type[] { typeof(NullReferenceException), typeof(ArgumentException), typeof(ArgumentNullException) });
+                                r.Incremental(5, TimeSpan.FromMilliseconds(200), TimeSpan.FromMilliseconds(200));
+                            });
                         });
-
-                    cfg.UseMessageRetry(r =>
-                    {
-                        r.Intervals(new int[] { 250, 500, 1000 });
-                    });
                 }));
             });
 

@@ -12,7 +12,7 @@ namespace GiG.Core.Security.Cryptography.Tests.Unit
         public void SHA256SignatureProvider_HashString_ReturnsCorrectHash()
         {
             //Arrange
-            var hashedString = "";
+            string hashedString;
             using (var hash = SHA256.Create())
             {
                 hashedString = Convert.ToBase64String(hash.ComputeHash(Encoding.UTF8.GetBytes("test")));

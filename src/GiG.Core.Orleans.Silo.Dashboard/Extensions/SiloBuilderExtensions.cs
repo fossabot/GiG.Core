@@ -15,26 +15,26 @@ namespace GiG.Core.Orleans.Silo.Dashboard.Extensions
         /// <summary>
         /// Configures the Orleans Dashboard.
         /// </summary>
-        /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
+        /// <param name="siloBuilder">The Orleans <see cref="ISiloBuilder"/>.</param>
         /// <param name="configuration">The <see cref="IConfiguration"/> from which to bind to <see cref="DashboardOptions"/>.</param>
         /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
-        public static ISiloBuilder ConfigureDashboard([NotNull] this ISiloBuilder builder, [NotNull] IConfiguration configuration)
+        public static ISiloBuilder ConfigureDashboard([NotNull] this ISiloBuilder siloBuilder, [NotNull] IConfiguration configuration)
         {
-            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
           
             var orleansConfiguration = configuration.GetSection(DashboardOptions.DefaultSectionName).Get<DashboardOptions>();
             
             if (orleansConfiguration?.IsEnabled ?? false)
             {
-                builder.UseDashboard(options =>
+                siloBuilder.UseDashboard(options =>
                 {
                     options.BasePath = orleansConfiguration.Path;
                     options.Port = orleansConfiguration.Port;
                 });
             }
 
-            return builder;
+            return siloBuilder;
         }
     }
 }
