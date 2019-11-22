@@ -64,6 +64,25 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Unit
             Assert.True(result.Succeeded);
             VerifyCallsWithHeader();
         }
+        
+        [Fact]
+        public async Task HmacAuthenticationHandler_NonceHeaderMissing_ReturnsFail()
+        {
+            //Arrange
+            _request.Headers.Remove(Constants.NonceHeader);
+            _request.Headers.Add(Constants.AuthHeader, "hmac abc");
+            _hashProvider.Setup(x => x.Hash(It.IsAny<string>())).Returns("abc");
+            var hmacAuthHandler = await BuildHandlerAsync();
+
+            //Act
+            var result = await hmacAuthHandler.AuthenticateAsync();
+
+            //Assert
+            Assert.False(result.Succeeded);
+            Assert.NotNull(result.Failure);
+            Assert.Equal("Nonce not set.", result.Failure.Message);
+            VerifyCallsNoHeader();
+        }
 
         [Fact]
         public async Task HmacAuthenticationHandler_MatchHmacHeader_ReturnsFail()

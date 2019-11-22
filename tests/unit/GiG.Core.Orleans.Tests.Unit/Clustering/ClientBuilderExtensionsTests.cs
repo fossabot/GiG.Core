@@ -2,6 +2,7 @@ using GiG.Core.Orleans.Clustering.Extensions;
 using Microsoft.Extensions.Configuration;
 using Orleans;
 using System;
+using System.Configuration;
 using Xunit;
 using ClientBuilderExtensions = GiG.Core.Orleans.Clustering.Extensions.ClientBuilderExtensions;
 // ReSharper disable AssignNullToNotNullAttribute
@@ -38,7 +39,13 @@ namespace GiG.Core.Orleans.Tests.Unit.Clustering
         [Fact]
         public void UseMembershipProvider_ConfigureProviderIsNull_ThrowsArgumentNullException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => new ClientBuilder().UseMembershipProvider(new ConfigurationBuilder().Build(), null));
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+            var exception = Assert.Throws<ArgumentNullException>(() => new ClientBuilder().UseMembershipProvider(configurationSection: config.GetSection("Orleans:ClusterA"), null));
+            Assert.Equal("configureProvider", exception.ParamName);
+            
+            exception = Assert.Throws<ArgumentNullException>(() => new ClientBuilder().UseMembershipProvider(new ConfigurationBuilder().Build(), null));
             Assert.Equal("configureProvider", exception.ParamName);
         }
     }
