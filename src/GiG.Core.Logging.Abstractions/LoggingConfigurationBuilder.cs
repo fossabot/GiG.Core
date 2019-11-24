@@ -43,12 +43,7 @@ namespace GiG.Core.Logging.Abstractions
                 throw new ConfigurationErrorsException($"Configuration section '{configurationSection.Key}' is not valid.");
             }
 
-            const string sectionName = nameof(_loggingOptions.Sinks);
-            SinkConfiguration = configurationSection.GetSection(sectionName);
-            if (SinkConfiguration?.Exists() != true)
-            {
-                throw new ConfigurationErrorsException($"Configuration section '{sectionName}' does not exist.");
-            }
+            SinkConfiguration = configurationSection.GetSection(nameof(_loggingOptions.Sinks));
 
             Services = services ?? throw new ArgumentNullException(nameof(services));
             LoggerConfiguration = loggerConfiguration ?? throw new ArgumentNullException(nameof(loggerConfiguration));
