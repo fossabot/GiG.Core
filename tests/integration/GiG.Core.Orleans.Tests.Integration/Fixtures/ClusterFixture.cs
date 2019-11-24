@@ -27,7 +27,6 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
         public ClusterFixture()
         {
             var siloHost = new HostBuilder()
-                .ConfigureAppConfiguration(a => a.AddJsonFile("appsettings.json"))
                 .UseOrleans((ctx, x) =>
                 {
                     x.ConfigureEndpoints(ctx.Configuration.GetSection("Orleans:ClusterA:Silo"));

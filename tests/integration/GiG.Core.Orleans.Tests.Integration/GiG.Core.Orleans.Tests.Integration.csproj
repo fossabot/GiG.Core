@@ -8,8 +8,6 @@
     <ItemGroup>
         <PackageReference Include="Bogus" Version="28.4.1" />
         <PackageReference Include="KubernetesClient" Version="1.6.4" />
-        <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.0" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0" />
         <PackageReference Include="Microsoft.Extensions.Http" Version="3.0.0" />
         <PackageReference Include="Microsoft.Orleans.Server" Version="3.0.0" />
