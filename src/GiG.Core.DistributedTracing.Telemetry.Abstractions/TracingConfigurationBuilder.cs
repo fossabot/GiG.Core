@@ -1,10 +1,9 @@
-using GiG.Core.DistributedTracing.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 
-namespace GiG.Core.DistributedTracing.Telemetry
+namespace GiG.Core.DistributedTracing.Telemetry.Abstractions
 {
     /// <summary>
     /// Tracing Configuration builder.
@@ -22,9 +21,9 @@ namespace GiG.Core.DistributedTracing.Telemetry
         public IServiceCollection Services { get; }
 
         /// <summary>
-        /// Is Exporter Configured
+        /// At least one Tracing Exporter Configured.
         /// </summary>
-        public bool IsExporterConfigured { get; private set; }
+        public bool IsConfigured { get; private set; }
 
         /// <summary>
         /// Tracing Configuration builder.
@@ -46,19 +45,19 @@ namespace GiG.Core.DistributedTracing.Telemetry
         {
             if (string.IsNullOrEmpty(name)) throw new ArgumentException(nameof(name));
             if (tracingExporter == null) throw new ArgumentNullException(nameof(tracingExporter));
-
-            if (IsExporterConfigured)
-            {
-                return this;
-            }
-
+          
             if (!Exporters.TryGetValue(name, out var exporterOptions))
             {
                 return this;
             }
+            
+            if (exporterOptions?.IsEnabled != true)
+            {
+                return this;
+            }
 
-            tracingExporter.RegisterExporter(exporterOptions.Exporter);
-            IsExporterConfigured = true;
+            tracingExporter.RegisterExporter(name);
+            IsConfigured = true;
 
             return this;
         }

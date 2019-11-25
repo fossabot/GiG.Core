@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GiG.Core.DistributedTracing.Abstractions
+namespace GiG.Core.DistributedTracing.Telemetry.Abstractions
 {
     /// <summary>
     /// Tracing Options.
@@ -11,7 +11,7 @@ namespace GiG.Core.DistributedTracing.Abstractions
         /// The configuration default section name.
         /// </summary>
         public const string DefaultSectionName = "Tracing";
-        
+
         /// <summary>
         /// A value to indicates whether a Exporter is enabled or not.
         /// </summary>

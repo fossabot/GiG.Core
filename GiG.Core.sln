@@ -387,7 +387,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.DistributedTracing
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.DistributedTracing.Tests.Unit", "tests\unit\GiG.Core.DistributedTracing.Tests.Unit\GiG.Core.DistributedTracing.Tests.Unit.csproj", "{FC67C53F-7073-4DF9-A8D4-1FBB6CE23F1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.DistributedTracing.Telemetry", "src\GiG.Core.DistributedTracing.Telemetry\GiG.Core.DistributedTracing.Telemetry.csproj", "{04DFFAC6-01DF-40F0-A477-274851FF1C50}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.DistributedTracing.Telemetry.Abstractions", "src\GiG.Core.DistributedTracing.Telemetry.Abstractions\GiG.Core.DistributedTracing.Telemetry.Abstractions.csproj", "{04DFFAC6-01DF-40F0-A477-274851FF1C50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

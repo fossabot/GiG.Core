@@ -1,11 +1,13 @@
 ﻿using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.DistributedTracing.Telemetry;
+using GiG.Core.DistributedTracing.Telemetry.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Configuration;
+using System.Linq;
 
 namespace GiG.Core.DistributedTracing.Extensions
 {
@@ -37,17 +39,15 @@ namespace GiG.Core.DistributedTracing.Extensions
             if (string.IsNullOrWhiteSpace(sectionName)) throw new ArgumentException($"Missing {nameof(sectionName)}.");
             
             var configuration = context.Configuration;
-
             var configurationSection = configuration.GetSection(sectionName);
         
             var tracingOptions = configurationSection.Get<TracingOptions>();
-            
             if (tracingOptions?.IsEnabled != true)
             {
                 return;
             }
             
-            if (tracingOptions?.Exporters?.Count < 1)
+            if (tracingOptions?.Exporters?.Any() != true)
             {
                 throw new ConfigurationErrorsException("No tracing exporters were configured.  Please add at least one tracing exporter");
             }
@@ -56,7 +56,7 @@ namespace GiG.Core.DistributedTracing.Extensions
 
             configureTracing?.Invoke(builder);
 
-            if (!builder.IsExporterConfigured)
+            if (!builder.IsConfigured)
             {
                 throw new ConfigurationErrorsException("Tracing is enabled but no tracing exporters were configured.");
             }

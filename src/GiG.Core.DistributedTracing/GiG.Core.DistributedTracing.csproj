@@ -13,6 +13,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\GiG.Core.DistributedTracing.Abstractions\GiG.Core.DistributedTracing.Abstractions.csproj" />
-        <ProjectReference Include="..\GiG.Core.DistributedTracing.Telemetry\GiG.Core.DistributedTracing.Telemetry.csproj" />        
+        <ProjectReference Include="..\GiG.Core.DistributedTracing.Telemetry.Abstractions\GiG.Core.DistributedTracing.Telemetry.Abstractions.csproj" />        
     </ItemGroup>
 </Project>

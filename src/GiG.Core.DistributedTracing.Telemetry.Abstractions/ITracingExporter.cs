@@ -1,4 +1,4 @@
-namespace GiG.Core.DistributedTracing.Abstractions
+namespace GiG.Core.DistributedTracing.Telemetry.Abstractions
 {
     /// <summary>
     /// Tracing Exporter.
