@@ -31,7 +31,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
 
         internal readonly IServiceProvider ClientServiceProvider;
 
-        protected readonly IHost SiloHost;
+        private readonly IHost SiloHost;
 
         internal readonly string SiloName;
 

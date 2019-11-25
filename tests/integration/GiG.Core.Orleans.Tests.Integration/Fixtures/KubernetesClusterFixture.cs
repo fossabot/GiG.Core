@@ -21,7 +21,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
 
         internal readonly IClusterClient ClusterClient;
 
-        protected readonly IHost SiloHost;
+        private readonly IHost SiloHost;
 
         internal readonly IServiceProvider ClientServiceProvider;
 
@@ -39,7 +39,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                 .UseOrleans((ctx, sb) =>
                 {
                     sb.ConfigureCluster(ctx.Configuration);
-                    sb.ConfigureEndpoints();
+                    sb.ConfigureEndpoints(ctx.Configuration);
                     sb.ConfigureKubernetesClustering(ctx.Configuration.GetSection("Orleans:KubernetesMembershipProvider"));
                     sb.AddAssemblies(typeof(EchoTestGrain));
                     sb.Configure<SiloOptions>(options => options.SiloName = SiloName);
