@@ -1,5 +1,3 @@
-using Microsoft.Extensions.DependencyInjection;
-
 namespace GiG.Core.DistributedTracing.Abstractions
 {
     /// <summary>

@@ -3,8 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <IsPackable>false</IsPackable>
-        <AssemblyName>GiG.Core.DistributedTracing.Tests.Unit</AssemblyName>
-        <RootNamespace>GiG.Core.DistributedTracing.Tests.Unit</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

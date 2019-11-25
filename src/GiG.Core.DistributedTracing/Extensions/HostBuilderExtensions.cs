@@ -1,4 +1,5 @@
 ﻿using GiG.Core.DistributedTracing.Abstractions;
+using GiG.Core.DistributedTracing.Telemetry;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,9 +31,10 @@ namespace GiG.Core.DistributedTracing.Extensions
                 .ConfigureServices((context, services) => ConfigureTracingInternal(context, services, tracingConfigurationBuilder, sectionName));
         }
 
-        private static void ConfigureTracingInternal(HostBuilderContext context, IServiceCollection services, Action<TracingConfigurationBuilder> configureTracing, string sectionName)
+        private static void ConfigureTracingInternal(HostBuilderContext context, [NotNull] IServiceCollection services, Action<TracingConfigurationBuilder> configureTracing, string sectionName)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
+            if (string.IsNullOrWhiteSpace(sectionName)) throw new ArgumentException($"Missing {nameof(sectionName)}.");
             
             var configuration = context.Configuration;
 

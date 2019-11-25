@@ -1,9 +1,10 @@
+using GiG.Core.DistributedTracing.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 
-namespace GiG.Core.DistributedTracing.Abstractions
+namespace GiG.Core.DistributedTracing.Telemetry
 {
     /// <summary>
     /// Tracing Configuration builder.
