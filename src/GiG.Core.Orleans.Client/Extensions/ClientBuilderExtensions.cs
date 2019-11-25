@@ -45,7 +45,7 @@ namespace GiG.Core.Orleans.Client.Extensions
         public static IClientBuilder ConfigureCluster([NotNull] this IClientBuilder clientBuilder, [NotNull] IConfigurationSection configurationSection)
         {
             if (clientBuilder == null) throw new ArgumentNullException(nameof(clientBuilder));
-            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection}' is incorrect.");
+            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection?.Path}' is incorrect.");
             
             return clientBuilder.Configure<ClusterOptions>(configurationSection);
         }

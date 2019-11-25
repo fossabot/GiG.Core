@@ -45,7 +45,7 @@ namespace GiG.Core.Web.Security.Hmac.Extensions
         public static IServiceCollection ConfigureDefaultHmacOptionProvider([NotNull]this IServiceCollection services, [NotNull]IConfigurationSection configurationSection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection}' is incorrect.");
+            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection?.Path}' is incorrect.");
 
             services.TryAddTransient<IHmacOptionsProvider, DefaultOptionsProvider>();
             services.Configure<HmacOptions>(configurationSection);
@@ -56,7 +56,7 @@ namespace GiG.Core.Web.Security.Hmac.Extensions
         /// Adds option provider for <see cref="HmacAuthenticationHandler" /> functionality.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>        
-        /// <param name="configuration">The <see cref="IConfigurationSection" />Configuration section for hmac settings.</param>        
+        /// <param name="configuration">The <see cref="IConfiguration" />Configuration for hmac settings.</param>        
         /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection ConfigureDefaultHmacOptionProvider([NotNull]this IServiceCollection services, [NotNull]IConfiguration configuration)
         {

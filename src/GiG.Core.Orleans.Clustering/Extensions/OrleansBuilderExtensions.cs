@@ -41,7 +41,7 @@ namespace GiG.Core.Orleans.Clustering.Extensions
         internal static T UseMembershipProviderInternal<T>([NotNull] this T builder, [NotNull] IConfigurationSection configurationSection, [NotNull] Action<MembershipProviderBuilder<T>> configureProvider)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
-            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection}' is incorrect.");
+            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection?.Path}' is incorrect.");
             if (configureProvider == null) throw new ArgumentNullException(nameof(configureProvider));
 
             var membershipProviderOptions = configurationSection.Get<MembershipProviderOptions>();

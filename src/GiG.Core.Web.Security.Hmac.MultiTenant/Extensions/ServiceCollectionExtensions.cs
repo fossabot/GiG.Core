@@ -25,7 +25,7 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant.Extensions
         public static IServiceCollection ConfigureMultiTenantHmacOptionProvider([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection}' is incorrect.");
+            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection?.Path}' is incorrect.");
 
             services.AddTenantAccessor();
             services.TryAddSingleton<IHmacOptionsProvider, MultiTenantOptionProvider>();

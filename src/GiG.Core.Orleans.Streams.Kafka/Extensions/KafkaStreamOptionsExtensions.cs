@@ -27,7 +27,7 @@ namespace GiG.Core.Orleans.Streams.Kafka.Extensions
 
             if (kafkaOptions == null)
             {
-                throw new ConfigurationErrorsException($"Configuration section '{configurationSection}' is incorrect.");
+                throw new ConfigurationErrorsException($"Configuration section '{configurationSection.Path}' is incorrect.");
             }
 
             if (kafkaOptions.Brokers != null)
