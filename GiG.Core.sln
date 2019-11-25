@@ -39,6 +39,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Logging.Sinks.Console.md = docs\GiG.Core.Logging.Sinks.Console.md
 		docs\GiG.Core.Logging.Sinks.File.md = docs\GiG.Core.Logging.Sinks.File.md
 		docs\GiG.Core.Logging.Sinks.Fluentd.md = docs\GiG.Core.Logging.Sinks.Fluentd.md
+		docs\GiG.Core.Messaging.MassTransit.md = docs\GiG.Core.Messaging.MassTransit.md
 		docs\GiG.Core.MultiTenant.Web.md = docs\GiG.Core.MultiTenant.Web.md
 		docs\GiG.Core.ObjectMapping.AutoMapper.md = docs\GiG.Core.ObjectMapping.AutoMapper.md
 		docs\GiG.Core.Orleans.Client.md = docs\GiG.Core.Orleans.Client.md
@@ -383,7 +384,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing.MassTransit.Tests.Integration", "tests\integration\GiG.Core.DistributedTracing.MassTransit.Tests.Integration\GiG.Core.DistributedTracing.MassTransit.Tests.Integration.csproj", "{378D1EFD-B761-4E37-97AB-F336589752AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Messaging.Tests.Unit", "tests\unit\GiG.Core.Messaging.Tests.Unit\GiG.Core.Messaging.Tests.Unit.csproj", "{C5590C09-595E-4A48-B79B-15E1A9297D6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.Tests.Unit", "tests\unit\GiG.Core.Messaging.Tests.Unit\GiG.Core.Messaging.Tests.Unit.csproj", "{C5590C09-595E-4A48-B79B-15E1A9297D6E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Messaging.MassTransit.Tests.Integration", "tests\integration\GiG.Core.Messaging.MassTransit.Tests.Integration\GiG.Core.Messaging.MassTransit.Tests.Integration.csproj", "{78286E74-ACB3-4588-9A4A-ACB7DB56CD5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -843,6 +846,10 @@ Global
 		{C5590C09-595E-4A48-B79B-15E1A9297D6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5590C09-595E-4A48-B79B-15E1A9297D6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5590C09-595E-4A48-B79B-15E1A9297D6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78286E74-ACB3-4588-9A4A-ACB7DB56CD5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78286E74-ACB3-4588-9A4A-ACB7DB56CD5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78286E74-ACB3-4588-9A4A-ACB7DB56CD5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78286E74-ACB3-4588-9A4A-ACB7DB56CD5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -999,6 +1006,7 @@ Global
 		{76EC84B1-54F9-49DE-BE72-CDA599E17E68} = {F3E4EB54-9129-4327-9A32-89ABD4ADA6C5}
 		{378D1EFD-B761-4E37-97AB-F336589752AE} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 		{C5590C09-595E-4A48-B79B-15E1A9297D6E} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
+		{78286E74-ACB3-4588-9A4A-ACB7DB56CD5E} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}
