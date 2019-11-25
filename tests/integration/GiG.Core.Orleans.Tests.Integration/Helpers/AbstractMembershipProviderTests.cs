@@ -12,7 +12,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Helpers
         protected IHostBuilder HostBuilder { get; set; }
         
         [Fact]
-        public void UseMembershipProvider_GetsProviderName_ThrowsConfigurationExceptionNoProviderFound()
+        public void UseMembershipProvider_GetsProviderName_ThrowsConfigurationErrorsException()
         {
             //Arrange
             HostBuilder.ConfigureAppConfiguration(x => x.AddInMemoryCollection(new Dictionary<string, string>

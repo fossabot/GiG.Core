@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Orleans.Hosting;
 using System;
+using System.Configuration;
 
 namespace GiG.Core.Orleans.Clustering.Consul.Extensions
 {
@@ -34,7 +35,7 @@ namespace GiG.Core.Orleans.Clustering.Consul.Extensions
         public static ISiloBuilder ConfigureConsulClustering([NotNull] this ISiloBuilder siloBuilder, [NotNull] IConfigurationSection configurationSection)
         {
             if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
-            if (configurationSection?.Exists() != true) throw new ArgumentNullException(nameof(configurationSection));
+            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection}' is incorrect.");
                  
             var consulOptions = configurationSection.Get<ConsulOptions>() ?? new ConsulOptions();
 

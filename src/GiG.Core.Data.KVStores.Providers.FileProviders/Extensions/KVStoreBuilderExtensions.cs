@@ -46,7 +46,7 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders.Extensions
         public static IKVStoreBuilder<T> FromJsonFile<T>([NotNull] this IKVStoreBuilder<T> builder, [NotNull] IConfigurationSection configurationSection)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
-            if (configurationSection?.Exists() != true) throw new ArgumentNullException(nameof(configurationSection));
+            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection}' is incorrect.");
             
             builder.Services.AddFileDataProvider();
 

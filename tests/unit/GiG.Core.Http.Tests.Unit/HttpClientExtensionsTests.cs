@@ -1,6 +1,7 @@
 ﻿using GiG.Core.Http.Extensions;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Configuration;
 using System.Net.Http;
 using Xunit;
 // ReSharper disable AssignNullToNotNullAttribute
@@ -37,10 +38,10 @@ namespace GiG.Core.Http.Tests.Unit
         }
 
         [Fact]
-        public void FromConfiguration_ConfigurationSectionIsNull_ThrowsArgumentNullException()
+        public void FromConfiguration_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => new HttpClient().FromConfiguration("", null));
-            Assert.Equal("configurationSection", exception.ParamName);
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => new HttpClient().FromConfiguration("", null));
+            Assert.Equal("Configuration Section '' is incorrect.", exception.Message);
         }
 
         [Fact]
@@ -51,10 +52,10 @@ namespace GiG.Core.Http.Tests.Unit
         }
 
         [Fact]
-        public void FromConfiguration_IncorrectConfigurationSectionName_ThrowsArgumentNullException()
+        public void FromConfiguration_IncorrectConfigurationSectionName_ThrowsConfigurationErrorsException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => new HttpClient().FromConfiguration("/api", _configuration.GetSection("Http")));
-            Assert.Equal("configurationSection", exception.ParamName);
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => new HttpClient().FromConfiguration("/api", _configuration.GetSection("Http")));
+            Assert.Equal("Configuration Section 'Http' is incorrect.", exception.Message);
         }
 
         [Fact]

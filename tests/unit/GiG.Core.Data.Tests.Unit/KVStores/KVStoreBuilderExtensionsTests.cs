@@ -2,6 +2,7 @@
 using GiG.Core.Data.KVStores.Providers.FileProviders.Extensions;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Configuration;
 using Xunit;
 using FileProvidersKVStoreBuilderExtensions = GiG.Core.Data.KVStores.Providers.FileProviders.Extensions.KVStoreBuilderExtensions;
 using KVStoreBuilderExtensions = GiG.Core.Data.KVStores.Extensions.KVStoreBuilderExtensions;
@@ -45,14 +46,14 @@ namespace GiG.Core.Data.Tests.Unit.KVStores
         }
 
         [Fact]
-        public void FromJsonFile_ConfigurationSectionIsNull_ThrowsArgumentNullException()
+        public void FromJsonFile_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() =>
+            var exception = Assert.Throws<ConfigurationErrorsException>(() =>
                 Host.CreateDefaultBuilder()
                     .ConfigureServices(x =>
                         x.AddKVStores<object>().FromJsonFile(null))
                     .Build());
-            Assert.Equal("configurationSection", exception.ParamName);
+            Assert.Equal("Configuration section '' is incorrect.", exception.Message);
         }
 
         [Fact]

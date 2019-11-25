@@ -23,10 +23,10 @@ namespace GiG.Core.Orleans.Tests.Unit.Clustering
         }
         
         [Fact]
-        public void UseMembershipProvider_ConfigurationSectionIsNull_ThrowsArgumentNullException()
+        public void UseMembershipProvider_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => new ClientBuilder().UseMembershipProvider(null, null));
-            Assert.Equal("configurationSection", exception.ParamName);
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => new ClientBuilder().UseMembershipProvider(null, null));
+            Assert.Equal("Configuration section '' is incorrect.", exception.Message);
         }
 
         [Fact]

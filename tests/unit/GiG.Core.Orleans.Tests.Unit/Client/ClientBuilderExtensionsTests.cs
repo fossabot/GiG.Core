@@ -2,6 +2,7 @@ using GiG.Core.Orleans.Client.Extensions;
 using Microsoft.Extensions.Configuration;
 using Orleans;
 using System;
+using System.Configuration;
 using Xunit;
 using ClientBuilderExtensions = GiG.Core.Orleans.Client.Extensions.ClientBuilderExtensions;
 
@@ -33,10 +34,10 @@ namespace GiG.Core.Orleans.Tests.Unit.Client
         }
 
         [Fact]
-        public void ConfigureCluster_ConfigurationSectionIsNull_ThrowsArgumentNullException()
+        public void ConfigureCluster_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => new ClientBuilder().ConfigureCluster(configurationSection: null));
-            Assert.Equal("configurationSection", exception.ParamName);
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => new ClientBuilder().ConfigureCluster(configurationSection: null));
+            Assert.Equal("Configuration section '' is incorrect.", exception.Message);
         }
 
         [Fact]

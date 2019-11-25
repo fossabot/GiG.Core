@@ -1,6 +1,7 @@
 ﻿using GiG.Core.Orleans.Clustering.Consul.Extensions;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Configuration;
 using Xunit;
 using SiloBuilderExtensions = GiG.Core.Orleans.Clustering.Consul.Extensions.SiloBuilderExtensions;
 // ReSharper disable AssignNullToNotNullAttribute
@@ -32,14 +33,14 @@ namespace GiG.Core.Orleans.Tests.Unit.Clustering.Consul
         }
 
         [Fact]
-        public void ConfigureConsulClustering_ConfigurationSectionIsNull_ThrowsArgumentNullException()
+        public void ConfigureConsulClustering_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => Host.CreateDefaultBuilder()
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => Host.CreateDefaultBuilder()
                 .UseOrleans((ctx, sb) =>
                 {
                     sb.ConfigureConsulClustering(configurationSection: null);
                 }).Build());
-            Assert.Equal("configurationSection", exception.ParamName);
+            Assert.Equal("Configuration section '' is incorrect.", exception.Message);
         }
     }
 }

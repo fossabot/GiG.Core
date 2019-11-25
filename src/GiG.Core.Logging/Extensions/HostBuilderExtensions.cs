@@ -1,5 +1,6 @@
 ﻿using GiG.Core.Logging.Abstractions;
 using JetBrains.Annotations;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
@@ -35,6 +36,12 @@ namespace GiG.Core.Logging.Extensions
         {
             var configuration = context.Configuration;
 
+            var configurationSection = configuration.GetSection(sectionName);
+            if (configurationSection?.Exists() == false)
+            {
+                throw new ConfigurationErrorsException($"Configuration section '{sectionName}' is incorrect.");
+            }
+            
             var loggerConfiguration = new LoggerConfiguration()
                 .Enrich.FromLogContext()
                 .ReadFrom.Configuration(configuration, sectionName);

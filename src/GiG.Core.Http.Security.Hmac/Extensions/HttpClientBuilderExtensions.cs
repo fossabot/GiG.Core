@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using System;
+using System.Configuration;
 using System.Linq;
 
 namespace GiG.Core.Http.Security.Hmac.Extensions
@@ -53,7 +54,7 @@ namespace GiG.Core.Http.Security.Hmac.Extensions
         public static IHttpClientBuilder ConfigureDefaultHmacDelegatingHandlerOptionProvider([NotNull]this IHttpClientBuilder httpClientBuilder, [NotNull]IConfigurationSection configurationSection)
         {
             if (httpClientBuilder == null) throw new ArgumentNullException(nameof(httpClientBuilder));
-            if (configurationSection?.Exists() != true) throw new ArgumentNullException(nameof(configurationSection));
+            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection}' is incorrect.");
 
             httpClientBuilder.Services.Configure<HmacOptions>(httpClientBuilder.Name, configurationSection);
 

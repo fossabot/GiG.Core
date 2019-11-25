@@ -29,20 +29,20 @@ namespace GiG.Core.Orleans.Tests.Unit.Streams.Kafka
         }
 
         [Fact]
-        public void FromConfiguration_ConfigurationSectionIsNull_ThrowsArgumentNullException()
+        public void FromConfiguration_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => new KafkaStreamOptions().FromConfiguration(configurationSection: null));
-            Assert.Equal("configurationSection", exception.ParamName);
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => new KafkaStreamOptions().FromConfiguration(configurationSection: null));
+            Assert.Equal("Configuration section '' is incorrect.", exception.Message);
         }
         
         [Fact]
-        public void FromConfiguration_IncorrectConfigurationSectionName_ThrowsArgumentNullException()
+        public void FromConfiguration_IncorrectConfigurationSectionName_ThrowsConfigurationErrorsException()
         {
             var config = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .Build();
-            var exception = Assert.Throws<ArgumentNullException>(() => new KafkaStreamOptions().FromConfiguration(config.GetSection("Orleans:Stream")));
-            Assert.Equal("configurationSection", exception.ParamName);
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => new KafkaStreamOptions().FromConfiguration(config.GetSection("Orleans:Stream")));
+            Assert.Equal("Configuration section 'Orleans:Stream' is incorrect.", exception.Message);
         }
         
         [Fact]

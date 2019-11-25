@@ -1,6 +1,7 @@
 ﻿using GiG.Core.Orleans.Storage.Npgsql.Extensions;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Configuration;
 using Xunit;
 // ReSharper disable AssignNullToNotNullAttribute
 
@@ -35,11 +36,11 @@ namespace GiG.Core.Orleans.Tests.Unit.Storage
         }
 
         [Fact]
-        public void AddNpgsqlGrainStorage_ConfigurationSectionIsNull_ThrowsArgumentNullException()
+        public void AddNpgsqlGrainStorage_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() =>
+            var exception = Assert.Throws<ConfigurationErrorsException>(() =>
                             Host.CreateDefaultBuilder().UseOrleans(sb => sb.AddNpgsqlGrainStorage(storageName: null, configurationSection: null)).Build());
-            Assert.Equal("configurationSection", exception.ParamName);
+            Assert.Equal("Configuration section '' is incorrect.", exception.Message);
         }
 
         [Fact]

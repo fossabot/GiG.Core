@@ -16,7 +16,7 @@ namespace GiG.Core.Logging.Tests.Unit
                 Host.CreateDefaultBuilder()
                 .ConfigureLogging(null, "Logging")
                     .Build());
-            Assert.Equal("Configuration section 'Logging' is not valid.", exception.Message);
+            Assert.Equal("Configuration section 'Logging' is incorrect.", exception.Message);
         }
     }
 }

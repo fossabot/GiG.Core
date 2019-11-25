@@ -1,6 +1,7 @@
 ﻿using GiG.Core.Hosting.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Configuration;
 using Xunit;
 // ReSharper disable AssignNullToNotNullAttribute
 
@@ -27,10 +28,10 @@ namespace GiG.Core.Hosting.Tests.Unit
         }
 
         [Fact]
-        public void ConfigureInfoManagement_ConfigurationSectionIsNull_ThrowsArgumentNullException()
+        public void ConfigureInfoManagement_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => new ServiceCollection().ConfigureInfoManagement(configurationSection: null));
-            Assert.Equal("configurationSection", exception.ParamName);
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => new ServiceCollection().ConfigureInfoManagement(configurationSection: null));
+            Assert.Equal("Configuration Section '' is incorrect.", exception.Message);
         }
 
         [Fact]

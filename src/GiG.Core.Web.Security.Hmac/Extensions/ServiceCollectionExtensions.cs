@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
+using System.Configuration;
 using System.Linq;
 
 namespace GiG.Core.Web.Security.Hmac.Extensions
@@ -44,7 +45,7 @@ namespace GiG.Core.Web.Security.Hmac.Extensions
         public static IServiceCollection ConfigureDefaultHmacOptionProvider([NotNull]this IServiceCollection services, [NotNull]IConfigurationSection configurationSection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            if (configurationSection?.Exists() != true) throw new ArgumentNullException(nameof(configurationSection));
+            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection}' is incorrect.");
 
             services.TryAddTransient<IHmacOptionsProvider, DefaultOptionsProvider>();
             services.Configure<HmacOptions>(configurationSection);

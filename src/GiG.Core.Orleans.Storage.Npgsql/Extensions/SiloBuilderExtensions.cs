@@ -60,7 +60,7 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Extensions
         public static ISiloBuilder AddNpgsqlGrainStorage([NotNull] this ISiloBuilder siloBuilder, [NotNull] string storageName, [NotNull] IConfigurationSection configurationSection)
         {
             if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
-            if (configurationSection?.Exists() != true) throw new ArgumentNullException(nameof(configurationSection));
+            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection}' is incorrect.");
             if (string.IsNullOrWhiteSpace(storageName)) throw new ArgumentException($"Missing {nameof(storageName)}.");
 
             var npgsqlOptions = configurationSection.Get<NpgsqlOptions>();

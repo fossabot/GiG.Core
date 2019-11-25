@@ -10,6 +10,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.HealthChecks" Version="2.2.0" PrivateAssets="compile" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.0.0" PrivateAssets="compile" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.0.0" PrivateAssets="compile" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.6.0" />
     <PackageReference Include="System.Text.Json" Version="4.6.0" PrivateAssets="compile" />
   </ItemGroup>
 
