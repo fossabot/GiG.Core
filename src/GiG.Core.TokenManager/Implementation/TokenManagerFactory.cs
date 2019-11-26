@@ -16,7 +16,7 @@ namespace GiG.Core.TokenManager.Implementation
         private readonly ITokenClientFactory _tokenClientFactory;
         private readonly ILoggerFactory _loggerFactory;
 
-        public TokenManagerFactory(ITokenClientFactory tokenClientFactory, ILoggerFactory loggerFactory, [NotNull] IDateTimeProvider dateTimeProvider)  
+        public TokenManagerFactory([NotNull] ITokenClientFactory tokenClientFactory, [NotNull] ILoggerFactory loggerFactory, [NotNull] IDateTimeProvider dateTimeProvider)  
         {
             _tokenClientFactory = tokenClientFactory ?? throw new ArgumentNullException(nameof(tokenClientFactory));
             _loggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
@@ -34,7 +34,7 @@ namespace GiG.Core.TokenManager.Implementation
         }
 
         /// <inheritdoc />
-        public ITokenManager Create(TokenManagerOptions config)
+        public ITokenManager Create([NotNull] TokenManagerOptions config)
         {
             if (config == null) throw new ArgumentNullException(nameof(config));
             if (config.Client == null) throw new ArgumentNullException(nameof(config.Client));

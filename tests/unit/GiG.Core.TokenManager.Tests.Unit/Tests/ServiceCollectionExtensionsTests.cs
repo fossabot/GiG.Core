@@ -3,7 +3,7 @@ using System;
 using Xunit;
 // ReSharper disable AssignNullToNotNullAttribute
 
-namespace GiG.Core.TokenManager.Tests.Unit
+namespace GiG.Core.TokenManager.Tests.Unit.Tests
 {
     [Trait("Category", "Unit")]
     public class ServiceCollectionExtensionsTests
