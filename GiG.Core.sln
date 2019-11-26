@@ -58,6 +58,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Web.Security.Hmac.MultiTenant.md = docs\GiG.Core.Web.Security.Hmac.MultiTenant.md
 		README.md = README.md
 		docs\GiG.Core.TokenManager.md = docs\GiG.Core.TokenManager.md
+		docs\GiG.Core.Providers.DateTime.md = docs\GiG.Core.Providers.DateTime.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AC01CBF6-BF4A-4F67-BCD6-CB0AC61D52A4}"

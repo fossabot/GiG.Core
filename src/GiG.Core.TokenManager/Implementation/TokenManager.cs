@@ -35,6 +35,7 @@ namespace GiG.Core.TokenManager.Implementation
                 return _dateTimeProvider.GetNow() <= _lastTokenResult.ExpiresAt;
             }
         }
+        
         internal TokenManager([NotNull] ITokenClientFactory tokenClientFactory, [NotNull] ILogger logger, [NotNull] TokenManagerOptions tokenManagerOptions, [NotNull] IDateTimeProvider dateTimeProvider)  
         {
             _tokenClientFactory = tokenClientFactory ?? throw new ArgumentNullException(nameof(tokenClientFactory));
