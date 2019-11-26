@@ -1,4 +1,5 @@
-﻿using GiG.Core.TokenManager.Implementation;
+﻿using GiG.Core.Providers.DateTime.Extensions;
+using GiG.Core.TokenManager.Implementation;
 using GiG.Core.TokenManager.Interfaces;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,7 +23,7 @@ namespace GiG.Core.TokenManager.Extensions
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            //services.AddDateTimeProvider();
+            services.AddDateTimeProvider();
             services.AddHttpClient();
 
             services.TryAddSingleton<ITokenClientFactory, TokenClientFactory>();

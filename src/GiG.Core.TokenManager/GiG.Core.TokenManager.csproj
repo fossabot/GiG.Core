@@ -12,4 +12,8 @@
         <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.6.0" PrivateAssets="compile" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\GiG.Core.Providers.DateTime\GiG.Core.Providers.DateTime.csproj" />
+    </ItemGroup>
+
 </Project>

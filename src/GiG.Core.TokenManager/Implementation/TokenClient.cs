@@ -1,4 +1,5 @@
-﻿using GiG.Core.TokenManager.Exceptions;
+﻿using GiG.Core.Providers.DateTime.Abstractions;
+using GiG.Core.TokenManager.Exceptions;
 using GiG.Core.TokenManager.Interfaces;
 using GiG.Core.TokenManager.Models;
 using IdentityModel.Client;
@@ -15,17 +16,17 @@ namespace GiG.Core.TokenManager.Implementation
     internal class TokenClient : ITokenClient
     {
         private readonly HttpClient _client;
-        //private readonly IDateTimeProvider _dateTimeProvider;
+        private readonly IDateTimeProvider _dateTimeProvider;
         private readonly ILogger _logger;
         private readonly IDiscoveryCache _discoveryCache;
         private readonly TokenClientOptions _tokenClientOptions;
 
-        internal TokenClient([NotNull] HttpClient client, [NotNull] ILogger<TokenClient> logger, [NotNull] TokenClientOptions tokenClientOptions) //IDateTimeProvider dateTimeProvider,
+        internal TokenClient([NotNull] HttpClient client, [NotNull] ILogger<TokenClient> logger, [NotNull] TokenClientOptions tokenClientOptions, [NotNull] IDateTimeProvider dateTimeProvider)
         {
             _client = client ?? throw new ArgumentNullException(nameof(client));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _tokenClientOptions = tokenClientOptions ?? throw new ArgumentNullException(nameof(tokenClientOptions));
-            //_dateTimeProvider = dateTimeProvider ?? throw new ArgumentNullException(nameof(dateTimeProvider));
+            _dateTimeProvider = dateTimeProvider ?? throw new ArgumentNullException(nameof(dateTimeProvider));
             
             _discoveryCache = new DiscoveryCache(_tokenClientOptions.AuthorityUrl, () => client, new DiscoveryPolicy
             {

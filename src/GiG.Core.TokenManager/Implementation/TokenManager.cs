@@ -1,4 +1,5 @@
-﻿using GiG.Core.TokenManager.Exceptions;
+﻿using GiG.Core.Providers.DateTime.Abstractions;
+using GiG.Core.TokenManager.Exceptions;
 using GiG.Core.TokenManager.Interfaces;
 using GiG.Core.TokenManager.Models;
 using JetBrains.Annotations;
@@ -11,7 +12,7 @@ namespace GiG.Core.TokenManager.Implementation
 {
     internal class TokenManager : ITokenManager
     {
-        //private readonly IDateTimeProvider _dateTimeProvider;
+        private readonly IDateTimeProvider _dateTimeProvider;
         private readonly ITokenClientFactory _tokenClientFactory;
         private readonly ILogger _logger;
         private readonly TokenManagerOptions _tokenManagerOptions;
@@ -31,15 +32,15 @@ namespace GiG.Core.TokenManager.Implementation
                     return false;
                 }
 
-                return false; //_dateTimeProvider.GetNow() <= _lastTokenResult.ExpiresAt;
+                return _dateTimeProvider.GetNow() <= _lastTokenResult.ExpiresAt;
             }
         }
-        internal TokenManager([NotNull] ITokenClientFactory tokenClientFactory, [NotNull] ILogger logger, [NotNull] TokenManagerOptions tokenManagerOptions) //IDateTimeProvider dateTimeProvider, 
+        internal TokenManager([NotNull] ITokenClientFactory tokenClientFactory, [NotNull] ILogger logger, [NotNull] TokenManagerOptions tokenManagerOptions, [NotNull] IDateTimeProvider dateTimeProvider)  
         {
             _tokenClientFactory = tokenClientFactory ?? throw new ArgumentNullException(nameof(tokenClientFactory));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _tokenManagerOptions = tokenManagerOptions ?? throw new ArgumentNullException(nameof(tokenManagerOptions));
-            //_dateTimeProvider = dateTimeProvider ?? throw new ArgumentNullException(nameof(dateTimeProvider));
+            _dateTimeProvider = dateTimeProvider ?? throw new ArgumentNullException(nameof(dateTimeProvider));
 
             _semaphore = new SemaphoreSlim(1);
         }

@@ -1,5 +1,7 @@
-﻿using GiG.Core.TokenManager.Interfaces;
+﻿using GiG.Core.Providers.DateTime.Abstractions;
+using GiG.Core.TokenManager.Interfaces;
 using GiG.Core.TokenManager.Models;
+using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 using System;
 
@@ -8,15 +10,15 @@ namespace GiG.Core.TokenManager.Implementation
     /// <inheritdoc />
     internal class TokenManagerFactory : ITokenManagerFactory
     {
-        //private readonly IDateTimeProvider _dateTimeProvider;
+        private readonly IDateTimeProvider _dateTimeProvider;
         private readonly ITokenClientFactory _tokenClientFactory;
         private readonly ILoggerFactory _loggerFactory;
 
-        public TokenManagerFactory(ITokenClientFactory tokenClientFactory, ILoggerFactory loggerFactory)  //IDateTimeProvider dateTimeProvider, 
+        public TokenManagerFactory(ITokenClientFactory tokenClientFactory, ILoggerFactory loggerFactory, [NotNull] IDateTimeProvider dateTimeProvider)  
         {
             _tokenClientFactory = tokenClientFactory ?? throw new ArgumentNullException(nameof(tokenClientFactory));
             _loggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
-            //_dateTimeProvider = dateTimeProvider ?? throw new ArgumentNullException(nameof(dateTimeProvider));
+            _dateTimeProvider = dateTimeProvider ?? throw new ArgumentNullException(nameof(dateTimeProvider));
         }
 
         /// <inheritdoc />
@@ -37,7 +39,7 @@ namespace GiG.Core.TokenManager.Implementation
             if (string.IsNullOrWhiteSpace(config.Client.AuthorityUrl)) throw new ArgumentException($"{nameof(config.Client.AuthorityUrl)} is missing.");
             if (string.IsNullOrWhiteSpace(config.Client.ClientId)) throw new ArgumentException($"{nameof(config.Client.ClientId)} is missing.");
 
-            return new TokenManager(_tokenClientFactory, _loggerFactory.CreateLogger<TokenManager>(), config);  // _dateTimeProvider
+            return new TokenManager(_tokenClientFactory, _loggerFactory.CreateLogger<TokenManager>(), config, _dateTimeProvider);
         }
     }
 }
