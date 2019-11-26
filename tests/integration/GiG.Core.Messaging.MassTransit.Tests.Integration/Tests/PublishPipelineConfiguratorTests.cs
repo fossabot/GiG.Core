@@ -21,7 +21,7 @@ namespace GiG.Core.Messaging.MassTransit.Tests.Integration.Tests
         }
 
         [Fact]
-        public async Task PublishPipelineConfigurator_SetFaultAddress()
+        public async Task PublishPipelineConfigurator_UseFaultAddress_FaultAddressSetInConsumeContext()
         {
             // Arrange
             var busControl = _serviceProvider.GetRequiredService<IBusControl>();
