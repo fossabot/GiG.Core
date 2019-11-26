@@ -7,10 +7,12 @@ using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using TokenClientOptions = GiG.Core.TokenManager.Models.TokenClientOptions;
 
+[assembly: InternalsVisibleTo("GiG.Core.TokenManager.Tests.Unit")]
 namespace GiG.Core.TokenManager.Implementation
 {
     internal class TokenClient : ITokenClient
@@ -150,7 +152,7 @@ namespace GiG.Core.TokenManager.Implementation
                 AccessToken = tokenResponse.AccessToken,
                 RefreshToken = tokenResponse.RefreshToken,
                 ExpiresIn = tokenResponse.ExpiresIn,
-                //ExpiresAt = _dateTimeProvider.GetNow().AddSeconds(tokenResponse.ExpiresIn)
+                ExpiresAt = _dateTimeProvider.GetNow().AddSeconds(tokenResponse.ExpiresIn)
             };
         }
 

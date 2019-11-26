@@ -5,9 +5,11 @@ using GiG.Core.TokenManager.Models;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
+[assembly: InternalsVisibleTo("GiG.Core.TokenManager.Tests.Unit")]
 namespace GiG.Core.TokenManager.Implementation
 {
     internal class TokenManager : ITokenManager

@@ -5,7 +5,9 @@ using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("GiG.Core.TokenManager.Tests.Unit")]
 namespace GiG.Core.TokenManager.Implementation
 {
     /// <inheritdoc />
