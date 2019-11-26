@@ -9,9 +9,6 @@ namespace GiG.Core.Providers.DateTime
     public class LocalDateTimeProvider : IDateTimeProvider
     {
         /// <inheritdoc />
-        public DateTimeOffset GetNow()
-        {
-            return DateTimeOffset.Now;
-        }
+        public DateTimeOffset GetNow() => DateTimeOffset.Now;
     }
 }

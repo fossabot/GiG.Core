@@ -17,9 +17,6 @@ namespace GiG.Core.Providers.DateTime
         }
         
         /// <inheritdoc />
-        public DateTimeOffset GetNow()
-        {
-            return _desiredDateTimeOffset;
-        }
+        public DateTimeOffset GetNow() => _desiredDateTimeOffset;
     }
 }

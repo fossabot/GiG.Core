@@ -9,9 +9,6 @@ namespace GiG.Core.Providers.DateTime
     public class UtcDateTimeProvider : IDateTimeProvider
     {
         /// <inheritdoc />
-        public DateTimeOffset GetNow()
-        {
-            return DateTimeOffset.UtcNow;
-        }
+        public DateTimeOffset GetNow() => DateTimeOffset.UtcNow;
     }
 }
