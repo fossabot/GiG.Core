@@ -1,6 +1,7 @@
 ﻿using GiG.Core.Orleans.Clustering.Kubernetes.Extensions;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Configuration;
 using Xunit;
 // ReSharper disable AssignNullToNotNullAttribute
 
@@ -31,14 +32,14 @@ namespace GiG.Core.Orleans.Tests.Unit.Clustering.Kubernetes
         }
 
         [Fact]
-        public void ConfigureConsulClustering_ConfigurationSectionIsNull_ThrowsArgumentNullException()
+        public void ConfigureConsulClustering_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => Host.CreateDefaultBuilder()
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => Host.CreateDefaultBuilder()
                 .UseOrleans((ctx, sb) =>
                 {
                     sb.ConfigureKubernetesClustering(configurationSection: null);
                 }).Build());
-            Assert.Equal("configurationSection", exception.ParamName);
+            Assert.Equal("Configuration section '' is incorrect.", exception.Message);
         }
     }
 }

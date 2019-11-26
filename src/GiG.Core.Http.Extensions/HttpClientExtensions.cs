@@ -24,14 +24,13 @@ namespace GiG.Core.Http.Extensions
             [NotNull] IConfigurationSection configurationSection)
         {
             if (client == null) throw new ArgumentNullException(nameof(client));
-            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
+            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection?.Path}' is incorrect.");
             if (string.IsNullOrWhiteSpace(baseUri)) throw new ArgumentException($"Missing {nameof(baseUri)}.");
 
             var httpClientOptions = configurationSection.Get<HttpClientOptions>();
             if (httpClientOptions == null)
             {
-                throw new ConfigurationErrorsException(
-                    $"Configuration section '{configurationSection.Key}' does not exist");
+                throw new ConfigurationErrorsException($"Configuration section '{configurationSection?.Path}' does not exist.");
             }
 
             var options = new HttpClientOptionsBuilder();

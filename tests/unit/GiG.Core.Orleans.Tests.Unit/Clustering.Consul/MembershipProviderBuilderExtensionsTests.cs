@@ -3,6 +3,7 @@ using GiG.Core.Orleans.Clustering.Extensions;
 using Microsoft.Extensions.Hosting;
 using Orleans;
 using System;
+using System.Configuration;
 using Xunit;
 // ReSharper disable AssignNullToNotNullAttribute
 
@@ -46,12 +47,12 @@ namespace GiG.Core.Orleans.Tests.Unit.Clustering.Consul
         }
 
         [Fact]
-        public void ConfigureConsulClustering_ConfigurationSectionIsNull_ThrowsArgumentNullException()
+        public void ConfigureConsulClustering_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => new ClientBuilder().ConfigureConsulClustering(configurationSection: null));
-            Assert.Equal("configurationSection", exception.ParamName);
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => new ClientBuilder().ConfigureConsulClustering(configurationSection: null));
+            Assert.Equal("Configuration section '' is incorrect.", exception.Message);
 
-            exception = Assert.Throws<ArgumentNullException>(() => Host.CreateDefaultBuilder()
+            exception = Assert.Throws<ConfigurationErrorsException>(() => Host.CreateDefaultBuilder()
                 .UseOrleans((ctx, sb) =>
                 {
                     sb.UseMembershipProvider(ctx.Configuration, x =>
@@ -60,7 +61,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Clustering.Consul
                     });
                 }).Build());
 
-            Assert.Equal("configurationSection", exception.ParamName);
+            Assert.Equal("Configuration section '' is incorrect.", exception.Message);
         }
     }
 }

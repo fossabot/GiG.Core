@@ -5,9 +5,9 @@ using Xunit;
 namespace GiG.Core.Orleans.Tests.Integration.Tests
 {
     [Trait("Category", "IntegrationWithDependency")]
-    public class OrleansMembershipProviderKuberneteslTests : AbstractKubernetesTests, IClassFixture<KubernetesMembershipProviderFixture>
+    public class OrleansMembershipProviderKubernetesTests : AbstractKubernetesTests, IClassFixture<KubernetesMembershipProviderFixture>
     {
-        public OrleansMembershipProviderKuberneteslTests(KubernetesMembershipProviderFixture kubernetesClusterFixture)
+        public OrleansMembershipProviderKubernetesTests(KubernetesMembershipProviderFixture kubernetesClusterFixture)
         {
             SiloName = kubernetesClusterFixture.SiloName;
             ClusterClient = kubernetesClusterFixture.ClusterClient;

@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Orleans.Clustering.Kubernetes;
 using Orleans.Hosting;
 using System;
+using System.Configuration;
 
 namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
 {
@@ -35,7 +36,7 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
         public static ISiloBuilder ConfigureKubernetesClustering([NotNull] this ISiloBuilder siloBuilder, [NotNull] IConfigurationSection configurationSection)
         {
             if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
-            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
+            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection?.Path}' is incorrect.");
 
             var kubernetesOptions = configurationSection.Get<KubernetesSiloOptions>() ?? new KubernetesSiloOptions();
 

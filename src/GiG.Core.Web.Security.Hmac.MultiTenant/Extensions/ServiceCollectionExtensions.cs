@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 
 namespace GiG.Core.Web.Security.Hmac.MultiTenant.Extensions
 {
@@ -24,7 +25,7 @@ namespace GiG.Core.Web.Security.Hmac.MultiTenant.Extensions
         public static IServiceCollection ConfigureMultiTenantHmacOptionProvider([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
+            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection?.Path}' is incorrect.");
 
             services.AddTenantAccessor();
             services.TryAddSingleton<IHmacOptionsProvider, MultiTenantOptionProvider>();

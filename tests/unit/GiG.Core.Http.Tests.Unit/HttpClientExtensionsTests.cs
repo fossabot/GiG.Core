@@ -1,6 +1,7 @@
 ﻿using GiG.Core.Http.Extensions;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Configuration;
 using System.Net.Http;
 using Xunit;
 // ReSharper disable AssignNullToNotNullAttribute
@@ -10,6 +11,15 @@ namespace GiG.Core.Http.Tests.Unit
     [Trait("Category", "Unit")]
     public class HttpClientExtensionsTests
     {
+        private readonly IConfiguration _configuration;
+
+        public HttpClientExtensionsTests()
+        {
+            _configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", optional: true)
+                .Build();
+        }
+
         [Fact]
         public void FromConfiguration_HttpClientIsNull_ThrowsArgumentNullException()
         {
@@ -28,23 +38,30 @@ namespace GiG.Core.Http.Tests.Unit
         }
 
         [Fact]
-        public void FromConfiguration_ConfigurationSectionIsNull_ThrowsArgumentNullException()
+        public void FromConfiguration_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => new HttpClient().FromConfiguration("", null));
-            Assert.Equal("configurationSection", exception.ParamName);
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => new HttpClient().FromConfiguration("", null));
+            Assert.Equal("Configuration Section '' is incorrect.", exception.Message);
         }
 
         [Fact]
-        public void FromConfiguration_BaseUriIsNull_ThrowsArgumentNullException()
+        public void FromConfiguration_BaseUriIsNull_ThrowsArgumentException()
         {
-            var exception = Assert.Throws<ArgumentException>(() => new HttpClient().FromConfiguration(null, new ConfigurationBuilder().Build().GetSection("HttpClient")));
+            var exception = Assert.Throws<ArgumentException>(() => new HttpClient().FromConfiguration(null, _configuration.GetSection("HttpClient")));
             Assert.Equal("Missing baseUri.", exception.Message);
+        }
+
+        [Fact]
+        public void FromConfiguration_IncorrectConfigurationSectionName_ThrowsConfigurationErrorsException()
+        {
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => new HttpClient().FromConfiguration("/api", _configuration.GetSection("Http")));
+            Assert.Equal("Configuration Section 'Http' is incorrect.", exception.Message);
         }
 
         [Fact]
         public void FromConfiguration_SectionNameIsNull_ThrowsArgumentNullException()
         {
-            var exception = Assert.Throws<ArgumentException>(() => new HttpClient().FromConfiguration(new ConfigurationBuilder().Build(), null));
+            var exception = Assert.Throws<ArgumentException>(() => new HttpClient().FromConfiguration(_configuration, null));
             Assert.Equal("Missing sectionName.", exception.Message);
         }
     }

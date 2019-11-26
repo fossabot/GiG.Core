@@ -21,13 +21,13 @@ namespace GiG.Core.Orleans.Streams.Kafka.Extensions
         public static KafkaStreamOptions FromConfiguration([NotNull] this KafkaStreamOptions options, [NotNull] IConfigurationSection configurationSection)
         {
             if (options == null) throw new ArgumentNullException(nameof(options));
-            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
+            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection?.Path}' is incorrect.");
 
             var kafkaOptions = configurationSection.Get<KafkaOptions>();
 
             if (kafkaOptions == null)
             {
-                throw new ConfigurationErrorsException($"Configuration section '{configurationSection.Path}' is not valid.");
+                throw new ConfigurationErrorsException($"Configuration section '{configurationSection.Path}' is incorrect.");
             }
 
             if (kafkaOptions.Brokers != null)

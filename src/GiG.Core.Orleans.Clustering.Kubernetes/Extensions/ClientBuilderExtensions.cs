@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Orleans;
 using Orleans.Clustering.Kubernetes;
 using System;
+using System.Configuration;
 
 namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
 {
@@ -35,7 +36,7 @@ namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
         public static IClientBuilder ConfigureKubernetesClustering([NotNull] this IClientBuilder clientBuilder, [NotNull] IConfigurationSection configurationSection)
         {
             if (clientBuilder == null) throw new ArgumentNullException(nameof(clientBuilder));
-            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
+            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection?.Path}' is incorrect.");
 
             var kubernetesOptions = configurationSection.Get<KubernetesClientOptions>() ?? new KubernetesClientOptions();
 

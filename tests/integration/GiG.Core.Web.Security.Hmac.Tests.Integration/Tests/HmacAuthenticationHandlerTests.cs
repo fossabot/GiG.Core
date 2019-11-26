@@ -1,5 +1,3 @@
-using GiG.Core.Http;
-using GiG.Core.Http.Security.Hmac;
 using GiG.Core.Http.Security.Hmac.Extensions;
 using GiG.Core.Security.Hmac.Abstractions;
 using GiG.Core.Web.Security.Hmac.Tests.Integration.Mocks;
@@ -11,8 +9,6 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using GiG.Core.Security.Cryptography;
-using Microsoft.Extensions.Options;
 using Xunit;
 
 namespace GiG.Core.Web.Security.Hmac.Tests.Integration.Tests
@@ -38,11 +34,9 @@ namespace GiG.Core.Web.Security.Hmac.Tests.Integration.Tests
                     .ConfigurePrimaryHttpMessageHandler(x => _server.CreateHandler())
                     .ConfigureHttpClient(x => x.BaseAddress = _server.BaseAddress)
                     .AddHmacDelegatingHandler()
-                    .ConfigureDefaultHmacDelegatingHandlerOptionProvider(ctx.Configuration.GetSection("Hmac"));
+                    .ConfigureDefaultHmacDelegatingHandlerOptionProvider(ctx.Configuration);
                 })
                 .ConfigureAppConfiguration(appConfig => appConfig.AddJsonFile("appsettings.json")));
-            ;
-
         }
 
         [Fact]

@@ -1,6 +1,7 @@
 ﻿using GiG.Core.Orleans.Silo.Extensions;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Configuration;
 using Xunit;
 // ReSharper disable AssignNullToNotNullAttribute
 
@@ -54,11 +55,11 @@ namespace GiG.Core.Orleans.Tests.Unit.Silo
         }
 
         [Fact]
-        public void ConfigureCluster_ConfigurationSectionIsNull_ThrowsArgumentNullException()
+        public void ConfigureCluster_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => 
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => 
                             Host.CreateDefaultBuilder().UseOrleans(sb => sb.ConfigureCluster(configurationSection: null)).Build());
-            Assert.Equal("configurationSection", exception.ParamName);
+            Assert.Equal("Configuration section '' is incorrect.", exception.Message);
         }
 
         [Fact]
@@ -80,11 +81,11 @@ namespace GiG.Core.Orleans.Tests.Unit.Silo
         }
 
         [Fact]
-        public void ConfigureEndpoints_ConfigurationSectionIsNull_ThrowsArgumentNullException()
+        public void ConfigureEndpoints_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => 
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => 
                             Host.CreateDefaultBuilder().UseOrleans(sb => sb.ConfigureEndpoints(configurationSection: null)).Build());
-            Assert.Equal("configurationSection", exception.ParamName);
+            Assert.Equal("Configuration section '' is incorrect.", exception.Message);
         }
 
         [Fact]

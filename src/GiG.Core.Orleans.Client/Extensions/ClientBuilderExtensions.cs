@@ -45,7 +45,7 @@ namespace GiG.Core.Orleans.Client.Extensions
         public static IClientBuilder ConfigureCluster([NotNull] this IClientBuilder clientBuilder, [NotNull] IConfigurationSection configurationSection)
         {
             if (clientBuilder == null) throw new ArgumentNullException(nameof(clientBuilder));
-            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
+            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection?.Path}' is incorrect.");
             
             return clientBuilder.Configure<ClusterOptions>(configurationSection);
         }
@@ -62,9 +62,9 @@ namespace GiG.Core.Orleans.Client.Extensions
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
             
             var configurationSection = configuration.GetSection(ClusterDefaultSectionName);
-            if (configurationSection == null)
+            if (configurationSection?.Exists() != true)
             {
-                throw new ConfigurationErrorsException($"Configuration section '{ClusterDefaultSectionName}' does not exist");
+                throw new ConfigurationErrorsException($"Configuration section '{ClusterDefaultSectionName}' is incorrect.");
             }
 
             clientBuilder.Configure<ClusterOptions>(configurationSection);
@@ -87,10 +87,9 @@ namespace GiG.Core.Orleans.Client.Extensions
             if (string.IsNullOrWhiteSpace(clusterName)) throw new ArgumentException($"Missing {nameof(clusterName)}.");
 
             var configurationSection = configuration.GetSection($"{ClusterDefaultSectionName}:{clusterName}");
-            if (configurationSection == null)
+            if (configurationSection?.Exists() != true)
             {
-                throw new ConfigurationErrorsException(
-                    $"Configuration section '{ClusterDefaultSectionName}' does not exist");
+                throw new ConfigurationErrorsException($"Configuration section '{ClusterDefaultSectionName}' is incorrect.");
             }
 
             clientBuilder.Configure<ClusterOptions>(configurationSection);
