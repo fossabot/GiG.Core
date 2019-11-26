@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 
 namespace GiG.Core.TokenManager.Interfaces
 {
+    /// <summary>
+    /// Token manager used to retrieve a token.
+    /// </summary>
     public interface ITokenManager : IDisposable
     {
         /// <summary>

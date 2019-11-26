@@ -3,8 +3,7 @@
  namespace GiG.Core.TokenManager.Models
 {
     /// <summary>
-    /// Provides an OAuth2.0 JWT self-contained authentication token and
-    /// its expiration time.
+    /// Provides an OAuth2.0 JWT self-contained authentication token and its expiration time.
     /// </summary>
     public class TokenResult
     {
@@ -16,7 +15,7 @@
         public string AccessToken { get; internal set; }
 
         /// <summary>
-        /// The refresh token used to get the next access token
+        /// The refresh token used to get the next access token.
         /// </summary>
         public string RefreshToken { get; internal set; }
 

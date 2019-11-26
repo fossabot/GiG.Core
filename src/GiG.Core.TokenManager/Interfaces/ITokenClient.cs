@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace GiG.Core.TokenManager.Interfaces
 {
+    /// <summary>
+    /// Token client used to retrieve an access or refresh token, provided the correct credentials are passed.
+    /// </summary>
     public interface ITokenClient : IDisposable
     {
         /// <summary>
