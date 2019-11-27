@@ -10,9 +10,9 @@ namespace GiG.Core.TokenManager.Abstractions.Interfaces
     public interface ITokenManager : IDisposable
     {
         /// <summary>
-        /// Requests a token using the resource owner password credentials
+        /// Requests a token using the resource owner password credentials.
         /// </summary>
-        /// <returns>Token result including Access Token</returns>
+        /// <returns>Token result including Access Token.</returns>
         Task<TokenResult> GetAndRefreshTokenAsync();
     }
 }

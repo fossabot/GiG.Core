@@ -44,7 +44,7 @@ namespace GiG.Core.TokenManager.Extensions
             if (services == null) throw new ArgumentNullException(nameof(services));
             if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection?.Path}' is incorrect.");
 
-            services.AddDateTimeProvider();
+            services.AddUtcDateTimeProvider();
             services.AddHttpClient();
 
             services.Configure<TokenManagerOptions>(configurationSection);

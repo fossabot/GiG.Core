@@ -34,14 +34,14 @@ namespace GiG.Core.TokenManager.Implementation
         }
 
         /// <inheritdoc />
-        public ITokenManager Create([NotNull] TokenManagerOptions config)
+        public ITokenManager Create([NotNull] TokenManagerOptions options)
         {
-            if (config == null) throw new ArgumentNullException(nameof(config));
-            if (config.Client == null) throw new ArgumentNullException(nameof(config.Client));
-            if (string.IsNullOrWhiteSpace(config.Client.AuthorityUrl)) throw new ArgumentException($"{nameof(config.Client.AuthorityUrl)} is missing.");
-            if (string.IsNullOrWhiteSpace(config.Client.ClientId)) throw new ArgumentException($"{nameof(config.Client.ClientId)} is missing.");
+            if (options == null) throw new ArgumentNullException(nameof(options));
+            if (options.Client == null) throw new ArgumentNullException(nameof(options.Client));
+            if (string.IsNullOrWhiteSpace(options.Client.AuthorityUrl)) throw new ArgumentException($"{nameof(options.Client.AuthorityUrl)} is missing.");
+            if (string.IsNullOrWhiteSpace(options.Client.ClientId)) throw new ArgumentException($"{nameof(options.Client.ClientId)} is missing.");
 
-            return new TokenManager(_tokenClientFactory, _loggerFactory.CreateLogger<TokenManager>(), config, _dateTimeProvider);
+            return new TokenManager(_tokenClientFactory, _loggerFactory.CreateLogger<TokenManager>(), options, _dateTimeProvider);
         }
     }
 }

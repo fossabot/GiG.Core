@@ -18,8 +18,8 @@ namespace GiG.Core.TokenManager.Abstractions.Interfaces
         /// <summary>
         /// Creates an instance of <see cref="ITokenManager"/> using the provided configuration.
         /// </summary>
-        /// <param name="config">The configuration to be used by the <see cref="ITokenManager"/> instance.</param>
+        /// <param name="options">The configuration options to be used by the <see cref="ITokenManager"/> instance.</param>
         /// <returns>An instance of <see cref="ITokenManager"/> based on the provided configuration.</returns>
-        ITokenManager Create(TokenManagerOptions config);
+        ITokenManager Create(TokenManagerOptions options);
     }
 }

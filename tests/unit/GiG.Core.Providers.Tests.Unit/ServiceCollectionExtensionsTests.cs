@@ -11,7 +11,7 @@ namespace GiG.Core.Providers.Tests.Unit
         [Fact]
         public void AddTokenManager_ServiceCollectionIsNull_ThrowsArgumentNullException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddDateTimeProvider(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddUtcDateTimeProvider(null));
             Assert.Equal("services", exception.ParamName);
         }
     }

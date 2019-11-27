@@ -15,7 +15,7 @@ namespace GiG.Core.Providers.DateTime.Extensions
         /// Registerer a Utc Date Time Provider.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection"/> on which to register the date time provider.</param>
-        public static void AddDateTimeProvider([NotNull] this IServiceCollection services)
+        public static void AddUtcDateTimeProvider([NotNull] this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
             

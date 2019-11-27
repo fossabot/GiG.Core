@@ -10,7 +10,7 @@ The below code needs to be added to the `Startup.cs`. This will register the def
 
 public void ConfigureServices(IServiceCollection services)
 {
-    services.AddDateTimeProvider();
+    services.AddUtcDateTimeProvider();
 }
 
 ```
