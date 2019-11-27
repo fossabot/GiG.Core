@@ -1,9 +1,12 @@
 ﻿using GiG.Core.Providers.DateTime;
 using GiG.Core.TokenManager.Extensions;
 using GiG.Core.TokenManager.Implementation;
+using GiG.Core.TokenManager.Models;
 using GiG.Core.TokenManager.Tests.Unit.Tests;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.Configuration;
 using System.Net.Http;
 
 namespace GiG.Core.TokenManager.Tests.Unit.Fixtures
@@ -18,8 +21,12 @@ namespace GiG.Core.TokenManager.Tests.Unit.Fixtures
         
         public TokenManagerFixture()
         {
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+            
             _serviceProvider = new ServiceCollection()
-                .AddTokenManager()
+                .AddTokenManager(config.GetSection("TokenManager"))
                 .AddLogging()
                 .BuildServiceProvider();
             
