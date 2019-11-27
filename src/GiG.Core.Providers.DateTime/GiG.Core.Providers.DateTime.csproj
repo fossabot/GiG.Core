@@ -5,12 +5,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\GiG.Core.Providers.DateTime.Abstractions\GiG.Core.Providers.DateTime.Abstractions.csproj" />
+        <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" PrivateAssets="compile" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" PrivateAssets="compile" />
     </ItemGroup>
-
+    
     <ItemGroup>
-      <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" />
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" />
+      <ProjectReference Include="..\GiG.Core.Providers.DateTime.Abstractions\GiG.Core.Providers.DateTime.Abstractions.csproj" />
     </ItemGroup>
 
 </Project>
