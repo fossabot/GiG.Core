@@ -1,6 +1,7 @@
 ﻿using GiG.Core.Messaging.Kafka.Abstractions.Extensions;
 using GiG.Core.Messaging.Kafka.Abstractions.Interfaces;
 using GiG.Core.Messaging.Kafka.Factories;
+using GiG.Core.Providers.DateTime.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
@@ -12,9 +13,9 @@ namespace GiG.Core.Messaging.Kafka.Extensions
     {
         public static IServiceCollection AddKafkaProducer<TKey, TValue>(this IServiceCollection services, Action<KafkaBuilderOptions<TKey, TValue>> setupAction)
         {
-            //Guard.IsNotNull(services, nameof(services));
+            if (services == null) throw new ArgumentNullException(nameof(services));
 
-            //services.AddDateTimeProvider();
+            services.AddUtcDateTimeProvider();
             services.Configure(setupAction);
             services.TryAddSingleton<IKafkaBuilderOptions<TKey, TValue>>(sp => sp.GetService<IOptions<KafkaBuilderOptions<TKey, TValue>>>().Value);
             services.TryAddSingleton<IProducerFactory, ProducerFactory>();
@@ -25,9 +26,9 @@ namespace GiG.Core.Messaging.Kafka.Extensions
 
         public static IServiceCollection AddKafkaConsumer<TKey, TValue>(this IServiceCollection services, Action<KafkaBuilderOptions<TKey, TValue>> setupAction)
         {
-            //Guard.IsNotNull(services, nameof(services));
-
-            //services.AddDateTimeProvider();
+            if (services == null) throw new ArgumentNullException(nameof(services));
+            
+            services.AddUtcDateTimeProvider();
             services.Configure(setupAction);
             services.TryAddSingleton<IKafkaBuilderOptions<TKey, TValue>>(sp => sp.GetService<IOptions<KafkaBuilderOptions<TKey, TValue>>>().Value);
             services.TryAddSingleton<IConsumerFactory, ConsumerFactory>();

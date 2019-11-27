@@ -16,8 +16,8 @@ namespace GiG.Core.Messaging.Kafka.Producers
 
         internal KafkaProducer(IKafkaBuilderOptions<TKey, TValue> kafkaBuilderOptions, ILogger<KafkaProducer<TKey, TValue>> logger)
         {
-            _kafkaBuilderOptions = kafkaBuilderOptions; //Guard.IsNotNull(kafkaBuilderOptions, nameof(kafkaBuilderOptions));
-            _logger = logger; //Guard.IsNotNull(logger, nameof(logger));
+            _kafkaBuilderOptions = kafkaBuilderOptions ?? throw new ArgumentNullException(nameof(kafkaBuilderOptions));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
             var config = new ProducerConfig(_kafkaBuilderOptions.KafkaProviderOptions.AdditionalConfiguration)
             {

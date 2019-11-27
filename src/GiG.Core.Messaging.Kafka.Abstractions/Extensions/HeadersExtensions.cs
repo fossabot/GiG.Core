@@ -6,11 +6,11 @@ namespace GiG.Core.Messaging.Kafka.Abstractions.Extensions
 {
     public static class HeadersExtensions
     {
-        private static readonly Encoding encoding = Encoding.UTF8;
+        private static readonly Encoding Encoding = Encoding.UTF8;
 
         public static string GetHeaderValue(this Headers headers, string headerName)
         {
-            return headers.TryGetLastBytes(headerName, out var headerInBytes) ? encoding.GetString(headerInBytes) : null;
+            return headers.TryGetLastBytes(headerName, out var headerInBytes) ? Encoding.GetString(headerInBytes) : null;
         }
 
         public static IDictionary<string, string> AsDictionary(this Headers headers)
@@ -19,7 +19,7 @@ namespace GiG.Core.Messaging.Kafka.Abstractions.Extensions
 
             foreach (var header in headers)
             {
-                var headerValue = encoding.GetString(header.GetValueBytes());
+                var headerValue = Encoding.GetString(header.GetValueBytes());
                 dictionary.Add(header.Key, headerValue);
             }
 
@@ -28,7 +28,7 @@ namespace GiG.Core.Messaging.Kafka.Abstractions.Extensions
 
         public static void Add(this Headers headers, string key, string value)
         {
-            var byteValue = value == null ? null : encoding.GetBytes(value);
+            var byteValue = value == null ? null : Encoding.GetBytes(value);
             headers.Add(key, byteValue);
         }
     }

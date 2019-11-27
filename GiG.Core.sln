@@ -59,6 +59,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		README.md = README.md
 		docs\GiG.Core.TokenManager.md = docs\GiG.Core.TokenManager.md
 		docs\GiG.Core.Providers.DateTime.md = docs\GiG.Core.Providers.DateTime.md
+		docs\GiG.Core.Messaging.Kafka.md = docs\GiG.Core.Messaging.Kafka.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AC01CBF6-BF4A-4F67-BCD6-CB0AC61D52A4}"
@@ -410,6 +411,18 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Providers.Tests.Unit", "tests\unit\GiG.Core.Providers.Tests.Unit\GiG.Core.Providers.Tests.Unit.csproj", "{170511A3-1A70-4B7E-98EB-2229A324F299}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.TokenManager.Abstractions", "src\GiG.Core.TokenManager.Abstractions\GiG.Core.TokenManager.Abstractions.csproj", "{182EE2D0-67A0-4721-8F1D-2B143D821C9C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Messaging", "Messaging", "{F3C1FDA9-11D3-4B05-8091-63D53022F544}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{87D84AC6-26A2-4D84-A346-7DA8352F9FE3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9059D569-10C5-467C-9759-1C3423EE026B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kafka", "Kafka", "{A7723AA8-DD5E-4D23-BAA2-C4826ED6011C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Messaging.Kafka.Consumer.Sample", "samples\Messaging\Kafka\src\GiG.Core.Messaging.Kafka.Consumer.Sample\GiG.Core.Messaging.Kafka.Consumer.Sample.csproj", "{47A3F03D-6409-4B6D-8478-3B3A980A8C58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Messaging.Kafka.Producer.Sample", "samples\Messaging\Kafka\src\GiG.Core.Messaging.Kafka.Producer.Sample\GiG.Core.Messaging.Kafka.Producer.Sample.csproj", "{E26D1052-92F4-4CF0-A46E-AA05FBAB3B88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -909,6 +922,14 @@ Global
 		{182EE2D0-67A0-4721-8F1D-2B143D821C9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{182EE2D0-67A0-4721-8F1D-2B143D821C9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{182EE2D0-67A0-4721-8F1D-2B143D821C9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47A3F03D-6409-4B6D-8478-3B3A980A8C58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47A3F03D-6409-4B6D-8478-3B3A980A8C58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47A3F03D-6409-4B6D-8478-3B3A980A8C58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47A3F03D-6409-4B6D-8478-3B3A980A8C58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E26D1052-92F4-4CF0-A46E-AA05FBAB3B88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E26D1052-92F4-4CF0-A46E-AA05FBAB3B88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E26D1052-92F4-4CF0-A46E-AA05FBAB3B88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E26D1052-92F4-4CF0-A46E-AA05FBAB3B88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1077,6 +1098,12 @@ Global
 		{BCF66C5F-31EB-49E3-A3DB-0536EFA31905} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
 		{170511A3-1A70-4B7E-98EB-2229A324F299} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
 		{182EE2D0-67A0-4721-8F1D-2B143D821C9C} = {8F2D4209-52CB-4960-A4EE-5E66E773D0FA}
+		{F3C1FDA9-11D3-4B05-8091-63D53022F544} = {99337274-FAB8-4358-81BB-3736EE2CCDE6}
+		{A7723AA8-DD5E-4D23-BAA2-C4826ED6011C} = {F3C1FDA9-11D3-4B05-8091-63D53022F544}
+		{87D84AC6-26A2-4D84-A346-7DA8352F9FE3} = {A7723AA8-DD5E-4D23-BAA2-C4826ED6011C}
+		{9059D569-10C5-467C-9759-1C3423EE026B} = {A7723AA8-DD5E-4D23-BAA2-C4826ED6011C}
+		{47A3F03D-6409-4B6D-8478-3B3A980A8C58} = {87D84AC6-26A2-4D84-A346-7DA8352F9FE3}
+		{E26D1052-92F4-4CF0-A46E-AA05FBAB3B88} = {87D84AC6-26A2-4D84-A346-7DA8352F9FE3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}

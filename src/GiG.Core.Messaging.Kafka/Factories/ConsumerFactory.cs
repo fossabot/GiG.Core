@@ -12,7 +12,7 @@ namespace GiG.Core.Messaging.Kafka.Factories
 
         public ConsumerFactory(ILoggerFactory loggerFactory)
         {
-            _loggerFactory = loggerFactory;  //Guard.IsNotNull(loggerFactory, nameof(loggerFactory));
+            _loggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
         }
 
         public IKafkaConsumer<TKey, TValue> Create<TKey, TValue>(Action<KafkaBuilderOptions<TKey, TValue>> setupAction)

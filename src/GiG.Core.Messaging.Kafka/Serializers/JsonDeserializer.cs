@@ -11,7 +11,7 @@ namespace GiG.Core.Messaging.Kafka.Serializers
         {
             if (isNull)
             {
-                return default(T);
+                return default;
             }
 
             var deserializedDataAsJson = Encoding.UTF8.GetString(data.ToArray());

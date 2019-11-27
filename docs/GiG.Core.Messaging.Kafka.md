@@ -1,0 +1,2 @@
+﻿# GiG.Core.Messaging.Kafka
+

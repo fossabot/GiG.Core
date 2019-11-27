@@ -1,6 +1,7 @@
 ﻿using Confluent.Kafka;
 using GiG.Core.Messaging.Kafka.Abstractions;
 using GiG.Core.Messaging.Kafka.Abstractions.Interfaces;
+using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace GiG.Core.Messaging.Kafka.Consumers
 
         private bool _disposed = false;
 
-        internal KafkaConsumer(IKafkaBuilderOptions<TKey, TValue> kafkaBuilderOptions, ILogger<KafkaConsumer<TKey, TValue>> logger)
+        internal KafkaConsumer([NotNull] IKafkaBuilderOptions<TKey, TValue> kafkaBuilderOptions, [NotNull] ILogger<KafkaConsumer<TKey, TValue>> logger)
         {
             _kafkaBuilderOptions = kafkaBuilderOptions ?? throw new ArgumentNullException(nameof(kafkaBuilderOptions));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -46,7 +47,7 @@ namespace GiG.Core.Messaging.Kafka.Consumers
             _consumer.Subscribe(_kafkaBuilderOptions.KafkaProviderOptions.Topic);
         }
 
-        public IKafkaMessage<TKey, TValue> Consume(CancellationToken token = default(CancellationToken))
+        public IKafkaMessage<TKey, TValue> Consume(CancellationToken token = default)
         {
             try
             {

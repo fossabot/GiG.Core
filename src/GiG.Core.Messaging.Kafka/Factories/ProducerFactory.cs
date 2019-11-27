@@ -13,8 +13,8 @@ namespace GiG.Core.Messaging.Kafka.Factories
 
         public ProducerFactory(ILoggerFactory loggerFactory, IMessageFactory messageFactory)
         {
-            _loggerFactory = loggerFactory; //Guard.IsNotNull(loggerFactory, nameof(loggerFactory));
-            _messageFactory = messageFactory; //Guard.IsNotNull(messageFactory, nameof(messageFactory));
+            _loggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
+            _messageFactory = messageFactory ?? throw new ArgumentNullException(nameof(messageFactory));
         }
 
         public IKafkaProducer<TKey, TValue> Create<TKey, TValue>(Action<KafkaBuilderOptions<TKey, TValue>> setupAction)
