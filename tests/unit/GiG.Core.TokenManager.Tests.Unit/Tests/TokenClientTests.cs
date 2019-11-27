@@ -1,6 +1,6 @@
 ﻿using GiG.Core.Providers.DateTime;
+using GiG.Core.TokenManager.Abstractions.Models;
 using GiG.Core.TokenManager.Implementation;
-using GiG.Core.TokenManager.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using System;

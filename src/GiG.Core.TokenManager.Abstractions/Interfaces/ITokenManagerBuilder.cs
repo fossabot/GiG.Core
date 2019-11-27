@@ -1,4 +1,4 @@
-﻿namespace GiG.Core.TokenManager.Interfaces
+﻿namespace GiG.Core.TokenManager.Abstractions.Interfaces
 {
     /// <summary>
     /// Token manager builder.

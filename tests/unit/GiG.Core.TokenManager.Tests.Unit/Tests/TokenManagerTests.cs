@@ -1,4 +1,4 @@
-﻿using GiG.Core.TokenManager.Models;
+﻿using GiG.Core.TokenManager.Abstractions.Models;
 using GiG.Core.TokenManager.Tests.Unit.Fixtures;
 using System;
 using Xunit;

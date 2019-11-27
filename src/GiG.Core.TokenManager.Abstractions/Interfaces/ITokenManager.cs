@@ -1,8 +1,8 @@
-﻿using GiG.Core.TokenManager.Models;
+﻿using GiG.Core.TokenManager.Abstractions.Models;
 using System;
 using System.Threading.Tasks;
 
-namespace GiG.Core.TokenManager.Interfaces
+namespace GiG.Core.TokenManager.Abstractions.Interfaces
 {
     /// <summary>
     /// Token manager used to retrieve a token.

@@ -1,5 +1,5 @@
-﻿using GiG.Core.TokenManager.Interfaces;
-using GiG.Core.TokenManager.Models;
+﻿using GiG.Core.TokenManager.Abstractions.Interfaces;
+using GiG.Core.TokenManager.Abstractions.Models;
 
 namespace GiG.Core.TokenManager.Implementation
 {

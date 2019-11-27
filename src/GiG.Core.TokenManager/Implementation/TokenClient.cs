@@ -1,7 +1,7 @@
 ﻿using GiG.Core.Providers.DateTime.Abstractions;
+using GiG.Core.TokenManager.Abstractions.Interfaces;
+using GiG.Core.TokenManager.Abstractions.Models;
 using GiG.Core.TokenManager.Exceptions;
-using GiG.Core.TokenManager.Interfaces;
-using GiG.Core.TokenManager.Models;
 using IdentityModel.Client;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
@@ -10,7 +10,7 @@ using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-using TokenClientOptions = GiG.Core.TokenManager.Models.TokenClientOptions;
+using TokenClientOptions = GiG.Core.TokenManager.Abstractions.Models.TokenClientOptions;
 
 [assembly: InternalsVisibleTo("GiG.Core.TokenManager.Tests.Unit")]
 namespace GiG.Core.TokenManager.Implementation

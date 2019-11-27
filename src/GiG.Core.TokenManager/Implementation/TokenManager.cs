@@ -1,7 +1,7 @@
 ﻿using GiG.Core.Providers.DateTime.Abstractions;
+using GiG.Core.TokenManager.Abstractions.Interfaces;
+using GiG.Core.TokenManager.Abstractions.Models;
 using GiG.Core.TokenManager.Exceptions;
-using GiG.Core.TokenManager.Interfaces;
-using GiG.Core.TokenManager.Models;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 using System;

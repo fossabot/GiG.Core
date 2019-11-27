@@ -1,5 +1,5 @@
-﻿using GiG.Core.TokenManager.Implementation;
-using GiG.Core.TokenManager.Models;
+﻿using GiG.Core.TokenManager.Abstractions.Models;
+using GiG.Core.TokenManager.Implementation;
 using Microsoft.Extensions.Logging;
 using System;
 using Xunit;

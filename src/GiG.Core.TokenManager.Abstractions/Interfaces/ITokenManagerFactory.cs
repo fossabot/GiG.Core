@@ -1,7 +1,7 @@
-﻿using GiG.Core.TokenManager.Models;
+﻿using GiG.Core.TokenManager.Abstractions.Models;
 using System;
 
-namespace GiG.Core.TokenManager.Interfaces
+namespace GiG.Core.TokenManager.Abstractions.Interfaces
 {
     /// <summary>
     /// Provides a factory to create an instance of <see cref="ITokenManager"/>.

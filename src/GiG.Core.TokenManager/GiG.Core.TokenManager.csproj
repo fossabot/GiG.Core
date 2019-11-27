@@ -15,6 +15,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\GiG.Core.Providers.DateTime\GiG.Core.Providers.DateTime.csproj" />
+      <ProjectReference Include="..\GiG.Core.TokenManager.Abstractions\GiG.Core.TokenManager.Abstractions.csproj" />
     </ItemGroup>
 
 </Project>

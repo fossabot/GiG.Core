@@ -1,6 +1,8 @@
 ﻿﻿using System;
+ using System.Runtime.CompilerServices;
 
- namespace GiG.Core.TokenManager.Models
+ [assembly: InternalsVisibleTo("GiG.Core.TokenManager")]
+ namespace GiG.Core.TokenManager.Abstractions.Models
 {
     /// <summary>
     /// Provides an OAuth2.0 JWT self-contained authentication token and its expiration time.

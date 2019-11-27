@@ -1,4 +1,4 @@
-﻿namespace GiG.Core.TokenManager.Models
+﻿namespace GiG.Core.TokenManager.Abstractions.Models
 {
     /// <summary>
     /// Provides the Discovery endpoint Result
