@@ -23,12 +23,5 @@ namespace GiG.Core.Web.Tests.Unit.Docs
             var exception = Assert.Throws<ArgumentNullException>(() => new ServiceCollection().ConfigureApiDocs(configuration: null));
             Assert.Equal("configuration", exception.ParamName);
         }
-
-        [Fact]
-        public void ConfigureApiDocs_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
-        {
-            var exception = Assert.Throws<ConfigurationErrorsException>(() => new ServiceCollection().ConfigureApiDocs(configurationSection: null));
-            Assert.Equal("Configuration Section '' is incorrect.", exception.Message);
-        }
     }
 }

@@ -28,7 +28,6 @@ namespace GiG.Core.Web.Docs.Extensions
             [NotNull] IConfigurationSection configurationSection, Action<SwaggerGenOptions> configureOptions = null)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection?.Path}' is incorrect.");
 
             services.Configure<ApiDocsOptions>(configurationSection);
 
