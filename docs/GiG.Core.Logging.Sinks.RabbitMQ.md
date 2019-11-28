@@ -1,4 +1,4 @@
-# GiG.Core.Logging.RabbitMQ
+# GiG.Core.Logging.Sinks.RabbitMQ
 
 This Library provides an API to register Logging to RabbitMQ using Serilog for an application.
 
