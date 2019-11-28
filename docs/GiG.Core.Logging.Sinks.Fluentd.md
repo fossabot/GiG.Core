@@ -1,4 +1,4 @@
-# GiG.Core.Logging.Fluentd
+# GiG.Core.Logging.Sinks.Fluentd
 
 This Library provides an API to register Logging to Fluentd using Serilog for an application.
 
