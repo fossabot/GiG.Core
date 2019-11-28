@@ -81,14 +81,6 @@ namespace GiG.Core.Orleans.Tests.Unit.Silo
         }
 
         [Fact]
-        public void ConfigureEndpoints_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
-        {
-            var exception = Assert.Throws<ConfigurationErrorsException>(() => 
-                            Host.CreateDefaultBuilder().UseOrleans(sb => sb.ConfigureEndpoints(configurationSection: null)).Build());
-            Assert.Equal("Configuration section '' is incorrect.", exception.Message);
-        }
-
-        [Fact]
         public void ConfigureDefaults_SiloBuilderIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.ConfigureDefaults(null, null));
