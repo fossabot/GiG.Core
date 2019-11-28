@@ -130,7 +130,7 @@ namespace GiG.Core.TokenManager.Implementation
                 {
                     LogEntry(LogLevel.Information, $"Unauthorized - {tokenResponse.ErrorDescription}");
 
-                    throw new TokenManagerException(tokenResponse.ErrorDescription); // This was previously a custom UnauthorizedException!
+                    throw new TokenManagerException(tokenResponse.ErrorDescription);
                 }
 
                 LogEntry(LogLevel.Error, tokenResponse.ErrorDescription, username: username);

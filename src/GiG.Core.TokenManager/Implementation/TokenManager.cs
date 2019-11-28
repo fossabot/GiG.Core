@@ -80,8 +80,9 @@ namespace GiG.Core.TokenManager.Implementation
 
                 return _tokenClient;
             }
-            catch (TokenManagerException)
+            catch (TokenManagerException ex)
             {
+                LogEntry(LogLevel.Error, ex.Message, ex);
                 throw;
             }
             catch (Exception ex)
@@ -114,10 +115,6 @@ namespace GiG.Core.TokenManager.Implementation
 
                 return _lastTokenResult;
             }
-            //catch (UnauthorizedException)
-            //{
-            //    throw;
-            //}
             catch (TokenManagerException)
             {
                 throw;

@@ -23,8 +23,9 @@ namespace GiG.Core.TokenManager.Extensions
         /// <param name="configuration">The <see cref="IConfiguration" />.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public static IServiceCollection AddTokenManager([NotNull] this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddTokenManager([NotNull] this IServiceCollection services, [NotNull] IConfiguration configuration)
         {
+            if (services == null) throw new ArgumentNullException(nameof(services));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
             return services.AddTokenManager(configuration.GetSection(TokenManagerOptions.DefaultSectionName));
