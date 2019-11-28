@@ -9,6 +9,7 @@ using GiG.Core.Orleans.Streams.Extensions;
 using GiG.Core.Orleans.Tests.Integration.Contracts;
 using GiG.Core.Orleans.Tests.Integration.Grains;
 using GiG.Core.Orleans.Tests.Integration.Mocks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Orleans;
@@ -26,9 +27,10 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
         public ClusterFixture()
         {
             var siloHost = new HostBuilder()
+                .ConfigureAppConfiguration(a => a.AddJsonFile("appsettings.json"))
                 .UseOrleans((ctx, x) =>
                 {
-                    x.ConfigureEndpoints(ctx.Configuration);
+                    x.ConfigureEndpoints(ctx.Configuration.GetSection("Orleans:ClusterA:Silo"));
                     x.UseLocalhostClustering();
                     x.AddAssemblies(typeof(EchoTestGrain));
                     x.AddSimpleMessageStreamProvider("SMSProvider");

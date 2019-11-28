@@ -1,6 +1,7 @@
 ﻿using GiG.Core.Orleans.Clustering.Extensions;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Configuration;
 using Xunit;
 using SiloBuilderExtensions = GiG.Core.Orleans.Clustering.Extensions.SiloBuilderExtensions;
 
@@ -22,15 +23,15 @@ namespace GiG.Core.Orleans.Tests.Unit.Clustering
         }
 
         [Fact]
-        public void UseMembershipProvider_ConfigurationSectionIsNull_ThrowsArgumentNullException()
+        public void UseMembershipProvider_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => Host.CreateDefaultBuilder()
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => Host.CreateDefaultBuilder()
                 .UseOrleans((ctx, sb) =>
                 {
                     sb.UseMembershipProvider(null, null);
                 }).Build());
 
-            Assert.Equal("configurationSection", exception.ParamName);
+            Assert.Equal("Configuration section '' is incorrect.", exception.Message);
         }
 
         [Fact]

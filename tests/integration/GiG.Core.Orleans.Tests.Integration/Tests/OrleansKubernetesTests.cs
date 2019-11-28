@@ -1,5 +1,7 @@
 using GiG.Core.Orleans.Tests.Integration.Fixtures;
 using GiG.Core.Orleans.Tests.Integration.Helpers;
+using Microsoft.Extensions.Hosting;
+using System;
 using Xunit;
 
 namespace GiG.Core.Orleans.Tests.Integration.Tests
@@ -12,6 +14,6 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             SiloName = kubernetesClusterFixture.SiloName;
             ClusterClient = kubernetesClusterFixture.ClusterClient;
             KubernetesSiloOptions = kubernetesClusterFixture.KubernetesOptions.Value;
-        }    
+        }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using System;
+using System.Configuration;
 using System.Linq;
 
 namespace GiG.Core.Http.Security.Hmac.Extensions
@@ -53,9 +54,9 @@ namespace GiG.Core.Http.Security.Hmac.Extensions
         public static IHttpClientBuilder ConfigureDefaultHmacDelegatingHandlerOptionProvider([NotNull]this IHttpClientBuilder httpClientBuilder, [NotNull]IConfigurationSection configurationSection)
         {
             if (httpClientBuilder == null) throw new ArgumentNullException(nameof(httpClientBuilder));
-            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
+            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection?.Path}' is incorrect.");
 
-            httpClientBuilder.Services.Configure<HmacOptions>(httpClientBuilder.Name,configurationSection);
+            httpClientBuilder.Services.Configure<HmacOptions>(httpClientBuilder.Name, configurationSection);
 
 
             return httpClientBuilder;
@@ -65,7 +66,7 @@ namespace GiG.Core.Http.Security.Hmac.Extensions
         /// Adds option provider for <see cref="HmacDelegatingHandler" /> functionality.
         /// </summary>
         /// <param name="httpClientBuilder">The <see cref="IHttpClientBuilder" />.</param>        
-        /// <param name="configuration">The <see cref="IConfigurationSection" />Configuration section for hmac settings.</param>        
+        /// <param name="configuration">The <see cref="IConfiguration" />Configuration for hmac settings.</param>        
         /// <returns>The <see cref="IHttpClientBuilder" />.</returns>
         public static IHttpClientBuilder ConfigureDefaultHmacDelegatingHandlerOptionProvider([NotNull]this IHttpClientBuilder httpClientBuilder, [NotNull]IConfiguration configuration)
         {

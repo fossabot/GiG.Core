@@ -1,6 +1,7 @@
 using GiG.Core.Orleans.Clustering.Kubernetes.Extensions;
 using Orleans;
 using System;
+using System.Configuration;
 using Xunit;
 using ClientBuilderExtensions = GiG.Core.Orleans.Clustering.Kubernetes.Extensions.ClientBuilderExtensions;
 // ReSharper disable AssignNullToNotNullAttribute
@@ -21,10 +22,10 @@ namespace GiG.Core.Orleans.Tests.Unit.Clustering.Kubernetes
         }
 
         [Fact]
-        public void ConfigureKubernetesClustering_ConfigurationIsNull_ThrowsArgumentNullException()
+        public void ConfigureKubernetesClustering_ConfigurationIsNull_ThrowsConfigurationErrorsException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => new ClientBuilder().ConfigureKubernetesClustering(configurationSection: null));
-            Assert.Equal("configurationSection", exception.ParamName);
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => new ClientBuilder().ConfigureKubernetesClustering(configurationSection: null));
+            Assert.Equal("Configuration section '' is incorrect.", exception.Message);
         }
 
         [Fact]

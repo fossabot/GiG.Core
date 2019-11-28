@@ -36,15 +36,14 @@ namespace GiG.Core.Orleans.Tests.Integration.Helpers
         [Fact]
         public async Task GetSiloMembership_Kubernetes_ReturnsSiloInformation()
         {
-            //Arrange
-            var expectedSiloName = SiloName;
-
             //Act
             var config = KubernetesClientConfiguration.BuildDefaultConfig();
             config.AccessToken = KubernetesSiloOptions.ApiToken;
 
-            using var client = new Kubernetes(config);
-            client.BaseUri = new Uri(KubernetesSiloOptions.ApiEndpoint.Remove(KubernetesSiloOptions.ApiEndpoint.LastIndexOf("/"), 4));
+            using var client = new Kubernetes(config)
+            {
+                BaseUri = new Uri(KubernetesSiloOptions.ApiEndpoint.Remove(KubernetesSiloOptions.ApiEndpoint.LastIndexOf("/"), 4))
+            };
             var membershipTable = await client.GetNamespacedCustomObjectAsync(KubernetesSiloOptions.Group, "v1", "orleanstest", "silos", string.Empty);
 
             JsonDocument.Parse(membershipTable.ToString()).RootElement.TryGetProperty("items", out var siloElements);
