@@ -1,5 +1,8 @@
-﻿using GiG.Core.HealthChecks.Orleans.Abstractions;
+﻿using GiG.Core.HealthChecks.Extensions;
+using GiG.Core.HealthChecks.Orleans.Abstractions;
+using GiG.Core.HealthChecks.Orleans.AspNetCore.Extensions;
 using GiG.Core.HealthChecks.Orleans.Extensions;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,21 +15,21 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GiG.Core.HealthChecks.Orleans.AspNetCore
+namespace GiG.Core.HealthChecks.Orleans.AspNetCore.Internal
 {
-    class HealthCheck : BackgroundService, IHostedService
+    internal class HealthCheckService : BackgroundService, IHostedService
     {
-        private IWebHost _host;
+        private IHost _host;
 
         private readonly IConfiguration _configuration;
         private readonly IClusterClient _clusterClient; 
-        private readonly ILogger<HealthCheck> _logger;
+        private readonly ILogger<HealthCheckService> _logger;
         private readonly HealthChecksOptions _healthChecksOptions;
 
-        public HealthCheck(
+        public HealthCheckService(
             IConfiguration configuration,
             IClusterClient clusterClient,
-            ILogger<HealthCheck> logger,
+            ILogger<HealthCheckService> logger,
             IOptions<HealthChecksOptions> healthChecksOptions)
         {
             _configuration = configuration;
@@ -35,31 +38,27 @@ namespace GiG.Core.HealthChecks.Orleans.AspNetCore
             _healthChecksOptions = healthChecksOptions.Value;
         }
 
-
         protected override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
             if (_healthChecksOptions.HostSelf)
             {
                 try
                 {
-                    _host =
-                        new WebHostBuilder()
-                            .ConfigureServices(services =>
-                            {
-                                services.ConfigureHealthChecks(_configuration);
-                                services.TryAddSingleton(_clusterClient);
-                                services.AddHealthChecks().AddOrleansHealthCheck();
-                            })
-                            .Configure(app =>
-                            {
-                                app.UseHealthChecks();
-                            })
-                            .UseKestrel()
-                            //.UseKestrel(x => x.ListenAnyIP(5555, listenOptions =>
-                            //{
-                            //    listenOptions.Protocols = HttpProtocols.Http1;
-                            //}))
-                            .UseUrls($"http://{_healthChecksOptions.DomainFilter}:{_healthChecksOptions.Port}")
+                    _host = Host.CreateDefaultBuilder()
+                            .ConfigureWebHostDefaults(webBuilder =>
+                                webBuilder.ConfigureServices(services =>
+                                {
+                                    services.ConfigureOrleansHealthChecks(_configuration);
+                                    services.AddHealthChecks().AddOrleansHealthCheck();
+                                    services.TryAddSingleton(_clusterClient);
+                                })
+                                .Configure(app =>
+                                {
+                                    app.UseHealthChecks();
+                                })
+                                .UseKestrel()
+                                .UseUrls($"http://{_healthChecksOptions.DomainFilter}:{_healthChecksOptions.Port}")
+                            )
                             .Build();
 
                     await _host.StartAsync(cancellationToken);
@@ -73,11 +72,12 @@ namespace GiG.Core.HealthChecks.Orleans.AspNetCore
             }
         }
        
-        public async Task StopAsync(CancellationToken cancellationToken)
+        public override void Dispose()
         {
             try
             {
-                await _host.StopAsync();
+                _host.StopAsync();
+                _host.WaitForShutdown();
                 _host?.Dispose();
             }
             catch

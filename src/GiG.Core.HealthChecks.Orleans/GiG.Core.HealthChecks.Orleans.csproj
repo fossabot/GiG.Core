@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GiG.Core.HealthChecks.Abstractions\GiG.Core.HealthChecks.Abstractions.csproj" />
     <ProjectReference Include="..\GiG.Core.Orleans.Silo\GiG.Core.Orleans.Silo.csproj" />
   </ItemGroup>
 

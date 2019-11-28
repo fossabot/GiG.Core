@@ -20,12 +20,9 @@
         /// </summary>
         public int Port { get; set; } = 5555;
 
-        public bool HostSelf { get; set; } = true;
-
         /// <summary>
-        /// The Url for the HealthCheck.
+        /// Set to 'false' to disable the HealthCheck from self hosting.
         /// </summary>
-        public string HealthCheckUrl { get; set; } = "/health";
-
+        public bool HostSelf { get; set; } = true;
     }
 }

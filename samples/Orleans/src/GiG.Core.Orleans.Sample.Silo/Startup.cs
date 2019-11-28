@@ -20,9 +20,8 @@ namespace GiG.Core.Orleans.Sample.Silo
         // This method gets called by the runtime. Use this method to add services to the container.
         public static void ConfigureServices(HostBuilderContext ctx, IServiceCollection services)
         {
-            services.ConfigureHealthChecks(ctx.Configuration);
             services.AddStream();
-            services.AddHealthCheckHost();
+            services.AddHealthCheckService(ctx.Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure Orleans.

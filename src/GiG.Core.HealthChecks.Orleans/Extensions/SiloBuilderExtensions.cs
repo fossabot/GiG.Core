@@ -1,7 +1,6 @@
 ﻿using GiG.Core.HealthChecks.Orleans.Internal;
 using GiG.Core.Orleans.Silo.Extensions;
 using JetBrains.Annotations;
-using Microsoft.Extensions.DependencyInjection;
 using Orleans.Hosting;
 using System;
 
@@ -21,7 +20,6 @@ namespace GiG.Core.HealthChecks.Orleans.Extensions
         {
             if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
 
-            siloBuilder.ConfigureServices(services => services.AddHealthChecks().AddOrleansHealthCheck());
             return siloBuilder.AddAssemblies(typeof(HealthCheckGrain));
         }
     }

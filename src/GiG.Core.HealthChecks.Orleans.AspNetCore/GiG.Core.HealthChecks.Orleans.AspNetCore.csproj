@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GiG.Core.HealthChecks.Orleans\GiG.Core.HealthChecks.Orleans.csproj" />
+    <ProjectReference Include="..\GiG.Core.HealthChecks\GiG.Core.HealthChecks.csproj" />
   </ItemGroup>
 
 </Project>
