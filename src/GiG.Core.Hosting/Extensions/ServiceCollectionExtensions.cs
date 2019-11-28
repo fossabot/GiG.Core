@@ -39,8 +39,9 @@ namespace GiG.Core.Hosting.Extensions
         public static IServiceCollection ConfigureInfoManagement([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-
-            return services.Configure<InfoManagementOptions>(configurationSection);
+            var options = configurationSection?.Get<InfoManagementOptions>() ?? new InfoManagementOptions();
+            
+            return services.Configure<InfoManagementOptions>(_ => _ = options);
         }
 
         /// <summary>

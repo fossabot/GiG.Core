@@ -29,9 +29,10 @@ namespace GiG.Core.Web.Docs.Extensions
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services.Configure<ApiDocsOptions>(configurationSection);
+            var docOptions = configurationSection?.Get<ApiDocsOptions>() ?? new ApiDocsOptions();
+            
+            services.Configure<ApiDocsOptions>(_ => _ = docOptions);
 
-            var docOptions = configurationSection.Get<ApiDocsOptions>() ?? new ApiDocsOptions();
             if (!docOptions.IsEnabled)
             {
                 return services;
