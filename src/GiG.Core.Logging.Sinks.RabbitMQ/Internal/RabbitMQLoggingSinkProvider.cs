@@ -1,11 +1,11 @@
-﻿using System;
-using GiG.Core.Logging.Abstractions;
+﻿using GiG.Core.Logging.Abstractions;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using Serilog.Configuration;
 using Serilog.Formatting.Json;
 using Serilog.Sinks.RabbitMQ;
 using Serilog.Sinks.RabbitMQ.Sinks.RabbitMQ;
+using System;
 
 namespace GiG.Core.Logging.Sinks.RabbitMQ.Internal
 {

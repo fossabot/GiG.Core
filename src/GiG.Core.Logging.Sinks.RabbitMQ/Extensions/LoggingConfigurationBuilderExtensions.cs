@@ -1,7 +1,7 @@
 using GiG.Core.Logging.Abstractions;
-using System;
 using GiG.Core.Logging.Sinks.RabbitMQ.Internal;
 using JetBrains.Annotations;
+using System;
 
 namespace GiG.Core.Logging.Sinks.RabbitMQ.Extensions
 {

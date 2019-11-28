@@ -1,8 +1,4 @@
-﻿using Serilog.Events;
-using Serilog.Sinks.RabbitMQ;
-using System;
-
-namespace GiG.Core.Logging.Sinks.RabbitMQ.Internal
+﻿namespace GiG.Core.Logging.Sinks.RabbitMQ.Internal
 {
     internal class RabbitMQSinkOptions
     {
