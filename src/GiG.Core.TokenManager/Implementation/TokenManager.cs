@@ -34,7 +34,7 @@ namespace GiG.Core.TokenManager.Implementation
                     return false;
                 }
 
-                return _dateTimeProvider.GetNow() <= _lastTokenResult.ExpiresAt;
+                return _dateTimeProvider.Now <= _lastTokenResult.ExpiresAt;
             }
         }
         

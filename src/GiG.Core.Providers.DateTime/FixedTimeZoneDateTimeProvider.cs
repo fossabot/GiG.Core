@@ -14,6 +14,6 @@ namespace GiG.Core.Providers.DateTime
         public FixedTimeZoneDateTimeProvider(string timezoneId) => _timezone = TimeZoneInfo.FindSystemTimeZoneById(timezoneId);
 
         /// <inheritdoc />
-        public DateTimeOffset GetNow() => TimeZoneInfo.ConvertTime(System.DateTime.UtcNow, _timezone);
+        public DateTimeOffset Now => TimeZoneInfo.ConvertTime(System.DateTime.UtcNow, _timezone);
     }
 }

@@ -152,7 +152,7 @@ namespace GiG.Core.TokenManager.Implementation
                 AccessToken = tokenResponse.AccessToken,
                 RefreshToken = tokenResponse.RefreshToken,
                 ExpiresIn = tokenResponse.ExpiresIn,
-                ExpiresAt = _dateTimeProvider.GetNow().AddSeconds(tokenResponse.ExpiresIn)
+                ExpiresAt = _dateTimeProvider.Now.AddSeconds(tokenResponse.ExpiresIn)
             };
         }
 
