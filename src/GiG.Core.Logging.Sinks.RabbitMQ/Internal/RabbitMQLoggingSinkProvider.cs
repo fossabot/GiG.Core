@@ -17,6 +17,7 @@ namespace GiG.Core.Logging.Sinks.RabbitMQ.Internal
         {
             _options = configurationSection.Get<RabbitMQSinkOptions>();
         }
+
         public void RegisterSink(LoggerSinkConfiguration sinkConfiguration)
         {
             if(!Enum.TryParse(_options.DeliveryMode, true, out RabbitMQDeliveryMode deliveryMode)) 
