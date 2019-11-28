@@ -1,4 +1,5 @@
-﻿using GiG.Core.Orleans.Clustering.Consul.Extensions;
+﻿using GiG.Core.HealthChecks.Orleans.Extensions;
+using GiG.Core.Orleans.Clustering.Consul.Extensions;
 using GiG.Core.Orleans.Clustering.Extensions;
 using GiG.Core.Orleans.Clustering.Kubernetes.Extensions;
 using GiG.Core.Orleans.Sample.Contracts;
@@ -32,6 +33,7 @@ namespace GiG.Core.Orleans.Sample.Silo
                     x.ConfigureConsulClustering(ctx.Configuration);
                     x.ConfigureKubernetesClustering(ctx.Configuration);
                 })
+                .AddHealthCheckDependencies()
                 .AddNpgsqlGrainStorage(Constants.StorageProviderName, ctx.Configuration)
                 .AddAssemblies(typeof(WalletGrain))
                 .AddSimpleMessageStreamProvider(Constants.StreamProviderName)

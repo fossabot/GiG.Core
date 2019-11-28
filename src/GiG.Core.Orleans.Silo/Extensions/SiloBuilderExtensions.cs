@@ -117,9 +117,9 @@ namespace GiG.Core.Orleans.Silo.Extensions
         public static ISiloBuilder ConfigureEndpoints([NotNull] this ISiloBuilder siloBuilder, [NotNull] IConfigurationSection configurationSection)
         {
             if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
-            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection?.Path}' is incorrect.");
+            //if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection?.Path}' is incorrect.");
          
-            var siloOptions = configurationSection.Get<SiloOptions>() ?? new SiloOptions();
+            var siloOptions = configurationSection?.Get<SiloOptions>() ?? new SiloOptions();
           
             var siloAddress = Dns.GetHostEntry(Dns.GetHostName()).AddressList
                 .First(a => a.AddressFamily == AddressFamily.InterNetwork);
