@@ -17,10 +17,9 @@ namespace GiG.Core.Orleans.Silo.Dashboard.Extensions
         /// Configures the Orleans Dashboard to start inside the web app host using the provided configuration.
         /// </summary>
         /// <param name="applicationBuilder">The <see cref="IApplicationBuilder"/> on which to configure the dashboard.</param>
-        /// <param name="configuration">The <see cref="IConfiguration"/> from which to bind the dashboard options.</param>
-        public static void UseDashboard(this IApplicationBuilder applicationBuilder, IConfiguration configuration)
+        public static void UseDashboard(this IApplicationBuilder applicationBuilder)
         {
-            var options = configuration.GetSection(DashboardOptions.DefaultSectionName).Get<DashboardOptions>();
+            var options = applicationBuilder.ApplicationServices.GetService<IOptions<DashboardOptions>>()?.Value ?? new DashboardOptions();
             
             if (options.IsEnabled)
             {
