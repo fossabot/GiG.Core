@@ -114,10 +114,9 @@ namespace GiG.Core.Orleans.Silo.Extensions
         /// <param name="siloBuilder">The Orleans <see cref="ISiloBuilder"/>.</param>
         /// <param name="configurationSection">The <see cref="IConfigurationSection"/> containing the Silo options.</param>
         /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
-        public static ISiloBuilder ConfigureEndpoints([NotNull] this ISiloBuilder siloBuilder, [NotNull] IConfigurationSection configurationSection)
+        public static ISiloBuilder ConfigureEndpoints([NotNull] this ISiloBuilder siloBuilder, IConfigurationSection configurationSection)
         {
             if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
-            //if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection?.Path}' is incorrect.");
          
             var siloOptions = configurationSection?.Get<SiloOptions>() ?? new SiloOptions();
           

@@ -7,6 +7,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+	<PackageReference Include="System.Configuration.ConfigurationManager" Version="4.6.0" />
+	<PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
@@ -20,6 +22,7 @@
     <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.MassTransit\GiG.Core.DistributedTracing.MassTransit.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Orleans\GiG.Core.DistributedTracing.Orleans.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Web\GiG.Core.DistributedTracing.Web.csproj" />
+	<ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing\GiG.Core.DistributedTracing.csproj" />
   </ItemGroup>
 
 </Project>

@@ -7,6 +7,7 @@ using GiG.Core.Logging.Extensions;
 using GiG.Core.Logging.Sinks.Console.Extensions;
 using GiG.Core.Logging.Sinks.File.Extensions;
 using GiG.Core.Logging.Sinks.Fluentd.Extensions;
+using GiG.Core.Logging.Sinks.RabbitMQ.Extensions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -33,6 +34,7 @@ namespace GiG.Core.Logging.All.Extensions
             return builder.ConfigureLogging(x => x
                 .WriteToConsole()
                 .WriteToFluentd()
+                .WriteToRabbitMQ()
                 .WriteToFile()
                 .EnrichWithApplicationMetadata()
                 .EnrichWithCorrelation()
