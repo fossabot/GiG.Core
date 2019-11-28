@@ -34,7 +34,7 @@ namespace GiG.Core.HealthChecks.Orleans.Extensions
             return builder
                 .UseHealthChecks(options.HealthCheckUrl, new HealthCheckOptions
                 {
-                    Predicate = check => check.Tags.Contains("Health"),
+                    Predicate = check => check.Tags.Contains(Constants.HealthCheckTag),
                     ResponseWriter = WriteJsonResponseWriter
                 });;
         }

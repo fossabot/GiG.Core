@@ -1,4 +1,5 @@
-﻿using GiG.Core.HealthChecks.Orleans.Extensions;
+﻿using GiG.Core.HealthChecks.Orleans.AspNetCore.Extensions;
+using GiG.Core.HealthChecks.Orleans.Extensions;
 using GiG.Core.Orleans.Clustering.Consul.Extensions;
 using GiG.Core.Orleans.Clustering.Extensions;
 using GiG.Core.Orleans.Clustering.Kubernetes.Extensions;
@@ -17,9 +18,11 @@ namespace GiG.Core.Orleans.Sample.Silo
     public static class Startup
     {
         // This method gets called by the runtime. Use this method to add services to the container.
-        public static void ConfigureServices(IServiceCollection services)
+        public static void ConfigureServices(HostBuilderContext ctx, IServiceCollection services)
         {
+            services.ConfigureHealthChecks(ctx.Configuration);
             services.AddStream();
+            services.AddHealthCheckHost();
         }
 
         // This method gets called by the runtime. Use this method to configure Orleans.

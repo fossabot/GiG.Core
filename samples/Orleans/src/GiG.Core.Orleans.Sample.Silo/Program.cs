@@ -4,7 +4,6 @@ using GiG.Core.Data.Migration.Evolve.Extensions;
 using GiG.Core.DistributedTracing.Orleans.Extensions;
 using GiG.Core.Hosting.Extensions;
 using GiG.Core.Logging.All.Extensions;
-using GiG.Core.HealthChecks.Orleans.AspNetCore.Extensions;
 using GiG.Core.Orleans.Sample.Contracts;
 using GiG.Core.Orleans.Storage.Npgsql.Abstractions;
 using Microsoft.Extensions.Hosting;
@@ -21,7 +20,6 @@ namespace GiG.Core.Orleans.Sample.Silo
 
         private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .AddHealthCheckDependencies()
                 .UseApplicationMetadata()
                 .ConfigureServices((ctx, services) => {
                     services.AddCorrelationAccessor();

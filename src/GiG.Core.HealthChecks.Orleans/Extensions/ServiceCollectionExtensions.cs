@@ -3,7 +3,6 @@ using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Configuration;
 
 namespace GiG.Core.HealthChecks.Orleans.Extensions
 {
@@ -35,9 +34,16 @@ namespace GiG.Core.HealthChecks.Orleans.Extensions
         public static IServiceCollection ConfigureHealthChecks([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection?.Path}' is incorrect.");
+            
+            var healthCheckOptions = configurationSection?.Get<HealthChecksOptions>() ?? new HealthChecksOptions();
 
-            return services.Configure<HealthChecksOptions>(configurationSection);
+            return services.Configure<HealthChecksOptions>(h =>
+            {
+                h.DomainFilter = healthCheckOptions.DomainFilter;
+                h.Port = healthCheckOptions.Port;
+                h.HealthCheckUrl = healthCheckOptions.HealthCheckUrl;
+                h.HostSelf = healthCheckOptions.HostSelf;
+            });
         }
     }
 }

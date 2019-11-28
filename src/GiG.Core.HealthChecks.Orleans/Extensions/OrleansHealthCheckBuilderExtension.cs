@@ -1,4 +1,5 @@
-﻿using GiG.Core.HealthChecks.Orleans.Internal;
+﻿using GiG.Core.HealthChecks.Orleans.Abstractions;
+using GiG.Core.HealthChecks.Orleans.Internal;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -26,7 +27,7 @@ namespace GiG.Core.HealthChecks.Orleans.Extensions
 
             return healthChecksBuilder.Add(
                 new HealthCheckRegistration(HealthCheckName, sp => new OrleansHealthCheck(sp.GetRequiredService<IClusterClient>()), 
-                HealthStatus.Unhealthy, new List<string> { "Health" }));
+                HealthStatus.Unhealthy, new List<string> { Constants.HealthCheckTag }));
         }
     }
 }
