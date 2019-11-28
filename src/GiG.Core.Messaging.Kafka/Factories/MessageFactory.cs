@@ -6,19 +6,22 @@ using GiG.Core.Messaging.Kafka.Abstractions.Interfaces;
 using GiG.Core.Providers.DateTime.Abstractions;
 using System;
 
-namespace GiG.Core.Messaging.Kafka
+namespace GiG.Core.Messaging.Kafka.Factories
 {
-    public class MessageFactory : IMessageFactory
+    /// <inheritdoc />
+    internal class MessageFactory : IMessageFactory
     {
         private readonly IDateTimeProvider _dateTimeProvider;
         private readonly ICorrelationContextAccessor _correlationContextAccessor;
 
+        /// <inheritdoc />
         public MessageFactory(IDateTimeProvider dateTimeProvider, ICorrelationContextAccessor correlationContextAccessor)
         {
             _dateTimeProvider = dateTimeProvider ?? throw new ArgumentNullException(nameof(dateTimeProvider));
             _correlationContextAccessor = correlationContextAccessor ?? throw new ArgumentNullException(nameof(correlationContextAccessor));
         }
-
+        
+        /// <inheritdoc />
         public virtual Message<TKey, TValue> BuildMessage<TKey, TValue>(IKafkaMessage<TKey, TValue> kafkaMessage)
         {
             kafkaMessage.Headers.AddOrUpdate(KafkaConstants.MessageTypeHeaderName, kafkaMessage.MessageType);
@@ -29,7 +32,7 @@ namespace GiG.Core.Messaging.Kafka
             {
                 Key = kafkaMessage.Key,
                 Value = kafkaMessage.Value,
-                Timestamp = new Timestamp(_dateTimeProvider.GetNow()),
+                Timestamp = new Timestamp(_dateTimeProvider.Now),
                 Headers = kafkaMessage.Headers.ToKafkaHeaders()
             };
         }

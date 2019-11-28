@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace GiG.Core.Messaging.Kafka.Producers
 {
-    public class KafkaProducer<TKey, TValue> : IKafkaProducer<TKey, TValue>
+    /// <inheritdoc />
+    internal class KafkaProducer<TKey, TValue> : IKafkaProducer<TKey, TValue>
     {
         private readonly IProducer<TKey, TValue> _producer;
 
@@ -36,6 +37,7 @@ namespace GiG.Core.Messaging.Kafka.Producers
                 .Build();
         }
 
+        /// <inheritdoc />
         public async Task ProduceAsync(IKafkaMessage<TKey, TValue> kafkaMessage)
         {
             var message = _kafkaBuilderOptions.MessageFactory.BuildMessage(kafkaMessage);

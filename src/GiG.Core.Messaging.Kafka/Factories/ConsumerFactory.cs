@@ -1,4 +1,4 @@
-﻿using GiG.Core.Messaging.Kafka.Abstractions.Extensions;
+﻿using GiG.Core.Messaging.Kafka.Abstractions;
 using GiG.Core.Messaging.Kafka.Abstractions.Interfaces;
 using GiG.Core.Messaging.Kafka.Consumers;
 using Microsoft.Extensions.Logging;
@@ -6,15 +6,18 @@ using System;
 
 namespace GiG.Core.Messaging.Kafka.Factories
 {
-    public class ConsumerFactory : IConsumerFactory
+    /// <inheritdoc />
+    internal class ConsumerFactory : IConsumerFactory
     {
         private readonly ILoggerFactory _loggerFactory;
 
+        /// <inheritdoc />
         public ConsumerFactory(ILoggerFactory loggerFactory)
         {
             _loggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
         }
 
+        /// <inheritdoc />
         public IKafkaConsumer<TKey, TValue> Create<TKey, TValue>(Action<KafkaBuilderOptions<TKey, TValue>> setupAction)
         {
             var builderOptions = new KafkaBuilderOptions<TKey, TValue>();

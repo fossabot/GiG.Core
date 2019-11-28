@@ -7,23 +7,33 @@ using System.Runtime.CompilerServices;
 [assembly:InternalsVisibleTo("GiG.Core.Messaging.Kafka")]
 namespace GiG.Core.Messaging.Kafka.Abstractions
 {
+    /// <inheritdoc />
     public class KafkaMessage<TKey, TValue> : IKafkaMessage<TKey, TValue>
     {
+        /// <inheritdoc />
         public TKey Key { get; set; }
 
+        /// <inheritdoc />
         public TValue Value { get; set; }
 
+        /// <inheritdoc />
         public string MessageType { get; set; }
 
+        /// <inheritdoc />
         public string MessageId { get; set; }
 
         internal TopicPartitionOffset Offset { get; set; }
 
+        /// <inheritdoc />
         public IDictionary<string, string> Headers { get; set; } = new Dictionary<string, string>();
 
-        public static implicit operator KafkaMessage<TKey, TValue>(ConsumeResult<TKey, TValue> result)
-        {
-            return new KafkaMessage<TKey, TValue>
+        /// <summary>
+        /// Converts the specified <see cref="ConsumeResult{TKey, TValue}"/> to a <see cref="KafkaMessage{TKey, TValue}"/>.
+        /// </summary>
+        /// <param name="result">The kafka message, <see cref="KafkaMessage{TKey, TValue}"/>.</param>
+        /// <returns></returns>
+        public static implicit operator KafkaMessage<TKey, TValue>(ConsumeResult<TKey, TValue> result) =>
+            new KafkaMessage<TKey, TValue>
             {
                 Key = result.Message.Key,
                 Value = result.Message.Value,
@@ -32,6 +42,5 @@ namespace GiG.Core.Messaging.Kafka.Abstractions
                 Headers = result.Message.Headers.AsDictionary(),
                 Offset = result.TopicPartitionOffset
             };
-        }
     }
 }

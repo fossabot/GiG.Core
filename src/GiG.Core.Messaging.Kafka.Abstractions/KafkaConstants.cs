@@ -2,7 +2,7 @@
 
 namespace GiG.Core.Messaging.Kafka.Abstractions
 {
-    public class KafkaConstants
+    internal class KafkaConstants
     {
         public const string MessageTypeHeaderName = "MessageType";
         public const string MessageIdHeaderName = "MessageId";
