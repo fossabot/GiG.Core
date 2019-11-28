@@ -11,6 +11,6 @@ namespace GiG.Core.Providers.DateTime.Abstractions
         /// Returns the current date and time.
         /// </summary>
         /// <returns>The <see cref="DateTimeOffset"/>.</returns>
-        DateTimeOffset GetNow();
+        DateTimeOffset Now { get; }
     }
 }

@@ -130,7 +130,7 @@ namespace GiG.Core.TokenManager.Implementation
                 {
                     LogEntry(LogLevel.Information, $"Unauthorized - {tokenResponse.ErrorDescription}");
 
-                    throw new TokenManagerException(tokenResponse.ErrorDescription); // This was previously a custom UnauthorizedException!
+                    throw new TokenManagerException(tokenResponse.ErrorDescription);
                 }
 
                 LogEntry(LogLevel.Error, tokenResponse.ErrorDescription, username: username);
@@ -152,7 +152,7 @@ namespace GiG.Core.TokenManager.Implementation
                 AccessToken = tokenResponse.AccessToken,
                 RefreshToken = tokenResponse.RefreshToken,
                 ExpiresIn = tokenResponse.ExpiresIn,
-                ExpiresAt = _dateTimeProvider.GetNow().AddSeconds(tokenResponse.ExpiresIn)
+                ExpiresAt = _dateTimeProvider.Now.AddSeconds(tokenResponse.ExpiresIn)
             };
         }
 
