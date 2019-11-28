@@ -47,7 +47,6 @@ namespace GiG.Core.HealthChecks.Orleans.AspNetCore.Extensions
                          listenOptions.Protocols = HttpProtocols.Http1;
                      });
 
-                     serverOptions.d
                  // Set properties and call methods on options
              }).UseStartup<Startup>();
 

@@ -20,6 +20,8 @@
         /// </summary>
         public int Port { get; set; } = 5555;
 
+        public bool HostSelf { get; set; } = true;
+
         /// <summary>
         /// The Url for the HealthCheck.
         /// </summary>

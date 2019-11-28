@@ -1,4 +1,4 @@
-﻿using GiG.Core.Orleans.HealthChecks.Internal;
+﻿using GiG.Core.HealthChecks.Orleans.Internal;
 using GiG.Core.Orleans.Silo.Extensions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
