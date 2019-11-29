@@ -1,48 +1,57 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using GiG.Core.DistributedTracing.Web.Extensions;
+using GiG.Core.Hosting.AspNetCore.Extensions;
+using GiG.Core.Hosting.Extensions;
+using GiG.Core.Messaging.Kafka.Abstractions;
+using GiG.Core.Web.Docs.Extensions;
+using GiG.Core.Web.FluentValidation.Extensions;
+using GiG.Core.Web.Hosting.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace GiG.Core.Messaging.Kafka.Producer.Sample
 {
     public class Startup
     {
+        private readonly IConfiguration _configuration;
+        
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            // Configuration
+            services.Configure<KafkaProviderOptions>(_configuration.GetSection(KafkaProviderOptions.DefaultSectionName));
+            services.ConfigureInfoManagement(_configuration);
+
+            services.AddCorrelationAccessor();
+            
+            // WebAPI
+            services
+                .ConfigureApiDocs(_configuration)
+                .AddControllers();
+            
+            // Forwarded Headers
+            services.ConfigureForwardedHeaders();
+
+            // Configure Api Behavior Options
+            services.ConfigureApiBehaviorOptions();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseHttpsRedirection();
-
+            app.UseForwardedHeaders();
+            app.UsePathBaseFromConfiguration();
+            app.UseCorrelation();
             app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseApiDocs();
+            app.UseEndpoints(endpoints => { 
+                endpoints.MapControllers();
+                endpoints.MapInfoManagement();
+            });
         }
     }
 }

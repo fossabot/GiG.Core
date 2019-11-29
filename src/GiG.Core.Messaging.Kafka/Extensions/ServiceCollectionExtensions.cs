@@ -2,6 +2,7 @@
 using GiG.Core.Messaging.Kafka.Abstractions.Interfaces;
 using GiG.Core.Messaging.Kafka.Factories;
 using GiG.Core.Providers.DateTime.Extensions;
+using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
@@ -23,10 +24,10 @@ namespace GiG.Core.Messaging.Kafka.Extensions
         /// <typeparam name="TValue">The Value of the Kafka message.</typeparam>
         /// <returns>The <see cref="IServiceCollection"/>.</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public static IServiceCollection AddKafkaProducer<TKey, TValue>(this IServiceCollection services,
-            Action<KafkaBuilderOptions<TKey, TValue>> setupAction)
+        public static IServiceCollection AddKafkaProducer<TKey, TValue>([NotNull] this IServiceCollection services, [NotNull] Action<KafkaBuilderOptions<TKey, TValue>> setupAction)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
+            if (setupAction == null) throw new ArgumentNullException(nameof(setupAction));
 
             services.AddUtcDateTimeProvider();
             services.Configure(setupAction);
@@ -46,11 +47,11 @@ namespace GiG.Core.Messaging.Kafka.Extensions
         /// <typeparam name="TValue">The Value of the Kafka message.</typeparam>
         /// <returns>The <see cref="IServiceCollection"/>.</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public static IServiceCollection AddKafkaConsumer<TKey, TValue>(this IServiceCollection services,
-            Action<KafkaBuilderOptions<TKey, TValue>> setupAction)
+        public static IServiceCollection AddKafkaConsumer<TKey, TValue>([NotNull] this IServiceCollection services, [NotNull] Action<KafkaBuilderOptions<TKey, TValue>> setupAction)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-
+            if (setupAction == null) throw new ArgumentNullException(nameof(setupAction));
+            
             services.AddUtcDateTimeProvider();
             services.Configure(setupAction);
             services.TryAddSingleton<IKafkaBuilderOptions<TKey, TValue>>(sp => sp.GetService<IOptions<KafkaBuilderOptions<TKey, TValue>>>().Value);

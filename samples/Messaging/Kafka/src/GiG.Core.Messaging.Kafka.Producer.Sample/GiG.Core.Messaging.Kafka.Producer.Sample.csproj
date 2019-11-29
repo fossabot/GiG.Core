@@ -5,10 +5,24 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Content Update="appsettings.Development.json">
-        <DependentUpon>appsettings.json</DependentUpon>
-      </Content>
+        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\..\..\src\GiG.Core.DistributedTracing.Web\GiG.Core.DistributedTracing.Web.csproj" />
+        <ProjectReference Include="..\..\..\..\..\src\GiG.Core.Hosting.AspNetCore\GiG.Core.Hosting.AspNetCore.csproj" />
+        <ProjectReference Include="..\..\..\..\..\src\GiG.Core.Messaging.Kafka.Abstractions\GiG.Core.Messaging.Kafka.Abstractions.csproj" />
+        <ProjectReference Include="..\..\..\..\..\src\GiG.Core.Web.Docs\GiG.Core.Web.Docs.csproj" />
+        <ProjectReference Include="..\..\..\..\..\src\GiG.Core.Web.FluentValidation\GiG.Core.Web.FluentValidation.csproj" />
+        <ProjectReference Include="..\..\..\..\..\src\GiG.Core.Web.Hosting\GiG.Core.Web.Hosting.csproj" />
+        <ProjectReference Include="..\GiG.Core.Messaging.Kafka.Models\GiG.Core.Messaging.Kafka.Models.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Update="appsettings.Development.json">
+            <DependentUpon>appsettings.json</DependentUpon>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
 
 </Project>

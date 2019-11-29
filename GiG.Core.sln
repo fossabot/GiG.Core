@@ -424,6 +424,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Messaging.Kafka.Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Messaging.Kafka.Producer.Sample", "samples\Messaging\Kafka\src\GiG.Core.Messaging.Kafka.Producer.Sample\GiG.Core.Messaging.Kafka.Producer.Sample.csproj", "{E26D1052-92F4-4CF0-A46E-AA05FBAB3B88}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Messaging.Kafka.Models", "samples\Messaging\Kafka\src\GiG.Core.Messaging.Kafka.Models\GiG.Core.Messaging.Kafka.Models.csproj", "{0164D718-F90C-4C2A-9FA7-F8707C5671CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -930,6 +932,10 @@ Global
 		{E26D1052-92F4-4CF0-A46E-AA05FBAB3B88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E26D1052-92F4-4CF0-A46E-AA05FBAB3B88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E26D1052-92F4-4CF0-A46E-AA05FBAB3B88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0164D718-F90C-4C2A-9FA7-F8707C5671CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0164D718-F90C-4C2A-9FA7-F8707C5671CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0164D718-F90C-4C2A-9FA7-F8707C5671CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0164D718-F90C-4C2A-9FA7-F8707C5671CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1104,6 +1110,7 @@ Global
 		{9059D569-10C5-467C-9759-1C3423EE026B} = {A7723AA8-DD5E-4D23-BAA2-C4826ED6011C}
 		{47A3F03D-6409-4B6D-8478-3B3A980A8C58} = {87D84AC6-26A2-4D84-A346-7DA8352F9FE3}
 		{E26D1052-92F4-4CF0-A46E-AA05FBAB3B88} = {87D84AC6-26A2-4D84-A346-7DA8352F9FE3}
+		{0164D718-F90C-4C2A-9FA7-F8707C5671CE} = {87D84AC6-26A2-4D84-A346-7DA8352F9FE3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}

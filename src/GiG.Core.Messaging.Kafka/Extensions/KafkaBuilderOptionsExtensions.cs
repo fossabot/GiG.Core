@@ -8,9 +8,9 @@ using System;
 namespace GiG.Core.Messaging.Kafka.Extensions
 {
     /// <summary>
-    /// Kafka Options Extensions.
+    /// Kafka Builder Options Extensions.
     /// </summary>
-    public static class KafkaOptionsExtensions
+    public static class KafkaBuilderOptionsExtensions
     {
         /// <summary>
         /// WithJson.
@@ -47,7 +47,8 @@ namespace GiG.Core.Messaging.Kafka.Extensions
             if (builderOptions == null) throw new ArgumentNullException(nameof(builderOptions));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            builderOptions.KafkaProviderOptions = configuration.GetSection(KafkaProviderOptions.DefaultSectionName).Get<KafkaProviderOptions>();
+            var configurationSection = configuration.GetSection(KafkaProviderOptions.DefaultSectionName);
+            builderOptions.KafkaProviderOptions = configurationSection?.Get<KafkaProviderOptions>() ?? new KafkaProviderOptions();
             return builderOptions;
         }
 
@@ -63,7 +64,7 @@ namespace GiG.Core.Messaging.Kafka.Extensions
         public static IKafkaBuilderOptions<TKey, TValue> WithTopic<TKey, TValue>([NotNull] this IKafkaBuilderOptions<TKey, TValue> builderOptions, [NotNull] string topicName)
         {
             if (builderOptions == null) throw new ArgumentNullException(nameof(builderOptions));
-            if (string.IsNullOrWhiteSpace(topicName)) throw new ArgumentNullException(nameof(topicName));
+            if (string.IsNullOrWhiteSpace(topicName)) throw new ArgumentException($"Missing {nameof(topicName)}.");
             
             builderOptions.KafkaProviderOptions.Topic = topicName;
             return builderOptions;
