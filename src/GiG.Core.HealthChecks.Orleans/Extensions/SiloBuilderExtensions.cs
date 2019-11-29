@@ -12,7 +12,7 @@ namespace GiG.Core.HealthChecks.Orleans.Extensions
     public static class SiloBuilderExtensions
     {
         /// <summary>
-        /// Adds the Orleans HealthCheck.
+        /// Adds the Orleans HealthCheck Dependencies.
         /// </summary>
         /// <param name="siloBuilder">The <see cref="ISiloBuilder" />.</param>
         /// <returns>The <see cref="ISiloBuilder" />.</returns>

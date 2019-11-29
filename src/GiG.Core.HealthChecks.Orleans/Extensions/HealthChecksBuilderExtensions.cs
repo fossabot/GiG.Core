@@ -12,21 +12,21 @@ namespace GiG.Core.HealthChecks.Orleans.Extensions
     /// <summary>
     /// HealthChecks Builder Extensions
     /// </summary>
-    public static class OrleansHealthCheckBuilderExtension
+    public static class HealthChecksBuilderExtensions
     {
         private const string HealthCheckName = "OrleansHealthCheck";
 
         /// <summary>
-        /// 
+        /// Adds the Orleans HealthCheck with the Ready Tag.
         /// </summary>
         /// <param name="healthChecksBuilder">The <see cref="IHealthChecksBuilder" />.</param>
-        /// <returns></returns>
+        /// <returns>The <see cref="IHealthChecksBuilder" />.</returns>
         public static IHealthChecksBuilder AddOrleansHealthCheck([NotNull] this IHealthChecksBuilder healthChecksBuilder)
         {
             if (healthChecksBuilder == null) throw new ArgumentNullException(nameof(healthChecksBuilder));
 
             return healthChecksBuilder.Add(
-                new HealthCheckRegistration(HealthCheckName, sp => new OrleansHealthCheck(sp.GetRequiredService<IClusterClient>()), 
+                new HealthCheckRegistration(HealthCheckName, sp => new OrleansHealthCheck(sp.GetRequiredService<IClusterClient>()),
                 HealthStatus.Unhealthy, new List<string> { Constants.ReadyTag }));
         }
     }

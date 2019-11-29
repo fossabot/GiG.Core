@@ -30,10 +30,9 @@ namespace GiG.Core.Orleans.Tests.Integration.Mocks
         // This method gets called by the runtime. Use this method to configure Orleans.
         public static void ConfigureOrleans(Microsoft.Extensions.Hosting.HostBuilderContext ctx, ISiloBuilder builder)
         {
-
             builder.ConfigureCluster(ctx.Configuration)
                 .ConfigureEndpoints(ctx.Configuration)
-                .UseLocalhostClustering(11111, 30001)
+                .UseLocalhostClustering(11115, 30005)
                 .AddHealthCheckDependencies();
         }
     }

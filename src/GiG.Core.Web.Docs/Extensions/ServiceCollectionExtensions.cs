@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
-using System.Configuration;
 using System.IO;
 using System.Reflection;
 
@@ -28,11 +27,17 @@ namespace GiG.Core.Web.Docs.Extensions
             [NotNull] IConfigurationSection configurationSection, Action<SwaggerGenOptions> configureOptions = null)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-           // if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection?.Path}' is incorrect.");
-
-            services.Configure<ApiDocsOptions>(configurationSection);
 
             var docOptions = configurationSection?.Get<ApiDocsOptions>() ?? new ApiDocsOptions();
+            services.Configure<ApiDocsOptions>(a =>
+            {
+                a.Description = docOptions.Description;
+                a.IsEnabled = docOptions.IsEnabled;
+                a.IsForwardedForEnabled = docOptions.IsForwardedForEnabled;
+                a.Title = docOptions.Title;
+                a.Url = docOptions.Url;
+            });
+            
             if (!docOptions.IsEnabled)
             {
                 return services;

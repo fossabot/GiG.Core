@@ -24,7 +24,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                 .UseOrleans((ctx, x) =>
                 {
                     x.ConfigureEndpoints(ctx.Configuration.GetSection("Orleans:ClusterB:Silo"));
-                    x.UseLocalhostClustering(11112, 30002);
+                    x.UseLocalhostClustering(11116, 30006);
                     x.AddHealthCheckDependencies();
                 })
                 .ConfigureServices((ctx, x) =>
