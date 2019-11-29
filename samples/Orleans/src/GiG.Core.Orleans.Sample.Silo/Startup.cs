@@ -21,7 +21,7 @@ namespace GiG.Core.Orleans.Sample.Silo
         public static void ConfigureServices(HostBuilderContext ctx, IServiceCollection services)
         {
             services.AddStream();
-            services.AddHealthCheckService(ctx.Configuration);
+            services.AddHealthChecksService(ctx.Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure Orleans.

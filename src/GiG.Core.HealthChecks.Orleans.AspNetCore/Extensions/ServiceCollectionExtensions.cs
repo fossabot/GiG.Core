@@ -16,8 +16,9 @@ namespace GiG.Core.HealthChecks.Orleans.AspNetCore.Extensions
         /// Adds the Orleans Health Check Hosted Service.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/>.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
-        public static IServiceCollection AddHealthCheckService([NotNull] this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddHealthChecksService([NotNull] this IServiceCollection services, [NotNull] IConfiguration configuration)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
@@ -31,8 +32,9 @@ namespace GiG.Core.HealthChecks.Orleans.AspNetCore.Extensions
         /// Adds the Orleans Health Check Hosted Service.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/>.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
-        public static IServiceCollection AddHealthCheckService([NotNull] this IServiceCollection services, IConfigurationSection configurationSection)
+        public static IServiceCollection AddHealthChecksService([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
@@ -41,7 +43,6 @@ namespace GiG.Core.HealthChecks.Orleans.AspNetCore.Extensions
 
             return services;
         }
-
 
         /// <summary>
         /// Registers a configuration instance which <see cref="HealthChecksOptions" /> will bind against.
