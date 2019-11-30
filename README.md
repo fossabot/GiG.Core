@@ -112,3 +112,9 @@ docker-compose -f docker-compose.yml -f docker-compose-sample-web.yml up --build
 ```sh
 docker-compose -f docker-compose.yml -f docker-compose-sample-orleans.yml up --build
 ```
+
+### Kafka Messaging
+
+```sh
+docker-compose -f docker-compose.yml -f docker-compose-sample-kafka.yml up --build
+```
