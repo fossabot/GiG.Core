@@ -2,6 +2,8 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.0</TargetFramework>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <NoWarn>1591</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
@@ -12,6 +14,7 @@
         <ProjectReference Include="..\..\..\..\..\src\GiG.Core.DistributedTracing.Web\GiG.Core.DistributedTracing.Web.csproj" />
         <ProjectReference Include="..\..\..\..\..\src\GiG.Core.Hosting.AspNetCore\GiG.Core.Hosting.AspNetCore.csproj" />
         <ProjectReference Include="..\..\..\..\..\src\GiG.Core.Messaging.Kafka.Abstractions\GiG.Core.Messaging.Kafka.Abstractions.csproj" />
+        <ProjectReference Include="..\..\..\..\..\src\GiG.Core.Messaging.Kafka\GiG.Core.Messaging.Kafka.csproj" />
         <ProjectReference Include="..\..\..\..\..\src\GiG.Core.Web.Docs\GiG.Core.Web.Docs.csproj" />
         <ProjectReference Include="..\..\..\..\..\src\GiG.Core.Web.FluentValidation\GiG.Core.Web.FluentValidation.csproj" />
         <ProjectReference Include="..\..\..\..\..\src\GiG.Core.Web.Hosting\GiG.Core.Web.Hosting.csproj" />

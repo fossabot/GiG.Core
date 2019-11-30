@@ -42,8 +42,7 @@ namespace GiG.Core.Messaging.Kafka.Producer.Sample.Controllers
             // Insert in data store
             _dataStore.Add(person.Id.ToString(), person);
             
-            // Result message
-            var resultMessage = new KafkaMessage<string, Person>
+            var message = new KafkaMessage<string, Person>
             {
                 Key = "person",
                 Value = person,
@@ -51,7 +50,7 @@ namespace GiG.Core.Messaging.Kafka.Producer.Sample.Controllers
                 MessageType = "Person.Created"
             };
 
-            await _kafkaProducer.ProduceAsync(resultMessage);
+            await _kafkaProducer.ProduceAsync(message);
 
             return CreatedAtAction("GetPersonById", new { id = person.Id }, person);
         }

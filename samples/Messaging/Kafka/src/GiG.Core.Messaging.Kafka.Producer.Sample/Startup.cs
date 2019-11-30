@@ -2,6 +2,8 @@ using GiG.Core.DistributedTracing.Web.Extensions;
 using GiG.Core.Hosting.AspNetCore.Extensions;
 using GiG.Core.Hosting.Extensions;
 using GiG.Core.Messaging.Kafka.Abstractions;
+using GiG.Core.Messaging.Kafka.Extensions;
+using GiG.Core.Messaging.Kafka.Models;
 using GiG.Core.Web.Docs.Extensions;
 using GiG.Core.Web.FluentValidation.Extensions;
 using GiG.Core.Web.Hosting.Extensions;
@@ -28,6 +30,11 @@ namespace GiG.Core.Messaging.Kafka.Producer.Sample
             services.ConfigureInfoManagement(_configuration);
 
             services.AddCorrelationAccessor();
+            
+            services.AddKafkaProducer<string, Person>(options => options
+                .WithJson()
+                .FromConfiguration(_configuration)
+                .WithTopic("new-person-topic"));
             
             // WebAPI
             services
