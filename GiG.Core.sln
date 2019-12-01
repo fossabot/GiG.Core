@@ -410,7 +410,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Messaging.Kafka.Ab
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Providers.DateTime", "src\GiG.Core.Providers.DateTime\GiG.Core.Providers.DateTime.csproj", "{D9795AA9-BD8A-4C06-9ECA-807B3AFEA2F3}"
 EndProject
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.TokenManager.Tests.Unit", "tests\unit\GiG.Core.TokenManager.Tests.Unit\GiG.Core.TokenManager.Tests.Unit.csproj", "{BCF66C5F-31EB-49E3-A3DB-0536EFA31905}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Providers.Tests.Unit", "tests\unit\GiG.Core.Providers.Tests.Unit\GiG.Core.Providers.Tests.Unit.csproj", "{170511A3-1A70-4B7E-98EB-2229A324F299}"
