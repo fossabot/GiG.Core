@@ -1,6 +1,7 @@
 ﻿using GiG.Core.Messaging.Kafka.Abstractions;
 using GiG.Core.Messaging.Kafka.Abstractions.Interfaces;
 using GiG.Core.Messaging.Kafka.Producers;
+using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 using System;
 
@@ -13,7 +14,7 @@ namespace GiG.Core.Messaging.Kafka.Factories
         private readonly IMessageFactory _messageFactory;
 
         /// <inheritdoc />
-        public ProducerFactory(ILoggerFactory loggerFactory, IMessageFactory messageFactory)
+        public ProducerFactory([NotNull] ILoggerFactory loggerFactory, [NotNull] IMessageFactory messageFactory)
         {
             _loggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
             _messageFactory = messageFactory ?? throw new ArgumentNullException(nameof(messageFactory));

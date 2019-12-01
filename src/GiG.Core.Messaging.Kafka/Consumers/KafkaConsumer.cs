@@ -19,9 +19,9 @@ namespace GiG.Core.Messaging.Kafka.Consumers
 
         private bool _disposed;
 
-        internal KafkaConsumer([NotNull] IKafkaBuilderOptions<TKey, TValue> kafkaBuilderOptions, [NotNull] ILogger<KafkaConsumer<TKey, TValue>> logger)
+        internal KafkaConsumer([NotNull] IKafkaBuilderOptions<TKey, TValue> builderOptions, [NotNull] ILogger<KafkaConsumer<TKey, TValue>> logger)
         {
-            var kafkaBuilderOptions1 = kafkaBuilderOptions ?? throw new ArgumentNullException(nameof(kafkaBuilderOptions));
+            var kafkaBuilderOptions1 = builderOptions ?? throw new ArgumentNullException(nameof(builderOptions));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
             var config = new ConsumerConfig(kafkaBuilderOptions1.KafkaProviderOptions.AdditionalConfiguration)

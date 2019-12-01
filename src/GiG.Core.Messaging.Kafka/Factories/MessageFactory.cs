@@ -4,6 +4,7 @@ using GiG.Core.Messaging.Kafka.Abstractions;
 using GiG.Core.Messaging.Kafka.Abstractions.Extensions;
 using GiG.Core.Messaging.Kafka.Abstractions.Interfaces;
 using GiG.Core.Providers.DateTime.Abstractions;
+using JetBrains.Annotations;
 using System;
 
 namespace GiG.Core.Messaging.Kafka.Factories
@@ -15,15 +16,17 @@ namespace GiG.Core.Messaging.Kafka.Factories
         private readonly ICorrelationContextAccessor _correlationContextAccessor;
 
         /// <inheritdoc />
-        public MessageFactory(IDateTimeProvider dateTimeProvider, ICorrelationContextAccessor correlationContextAccessor)
+        public MessageFactory([NotNull] IDateTimeProvider dateTimeProvider, [NotNull] ICorrelationContextAccessor correlationContextAccessor)
         {
             _dateTimeProvider = dateTimeProvider ?? throw new ArgumentNullException(nameof(dateTimeProvider));
             _correlationContextAccessor = correlationContextAccessor ?? throw new ArgumentNullException(nameof(correlationContextAccessor));
         }
         
         /// <inheritdoc />
-        public virtual Message<TKey, TValue> BuildMessage<TKey, TValue>(IKafkaMessage<TKey, TValue> kafkaMessage)
+        public virtual Message<TKey, TValue> BuildMessage<TKey, TValue>([NotNull] IKafkaMessage<TKey, TValue> kafkaMessage)
         {
+            if (kafkaMessage == null) throw new ArgumentNullException(nameof(kafkaMessage));
+            
             kafkaMessage.Headers.AddOrUpdate(KafkaConstants.MessageTypeHeaderName, kafkaMessage.MessageType);
             kafkaMessage.Headers.AddOrUpdate(KafkaConstants.MessageIdHeaderName, kafkaMessage.MessageId);
             kafkaMessage.Headers.AddOrUpdate(KafkaConstants.CorrelationIdHeaderName, _correlationContextAccessor?.Value.ToString());

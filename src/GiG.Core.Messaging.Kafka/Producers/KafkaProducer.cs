@@ -1,6 +1,7 @@
 ﻿using Confluent.Kafka;
 using GiG.Core.Messaging.Kafka.Abstractions.Extensions;
 using GiG.Core.Messaging.Kafka.Abstractions.Interfaces;
+using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace GiG.Core.Messaging.Kafka.Producers
         private readonly IKafkaBuilderOptions<TKey, TValue> _kafkaBuilderOptions;
         private readonly ILogger<KafkaProducer<TKey, TValue>> _logger;
 
-        internal KafkaProducer(IKafkaBuilderOptions<TKey, TValue> kafkaBuilderOptions, ILogger<KafkaProducer<TKey, TValue>> logger)
+        internal KafkaProducer([NotNull] IKafkaBuilderOptions<TKey, TValue> kafkaBuilderOptions, [NotNull] ILogger<KafkaProducer<TKey, TValue>> logger)
         {
             _kafkaBuilderOptions = kafkaBuilderOptions ?? throw new ArgumentNullException(nameof(kafkaBuilderOptions));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
