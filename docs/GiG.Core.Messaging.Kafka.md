@@ -24,33 +24,33 @@ public void ConfigureServices(IServiceCollection services)
 To consume the Producer, inject the KafkaProducer you registered earlier.
 
 ```csharp
-    public class PersonService
+public class PersonService
+{
+    private readonly IKafkaProducer<string, Person> _kafkaProducer;
+    
+    public PersonService(IKafkaProducer<string, Person> kafkaProducer)
     {
-        private readonly IKafkaProducer<string, Person> _kafkaProducer;
-        
-        public PersonService(IKafkaProducer<string, Person> kafkaProducer)
-        {
-            _kafkaProducer = kafkaProducer ?? throw new ArgumentNullException(nameof(kafkaProducer));
-        }
-
-        public async Task CreatePerson()
-        {
-            var person = Person.Default;
-            var messageId = Guid.NewGuid().ToString();
-            
-            // insert Person to DB if needed.
-
-            var message = new KafkaMessage<string, Person>
-            {
-                Key = "person",
-                Value = person,
-                MessageId = messageId,
-                MessageType = "Person.Created"
-            };
-
-            await _kafkaProducer.ProduceAsync(message);
-        }
+        _kafkaProducer = kafkaProducer ?? throw new ArgumentNullException(nameof(kafkaProducer));
     }
+
+    public async Task CreatePerson()
+    {
+        var person = Person.Default;
+        var messageId = Guid.NewGuid().ToString();
+        
+        // insert Person to DB if needed.
+
+        var message = new KafkaMessage<string, Person>
+        {
+            Key = "person",
+            Value = person,
+            MessageId = messageId,
+            MessageType = "Person.Created"
+        };
+
+        await _kafkaProducer.ProduceAsync(message);
+    }
+}
 
 ```
 
@@ -86,63 +86,82 @@ private static IHostBuilder CreateHostBuilder(string[] args) =>
 To use the Consumer (as an IHostedService), inject the KafkaConsumer you registered earlier.
 
 ```csharp
-    public class ConsumerService : IHostedService
+public class ConsumerService : IHostedService
+{
+    private readonly IKafkaConsumer<string, Person> _consumer;
+
+    public ConsumerService(IKafkaConsumer<string, Person> consumer) => _consumer = consumer ?? throw new ArgumentNullException(nameof(consumer));
+
+    public async Task StartAsync(CancellationToken cancellationToken = default) 
     {
-        private readonly IKafkaConsumer<string, Person> _consumer;
+        await Task.Run(() => RunConsumer(cancellationToken), cancellationToken);
+    }
 
-        public ConsumerService(IKafkaConsumer<string, Person> consumer) => _consumer = consumer ?? throw new ArgumentNullException(nameof(consumer));
+    public Task StopAsync(CancellationToken cancellationToken = default)
+    {
+        _consumer.Dispose();
+        return null;
+    }
+    
+    private void RunConsumer(CancellationToken token = default)
+    {
+        var count = 0;
 
-        public async Task StartAsync(CancellationToken cancellationToken = default) 
+        try
         {
-            await Task.Run(() => RunConsumer(cancellationToken), cancellationToken);
-        }
-
-        public Task StopAsync(CancellationToken cancellationToken = default)
-        {
-            _consumer.Dispose();
-            return null;
-        }
-        
-        private void RunConsumer(CancellationToken token = default)
-        {
-            var count = 0;
-
-            try
+            while (true)
             {
-                while (true)
+                try
                 {
-                    try
-                    {
-                        var message = _consumer.Consume(token);
-                        HandleMessage(message);
+                    var message = _consumer.Consume(token);
+                    HandleMessage(message);
 
-                        if (count++ % 10 == 0)
-                        {
-                            _consumer.Commit(message);
-                        }
-                    }
-                    catch (Exception e)
+                    if (count++ % 10 == 0)
                     {
-                        Console.WriteLine($"Error occurred: { e.Message } ");
+                        _consumer.Commit(message);
                     }
                 }
-            }
-            catch (OperationCanceledException)
-            {
-                _consumer.Dispose();
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Error occurred: { e.Message } ");
+                }
             }
         }
-
-        private static void HandleMessage(IKafkaMessage<string, Person> message)
+        catch (OperationCanceledException)
         {
-            var serializedValue = JsonConvert.SerializeObject(message.Value);
-            Console.WriteLine($"Consumed message in service \nkey: '{ message.Key }' \nvalue: '{ serializedValue }'");
-
-            foreach (var (key, value) in message.Headers)
-            {
-                Console.WriteLine($"Key: { key }\tValue: { value }");
-            }
+            _consumer.Dispose();
         }
     }
 
+    private static void HandleMessage(IKafkaMessage<string, Person> message)
+    {
+        var serializedValue = JsonConvert.SerializeObject(message.Value);
+        Console.WriteLine($"Consumed message in service \nkey: '{ message.Key }' \nvalue: '{ serializedValue }'");
+
+        foreach (var (key, value) in message.Headers)
+        {
+            Console.WriteLine($"Key: { key }\tValue: { value }");
+        }
+    }
+}
+
 ```
+
+### Configuration
+
+The below table outlines the valid Configurations used to override the [KafkaProviderOptions](..\src\GiG.Core.Messaging.Kafka.Abstractions\KafkaProviderOptions.cs) under the default Config section `EventProvider`.
+
+| Configuration Name        | Type                          | Optional | Default Value               |
+|:--------------------------|:------------------------------|:---------|:----------------------------|
+| BootstrapServers          | string                        | Yes      | `http://localhost:9092`     |
+| GroupId                   | string                        | Yes      | `default-group`             |
+| Topic                     | string                        | Yes      | `default-topic`             |
+| MessageTimeoutMs          | int                           | Yes      | `25000`                     |
+| AutoOffsetReset           | AutoOffsetReset               | Yes      | `AutoOffsetReset.Latest`    |
+| EnableAutoCommit          | bool                          | Yes      | `false`                     |
+| SaslUsername              | string                        | Yes      |                             |
+| SaslPassword              | string                        | Yes      |                             |
+| SecurityProtocol          | SecurityProtocol              | Yes      | `SecurityProtocol.Plaintext`|
+| SaslMechanism             | SaslMechanism                 | Yes      | `SaslMechanism.Plain`       |
+| AdditionalConfiguration   | IDictionary<string, string>   | Yes      | `dev`                       |
+| SchemaRegistry            | String                        | Yes      | `http://localhost:8081`     |
