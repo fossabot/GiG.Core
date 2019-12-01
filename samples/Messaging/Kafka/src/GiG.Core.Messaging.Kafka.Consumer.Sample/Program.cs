@@ -17,7 +17,6 @@ namespace GiG.Core.Messaging.Kafka.Consumer.Sample
 
         private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                //.ConfigureLogging()
                 .ConfigureServices((hostContext, services) =>
                 {
                     var kafkaOptions = hostContext.Configuration
