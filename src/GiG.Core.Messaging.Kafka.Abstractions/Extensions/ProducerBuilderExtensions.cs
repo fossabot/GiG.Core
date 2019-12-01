@@ -7,6 +7,12 @@
     /// </summary>
     public static class ProducerBuilderExtensions
     {
+        /// <summary>
+        /// Sets the Message Value serializers.
+        /// </summary>
+        /// <param name="builder">The <see cref="ProducerBuilder{TKey, TValue}"/>.</param>
+        /// <param name="serializers">The serializers to use.</param>
+        /// <returns>The <see cref="ProducerBuilder{TKey, TValue}"/>.</returns>
         public static ProducerBuilder<TKey, TValue> SetValueSerializer<TKey, TValue>(this ProducerBuilder<TKey, TValue> builder, Serializers<TKey, TValue> serializers)
         {
             if (serializers.ValueSerializer != null)

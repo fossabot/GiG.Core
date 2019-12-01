@@ -13,7 +13,7 @@ namespace GiG.Core.Messaging.Kafka.Extensions
     public static class KafkaBuilderOptionsExtensions
     {
         /// <summary>
-        /// WithJson.
+        /// Sets the ValueSerializer and ValueDeserializer to use JSON.
         /// </summary>
         /// <param name="builderOptions">The <see cref="IKafkaBuilderOptions{TKey, TValue}"/> to build upon.</param>
         /// <typeparam name="TKey">The Key value of the message.</typeparam>
