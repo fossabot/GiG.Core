@@ -41,7 +41,7 @@ namespace GiG.Core.Hosting.Extensions
 
             var infoManagementOptions = configurationSection?.Get<InfoManagementOptions>() ?? new InfoManagementOptions();
 
-            return services.Configure<InfoManagementOptions>(i => i.Url = infoManagementOptions.Url);
+            return services.Configure<InfoManagementOptions>(options => options.Url = infoManagementOptions.Url);
         }
 
         /// <summary>

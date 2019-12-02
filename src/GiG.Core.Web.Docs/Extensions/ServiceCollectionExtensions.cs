@@ -29,13 +29,13 @@ namespace GiG.Core.Web.Docs.Extensions
             if (services == null) throw new ArgumentNullException(nameof(services));
 
             var docOptions = configurationSection?.Get<ApiDocsOptions>() ?? new ApiDocsOptions();
-            services.Configure<ApiDocsOptions>(a =>
+            services.Configure<ApiDocsOptions>(options =>
             {
-                a.Description = docOptions.Description;
-                a.IsEnabled = docOptions.IsEnabled;
-                a.IsForwardedForEnabled = docOptions.IsForwardedForEnabled;
-                a.Title = docOptions.Title;
-                a.Url = docOptions.Url;
+                options.Description = docOptions.Description;
+                options.IsEnabled = docOptions.IsEnabled;
+                options.IsForwardedForEnabled = docOptions.IsForwardedForEnabled;
+                options.Title = docOptions.Title;
+                options.Url = docOptions.Url;
             });
             
             if (!docOptions.IsEnabled)
