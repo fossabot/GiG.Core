@@ -1,4 +1,4 @@
-﻿﻿namespace GiG.Core.Messaging.Kafka.Models
+﻿﻿namespace GiG.Core.Messaging.Kafka.Sample.Models
 {
     public class Address
     {

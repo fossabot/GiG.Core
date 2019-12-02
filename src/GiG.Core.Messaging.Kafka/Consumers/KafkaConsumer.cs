@@ -55,7 +55,7 @@ namespace GiG.Core.Messaging.Kafka.Consumers
                 var consumeResult = _consumer.Consume(cancellationToken);
                 var kafkaMessage = (KafkaMessage<TKey, TValue>)consumeResult;
 
-                _logger.LogDebug($"Consumed message 'key { consumeResult.Key } ' at: '{ consumeResult.TopicPartitionOffset }'.");
+                _logger.LogInformation($"Consumed message 'key { consumeResult.Key } ' at: '{ consumeResult.TopicPartitionOffset }'.");
 
                 return kafkaMessage;
             }

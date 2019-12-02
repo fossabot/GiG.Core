@@ -1,18 +1,18 @@
 ﻿using GiG.Core.Messaging.Kafka.Abstractions.Interfaces;
-using GiG.Core.Messaging.Kafka.Models;
+using GiG.Core.Messaging.Kafka.Sample.Models;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GiG.Core.Messaging.Kafka.Consumer.Sample
+namespace GiG.Core.Messaging.Kafka.Sample
 {
     public class ConsumerService : IHostedService
     {
-        private readonly IKafkaConsumer<string, Person> _consumer;
+        private readonly IKafkaConsumer<string, Person> _kafkaConsumer;
 
-        public ConsumerService(IKafkaConsumer<string, Person> consumer) => _consumer = consumer ?? throw new ArgumentNullException(nameof(consumer));
+        public ConsumerService(IKafkaConsumer<string, Person> consumer) => _kafkaConsumer = consumer ?? throw new ArgumentNullException(nameof(consumer));
 
         /// <inheritdoc />
         public async Task StartAsync(CancellationToken cancellationToken = default) 
@@ -22,8 +22,8 @@ namespace GiG.Core.Messaging.Kafka.Consumer.Sample
 
         public Task StopAsync(CancellationToken cancellationToken = default)
         {
-            _consumer.Dispose();
-            return null;
+            _kafkaConsumer.Dispose();
+            return Task.CompletedTask;
         }
         
         private void RunConsumer(CancellationToken token = default)
@@ -36,12 +36,12 @@ namespace GiG.Core.Messaging.Kafka.Consumer.Sample
                 {
                     try
                     {
-                        var message = _consumer.Consume(token);
+                        var message = _kafkaConsumer.Consume(token);
                         HandleMessage(message);
 
                         if (count++ % 10 == 0)
                         {
-                            _consumer.Commit(message);
+                            _kafkaConsumer.Commit(message);
                         }
                     }
                     catch (Exception e)
@@ -52,18 +52,18 @@ namespace GiG.Core.Messaging.Kafka.Consumer.Sample
             }
             catch (OperationCanceledException)
             {
-                _consumer.Dispose();
+                _kafkaConsumer.Dispose();
             }
         }
 
         private static void HandleMessage(IKafkaMessage<string, Person> message)
         {
             var serializedValue = JsonConvert.SerializeObject(message.Value);
-            Console.WriteLine($"Consumed message in service \nkey: '{ message.Key }' \nvalue: '{ serializedValue }'");
+            Console.WriteLine($"Consumed message in service [key: '{ message.Key }'] [value: '{ serializedValue }']");
 
             foreach (var (key, value) in message.Headers)
             {
-                Console.WriteLine($"Key: { key }\tValue: { value }");
+                Console.WriteLine($"Header: { key }\tValue: { value }");
             }
         }
     }
