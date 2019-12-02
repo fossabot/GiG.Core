@@ -1,19 +1,6 @@
 version: "3.4"
 
 services:
-  sample-kafka:
-    image: ${DOCKER_REGISTRY-}gig.core.messaging.kafka.producer.sample
-    build:
-      context: ..
-      dockerfile: samples/Messaging/Kafka/src/GiG.Core.Messaging.Kafka.Producer.Sample/Dockerfile
-    environment:
-      - ASPNETCORE_URLS=http://+:8080
-      - PATH_BASE=/api/person
-    depends_on:
-      - kafka
-      - zookeeper
-    ports:
-      - "7000:8080"
 
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
