@@ -29,10 +29,12 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Logging.Sinks.Console](docs/GiG.Core.Logging.Sinks.Console.md) - Provides an API to register Logging to a Console using Serilog for an application.
 - [GiG.Core.Logging.Sinks.File](docs/GiG.Core.Logging.Sinks.File.md) - Provides an API to register Logging to a File using Serilog for an application.
 - [GiG.Core.Logging.Sinks.Fluentd](docs/GiG.Core.Logging.Sinks.Fluentd.md) - Provides an API to register Logging to Fluentd using Serilog for an application.
+- [GiG.Core.Logging.Sinks.RabbitMQ](docs/GiG.Core.Logging.Sinks.RabbitMQ.md) - Provides an API to register Logging to RabbitMQ using Serilog for an application.
 - [GiG.Core.Logging.Enrichers.ApplicationMetadata](docs/GiG.Core.Logging.Enrichers.ApplicationMetadata.md) - Provides an API to register and ApplicationMetadata Enricher for Logging when using Serilog.
 - [GiG.Core.Logging.Enrichers.Context](docs/GiG.Core.Logging.Enrichers.Context.md) - Provides an API to register the Context Enricher for Logging when using Serilog.
 - [GiG.Core.Logging.Enrichers.DistributedTracing](docs/GiG.Core.Logging.Enrichers.DistributedTracing.md) - Provides an API to register the Correlation Id Enricher for Logging when using Serilog.
 - [GiG.Core.Logging.Enrichers.MultiTenant](docs/GiG.Core.Logging.Enrichers.MultiTenant.md) - Provides an API to register Tenant Id Enricher for Logging when using Serilog.
+- [GiG.Core.Messaging.MassTransit](docs/GiG.Core.Messaging.MassTransit.md) - Provides an API to register MassTransit related functionality to an application.
 - [GiG.Core.MultiTenant.Web](docs/GiG.Core.MultiTenant.Web.md) - Provides an API to register Multi Tenancy for an application.
 - [GiG.Core.ObjectMapping.AutoMapper](docs/GiG.Core.ObjectMapping.AutoMapper.md) - Provides an API to register an Object Mapper using AutoMapper.
 - [GiG.Core.Orleans.Client](docs/GiG.Core.Orleans.Client.md) - Provides an API to register an Orleans Client in an application.
@@ -44,6 +46,8 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Orleans.Storage.Npgsql](docs/GiG.Core.Orleans.Storage.Npgsql.md) - Provides an API to register PostgreSQL as a Grain Storage Provider.
 - [GiG.Core.Orleans.Streams](docs/GiG.Core.Orleans.Streams.md) - Provides an API to register an Orleans Stream Factory.
 - [GiG.Core.Orleans.Streams.Kafka](docs/GiG.Core.Orleans.Streams.Kafka.md) - Provides an API to register an Orleans Stream using Kafka.
+- [GiG.Core.Providers.DateTime](docs/GiG.Core.Providers.DateTime.md) - This Library provides an API to register required DateTime providers.
+- [GiG.Core.TokenManager](docs/GiG.Core.TokenManager.md) - This Library provides an API to register required services for the Token Manager.
 - [GiG.Core.Web.Docs](docs/GiG.Core.Web.Docs.md) - Provides an API to configure API Documentation.
 - [GiG.Core.Web.FluentValidation](docs/GiG.Core.Web.FluentValidation.md) - Provides an API to register the Fluent Validation Exception Middleware in an application.
 - [GiG.Core.Web.Hosting](docs/GiG.Core.Web.Hosting.md) - Provides an API to configure `BASE_PATH` and Forwarded Headers.
