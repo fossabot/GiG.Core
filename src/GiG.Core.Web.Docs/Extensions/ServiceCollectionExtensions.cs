@@ -28,11 +28,17 @@ namespace GiG.Core.Web.Docs.Extensions
             [NotNull] IConfigurationSection configurationSection, Action<SwaggerGenOptions> configureOptions = null)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection?.Path}' is incorrect.");
 
-            services.Configure<ApiDocsOptions>(configurationSection);
+            var docOptions = configurationSection?.Get<ApiDocsOptions>() ?? new ApiDocsOptions();
+            services.Configure<ApiDocsOptions>(options =>
+                {
+                    options.Description = docOptions.Description;
+                    options.IsEnabled = docOptions.IsEnabled;
+                    options.IsForwardedForEnabled = docOptions.IsForwardedForEnabled;
+                    options.Title = docOptions.Title;
+                    options.Url = docOptions.Url;
+                });
 
-            var docOptions = configurationSection.Get<ApiDocsOptions>() ?? new ApiDocsOptions();
             if (!docOptions.IsEnabled)
             {
                 return services;

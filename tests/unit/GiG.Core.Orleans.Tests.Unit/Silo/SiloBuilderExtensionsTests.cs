@@ -79,7 +79,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Silo
                             Host.CreateDefaultBuilder().UseOrleans(sb => sb.ConfigureEndpoints(configuration: null)).Build());
             Assert.Equal("configuration", exception.ParamName);
         }
-
+        
         [Fact]
         public void ConfigureDefaults_SiloBuilderIsNull_ThrowsArgumentNullException()
         {
