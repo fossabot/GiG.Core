@@ -1,11 +1,5 @@
-﻿using GiG.Core.Messaging.Kafka.Abstractions;
-using GiG.Core.Messaging.Kafka.Extensions;
-using GiG.Core.Messaging.Kafka.Sample.Models;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using GiG.Core.Logging.All.Extensions;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace GiG.Core.Messaging.Kafka.Sample
 {
@@ -18,10 +12,7 @@ namespace GiG.Core.Messaging.Kafka.Sample
 
         private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureLogging(options => options.AddConsole())
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+                .ConfigureLogging()
+                .ConfigureServices(Startup.ConfigureServices);
     }
 }

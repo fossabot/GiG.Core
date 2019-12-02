@@ -18,6 +18,7 @@ namespace GiG.Core.Messaging.Kafka.Serializers
             }
 
             var serializedDataAsJson = JsonConvert.SerializeObject(data);
+            
             return Encoding.UTF8.GetBytes(serializedDataAsJson);
         }
     }

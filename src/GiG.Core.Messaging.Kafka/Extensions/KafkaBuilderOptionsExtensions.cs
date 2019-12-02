@@ -53,6 +53,24 @@ namespace GiG.Core.Messaging.Kafka.Extensions
         }
 
         /// <summary>
+        /// Configure the Kafka Provider Options from configuration.
+        /// </summary>
+        /// <param name="builderOptions">The <see cref="IKafkaBuilderOptions{TKey, TValue}"/> to build upon.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/>.</param>
+        /// <typeparam name="TKey">The Key value of the message.</typeparam>
+        /// <typeparam name="TValue">The Value of the message.</typeparam>
+        /// <returns>The <see cref="IKafkaBuilderOptions{TKey, TValue}"/> to allow chaining.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static IKafkaBuilderOptions<TKey, TValue> FromConfiguration<TKey, TValue>([NotNull] this IKafkaBuilderOptions<TKey, TValue> builderOptions, [NotNull] IConfigurationSection configurationSection)
+        {
+            if (builderOptions == null) throw new ArgumentNullException(nameof(builderOptions));
+
+            builderOptions.KafkaProviderOptions = configurationSection?.Get<KafkaProviderOptions>() ?? new KafkaProviderOptions();
+            
+            return builderOptions;
+        }
+        
+        /// <summary>
         /// Sets the Kafka Topic.
         /// </summary>
         /// <param name="builderOptions">The <see cref="IKafkaBuilderOptions{TKey, TValue}"/> to build upon.</param>

@@ -2,7 +2,7 @@
 using GiG.Core.Messaging.Kafka.Abstractions.Interfaces;
 using GiG.Core.Messaging.Kafka.Sample.Models;
 using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,10 +12,12 @@ namespace GiG.Core.Messaging.Kafka.Sample
     public class ProducerService : IHostedService
     {
         private readonly IKafkaProducer<string, Person> _kafkaProducer;
-
-        public ProducerService(IKafkaProducer<string, Person> kafkaProducer)
+        private readonly ILogger<ProducerService> _logger;
+        
+        public ProducerService(IKafkaProducer<string, Person> kafkaProducer, ILogger<ProducerService> logger)
         {
-            _kafkaProducer = kafkaProducer ?? throw new ArgumentNullException(nameof(kafkaProducer));
+            _kafkaProducer = kafkaProducer;
+            _logger = logger;
         }
 
         /// <inheritdoc />
@@ -55,7 +57,7 @@ namespace GiG.Core.Messaging.Kafka.Sample
             catch (Exception ex)
             {
                 _kafkaProducer.Dispose();
-                Console.Write(ex.StackTrace);
+                _logger.LogError(ex, ex.Message);
             }
         }
     }

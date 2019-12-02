@@ -1,7 +1,6 @@
 ﻿using GiG.Core.Messaging.Kafka.Abstractions;
 using GiG.Core.Messaging.Kafka.Extensions;
 using GiG.Core.Messaging.Kafka.Serializers;
-using Microsoft.Extensions.Configuration;
 using System;
 using Xunit;
 // ReSharper disable AssignNullToNotNullAttribute
@@ -43,31 +42,7 @@ namespace GiG.Core.Messaging.Tests.Unit.Kafka
             var exception = Assert.Throws<ArgumentNullException>(() => KafkaBuilderOptionsExtensions.FromConfiguration<object, object>(null, null));
             Assert.Equal("builderOptions", exception.ParamName);
         }
-        
-        [Fact]
-        public void FromConfiguration_ConfigurationIsNull_ThrowsArgumentNullException()
-        {
-            var exception = Assert.Throws<ArgumentNullException>(() => new KafkaBuilderOptions<object, object>().FromConfiguration(null));
-            Assert.Equal("configuration", exception.ParamName);
-        }
-        
-        [Fact]
-        public void FromConfiguration_ConfigurationIsEmpty_ReturnsIKafkaBuilderOptionsWithDefaults()
-        {
-            // Arrange
-            var configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .Build();
-            
-            // Act
-            var builderOptions = new KafkaBuilderOptions<object, object>().FromConfiguration(configuration);
-            
-            // Assert
-            Assert.NotNull(builderOptions);
-            Assert.NotNull(builderOptions.KafkaProviderOptions);
-            Assert.NotStrictEqual(new KafkaProviderOptions(), builderOptions.KafkaProviderOptions);
-        }
-        
+
         [Fact]
         public void WithTopic_BuilderOptionsIsNull_ThrowsArgumentNullException()
         {

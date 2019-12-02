@@ -21,30 +21,30 @@ namespace GiG.Core.Messaging.Kafka.Consumers
 
         internal KafkaConsumer([NotNull] IKafkaBuilderOptions<TKey, TValue> builderOptions, [NotNull] ILogger<KafkaConsumer<TKey, TValue>> logger)
         {
-            var kafkaBuilderOptions1 = builderOptions ?? throw new ArgumentNullException(nameof(builderOptions));
+            var kafkaBuilderOptions = builderOptions ?? throw new ArgumentNullException(nameof(builderOptions));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
-            var config = new ConsumerConfig(kafkaBuilderOptions1.KafkaProviderOptions.AdditionalConfiguration)
+            var config = new ConsumerConfig(kafkaBuilderOptions.KafkaProviderOptions.AdditionalConfiguration)
             {
-                BootstrapServers = kafkaBuilderOptions1.KafkaProviderOptions.BootstrapServers,
-                GroupId = kafkaBuilderOptions1.KafkaProviderOptions.GroupId,
-                AutoOffsetReset = kafkaBuilderOptions1.KafkaProviderOptions.AutoOffsetReset,
-                EnableAutoCommit = kafkaBuilderOptions1.KafkaProviderOptions.EnableAutoCommit,
-                SaslUsername = kafkaBuilderOptions1.KafkaProviderOptions.SaslUsername,
-                SaslPassword = kafkaBuilderOptions1.KafkaProviderOptions.SaslPassword,
-                SecurityProtocol = kafkaBuilderOptions1.KafkaProviderOptions.SecurityProtocol,
-                SaslMechanism = kafkaBuilderOptions1.KafkaProviderOptions.SaslMechanism
+                BootstrapServers = kafkaBuilderOptions.KafkaProviderOptions.BootstrapServers,
+                GroupId = kafkaBuilderOptions.KafkaProviderOptions.GroupId,
+                AutoOffsetReset = kafkaBuilderOptions.KafkaProviderOptions.AutoOffsetReset,
+                EnableAutoCommit = kafkaBuilderOptions.KafkaProviderOptions.EnableAutoCommit,
+                SaslUsername = kafkaBuilderOptions.KafkaProviderOptions.SaslUsername,
+                SaslPassword = kafkaBuilderOptions.KafkaProviderOptions.SaslPassword,
+                SecurityProtocol = kafkaBuilderOptions.KafkaProviderOptions.SecurityProtocol,
+                SaslMechanism = kafkaBuilderOptions.KafkaProviderOptions.SaslMechanism
             };
 
             _consumer = new ConsumerBuilder<TKey, TValue>(config)
-                .SetValueDeserializer(kafkaBuilderOptions1.Serializers.ValueDeserializer)
+                .SetValueDeserializer(kafkaBuilderOptions.Serializers.ValueDeserializer)
                 .SetErrorHandler((_, e) => _logger.LogError(e.Reason))
                 .SetLogHandler((_, e) => _logger.LogInformation(e.Message))
                 .SetPartitionsAssignedHandler((_, e) => _logger.LogDebug($"Assigned partitions: [{string.Join(", ", e.Select(x => x.Partition))}]"))
                 .SetPartitionsRevokedHandler((_, e) => _logger.LogDebug($"Revoked partitions: [{string.Join(", ", e.Select(x => x.Partition))}]"))
                 .Build();
 
-            _consumer.Subscribe(kafkaBuilderOptions1.KafkaProviderOptions.Topic);
+            _consumer.Subscribe(kafkaBuilderOptions.KafkaProviderOptions.Topic);
         }
 
         /// <inheritdoc />
@@ -55,7 +55,7 @@ namespace GiG.Core.Messaging.Kafka.Consumers
                 var consumeResult = _consumer.Consume(cancellationToken);
                 var kafkaMessage = (KafkaMessage<TKey, TValue>)consumeResult;
 
-                _logger.LogInformation($"Consumed message 'key { consumeResult.Key } ' at: '{ consumeResult.TopicPartitionOffset }'.");
+                _logger.LogDebug($"Consumed message 'key { consumeResult.Key } ' at: '{ consumeResult.TopicPartitionOffset }'.");
 
                 return kafkaMessage;
             }
@@ -80,15 +80,15 @@ namespace GiG.Core.Messaging.Kafka.Consumers
 
         public void Dispose()
         {
-            if (!_disposed)
-            {
-                _logger.LogInformation("Disposing...");
+            if (_disposed)
+                return;
 
-                _consumer.Close();
-                _consumer.Dispose();
+            _logger.LogDebug($"Disposing Kafka Consumer [{_consumer.MemberId}-{_consumer.Name}] ...");
 
-                _disposed = true;
-            }
+            _consumer.Close();
+            _consumer.Dispose();
+
+            _disposed = true;
         }
     }
 }

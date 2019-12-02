@@ -3,9 +3,12 @@ using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.Messaging.Kafka.Abstractions;
 using GiG.Core.Messaging.Kafka.Abstractions.Extensions;
 using GiG.Core.Messaging.Kafka.Abstractions.Interfaces;
+using GiG.Core.MultiTenant.Abstractions;
 using GiG.Core.Providers.DateTime.Abstractions;
 using JetBrains.Annotations;
 using System;
+using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace GiG.Core.Messaging.Kafka.Factories
 {
@@ -13,13 +16,15 @@ namespace GiG.Core.Messaging.Kafka.Factories
     internal class MessageFactory : IMessageFactory
     {
         private readonly IDateTimeProvider _dateTimeProvider;
+        private readonly ITenantAccessor _tenantAccessor;
         private readonly ICorrelationContextAccessor _correlationContextAccessor;
 
         /// <inheritdoc />
-        public MessageFactory([NotNull] IDateTimeProvider dateTimeProvider, [NotNull] ICorrelationContextAccessor correlationContextAccessor)
+        public MessageFactory([NotNull] IDateTimeProvider dateTimeProvider, ITenantAccessor tenantAccessor = null, ICorrelationContextAccessor correlationContextAccessor = null)
         {
-            _dateTimeProvider = dateTimeProvider ?? throw new ArgumentNullException(nameof(dateTimeProvider));
-            _correlationContextAccessor = correlationContextAccessor ?? throw new ArgumentNullException(nameof(correlationContextAccessor));
+            _dateTimeProvider = dateTimeProvider;
+            _tenantAccessor = tenantAccessor;
+            _correlationContextAccessor = correlationContextAccessor;
         }
         
         /// <inheritdoc />
@@ -29,7 +34,17 @@ namespace GiG.Core.Messaging.Kafka.Factories
             
             kafkaMessage.Headers.AddOrUpdate(KafkaConstants.MessageTypeHeaderName, kafkaMessage.MessageType);
             kafkaMessage.Headers.AddOrUpdate(KafkaConstants.MessageIdHeaderName, kafkaMessage.MessageId);
-            kafkaMessage.Headers.AddOrUpdate(KafkaConstants.CorrelationIdHeaderName, _correlationContextAccessor?.Value.ToString());
+
+            if (_tenantAccessor != null)
+            {
+                var tenants = string.Join(",", _tenantAccessor.Values.ToArray());
+                kafkaMessage.Headers.AddOrUpdate(MultiTenant.Abstractions.Constants.Header, tenants);
+            }
+
+            if (_correlationContextAccessor != null)
+            {
+                kafkaMessage.Headers.AddOrUpdate(DistributedTracing.Abstractions.Constants.Header, _correlationContextAccessor.Value.ToString());
+            }
 
             return new Message<TKey, TValue>
             {

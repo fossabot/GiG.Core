@@ -50,7 +50,7 @@ namespace GiG.Core.Messaging.Kafka.Producers
             try
             {
                 var deliveryReport = await _producer.ProduceAsync(_kafkaBuilderOptions.KafkaProviderOptions.Topic, message);
-                _logger.LogInformation($"Delivered 'key: { deliveryReport.Key }' - '{ deliveryReport.Value }' to '{ deliveryReport.TopicPartitionOffset }' with offset '{ deliveryReport.Offset }'");
+                _logger.LogDebug($"Delivered 'key: { deliveryReport.Key }' - '{ deliveryReport.Value }' to '{ deliveryReport.TopicPartitionOffset }' with offset '{ deliveryReport.Offset }'");
             }
             catch (ProduceException<TKey, TValue> e)
             {
@@ -61,6 +61,8 @@ namespace GiG.Core.Messaging.Kafka.Producers
 
         public void Dispose()
         {
+            _logger.LogDebug($"Disposing Kafka Producer [{_producer.Name}] ...");
+            
             _producer.Flush(TimeSpan.FromSeconds(5));
             _producer.Dispose();
         }

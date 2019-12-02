@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
@@ -14,8 +14,15 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\..\..\..\src\GiG.Core.DistributedTracing.Web\GiG.Core.DistributedTracing.Web.csproj" />
+        <ProjectReference Include="..\..\..\..\..\src\GiG.Core.Logging.All\GiG.Core.Logging.All.csproj" />
         <ProjectReference Include="..\..\..\..\..\src\GiG.Core.Messaging.Kafka.Abstractions\GiG.Core.Messaging.Kafka.Abstractions.csproj" />
         <ProjectReference Include="..\..\..\..\..\src\GiG.Core.Messaging.Kafka\GiG.Core.Messaging.Kafka.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="appsettings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

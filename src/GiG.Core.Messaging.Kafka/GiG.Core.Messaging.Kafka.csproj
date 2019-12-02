@@ -13,10 +13,12 @@
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.0.0" PrivateAssets="compile" />
         <PackageReference Include="Microsoft.Extensions.Options" Version="3.0.0" PrivateAssets="compile" />
         <PackageReference Include="Newtonsoft.Json" Version="12.0.3" PrivateAssets="compile" />
+        <PackageReference Include="System.Collections.Immutable" Version="1.6.0" />
     </ItemGroup>
     
     <ItemGroup>
       <ProjectReference Include="..\GiG.Core.Messaging.Kafka.Abstractions\GiG.Core.Messaging.Kafka.Abstractions.csproj" />
+      <ProjectReference Include="..\GiG.Core.MultiTenant.Abstractions\GiG.Core.MultiTenant.Abstractions.csproj" />
       <ProjectReference Include="..\GiG.Core.Providers.DateTime.Abstractions\GiG.Core.Providers.DateTime.Abstractions.csproj" />
       <ProjectReference Include="..\GiG.Core.Providers.DateTime\GiG.Core.Providers.DateTime.csproj" />
     </ItemGroup>
