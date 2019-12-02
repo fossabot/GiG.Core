@@ -9,7 +9,7 @@ using Orleans;
 namespace GiG.Core.Orleans.Silo.Dashboard.Extensions
 {
     /// <summary>
-    /// Application Builder Extensions for Orleans Dashboard
+    /// Application Builder Extensions for Orleans Dashboard.
     /// </summary>
     public static class ApplicationBuilderExtensions
     {
