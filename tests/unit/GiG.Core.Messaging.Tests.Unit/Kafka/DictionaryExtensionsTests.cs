@@ -21,7 +21,7 @@ namespace GiG.Core.Messaging.Tests.Unit.Kafka
         public void AddOrUpdate_KeyIsStringAndNull_ThrowsArgumentException()
         {
             var exception = Assert.Throws<ArgumentException>(() => new Dictionary<string, object>().AddOrUpdate("", null));
-            Assert.Equal("Missing key.", exception.Message);
+            Assert.Equal("Missing key. (Parameter 'key')", exception.Message);
         }
 
         [Fact]
