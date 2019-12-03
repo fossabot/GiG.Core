@@ -19,7 +19,7 @@ namespace GiG.Core.Messaging.Kafka.Abstractions.Extensions
         public static void AddOrUpdate<TKey, TValue>([NotNull] this IDictionary<TKey, TValue> dictionary, [NotNull] TKey key, TValue value)
         {
             if (dictionary == null) throw new ArgumentNullException(nameof(dictionary));
-            if (key is string && string.IsNullOrWhiteSpace(key.ToString())) throw new ArgumentException($"Missing {nameof(key)}.");
+            if (key is string && string.IsNullOrWhiteSpace(key.ToString())) throw new ArgumentException($"Missing {nameof(key)}.", nameof(key));
             if (key == null) throw new ArgumentNullException(nameof(key));
             
             if (dictionary.ContainsKey(key))

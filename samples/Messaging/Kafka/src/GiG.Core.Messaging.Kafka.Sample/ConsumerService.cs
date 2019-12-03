@@ -50,11 +50,12 @@ namespace GiG.Core.Messaging.Kafka.Sample
                         if (count++ % 10 == 0)
                         {
                             _kafkaConsumer.Commit(message);
+                            count = 0;
                         }
                     }
                     catch (Exception e)
                     {
-                        _logger.LogError(e, e.Message );
+                        _logger.LogError(e, e.Message);
                     }
                 }
             }
@@ -67,11 +68,11 @@ namespace GiG.Core.Messaging.Kafka.Sample
         private void HandleMessage(IKafkaMessage<string, Person> message)
         {
             var serializedValue = JsonConvert.SerializeObject(message.Value);
-            _logger.LogInformation($"Consumed message in service [key: '{ message.Key }'] [value: '{ serializedValue }']");
+            _logger.LogInformation("Consumed message in service [key: '{key} '] [value: '{serializedValue}']", message.Key, serializedValue);
 
             foreach (var (key, value) in message.Headers)
             {
-                _logger.LogInformation($"Header: { key }\tValue: { value }");
+                _logger.LogInformation("Header: {key}\tValue: {value}", key, value);
             }
         }
     }

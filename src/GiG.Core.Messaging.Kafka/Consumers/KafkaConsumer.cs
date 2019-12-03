@@ -40,8 +40,8 @@ namespace GiG.Core.Messaging.Kafka.Consumers
                 .SetValueDeserializer(kafkaBuilderOptions.Serializers.ValueDeserializer)
                 .SetErrorHandler((_, e) => _logger.LogError(e.Reason))
                 .SetLogHandler((_, e) => _logger.LogInformation(e.Message))
-                .SetPartitionsAssignedHandler((_, e) => _logger.LogDebug($"Assigned partitions: [{string.Join(", ", e.Select(x => x.Partition))}]"))
-                .SetPartitionsRevokedHandler((_, e) => _logger.LogDebug($"Revoked partitions: [{string.Join(", ", e.Select(x => x.Partition))}]"))
+                .SetPartitionsAssignedHandler((_, e) => _logger.LogDebug("Assigned partitions: [{partitions}]", string.Join(", ", e.Select(x => x.Partition))))
+                .SetPartitionsRevokedHandler((_, e) => _logger.LogDebug("Revoked partitions: [{partitions}]", string.Join(", ", e.Select(x => x.Partition))))
                 .Build();
 
             _consumer.Subscribe(kafkaBuilderOptions.KafkaProviderOptions.Topic);
@@ -55,18 +55,18 @@ namespace GiG.Core.Messaging.Kafka.Consumers
                 var consumeResult = _consumer.Consume(cancellationToken);
                 var kafkaMessage = (KafkaMessage<TKey, TValue>)consumeResult;
 
-                _logger.LogDebug($"Consumed message 'key { consumeResult.Key } ' at: '{ consumeResult.TopicPartitionOffset }'.");
+                _logger.LogDebug("Consumed message 'key {key} ' at: '{partitionOffset}'.", consumeResult.Key, consumeResult.TopicPartitionOffset);
 
                 return kafkaMessage;
             }
             catch (ConsumeException e)
             {
-                _logger.LogError(e, $"ConsumeException occurred: { e.Error.Reason }");
+                _logger.LogError(e, "ConsumeException occurred: {reason}", e.Error.Reason);
                 throw;
             }
             catch (KafkaException e)
             {
-                _logger.LogError(e, $"KafkaException occurred: { e.Error.Reason }");
+                _logger.LogError(e, "KafkaException occurred: {reason}", e.Error.Reason);
                 throw;
             }
         }

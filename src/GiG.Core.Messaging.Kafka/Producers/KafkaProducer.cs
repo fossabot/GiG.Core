@@ -12,7 +12,6 @@ namespace GiG.Core.Messaging.Kafka.Producers
     internal class KafkaProducer<TKey, TValue> : IKafkaProducer<TKey, TValue>
     {
         private readonly IProducer<TKey, TValue> _producer;
-
         private readonly IKafkaBuilderOptions<TKey, TValue> _kafkaBuilderOptions;
         private readonly ILogger<KafkaProducer<TKey, TValue>> _logger;
 
@@ -50,18 +49,18 @@ namespace GiG.Core.Messaging.Kafka.Producers
             try
             {
                 var deliveryReport = await _producer.ProduceAsync(_kafkaBuilderOptions.KafkaProviderOptions.Topic, message);
-                _logger.LogDebug($"Delivered 'key: { deliveryReport.Key }' - '{ deliveryReport.Value }' to '{ deliveryReport.TopicPartitionOffset }' with offset '{ deliveryReport.Offset }'");
+                _logger.LogDebug("Delivered 'key: {key}' - '{value}' to '{topicPartitionOffset}' with offset '{offset}'", deliveryReport.Key, deliveryReport.Value, deliveryReport.TopicPartitionOffset, deliveryReport.Offset);
             }
             catch (ProduceException<TKey, TValue> e)
             {
-                _logger.LogError(e, $"Delivery failed: { e.Error.Reason }");
+                _logger.LogError(e, "Delivery failed: {reason}", e.Error.Reason);
                 throw;
             }
         }
 
         public void Dispose()
         {
-            _logger.LogDebug($"Disposing Kafka Producer [{_producer.Name}] ...");
+            _logger.LogDebug("Disposing Kafka Producer [{producerName}] ...", _producer.Name);
             
             _producer.Flush(TimeSpan.FromSeconds(5));
             _producer.Dispose();
