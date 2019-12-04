@@ -18,7 +18,7 @@ namespace GiG.Core.HealthChecks.Orleans.AspNetCore.Extensions
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
         /// <param name="configuration">The <see cref="IConfiguration"/>.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
-        public static IServiceCollection AddHealthChecksService([NotNull] this IServiceCollection services, [NotNull] IConfiguration configuration)
+        public static IServiceCollection AddOrleansHealthChecksSelfHosted([NotNull] this IServiceCollection services, [NotNull] IConfiguration configuration)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
@@ -34,7 +34,7 @@ namespace GiG.Core.HealthChecks.Orleans.AspNetCore.Extensions
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
         /// <param name="configurationSection">The <see cref="IConfigurationSection"/>.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
-        public static IServiceCollection AddHealthChecksService([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection)
+        public static IServiceCollection AddOrleansHealthChecksSelfHosted([NotNull] this IServiceCollection services, IConfigurationSection configurationSection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
@@ -64,7 +64,7 @@ namespace GiG.Core.HealthChecks.Orleans.AspNetCore.Extensions
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
         /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
-        internal static IServiceCollection ConfigureOrleansHealthChecks([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection)
+        internal static IServiceCollection ConfigureOrleansHealthChecks([NotNull] this IServiceCollection services, IConfigurationSection configurationSection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 

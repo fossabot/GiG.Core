@@ -24,7 +24,7 @@ namespace GiG.Core.HealthChecks.Orleans.Internal
 
             try
             {
-                return await _clusterClient.GetGrain<IHealthCheckGrain>(Guid.Empty).IsHealthy()
+                return await _clusterClient.GetGrain<IHealthCheckGrain>(Guid.Empty).IsHealthyAsync()
                     ? HealthCheckResult.Healthy()
                     : HealthCheckResult.Unhealthy();
             }

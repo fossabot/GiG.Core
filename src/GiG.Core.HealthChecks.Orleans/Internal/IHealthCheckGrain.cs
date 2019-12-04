@@ -5,6 +5,6 @@ namespace GiG.Core.HealthChecks.Orleans.Internal
 {
     interface IHealthCheckGrain : IGrainWithGuidKey
     {
-        Task<bool> IsHealthy();
+        Task<bool> IsHealthyAsync();
     }
 }

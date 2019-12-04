@@ -11,7 +11,7 @@ The below code needs to be added to the `Startup.cs`. This will register the Liv
 
 public void ConfigureServices(IServiceCollection services)
 {
-     services.AddHealthChecksService(ctx.Configuration);
+     services.AddOrleansHealthChecksSelfHosted(ctx.Configuration);
 }
 
 public static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builder)
@@ -22,6 +22,8 @@ public static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builder
 }
 
 ```
+
+The HealthChecks can be reached via the configured endpoints as per [GiG.Core.HealthChecks](GiG.Core.HealthChecks.md). 
 
 ### Configuration
 

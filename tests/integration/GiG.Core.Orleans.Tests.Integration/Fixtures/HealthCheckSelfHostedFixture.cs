@@ -31,7 +31,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                 {
                     x.AddHttpClient();
                     x.AddHealthChecks().AddOrleansHealthCheck();
-                    x.AddHealthChecksService(ctx.Configuration);
+                    x.AddOrleansHealthChecksSelfHosted(ctx.Configuration);
                 })
                 .Build();
 

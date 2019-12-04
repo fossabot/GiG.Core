@@ -30,12 +30,12 @@ namespace GiG.Core.HealthChecks.Orleans.AspNetCore.Internal
             IConfiguration configuration,
             IClusterClient clusterClient,
             ILogger<HealthCheckService> logger,
-            IOptions<HealthChecksOptions> healthChecksOptions)
+            IOptions<HealthChecksOptions> healthChecksOptionsAccessor)
         {
             _configuration = configuration;
             _clusterClient = clusterClient;
             _logger = logger;
-            _healthChecksOptions = healthChecksOptions.Value;
+            _healthChecksOptions = healthChecksOptionsAccessor.Value;
         }
 
         protected override async Task ExecuteAsync(CancellationToken cancellationToken)
@@ -80,9 +80,9 @@ namespace GiG.Core.HealthChecks.Orleans.AspNetCore.Internal
                 _host.WaitForShutdown();
                 _host?.Dispose();
             }
-            catch
+            catch(Exception ex)
             {
-                /* NOOP */
+                _logger.LogError("Orleans HealthCheckd Dispose failed.", ex);
             }
         }
 

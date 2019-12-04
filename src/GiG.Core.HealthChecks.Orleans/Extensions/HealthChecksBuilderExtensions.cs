@@ -10,7 +10,7 @@ using System.Collections.Generic;
 namespace GiG.Core.HealthChecks.Orleans.Extensions
 {
     /// <summary>
-    /// HealthChecks Builder Extensions
+    /// HealthChecks Builder Extensions.
     /// </summary>
     public static class HealthChecksBuilderExtensions
     {
@@ -25,9 +25,8 @@ namespace GiG.Core.HealthChecks.Orleans.Extensions
         {
             if (healthChecksBuilder == null) throw new ArgumentNullException(nameof(healthChecksBuilder));
 
-            return healthChecksBuilder.Add(
-                new HealthCheckRegistration(HealthCheckName, sp => new OrleansHealthCheck(sp.GetRequiredService<IClusterClient>()),
-                HealthStatus.Unhealthy, new List<string> { Constants.ReadyTag }));
+            return healthChecksBuilder.AddCheck<OrleansHealthCheck>(HealthCheckName, HealthStatus.Unhealthy, 
+                new List<string> { Constants.ReadyTag });
         }
     }
 }
