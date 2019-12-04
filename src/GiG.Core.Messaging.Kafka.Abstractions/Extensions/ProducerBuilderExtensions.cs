@@ -1,4 +1,5 @@
 ﻿﻿using Confluent.Kafka;
+ using System;
 
  namespace GiG.Core.Messaging.Kafka.Abstractions.Extensions
 {
@@ -15,6 +16,8 @@
         /// <returns>The <see cref="ProducerBuilder{TKey, TValue}"/>.</returns>
         public static ProducerBuilder<TKey, TValue> SetValueSerializer<TKey, TValue>(this ProducerBuilder<TKey, TValue> builder, Serializers<TKey, TValue> serializers)
         {
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            
             if (serializers.ValueSerializer != null)
             {
                 builder.SetValueSerializer(serializers.ValueSerializer);

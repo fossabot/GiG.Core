@@ -1,4 +1,5 @@
 ﻿using Confluent.Kafka;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -18,7 +19,11 @@ namespace GiG.Core.Messaging.Kafka.Abstractions.Extensions
         /// <param name="headerName">The name of the header we are searching for.</param>
         /// <returns>A string that represents the Header object.</returns>
         public static string GetHeaderValue(this Headers headers, string headerName)
-            => headers.TryGetLastBytes(headerName, out var headerInBytes) ? Encoding.GetString(headerInBytes) : null;
+        {
+            if (headers == null) throw new ArgumentNullException(nameof(headers));
+            
+            return headers.TryGetLastBytes(headerName, out var headerInBytes) ? Encoding.GetString(headerInBytes) : null;
+        }
 
         /// <summary>
         /// Convert the <see cref="Confluent.Kafka.Headers"/> to a Dictionary of type <see cref="T:IDictionary{string, string}"/>.
@@ -27,6 +32,8 @@ namespace GiG.Core.Messaging.Kafka.Abstractions.Extensions
         /// <returns>The <see cref="T:IDictionary{string, string}"/>.</returns>
         public static IDictionary<string, string> AsDictionary(this Headers headers)
         {
+            if (headers == null) throw new ArgumentNullException(nameof(headers));
+            
             var dictionary = new Dictionary<string, string>();
 
             foreach (var header in headers)
@@ -46,6 +53,8 @@ namespace GiG.Core.Messaging.Kafka.Abstractions.Extensions
         /// <param name="value">The header value.</param>
         public static void Add(this Headers headers, string key, string value)
         {
+            if (headers == null) headers = new Headers();
+            
             var byteValue = value == null ? null : Encoding.GetBytes(value);
             headers.Add(key, byteValue);
         }

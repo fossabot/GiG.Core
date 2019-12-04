@@ -2,9 +2,7 @@
 using GiG.Core.Messaging.Kafka.Abstractions.Extensions;
 using GiG.Core.Messaging.Kafka.Abstractions.Interfaces;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
-[assembly:InternalsVisibleTo("GiG.Core.Messaging.Kafka")]
 namespace GiG.Core.Messaging.Kafka.Abstractions
 {
     /// <inheritdoc />
