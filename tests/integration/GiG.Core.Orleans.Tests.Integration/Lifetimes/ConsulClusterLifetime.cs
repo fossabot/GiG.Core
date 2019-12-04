@@ -1,4 +1,4 @@
-using Bogus;
+﻿using Bogus;
 using GiG.Core.Orleans.Client.Extensions;
 using GiG.Core.Orleans.Clustering.Consul.Abstractions;
 using GiG.Core.Orleans.Clustering.Consul.Extensions;
@@ -13,38 +13,44 @@ using Orleans.Configuration;
 using Orleans.Hosting;
 using System;
 using System.Net.Http;
+using System.Threading.Tasks;
+using Xunit;
 
-namespace GiG.Core.Orleans.Tests.Integration.Fixtures
+namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
 {
-    public class ConsulClusterFixture
+    public class ConsulClusterLifetime : IAsyncLifetime
     {
-        internal readonly IOptions<ConsulOptions> ConsulOptions;
+        internal  IOptions<ConsulOptions> ConsulOptions;
 
-        internal readonly IHttpClientFactory HttpClientFactory;
+        internal  IHttpClientFactory HttpClientFactory;
 
-        internal readonly IClusterClient ClusterClient;
+        internal  IClusterClient ClusterClient;
 
-        internal readonly IServiceProvider ClientServiceProvider;
+        internal  IServiceProvider ClientServiceProvider;
 
-        internal readonly string SiloName;
+        internal  string SiloName;
 
-        public ConsulClusterFixture()
+        internal string ConsulKvStoreBaseAddress;
+
+        private IHost _siloHost;
+
+        public async Task InitializeAsync()
         {
             SiloName = new Faker().Random.String2(5);
 
-            var siloHost = Host.CreateDefaultBuilder()
+            _siloHost = Host.CreateDefaultBuilder()
                 .UseOrleans((ctx, sb) =>
                 {
                     sb.ConfigureCluster(ctx.Configuration);
-                    sb.ConfigureEndpoints(ctx.Configuration);
+                    sb.ConfigureEndpoints(ctx.Configuration.GetSection("Orleans:ConsulSilo"));
                     sb.ConfigureConsulClustering(ctx.Configuration);
                     sb.AddAssemblies(typeof(EchoTestGrain));
                     sb.Configure<SiloOptions>(options => options.SiloName = SiloName);
                 })
                 .Build();
 
-            siloHost.StartAsync().GetAwaiter().GetResult();
-            
+            await _siloHost.StartAsync();
+
             var clientHost = Host.CreateDefaultBuilder()
                 .ConfigureServices((ctx, services) =>
                 {
@@ -67,6 +73,15 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
             ClusterClient = ClientServiceProvider.GetRequiredService<IClusterClient>();
 
             ConsulOptions = ClientServiceProvider.GetRequiredService<IOptions<ConsulOptions>>();
+
+            var options = ConsulOptions.Value;
+            ConsulKvStoreBaseAddress = $"{options.Address}/v1/kv/{options.KvRootFolder}/";
+        }
+
+        public async Task DisposeAsync()
+        {
+            await ClusterClient?.Close();
+            await _siloHost?.StopAsync();
         }
     }
 }

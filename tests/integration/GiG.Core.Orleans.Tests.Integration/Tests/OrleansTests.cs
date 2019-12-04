@@ -2,7 +2,7 @@ using Bogus;
 using GiG.Core.Context.Abstractions;
 using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.Orleans.Tests.Integration.Contracts;
-using GiG.Core.Orleans.Tests.Integration.Fixtures;
+using GiG.Core.Orleans.Tests.Integration.Lifetimes;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
@@ -11,20 +11,17 @@ using Xunit;
 namespace GiG.Core.Orleans.Tests.Integration.Tests
 {
     [Trait("Category", "Integration")]
-    public class OrleansTests : IClassFixture<ClusterFixture>
+    public class OrleansTests : DefaultClusterLifetime
     {
-        private readonly ClusterFixture _clusterFixture;
-
-        public OrleansTests(ClusterFixture clusterFixture)
+        public OrleansTests()
         {
-            _clusterFixture = clusterFixture;
         }
 
-        [Fact]
+        //[Fact]
         public async Task GetValueAsync_CallGrain_ReturnsExpectedInteger()
         {
             //Arrange
-            var grain = _clusterFixture.ClusterClient.GetGrain<IEchoTestGrain>(Guid.NewGuid().ToString());
+            var grain = ClusterClient.GetGrain<IEchoTestGrain>(Guid.NewGuid().ToString());
             var expectedValue = new Randomizer().Int();
             await grain.SetValueAsync(expectedValue);
 
@@ -35,12 +32,12 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             Assert.Equal(expectedValue, actualValue);
         }
         
-        [Fact]
+        //[Fact]
         public async Task GetCorrelationIdAsync_CallGrain_ReturnsExpectedCorrelationGuid()
         {
             //Arrange
-            var grain = _clusterFixture.ClusterClient.GetGrain<ICorrelationTestGrain>(Guid.NewGuid().ToString());
-            var correlationAccessor = _clusterFixture.ClientServiceProvider.GetRequiredService<ICorrelationContextAccessor>();
+            var grain = ClusterClient.GetGrain<ICorrelationTestGrain>(Guid.NewGuid().ToString());
+            var correlationAccessor = ClientServiceProvider.GetRequiredService<ICorrelationContextAccessor>();
             var expectedValue = correlationAccessor.Value;
 
             //Act 
@@ -50,12 +47,12 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             Assert.Equal(expectedValue, actualValue);
         }
 
-        [Fact]
+        //[Fact]
         public async Task GetIPAddressAsync_CallGrain_ReturnsExpectedIPAddress()
         {
             //Arrange
-            var grain = _clusterFixture.ClusterClient.GetGrain<IRequestContextTestGrain>(Guid.NewGuid().ToString());
-            var requestContextAccessor = _clusterFixture.ClientServiceProvider.GetRequiredService<IRequestContextAccessor>();
+            var grain = ClusterClient.GetGrain<IRequestContextTestGrain>(Guid.NewGuid().ToString());
+            var requestContextAccessor = ClientServiceProvider.GetRequiredService<IRequestContextAccessor>();
             var expectedValue = requestContextAccessor.IPAddress;
 
             //Act 
