@@ -54,7 +54,7 @@ namespace GiG.Core.Messaging.Tests.Unit.Kafka
         public void WithTopic_TopicNameIsMissing_ThrowsArgumentException()
         {
             var exception = Assert.Throws<ArgumentException>(() => new KafkaBuilderOptions<object, object>().WithTopic(""));
-            Assert.Equal("Missing topicName.", exception.Message);
+            Assert.Equal("'topicName' must not be null, empty or whitespace. (Parameter 'topicName')", exception.Message);
         }
         
         [Fact]

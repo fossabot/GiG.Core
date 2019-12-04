@@ -82,7 +82,7 @@ namespace GiG.Core.Messaging.Kafka.Extensions
         public static IKafkaBuilderOptions<TKey, TValue> WithTopic<TKey, TValue>([NotNull] this IKafkaBuilderOptions<TKey, TValue> builderOptions, [NotNull] string topicName)
         {
             if (builderOptions == null) throw new ArgumentNullException(nameof(builderOptions));
-            if (string.IsNullOrWhiteSpace(topicName)) throw new ArgumentException($"Missing {nameof(topicName)}.");
+            if (string.IsNullOrWhiteSpace(topicName)) throw new ArgumentException($"'{nameof(topicName)}' must not be null, empty or whitespace.", nameof(topicName));
             
             builderOptions.KafkaProviderOptions.Topic = topicName;
             return builderOptions;
