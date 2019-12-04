@@ -30,7 +30,7 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders.Extensions
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-            if (string.IsNullOrWhiteSpace(configurationSectionName)) throw new ArgumentException($"Missing {nameof(configurationSectionName)}.");
+            if (string.IsNullOrWhiteSpace(configurationSectionName)) throw new ArgumentException($"'{nameof(configurationSectionName)}' must not be null, empty or whitespace.", nameof(configurationSectionName));
 
             return builder.FromJsonFile(configuration.GetSection(configurationSectionName));
         }

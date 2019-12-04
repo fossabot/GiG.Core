@@ -11,7 +11,7 @@ namespace GiG.Core.Http.Tests.Unit
         public void GetOrAdd_NameIsNull_ThrowsArgumentException()
         {
             var exception = Assert.Throws<ArgumentException>(() => HttpClientFactory.GetOrAdd(""));
-            Assert.Equal("Missing name.", exception.Message);
+            Assert.Equal("'name' must not be null, empty or whitespace. (Parameter 'name')", exception.Message);
         }
     }
 }

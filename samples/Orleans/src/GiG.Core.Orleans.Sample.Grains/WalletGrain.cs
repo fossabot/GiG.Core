@@ -45,7 +45,7 @@ namespace GiG.Core.Orleans.Sample.Grains
         /// <returns></returns>
         public async Task<decimal> DebitAsync(decimal amount)
         {
-            _logger.LogInformation($"Debit {amount}");
+            _logger.LogInformation("Debit {amount}", amount);
             State.Amount -= amount;
 
             var transactionModel = new WalletTransaction()
@@ -73,7 +73,7 @@ namespace GiG.Core.Orleans.Sample.Grains
             //    throw new Exception("Credit Amount must be smaller or equal to the BalanceState.");
             //}
             
-            _logger.LogInformation($"Credit {amount}");
+            _logger.LogInformation("Credit {amount}", amount);
             State.Amount += amount;
 
             var transactionModel = new WalletTransaction()
@@ -123,7 +123,7 @@ namespace GiG.Core.Orleans.Sample.Grains
 
         public Task OnErrorAsync(Exception ex)
         {
-            _logger.LogError($"Stream has error: {ex.Message}");
+            _logger.LogError("Stream has error: {message}", ex.Message);
 
             return Task.CompletedTask;
         }

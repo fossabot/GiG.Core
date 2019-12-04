@@ -20,7 +20,7 @@ namespace GiG.Core.Logging.Tests.Unit.Logging.All
         public void ConfigureLogging_SectionNameIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentException>(() => new HostBuilder().ConfigureLogging(""));
-            Assert.Equal("Missing sectionName.", exception.Message);
+            Assert.Equal("'sectionName' must not be null, empty or whitespace. (Parameter 'sectionName')", exception.Message);
         }
     }
 }

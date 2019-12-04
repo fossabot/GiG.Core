@@ -30,7 +30,7 @@ namespace GiG.Core.Orleans.Sample.Grains
         
         public Task OnNextAsync(WalletTransaction item, StreamSequenceToken token = null)
         {
-            _logger.LogInformation($"User {this.GetPrimaryKey()} Balance updated to {item.NewBalance}");
+            _logger.LogInformation("User {primaryKey()} Balance updated to {newBalance}", this.GetPrimaryKey(), item.NewBalance);
             
             return Task.CompletedTask;
         }
@@ -44,7 +44,7 @@ namespace GiG.Core.Orleans.Sample.Grains
 
         public Task OnErrorAsync(Exception ex)
         {
-            _logger.LogError($"Stream has error: {ex.Message}");
+            _logger.LogError("Stream has error: {message}", ex.Message);
             
             return Task.CompletedTask;
         }

@@ -43,7 +43,7 @@ namespace GiG.Core.DistributedTracing.Telemetry.Abstractions
         /// <param name="tracingExporter">The <see cref="ITracingExporter"/>.</param>
         public TracingConfigurationBuilder RegisterExporter([NotNull] string name, [NotNull] ITracingExporter tracingExporter)
         {
-            if (string.IsNullOrEmpty(name)) throw new ArgumentException(nameof(name));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentException($"'{nameof(name)}' must not be null, empty or whitespace.", nameof(name));
             if (tracingExporter == null) throw new ArgumentNullException(nameof(tracingExporter));
           
             if (!Exporters.TryGetValue(name, out var exporterOptions))

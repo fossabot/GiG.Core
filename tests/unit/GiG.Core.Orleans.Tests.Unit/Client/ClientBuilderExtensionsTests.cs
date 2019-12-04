@@ -54,7 +54,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Client
         public void ConfigureCluster_ClusterNameIsNull_ThrowsArgumentException()
         {
             var exception = Assert.Throws<ArgumentException>(() => new ClientBuilder().ConfigureCluster("", new ConfigurationBuilder().Build()));
-            Assert.Equal("Missing clusterName.", exception.Message);
+            Assert.Equal("'clusterName' must not be null, empty or whitespace. (Parameter 'clusterName')", exception.Message);
         }
 
         [Fact]

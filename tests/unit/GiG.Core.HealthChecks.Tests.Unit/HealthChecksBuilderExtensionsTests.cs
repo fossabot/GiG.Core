@@ -27,12 +27,12 @@ namespace GiG.Core.HealthChecks.Tests.Unit
             var exception = Assert.Throws<ArgumentException>(() => new ServiceCollection()
                 .AddCachedHealthChecks()
                 .AddReadyCheck<CachedUnHealthyCheck>(null));
-            Assert.Equal("Missing name.", exception.Message);
+            Assert.Equal("'name' must not be null, empty or whitespace. (Parameter 'name')", exception.Message);
 
             exception = Assert.Throws<ArgumentException>(() => new ServiceCollection()
                 .AddCachedHealthChecks()
                 .AddReadyCheck(null, null));
-            Assert.Equal("Missing name.", exception.Message);
+            Assert.Equal("'name' must not be null, empty or whitespace. (Parameter 'name')", exception.Message);
         }
 
         [Fact]
@@ -60,12 +60,12 @@ namespace GiG.Core.HealthChecks.Tests.Unit
             var exception = Assert.Throws<ArgumentException>(() => new ServiceCollection()
                         .AddCachedHealthChecks()
                         .AddLiveCheck<CachedUnHealthyCheck>(null));
-            Assert.Equal("Missing name.", exception.Message);
+            Assert.Equal("'name' must not be null, empty or whitespace. (Parameter 'name')", exception.Message);
 
             exception = Assert.Throws<ArgumentException>(() => new ServiceCollection()
                         .AddCachedHealthChecks()
                         .AddLiveCheck(null, null));
-            Assert.Equal("Missing name.", exception.Message);
+            Assert.Equal("'name' must not be null, empty or whitespace. (Parameter 'name')", exception.Message);
         }
 
         [Fact]

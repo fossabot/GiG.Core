@@ -24,7 +24,7 @@ namespace GiG.Core.Web.Tests.Unit.Hosting
         public void UsePathBaseFromConfiguration_ConfigSectionNameIsNull_ThrowsArgumentException()
         {
             var exception = Assert.Throws<ArgumentException>(() => new ApplicationBuilder(null).UsePathBaseFromConfiguration(null));
-            Assert.Equal("Missing configSectionName.", exception.Message);
+            Assert.Equal("'configSectionName' must not be null, empty or whitespace. (Parameter 'configSectionName')", exception.Message);
         }
     }
 }

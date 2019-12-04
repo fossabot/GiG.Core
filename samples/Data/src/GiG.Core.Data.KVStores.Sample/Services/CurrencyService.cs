@@ -26,7 +26,7 @@ namespace GiG.Core.Data.KVStores.Sample.Services
             _logger.LogInformation("Retrieving Currencies...");
            
             var data = _dataRetriever.Get();
-            _logger.LogInformation(String.Join(", ", data.Select(x=>$"Name: {x.Name}").ToArray()));
+            _logger.LogInformation(String.Join(", ", data.Select(x => $"Name: {x.Name}").ToArray()));
 
             return Task.CompletedTask;
         }

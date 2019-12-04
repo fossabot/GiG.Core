@@ -69,9 +69,9 @@ namespace GiG.Core.TokenManager.Implementation
         public async Task<TokenResult> LoginAsync([NotNull] string username, [NotNull] string password, [NotNull] string scopes,
             CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(username)) throw new ArgumentException($"{nameof(username)} is missing.");
-            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException($"{nameof(password)} is missing.");
-            if (string.IsNullOrWhiteSpace(scopes)) throw new ArgumentException($"{nameof(scopes)} is missing.");
+            if (string.IsNullOrWhiteSpace(username)) throw new ArgumentException($"'{nameof(username)}' must not be null, empty or whitespace.", nameof(username));
+            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException($"'{nameof(password)}' must not be null, empty or whitespace.", nameof(password));
+            if (string.IsNullOrWhiteSpace(scopes)) throw new ArgumentException($"'{nameof(scopes)}' must not be null, empty or whitespace.", nameof(scopes));
 
             LogEntry(LogLevel.Debug, Constants.Logs.AccessTokenRetrieving);
 
@@ -98,7 +98,7 @@ namespace GiG.Core.TokenManager.Implementation
         /// <inheritdoc />
         public async Task<TokenResult> RefreshTokenAsync([NotNull] string refreshToken, CancellationToken cancellationToken = default)
         {
-            if (string.IsNullOrWhiteSpace(refreshToken)) throw new ArgumentException($"{nameof(refreshToken)} is missing.");
+            if (string.IsNullOrWhiteSpace(refreshToken)) throw new ArgumentException($"'{nameof(refreshToken)}' must not be null, empty or whitespace.", nameof(refreshToken));
 
             LogEntry(LogLevel.Debug, Constants.Logs.RefreshTokenRetrieving);
 
@@ -128,7 +128,7 @@ namespace GiG.Core.TokenManager.Implementation
             {
                 if (tokenResponse.Error == Constants.Errors.InvalidGrant)
                 {
-                    LogEntry(LogLevel.Information, $"Unauthorized - {tokenResponse.ErrorDescription}");
+                    LogEntry(LogLevel.Information, "Unauthorized - {tokenResponse.ErrorDescription}");
 
                     throw new TokenManagerException(tokenResponse.ErrorDescription);
                 }

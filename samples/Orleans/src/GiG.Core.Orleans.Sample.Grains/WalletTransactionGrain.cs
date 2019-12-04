@@ -40,8 +40,8 @@ namespace GiG.Core.Orleans.Sample.Grains
         {
             State.Add(item);
 
-            _logger.LogInformation($"Correlation Id {_correlationAccessor.Value}");
-            _logger.LogInformation($"New {item.TransactionType.ToString()}. Amount: {item.Amount}. New Balance: {item.NewBalance}");
+            _logger.LogInformation("Correlation Id {correlationId}", _correlationAccessor.Value);
+            _logger.LogInformation("New {transactionType}. Amount: {amount}. New Balance: {newBalance}", item.TransactionType.ToString(), item.Amount, item.NewBalance);
 
             return Task.CompletedTask;
         }
@@ -55,7 +55,7 @@ namespace GiG.Core.Orleans.Sample.Grains
 
         public Task OnErrorAsync(Exception ex)
         {
-            _logger.LogError($"Stream has error: {ex.Message}");
+            _logger.LogError("Stream has error: {errorMessage}", ex.Message);
 
             return Task.CompletedTask;
         }
