@@ -11,7 +11,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
 {
     [Trait("Category", "Integration")]
     public class OrleansClientMembershipProviderTests : AbstractMembershipProviderTests
-    {       
+    {
         public OrleansClientMembershipProviderTests()
         {
             HostBuilder = Host.CreateDefaultBuilder()

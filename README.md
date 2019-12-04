@@ -35,6 +35,7 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Logging.Enrichers.Context](docs/GiG.Core.Logging.Enrichers.Context.md) - Provides an API to register the Context Enricher for Logging when using Serilog.
 - [GiG.Core.Logging.Enrichers.DistributedTracing](docs/GiG.Core.Logging.Enrichers.DistributedTracing.md) - Provides an API to register the Correlation Id Enricher for Logging when using Serilog.
 - [GiG.Core.Logging.Enrichers.MultiTenant](docs/GiG.Core.Logging.Enrichers.MultiTenant.md) - Provides an API to register Tenant Id Enricher for Logging when using Serilog.
+- [GiG.Core.Messaging.Kafka](docs/GiG.Core.Messaging.Kafka.md) - This Library provides an API to register Kafka Producers, Consumers and their dependencies for an application.
 - [GiG.Core.Messaging.MassTransit](docs/GiG.Core.Messaging.MassTransit.md) - Provides an API to register MassTransit related functionality to an application.
 - [GiG.Core.MultiTenant.Web](docs/GiG.Core.MultiTenant.Web.md) - Provides an API to register Multi Tenancy for an application.
 - [GiG.Core.ObjectMapping.AutoMapper](docs/GiG.Core.ObjectMapping.AutoMapper.md) - Provides an API to register an Object Mapper using AutoMapper.
@@ -113,4 +114,10 @@ docker-compose -f docker-compose.yml -f docker-compose-sample-web.yml up --build
 
 ```sh
 docker-compose -f docker-compose.yml -f docker-compose-sample-orleans.yml up --build
+```
+
+### Kafka Messaging
+
+```sh
+docker-compose -f docker-compose.yml -f docker-compose-sample-kafka.yml up --build
 ```

@@ -8,6 +8,7 @@ using GiG.Core.Orleans.Clustering.Kubernetes.Extensions;
 using GiG.Core.Orleans.Silo.Extensions;
 using GiG.Core.Orleans.Tests.Integration.Contracts;
 using GiG.Core.Orleans.Tests.Integration.Grains;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
@@ -16,41 +17,59 @@ using Orleans.Configuration;
 using Orleans.Hosting;
 using System;
 using System.Net.Http;
+using System.Threading.Tasks;
+using Xunit;
 
-namespace GiG.Core.Orleans.Tests.Integration.Fixtures
+namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
 {
-    public abstract class MembershipProviderFixture : IDisposable
+    public abstract class MembershipProviderLifetime : IAsyncLifetime
     {
-        internal readonly IOptions<ConsulOptions> ConsulOptions;
+        private readonly string _membershipProviderSectionName;
 
-        internal readonly IOptions<KubernetesSiloOptions> KubernetesOptions;
+        private readonly string _clusterOptionsSectionName;
 
-        internal readonly IClusterClient ClusterClient;
+        private readonly string _siloOptionsSectionName;
 
-        internal readonly IHttpClientFactory HttpClientFactory;
+        internal IOptions<ConsulOptions> ConsulOptions;
 
-        internal readonly IServiceProvider ClientServiceProvider;
+        internal IOptions<KubernetesSiloOptions> KubernetesOptions;
 
-        private readonly IHost SiloHost;
+        internal IClusterClient ClusterClient;
 
-        internal readonly string SiloName;
+        internal IHttpClientFactory HttpClientFactory;
 
-        public MembershipProviderFixture(string membershipProviderSectionName)
+        internal IServiceProvider ClientServiceProvider;
+
+        internal string ConsulKvStoreBaseAddress;
+
+        private IHost SiloHost;
+
+        internal string SiloName;
+
+        public MembershipProviderLifetime(string membershipProviderSectionName, string clusterOptionsSectionName, string siloOptionsSectionName)
+        {
+            _membershipProviderSectionName = membershipProviderSectionName;
+            _clusterOptionsSectionName = clusterOptionsSectionName;
+            _siloOptionsSectionName = siloOptionsSectionName;
+        }
+
+        public async Task InitializeAsync()
         {
             SiloName = new Faker().Random.String2(5);
 
             SiloHost = Host.CreateDefaultBuilder()
+                .ConfigureAppConfiguration(a => a.AddJsonFile("appsettings.json"))
                 .ConfigureServices((ctx, services) =>
                 {
-                    var membershipProviderSection = ctx.Configuration.GetSection(membershipProviderSectionName);
+                    var membershipProviderSection = ctx.Configuration.GetSection(_membershipProviderSectionName);
                     services.Configure<KubernetesSiloOptions>(membershipProviderSection);
                 })
                 .UseOrleans((ctx, sb) =>
                 {
-                    var membershipProviderSection = ctx.Configuration.GetSection(membershipProviderSectionName);
+                    var membershipProviderSection = ctx.Configuration.GetSection(_membershipProviderSectionName);
 
-                    sb.ConfigureCluster(ctx.Configuration);
-                    sb.ConfigureEndpoints(11112, 30001);
+                    sb.ConfigureCluster(ctx.Configuration.GetSection(_clusterOptionsSectionName));
+                    sb.ConfigureEndpoints(ctx.Configuration.GetSection(_siloOptionsSectionName));
                     sb.UseMembershipProvider(membershipProviderSection, x =>
                     {
                         x.ConfigureConsulClustering(membershipProviderSection);
@@ -61,17 +80,17 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                 })
                 .Build();
 
-            SiloHost.StartAsync().GetAwaiter().GetResult();
+            await SiloHost.StartAsync();
 
             var clientHost = Host.CreateDefaultBuilder()
                 .ConfigureServices((ctx, services) =>
                 {
-                    var membershipProviderSection = ctx.Configuration.GetSection(membershipProviderSectionName);
+                    var membershipProviderSection = ctx.Configuration.GetSection(_membershipProviderSectionName);
 
                     services.AddHttpClient();
                     services.AddDefaultClusterClient(x =>
                     {
-                        x.ConfigureCluster(ctx.Configuration);
+                        x.ConfigureCluster(ctx.Configuration.GetSection(_clusterOptionsSectionName));
                         x.UseMembershipProvider(membershipProviderSection, builder =>
                         {
                             builder.ConfigureConsulClustering(membershipProviderSection);
@@ -91,13 +110,15 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
             ConsulOptions = ClientServiceProvider.GetRequiredService<IOptions<ConsulOptions>>();
 
             KubernetesOptions = SiloHost.Services.GetRequiredService<IOptions<KubernetesSiloOptions>>();
+            
+            var options = ConsulOptions.Value;
+            ConsulKvStoreBaseAddress = $"{options.Address}/v1/kv/{options.KvRootFolder}/";
         }
 
-        public void Dispose()
+        public async Task DisposeAsync()
         {
-            SiloHost?.StopAsync();
-            SiloHost?.WaitForShutdown();
-            ClusterClient?.Close();
+            await SiloHost.StopAsync();
+            await ClusterClient.Close();
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using GiG.Core.Orleans.Tests.Integration.Contracts;
-using GiG.Core.Orleans.Tests.Integration.Fixtures;
+using GiG.Core.Orleans.Tests.Integration.Lifetimes;
 using GiG.Core.Orleans.Tests.Integration.Mocks;
 using Orleans.Runtime;
 using System;
@@ -9,19 +9,12 @@ using Xunit;
 namespace GiG.Core.Orleans.Tests.Integration.Tests
 {
     [Trait("Category", "IntegrationWithDependency")]
-    public class OrleansCorrelationTests : IClassFixture<ClusterFixture>
+    public class OrleansCorrelationTests : CorrelationIdClusterLifetime
     {
-        private readonly ClusterFixture _clusterFixture;
-
-        public OrleansCorrelationTests(ClusterFixture clusterFixture)
-        {
-            _clusterFixture = clusterFixture;
-        }
-
         [Fact]
         public async Task GetCorrelationIdAsync_PublishGrainMessage_ReturnsExpectedCorrelationGuid()
         {        
-            var grain = _clusterFixture.ClusterClient.GetGrain<IPublisherGrain>(123);
+            var grain = ClusterClient.GetGrain<IPublisherGrain>(123);
 
             var correlationId = Guid.NewGuid();
 
@@ -35,7 +28,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
         [Fact]
         public async Task GetCorrelationIdAsync_PublishGrainMessage_CorrelationIdShouldNotBeEmpty()
         {
-            var grain = _clusterFixture.ClusterClient.GetGrain<IPublisherGrain>(123);
+            var grain = ClusterClient.GetGrain<IPublisherGrain>(123);
             
             var result = await grain.PublishMessage(new MockMessage());
 

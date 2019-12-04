@@ -12,22 +12,24 @@ using Orleans;
 using Orleans.Configuration;
 using Orleans.Hosting;
 using System;
+using System.Threading.Tasks;
+using Xunit;
 
-namespace GiG.Core.Orleans.Tests.Integration.Fixtures
+namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
 {
-    public class KubernetesClusterFixture
+    public class KubernetesClusterLifetime : IAsyncLifetime
     {
-        internal readonly IOptions<KubernetesSiloOptions> KubernetesOptions;
+        internal IOptions<KubernetesSiloOptions> KubernetesOptions;
 
-        internal readonly IClusterClient ClusterClient;
+        internal IClusterClient ClusterClient;
 
-        private readonly IHost SiloHost;
+        private IHost SiloHost;
 
-        internal readonly IServiceProvider ClientServiceProvider;
+        internal IServiceProvider ClientServiceProvider;
 
-        internal readonly string SiloName;
+        internal string SiloName;
 
-        public KubernetesClusterFixture()
+        public async Task InitializeAsync()
         {
             SiloName = new Faker().Random.String2(5);
 
@@ -46,8 +48,8 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                 })
                 .Build();
 
-            SiloHost.StartAsync().GetAwaiter().GetResult();
-            
+            await SiloHost.StartAsync();
+
             var clientHost = Host.CreateDefaultBuilder()
                 .ConfigureServices((ctx, services) =>
                 {
@@ -66,6 +68,12 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
             ClusterClient = ClientServiceProvider.GetRequiredService<IClusterClient>();
 
             KubernetesOptions = SiloHost.Services.GetRequiredService<IOptions<KubernetesSiloOptions>>();
+        }
+
+        public async Task DisposeAsync()
+        {
+            await SiloHost?.StopAsync();
+            await ClusterClient?.Close();
         }
     }
 }

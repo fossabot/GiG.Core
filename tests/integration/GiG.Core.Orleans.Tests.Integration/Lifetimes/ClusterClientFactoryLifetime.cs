@@ -11,47 +11,53 @@ using Orleans;
 using Orleans.Configuration;
 using Orleans.Hosting;
 using System;
+using System.Threading.Tasks;
+using Xunit;
 
-namespace GiG.Core.Orleans.Tests.Integration.Fixtures
+namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
 {
-    public class ClusterClientFactoryFixture
+    public abstract class ClusterClientFactoryLifetime :  IAsyncLifetime
     {
-        internal readonly IClusterClientFactory OrleansClusterClientFactory;
+        internal IClusterClientFactory OrleansClusterClientFactory;
 
-        internal readonly IServiceProvider ClientServiceProvider;
+        internal IServiceProvider ClientServiceProvider;
 
-        internal readonly string SiloNameA;
+        internal string SiloNameA;
         
-        internal readonly string SiloNameB;
+        internal string SiloNameB;
 
-        public ClusterClientFactoryFixture()
+        private IHost _siloHostA;
+ 
+        private IHost _siloHostB;
+
+        public async Task InitializeAsync()
         {
             SiloNameA = new Faker().Random.String2(5);
 
-            var siloHostA = Host.CreateDefaultBuilder()
+            _siloHostA = Host.CreateDefaultBuilder()
                 .UseOrleans((ctx, sb) =>
                 {
-                    sb.ConfigureCluster(ctx.Configuration.GetSection("Orleans:ClusterA"));
-                    sb.ConfigureEndpoints(ctx.Configuration.GetSection("Orleans:ClusterA:Silo"));
+                    sb.ConfigureCluster(ctx.Configuration.GetSection("Orleans:ClusterFactoryA"));
+                    sb.ConfigureEndpoints(ctx.Configuration.GetSection("Orleans:ClusterFactoryA:Silo"));
                     sb.ConfigureConsulClustering(ctx.Configuration);
                     sb.AddAssemblies(typeof(ClusterClientFactoryTestGrain));
                     sb.Configure<SiloOptions>(options => options.SiloName = SiloNameA);
                 })
                 .Build();
-            siloHostA.StartAsync().GetAwaiter().GetResult();
+            await _siloHostA.StartAsync();
 
             SiloNameB = new Faker().Random.String2(5);
-            var siloHostB = Host.CreateDefaultBuilder()
+            _siloHostB = Host.CreateDefaultBuilder()
                .UseOrleans((ctx, sb) =>
                {
-                   sb.ConfigureCluster(ctx.Configuration.GetSection("Orleans:ClusterB"));
-                   sb.ConfigureEndpoints(ctx.Configuration.GetSection("Orleans:ClusterB:Silo"));
+                   sb.ConfigureCluster(ctx.Configuration.GetSection("Orleans:ClusterFactoryB"));
+                   sb.ConfigureEndpoints(ctx.Configuration.GetSection("Orleans:ClusterFactoryB:Silo"));
                    sb.ConfigureConsulClustering(ctx.Configuration);
                    sb.AddAssemblies(typeof(ClusterClientFactoryTestGrain));
                    sb.Configure<SiloOptions>(options => options.SiloName = SiloNameB);
                })
                .Build();
-            siloHostB.StartAsync().GetAwaiter().GetResult();
+            await _siloHostB.StartAsync();
 
             var clientHost = Host.CreateDefaultBuilder()
                 .ConfigureServices((ctx, services) =>
@@ -63,7 +69,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                         {
                             return services.CreateClusterClient((builder) =>
                             {
-                                builder.ConfigureCluster(ctx.Configuration.GetSection("Orleans:ClusterA"));
+                                builder.ConfigureCluster(ctx.Configuration.GetSection("Orleans:ClusterFactoryA"));
                                 builder.ConfigureConsulClustering(ctx.Configuration);
                                 builder.AddAssemblies(typeof(IClusterClientFactoryTestGrain));
                             });
@@ -71,7 +77,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                         .AddClusterClient("ClusterB", () => {
                             return services.CreateClusterClient((builder) =>
                             {
-                                builder.ConfigureCluster(ctx.Configuration.GetSection("Orleans:ClusterB"));
+                                builder.ConfigureCluster(ctx.Configuration.GetSection("Orleans:ClusterFactoryB"));
                                 builder.ConfigureConsulClustering(ctx.Configuration);
                                 builder.AddAssemblies(typeof(IClusterClientFactoryTestGrain));
                             });
@@ -81,6 +87,13 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
 
             ClientServiceProvider = clientHost.Services;
             OrleansClusterClientFactory = ClientServiceProvider.GetRequiredService<IClusterClientFactory>();
+        }
+        
+        public async Task DisposeAsync()
+        {
+            await _siloHostA?.StopAsync();
+            await _siloHostB?.StopAsync();
+            OrleansClusterClientFactory?.Dispose();
         }
     }
 }
