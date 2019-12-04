@@ -2,6 +2,9 @@
 using GiG.Core.Messaging.Kafka.Abstractions.Extensions;
 using GiG.Core.Messaging.Kafka.Abstractions.Interfaces;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
+[assembly:InternalsVisibleTo("GiG.Core.Messaging.Kafka")]
 
 namespace GiG.Core.Messaging.Kafka.Abstractions
 {
@@ -35,8 +38,8 @@ namespace GiG.Core.Messaging.Kafka.Abstractions
             {
                 Key = result.Message.Key,
                 Value = result.Message.Value,
-                MessageType = result.Message.Headers.GetHeaderValue(KafkaConstants.MessageTypeHeaderName),
-                MessageId = result.Message.Headers.GetHeaderValue(KafkaConstants.MessageIdHeaderName),
+                MessageType = result.Message.Headers.GetHeaderValue(Constants.MessageTypeHeaderName),
+                MessageId = result.Message.Headers.GetHeaderValue(Constants.MessageIdHeaderName),
                 Headers = result.Message.Headers.AsDictionary(),
                 Offset = result.TopicPartitionOffset
             };

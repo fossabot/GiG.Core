@@ -9,6 +9,7 @@ using JetBrains.Annotations;
 using System;
 using System.Linq;
 using System.Runtime.InteropServices;
+using Constants = GiG.Core.Messaging.Kafka.Abstractions.Constants;
 
 namespace GiG.Core.Messaging.Kafka.Factories
 {
@@ -32,8 +33,8 @@ namespace GiG.Core.Messaging.Kafka.Factories
         {
             if (kafkaMessage == null) throw new ArgumentNullException(nameof(kafkaMessage));
             
-            kafkaMessage.Headers.AddOrUpdate(KafkaConstants.MessageTypeHeaderName, kafkaMessage.MessageType);
-            kafkaMessage.Headers.AddOrUpdate(KafkaConstants.MessageIdHeaderName, kafkaMessage.MessageId);
+            kafkaMessage.Headers.AddOrUpdate(Constants.MessageTypeHeaderName, kafkaMessage.MessageType);
+            kafkaMessage.Headers.AddOrUpdate(Constants.MessageIdHeaderName, kafkaMessage.MessageId);
 
             if (_tenantAccessor != null)
             {
