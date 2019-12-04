@@ -1,9 +1,11 @@
+using Bogus;
 using GiG.Core.Context.Abstractions;
 using GiG.Core.Context.Orleans.Extensions;
 using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.DistributedTracing.Orleans;
 using GiG.Core.DistributedTracing.Orleans.Extensions;
 using GiG.Core.Orleans.Client.Extensions;
+using GiG.Core.Orleans.Silo.Abstractions;
 using GiG.Core.Orleans.Silo.Extensions;
 using GiG.Core.Orleans.Streams.Extensions;
 using GiG.Core.Orleans.Tests.Integration.Contracts;
@@ -15,23 +17,39 @@ using Microsoft.Extensions.Hosting;
 using Orleans;
 using Orleans.Hosting;
 using System;
+using System.Threading.Tasks;
+using Xunit;
 
-namespace GiG.Core.Orleans.Tests.Integration.Fixtures
+namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
 {
-    public class ClusterFixture
+    public abstract class ClusterLifetime : IAsyncLifetime
     {
-        internal readonly IClusterClient ClusterClient;
+        private readonly string _siloSectionName;
+        
+        internal IClusterClient ClusterClient;
 
-        internal readonly IServiceProvider ClientServiceProvider;
+        internal IServiceProvider ClientServiceProvider;
 
-        public ClusterFixture()
+        private IHost _siloHost;
+
+        public ClusterLifetime(string siloSectionName)
         {
-            var siloHost = new HostBuilder()
+            _siloSectionName = siloSectionName;
+        }
+        
+        public async Task InitializeAsync()
+        {
+            var serviceId = new Randomizer().String2(8);
+            var clusterId = new Randomizer().String2(8);
+
+            _siloHost = new HostBuilder()
                 .ConfigureAppConfiguration(a => a.AddJsonFile("appsettings.json"))
                 .UseOrleans((ctx, x) =>
                 {
-                    x.ConfigureEndpoints(ctx.Configuration.GetSection("Orleans:ClusterA:Silo"));
-                    x.UseLocalhostClustering();
+                    var options = ctx.Configuration.GetSection(_siloSectionName).Get<SiloOptions>() ?? new SiloOptions();
+
+                    x.ConfigureEndpoints(ctx.Configuration.GetSection(_siloSectionName));
+                    x.UseLocalhostClustering(options.SiloPort, options.GatewayPort, null, serviceId, clusterId);
                     x.AddAssemblies(typeof(EchoTestGrain));
                     x.AddSimpleMessageStreamProvider("SMSProvider");
                     x.AddMemoryGrainStorage("PubSubStore");
@@ -43,8 +61,10 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                     x.AddStream();
                 })
                 .Build();
+            await _siloHost.StartAsync();
 
-            siloHost.StartAsync().GetAwaiter().GetResult();
+            var config = _siloHost.Services.GetService<IConfiguration>();
+            var options = config.GetSection(_siloSectionName).Get<SiloOptions>() ?? new SiloOptions();
 
             var clientHost = new HostBuilder()
                 .ConfigureServices(services =>
@@ -55,7 +75,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                     {
                         x.AddCorrelationOutgoingFilter(sp);
                         x.AddRequestContextOutgoingFilter(sp);
-                        x.UseLocalhostClustering();
+                        x.UseLocalhostClustering(options.GatewayPort, serviceId, clusterId);
                         x.AddAssemblies(typeof(IEchoTestGrain));
                     });
                 })
@@ -64,6 +84,12 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
             ClientServiceProvider = clientHost.Services;
 
             ClusterClient = ClientServiceProvider.GetRequiredService<IClusterClient>();
+        }
+
+        public async Task DisposeAsync()
+        {
+            await ClusterClient?.Close();
+            await _siloHost?.StopAsync();
         }
     }
 }

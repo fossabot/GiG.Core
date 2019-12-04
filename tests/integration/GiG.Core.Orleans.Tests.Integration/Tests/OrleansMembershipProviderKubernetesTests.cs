@@ -1,17 +1,32 @@
-using GiG.Core.Orleans.Tests.Integration.Fixtures;
 using GiG.Core.Orleans.Tests.Integration.Helpers;
+using GiG.Core.Orleans.Tests.Integration.Lifetimes;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace GiG.Core.Orleans.Tests.Integration.Tests
 {
     [Trait("Category", "IntegrationWithDependency")]
-    public class OrleansMembershipProviderKubernetesTests : AbstractKubernetesTests, IClassFixture<KubernetesMembershipProviderFixture>
+    public class OrleansMembershipProviderKubernetesTests : AbstractKubernetesTests, IAsyncLifetime
     {
-        public OrleansMembershipProviderKubernetesTests(KubernetesMembershipProviderFixture kubernetesClusterFixture)
+        private readonly KubernetesMembershipProviderLifetime _kubernetesClusterLifetime;
+
+        public OrleansMembershipProviderKubernetesTests()
         {
-            SiloName = kubernetesClusterFixture.SiloName;
-            ClusterClient = kubernetesClusterFixture.ClusterClient;
-            KubernetesSiloOptions = kubernetesClusterFixture.KubernetesOptions.Value;
+            _kubernetesClusterLifetime = new KubernetesMembershipProviderLifetime();
+        }
+
+        public async Task InitializeAsync()
+        {
+            await _kubernetesClusterLifetime.InitializeAsync();
+
+            SiloName = _kubernetesClusterLifetime.SiloName;
+            ClusterClient = _kubernetesClusterLifetime.ClusterClient;
+            KubernetesSiloOptions = _kubernetesClusterLifetime.KubernetesOptions.Value;
+        }
+
+        public async Task DisposeAsync()
+        {
+            await _kubernetesClusterLifetime.DisposeAsync();
         }
     }
 }
