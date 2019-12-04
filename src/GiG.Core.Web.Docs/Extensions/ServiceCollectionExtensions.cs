@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
+using System.Configuration;
 using System.IO;
 using System.Reflection;
 
@@ -30,14 +31,14 @@ namespace GiG.Core.Web.Docs.Extensions
 
             var docOptions = configurationSection?.Get<ApiDocsOptions>() ?? new ApiDocsOptions();
             services.Configure<ApiDocsOptions>(options =>
-            {
-                options.Description = docOptions.Description;
-                options.IsEnabled = docOptions.IsEnabled;
-                options.IsForwardedForEnabled = docOptions.IsForwardedForEnabled;
-                options.Title = docOptions.Title;
-                options.Url = docOptions.Url;
-            });
-            
+                {
+                    options.Description = docOptions.Description;
+                    options.IsEnabled = docOptions.IsEnabled;
+                    options.IsForwardedForEnabled = docOptions.IsForwardedForEnabled;
+                    options.Title = docOptions.Title;
+                    options.Url = docOptions.Url;
+                });
+
             if (!docOptions.IsEnabled)
             {
                 return services;

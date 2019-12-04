@@ -25,7 +25,7 @@ namespace GiG.Core.Hosting.Tests.Unit
             var exception = Assert.Throws<ArgumentNullException>(() => new ServiceCollection().ConfigureInfoManagement(configuration: null));
             Assert.Equal("configuration", exception.ParamName);
         }
-
+        
         [Fact]
         public void AddApplicationMetadataAccessor_ServiceCollectionIsNull_ThrowsArgumentNullException()
         {

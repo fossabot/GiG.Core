@@ -31,6 +31,7 @@ namespace GiG.Core.Orleans.Silo.Dashboard.Extensions
                 {
                     options.BasePath = orleansConfiguration.Path;
                     options.Port = orleansConfiguration.Port;
+                    options.HostSelf = orleansConfiguration.HostSelf;    
                 });
             }
 
