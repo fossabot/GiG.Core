@@ -31,7 +31,7 @@ namespace GiG.Core.Messaging.Kafka.Extensions
 
             services.AddUtcDateTimeProvider();
             services.Configure(setupAction);
-            services.TryAddSingleton<IKafkaBuilderOptions<TKey, TValue>>(sp => sp.GetService<IOptions<KafkaBuilderOptions<TKey, TValue>>>().Value);
+            services.TryAddSingleton<IKafkaBuilderOptions<TKey, TValue>>(sp => sp.GetRequiredService<IOptions<KafkaBuilderOptions<TKey, TValue>>>().Value);
             services.TryAddSingleton<IProducerFactory, ProducerFactory>();
             services.TryAddSingleton<IMessageFactory, MessageFactory>();
             services.TryAddSingleton(x => x.GetRequiredService<IProducerFactory>().Create(setupAction));
@@ -54,7 +54,7 @@ namespace GiG.Core.Messaging.Kafka.Extensions
             
             services.AddUtcDateTimeProvider();
             services.Configure(setupAction);
-            services.TryAddSingleton<IKafkaBuilderOptions<TKey, TValue>>(sp => sp.GetService<IOptions<KafkaBuilderOptions<TKey, TValue>>>().Value);
+            services.TryAddSingleton<IKafkaBuilderOptions<TKey, TValue>>(sp => sp.GetRequiredService<IOptions<KafkaBuilderOptions<TKey, TValue>>>().Value);
             services.TryAddSingleton<IConsumerFactory, ConsumerFactory>();
             services.TryAddSingleton(x => x.GetRequiredService<IConsumerFactory>().Create(setupAction));
 
