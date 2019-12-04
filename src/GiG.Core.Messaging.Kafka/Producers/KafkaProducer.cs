@@ -15,6 +15,8 @@ namespace GiG.Core.Messaging.Kafka.Producers
         private readonly IKafkaBuilderOptions<TKey, TValue> _kafkaBuilderOptions;
         private readonly ILogger<KafkaProducer<TKey, TValue>> _logger;
 
+        private bool _isDisposing;
+        
         internal KafkaProducer([NotNull] IKafkaBuilderOptions<TKey, TValue> kafkaBuilderOptions, [NotNull] ILogger<KafkaProducer<TKey, TValue>> logger)
         {
             _kafkaBuilderOptions = kafkaBuilderOptions ?? throw new ArgumentNullException(nameof(kafkaBuilderOptions));
@@ -60,10 +62,17 @@ namespace GiG.Core.Messaging.Kafka.Producers
 
         public void Dispose()
         {
+            if (_isDisposing)
+            {
+                return;
+            }
+
+            _isDisposing = true;
+            
             _logger.LogDebug("Disposing Kafka Producer [{producerName}] ...", _producer.Name);
             
             _producer.Flush(TimeSpan.FromSeconds(5));
-            _producer.Dispose();
+            _producer?.Dispose();
         }
     }
 }

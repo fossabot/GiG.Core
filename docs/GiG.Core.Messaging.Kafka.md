@@ -21,7 +21,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ```
 
-To consume the Producer, inject the KafkaProducer you registered earlier.
+To consume the Producer, inject the KafkaProducer<TKey, TValue>, and pass the message to the ProduceAsync method.
 
 ```csharp
 public class PersonService
@@ -65,13 +65,7 @@ private static IHostBuilder CreateHostBuilder(string[] args) =>
     Host.CreateDefaultBuilder(args)
         .ConfigureServices((hostContext, services) =>
         {
-            var kafkaOptions = hostContext.Configuration
-                .GetSection(KafkaProviderOptions.DefaultSectionName)
-                .Get<KafkaProviderOptions>();
-
-            services
-                .AddOptions()
-                .AddScoped(sp => kafkaOptions);
+            services.Configure<KafkaProviderOptions>(configuration.GetSection(KafkaProviderOptions.DefaultSectionName));
 
             services
                 .AddKafkaConsumer<string, Person>(options => options
@@ -83,64 +77,65 @@ private static IHostBuilder CreateHostBuilder(string[] args) =>
 
 ```
 
-To use the Consumer (as an IHostedService), inject the KafkaConsumer you registered earlier.
+To use the Consumer, inject the IKafkaConsumer<TKey, TValue>, and use the Consume and Commit methods.
 
 ```csharp
-public class ConsumerService : IHostedService
+public class ConsumerService : BackgroundService
 {
     private readonly IKafkaConsumer<string, Person> _consumer;
 
     public ConsumerService(IKafkaConsumer<string, Person> consumer) => _consumer = consumer ?? throw new ArgumentNullException(nameof(consumer));
 
-    public async Task StartAsync(CancellationToken cancellationToken = default) 
+    protected override Task ExecuteAsync(CancellationToken cancellationToken)
     {
-        await Task.Run(() => RunConsumer(cancellationToken), cancellationToken);
+        RunConsumer(cancellationToken);
+        return Task.CompletedTask;
     }
 
-    public Task StopAsync(CancellationToken cancellationToken = default)
+    public override Task StopAsync(CancellationToken cancellationToken)
     {
-        _consumer.Dispose();
-        return null;
+        _kafkaConsumer.Dispose();
+        return Task.CompletedTask;
     }
-    
+
     private void RunConsumer(CancellationToken token = default)
     {
         var count = 0;
 
         try
         {
-            while (true)
+            while (!token.IsCancellationRequested)
             {
                 try
                 {
-                    var message = _consumer.Consume(token);
+                    var message = _kafkaConsumer.Consume(token);
                     HandleMessage(message);
 
                     if (count++ % 10 == 0)
                     {
-                        _consumer.Commit(message);
+                        _kafkaConsumer.Commit(message);
+                        count = 0;
                     }
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine($"Error occurred: { e.Message } ");
+                    _logger.LogError(e, e.Message);
                 }
             }
         }
         catch (OperationCanceledException)
         {
-            _consumer.Dispose();
+            _kafkaConsumer.Dispose();
         }
     }
 
-    private static void HandleMessage(IKafkaMessage<string, Person> message)
+    private void HandleMessage(IKafkaMessage<string, Person> message)
     {
         var serializedValue = JsonConvert.SerializeObject(message.Value);
-        Console.WriteLine($"Consumed message in service \nkey: '{ message.Key }' \nvalue: '{ serializedValue }'");
 
         foreach (var (key, value) in message.Headers)
         {
-            Console.WriteLine($"Key: { key }\tValue: { value }");
+            _logger.LogInformation("Header: {key}\tValue: {value}", key, value);
         }
     }
 }
