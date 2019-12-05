@@ -23,14 +23,14 @@ namespace GiG.Core.ObjectMapping.AutoMapper.Tests.Unit
         public void AddObjectMapper_AssembliesIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentException>(() => new ServiceCollection().AddObjectMapper(assemblies: null));
-            Assert.Equal("'assemblies' must not be null. (Parameter 'assemblies')", exception.Message);
+            Assert.Equal("'assemblies' must not be null or empty. (Parameter 'assemblies')", exception.Message);
         }
 
         [Fact]
         public void AddObjectMapper_ProfileAssemblyMarkerTypesIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentException>(() => new ServiceCollection().AddObjectMapper(profileAssemblyMarkerTypes: null));
-            Assert.Equal("'profileAssemblyMarkerTypes' must not be null. (Parameter 'profileAssemblyMarkerTypes')", exception.Message);
+            Assert.Equal("'profileAssemblyMarkerTypes' must not be null or empty. (Parameter 'profileAssemblyMarkerTypes')", exception.Message);
         }
     }
 }

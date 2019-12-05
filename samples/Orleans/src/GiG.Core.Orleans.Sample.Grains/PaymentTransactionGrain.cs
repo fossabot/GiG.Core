@@ -36,7 +36,7 @@ namespace GiG.Core.Orleans.Sample.Grains
         public Task OnNextAsync(PaymentTransaction item, StreamSequenceToken token = null)
         {
             State.Add(item);
-            _logger.LogInformation("New {transactionType}. Amount: {amount}. CorrelationId : {activityId}", item.TransactionType.ToString(), item.Amount, RequestContext.ActivityId.ToString());
+            _logger.LogInformation("New {transactionType}. Amount: {amount}. CorrelationId : {activityId}", item.TransactionType, item.Amount, RequestContext.ActivityId.ToString());
 
             return Task.CompletedTask;
         }
@@ -50,7 +50,7 @@ namespace GiG.Core.Orleans.Sample.Grains
 
         public Task OnErrorAsync(Exception ex)
         {
-            _logger.LogError("Stream has error: {message}", ex.Message);
+            _logger.LogError(ex, "Stream has error: {message}", ex.Message);
             
             return Task.CompletedTask;
         }

@@ -55,7 +55,7 @@ namespace GiG.Core.Orleans.Sample.Grains
 
         public Task OnErrorAsync(Exception ex)
         {
-            _logger.LogError("Stream has error: {errorMessage}", ex.Message);
+            _logger.LogError(ex, "Stream has error: {errorMessage}", ex.Message);
 
             return Task.CompletedTask;
         }
