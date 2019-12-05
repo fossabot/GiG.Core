@@ -19,6 +19,7 @@ services:
       - sample-db
     ports:
       - "8000:8080"
+      - "7777:7777"
     restart: on-failure
 
   sample-web:

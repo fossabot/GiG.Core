@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\GiG.Core.HealthChecks.AspNetCore\GiG.Core.HealthChecks.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\..\src\GiG.Core.HealthChecks.Orleans.AspNetCore\GiG.Core.HealthChecks.Orleans.AspNetCore.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.HealthChecks\GiG.Core.HealthChecks.csproj" />
   </ItemGroup>
 
