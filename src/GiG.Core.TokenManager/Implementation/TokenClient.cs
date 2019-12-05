@@ -158,7 +158,7 @@ namespace GiG.Core.TokenManager.Implementation
 
         private void LogEntry(LogLevel logLevel, string message, Exception ex = null, string username = null)
         {
-            _logger.Log(logLevel, ex, $"{message} - {{details}}",
+            _logger.Log(logLevel, ex, "{message} - {details}", message,
                 new {_tokenClientOptions.AuthorityUrl, _tokenClientOptions.ClientId, _tokenClientOptions.Scopes, Username = username});
         }
     }
