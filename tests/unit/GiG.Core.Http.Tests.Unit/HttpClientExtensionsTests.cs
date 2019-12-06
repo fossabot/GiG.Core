@@ -48,7 +48,7 @@ namespace GiG.Core.Http.Tests.Unit
         public void FromConfiguration_BaseUriIsNull_ThrowsArgumentException()
         {
             var exception = Assert.Throws<ArgumentException>(() => new HttpClient().FromConfiguration(null, _configuration.GetSection("HttpClient")));
-            Assert.Equal("Missing baseUri.", exception.Message);
+            Assert.Equal("'baseUri' must not be null, empty or whitespace. (Parameter 'baseUri')", exception.Message);
         }
 
         [Fact]
@@ -62,7 +62,7 @@ namespace GiG.Core.Http.Tests.Unit
         public void FromConfiguration_SectionNameIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentException>(() => new HttpClient().FromConfiguration(_configuration, null));
-            Assert.Equal("Missing sectionName.", exception.Message);
+            Assert.Equal("'sectionName' must not be null, empty or whitespace. (Parameter 'sectionName')", exception.Message);
         }
     }
 }

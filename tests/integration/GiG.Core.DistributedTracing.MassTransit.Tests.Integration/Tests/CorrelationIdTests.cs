@@ -31,7 +31,7 @@ namespace GiG.Core.DistributedTracing.MassTransit.Tests.Integration.Tests
             var correlationId = Guid.NewGuid();
 
             // Act
-            await busControl.Publish<MockMessage>(new MockMessage { Id = messageId }, x => x.CorrelationId = correlationId);
+            await busControl.Publish(new MockMessage { Id = messageId }, x => x.CorrelationId = correlationId);
             Thread.Sleep(500);
             
             // Assert
@@ -49,7 +49,7 @@ namespace GiG.Core.DistributedTracing.MassTransit.Tests.Integration.Tests
             var messageId = Guid.NewGuid();
 
             // Act
-            await busControl.Publish<MockMessage>(new MockMessage { Id = messageId });
+            await busControl.Publish(new MockMessage { Id = messageId });
             Thread.Sleep(500);
             
             // Assert
@@ -66,7 +66,7 @@ namespace GiG.Core.DistributedTracing.MassTransit.Tests.Integration.Tests
             _serviceProvider = services.BuildServiceProvider();
         }
 
-        private IServiceCollection AddMessageConsumer(IServiceCollection services)
+        private static void AddMessageConsumer(IServiceCollection services)
         {
             services.AddMassTransit(x =>
             {
@@ -79,11 +79,8 @@ namespace GiG.Core.DistributedTracing.MassTransit.Tests.Integration.Tests
                     {
                         e.Consumer<MockConsumer>(provider);
                     });
-
                 }));
             });
-
-            return services;
         }
     }
 }

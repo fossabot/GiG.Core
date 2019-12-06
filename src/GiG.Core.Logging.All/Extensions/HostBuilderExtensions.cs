@@ -29,7 +29,7 @@ namespace GiG.Core.Logging.All.Extensions
             [NotNull] string sectionName = LoggingOptions.DefaultSectionName)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
-            if (string.IsNullOrWhiteSpace(sectionName)) throw new ArgumentException($"Missing {nameof(sectionName)}.");
+            if (string.IsNullOrWhiteSpace(sectionName)) throw new ArgumentException($"'{nameof(sectionName)}' must not be null, empty or whitespace.", nameof(sectionName));
 
             return builder.ConfigureLogging(x => x
                 .WriteToConsole()

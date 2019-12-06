@@ -1,7 +1,5 @@
 ﻿using GiG.Core.Orleans.Silo.Abstractions;
-using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Orleans;

@@ -64,7 +64,7 @@ namespace GiG.Core.Data.Tests.Unit.KVStores
                     .ConfigureServices((x, y) =>
                         y.AddKVStores<object>().FromJsonFile(x.Configuration, ""))
                     .Build());
-            Assert.Equal("Missing configurationSectionName.", exception.Message);
+            Assert.Equal("'configurationSectionName' must not be null, empty or whitespace. (Parameter 'configurationSectionName')", exception.Message);
         }
 
         [Fact]

@@ -118,7 +118,7 @@ namespace GiG.Core.Orleans.Sample.Tests.Unit.Tests
             Assert.Equal(0, storageStats.Reads);
             Assert.Equal(transactionMessage.Amount, balanceState.Amount);
             _streamFactoryMock.Verify(x => x.GetStream<WalletTransaction>(It.IsAny<IStreamProvider>(), grainId, Constants.WalletTransactionsStreamNamespace), Times.Once);
-            _streamMock.Verify(x => x.PublishAsync(It.Is<WalletTransaction>(x => x.TransactionType == WalletTransactionType.Credit), It.IsAny<StreamSequenceToken>()), Times.Once());
+            _streamMock.Verify(x => x.PublishAsync(It.Is<WalletTransaction>(y => y.TransactionType == WalletTransactionType.Credit), It.IsAny<StreamSequenceToken>()), Times.Once());
             VerifyNoOtherCalls();
         }
 
@@ -146,7 +146,7 @@ namespace GiG.Core.Orleans.Sample.Tests.Unit.Tests
             Assert.Equal(0, storageStats.Reads);
             Assert.Equal(transactionMessage.Amount * -1, balanceState.Amount);
             _streamFactoryMock.Verify(x => x.GetStream<WalletTransaction>(It.IsAny<IStreamProvider>(), grainId, Constants.WalletTransactionsStreamNamespace), Times.Once);
-            _streamMock.Verify(x => x.PublishAsync(It.Is<WalletTransaction>(x => x.TransactionType == WalletTransactionType.Debit), It.IsAny<StreamSequenceToken>()), Times.Once());
+            _streamMock.Verify(x => x.PublishAsync(It.Is<WalletTransaction>(y => y.TransactionType == WalletTransactionType.Debit), It.IsAny<StreamSequenceToken>()), Times.Once());
             VerifyNoOtherCalls();
         }
 

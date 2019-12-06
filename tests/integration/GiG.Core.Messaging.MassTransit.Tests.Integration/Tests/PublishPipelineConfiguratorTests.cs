@@ -30,7 +30,7 @@ namespace GiG.Core.Messaging.MassTransit.Tests.Integration.Tests
             var messageId = Guid.NewGuid();
 
             // Act
-            await busControl.Publish<MockMessage>(new MockMessage { Id = messageId });
+            await busControl.Publish(new MockMessage { Id = messageId });
             Thread.Sleep(500);
             
             // Assert
@@ -46,7 +46,7 @@ namespace GiG.Core.Messaging.MassTransit.Tests.Integration.Tests
             _serviceProvider = services.BuildServiceProvider();
         }
 
-        private IServiceCollection SetupMassTransit(IServiceCollection services)
+        private void SetupMassTransit(IServiceCollection services)
         {
             services.AddMassTransit(x => {
                 x.AddConsumer<MockConsumer>();
@@ -61,8 +61,6 @@ namespace GiG.Core.Messaging.MassTransit.Tests.Integration.Tests
                    })
                 );
             });
-
-            return services;
         }
     }
 }

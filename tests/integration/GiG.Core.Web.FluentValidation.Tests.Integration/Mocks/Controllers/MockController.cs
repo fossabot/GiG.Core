@@ -7,14 +7,7 @@ namespace GiG.Core.Web.FluentValidation.Tests.Integration.Mocks.Controllers
     [ApiController]
     public class MockController : ControllerBase
     {
-        public MockController()
-        {
-        }
-
         [HttpGet]
-        public ActionResult<string> Get()
-        {
-            throw new ValidationException("Test");
-        }
+        public ActionResult<string> Get() => throw new ValidationException("Test");
     }
 }

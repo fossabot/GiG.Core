@@ -23,9 +23,9 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
 
         internal IClusterClient ClusterClient;
 
-        private IHost SiloHost;
+        private IHost _siloHost;
 
-        internal IServiceProvider ClientServiceProvider;
+        private IServiceProvider _clientServiceProvider;
 
         internal string SiloName;
 
@@ -33,7 +33,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
         {
             SiloName = new Faker().Random.String2(5);
 
-            SiloHost = Host.CreateDefaultBuilder()
+            _siloHost = Host.CreateDefaultBuilder()
                 .ConfigureServices((ctx, services) =>
                 {
                     services.Configure<KubernetesSiloOptions>(ctx.Configuration.GetSection("Orleans:KubernetesMembershipProvider"));
@@ -48,7 +48,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                 })
                 .Build();
 
-            await SiloHost.StartAsync();
+            await _siloHost.StartAsync();
 
             var clientHost = Host.CreateDefaultBuilder()
                 .ConfigureServices((ctx, services) =>
@@ -63,16 +63,16 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                 })
                 .Build();
 
-            ClientServiceProvider = clientHost.Services;
+            _clientServiceProvider = clientHost.Services;
 
-            ClusterClient = ClientServiceProvider.GetRequiredService<IClusterClient>();
+            ClusterClient = _clientServiceProvider.GetRequiredService<IClusterClient>();
 
-            KubernetesOptions = SiloHost.Services.GetRequiredService<IOptions<KubernetesSiloOptions>>();
+            KubernetesOptions = _siloHost.Services.GetRequiredService<IOptions<KubernetesSiloOptions>>();
         }
 
         public async Task DisposeAsync()
         {
-            await SiloHost?.StopAsync();
+            await _siloHost?.StopAsync();
             await ClusterClient?.Close();
         }
     }

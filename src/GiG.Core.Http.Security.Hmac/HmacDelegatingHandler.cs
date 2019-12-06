@@ -48,7 +48,7 @@ namespace GiG.Core.Http.Security.Hmac
 
             if(!request.Headers.TryGetValues(Constants.NonceHeader,out var nonceValue) || nonceValue.Count() == 0)
             {
-                throw new ArgumentException($"Missing {Constants.NonceHeader}.");
+                throw new ArgumentException($"'{Constants.NonceHeader}' must not be null or empty.", Constants.NonceHeader);
             }
 
             var hashProvider = _hashProviderFactory.GetHashProvider(options.HashAlgorithm);

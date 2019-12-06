@@ -25,8 +25,8 @@ namespace GiG.Core.Web.Sample.Services
         /// <returns></returns>
         public decimal Deposit(decimal amount)
         {
-            _logger.LogInformation($"Request IP Address {_requestContextAccessor.IPAddress}");
-            _logger.LogInformation($"Deposit {amount}");
+            _logger.LogInformation("Request IP Address {IPAddress}", _requestContextAccessor.IPAddress);
+            _logger.LogInformation("Deposit {amount}", amount);
             Balance += amount;
 
             return Balance;
@@ -39,7 +39,7 @@ namespace GiG.Core.Web.Sample.Services
         /// <returns></returns>
         public decimal Withdraw(decimal amount)
         {
-            _logger.LogInformation($"Withdraw {amount}");
+            _logger.LogInformation("Withdraw {amount}", amount);
             Balance -= amount;
             
             return Balance;

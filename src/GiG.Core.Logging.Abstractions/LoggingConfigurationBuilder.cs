@@ -57,7 +57,7 @@ namespace GiG.Core.Logging.Abstractions
         /// <exception cref="ConfigurationErrorsException">Throws a <see cref="ConfigurationErrorsException"/> when Sink providers are not configured.</exception>
         public LoggingConfigurationBuilder RegisterSink([NotNull] string name, [NotNull] ILoggingSinkProvider sinkProvider)
         {
-            if (string.IsNullOrEmpty(name)) throw new ArgumentException($"Missing {nameof(name)}.");
+            if (string.IsNullOrEmpty(name)) throw new ArgumentException($"'{nameof(name)}' must not be null, empty or whitespace.", nameof(name));
             if (sinkProvider == null) throw new ArgumentNullException(nameof(sinkProvider));
             
             if (_loggingOptions.Sinks == null)

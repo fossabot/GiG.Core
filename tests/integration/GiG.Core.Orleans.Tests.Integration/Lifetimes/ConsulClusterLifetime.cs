@@ -45,7 +45,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                     sb.ConfigureEndpoints(ctx.Configuration.GetSection("Orleans:ConsulSilo"));
                     sb.ConfigureConsulClustering(ctx.Configuration);
                     sb.AddAssemblies(typeof(EchoTestGrain));
-                    sb.Configure<SiloOptions>(options => options.SiloName = SiloName);
+                    sb.Configure<SiloOptions>(siloOptions => siloOptions.SiloName = SiloName);
                 })
                 .Build();
 
