@@ -32,11 +32,8 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
 
         private IHost _siloHost;
 
-        public ClusterLifetime(string siloSectionName)
-        {
-            _siloSectionName = siloSectionName;
-        }
-        
+        protected ClusterLifetime(string siloSectionName) => _siloSectionName = siloSectionName;
+
         public async Task InitializeAsync()
         {
             var serviceId = new Randomizer().String2(8);
@@ -46,10 +43,10 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                 .ConfigureAppConfiguration(a => a.AddJsonFile("appsettings.json"))
                 .UseOrleans((ctx, x) =>
                 {
-                    var options = ctx.Configuration.GetSection(_siloSectionName).Get<SiloOptions>() ?? new SiloOptions();
+                    var siloOptions = ctx.Configuration.GetSection(_siloSectionName).Get<SiloOptions>() ?? new SiloOptions();
 
                     x.ConfigureEndpoints(ctx.Configuration.GetSection(_siloSectionName));
-                    x.UseLocalhostClustering(options.SiloPort, options.GatewayPort, null, serviceId, clusterId);
+                    x.UseLocalhostClustering(siloOptions.SiloPort, siloOptions.GatewayPort, null, serviceId, clusterId);
                     x.AddAssemblies(typeof(EchoTestGrain));
                     x.AddSimpleMessageStreamProvider("SMSProvider");
                     x.AddMemoryGrainStorage("PubSubStore");

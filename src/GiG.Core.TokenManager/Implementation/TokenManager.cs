@@ -138,7 +138,7 @@ namespace GiG.Core.TokenManager.Implementation
             var tokenResult = await GetTokenAsync(forceRefresh);
 
             // Set the token refresh timer
-            var refreshIn = TimeSpan.FromSeconds(tokenResult.ExpiresIn / 2);
+            var refreshIn = TimeSpan.FromSeconds((double) tokenResult.ExpiresIn / 2);
             var period = TimeSpan.FromMinutes(1);
 
             _timer?.Dispose();

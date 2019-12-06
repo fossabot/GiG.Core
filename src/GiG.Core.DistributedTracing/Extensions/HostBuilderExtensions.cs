@@ -1,6 +1,4 @@
-﻿using GiG.Core.DistributedTracing.Abstractions;
-using GiG.Core.DistributedTracing.Telemetry;
-using GiG.Core.DistributedTracing.Telemetry.Abstractions;
+﻿using GiG.Core.DistributedTracing.Telemetry.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

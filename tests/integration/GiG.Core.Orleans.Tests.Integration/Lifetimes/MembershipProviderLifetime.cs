@@ -30,7 +30,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
 
         private readonly string _siloOptionsSectionName;
 
-        internal IOptions<ConsulOptions> ConsulOptions;
+        private IOptions<ConsulOptions> _consulOptions;
 
         internal IOptions<KubernetesSiloOptions> KubernetesOptions;
 
@@ -38,11 +38,11 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
 
         internal IHttpClientFactory HttpClientFactory;
 
-        internal IServiceProvider ClientServiceProvider;
+        private IServiceProvider _clientServiceProvider;
 
         internal string ConsulKvStoreBaseAddress;
 
-        private IHost SiloHost;
+        private IHost _siloHost;
 
         internal string SiloName;
 
@@ -57,7 +57,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
         {
             SiloName = new Faker().Random.String2(5);
 
-            SiloHost = Host.CreateDefaultBuilder()
+            _siloHost = Host.CreateDefaultBuilder()
                 .ConfigureAppConfiguration(a => a.AddJsonFile("appsettings.json"))
                 .ConfigureServices((ctx, services) =>
                 {
@@ -76,11 +76,11 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                         x.ConfigureKubernetesClustering(membershipProviderSection);
                     });
                     sb.AddAssemblies(typeof(EchoTestGrain));
-                    sb.Configure<SiloOptions>(options => options.SiloName = SiloName);
+                    sb.Configure<SiloOptions>(siloOptions => siloOptions.SiloName = SiloName);
                 })
                 .Build();
 
-            await SiloHost.StartAsync();
+            await _siloHost.StartAsync();
 
             var clientHost = Host.CreateDefaultBuilder()
                 .ConfigureServices((ctx, services) =>
@@ -101,23 +101,23 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                 })
                 .Build();
 
-            ClientServiceProvider = clientHost.Services;
+            _clientServiceProvider = clientHost.Services;
 
-            HttpClientFactory = ClientServiceProvider.GetRequiredService<IHttpClientFactory>();
+            HttpClientFactory = _clientServiceProvider.GetRequiredService<IHttpClientFactory>();
 
-            ClusterClient = ClientServiceProvider.GetRequiredService<IClusterClient>();
+            ClusterClient = _clientServiceProvider.GetRequiredService<IClusterClient>();
 
-            ConsulOptions = ClientServiceProvider.GetRequiredService<IOptions<ConsulOptions>>();
+            _consulOptions = _clientServiceProvider.GetRequiredService<IOptions<ConsulOptions>>();
 
-            KubernetesOptions = SiloHost.Services.GetRequiredService<IOptions<KubernetesSiloOptions>>();
+            KubernetesOptions = _siloHost.Services.GetRequiredService<IOptions<KubernetesSiloOptions>>();
             
-            var options = ConsulOptions.Value;
+            var options = _consulOptions.Value;
             ConsulKvStoreBaseAddress = $"{options.Address}/v1/kv/{options.KvRootFolder}/";
         }
 
         public async Task DisposeAsync()
         {
-            await SiloHost.StopAsync();
+            await _siloHost.StopAsync();
             await ClusterClient.Close();
         }
     }

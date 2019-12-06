@@ -13,10 +13,6 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
     [Trait("Category", "Integration")]
     public class OrleansTests : DefaultClusterLifetime
     {
-        public OrleansTests()
-        {
-        }
-
         //[Fact]
         public async Task GetValueAsync_CallGrain_ReturnsExpectedInteger()
         {

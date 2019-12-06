@@ -46,7 +46,7 @@ namespace GiG.Core.TokenManager.Tests.Unit.Tests
         {
             var tokenClient = CreateTokenClient();
             
-            var exception = Assert.ThrowsAsync<ArgumentException>(() => tokenClient.LoginAsync("", "", "", default));
+            var exception = Assert.ThrowsAsync<ArgumentException>(() => tokenClient.LoginAsync("", "", ""));
             Assert.Equal("'username' must not be null, empty or whitespace. (Parameter 'username')", exception.Result.Message);
         }
         
@@ -55,7 +55,7 @@ namespace GiG.Core.TokenManager.Tests.Unit.Tests
         {
             var tokenClient = CreateTokenClient();
             
-            var exception = Assert.ThrowsAsync<ArgumentException>(() => tokenClient.LoginAsync("a", "", "", default));
+            var exception = Assert.ThrowsAsync<ArgumentException>(() => tokenClient.LoginAsync("a", "", ""));
             Assert.Equal("'password' must not be null, empty or whitespace. (Parameter 'password')", exception.Result.Message);
         }
         
@@ -64,7 +64,7 @@ namespace GiG.Core.TokenManager.Tests.Unit.Tests
         {
             var tokenClient = CreateTokenClient();
             
-            var exception = Assert.ThrowsAsync<ArgumentException>(() => tokenClient.LoginAsync("a", "b", "", default));
+            var exception = Assert.ThrowsAsync<ArgumentException>(() => tokenClient.LoginAsync("a", "b", ""));
             Assert.Equal("'scopes' must not be null, empty or whitespace. (Parameter 'scopes')", exception.Result.Message);
         }
         
@@ -73,7 +73,7 @@ namespace GiG.Core.TokenManager.Tests.Unit.Tests
         {
             var tokenClient = CreateTokenClient();
             
-            var exception = Assert.ThrowsAsync<ArgumentException>(() => tokenClient.RefreshTokenAsync("", default));
+            var exception = Assert.ThrowsAsync<ArgumentException>(() => tokenClient.RefreshTokenAsync(""));
             Assert.Equal("'refreshToken' must not be null, empty or whitespace. (Parameter 'refreshToken')", exception.Result.Message);
         }
 

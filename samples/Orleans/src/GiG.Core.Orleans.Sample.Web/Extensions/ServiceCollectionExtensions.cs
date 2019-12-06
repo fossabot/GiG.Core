@@ -21,7 +21,7 @@ namespace GiG.Core.Orleans.Sample.Web.Extensions
             services.AddMassTransit(x =>
             {
                 var contextAccessor = services.BuildServiceProvider().GetService<ICorrelationContextAccessor>();
-                MessageCorrelation.UseCorrelationId<PaymentTransactionRequested>(x => contextAccessor.Value);
+                MessageCorrelation.UseCorrelationId<PaymentTransactionRequested>(c => contextAccessor.Value);
 
                 x.AddBus(provider=> Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {

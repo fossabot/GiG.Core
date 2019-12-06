@@ -12,7 +12,7 @@ namespace GiG.Core.Orleans.Client
     /// </summary>
     public class ClusterClientFactoryBuilder
     {
-        private readonly ClusterClientFactory factory = new ClusterClientFactory();
+        private readonly ClusterClientFactory _factory = new ClusterClientFactory();
 
         /// <summary>
         /// Default Constructor.
@@ -20,7 +20,7 @@ namespace GiG.Core.Orleans.Client
         /// <param name="services">The <see cref="IServiceCollection"/> to register the factory on.</param>     
         public ClusterClientFactoryBuilder(IServiceCollection services)
         {
-            services.TryAddSingleton<IClusterClientFactory>(factory);
+            services.TryAddSingleton<IClusterClientFactory>(_factory);
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace GiG.Core.Orleans.Client
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException($"'{nameof(name)}' must not be null, empty or whitespace.", nameof(name));
             if (clusterClient == null) throw new ArgumentNullException(nameof(clusterClient));
 
-            factory.Add(name, clusterClient);
+            _factory.Add(name, clusterClient);
 
             return this;
         }

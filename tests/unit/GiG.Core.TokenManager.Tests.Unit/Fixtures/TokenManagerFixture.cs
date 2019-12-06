@@ -5,7 +5,6 @@ using GiG.Core.TokenManager.Tests.Unit.Tests;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System.Configuration;
 using System.Net.Http;
 
 namespace GiG.Core.TokenManager.Tests.Unit.Fixtures

@@ -1,8 +1,8 @@
 using GiG.Core.Web.Docs.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Configuration;
 using Xunit;
+
 // ReSharper disable AssignNullToNotNullAttribute
 
 namespace GiG.Core.Web.Tests.Unit.Docs

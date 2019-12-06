@@ -7,7 +7,6 @@ using GiG.Core.Orleans.Tests.Integration.Contracts;
 using GiG.Core.Orleans.Tests.Integration.Grains;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Orleans;
 using Orleans.Configuration;
 using Orleans.Hosting;
 using System;

@@ -6,7 +6,6 @@ using MassTransit;
 using Microsoft.Extensions.Logging;
 using Orleans;
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace GiG.Core.Orleans.Sample.Consumer
