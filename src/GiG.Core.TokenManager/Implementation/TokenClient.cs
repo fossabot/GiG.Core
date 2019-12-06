@@ -6,6 +6,7 @@ using IdentityModel.Client;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading;
@@ -128,7 +129,7 @@ namespace GiG.Core.TokenManager.Implementation
             {
                 if (tokenResponse.Error == Constants.Errors.InvalidGrant)
                 {
-                    LogEntry(LogLevel.Information, "Unauthorized - {tokenResponse.ErrorDescription}");
+                    LogEntry(LogLevel.Information, $"Unauthorized - {tokenResponse.ErrorDescription}");
 
                     throw new TokenManagerException(tokenResponse.ErrorDescription);
                 }
@@ -158,8 +159,15 @@ namespace GiG.Core.TokenManager.Implementation
 
         private void LogEntry(LogLevel logLevel, string message, Exception ex = null, string username = null)
         {
-            _logger.Log(logLevel, ex, "{message} - {details}", message,
-                new {_tokenClientOptions.AuthorityUrl, _tokenClientOptions.ClientId, _tokenClientOptions.Scopes, Username = username});
+            using (_logger.BeginScope(new Dictionary<string, object>{
+                    ["AuthorityUrl"] = _tokenClientOptions.AuthorityUrl,
+                    ["ClientId"] = _tokenClientOptions.ClientId,
+                    ["Scopes"] = _tokenClientOptions.Scopes,
+                    ["Username"] = username
+                }))
+                {
+                    _logger.Log(logLevel, ex, message);
+                }
         }
     }
 }

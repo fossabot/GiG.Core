@@ -5,6 +5,7 @@ using GiG.Core.TokenManager.Exceptions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -148,8 +149,15 @@ namespace GiG.Core.TokenManager.Implementation
 
         private void LogEntry(LogLevel logLevel, string message, Exception ex = null)
         {
-            _logger.Log(logLevel, ex, "{message} - {details}", message,
-                new {_tokenManagerOptions.Client.AuthorityUrl, _tokenManagerOptions.Client.ClientId, _tokenManagerOptions.Client.Scopes, _tokenManagerOptions.Username});
+            using (_logger.BeginScope(new Dictionary<string, object>{
+                ["AuthorityUrl"] = _tokenManagerOptions.Client.AuthorityUrl,
+                ["ClientId"] = _tokenManagerOptions.Client.ClientId,
+                ["Scopes"] = _tokenManagerOptions.Client.Scopes,
+                ["Username"] = _tokenManagerOptions.Username
+            }))
+            {
+                _logger.Log(logLevel, ex, message);
+            }
         }
     }
 }
