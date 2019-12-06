@@ -65,7 +65,7 @@ namespace GiG.Core.HealthChecks.Orleans.AspNetCore.Internal
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex.Message, ex);
+                    _logger.LogError(ex, ex.Message);
                 }
 
                 _logger.LogInformation($"HealthCheck listening on {_healthChecksOptions.Port}");

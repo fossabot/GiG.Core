@@ -3,7 +3,6 @@ using GiG.Core.HealthChecks.Orleans.Internal;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Orleans;
 using System;
 using System.Collections.Generic;
 
