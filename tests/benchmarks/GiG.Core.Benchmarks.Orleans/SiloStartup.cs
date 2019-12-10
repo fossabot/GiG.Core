@@ -1,4 +1,5 @@
-﻿using GiG.Core.Benchmarks.Orleans.Streams.Grains;
+﻿using GiG.Core.Benchmarks.Orleans.StorageProviders;
+using GiG.Core.Benchmarks.Orleans.Streams.Grains;
 using GiG.Core.Orleans.Silo.Dashboard.Extensions;
 using GiG.Core.Orleans.Silo.Extensions;
 using GiG.Core.Orleans.Streams.Kafka.Extensions;
@@ -21,6 +22,7 @@ namespace GiG.Core.Benchmarks.Orleans
                 .AddAssemblies(typeof(ProducerGrain))
                 .AddSimpleMessageStreamProvider(Constants.SMSProviderName)
                 .AddMemoryGrainStorage(Constants.StreamsMemoryStorageName)
+                .AddMemoryGrainStorage(name: StorageProvidersConstants.InMemory)
                 .AddKafka(Constants.KafkaProviderName)
                 .WithOptions(options =>
                 {
