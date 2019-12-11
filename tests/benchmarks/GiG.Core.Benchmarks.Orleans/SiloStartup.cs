@@ -3,8 +3,10 @@ using GiG.Core.Benchmarks.Orleans.Streams.Grains;
 using GiG.Core.Orleans.Silo.Dashboard.Extensions;
 using GiG.Core.Orleans.Silo.Extensions;
 using GiG.Core.Orleans.Streams.Kafka.Extensions;
+using Newtonsoft.Json;
 using Orleans.Hosting;
 using Orleans.Streams.Kafka.Config;
+using System.Data.Common;
 using HostBuilderContext = Microsoft.Extensions.Hosting.HostBuilderContext;
 
 namespace GiG.Core.Benchmarks.Orleans
@@ -23,6 +25,19 @@ namespace GiG.Core.Benchmarks.Orleans
                 .AddSimpleMessageStreamProvider(Constants.SMSProviderName)
                 .AddMemoryGrainStorage(Constants.StreamsMemoryStorageName)
                 .AddMemoryGrainStorage(name: StorageProvidersConstants.InMemory)
+                .UseMongoDBClient(ConnectionStrings.MongoDb)
+                .AddMongoDBGrainStorage(StorageProvidersConstants.MongoDb, options =>
+                {
+                    options.DatabaseName = StorageProvidersConstants.DatabaseName;
+                    options.CreateShardKeyForCosmos = true;
+                    
+                    options.ConfigureJsonSerializerSettings = settings =>
+                    {
+                        settings.NullValueHandling = NullValueHandling.Include;
+                        settings.ObjectCreationHandling = ObjectCreationHandling.Replace;
+                        settings.DefaultValueHandling = DefaultValueHandling.Populate;
+                    };
+                })
                 .AddKafka(Constants.KafkaProviderName)
                 .WithOptions(options =>
                 {

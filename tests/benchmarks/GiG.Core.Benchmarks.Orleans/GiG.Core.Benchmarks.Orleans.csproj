@@ -15,6 +15,7 @@
         <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="3.0.0">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="Orleans.Providers.MongoDB" Version="3.1.1" />
         <PackageReference Include="Orleans.Streams.Kafka" Version="4.0.0-dev-118" />
     </ItemGroup>  
 
