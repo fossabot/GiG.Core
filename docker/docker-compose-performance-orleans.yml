@@ -52,3 +52,9 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
     ports:
       - 27017:27017
+
+  dynamodb:
+    image: amazon/dynamodb-local
+    restart: always
+    ports:
+      - 8000:8000

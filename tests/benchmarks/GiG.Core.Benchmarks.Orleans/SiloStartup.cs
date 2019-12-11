@@ -38,6 +38,11 @@ namespace GiG.Core.Benchmarks.Orleans
                         settings.DefaultValueHandling = DefaultValueHandling.Populate;
                     };
                 })
+                .AddDynamoDBGrainStorage(StorageProvidersConstants.DynamoDb, options =>
+                {
+                    options.UseJson = true;
+                    options.Service = ConnectionStrings.DynamoDb;
+                })
                 .AddKafka(Constants.KafkaProviderName)
                 .WithOptions(options =>
                 {

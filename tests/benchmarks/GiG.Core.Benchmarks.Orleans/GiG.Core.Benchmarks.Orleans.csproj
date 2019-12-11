@@ -10,7 +10,8 @@
         <PackageReference Include="Bogus" Version="28.4.2" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0" />
-        <PackageReference Include="Microsoft.Orleans.Runtime.Abstractions" Version="3.0.0" />
+        <PackageReference Include="Microsoft.Orleans.Runtime.Abstractions" Version="3.0.1" />
+        <PackageReference Include="Microsoft.Orleans.Persistence.DynamoDB" Version="3.0.1" />
         <PackageReference Include="Microsoft.Orleans.Server" Version="3.0.0" />
         <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="3.0.0">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>

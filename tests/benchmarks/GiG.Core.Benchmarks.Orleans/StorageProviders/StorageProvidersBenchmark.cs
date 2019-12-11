@@ -10,6 +10,7 @@ namespace GiG.Core.Benchmarks.Orleans.StorageProviders
     {
         private IMemoryPlayerStateWritesGrain _memoryPlayerStateWritesGrain;
         private IMongoPlayerStateWriterGrain _mongoPlayerStateWriterGrain;
+        private IDynamoPlayerStateWriterGrain _dynamoPlayerStateWriterGrain;
         
         [GlobalSetup]
         public void Setup()
@@ -18,9 +19,10 @@ namespace GiG.Core.Benchmarks.Orleans.StorageProviders
             
             _memoryPlayerStateWritesGrain = clusterClient.GetGrain<IMemoryPlayerStateWritesGrain>(Guid.NewGuid());
             _mongoPlayerStateWriterGrain = clusterClient.GetGrain<IMongoPlayerStateWriterGrain>(Guid.NewGuid());
+            _dynamoPlayerStateWriterGrain = clusterClient.GetGrain<IDynamoPlayerStateWriterGrain>(Guid.NewGuid());
         }
 
-        [Params(1, 10)]
+        [Params(10)]
         public int Counter;
 
         [Benchmark]
@@ -28,6 +30,9 @@ namespace GiG.Core.Benchmarks.Orleans.StorageProviders
 
         [Benchmark]
         public Task MongoDb() => WriteStateAsync(_mongoPlayerStateWriterGrain);
+
+        [Benchmark]
+        public Task DynamoDb() => WriteStateAsync(_dynamoPlayerStateWriterGrain);
 
         private async Task WriteStateAsync(IPlayerStateWriterGrain grain)
         {
