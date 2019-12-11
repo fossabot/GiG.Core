@@ -5,19 +5,20 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Orleans;
 using Orleans.Hosting;
-using System;
 using System.Net.Http;
+using System.Threading.Tasks;
+using Xunit;
 
-namespace GiG.Core.Orleans.Tests.Integration.Fixtures
+namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
 {
-    public class HealthCheckCoHostedFixture : IDisposable
+    public class HealthCheckCoHostedLifetime : IAsyncLifetime
     {
-        internal readonly IHttpClientFactory HttpClientFactory;
+        internal IHttpClientFactory HttpClientFactory;
         internal readonly int Port = 7777;
 
         private IHost _host;
 
-        public HealthCheckCoHostedFixture()
+        public async Task InitializeAsync()
         {
             _host = new HostBuilder()
                 .ConfigureAppConfiguration(a => a.AddJsonFile("appsettings.json"))
@@ -30,14 +31,15 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                .ConfigureServices(MockStartUp.ConfigureOrleansServices)
                .Build();
 
-            _host.StartAsync().GetAwaiter().GetResult();
+            await _host.StartAsync();
             HttpClientFactory = _host.Services.GetService<IHttpClientFactory>();
         }
 
-        public void Dispose()
+        public async Task DisposeAsync()
         {
-            _host?.StopAsync();
-            _host?.WaitForShutdown();
+            await _host?.StopAsync();
+            await _host?.WaitForShutdownAsync();
+            _host.Dispose();
         }
     }
 }

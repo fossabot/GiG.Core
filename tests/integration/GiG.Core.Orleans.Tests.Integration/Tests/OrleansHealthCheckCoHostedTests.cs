@@ -1,18 +1,33 @@
 using GiG.Core.HealthChecks.Abstractions;
-using GiG.Core.Orleans.Tests.Integration.Fixtures;
 using GiG.Core.Orleans.Tests.Integration.Helpers;
+using GiG.Core.Orleans.Tests.Integration.Lifetimes;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace GiG.Core.Orleans.Tests.Integration.Tests
 {
     [Trait("Category", "Integration")]
-    public class OrleansHealthCheckCoHostedTests : AbstractHealthCheckTests ,IClassFixture<HealthCheckCoHostedFixture>
+    public class OrleansHealthCheckCoHostedTests : AbstractHealthCheckTests, IAsyncLifetime
     {
-        public OrleansHealthCheckCoHostedTests(HealthCheckCoHostedFixture healthCheckFixture)
+        private readonly  HealthCheckCoHostedLifetime _healthCheckLifetime;
+
+        public OrleansHealthCheckCoHostedTests()
         {
-            HttpClientFactory = healthCheckFixture.HttpClientFactory;
+            _healthCheckLifetime = new HealthCheckCoHostedLifetime();
+        }
+
+        public async Task InitializeAsync()
+        {
+            await _healthCheckLifetime.InitializeAsync();
+
+            HttpClientFactory = _healthCheckLifetime.HttpClientFactory;
             HealthChecksOptions = new HealthChecksOptions();
-            Port = healthCheckFixture.Port;
+            Port = _healthCheckLifetime.Port;
+        }
+
+        public async Task DisposeAsync()
+        {
+            await _healthCheckLifetime.DisposeAsync();
         }
     }
 }
