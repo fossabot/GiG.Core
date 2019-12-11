@@ -6,6 +6,7 @@
         public const string InMemory = "memory";
         public const string MongoDb = "mongodb";
         public const string DynamoDb = "dynamo";
+        public const string Postgres = "postgres";
         
         //States
         public const string PlayerState = "player";

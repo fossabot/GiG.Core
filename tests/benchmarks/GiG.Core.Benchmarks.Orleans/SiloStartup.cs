@@ -2,6 +2,7 @@
 using GiG.Core.Benchmarks.Orleans.Streams.Grains;
 using GiG.Core.Orleans.Silo.Dashboard.Extensions;
 using GiG.Core.Orleans.Silo.Extensions;
+using GiG.Core.Orleans.Storage.Npgsql.Extensions;
 using GiG.Core.Orleans.Streams.Kafka.Extensions;
 using Newtonsoft.Json;
 using Orleans.Hosting;
@@ -43,6 +44,7 @@ namespace GiG.Core.Benchmarks.Orleans
                     options.UseJson = true;
                     options.Service = ConnectionStrings.DynamoDb;
                 })
+                .AddNpgsqlGrainStorage(StorageProvidersConstants.Postgres, ctx.Configuration)
                 .AddKafka(Constants.KafkaProviderName)
                 .WithOptions(options =>
                 {

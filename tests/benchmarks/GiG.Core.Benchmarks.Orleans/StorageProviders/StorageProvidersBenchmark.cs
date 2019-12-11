@@ -11,6 +11,7 @@ namespace GiG.Core.Benchmarks.Orleans.StorageProviders
         private IMemoryPlayerStateWritesGrain _memoryPlayerStateWritesGrain;
         private IMongoPlayerStateWriterGrain _mongoPlayerStateWriterGrain;
         private IDynamoPlayerStateWriterGrain _dynamoPlayerStateWriterGrain;
+        private IPostgresPlayerStateWriterGrain _postgresPlayerStateWriterGrain;
         
         [GlobalSetup]
         public void Setup()
@@ -20,6 +21,7 @@ namespace GiG.Core.Benchmarks.Orleans.StorageProviders
             _memoryPlayerStateWritesGrain = clusterClient.GetGrain<IMemoryPlayerStateWritesGrain>(Guid.NewGuid());
             _mongoPlayerStateWriterGrain = clusterClient.GetGrain<IMongoPlayerStateWriterGrain>(Guid.NewGuid());
             _dynamoPlayerStateWriterGrain = clusterClient.GetGrain<IDynamoPlayerStateWriterGrain>(Guid.NewGuid());
+            _postgresPlayerStateWriterGrain = clusterClient.GetGrain<IPostgresPlayerStateWriterGrain>(Guid.NewGuid());
         }
 
         [Params(10)]
@@ -33,6 +35,9 @@ namespace GiG.Core.Benchmarks.Orleans.StorageProviders
 
         [Benchmark]
         public Task DynamoDb() => WriteStateAsync(_dynamoPlayerStateWriterGrain);
+
+        [Benchmark]
+        public Task Postgres() => WriteStateAsync(_postgresPlayerStateWriterGrain);
 
         private async Task WriteStateAsync(IPlayerStateWriterGrain grain)
         {
