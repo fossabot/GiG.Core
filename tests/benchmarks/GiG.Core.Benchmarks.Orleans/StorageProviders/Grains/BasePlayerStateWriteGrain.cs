@@ -20,5 +20,13 @@ namespace GiG.Core.Benchmarks.Orleans.StorageProviders.Grains
 
             await _playerState.WriteStateAsync();
         }
+        
+        public async Task<PlayerDetailsState> ReadPlayerDetailAsync()
+        {
+            //this is to refresh the state from the underlying persistence storage.
+            await _playerState.ReadStateAsync();
+            
+            return _playerState.State;
+        }
     }
 }

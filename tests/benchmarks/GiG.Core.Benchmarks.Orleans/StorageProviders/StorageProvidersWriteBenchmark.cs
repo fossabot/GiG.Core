@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GiG.Core.Benchmarks.Orleans.StorageProviders
 {
-    public class StorageProvidersBenchmark
+    public class StorageProvidersWriteBenchmark
     {
         private IMemoryPlayerStateWritesGrain _memoryPlayerStateWritesGrain;
         private IMongoPlayerStateWriterGrain _mongoPlayerStateWriterGrain;
