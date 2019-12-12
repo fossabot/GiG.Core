@@ -1,4 +1,5 @@
 using FluentValidation.AspNetCore;
+using GiG.Core.Authentication.Web.Extensions;
 using GiG.Core.DistributedTracing.Web.Extensions;
 using GiG.Core.HealthChecks.AspNetCore.Extensions;
 using GiG.Core.HealthChecks.Extensions;
@@ -52,6 +53,9 @@ namespace GiG.Core.Web.Sample
 
             // Configure Api Behavior Options
             services.ConfigureApiBehaviorOptions();
+
+            //Authentcation
+            services.ConfigureApiAuthentication(_configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -41,7 +41,7 @@ namespace GiG.Core.Web.Sample.Tests.Component.StepDefinitions
         }
 
         [Given(@"I deposit '(.*)' '(less|more)' than the minimum deposit amount")]
-        [When(@"I deposit '(.*)' '(less|more)' than the minimum deposit amount")]
+        [When(@"I deposit '(.*)' '(less|more)' than the mimimum deposit amount")]
         public void GivenIDepositMoreThanTheMinimumDepositAmount(decimal depositAmount, string lessOrMore)
         {
             if (lessOrMore.Equals("less")) 
