@@ -18,20 +18,20 @@
         /// <summary>
         /// The Url for the Live HealthCheck.
         /// </summary>
-        public string LiveUrl { get; set; } = string.Concat(Constants.CombinedHealthCheckUrl, "/", Constants.LiveTag);
+        public string LiveUrl { get; set; }
 
         /// <summary>
         /// The Url for the Ready HealthCheck.
         /// </summary>
-        public string ReadyUrl { get; set; } = string.Concat(Constants.CombinedHealthCheckUrl, "/", Constants.ReadyTag);
+        public string ReadyUrl { get; set; }
 
         /// <summary>
         /// Constructor.
         /// </summary>
         public HealthChecksOptions()
         {
-            LiveUrl = string.Concat(Constants.CombinedHealthCheckUrl, "/", Constants.LiveTag);
-            ReadyUrl = string.Concat(Constants.CombinedHealthCheckUrl, "/", Constants.ReadyTag);
+            LiveUrl = $"{Constants.CombinedHealthCheckUrl} / {Constants.LiveTag}";
+            ReadyUrl = $"{Constants.CombinedHealthCheckUrl} / {Constants.ReadyTag}";
         }
     }
 }
