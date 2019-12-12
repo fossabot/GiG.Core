@@ -1,0 +1,134 @@
+<Project TreatAsLocalProperty="
+         ArgsFile;
+         CodeGeneratorEnabled;
+         CoreAssembly;
+         DotNetHost;
+         GeneratorAssembly;
+         MSBuildIsCore;
+         OutputFileName;
+         TargetIsCore;
+         TaskAssembly;
+         TargetFramework">
+
+  <PropertyGroup>
+    <CodeGeneratorTargetFramework>netcoreapp3.1</CodeGeneratorTargetFramework>
+    <DotNetHost Condition="'$(DotNetFromPath)' == 'true'">dotnet</DotNetHost>
+    <CoreAssembly Condition="'$(CodeGenCoreAssembly)' != ''">$(CodeGenCoreAssembly)</CoreAssembly>
+    <CoreAssembly Condition="'$(CoreAssembly)' == ''">$(MSBuildThisFileDirectory)..\tasks\$(CodeGeneratorTargetFramework)\GiG.Core.Messaging.Avro.Schema.Abstractions.Generator.MSBuild.dll</CoreAssembly>
+
+    <!-- Specify the assembly containing the MSBuild tasks. -->
+    <MSBuildIsCore Condition="'$(MSBuildRuntimeType)' == 'Core' or '$(OS)' != 'Windows_NT'">true</MSBuildIsCore>
+    <TaskAssembly Condition="'$(CodeGenTasksAssembly)' != ''">$(CodeGenTasksAssembly)</TaskAssembly>
+    <TaskAssembly Condition="'$(TaskAssembly)' == '' and '$(MSBuildIsCore)' == 'true'">$(MSBuildThisFileDirectory)..\tasks\$(CodeGeneratorTargetFramework)\GiG.Core.Messaging.Avro.Schema.Abstractions.Generator.MSBuild.Tasks.dll</TaskAssembly>
+
+    <!-- When the MSBuild host is full-framework, we defer to PATH for dotnet -->
+    <DotNetHost Condition="'$(MSBuildIsCore)' != 'true'">dotnet</DotNetHost>
+    <DotNetHost Condition="'$(DotNetHost)' != ''">$(DotNetHost)</DotNetHost>
+
+    <!-- Specify the assembly containing the code generator. -->
+    <GeneratorAssembly Condition="'$(GeneratorAssembly)' == ''">$(CoreAssembly)</GeneratorAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <CodeGenDirectory Condition="'$([System.IO.Path]::IsPathRooted($(IntermediateOutputPath)))' == 'true'">$(IntermediateOutputPath)</CodeGenDirectory>
+    <CodeGenDirectory Condition="'$(CodeGenDirectory)' == ''">$(ProjectDir)$(IntermediateOutputPath)</CodeGenDirectory>
+    <OutputFileName>$(CodeGenDirectory)$(TargetName).avro.g.cs</OutputFileName>
+    <CodeGeneratorEnabled Condition=" '$(DesignTimeBuild)' != 'true'">true</CodeGeneratorEnabled>
+    <ArgsFile>$(CodeGenDirectory)$(TargetName).avro.g.args.txt</ArgsFile>
+    <GenerateCodeDependsOn>$(GenerateCodeDependsOn);ResolveReferences;GenerateInputCache</GenerateCodeDependsOn>
+  </PropertyGroup>
+
+  <UsingTask
+    TaskName="GiG.Core.Messaging.Avro.Schema.Abstractions.Generator.MSBuild.Tasks.GetDotNetHost"
+    AssemblyFile="$(TaskAssembly)"
+    Condition="'$(CodeGeneratorEnabled)' == 'true' and '$(DotNetHost)' == '' and '$(MSBuildIsCore)' == 'true'" />
+
+  <!--
+    Input to the code generator should not include its output.
+  -->
+  <ItemGroup>
+    <CodeGenInputs Include="@(Compile);@(ReferencePath)" />
+    <CodeGenInputs Remove="*.Avro.cs" />
+  </ItemGroup>
+
+  <!-- Properties used to support correct, incremental builds. -->
+  <PropertyGroup>
+    <!--
+      Since the code generator also affects the state of @(Compile) and hence the compile inputs file,
+      we maintain a separate cache with our own files removed. Otherwise there would be a circular dependency
+      whereby the cache updates and triggers the code generator, which triggers a cache update.
+    -->
+    <CodeGenInputCache>$(IntermediateOutputPath)$(MSBuildProjectFile).CodeGenInputs.cache</CodeGenInputCache>
+  </PropertyGroup>
+
+  <!--
+    Update the file which captures the total set of all inputs to the code generator.
+    This is based on the _GenerateCompileDependencyCache target from the .NET project system.
+  -->
+  <Target Name="GenerateInputCache"
+          DependsOnTargets="ResolveAssemblyReferences"
+          BeforeTargets="GenerateCode">
+
+    <Hash ItemsToHash="@(CodeGenInputs)">
+      <Output TaskParameter="HashResult" PropertyName="UpdatedInputCacheContents" />
+    </Hash>
+
+    <WriteLinesToFile
+      Overwrite="true"
+      File="$(CodeGenInputCache)"
+      Lines="$(UpdatedInputCacheContents)"
+      WriteOnlyWhenDifferent="True" />
+
+    <ItemGroup>
+      <FileWrites Include="$(CodeGenInputCache)" />
+    </ItemGroup>
+
+  </Target>
+
+  <Target Name="GenerateCode"
+          DependsOnTargets="$(GenerateCodeDependsOn)"
+          AfterTargets="GenerateInputCache"
+          BeforeTargets="AssignTargetPaths"
+          Condition="'$(CodeGeneratorEnabled)' == 'true'"
+          Inputs="@(CodeGenInputs);$(CodeGenInputCache)"
+          Outputs="$(OutputFileName)">
+
+    <ItemGroup>
+      <CodeGenArgs Include="WaitForDebugger" Condition="'$(CodeGenWaitForDebugger)' != ''" />
+      <CodeGenArgs Include="ProjectPath:$(MSBuildProjectFullPath)"/>
+      <CodeGenArgs Include="ProjectGuid:$(ProjectGuid)"/>
+      <CodeGenArgs Include="AssemblyName:$(AssemblyName)"/>
+      <CodeGenArgs Include="OutputType:$(OutputType)"/>
+      <CodeGenArgs Include="TargetPath:$(TargetPath)"/>
+      <CodeGenArgs Include="@(Compile -> 'Compile:%(FullPath)')"/>
+      <CodeGenArgs Include="@(ReferencePath -> 'Reference:%(FullPath)')"/>
+      <CodeGenArgs Include="DefineConstants:$(DefineConstants.Replace(';',','))"/>
+    </ItemGroup>
+
+    <Message Text="[Avro.CodeGenerator] - CodeGen executable=$(GeneratorAssembly)" Importance="Low" />
+    <Message Text="[Avro.CodeGenerator] - CodeGen arguments=@(CodeGenArgs -> '%(Identity)')" Importance="Low"/>
+    <Message Text="[Avro.CodeGenerator] - CodeGen arguments file=$(ArgsFile)" Importance="Low"/>
+    <WriteLinesToFile Overwrite="true" File="$(ArgsFile)" Lines="@(CodeGenArgs)"/>
+
+    <GiG.Core.Messaging.Avro.Schema.Abstractions.Generator.MSBuild.Tasks.GetDotNetHost Condition="'$(DotNetHost)' == '' and '$(MSBuildIsCore)' == 'true' ">
+      <Output TaskParameter="DotNetHost" PropertyName="DotNetHost" />
+    </GiG.Core.Messaging.Avro.Schema.Abstractions.Generator.MSBuild.Tasks.GetDotNetHost>
+
+    <Exec Command="&quot;$(DotNetHost)&quot; &quot;$(GeneratorAssembly)&quot; SourceToSource &quot;$(ArgsFile)&quot;" Outputs="$(OutputFileName)" />
+
+    <ItemGroup>
+      <Compile Include="**/*.Avro.cs" Exclude="@(Compile)" />
+      <FileWrites Include="**/*.Avro.cs" Exclude="@(Compile)" />
+    </ItemGroup>
+
+  </Target>
+
+  <Target Name="AvroIncludeCodegenOutputDuringDesignTimeBuild"
+          BeforeTargets="AssignTargetPaths"
+          Condition="'$(CodeGeneratorEnabled)' != 'true'">
+    <ItemGroup>
+      <Compile Include="**/*.Avro.cs" Exclude="@(Compile)" />
+      <FileWrites Include="**/*.Avro.cs" Exclude="@(Compile)" />
+    </ItemGroup>
+  </Target>
+</Project>

@@ -433,6 +433,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.HealthChecks.Orlea
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.HealthChecks.Orleans.AspNetCore", "src\GiG.Core.HealthChecks.Orleans.AspNetCore\GiG.Core.HealthChecks.Orleans.AspNetCore.csproj", "{1DF02E3B-8455-48C9-AE4C-181EC1DD4193}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Messaging.Avro.Schema.Abstractions", "src\GiG.Core.Messaging.Avro.Schema.Abstractions\GiG.Core.Messaging.Avro.Schema.Abstractions.csproj", "{72B552C4-3373-4916-A7C2-3D0F8A273B81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Messaging.Avro.Schema.Generator", "src\GiG.Core.Messaging.Avro.Schema.Generator\GiG.Core.Messaging.Avro.Schema.Generator.csproj", "{31E7E6AF-4593-4260-A38E-4BA8C10DCAAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Messaging.Avro.Schema.Generator.MSBuild", "src\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.csproj", "{C5490DE7-B374-4E40-958D-F2E824239B52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.Tasks", "src\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.Tasks\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.Tasks.csproj", "{B6161DCD-CC53-41DE-A173-928A61F45477}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -951,6 +959,22 @@ Global
 		{1DF02E3B-8455-48C9-AE4C-181EC1DD4193}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DF02E3B-8455-48C9-AE4C-181EC1DD4193}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DF02E3B-8455-48C9-AE4C-181EC1DD4193}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72B552C4-3373-4916-A7C2-3D0F8A273B81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72B552C4-3373-4916-A7C2-3D0F8A273B81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72B552C4-3373-4916-A7C2-3D0F8A273B81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72B552C4-3373-4916-A7C2-3D0F8A273B81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31E7E6AF-4593-4260-A38E-4BA8C10DCAAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31E7E6AF-4593-4260-A38E-4BA8C10DCAAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31E7E6AF-4593-4260-A38E-4BA8C10DCAAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31E7E6AF-4593-4260-A38E-4BA8C10DCAAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5490DE7-B374-4E40-958D-F2E824239B52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5490DE7-B374-4E40-958D-F2E824239B52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5490DE7-B374-4E40-958D-F2E824239B52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5490DE7-B374-4E40-958D-F2E824239B52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6161DCD-CC53-41DE-A173-928A61F45477}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6161DCD-CC53-41DE-A173-928A61F45477}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6161DCD-CC53-41DE-A173-928A61F45477}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6161DCD-CC53-41DE-A173-928A61F45477}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1128,6 +1152,10 @@ Global
 		{47A3F03D-6409-4B6D-8478-3B3A980A8C58} = {87D84AC6-26A2-4D84-A346-7DA8352F9FE3}
 		{EBE23EFA-F27D-4676-A7FA-3473B38F8905} = {64FBDA2C-D499-4EE1-AAA9-DFF1BCF8C465}
 		{1DF02E3B-8455-48C9-AE4C-181EC1DD4193} = {64FBDA2C-D499-4EE1-AAA9-DFF1BCF8C465}
+		{72B552C4-3373-4916-A7C2-3D0F8A273B81} = {1577B553-2909-4844-A422-8782E2AA0F83}
+		{31E7E6AF-4593-4260-A38E-4BA8C10DCAAE} = {1577B553-2909-4844-A422-8782E2AA0F83}
+		{C5490DE7-B374-4E40-958D-F2E824239B52} = {1577B553-2909-4844-A422-8782E2AA0F83}
+		{B6161DCD-CC53-41DE-A173-928A61F45477} = {1577B553-2909-4844-A422-8782E2AA0F83}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}
