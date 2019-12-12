@@ -4,7 +4,7 @@ using GiG.Core.Benchmarks.Orleans.StorageProviders.Contracts;
 using System;
 using System.Threading.Tasks;
 
-namespace GiG.Core.Benchmarks.Orleans.StorageProviders
+namespace GiG.Core.Benchmarks.Orleans.StorageProviders.Benchmarks
 {
     public class StorageProvidersWriteBenchmark
     {
@@ -12,6 +12,7 @@ namespace GiG.Core.Benchmarks.Orleans.StorageProviders
         private IMongoPlayerStateWriterGrain _mongoPlayerStateWriterGrain;
         private IDynamoPlayerStateWriterGrain _dynamoPlayerStateWriterGrain;
         private IPostgresPlayerStateWriterGrain _postgresPlayerStateWriterGrain;
+        private IRedisPlayerStateWriterGrain _redisPlayerStateWriterGrain;
         
         [GlobalSetup]
         public void Setup()
@@ -22,6 +23,7 @@ namespace GiG.Core.Benchmarks.Orleans.StorageProviders
             _mongoPlayerStateWriterGrain = clusterClient.GetGrain<IMongoPlayerStateWriterGrain>(Guid.NewGuid());
             _dynamoPlayerStateWriterGrain = clusterClient.GetGrain<IDynamoPlayerStateWriterGrain>(Guid.NewGuid());
             _postgresPlayerStateWriterGrain = clusterClient.GetGrain<IPostgresPlayerStateWriterGrain>(Guid.NewGuid());
+            _redisPlayerStateWriterGrain = clusterClient.GetGrain<IRedisPlayerStateWriterGrain>(Guid.NewGuid());
         }
 
         [Params(10)]
@@ -38,6 +40,9 @@ namespace GiG.Core.Benchmarks.Orleans.StorageProviders
 
         [Benchmark]
         public Task Postgres() => WriteStateAsync(_postgresPlayerStateWriterGrain);
+
+        [Benchmark]
+        public Task Redis() => WriteStateAsync(_redisPlayerStateWriterGrain);
 
         private async Task WriteStateAsync(IPlayerStateWriterGrain grain)
         {

@@ -7,6 +7,7 @@
         public const string MongoDb = "mongodb";
         public const string DynamoDb = "dynamo";
         public const string Postgres = "postgres";
+        public const string Redis = "redis";
         
         //States
         public const string PlayerState = "player";
@@ -19,5 +20,6 @@
     {
         public static string MongoDb = "mongodb://root:example@localhost:27017";
         public static string DynamoDb = "http://localhost:8000";
+        public static string Redis = "localhost";
     }
 }

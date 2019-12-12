@@ -7,7 +7,7 @@ using GiG.Core.Orleans.Streams.Kafka.Extensions;
 using Newtonsoft.Json;
 using Orleans.Hosting;
 using Orleans.Streams.Kafka.Config;
-using System.Data.Common;
+using System.Collections.Generic;
 using HostBuilderContext = Microsoft.Extensions.Hosting.HostBuilderContext;
 
 namespace GiG.Core.Benchmarks.Orleans
@@ -54,7 +54,15 @@ namespace GiG.Core.Benchmarks.Orleans
                     options.AddTopic(Constants.MessageNamespace);
                 })
                 .AddJson()
-                .Build();
+                .Build()
+                .AddRedisGrainStorage(StorageProvidersConstants.Redis)
+                .Build(config => config.Configure(opts =>
+                    {
+                        opts.Servers = new List<string> {ConnectionStrings.Redis};
+                        opts.ClientName = StorageProvidersConstants.Redis;
+                        opts.KeyPrefix = "OrleansGrainStorage";
+                    })
+                );
         }
     }
 }
