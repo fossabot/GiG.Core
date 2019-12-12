@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace GiG.Core.Benchmarks.Orleans.StorageProviders.Benchmarks
 {
-    public class StorageProvidersWriteBenchmark
+    [CsvExporter]
+    public class SingleGrainReadsBenchmark
     {
         private IMemoryPlayerStateWritesGrain _memoryPlayerStateWritesGrain;
         private IMongoPlayerStateWriterGrain _mongoPlayerStateWriterGrain;
@@ -24,34 +25,49 @@ namespace GiG.Core.Benchmarks.Orleans.StorageProviders.Benchmarks
             _dynamoPlayerStateWriterGrain = clusterClient.GetGrain<IDynamoPlayerStateWriterGrain>(Guid.NewGuid());
             _postgresPlayerStateWriterGrain = clusterClient.GetGrain<IPostgresPlayerStateWriterGrain>(Guid.NewGuid());
             _redisPlayerStateWriterGrain = clusterClient.GetGrain<IRedisPlayerStateWriterGrain>(Guid.NewGuid());
-        }
 
-        [Params(10)]
+            WritePlayerDetailsAsync().GetAwaiter().GetResult();
+        }
+        
+        [Params(10, 100, 1000, 10_000)]
         public int Counter;
 
         [Benchmark]
-        public Task Memory() => WriteStateAsync(_memoryPlayerStateWritesGrain);
+        public Task Memory() => ReadPlayerDetailAsync(_memoryPlayerStateWritesGrain);
 
         [Benchmark]
-        public Task MongoDb() => WriteStateAsync(_mongoPlayerStateWriterGrain);
+        public Task MongoDb() => ReadPlayerDetailAsync(_mongoPlayerStateWriterGrain);
 
         [Benchmark]
-        public Task DynamoDb() => WriteStateAsync(_dynamoPlayerStateWriterGrain);
+        public Task DynamoDb() => ReadPlayerDetailAsync(_dynamoPlayerStateWriterGrain);
 
         [Benchmark]
-        public Task Postgres() => WriteStateAsync(_postgresPlayerStateWriterGrain);
+        public Task Postgres() => ReadPlayerDetailAsync(_postgresPlayerStateWriterGrain);
 
         [Benchmark]
-        public Task Redis() => WriteStateAsync(_redisPlayerStateWriterGrain);
-
-        private async Task WriteStateAsync(IPlayerStateWriterGrain grain)
+        public Task Redis() => ReadPlayerDetailAsync(_redisPlayerStateWriterGrain);
+        
+        private async Task ReadPlayerDetailAsync(IPlayerStateWriterGrain grain)
         {
-            var ranomizer = new Faker().Random;
-            
             for (var i = 0; i < Counter; i++)
             {
-                await grain.WritePlayerDetailAsync(ranomizer.String2(10), ranomizer.String2(12));
+                await grain.ReadPlayerDetailAsync();    
             }
         }
+        
+        private async Task WritePlayerDetailsAsync()
+        {
+            var ranomizer = new Faker().Random;
+
+            var firstName = ranomizer.String2(10);
+            var lastName = ranomizer.String2(12);
+
+            await _memoryPlayerStateWritesGrain.WritePlayerDetailAsync(firstName, lastName);
+            await _mongoPlayerStateWriterGrain.WritePlayerDetailAsync(firstName, lastName);
+            await _dynamoPlayerStateWriterGrain.WritePlayerDetailAsync(firstName, lastName);
+            await _postgresPlayerStateWriterGrain.WritePlayerDetailAsync(firstName, lastName);
+            await _redisPlayerStateWriterGrain.WritePlayerDetailAsync(firstName, lastName);
+        }
+        
     }
 }
