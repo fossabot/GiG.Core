@@ -33,17 +33,17 @@ namespace GiG.Core.Web.Docs.Extensions
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            var docOptions = configurationSection?.Get<ApiDocsOptions>() ?? new ApiDocsOptions();
+            var apiDocsOptions = configurationSection?.Get<ApiDocsOptions>() ?? new ApiDocsOptions();
             services.Configure<ApiDocsOptions>(options =>
                 {
-                    options.Description = docOptions.Description;
-                    options.IsEnabled = docOptions.IsEnabled;
-                    options.IsForwardedForEnabled = docOptions.IsForwardedForEnabled;
-                    options.Title = docOptions.Title;
-                    options.Url = docOptions.Url;
+                    options.Description = apiDocsOptions.Description;
+                    options.IsEnabled = apiDocsOptions.IsEnabled;
+                    options.IsForwardedForEnabled = apiDocsOptions.IsForwardedForEnabled;
+                    options.Title = apiDocsOptions.Title;
+                    options.Url = apiDocsOptions.Url;
                 });
 
-            if (!docOptions.IsEnabled)
+            if (!apiDocsOptions.IsEnabled)
             {
                 return services;
             }
@@ -72,7 +72,7 @@ namespace GiG.Core.Web.Docs.Extensions
 
                     c.IncludeXmlComments();
                     c.IncludeFullNameCustomSchemaId();
-                    c.IncludeForwardedForFilter(docOptions.IsForwardedForEnabled);
+                    c.IncludeForwardedForFilter(apiDocsOptions.IsForwardedForEnabled);
                     c.OperationFilter<DeprecatedOperationFilter>();
                     
                     c.IncludeAuthentication(serviceProvider);
