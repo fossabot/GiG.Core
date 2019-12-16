@@ -61,6 +61,7 @@ namespace GiG.Core.Benchmarks.Orleans
                         opts.Servers = new List<string> {ConnectionStrings.Redis};
                         opts.ClientName = StorageProvidersConstants.Redis;
                         opts.KeyPrefix = "OrleansGrainStorage";
+                        opts.HumanReadableSerialization = true;
                     })
                 );
         }
