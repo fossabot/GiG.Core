@@ -1,5 +1,5 @@
 ﻿using GiG.Core.Authentication.Abstractions;
-using GiG.Core.Authentication.Web.Abstractions;
+using GiG.Core.Web.Authentication.OAuth.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,17 +13,17 @@ namespace GiG.Core.Authentication.Web.Extensions
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Registers a configuration instance which <see cref="ApiAuthenticationOptions" /> will bind against.
+        /// Registers a configuration instance which <see cref="OAuthAuthenticationOptions" /> will bind against.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
         /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
-        public static IServiceCollection ConfigureApiAuthentication([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection)
+        public static IServiceCollection ConfigureOAuthAuthentication([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            var apiAuthentiicationOptions = configurationSection?.Get<ApiAuthenticationOptions>() ?? new ApiAuthenticationOptions();
-            services.Configure<ApiAuthenticationOptions>(configureOptions =>
+            var apiAuthentiicationOptions = configurationSection?.Get<OAuthAuthenticationOptions>() ?? new OAuthAuthenticationOptions();
+            services.Configure<OAuthAuthenticationOptions>(configureOptions =>
             {
                 configureOptions.IsEnabled = apiAuthentiicationOptions.IsEnabled;
                 configureOptions.Authority = apiAuthentiicationOptions.Authority;
@@ -40,31 +40,31 @@ namespace GiG.Core.Authentication.Web.Extensions
                 return services;
             }
 
-            return services.ConfigureApiAuthentication(apiAuthentiicationOptions);
+            return services.AddOAuthAuthentication(apiAuthentiicationOptions);
         }
 
         /// <summary>
-        /// Registers a configuration instance which <see cref="ApiAuthenticationOptions" /> will bind against.
+        /// Registers a configuration instance which <see cref="OAuthAuthenticationOptions" /> will bind against.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
         /// <param name="configuration">The <see cref="IConfiguration" />.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
-        public static IServiceCollection ConfigureApiAuthentication([NotNull] this IServiceCollection services, [NotNull] IConfiguration configuration)
+        public static IServiceCollection ConfigureOAuthAuthentication([NotNull] this IServiceCollection services, [NotNull] IConfiguration configuration)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            return services.ConfigureApiAuthentication(configuration.GetSection(ApiAuthenticationOptions.DefaultSectionName));
+            return services.ConfigureOAuthAuthentication(configuration.GetSection(OAuthAuthenticationOptions.DefaultSectionName));
         }
 
         /// <summary>
-        /// Registers a configuration instance which <see cref="ApiAuthenticationOptions" /> will bind against.
+        /// Registers a configuration instance which <see cref="OAuthAuthenticationOptions" /> will bind against.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
-        /// <param name="options">The <see cref="ApiAuthenticationOptions" />.</param>
+        /// <param name="options">The <see cref="OAuthAuthenticationOptions" />.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
-        public static IServiceCollection ConfigureApiAuthentication([NotNull] this IServiceCollection services, [NotNull] ApiAuthenticationOptions options)
+        public static IServiceCollection AddOAuthAuthentication([NotNull] this IServiceCollection services, [NotNull] OAuthAuthenticationOptions options)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
@@ -78,7 +78,7 @@ namespace GiG.Core.Authentication.Web.Extensions
                         x.DefaultScheme = authenticationScheme;
                         x.DefaultChallengeScheme = authenticationScheme;
                     })
-                    .ConfigureApiAuthentication(options);
+                    .AddOAuthAuthentication(options);
             }
 
             return services;

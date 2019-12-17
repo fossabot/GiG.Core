@@ -1,4 +1,4 @@
-﻿using GiG.Core.Authentication.Web.Abstractions;
+﻿using GiG.Core.Web.Authentication.OAuth.Abstractions;
 using IdentityServer4.AccessTokenValidation;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Authentication;
@@ -13,17 +13,16 @@ namespace GiG.Core.Authentication.Web.Extensions
     public static class AuthenticationBuilderExtensions
     {
         /// <summary>
-        /// Configures Identity Server Authentication using <see cref="ApiAuthenticationOptions" />.
+        /// Configures Identity Server Authentication using <see cref="OAuthAuthenticationOptions" />.
         /// </summary>
         /// <param name="builder">The <see cref="AuthenticationBuilder" />.</param>
-        /// <param name="options">The <see cref="ApiAuthenticationOptions" />.</param>
+        /// <param name="options">The <see cref="OAuthAuthenticationOptions" />.</param>
         /// <returns>The <see cref="AuthenticationBuilder" />.</returns>
-        public static AuthenticationBuilder ConfigureApiAuthentication([NotNull] this AuthenticationBuilder builder, [NotNull] ApiAuthenticationOptions options)
+        public static AuthenticationBuilder AddOAuthAuthentication([NotNull] this AuthenticationBuilder builder, [NotNull] OAuthAuthenticationOptions options)
         {
             if (options?.IsEnabled == true)
             {
-                builder
-                    .AddIdentityServerAuthentication(x =>
+                builder.AddIdentityServerAuthentication(x =>
                     {
                         x.Authority = options.Authority;
                         x.ApiName = options.ApiName;

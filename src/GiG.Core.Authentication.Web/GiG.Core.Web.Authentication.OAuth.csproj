@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GiG.Core.Authentication.Web.Abstractions\GiG.Core.Authentication.Web.Abstractions.csproj" />
-    <ProjectReference Include="..\GiG.Core.Authentication\GiG.Core.Authentication.csproj" />
+    <ProjectReference Include="..\GiG.Core.Authentication\GiG.Core.Authentication.OAuth.Abstractions.csproj" />
+    <ProjectReference Include="..\GiG.Core.Web.Authentication.OAuth.Abstractions\GiG.Core.Web.Authentication.OAuth.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

@@ -12,13 +12,11 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="4.0.0" PrivateAssets="compile" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.0.0" PrivateAssets="compile" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc4" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.0.0-rc4" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.0.0-rc5" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.6.0" PrivateAssets="compile" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GiG.Core.Authentication.Web.Abstractions\GiG.Core.Authentication.Web.Abstractions.csproj" />
-    <ProjectReference Include="..\GiG.Core.Authentication\GiG.Core.Authentication.csproj" />
     <ProjectReference Include="..\GiG.Core.Hosting.Abstractions\GiG.Core.Hosting.Abstractions.csproj" />
     <ProjectReference Include="..\GiG.Core.Hosting\GiG.Core.Hosting.csproj" />
   </ItemGroup>

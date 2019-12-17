@@ -5,6 +5,7 @@ using GiG.Core.HealthChecks.AspNetCore.Extensions;
 using GiG.Core.HealthChecks.Extensions;
 using GiG.Core.Hosting.AspNetCore.Extensions;
 using GiG.Core.Hosting.Extensions;
+using GiG.Core.Web.Docs.Authentication.OAuth.Extentions;
 using GiG.Core.Web.Docs.Extensions;
 using GiG.Core.Web.FluentValidation.Extensions;
 using GiG.Core.Web.Hosting.Extensions;
@@ -54,8 +55,10 @@ namespace GiG.Core.Web.Sample
             // Configure Api Behavior Options
             services.ConfigureApiBehaviorOptions();
 
-            //Authentcation
-            services.ConfigureApiAuthentication(_configuration);
+            //Authentication
+            services.ConfigureOAuthAuthentication(_configuration)
+                .AddApiDocsOAuthAuthentication();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -435,11 +435,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.HealthChecks.Orlea
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentication", "{F286F8FD-A3C9-4D52-B06A-27EB3A29B06C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Authentication.Web", "src\GiG.Core.Authentication.Web\GiG.Core.Authentication.Web.csproj", "{8FD4493A-8A9D-4E76-8289-DC4FC8CC6990}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Authentication.OAuth", "src\GiG.Core.Authentication.Web\GiG.Core.Web.Authentication.OAuth.csproj", "{8FD4493A-8A9D-4E76-8289-DC4FC8CC6990}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Authentication", "src\GiG.Core.Authentication\GiG.Core.Authentication.csproj", "{DDDE242E-78E3-4D93-9515-BD677A1BCC29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Authentication.OAuth.Abstractions", "src\GiG.Core.Authentication\GiG.Core.Authentication.OAuth.Abstractions.csproj", "{DDDE242E-78E3-4D93-9515-BD677A1BCC29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Authentication.Web.Abstractions", "src\GiG.Core.Authentication.Web.Abstractions\GiG.Core.Authentication.Web.Abstractions.csproj", "{703DAA9F-6C17-460B-A61E-E0B284167B3E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Web.Authentication.OAuth.Abstractions", "src\GiG.Core.Web.Authentication.OAuth.Abstractions\GiG.Core.Web.Authentication.OAuth.Abstractions.csproj", "{C9B02078-9B9E-419C-8464-309CCEA0C677}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Web.Docs.Authentication.OAuth", "src\GiG.Core.Web.Docs.Authentication.OAuth\GiG.Core.Web.Docs.Authentication.OAuth.csproj", "{63CD0801-B89B-425B-B68B-D65195AC20B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -967,10 +969,14 @@ Global
 		{DDDE242E-78E3-4D93-9515-BD677A1BCC29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDDE242E-78E3-4D93-9515-BD677A1BCC29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDDE242E-78E3-4D93-9515-BD677A1BCC29}.Release|Any CPU.Build.0 = Release|Any CPU
-		{703DAA9F-6C17-460B-A61E-E0B284167B3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{703DAA9F-6C17-460B-A61E-E0B284167B3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{703DAA9F-6C17-460B-A61E-E0B284167B3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{703DAA9F-6C17-460B-A61E-E0B284167B3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9B02078-9B9E-419C-8464-309CCEA0C677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9B02078-9B9E-419C-8464-309CCEA0C677}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9B02078-9B9E-419C-8464-309CCEA0C677}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9B02078-9B9E-419C-8464-309CCEA0C677}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63CD0801-B89B-425B-B68B-D65195AC20B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63CD0801-B89B-425B-B68B-D65195AC20B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63CD0801-B89B-425B-B68B-D65195AC20B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63CD0801-B89B-425B-B68B-D65195AC20B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1149,9 +1155,10 @@ Global
 		{EBE23EFA-F27D-4676-A7FA-3473B38F8905} = {64FBDA2C-D499-4EE1-AAA9-DFF1BCF8C465}
 		{1DF02E3B-8455-48C9-AE4C-181EC1DD4193} = {64FBDA2C-D499-4EE1-AAA9-DFF1BCF8C465}
 		{F286F8FD-A3C9-4D52-B06A-27EB3A29B06C} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
-		{8FD4493A-8A9D-4E76-8289-DC4FC8CC6990} = {F286F8FD-A3C9-4D52-B06A-27EB3A29B06C}
+		{8FD4493A-8A9D-4E76-8289-DC4FC8CC6990} = {D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF}
 		{DDDE242E-78E3-4D93-9515-BD677A1BCC29} = {F286F8FD-A3C9-4D52-B06A-27EB3A29B06C}
-		{703DAA9F-6C17-460B-A61E-E0B284167B3E} = {F286F8FD-A3C9-4D52-B06A-27EB3A29B06C}
+		{C9B02078-9B9E-419C-8464-309CCEA0C677} = {D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF}
+		{63CD0801-B89B-425B-B68B-D65195AC20B9} = {D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}

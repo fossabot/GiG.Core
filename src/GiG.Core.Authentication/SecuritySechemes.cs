@@ -6,6 +6,6 @@
     public class SecuritySechemes
     {
         /// Oauth2.
-        public static string Oauth2 = "oauth2";
+        public static string OAuth2 = "oauth2";
     }
 }

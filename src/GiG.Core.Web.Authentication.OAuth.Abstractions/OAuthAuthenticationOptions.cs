@@ -1,14 +1,14 @@
-﻿namespace GiG.Core.Authentication.Web.Abstractions
+﻿namespace GiG.Core.Web.Authentication.OAuth.Abstractions
 {
     /// <summary>
     /// Api Authentication Options.
     /// </summary>
-    public class ApiAuthenticationOptions
+    public class OAuthAuthenticationOptions
     {
         /// <summary>
         /// The default configuration section name.
         /// </summary>
-        public const string DefaultSectionName = "ApiAuthentication";
+        public const string DefaultSectionName = "Authentication:OAuth";
 
         /// <summary>
         /// A value to indicate if the ApiDocs are enabled or not.
