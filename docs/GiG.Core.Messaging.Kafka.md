@@ -146,17 +146,17 @@ public class ConsumerService : BackgroundService
 
 The below table outlines the valid Configurations used to override the [KafkaProviderOptions](..\src\GiG.Core.Messaging.Kafka.Abstractions\KafkaProviderOptions.cs) under the default Config section `EventProvider`.
 
-| Configuration Name        | Type                          | Optional | Default Value               |
-|:--------------------------|:------------------------------|:---------|:----------------------------|
-| BootstrapServers          | string                        | Yes      | `http://localhost:9092`     |
-| GroupId                   | string                        | Yes      | `default-group`             |
-| Topic                     | string                        | Yes      | `default-topic`             |
-| MessageTimeoutMs          | int                           | Yes      | `25000`                     |
-| AutoOffsetReset           | AutoOffsetReset               | Yes      | `AutoOffsetReset.Latest`    |
-| EnableAutoCommit          | bool                          | Yes      | `false`                     |
-| SaslUsername              | string                        | Yes      |                             |
-| SaslPassword              | string                        | Yes      |                             |
-| SecurityProtocol          | SecurityProtocol              | Yes      | `SecurityProtocol.Plaintext`|
-| SaslMechanism             | SaslMechanism                 | Yes      | `SaslMechanism.Plain`       |
-| AdditionalConfiguration   | IDictionary<string, string>   | Yes      | `dev`                       |
-| SchemaRegistry            | String                        | Yes      | `http://localhost:8081`     |
+| Configuration Name      | Type                        | Optional | Default Value                |
+|:------------------------|:----------------------------|:---------|:-----------------------------|
+| BootstrapServers        | String                      | Yes      | `http://localhost:9092`      |
+| GroupId                 | String                      | Yes      | `default-group`              |
+| Topic                   | String                      | Yes      | `default-topic`              |
+| MessageTimeoutMs        | Int                         | Yes      | `25000`                      |
+| AutoOffsetReset         | AutoOffsetReset             | Yes      | `AutoOffsetReset.Latest`     |
+| EnableAutoCommit        | Boolean                     | Yes      | `false`                      |
+| SaslUsername            | String                      | Yes      |                              |
+| SaslPassword            | String                      | Yes      |                              |
+| SecurityProtocol        | SecurityProtocol            | Yes      | `SecurityProtocol.Plaintext` |
+| SaslMechanism           | SaslMechanism               | Yes      | `SaslMechanism.Plain`        |
+| AdditionalConfiguration | IDictionary<string, string> | Yes      | `dev`                        |
+| SchemaRegistry          | String                      | Yes      | `http://localhost:8081`      |

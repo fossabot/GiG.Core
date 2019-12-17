@@ -32,10 +32,10 @@ public void Configure(IApplicationBuilder app)
 
 The below table outlines the valid Configurations used to override the [ApiDocsOptions](../src/GiG.Core.Web.Docs/Abstractions/ApiDocsOptions.cs).
 
-| Configuration Name    | Type	  | Required | Default Value	|
-|-----------------------|---------|----------|------------------|
-| IsEnabled             | Boolean | No       | `true`           | 
-| Url                   | String  | No       | `api-docs`      |
-| Title                 | String  | No       | <null>           |
-| Description           | String  | No       | <null>           | 
-| IsForwardedForEnabled | Boolean | No       | `true`           |
+| Configuration Name    | Type    | Required | Default Value |
+|:----------------------|:--------|:---------|:--------------|
+| IsEnabled             | Boolean | No       | `true`        |
+| Url                   | String  | No       | `api-docs`    |
+| Title                 | String  | No       | <null>        |
+| Description           | String  | No       | <null>        |
+| IsForwardedForEnabled | Boolean | No       | `true`        |

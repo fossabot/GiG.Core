@@ -27,9 +27,9 @@ static class Program
 
 The below table outlines the valid Configurations under the Config section `Logging:Sinks:Console`.
 
-| Configuration Name | Type | Optional | Default Value |
-|:-------------------|:-----|:---------|:--------------|
-| IsEnabled          | bool | Yes      | false         |
+| Configuration Name | Type    | Optional | Default Value |
+|:-------------------|:--------|:---------|:--------------|
+| IsEnabled          | Boolean | Yes      | false         |
 
 #### Sample Configuration
 
