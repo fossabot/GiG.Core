@@ -1,4 +1,4 @@
-﻿using GiG.Core.Authentication.Abstractions;
+﻿using GiG.Core.Authentication.OAuth.Abstractions;
 using GiG.Core.Web.Authentication.OAuth.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;

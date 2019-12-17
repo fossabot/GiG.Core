@@ -2,9 +2,6 @@
 using GiG.Core.Web.Docs.Authentication.OAuth.Extentions;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GiG.Core.Web.Docs.Authentication.OAuth
 {
@@ -16,6 +13,7 @@ namespace GiG.Core.Web.Docs.Authentication.OAuth
         {
             _oAuthAuthenticationOptions = oAuthAuthenticationOptionsAccessor?.Value;
         }
+
         public void Configure(SwaggerGenOptions options)
         {
             options.IncludeOAuthAuthentication(_oAuthAuthenticationOptions);

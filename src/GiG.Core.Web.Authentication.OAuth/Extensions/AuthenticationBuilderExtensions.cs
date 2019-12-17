@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using System;
 
-namespace GiG.Core.Authentication.Web.Extensions
+namespace GiG.Core.Web.Authentication.OAuth.Extensions
 {
     /// <summary>
     /// Authentication Builder Extensions.
@@ -20,6 +20,8 @@ namespace GiG.Core.Authentication.Web.Extensions
         /// <returns>The <see cref="AuthenticationBuilder" />.</returns>
         public static AuthenticationBuilder AddOAuthAuthentication([NotNull] this AuthenticationBuilder builder, [NotNull] OAuthAuthenticationOptions options)
         {
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+
             if (options?.IsEnabled == true)
             {
                 builder.AddIdentityServerAuthentication(x =>

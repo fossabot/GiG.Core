@@ -1,10 +1,10 @@
 using FluentValidation.AspNetCore;
-using GiG.Core.Authentication.Web.Extensions;
 using GiG.Core.DistributedTracing.Web.Extensions;
 using GiG.Core.HealthChecks.AspNetCore.Extensions;
 using GiG.Core.HealthChecks.Extensions;
 using GiG.Core.Hosting.AspNetCore.Extensions;
 using GiG.Core.Hosting.Extensions;
+using GiG.Core.Web.Authentication.OAuth.Extensions;
 using GiG.Core.Web.Docs.Authentication.OAuth.Extentions;
 using GiG.Core.Web.Docs.Extensions;
 using GiG.Core.Web.FluentValidation.Extensions;

@@ -11,7 +11,7 @@
         public const string DefaultSectionName = "Authentication:OAuth";
 
         /// <summary>
-        /// A value to indicate if the ApiDocs are enabled or not.
+        /// A value to indicate if OAuth Authentication is enabled or not.
         /// </summary>
         public bool IsEnabled { get; set; } = true;
 

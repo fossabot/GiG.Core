@@ -24,6 +24,8 @@ namespace GiG.Core.Web.Docs.Extensions
         public static IServiceCollection ConfigureApiDocs([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection, Action<SwaggerGenOptions> configureOptions = null)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
+            
+            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
 
             var apiDocsOptions = configurationSection?.Get<ApiDocsOptions>() ?? new ApiDocsOptions();
             services.Configure<ApiDocsOptions>(options =>
@@ -60,8 +62,6 @@ namespace GiG.Core.Web.Docs.Extensions
                 .AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>()
                 .AddSwaggerGen(c =>
                 {
-                    var serviceProvider = services.BuildServiceProvider();
-
                     c.IncludeXmlComments();
                     c.IncludeFullNameCustomSchemaId();
                     c.IncludeForwardedForFilter(apiDocsOptions.IsForwardedForEnabled);
@@ -79,6 +79,8 @@ namespace GiG.Core.Web.Docs.Extensions
         /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection ConfigureApiDocs([NotNull] this IServiceCollection services, [NotNull] IConfiguration configuration, Action<SwaggerGenOptions> configureOptions = null)
         {
+            if (services == null) throw new ArgumentNullException(nameof(services));
+
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
             return services.ConfigureApiDocs(configuration.GetSection(ApiDocsOptions.DefaultSectionName), configureOptions);

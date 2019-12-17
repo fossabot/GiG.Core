@@ -1,4 +1,4 @@
-﻿namespace GiG.Core.Authentication.Abstractions
+﻿namespace GiG.Core.Authentication.OAuth.Abstractions
 {
     /// <summary>
     /// Headers Constants.

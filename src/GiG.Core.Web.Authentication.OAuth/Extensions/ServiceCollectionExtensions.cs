@@ -1,11 +1,11 @@
-﻿using GiG.Core.Authentication.Abstractions;
+﻿using GiG.Core.Authentication.OAuth.Abstractions;
 using GiG.Core.Web.Authentication.OAuth.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace GiG.Core.Authentication.Web.Extensions
+namespace GiG.Core.Web.Authentication.OAuth.Extensions
 {
     /// <summary>
     /// Service Collection Extensions.
@@ -22,25 +22,28 @@ namespace GiG.Core.Authentication.Web.Extensions
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            var apiAuthentiicationOptions = configurationSection?.Get<OAuthAuthenticationOptions>() ?? new OAuthAuthenticationOptions();
-            services.Configure<OAuthAuthenticationOptions>(configureOptions =>
-            {
-                configureOptions.IsEnabled = apiAuthentiicationOptions.IsEnabled;
-                configureOptions.Authority = apiAuthentiicationOptions.Authority;
-                configureOptions.ApiName = apiAuthentiicationOptions.ApiName;
-                configureOptions.ApiSecret = apiAuthentiicationOptions.ApiSecret;
-                configureOptions.Scopes = apiAuthentiicationOptions.Scopes;
-                configureOptions.SupportedTokens = apiAuthentiicationOptions.SupportedTokens;
-                configureOptions.RequireHttpsMetadata = apiAuthentiicationOptions.RequireHttpsMetadata;
-                configureOptions.LegacyAudienceValidation = apiAuthentiicationOptions.LegacyAudienceValidation;
-            });
+            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
 
-            if (!apiAuthentiicationOptions.IsEnabled)
+            var apiAuthenticationOptions = configurationSection?.Get<OAuthAuthenticationOptions>() ?? new OAuthAuthenticationOptions();
+
+            if (!apiAuthenticationOptions.IsEnabled)
             {
                 return services;
             }
 
-            return services.AddOAuthAuthentication(apiAuthentiicationOptions);
+            services.Configure<OAuthAuthenticationOptions>(configureOptions =>
+            {
+                configureOptions.IsEnabled = apiAuthenticationOptions.IsEnabled;
+                configureOptions.Authority = apiAuthenticationOptions.Authority;
+                configureOptions.ApiName = apiAuthenticationOptions.ApiName;
+                configureOptions.ApiSecret = apiAuthenticationOptions.ApiSecret;
+                configureOptions.Scopes = apiAuthenticationOptions.Scopes;
+                configureOptions.SupportedTokens = apiAuthenticationOptions.SupportedTokens;
+                configureOptions.RequireHttpsMetadata = apiAuthenticationOptions.RequireHttpsMetadata;
+                configureOptions.LegacyAudienceValidation = apiAuthenticationOptions.LegacyAudienceValidation;
+            });
+
+            return services.AddOAuthAuthentication(apiAuthenticationOptions);
         }
 
         /// <summary>
@@ -67,6 +70,8 @@ namespace GiG.Core.Authentication.Web.Extensions
         public static IServiceCollection AddOAuthAuthentication([NotNull] this IServiceCollection services, [NotNull] OAuthAuthenticationOptions options)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
+
+            if (options == null) throw new ArgumentNullException(nameof(options));
 
             if (options.IsEnabled == true)
             {
