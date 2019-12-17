@@ -14,12 +14,12 @@
     <CodeGeneratorTargetFramework>netcoreapp3.1</CodeGeneratorTargetFramework>
     <DotNetHost Condition="'$(DotNetFromPath)' == 'true'">dotnet</DotNetHost>
     <CoreAssembly Condition="'$(CodeGenCoreAssembly)' != ''">$(CodeGenCoreAssembly)</CoreAssembly>
-    <CoreAssembly Condition="'$(CoreAssembly)' == ''">$(MSBuildThisFileDirectory)..\tasks\$(CodeGeneratorTargetFramework)\GiG.Core.Messaging.Avro.Schema.Abstractions.Generator.MSBuild.dll</CoreAssembly>
+    <CoreAssembly Condition="'$(CoreAssembly)' == ''">$(MSBuildThisFileDirectory)..\tasks\$(CodeGeneratorTargetFramework)\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.dll</CoreAssembly>
 
     <!-- Specify the assembly containing the MSBuild tasks. -->
     <MSBuildIsCore Condition="'$(MSBuildRuntimeType)' == 'Core' or '$(OS)' != 'Windows_NT'">true</MSBuildIsCore>
     <TaskAssembly Condition="'$(CodeGenTasksAssembly)' != ''">$(CodeGenTasksAssembly)</TaskAssembly>
-    <TaskAssembly Condition="'$(TaskAssembly)' == '' and '$(MSBuildIsCore)' == 'true'">$(MSBuildThisFileDirectory)..\tasks\$(CodeGeneratorTargetFramework)\GiG.Core.Messaging.Avro.Schema.Abstractions.Generator.MSBuild.Tasks.dll</TaskAssembly>
+    <TaskAssembly Condition="'$(TaskAssembly)' == '' and '$(MSBuildIsCore)' == 'true'">$(MSBuildThisFileDirectory)..\tasks\$(CodeGeneratorTargetFramework)\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.Tasks.dll</TaskAssembly>
 
     <!-- When the MSBuild host is full-framework, we defer to PATH for dotnet -->
     <DotNetHost Condition="'$(MSBuildIsCore)' != 'true'">dotnet</DotNetHost>
@@ -39,7 +39,7 @@
   </PropertyGroup>
 
   <UsingTask
-    TaskName="GiG.Core.Messaging.Avro.Schema.Abstractions.Generator.MSBuild.Tasks.GetDotNetHost"
+    TaskName="GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.Tasks.GetDotNetHost"
     AssemblyFile="$(TaskAssembly)"
     Condition="'$(CodeGeneratorEnabled)' == 'true' and '$(DotNetHost)' == '' and '$(MSBuildIsCore)' == 'true'" />
 
@@ -110,9 +110,9 @@
     <Message Text="[Avro.CodeGenerator] - CodeGen arguments file=$(ArgsFile)" Importance="Low"/>
     <WriteLinesToFile Overwrite="true" File="$(ArgsFile)" Lines="@(CodeGenArgs)"/>
 
-    <GiG.Core.Messaging.Avro.Schema.Abstractions.Generator.MSBuild.Tasks.GetDotNetHost Condition="'$(DotNetHost)' == '' and '$(MSBuildIsCore)' == 'true' ">
+    <GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.Tasks.GetDotNetHost Condition="'$(DotNetHost)' == '' and '$(MSBuildIsCore)' == 'true' ">
       <Output TaskParameter="DotNetHost" PropertyName="DotNetHost" />
-    </GiG.Core.Messaging.Avro.Schema.Abstractions.Generator.MSBuild.Tasks.GetDotNetHost>
+    </GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.Tasks.GetDotNetHost>
 
     <Exec Command="&quot;$(DotNetHost)&quot; &quot;$(GeneratorAssembly)&quot; SourceToSource &quot;$(ArgsFile)&quot;" Outputs="$(OutputFileName)" />
 

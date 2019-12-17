@@ -5,8 +5,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.CodeAnalysis" Version="3.3.1" PrivateAssets="compile" />
-        <PackageReference Include="Microsoft.CSharp" Version="4.7.0" PrivateAssets="compile" />
+        <PackageReference Include="Microsoft.CodeAnalysis" Version="3.3.1" />
+        <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.0.0" PrivateAssets="compile" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.0.0" PrivateAssets="compile" />
         <PackageReference Include="Newtonsoft.Json" Version="12.0.3" PrivateAssets="compile" />
@@ -15,6 +15,11 @@
 
     <ItemGroup>
       <ProjectReference Include="..\GiG.Core.Messaging.Avro.Schema.Abstractions\GiG.Core.Messaging.Avro.Schema.Abstractions.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Templates\AvroClassTemplate.txt" />
+      <EmbeddedResource Include="Templates\AvroClassTemplate.txt" />
     </ItemGroup>
 
 </Project>
