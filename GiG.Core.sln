@@ -41,6 +41,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Logging.Sinks.File.md = docs\GiG.Core.Logging.Sinks.File.md
 		docs\GiG.Core.Logging.Sinks.Fluentd.md = docs\GiG.Core.Logging.Sinks.Fluentd.md
 		docs\GiG.Core.Logging.Sinks.RabbitMQ.md = docs\GiG.Core.Logging.Sinks.RabbitMQ.md
+		docs\GiG.Core.Messaging.Avro.md = docs\GiG.Core.Messaging.Avro.md
 		docs\GiG.Core.Messaging.Kafka.md = docs\GiG.Core.Messaging.Kafka.md
 		docs\GiG.Core.Messaging.MassTransit.md = docs\GiG.Core.Messaging.MassTransit.md
 		docs\GiG.Core.MultiTenant.Web.md = docs\GiG.Core.MultiTenant.Web.md
@@ -433,13 +434,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.HealthChecks.Orlea
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.HealthChecks.Orleans.AspNetCore", "src\GiG.Core.HealthChecks.Orleans.AspNetCore\GiG.Core.HealthChecks.Orleans.AspNetCore.csproj", "{1DF02E3B-8455-48C9-AE4C-181EC1DD4193}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Messaging.Avro.Schema.Abstractions", "src\GiG.Core.Messaging.Avro.Schema.Abstractions\GiG.Core.Messaging.Avro.Schema.Abstractions.csproj", "{72B552C4-3373-4916-A7C2-3D0F8A273B81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.Avro.Schema.Abstractions", "src\GiG.Core.Messaging.Avro.Schema.Abstractions\GiG.Core.Messaging.Avro.Schema.Abstractions.csproj", "{72B552C4-3373-4916-A7C2-3D0F8A273B81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Messaging.Avro.Schema.Generator", "src\GiG.Core.Messaging.Avro.Schema.Generator\GiG.Core.Messaging.Avro.Schema.Generator.csproj", "{31E7E6AF-4593-4260-A38E-4BA8C10DCAAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.Avro.Schema.Generator", "src\GiG.Core.Messaging.Avro.Schema.Generator\GiG.Core.Messaging.Avro.Schema.Generator.csproj", "{31E7E6AF-4593-4260-A38E-4BA8C10DCAAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Messaging.Avro.Schema.Generator.MSBuild", "src\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.csproj", "{C5490DE7-B374-4E40-958D-F2E824239B52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.Avro.Schema.Generator.MSBuild", "src\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.csproj", "{C5490DE7-B374-4E40-958D-F2E824239B52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.Tasks", "src\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.Tasks\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.Tasks.csproj", "{B6161DCD-CC53-41DE-A173-928A61F45477}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.Tasks", "src\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.Tasks\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.Tasks.csproj", "{B6161DCD-CC53-41DE-A173-928A61F45477}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Avro", "Avro", "{F3CE36D9-6ED4-4C5C-923C-CD1F46396134}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{80BE322A-30A3-4C7C-82AD-5C912FF57998}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AE5338FC-895C-4130-8166-6934217F36F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Messaging.Avro.Sample", "samples\Messaging\Avro\src\GiG.Core.Messaging.Avro.Sample\GiG.Core.Messaging.Avro.Sample.csproj", "{022ED0B9-EB30-49DD-B0AA-C8167CBB16D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -975,6 +984,10 @@ Global
 		{B6161DCD-CC53-41DE-A173-928A61F45477}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6161DCD-CC53-41DE-A173-928A61F45477}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6161DCD-CC53-41DE-A173-928A61F45477}.Release|Any CPU.Build.0 = Release|Any CPU
+		{022ED0B9-EB30-49DD-B0AA-C8167CBB16D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{022ED0B9-EB30-49DD-B0AA-C8167CBB16D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{022ED0B9-EB30-49DD-B0AA-C8167CBB16D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{022ED0B9-EB30-49DD-B0AA-C8167CBB16D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1156,6 +1169,10 @@ Global
 		{31E7E6AF-4593-4260-A38E-4BA8C10DCAAE} = {1577B553-2909-4844-A422-8782E2AA0F83}
 		{C5490DE7-B374-4E40-958D-F2E824239B52} = {1577B553-2909-4844-A422-8782E2AA0F83}
 		{B6161DCD-CC53-41DE-A173-928A61F45477} = {1577B553-2909-4844-A422-8782E2AA0F83}
+		{F3CE36D9-6ED4-4C5C-923C-CD1F46396134} = {F3C1FDA9-11D3-4B05-8091-63D53022F544}
+		{80BE322A-30A3-4C7C-82AD-5C912FF57998} = {F3CE36D9-6ED4-4C5C-923C-CD1F46396134}
+		{AE5338FC-895C-4130-8166-6934217F36F5} = {F3CE36D9-6ED4-4C5C-923C-CD1F46396134}
+		{022ED0B9-EB30-49DD-B0AA-C8167CBB16D5} = {80BE322A-30A3-4C7C-82AD-5C912FF57998}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}
