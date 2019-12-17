@@ -31,7 +31,7 @@ The below table outlines the valid Configurations used to override the [RabbitMQ
 
 | Configuration Name | Type    | Optional | Default Value          |
 |:-------------------|:--------|:---------|:-----------------------|
-| IsEnabled          | bool    | Yes      | false                  |
+| IsEnabled          | Boolean | Yes      | false                  |
 | Hostname           | String  | Yes      | `localhost`            |
 | Username           | String  | Yes      | `guest`                |
 | Password           | String  | Yes      | `guest`                |
@@ -46,7 +46,7 @@ The below table outlines the valid Configurations used to override the [RabbitMQ
 | Ssl:IsEnabled      | Boolean | Yes      | false                  |
 | Ssl:CertPath       | String  | Yes      | <null>                 |
 | Ssl:CertPassphrase | String  | Yes      | <null>                 |
-| Ssl:ServerName     | String  | Yes      | (fallback to Hostname) |
+| Ssl:ServerName     | String  | Yes      | Fallback to `Hostname` |
 
 #### Sample Configuration
 
