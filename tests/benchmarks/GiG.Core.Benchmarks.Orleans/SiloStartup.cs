@@ -4,6 +4,7 @@ using GiG.Core.Orleans.Silo.Dashboard.Extensions;
 using GiG.Core.Orleans.Silo.Extensions;
 using GiG.Core.Orleans.Storage.Npgsql.Extensions;
 using GiG.Core.Orleans.Streams.Kafka.Extensions;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Orleans.Hosting;
 using Orleans.Streams.Kafka.Config;
@@ -26,7 +27,7 @@ namespace GiG.Core.Benchmarks.Orleans
                 .AddSimpleMessageStreamProvider(Constants.SMSProviderName)
                 .AddMemoryGrainStorage(Constants.StreamsMemoryStorageName)
                 .AddMemoryGrainStorage(name: StorageProvidersConstants.InMemory)
-                .UseMongoDBClient(ConnectionStrings.MongoDb)
+                .UseMongoDBClient(GetConnectionString(ctx.Configuration, StorageProvidersConstants.MongoDb))
                 .AddMongoDBGrainStorage(StorageProvidersConstants.MongoDb, options =>
                 {
                     options.DatabaseName = StorageProvidersConstants.DatabaseName;
@@ -42,7 +43,7 @@ namespace GiG.Core.Benchmarks.Orleans
                 .AddDynamoDBGrainStorage(StorageProvidersConstants.DynamoDb, options =>
                 {
                     options.UseJson = true;
-                    options.Service = ConnectionStrings.DynamoDb;
+                    options.Service = GetConnectionString(ctx.Configuration, StorageProvidersConstants.DynamoDb);
                 })
                 .AddNpgsqlGrainStorage(StorageProvidersConstants.Postgres, ctx.Configuration)
                 .AddKafka(Constants.KafkaProviderName)
@@ -58,12 +59,19 @@ namespace GiG.Core.Benchmarks.Orleans
                 .AddRedisGrainStorage(StorageProvidersConstants.Redis)
                 .Build(config => config.Configure(opts =>
                     {
-                        opts.Servers = new List<string> {ConnectionStrings.Redis};
+                        opts.Servers = new List<string> {GetConnectionString(ctx.Configuration, StorageProvidersConstants.Redis)};
                         opts.ClientName = StorageProvidersConstants.Redis;
                         opts.KeyPrefix = "OrleansGrainStorage";
                         opts.HumanReadableSerialization = true;
                     })
                 );
+        }
+        
+        private static string GetConnectionString(IConfiguration configuration, string provider)
+        {
+            var configSection = configuration.GetSection($"Orleans:StorageProviders:{provider}:ConnectionString");
+
+            return configSection.Value;
         }
     }
 }
