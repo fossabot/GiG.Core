@@ -6,6 +6,7 @@ namespace GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.Tasks
     /// <summary>
     /// Gets the Dot Net Execution Path.
     /// </summary>
+    // ReSharper disable once UnusedType.Global
     public class GetDotNetHost : Task
     {
         /// <summary>

@@ -41,7 +41,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Logging.Sinks.File.md = docs\GiG.Core.Logging.Sinks.File.md
 		docs\GiG.Core.Logging.Sinks.Fluentd.md = docs\GiG.Core.Logging.Sinks.Fluentd.md
 		docs\GiG.Core.Logging.Sinks.RabbitMQ.md = docs\GiG.Core.Logging.Sinks.RabbitMQ.md
-		docs\GiG.Core.Messaging.Avro.md = docs\GiG.Core.Messaging.Avro.md
+		docs\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.md = docs\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.md
 		docs\GiG.Core.Messaging.Kafka.md = docs\GiG.Core.Messaging.Kafka.md
 		docs\GiG.Core.Messaging.MassTransit.md = docs\GiG.Core.Messaging.MassTransit.md
 		docs\GiG.Core.MultiTenant.Web.md = docs\GiG.Core.MultiTenant.Web.md
@@ -448,7 +448,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{80BE322A-30A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AE5338FC-895C-4130-8166-6934217F36F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Messaging.Avro.Sample", "samples\Messaging\Avro\src\GiG.Core.Messaging.Avro.Sample\GiG.Core.Messaging.Avro.Sample.csproj", "{022ED0B9-EB30-49DD-B0AA-C8167CBB16D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.Avro.Sample", "samples\Messaging\Avro\src\GiG.Core.Messaging.Avro.Sample\GiG.Core.Messaging.Avro.Sample.csproj", "{022ED0B9-EB30-49DD-B0AA-C8167CBB16D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

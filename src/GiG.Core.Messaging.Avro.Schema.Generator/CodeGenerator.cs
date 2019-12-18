@@ -2,6 +2,7 @@ using GiG.Core.Messaging.Avro.Schema.Abstractions.Annotations;
 using GiG.Core.Messaging.Avro.Schema.Generator.Exceptions;
 using GiG.Core.Messaging.Avro.Schema.Generator.Extensions;
 using GiG.Core.Messaging.Avro.Schema.Generator.Templates;
+using JetBrains.Annotations;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -15,7 +16,6 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-
 
 namespace GiG.Core.Messaging.Avro.Schema.Generator
 {
@@ -34,7 +34,6 @@ namespace GiG.Core.Messaging.Avro.Schema.Generator
 
         private readonly WellKnownTypes _wellKnownTypes;
         private readonly Compilation _compilation;
-        private readonly ILogger _log;
 
         private static List<string> _alreadyRegistered = new List<string>();
 
@@ -46,11 +45,11 @@ namespace GiG.Core.Messaging.Avro.Schema.Generator
         /// Default Constructor. 
         /// </summary>
         /// <param name="compilation">The <see cref="Compilation"/>.</param>
-        /// <param name="log">The <see cref="ILogger"/>.</param>
-        public CodeGenerator(Compilation compilation, ILogger log)
+        public CodeGenerator([NotNull] Compilation compilation)
         {
+            if (compilation == null) throw new ArgumentNullException(nameof(compilation));
+
             _compilation = compilation;
-            _log = log;
             _wellKnownTypes = WellKnownTypes.FromCompilation(compilation);
         }
 
@@ -515,12 +514,6 @@ namespace GiG.Core.Messaging.Avro.Schema.Generator
             sourceCode = regex.Replace(sourceCode, "partial $1 $2");
 
             File.WriteAllText(filepath, sourceCode);
-        }
-
-        private void LogInfo(string message)
-        {
-            _log.LogInformation($"{message} completed in {_stopwatch.ElapsedMilliseconds}ms.");
-            _stopwatch.Restart();
         }
 
         private static string ReadFile(string filePath)

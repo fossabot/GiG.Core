@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyModel;
+using Microsoft.Extensions.DependencyModel.Resolution;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
-using Microsoft.Extensions.DependencyModel;
-using Microsoft.Extensions.DependencyModel.Resolution;
+
 namespace GiG.Core.Messaging.Avro.Schema.Generator.MSBuild
 {
     /// <inheritdoc />

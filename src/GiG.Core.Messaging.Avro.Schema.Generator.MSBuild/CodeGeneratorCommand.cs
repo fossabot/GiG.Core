@@ -78,18 +78,19 @@ namespace GiG.Core.Messaging.Avro.Schema.Generator.MSBuild
                 ? ProjectId.CreateFromSerialized(projectIdGuid)
                 : ProjectId.CreateNewId();
 
-#if DEBUG
-            Log.LogDebug($"AssemblyName: {AssemblyName}");
-            if (!string.IsNullOrWhiteSpace(ProjectGuid)) Log.LogDebug($"ProjectGuid: {ProjectGuid}");
-            Log.LogDebug($"ProjectID: {projectId}");
-            Log.LogDebug($"ProjectName: {projectName}");
-            Log.LogDebug($"ProjectPath: {ProjectPath}");
-            Log.LogDebug($"OutputType: {OutputType}");
-            Log.LogDebug($"TargetPath: {TargetPath}");
-            Log.LogDebug($"DefineConstants ({DefineConstants.Count}): {string.Join(", ", DefineConstants)}");
-            Log.LogDebug($"Sources ({Compile.Count}): {string.Join(", ", Compile)}");
-            Log.LogDebug($"References ({Reference.Count}): {string.Join(", ", Reference)}");
-#endif
+            if (Log.IsEnabled(LogLevel.Debug))
+            {
+                Log.LogDebug($"AssemblyName: {AssemblyName}");
+                if (!string.IsNullOrWhiteSpace(ProjectGuid)) Log.LogDebug($"ProjectGuid: {ProjectGuid}");
+                Log.LogDebug($"ProjectID: {projectId}");
+                Log.LogDebug($"ProjectName: {projectName}");
+                Log.LogDebug($"ProjectPath: {ProjectPath}");
+                Log.LogDebug($"OutputType: {OutputType}");
+                Log.LogDebug($"TargetPath: {TargetPath}");
+                Log.LogDebug($"DefineConstants ({DefineConstants.Count}): {string.Join(", ", DefineConstants)}");
+                Log.LogDebug($"Sources ({Compile.Count}): {string.Join(", ", Compile)}");
+                Log.LogDebug($"References ({Reference.Count}): {string.Join(", ", Reference)}");
+            }
 
             var projectInfo = ProjectInfo.Create(
                 projectId,
@@ -126,7 +127,7 @@ namespace GiG.Core.Messaging.Avro.Schema.Generator.MSBuild
             Log.LogInformation($"ProjectNugetReferencesAreValid completed in {stopwatch.ElapsedMilliseconds}ms.");
             if (referencesValid)
             {
-                var generator = new CodeGenerator(compilation, Log);
+                var generator = new CodeGenerator(compilation);
                 generator.GenerateCode(cancellationToken);
             }
 
