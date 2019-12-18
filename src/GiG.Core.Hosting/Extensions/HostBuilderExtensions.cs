@@ -1,6 +1,9 @@
 ﻿using JetBrains.Annotations;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.IO;
 
 namespace GiG.Core.Hosting.Extensions
 {
@@ -23,8 +26,30 @@ namespace GiG.Core.Hosting.Extensions
                 var applicationName = context.Configuration["ApplicationName"];
                 ApplicationMetadata.Name = applicationName;
 
+                ApplicationMetadata.Checksum = GetCheckSum(context.Configuration);
+
                 services.AddApplicationMetadataAccessor();
             });
         }
+
+        private static string GetCheckSum(IConfiguration configuration)
+        {
+            var checksumFilePath = "/checksum/checksum.app.txt";//configuration[""];
+            var physicalFileProvider = new PhysicalFileProvider(AppContext.BaseDirectory);
+            var fileInfo = physicalFileProvider.GetFileInfo(checksumFilePath);
+
+            if (!fileInfo.Exists)
+                return string.Empty;
+            
+            using (var stream = fileInfo.CreateReadStream())
+            {
+                using (var reader = new StreamReader(stream))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
+        }
+
+
     }
 }

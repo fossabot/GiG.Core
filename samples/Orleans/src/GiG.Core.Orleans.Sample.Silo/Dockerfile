@@ -9,13 +9,13 @@ COPY . .
 RUN dotnet build /p:Version=$VERSION -c Release 
 
 WORKDIR "/sln/artifacts/nugets"
-RUN ["/scripts/checksum.sh", "checksum.artifacts.list.txt"]
+RUN ["/sln/checksum.sh", "/app/checksum/", "checksum.artifacts.list.txt"]
 
 FROM build AS publish
 WORKDIR "/sln/samples/Orleans/src/GiG.Core.Orleans.Sample.Silo"
 RUN dotnet publish "GiG.Core.Orleans.Sample.Silo.csproj" -c Release -o /app/publish
 WORKDIR "/app/publish"
-RUN ["/scripts/checksum.sh", "checksum.app.list.txt"]
+RUN ["/sln/checksum.sh", "/app/checksum/", "checksum.app.list.txt", "checksum.app.txt"]
 
 FROM publish AS push
 ENTRYPOINT ["/scripts/push.sh"]
