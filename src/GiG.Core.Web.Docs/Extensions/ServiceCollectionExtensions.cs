@@ -6,8 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
-using System.IO;
-using System.Reflection;
 
 namespace GiG.Core.Web.Docs.Extensions
 {
@@ -23,20 +21,21 @@ namespace GiG.Core.Web.Docs.Extensions
         /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
         /// <param name="configureOptions">A delegate that is used to configure the <see cref="SwaggerGenOptions" />.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
-        public static IServiceCollection ConfigureApiDocs([NotNull] this IServiceCollection services,
-            [NotNull] IConfigurationSection configurationSection, Action<SwaggerGenOptions> configureOptions = null)
+        public static IServiceCollection ConfigureApiDocs([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection, Action<SwaggerGenOptions> configureOptions = null)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
+            
+            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
 
             var apiDocsOptions = configurationSection?.Get<ApiDocsOptions>() ?? new ApiDocsOptions();
             services.Configure<ApiDocsOptions>(options =>
-                {
-                    options.Description = apiDocsOptions.Description;
-                    options.IsEnabled = apiDocsOptions.IsEnabled;
-                    options.IsForwardedForEnabled = apiDocsOptions.IsForwardedForEnabled;
-                    options.Title = apiDocsOptions.Title;
-                    options.Url = apiDocsOptions.Url;
-                });
+            {
+                options.Description = apiDocsOptions.Description;
+                options.IsEnabled = apiDocsOptions.IsEnabled;
+                options.IsForwardedForEnabled = apiDocsOptions.IsForwardedForEnabled;
+                options.Title = apiDocsOptions.Title;
+                options.Url = apiDocsOptions.Url;
+            });
 
             if (!apiDocsOptions.IsEnabled)
             {
@@ -67,7 +66,6 @@ namespace GiG.Core.Web.Docs.Extensions
                     c.IncludeFullNameCustomSchemaId();
                     c.IncludeForwardedForFilter(apiDocsOptions.IsForwardedForEnabled);
                     c.OperationFilter<DeprecatedOperationFilter>();
-
                     configureOptions?.Invoke(c);
                 });
         }
@@ -79,39 +77,13 @@ namespace GiG.Core.Web.Docs.Extensions
         /// <param name="configuration">The <see cref="IConfiguration" />.</param>
         /// <param name="configureOptions">A delegate that is used to configure the <see cref="SwaggerGenOptions" />.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
-        public static IServiceCollection ConfigureApiDocs([NotNull] this IServiceCollection services,
-            [NotNull] IConfiguration configuration, Action<SwaggerGenOptions> configureOptions = null)
+        public static IServiceCollection ConfigureApiDocs([NotNull] this IServiceCollection services, [NotNull] IConfiguration configuration, Action<SwaggerGenOptions> configureOptions = null)
         {
+            if (services == null) throw new ArgumentNullException(nameof(services));
+
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
             return services.ConfigureApiDocs(configuration.GetSection(ApiDocsOptions.DefaultSectionName), configureOptions);
-        }
-
-        private static void IncludeXmlComments(this SwaggerGenOptions options)
-        {
-            var xmlFile = $"{Assembly.GetEntryAssembly()?.GetName().Name}.xml";
-            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-
-            if (string.IsNullOrEmpty(xmlPath))
-            {
-                throw new ApplicationException(
-                    "The following property is missing from your project; <GenerateDocumentationFile>true</GenerateDocumentationFile>.");
-            }
-
-            options.IncludeXmlComments(xmlPath);
-        }
-
-        private static void IncludeFullNameCustomSchemaId(this SwaggerGenOptions options)
-        {
-            options.CustomSchemaIds(x => x.FullName);
-        }
-
-        private static void IncludeForwardedForFilter(this SwaggerGenOptions options, bool isEnabled)
-        {
-            if (isEnabled)
-            {
-                options.OperationFilter<ForwardedForOperationFilter>();
-            }
         }
     }
 }
