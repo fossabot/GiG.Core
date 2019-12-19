@@ -16,7 +16,7 @@
         public string Url { get; set; } = "/actuator/info";
         
         /// <summary>
-        /// Checksum info Options
+        /// Checksum info Options.
         /// </summary>
         public InfoManagementChecksumOptions Checksum { get; set; }
     }
