@@ -13,7 +13,7 @@
         /// <summary>
         /// The Url for the Ready + Live Health Checks.
         /// </summary>
-        public string CombinedUrl { get; set; } = "/actuator/health";
+        public string CombinedUrl { get; set; } = Constants.CombinedHealthCheckUrl;
 
         /// <summary>
         /// The Url for the Live HealthCheck.
@@ -30,8 +30,8 @@
         /// </summary>
         public HealthChecksOptions()
         {
-            LiveUrl = $"{CombinedUrl}/live";
-            ReadyUrl = $"{CombinedUrl}/ready";
+            LiveUrl = $"{Constants.CombinedHealthCheckUrl} / {Constants.LiveTag}";
+            ReadyUrl = $"{Constants.CombinedHealthCheckUrl} / {Constants.ReadyTag}";
         }
     }
 }

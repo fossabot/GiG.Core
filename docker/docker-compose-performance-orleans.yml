@@ -42,3 +42,34 @@ services:
       CONTROL_CENTER_MONITORING_INTERCEPTOR_TOPIC_PARTITIONS: 1
       CONFLUENT_METRICS_TOPIC_REPLICATION: 1
       PORT: 9021
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - 27017:27017
+
+  dynamodb:
+    image: amazon/dynamodb-local
+    restart: always
+    ports:
+      - 8000:8000
+
+  postgres:
+    image: postgres:11.5-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: orleansstorage
+    ports:
+      - "5432:5432"
+        
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - 6379:6379

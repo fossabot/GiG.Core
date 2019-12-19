@@ -27,7 +27,7 @@ The below table outlines the valid Configurations used to override the [Dashboar
 |:-------------------|:--------|:---------|:--------------|
 | IsEnabled          | Boolean | Yes      | `false`       |
 | Port               | String  | Yes      | `8080`        |
-| Path               | String  | No       | `/dashboard`   |
+| Path               | String  | No       | `/dashboard`  |
 | HostSelf           | Boolean | No       | `true`        |
 
 

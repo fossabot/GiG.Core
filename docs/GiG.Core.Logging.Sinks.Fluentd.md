@@ -29,11 +29,11 @@ static class Program
 
 The below table outlines the valid Configurations used to override the [FluentdSinkOptions](../src/GiG.Core.Logging.Sinks.Fluentd/Internal/FluentdSinkOptions.cs) under the Config section `Logging:Sinks:Fluentd`
 
-| Configuration Name | Type   | Optional | Default Value |
-|:-------------------|:-------|:---------|:--------------|
-| IsEnabled          | bool   | Yes      | false         |
-| Hostname           | string | Yes      | 'localhost'   |
-| Port               | int    | Yes      | 24224         |
+| Configuration Name | Type    | Optional | Default Value |
+|:-------------------|:--------|:---------|:--------------|
+| IsEnabled          | Boolean | Yes      | false         |
+| Hostname           | String  | Yes      | `localhost`   |
+| Port               | Int     | Yes      | 24224         |
 
 #### Sample Configuration
 

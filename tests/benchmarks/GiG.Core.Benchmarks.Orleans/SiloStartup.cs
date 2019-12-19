@@ -1,9 +1,14 @@
-﻿using GiG.Core.Benchmarks.Orleans.Streams.Grains;
+﻿using GiG.Core.Benchmarks.Orleans.StorageProviders;
+using GiG.Core.Benchmarks.Orleans.Streams.Grains;
 using GiG.Core.Orleans.Silo.Dashboard.Extensions;
 using GiG.Core.Orleans.Silo.Extensions;
+using GiG.Core.Orleans.Storage.Npgsql.Extensions;
 using GiG.Core.Orleans.Streams.Kafka.Extensions;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using Orleans.Hosting;
 using Orleans.Streams.Kafka.Config;
+using System.Collections.Generic;
 using HostBuilderContext = Microsoft.Extensions.Hosting.HostBuilderContext;
 
 namespace GiG.Core.Benchmarks.Orleans
@@ -21,6 +26,26 @@ namespace GiG.Core.Benchmarks.Orleans
                 .AddAssemblies(typeof(ProducerGrain))
                 .AddSimpleMessageStreamProvider(Constants.SMSProviderName)
                 .AddMemoryGrainStorage(Constants.StreamsMemoryStorageName)
+                .AddMemoryGrainStorage(name: StorageProvidersConstants.InMemory)
+                .UseMongoDBClient(GetConnectionString(ctx.Configuration, StorageProvidersConstants.MongoDb))
+                .AddMongoDBGrainStorage(StorageProvidersConstants.MongoDb, options =>
+                {
+                    options.DatabaseName = StorageProvidersConstants.DatabaseName;
+                    options.CreateShardKeyForCosmos = true;
+                    
+                    options.ConfigureJsonSerializerSettings = settings =>
+                    {
+                        settings.NullValueHandling = NullValueHandling.Include;
+                        settings.ObjectCreationHandling = ObjectCreationHandling.Replace;
+                        settings.DefaultValueHandling = DefaultValueHandling.Populate;
+                    };
+                })
+                .AddDynamoDBGrainStorage(StorageProvidersConstants.DynamoDb, options =>
+                {
+                    options.UseJson = true;
+                    options.Service = GetConnectionString(ctx.Configuration, StorageProvidersConstants.DynamoDb);
+                })
+                .AddNpgsqlGrainStorage(StorageProvidersConstants.Postgres, ctx.Configuration)
                 .AddKafka(Constants.KafkaProviderName)
                 .WithOptions(options =>
                 {
@@ -30,7 +55,23 @@ namespace GiG.Core.Benchmarks.Orleans
                     options.AddTopic(Constants.MessageNamespace);
                 })
                 .AddJson()
-                .Build();
+                .Build()
+                .AddRedisGrainStorage(StorageProvidersConstants.Redis)
+                .Build(config => config.Configure(opts =>
+                    {
+                        opts.Servers = new List<string> {GetConnectionString(ctx.Configuration, StorageProvidersConstants.Redis)};
+                        opts.ClientName = StorageProvidersConstants.Redis;
+                        opts.KeyPrefix = "OrleansGrainStorage";
+                        opts.HumanReadableSerialization = true;
+                    })
+                );
+        }
+        
+        private static string GetConnectionString(IConfiguration configuration, string provider)
+        {
+            var configSection = configuration.GetSection($"Orleans:StorageProviders:{provider}:ConnectionString");
+
+            return configSection.Value;
         }
     }
 }
