@@ -4,6 +4,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
+using GiG.Core.Hosting.Abstractions;
 
 namespace GiG.Core.Hosting.Extensions
 {
@@ -31,15 +32,18 @@ namespace GiG.Core.Hosting.Extensions
                 services.AddApplicationMetadataAccessor();
             });
         }
+        
 
         private static string GetCheckSum(IConfiguration configuration)
         {
-            var checksumFilePath = "/checksum/checksum.app.txt";//configuration[""];
-            var physicalFileProvider = new PhysicalFileProvider(AppContext.BaseDirectory);
-            var fileInfo = physicalFileProvider.GetFileInfo(checksumFilePath);
-
+            var checksumConfiguration = configuration.GetSection(InfoManagementChecksumOptions.DefaultSectionName)
+                .Get<InfoManagementChecksumOptions>();
+            
+            var physicalFileProvider = new PhysicalFileProvider(checksumConfiguration.Root);
+            var fileInfo = physicalFileProvider.GetFileInfo(checksumConfiguration.FilePath);
+            
             if (!fileInfo.Exists)
-                return string.Empty;
+                return null;
             
             using (var stream = fileInfo.CreateReadStream())
             {
@@ -49,7 +53,5 @@ namespace GiG.Core.Hosting.Extensions
                 }
             }
         }
-
-
     }
 }

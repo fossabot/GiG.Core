@@ -13,5 +13,8 @@ namespace GiG.Core.Hosting.Internal
 
         /// <inheritdoc />
         public string InformationalVersion => ApplicationMetadata.InformationalVersion;
+
+        /// <inheritdoc />
+        public string Checksum => ApplicationMetadata.Checksum;
     }
 }

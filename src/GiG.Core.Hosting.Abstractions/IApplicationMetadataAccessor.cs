@@ -19,5 +19,10 @@
         /// The application's informational version.
         /// </summary>
         string InformationalVersion { get; }
+        
+        /// <summary>
+        /// The application's checksum value. Which is generated upon build.
+        /// </summary>
+        string Checksum { get; }
     }
 }

@@ -44,5 +44,13 @@ namespace GiG.Core.Hosting.Tests.Integration.Tests
             Assert.Equal(TestHelper.InformationalVersion, ApplicationMetadata.InformationalVersion);
             Assert.Equal(TestHelper.InformationalVersion, _applicationMetadataAccessor.InformationalVersion);
         }
+        
+        [Fact]
+        public void ApplicationMetadataAccessor_Checksum_ReturnsSameChecksum()
+        {
+            //Act & Assert
+            Assert.Equal(TestHelper.Checksum, ApplicationMetadata.Checksum);
+            Assert.Equal(TestHelper.Checksum, _applicationMetadataAccessor.Checksum);
+        }
     }
 }
