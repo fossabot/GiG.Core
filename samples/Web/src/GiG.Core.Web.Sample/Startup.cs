@@ -70,6 +70,10 @@ namespace GiG.Core.Web.Sample
             app.UseRouting();
             app.UseFluentValidationMiddleware();
             app.UseApiDocs();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints => { 
                 endpoints.MapControllers();
                 endpoints.MapInfoManagement();

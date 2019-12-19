@@ -20,8 +20,8 @@
     <ProjectReference Include="..\..\..\src\GiG.Core.Web.FluentValidation\GiG.Core.Web.FluentValidation.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Web.Hosting\GiG.Core.Web.Hosting.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Web.Mock\GiG.Core.Web.Mock.csproj" />
-    <ProjectReference Include="..\..\..\src\GiG.Core.Web.Security.Hmac.MultiTenant\GiG.Core.Web.Security.Hmac.MultiTenant.csproj" />
-    <ProjectReference Include="..\..\..\src\GiG.Core.Web.Security.Hmac\GiG.Core.Web.Security.Hmac.csproj" />
+    <ProjectReference Include="..\..\..\src\GiG.Core.Web.Authentication.Hmac.MultiTenant\GiG.Core.Web.Authentication.Hmac.MultiTenant.csproj" />
+    <ProjectReference Include="..\..\..\src\GiG.Core.Web.Authentication.Hmac\GiG.Core.Web.Authentication.Hmac.csproj" />
   </ItemGroup>
 
 </Project>
