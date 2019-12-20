@@ -51,6 +51,6 @@ public void Configure(IApplicationBuilder app)
 
 The below table outlines the valid Configurations.
 
-| Configuration Name  | Type	| Optional | Default Value	   |
-|---------------------|---------|----------|-------------------|
-| Url				  | String  | No	   | `/actuator/info` | 	
+| Configuration Name | Type   | Optional | Default Value    |
+|:-------------------|:-------|:---------|:-----------------|
+| Url                | String | No       | `/actuator/info` |

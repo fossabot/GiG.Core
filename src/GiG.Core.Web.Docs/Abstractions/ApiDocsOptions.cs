@@ -1,7 +1,7 @@
 ﻿namespace GiG.Core.Web.Docs.Abstractions
 {
     /// <summary>
-    /// Api Docs settings.
+    /// Api Docs Options.
     /// </summary>
     public class ApiDocsOptions
     {

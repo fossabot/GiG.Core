@@ -63,7 +63,7 @@ namespace GiG.Core.HealthChecks.Orleans.AspNetCore.Internal
 
                     await _host.StartAsync(cancellationToken);
                 }
-                catch (Exception ex)
+                catch(Exception ex)
                 {
                     _logger.LogError(ex, ex.Message);
                 }
@@ -71,13 +71,14 @@ namespace GiG.Core.HealthChecks.Orleans.AspNetCore.Internal
                 _logger.LogInformation($"HealthCheck listening on {_healthChecksOptions.Port}");
             }
         }
-       
-        public override void Dispose()
+
+        public override async Task StopAsync(CancellationToken cancellationToken)
         {
+            await base.StopAsync(cancellationToken);
             try
             {
-                _host.StopAsync();
-                _host.WaitForShutdown();
+                _host?.StopAsync();
+                _host?.WaitForShutdown();
                 _host?.Dispose();
             }
             catch(Exception ex)
@@ -85,6 +86,5 @@ namespace GiG.Core.HealthChecks.Orleans.AspNetCore.Internal
                 _logger.LogError("Orleans HealthCheckd Dispose failed.", ex);
             }
         }
-
     }
 }

@@ -7,14 +7,18 @@
 
     <ItemGroup>
         <PackageReference Include="BenchmarkDotNet" Version="0.12.0" />
+        <PackageReference Include="Bogus" Version="28.4.2" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0" />
-        <PackageReference Include="Microsoft.Orleans.Runtime.Abstractions" Version="3.0.0" />
+        <PackageReference Include="Microsoft.Orleans.Runtime.Abstractions" Version="3.0.1" />
+        <PackageReference Include="Microsoft.Orleans.Persistence.DynamoDB" Version="3.0.1" />
         <PackageReference Include="Microsoft.Orleans.Server" Version="3.0.0" />
         <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="3.0.0">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="Orleans.Providers.MongoDB" Version="3.1.1" />
         <PackageReference Include="Orleans.Streams.Kafka" Version="4.0.0-dev-118" />
+        <PackageReference Include="Sucrose.Orleans.Persistence.Redis" Version="0.6.0" />
     </ItemGroup>  
 
     <ItemGroup>
@@ -26,6 +30,7 @@
         <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Client\GiG.Core.Orleans.Client.csproj" />
         <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Silo.Dashboard\GiG.Core.Orleans.Silo.Dashboard.csproj" />
         <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Silo\GiG.Core.Orleans.Silo.csproj" />
+        <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Storage.Npgsql\GiG.Core.Orleans.Storage.Npgsql.csproj" />
         <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Streams.Kafka\GiG.Core.Orleans.Streams.Kafka.csproj" />
     </ItemGroup>  
 

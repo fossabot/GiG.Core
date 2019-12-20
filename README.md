@@ -1,4 +1,4 @@
-![Alt text](gig-core.png)
+# ![GiG Core](gig-core.png)
 
 The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 
