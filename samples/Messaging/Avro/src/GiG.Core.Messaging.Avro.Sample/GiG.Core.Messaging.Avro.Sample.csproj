@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="**/*.Avro.cs">
+      <DependentUpon>$([System.String]::Copy('%(Filename).cs').Replace('Avro.',''))</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Confluent.Apache.Avro" Version="1.7.7.7" />
+    <PackageReference Include="GiG.Core.Messaging.Avro.Schema.Abstractions" Version="1.2.3-phoenix-917-back0001.519" />
+    <PackageReference Include="GiG.Core.Messaging.Avro.Schema.Generator.MSBuild" Version="1.2.3-phoenix-917-back0001.519">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+</Project>
