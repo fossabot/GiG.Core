@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Configuration;
 
 namespace GiG.Core.Web.Authentication.OAuth.Extensions
 {
@@ -24,7 +25,12 @@ namespace GiG.Core.Web.Authentication.OAuth.Extensions
 
             if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
 
-            var apiAuthenticationOptions = configurationSection?.Get<OAuthAuthenticationOptions>() ?? new OAuthAuthenticationOptions();
+            var apiAuthenticationOptions = configurationSection.Get<OAuthAuthenticationOptions>();
+
+            if (apiAuthenticationOptions == null)
+            {
+                throw new ConfigurationErrorsException($"Configuration section '{configurationSection?.Path}' does not exist.");
+            }
 
             if (!apiAuthenticationOptions.IsEnabled)
             {
