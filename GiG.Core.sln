@@ -435,18 +435,23 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.HealthChecks.Orleans.AspNetCore", "src\GiG.Core.HealthChecks.Orleans.AspNetCore\GiG.Core.HealthChecks.Orleans.AspNetCore.csproj", "{1DF02E3B-8455-48C9-AE4C-181EC1DD4193}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.Avro.Schema.Abstractions", "src\GiG.Core.Messaging.Avro.Schema.Abstractions\GiG.Core.Messaging.Avro.Schema.Abstractions.csproj", "{72B552C4-3373-4916-A7C2-3D0F8A273B81}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentication", "{F286F8FD-A3C9-4D52-B06A-27EB3A29B06C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.Avro.Schema.Generator", "src\GiG.Core.Messaging.Avro.Schema.Generator\GiG.Core.Messaging.Avro.Schema.Generator.csproj", "{31E7E6AF-4593-4260-A38E-4BA8C10DCAAE}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Authentication.OAuth.Abstractions", "src\GiG.Core.Authentication.OAuth.Abstractions\GiG.Core.Authentication.OAuth.Abstractions.csproj", "{DDDE242E-78E3-4D93-9515-BD677A1BCC29}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.Avro.Schema.Generator.MSBuild", "src\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.csproj", "{C5490DE7-B374-4E40-958D-F2E824239B52}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Authentication.OAuth.Abstractions", "src\GiG.Core.Web.Authentication.OAuth.Abstractions\GiG.Core.Web.Authentication.OAuth.Abstractions.csproj", "{C9B02078-9B9E-419C-8464-309CCEA0C677}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.Tasks", "src\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.Tasks\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.Tasks.csproj", "{B6161DCD-CC53-41DE-A173-928A61F45477}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Docs.Authentication.OAuth", "src\GiG.Core.Web.Docs.Authentication.OAuth\GiG.Core.Web.Docs.Authentication.OAuth.csproj", "{63CD0801-B89B-425B-B68B-D65195AC20B9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Avro", "Avro", "{F3CE36D9-6ED4-4C5C-923C-CD1F46396134}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Authentication.OAuth", "src\GiG.Core.Web.Authentication.OAuth\GiG.Core.Web.Authentication.OAuth.csproj", "{FBA3F75B-F62C-45A1-B3E2-C32396E61AA2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{80BE322A-30A3-4C7C-82AD-5C912FF57998}"
