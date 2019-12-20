@@ -1,4 +1,4 @@
-# GiG.Core.Http.Security.Hmac
+# GiG.Core.Http.Authentication.Hmac
 
 This Library provides an API to register an HmacDelegatingHandler onto the HttpClient. When using this Library, the library will inject the Hmac header to the request.
 
