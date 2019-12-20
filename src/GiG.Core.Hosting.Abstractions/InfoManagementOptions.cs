@@ -18,6 +18,6 @@
         /// <summary>
         /// Checksum info Options.
         /// </summary>
-        public InfoManagementChecksumOptions Checksum { get; set; }
+        public InfoManagementChecksumOptions Checksum { get; set; } = new InfoManagementChecksumOptions();
     }
 }

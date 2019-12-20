@@ -16,10 +16,10 @@ namespace GiG.Core.Hosting.Abstractions
         /// The root directory.
         /// </summary>
         public string Root { get; set; } = AppContext.BaseDirectory;
-        
+
         /// <summary>
         /// The path of the file which will contain the checksum.
         /// </summary>
-        public string FilePath { get; set; }
+        public string FilePath { get; set; } = "checksum.app.txt";
     }
 }

@@ -1,7 +1,9 @@
-﻿using GiG.Core.Hosting.Tests.Integration.Mocks;
+﻿using GiG.Core.Hosting.Extensions;
+using GiG.Core.Hosting.Tests.Integration.Mocks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -18,10 +20,16 @@ namespace GiG.Core.Hosting.Tests.Integration.Tests
 
         public InfoManagementTests()
         {
-            _httpClient = new TestServer(new WebHostBuilder()
-                .UseStartup<MockStartup>()
-                .ConfigureAppConfiguration(appConfig => appConfig.AddJsonFile("appsettings.json")))
-                .CreateClient();
+            var hostBuilder = new HostBuilder()
+                .UseApplicationMetadata()
+                .ConfigureWebHost(webHost =>
+                {
+                    webHost.UseTestServer();
+                    webHost.UseStartup<AspNetCoreMockStartup>();
+                    webHost.ConfigureAppConfiguration(appConfig => appConfig.AddJsonFile("appsettings.json"));
+                });
+
+            _httpClient = hostBuilder.Start().GetTestClient();
         }
 
         [Fact]
@@ -41,6 +49,7 @@ namespace GiG.Core.Hosting.Tests.Integration.Tests
             Assert.Equal(applicationMetadataDictionary[nameof(ApplicationMetadata.Name)], ApplicationMetadata.Name);
             Assert.Equal(applicationMetadataDictionary[nameof(ApplicationMetadata.Version)], ApplicationMetadata.Version);
             Assert.Equal(applicationMetadataDictionary[nameof(ApplicationMetadata.InformationalVersion)], ApplicationMetadata.InformationalVersion);
+            Assert.Equal(applicationMetadataDictionary[nameof(ApplicationMetadata.Checksum)], ApplicationMetadata.Checksum);
         }
     }
 }

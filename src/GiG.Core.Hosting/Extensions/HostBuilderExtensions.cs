@@ -1,10 +1,10 @@
-﻿using JetBrains.Annotations;
+﻿using GiG.Core.Hosting.Abstractions;
+using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
-using GiG.Core.Hosting.Abstractions;
 
 namespace GiG.Core.Hosting.Extensions
 {
@@ -37,7 +37,7 @@ namespace GiG.Core.Hosting.Extensions
         private static string GetCheckSum(IConfiguration configuration)
         {
             var checksumConfiguration = configuration.GetSection(InfoManagementChecksumOptions.DefaultSectionName)
-                .Get<InfoManagementChecksumOptions>();
+                .Get<InfoManagementChecksumOptions>() ?? new InfoManagementChecksumOptions();
             
             var physicalFileProvider = new PhysicalFileProvider(checksumConfiguration.Root);
             var fileInfo = physicalFileProvider.GetFileInfo(checksumConfiguration.FilePath);
@@ -49,7 +49,7 @@ namespace GiG.Core.Hosting.Extensions
             {
                 using (var reader = new StreamReader(stream))
                 {
-                    return reader.ReadToEnd();
+                    return reader.ReadToEnd().Trim();
                 }
             }
         }

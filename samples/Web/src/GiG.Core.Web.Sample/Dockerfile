@@ -22,5 +22,6 @@ ENTRYPOINT ["/scripts/push.sh"]
 
 FROM base AS final
 COPY --from=publish /app/publish .
-COPY --from=publish /app/checksum /checksum
+COPY --from=publish /app/checksum ./checksum
+ENV InfoManagement__Checksum__FilePath=/checksum/checksum.app.txt
 ENTRYPOINT ["dotnet", "GiG.Core.Web.Sample.dll"]
