@@ -450,6 +450,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AE5338FC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.Avro.Sample", "samples\Messaging\Avro\src\GiG.Core.Messaging.Avro.Sample\GiG.Core.Messaging.Avro.Sample.csproj", "{022ED0B9-EB30-49DD-B0AA-C8167CBB16D5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.Avro.Schema.Generator.Tests.Integration", "tests\integration\GiG.Core.Messaging.Avro.Schema.Generator.Tests.Integration\GiG.Core.Messaging.Avro.Schema.Generator.Tests.Integration.csproj", "{BA5D47D8-66E1-4B81-B11B-221F8C36FDE0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -988,6 +990,10 @@ Global
 		{022ED0B9-EB30-49DD-B0AA-C8167CBB16D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{022ED0B9-EB30-49DD-B0AA-C8167CBB16D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{022ED0B9-EB30-49DD-B0AA-C8167CBB16D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA5D47D8-66E1-4B81-B11B-221F8C36FDE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA5D47D8-66E1-4B81-B11B-221F8C36FDE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA5D47D8-66E1-4B81-B11B-221F8C36FDE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA5D47D8-66E1-4B81-B11B-221F8C36FDE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1173,6 +1179,7 @@ Global
 		{80BE322A-30A3-4C7C-82AD-5C912FF57998} = {F3CE36D9-6ED4-4C5C-923C-CD1F46396134}
 		{AE5338FC-895C-4130-8166-6934217F36F5} = {F3CE36D9-6ED4-4C5C-923C-CD1F46396134}
 		{022ED0B9-EB30-49DD-B0AA-C8167CBB16D5} = {80BE322A-30A3-4C7C-82AD-5C912FF57998}
+		{BA5D47D8-66E1-4B81-B11B-221F8C36FDE0} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}

@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <Target Name="PrintAllReferences" DependsOnTargets="ResolvePackageDependenciesForBuild">
+    <Message Importance="high" Text="Referenced package: %(PackageDefinitions.Identity)" />
+  </Target>
+
+  <ItemGroup>
+    <PackageReference Include="Confluent.Apache.Avro" Version="1.7.7.7" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.3.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="3.3.1" />
+    <PackageReference Include="Microsoft.Net.Compilers" Version="3.3.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="3.3.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
+    <PackageReference Include="Moq" Version="4.13.1" />
+    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+    <PackageReference Include="coverlet.collector" Version="1.0.1" />
+    <PackageReference Include="Microsoft.Build.Locator" Version="1.2.6" />
+    <PackageReference Include="Confluent.Apache.Avro" Version="1.7.7.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\GiG.Core.Messaging.Avro.Schema.Abstractions\GiG.Core.Messaging.Avro.Schema.Abstractions.csproj" />
+    <ProjectReference Include="..\..\..\src\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.csproj" />
+    <ProjectReference Include="..\..\..\src\GiG.Core.Messaging.Avro.Schema.Generator\GiG.Core.Messaging.Avro.Schema.Generator.csproj" />
+  </ItemGroup>
+
+</Project>
