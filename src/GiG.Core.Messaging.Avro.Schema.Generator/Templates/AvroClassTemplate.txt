@@ -1,0 +1,126 @@
+// ReSharper disable UnusedMember.Global
+// ReSharper disable UnusedMember.Local
+// ReSharper disable RedundantNameQualifier
+// ReSharper disable StringLiteralTypo
+// ReSharper disable RedundantUsingDirective
+
+using Avro;
+using Avro.Specific;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace {{namespace}}
+{
+    public partial class {{classname}} : ISpecificRecord
+    {
+        // ReSharper disable once InconsistentNaming
+        // ReSharper disable once MemberCanBePrivate.Global
+        // ReSharper disable once FieldCanBeMadeReadOnly.Global
+        public static global::Avro.Schema _SCHEMA = global::Avro.Schema.Parse(@"{{avro_schema}}");
+
+        public object Get(int fieldPos)
+        {
+            switch (fieldPos)
+            {
+{{avro_serializer}}
+                default: throw new AvroRuntimeException("Bad index " + fieldPos + " in Get()");
+            }
+        }
+
+        public void Put(int fieldPos, object fieldValue)
+        {
+            switch (fieldPos)
+            {
+{{avro_deserializer}}
+                default: throw new AvroRuntimeException("Bad index " + fieldPos + " in Put()");
+            }
+        }
+
+        public global::Avro.Schema Schema => _SCHEMA;
+        
+        #region DateTime serialization helpers
+        
+        private static long SerializeDateTime(DateTime timestamp) => new DateTimeOffset(timestamp.ToUniversalTime()).ToUnixTimeMilliseconds();
+
+        private static DateTime DeserializeDateTime(long timestamp) => DateTimeOffset.FromUnixTimeMilliseconds(timestamp).UtcDateTime;
+        
+        #endregion
+        
+        #region Bytes serialization helpers
+
+        private static readonly byte[] DefaultByteArray = new byte[0];
+        
+        private static byte[] SerializeBytes(byte[] data) => data ?? DefaultByteArray;
+
+        private static byte[] DeserializeBytes(byte[] data) => data?.Length > 0 ? data : null;
+        
+        #endregion
+        
+        #region Enum serialization helpers
+        
+        private static string SerializeEnum(Enum value) => value.ToString().ToUpperInvariant();
+        
+        private static TModel DeserializeEnum<TModel>(object data)
+        {
+            var val = Enum.Parse(typeof(TModel), data.ToString());
+            return (TModel) val;
+        }
+        
+        #endregion
+
+		#region Decimal serialization helpers
+
+        public static byte[] SerializeDecimal(decimal dec)
+        {
+            //Load four 32 bit integers from the Decimal.GetBits function
+		    var bits = decimal.GetBits(dec);
+
+		    //Create a temporary list to hold the bytes
+		    var bytes = new List<byte>();
+		    
+			//iterate each 32 bit integer
+		    foreach (var i in bits)
+		    {
+		        //add the bytes of the current 32bit integer to the bytes list
+		        bytes.AddRange(BitConverter.GetBytes(i));
+		    }
+		 
+		    //return the bytes list as an array
+		    var result = bytes.ToArray();
+
+			if (BitConverter.IsLittleEndian)
+			{
+				Array.Reverse(result);
+			}
+
+			return result;
+		}
+
+		public static decimal DeserializeDecimal(byte[] bytes)
+		{
+		    //check that it is even possible to convert the array
+		    if (bytes.Length != 16)
+			{
+		        throw new Exception("A decimal must be created from exactly 16 bytes");
+			}
+
+			if (BitConverter.IsLittleEndian)
+			{
+				Array.Reverse(bytes);
+			}
+		    //make an array to convert back to int32's
+		    var bits = new int[4];
+		    for (var i = 0; i <= 15; i += 4)
+		    {
+		        //convert every 4 bytes into an int32
+		        bits[i/4] = BitConverter.ToInt32(bytes, i);
+		    }
+
+		    //Use the decimal's new constructor to create an instance of decimal
+		    return new decimal(bits);
+		}
+
+		#endregion
+    }
+}
