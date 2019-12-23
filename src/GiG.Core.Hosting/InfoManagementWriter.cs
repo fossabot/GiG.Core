@@ -28,6 +28,7 @@ namespace GiG.Core.Hosting
                     writer.WriteString(nameof(ApplicationMetadata.Name), ApplicationMetadata.Name);
                     writer.WriteString(nameof(ApplicationMetadata.Version), ApplicationMetadata.Version);
                     writer.WriteString(nameof(ApplicationMetadata.InformationalVersion), ApplicationMetadata.InformationalVersion);
+                    writer.WriteString(nameof(ApplicationMetadata.Checksum), ApplicationMetadata.Checksum);
                     writer.WriteEndObject();
                 }
 

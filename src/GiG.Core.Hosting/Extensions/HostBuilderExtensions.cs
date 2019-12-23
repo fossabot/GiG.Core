@@ -1,6 +1,10 @@
-﻿using JetBrains.Annotations;
+﻿using GiG.Core.Hosting.Abstractions;
+using JetBrains.Annotations;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.IO;
 
 namespace GiG.Core.Hosting.Extensions
 {
@@ -23,8 +27,31 @@ namespace GiG.Core.Hosting.Extensions
                 var applicationName = context.Configuration["ApplicationName"];
                 ApplicationMetadata.Name = applicationName;
 
+                ApplicationMetadata.Checksum = GetCheckSum(context.Configuration);
+
                 services.AddApplicationMetadataAccessor();
             });
+        }
+        
+
+        private static string GetCheckSum(IConfiguration configuration)
+        {
+            var checksumConfiguration = configuration.GetSection(InfoManagementChecksumOptions.DefaultSectionName)
+                .Get<InfoManagementChecksumOptions>() ?? new InfoManagementChecksumOptions();
+            
+            var physicalFileProvider = new PhysicalFileProvider(checksumConfiguration.Root);
+            var fileInfo = physicalFileProvider.GetFileInfo(checksumConfiguration.FilePath);
+            
+            if (!fileInfo.Exists)
+                return null;
+            
+            using (var stream = fileInfo.CreateReadStream())
+            {
+                using (var reader = new StreamReader(stream))
+                {
+                    return reader.ReadToEnd().Trim();
+                }
+            }
         }
     }
 }
