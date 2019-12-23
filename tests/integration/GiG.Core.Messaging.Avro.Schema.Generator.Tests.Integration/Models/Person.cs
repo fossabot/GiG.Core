@@ -43,8 +43,8 @@ namespace GiG.Core.Messaging.Avro.Schema.Generator.Tests.Integration.Models
         [Field(nameof(MyLong))]
         public Int64? MyLong { get; set; }
         
-    //    [Field(nameof(Id))]
-    //    public Guid? Id { get; set; }
+        [Field(nameof(Id))]
+        public Guid? Id { get; set; }
 
         [Field(nameof(Address), "The Address Object")]
         public Address Address { get; set; }
