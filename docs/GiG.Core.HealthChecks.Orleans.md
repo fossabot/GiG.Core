@@ -29,8 +29,8 @@ The HealthChecks can be reached via the configured endpoints as per [GiG.Core.He
 
 The below table outlines the valid Configurations used to override the [HealthChecksOptions](..\src\GiG.Core.HealthChecks.Orleans\Abstractions\HealthChecksOptions.cs) under the Config section `Orleans:HealthChecks`.
 
-| Configuration Name | Type   | Optional | Default Value |
-|:-------------------|:-------|:---------|:--------------|
-| DomainFilter       | String | Yes      | `*`           |
-| Port               | Integer| Yes      | 5555         |
-| HostSelf           | Boolean| Yes      | true         |
+| Configuration Name | Type    | Optional | Default Value |
+|:-------------------|:--------|:---------|:--------------|
+| DomainFilter       | String  | Yes      | `*`           |
+| Port               | Int     | Yes      | 5555          |
+| HostSelf           | Boolean | Yes      | true          |

@@ -11,7 +11,7 @@ namespace GiG.Core.Logging.Sinks.Fluentd.Internal
         
         public FluentdLoggingSinkProvider(IConfiguration configurationSection)
         {
-            _options = configurationSection.Get<FluentdSinkOptions>();
+            _options = configurationSection.Get<FluentdSinkOptions>() ?? new FluentdSinkOptions();
         }
 
         public void RegisterSink(LoggerSinkConfiguration sinkConfiguration)

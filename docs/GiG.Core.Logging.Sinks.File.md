@@ -27,14 +27,14 @@ static class Program
 
 The below table outlines the valid Configurations used to override the [FileSinkOptions](../src/GiG.Core.Logging.Sinks.File/Internal/FileSinkOptions.cs) under the Config section `Logging:Sinks:File`
 
-| Configuration Name     | Type   | Optional | Default Value           |
-|:-----------------------|:-------|:---------|:------------------------|
-| IsEnabled              | bool   | Yes      | false                   |
-| FilePath               | string | Yes      | 'logs\\log-.txt'        |
-| RollingInterval        | string | Yes      | 'RollingInterval.Day'   |
-| FileSizeLimitBytes     | long   | Yes      | 1L * 1024 * 1024 * 1024 |
-| RetainedFileCountLimit | int    | Yes      | 31                      |
-| RollOnFileSizeLimit    | bool   | Yes      | true                    |
+| Configuration Name     | Type    | Optional | Default Value           |
+|:-----------------------|:--------|:---------|:------------------------|
+| IsEnabled              | Boolean | Yes      | false                   |
+| FilePath               | String  | Yes      | `logs\\log-.txt`        |
+| RollingInterval        | String  | Yes      | `RollingInterval.Day`   |
+| FileSizeLimitBytes     | Long    | Yes      | 1L * 1024 * 1024 * 1024 |
+| RetainedFileCountLimit | Int     | Yes      | 31                      |
+| RollOnFileSizeLimit    | Boolean | Yes      | true                    |
 
 #### Sample Configuration
 

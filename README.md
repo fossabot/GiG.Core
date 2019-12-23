@@ -1,4 +1,4 @@
-![Alt text](gig-core.png)
+# ![GiG Core](gig-core.png)
 
 The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 
@@ -25,7 +25,7 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Http](docs/GiG.Core.Http.md) - Provides an API to create or customise an `HttpClient` without using IOC.
 - [GiG.Core.Http.DistributedTracing](docs/GiG.Core.Http.DistributedTracing.md) - Provides an API to register a `CorrelationIdDelegatingHandler` onto the `HttpClient`.
 - [GiG.Core.Http.MultiTenant](docs/GiG.Core.Http.MultiTenant.md) - Provides an API to register a `TenantDelegatingHandler` onto the `HttpClient`
-- [GiG.Core.Http.Security.Hmac](docs/GiG.Core.Http.Security.Hmac.md) - Provides an API to register an `HmacDelegatingHandler` onto the `HttpClient`.
+- [GiG.Core.Http.Authentication.Hmac](docs/GiG.Core.Http.Authentication.Hmac.md) - Provides an API to register an `HmacDelegatingHandler` onto the `HttpClient`.
 - [GiG.Core.Logging.All](docs/GiG.Core.Logging.All.md) - Provides an API to register Logging using Serilog and multiple Sinks and Enrichers for an application.
 - [GiG.Core.Logging.Sinks.Console](docs/GiG.Core.Logging.Sinks.Console.md) - Provides an API to register Logging to a Console using Serilog for an application.
 - [GiG.Core.Logging.Sinks.File](docs/GiG.Core.Logging.Sinks.File.md) - Provides an API to register Logging to a File using Serilog for an application.
@@ -51,11 +51,13 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Orleans.Streams.Kafka](docs/GiG.Core.Orleans.Streams.Kafka.md) - Provides an API to register an Orleans Stream using Kafka.
 - [GiG.Core.Providers.DateTime](docs/GiG.Core.Providers.DateTime.md) - This Library provides an API to register required DateTime providers.
 - [GiG.Core.TokenManager](docs/GiG.Core.TokenManager.md) - This Library provides an API to register required services for the Token Manager.
+- [GiG.Core.Web.Authentication.Hmac](docs/GiG.Core.Web.Authentication.Hmac.md) - Provides an API to configure `HmacAuthenticationHandler`
+- [GiG.Core.Web.Authentication.Hmac.MultiTenant](docs/GiG.Core.Web.Authentication.Hmac.MultiTenant.md) - Provides an API to configure `HmacAuthenticationHandler` for multitenancy.
+- [GiG.Core.Web.Authentication.OAuth](docs/GiG.Core.Web.Authentication.OAuth.md) - Provides an API to configure OAuth2.0 as a protocol for Authentication.
 - [GiG.Core.Web.Docs](docs/GiG.Core.Web.Docs.md) - Provides an API to configure API Documentation.
+- [GiG.Core.Web.Docs.Authentication.OAuth](docs/GiG.Core.Web.Docs.Authentication.OAuth.md) - Provides an API to configure OAuth2.0 as a protocol for Authentication when accessing API Documentation.
 - [GiG.Core.Web.FluentValidation](docs/GiG.Core.Web.FluentValidation.md) - Provides an API to register the Fluent Validation Exception Middleware in an application.
 - [GiG.Core.Web.Hosting](docs/GiG.Core.Web.Hosting.md) - Provides an API to configure `BASE_PATH` and Forwarded Headers.
-- [GiG.Core.Web.Security.Hmac](docs/GiG.Core.Web.Security.Hmac.md) - Provides an API to configure `HmacAuthenticationHandler`
-- [GiG.Core.Web.Security.Hmac.MultiTenant](docs/GiG.Core.Web.Security.Hmac.MultiTenant.md) - Provides an API to configure `HmacAuthenticationHandler` for multitenancy.
 - [GiG.Core.Web.Mock](docs/GiG.Core.Web.Mock.md) - Provides a MockStartupBase class to be used for Testing.
 
 

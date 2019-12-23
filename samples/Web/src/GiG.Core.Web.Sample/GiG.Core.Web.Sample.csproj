@@ -20,6 +20,8 @@
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Logging.All\GiG.Core.Logging.All.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.HealthChecks.Abstractions\GiG.Core.HealthChecks.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.MultiTenant.Web\GiG.Core.MultiTenant.Web.csproj" />
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.Web.Authentication.OAuth\GiG.Core.Web.Authentication.OAuth.csproj" />
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.Web.Docs.Authentication.OAuth\GiG.Core.Web.Docs.Authentication.OAuth.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Web.Docs\GiG.Core.Web.Docs.csproj" />  
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Web.FluentValidation\GiG.Core.Web.FluentValidation.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Web.Hosting\GiG.Core.Web.Hosting.csproj" />

@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System;
-using System.Configuration;
 
 namespace GiG.Core.HealthChecks.Extensions
 {
@@ -36,7 +35,14 @@ namespace GiG.Core.HealthChecks.Extensions
         public static IServiceCollection ConfigureHealthChecks([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection?.Path}' is incorrect.");
+
+            var healthCheckOptions = configurationSection?.Get<HealthChecksOptions>() ?? new HealthChecksOptions();
+            services.Configure<HealthChecksOptions>(options =>
+            {
+                options.CombinedUrl = healthCheckOptions.CombinedUrl;
+                options.LiveUrl = healthCheckOptions.LiveUrl;
+                options.ReadyUrl = healthCheckOptions.ReadyUrl;
+            });
 
             return services.Configure<HealthChecksOptions>(configurationSection);
         }

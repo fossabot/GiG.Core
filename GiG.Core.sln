@@ -28,10 +28,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.HealthChecks.Orleans.md = docs\GiG.Core.HealthChecks.Orleans.md
 		docs\GiG.Core.Hosting.AspNetCore.md = docs\GiG.Core.Hosting.AspNetCore.md
 		docs\GiG.Core.Hosting.md = docs\GiG.Core.Hosting.md
+		docs\GiG.Core.Http.Authentication.Hmac.md = docs\GiG.Core.Http.Authentication.Hmac.md
 		docs\GiG.Core.Http.DistributedTracing.md = docs\GiG.Core.Http.DistributedTracing.md
 		docs\GiG.Core.Http.md = docs\GiG.Core.Http.md
 		docs\GiG.Core.Http.MultiTenant.md = docs\GiG.Core.Http.MultiTenant.md
-		docs\GiG.Core.Http.Security.Hmac.md = docs\GiG.Core.Http.Security.Hmac.md
 		docs\GiG.Core.Logging.All.md = docs\GiG.Core.Logging.All.md
 		docs\GiG.Core.Logging.Enrichers.ApplicationMetadata.md = docs\GiG.Core.Logging.Enrichers.ApplicationMetadata.md
 		docs\GiG.Core.Logging.Enrichers.Context.md = docs\GiG.Core.Logging.Enrichers.Context.md
@@ -57,12 +57,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Orleans.Streams.md = docs\GiG.Core.Orleans.Streams.md
 		docs\GiG.Core.Providers.DateTime.md = docs\GiG.Core.Providers.DateTime.md
 		docs\GiG.Core.TokenManager.md = docs\GiG.Core.TokenManager.md
+		docs\GiG.Core.Web.Authentication.Hmac.md = docs\GiG.Core.Web.Authentication.Hmac.md
+		docs\GiG.Core.Web.Authentication.Hmac.MultiTenant.md = docs\GiG.Core.Web.Authentication.Hmac.MultiTenant.md
+		docs\GiG.Core.Web.Authentication.OAuth.md = docs\GiG.Core.Web.Authentication.OAuth.md
+		docs\GiG.Core.Web.Docs.Authentication.OAuth.md = docs\GiG.Core.Web.Docs.Authentication.OAuth.md
 		docs\GiG.Core.Web.Docs.md = docs\GiG.Core.Web.Docs.md
 		docs\GiG.Core.Web.FluentValidation.md = docs\GiG.Core.Web.FluentValidation.md
 		docs\GiG.Core.Web.Hosting.md = docs\GiG.Core.Web.Hosting.md
 		docs\GiG.Core.Web.Mock.md = docs\GiG.Core.Web.Mock.md
-		docs\GiG.Core.Web.Security.Hmac.md = docs\GiG.Core.Web.Security.Hmac.md
-		docs\GiG.Core.Web.Security.Hmac.MultiTenant.md = docs\GiG.Core.Web.Security.Hmac.MultiTenant.md
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -314,31 +316,31 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Data.KVStores.Test
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Mock", "src\GiG.Core.Web.Mock\GiG.Core.Web.Mock.csproj", "{CA0EC278-E7BC-4C52-842C-0D737663FE23}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Security.Hmac", "src\GiG.Core.Web.Security.Hmac\GiG.Core.Web.Security.Hmac.csproj", "{56305F63-41CB-4BCD-9408-0AAD8ADF7DF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Authentication.Hmac", "src\GiG.Core.Web.Authentication.Hmac\GiG.Core.Web.Authentication.Hmac.csproj", "{56305F63-41CB-4BCD-9408-0AAD8ADF7DF9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Logging.Sinks.File", "src\GiG.Core.Logging.Sinks.File\GiG.Core.Logging.Sinks.File.csproj", "{A479D4F7-2F54-44EF-9A56-B04927E86F60}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Security.Hmac.Abstractions", "src\GiG.Core.Web.Security.Hmac.Abstractions\GiG.Core.Web.Security.Hmac.Abstractions.csproj", "{A5C23765-DBC3-4998-AAB5-F28452D28047}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Authentication.Hmac.Abstractions", "src\GiG.Core.Web.Authentication.Hmac.Abstractions\GiG.Core.Web.Authentication.Hmac.Abstractions.csproj", "{A5C23765-DBC3-4998-AAB5-F28452D28047}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Security.Hmac.MultiTenant", "src\GiG.Core.Web.Security.Hmac.MultiTenant\GiG.Core.Web.Security.Hmac.MultiTenant.csproj", "{8214A649-31D1-4D0C-9038-24F835EAF4AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Authentication.Hmac.MultiTenant", "src\GiG.Core.Web.Authentication.Hmac.MultiTenant\GiG.Core.Web.Authentication.Hmac.MultiTenant.csproj", "{8214A649-31D1-4D0C-9038-24F835EAF4AB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{C052B84C-DFF7-409F-A8D9-97023D0596E8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Security.Cryptography", "src\GiG.Core.Security.Cryptography\GiG.Core.Security.Cryptography.csproj", "{4F0FE16A-CE94-40A3-A6E1-8092F818D42D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Security.Hmac.Tests.Integration", "tests\integration\GiG.Core.Web.Security.Hmac.Tests.Integration\GiG.Core.Web.Security.Hmac.Tests.Integration.csproj", "{99C9840D-78BF-4D67-ACCD-584F0283DFC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Authentication.Hmac.Tests.Integration", "tests\integration\GiG.Core.Web.Authentication.Hmac.Tests.Integration\GiG.Core.Web.Authentication.Hmac.Tests.Integration.csproj", "{99C9840D-78BF-4D67-ACCD-584F0283DFC3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Security.Hmac.Tests.Unit", "tests\unit\GiG.Core.Web.Security.Hmac.Tests.Unit\GiG.Core.Web.Security.Hmac.Tests.Unit.csproj", "{F629C7DA-949A-45EC-B835-ADF4B7936111}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Authentication.Hmac.Tests.Unit", "tests\unit\GiG.Core.Web.Authentication.Hmac.Tests.Unit\GiG.Core.Web.Authentication.Hmac.Tests.Unit.csproj", "{F629C7DA-949A-45EC-B835-ADF4B7936111}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Http.Security.Hmac", "src\GiG.Core.Http.Security.Hmac\GiG.Core.Http.Security.Hmac.csproj", "{1FAA2E06-7A8B-4734-91C0-19896F384513}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Http.Authentication.Hmac", "src\GiG.Core.Http.Authentication.Hmac\GiG.Core.Http.Authentication.Hmac.csproj", "{1FAA2E06-7A8B-4734-91C0-19896F384513}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Security.Cryptography.Tests.Unit", "tests\unit\GiG.Core.Security.Cryptography.Tests.Unit\GiG.Core.Security.Cryptography.Tests.Unit.csproj", "{B4DE1B91-2BD4-4617-8AE9-C9BC47C77C64}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Security.Hmac.Abstractions", "src\GiG.Core.Security.Hmac.Abstractions\GiG.Core.Security.Hmac.Abstractions.csproj", "{66D3F817-EC0C-4C20-AB5D-CA2D20492B81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Authentication.Hmac.Abstractions", "src\GiG.Core.Authentication.Hmac.Abstractions\GiG.Core.Authentication.Hmac.Abstractions.csproj", "{66D3F817-EC0C-4C20-AB5D-CA2D20492B81}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Silo.Dashboard", "src\GiG.Core.Orleans.Silo.Dashboard\GiG.Core.Orleans.Silo.Dashboard.csproj", "{7FAA49E4-CA3F-4F03-A86A-4481CB80D0C0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Security.Hmac.MultiTenant.Tests.Integration", "tests\integration\GiG.Core.Web.Security.Hmac.MultiTenant.Tests.Integration\GiG.Core.Web.Security.Hmac.MultiTenant.Tests.Integration.csproj", "{981182FD-FCC7-40F2-8795-2BE4D8A8724A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Authentication.Hmac.MultiTenant.Tests.Integration", "tests\integration\GiG.Core.Web.Authentication.Hmac.MultiTenant.Tests.Integration\GiG.Core.Web.Authentication.Hmac.MultiTenant.Tests.Integration.csproj", "{981182FD-FCC7-40F2-8795-2BE4D8A8724A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit", "unit", "{5D6A15C2-4BE6-4C8D-85BF-415138516AEB}"
 EndProject
@@ -436,13 +438,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.HealthChecks.Orlea
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.Avro.Schema.Abstractions", "src\GiG.Core.Messaging.Avro.Schema.Abstractions\GiG.Core.Messaging.Avro.Schema.Abstractions.csproj", "{72B552C4-3373-4916-A7C2-3D0F8A273B81}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentication", "{F286F8FD-A3C9-4D52-B06A-27EB3A29B06C}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.Avro.Schema.Generator", "src\GiG.Core.Messaging.Avro.Schema.Generator\GiG.Core.Messaging.Avro.Schema.Generator.csproj", "{31E7E6AF-4593-4260-A38E-4BA8C10DCAAE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Authentication.OAuth.Abstractions", "src\GiG.Core.Authentication.OAuth.Abstractions\GiG.Core.Authentication.OAuth.Abstractions.csproj", "{DDDE242E-78E3-4D93-9515-BD677A1BCC29}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.Avro.Schema.Generator.MSBuild", "src\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.csproj", "{C5490DE7-B374-4E40-958D-F2E824239B52}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Authentication.OAuth.Abstractions", "src\GiG.Core.Web.Authentication.OAuth.Abstractions\GiG.Core.Web.Authentication.OAuth.Abstractions.csproj", "{C9B02078-9B9E-419C-8464-309CCEA0C677}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.Tasks", "src\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.Tasks\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.Tasks.csproj", "{B6161DCD-CC53-41DE-A173-928A61F45477}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Docs.Authentication.OAuth", "src\GiG.Core.Web.Docs.Authentication.OAuth\GiG.Core.Web.Docs.Authentication.OAuth.csproj", "{63CD0801-B89B-425B-B68B-D65195AC20B9}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Avro", "Avro", "{F3CE36D9-6ED4-4C5C-923C-CD1F46396134}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Authentication.OAuth", "src\GiG.Core.Web.Authentication.OAuth\GiG.Core.Web.Authentication.OAuth.csproj", "{FBA3F75B-F62C-45A1-B3E2-C32396E61AA2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{80BE322A-30A3-4C7C-82AD-5C912FF57998}"
 EndProject
@@ -986,6 +998,22 @@ Global
 		{B6161DCD-CC53-41DE-A173-928A61F45477}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6161DCD-CC53-41DE-A173-928A61F45477}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6161DCD-CC53-41DE-A173-928A61F45477}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDDE242E-78E3-4D93-9515-BD677A1BCC29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDDE242E-78E3-4D93-9515-BD677A1BCC29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDDE242E-78E3-4D93-9515-BD677A1BCC29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDDE242E-78E3-4D93-9515-BD677A1BCC29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9B02078-9B9E-419C-8464-309CCEA0C677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9B02078-9B9E-419C-8464-309CCEA0C677}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9B02078-9B9E-419C-8464-309CCEA0C677}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9B02078-9B9E-419C-8464-309CCEA0C677}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63CD0801-B89B-425B-B68B-D65195AC20B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63CD0801-B89B-425B-B68B-D65195AC20B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63CD0801-B89B-425B-B68B-D65195AC20B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63CD0801-B89B-425B-B68B-D65195AC20B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBA3F75B-F62C-45A1-B3E2-C32396E61AA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBA3F75B-F62C-45A1-B3E2-C32396E61AA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBA3F75B-F62C-45A1-B3E2-C32396E61AA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBA3F75B-F62C-45A1-B3E2-C32396E61AA2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{022ED0B9-EB30-49DD-B0AA-C8167CBB16D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{022ED0B9-EB30-49DD-B0AA-C8167CBB16D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{022ED0B9-EB30-49DD-B0AA-C8167CBB16D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -1121,7 +1149,7 @@ Global
 		{F629C7DA-949A-45EC-B835-ADF4B7936111} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
 		{1FAA2E06-7A8B-4734-91C0-19896F384513} = {663B3F62-62DA-4B0D-81CA-156013D0C93C}
 		{B4DE1B91-2BD4-4617-8AE9-C9BC47C77C64} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
-		{66D3F817-EC0C-4C20-AB5D-CA2D20492B81} = {C052B84C-DFF7-409F-A8D9-97023D0596E8}
+		{66D3F817-EC0C-4C20-AB5D-CA2D20492B81} = {F286F8FD-A3C9-4D52-B06A-27EB3A29B06C}
 		{7FAA49E4-CA3F-4F03-A86A-4481CB80D0C0} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
 		{981182FD-FCC7-40F2-8795-2BE4D8A8724A} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 		{5D6A15C2-4BE6-4C8D-85BF-415138516AEB} = {807ECA6E-BD91-4F04-B213-C500DF38DA43}
@@ -1176,6 +1204,11 @@ Global
 		{C5490DE7-B374-4E40-958D-F2E824239B52} = {1577B553-2909-4844-A422-8782E2AA0F83}
 		{B6161DCD-CC53-41DE-A173-928A61F45477} = {1577B553-2909-4844-A422-8782E2AA0F83}
 		{F3CE36D9-6ED4-4C5C-923C-CD1F46396134} = {F3C1FDA9-11D3-4B05-8091-63D53022F544}
+		{F286F8FD-A3C9-4D52-B06A-27EB3A29B06C} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
+		{DDDE242E-78E3-4D93-9515-BD677A1BCC29} = {F286F8FD-A3C9-4D52-B06A-27EB3A29B06C}
+		{C9B02078-9B9E-419C-8464-309CCEA0C677} = {D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF}
+		{63CD0801-B89B-425B-B68B-D65195AC20B9} = {D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF}
+		{FBA3F75B-F62C-45A1-B3E2-C32396E61AA2} = {D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF}
 		{80BE322A-30A3-4C7C-82AD-5C912FF57998} = {F3CE36D9-6ED4-4C5C-923C-CD1F46396134}
 		{AE5338FC-895C-4130-8166-6934217F36F5} = {F3CE36D9-6ED4-4C5C-923C-CD1F46396134}
 		{022ED0B9-EB30-49DD-B0AA-C8167CBB16D5} = {80BE322A-30A3-4C7C-82AD-5C912FF57998}

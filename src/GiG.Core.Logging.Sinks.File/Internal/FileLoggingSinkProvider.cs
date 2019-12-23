@@ -12,7 +12,7 @@ namespace GiG.Core.Logging.Sinks.File.Internal
 
         public FileLoggingSinkProvider(IConfiguration configurationSection)
         {
-            _options = configurationSection.Get<FileSinkOptions>();
+            _options = configurationSection.Get<FileSinkOptions>() ?? new FileSinkOptions();
         }
 
         public void RegisterSink(LoggerSinkConfiguration sinkConfiguration)

@@ -24,8 +24,8 @@ The below table outlines the valid Configurations used to configure the [TokenMa
 The default configuration section is set to 'TokenManager'.
 
 
-| Configuration Name | Type               | Optional | Default Value            |
-|:-------------------|:-------            |:---------|:-------------------------|
-| Username           | String             | No       |                          |
-| Password           | String             | No       |                          |
-| Client             | [TokenClientOptions](..\src\GiG.Core.TokenManager\Models\TokenClientOptions.cs) | No       |                          |
+| Configuration Name | Type                                                                            | Optional | Default Value |
+|:-------------------|:--------------------------------------------------------------------------------|:---------|:--------------|
+| Username           | String                                                                          | No       |               |
+| Password           | String                                                                          | No       |               |
+| Client             | [TokenClientOptions](..\src\GiG.Core.TokenManager\Models\TokenClientOptions.cs) | No       |               |
