@@ -27,4 +27,10 @@
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Web.Hosting\GiG.Core.Web.Hosting.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="checksum.app.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
