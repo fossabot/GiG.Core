@@ -10,6 +10,7 @@ using Xunit;
 
 namespace GiG.Core.Messaging.Avro.Schema.Generator.Tests.Integration.Tests
 {
+    [Trait("Category", "Integration")]
     public class CodeGeneratorTests
     {
         [Fact]
