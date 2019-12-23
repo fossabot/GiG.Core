@@ -20,7 +20,7 @@ namespace GiG.Core.Messaging.Avro.Schema.Generator.Tests.Integration.Tests
             Assembly assembly = typeof(CodeGeneratorTests).Assembly;
             var assemblyName = assembly.GetName().Name;
             var projectPath = assembly.Location.Substring(0, assembly.Location.IndexOf(assemblyName));
-            projectPath = projectPath + assemblyName + @"\" + assemblyName + ".csproj";
+            projectPath = projectPath + assemblyName + @"/" + assemblyName + ".csproj";
 
             // Delete previous avro files - comment this out when debugging
             DeleteAvroFiles(projectPath);
