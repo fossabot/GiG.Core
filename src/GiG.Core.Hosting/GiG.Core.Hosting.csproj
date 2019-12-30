@@ -12,7 +12,7 @@
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="3.0.0" PrivateAssets="compile" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.0.0" PrivateAssets="compile" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.6.0" PrivateAssets="compile" />
-    <PackageReference Include="System.Text.Json" Version="4.6.0" PrivateAssets="compile" />
+    <PackageReference Include="System.Text.Json" Version="4.7.0" PrivateAssets="compile" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,4 +1,4 @@
-# GiG.Core.Logging.File
+# GiG.Core.Logging.Sinks.File
 
 This Library provides an API to register Logging to File using Serilog for an application.
 
