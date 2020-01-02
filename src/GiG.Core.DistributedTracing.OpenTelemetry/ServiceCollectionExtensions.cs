@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using OpenTelemetry.Trace.Configuration;
 using System;
 
-namespace GiG.Core.DistributedTracing.Extensions
+namespace GiG.Core.DistributedTracing.OpenTelemetry
 {
     /// <summary>
     /// Service Collection Extensions.

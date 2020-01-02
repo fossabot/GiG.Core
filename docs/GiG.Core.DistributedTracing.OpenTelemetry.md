@@ -1,6 +1,6 @@
-# GiG.Core.DistributedTracing
+# GiG.Core.DistributedTracing.OpenTelemetry
 
-This Library provides an API to register Tracing to capture distributed traces from your application.
+This Library provides an API to register Tracing using Open Telemetry to capture distributed traces from your application.
 
 ## Basic Usage
 

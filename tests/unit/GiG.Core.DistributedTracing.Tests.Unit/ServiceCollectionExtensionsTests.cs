@@ -1,5 +1,4 @@
-﻿using GiG.Core.DistributedTracing.Extensions;
-using Microsoft.Extensions.DependencyInjection;
+﻿using GiG.Core.DistributedTracing.OpenTelemetry;
 using System;
 using Xunit;
 
