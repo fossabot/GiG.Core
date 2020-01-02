@@ -60,16 +60,16 @@ namespace GiG.Core.Configuration.Tests.Integration.Tests
             // Arrange
             const string expected = "Override";
             
-            File.WriteAllText(Path.Combine("./configs", "appsettings.override.json"), @"{ ""Configuration"": ""Override"" }");
-
+            File.WriteAllText($"{Directory.GetCurrentDirectory()}/configs/appsettings.override.json", @"{ ""Configuration"": ""Override"" }");
+            
             var host = Host.CreateDefaultBuilder()
                 .ConfigureExternalConfiguration()
                 .Build();
             
-            File.Delete("./configs/appsettings.override.json");
+            File.Delete($"{Directory.GetCurrentDirectory()}/configs/appsettings.override.json");
             
             var configuration = host.Services.GetRequiredService<IConfiguration>();
-            
+           
             // Act - Assert
             Assert.Equal(expected, configuration.GetValue<string>(ConfigurationSectionName));
             
@@ -80,16 +80,16 @@ namespace GiG.Core.Configuration.Tests.Integration.Tests
         {
             // Arrange
             const string expected = "Override2";
-            
-            File.WriteAllText(Path.Combine("./configs", "appsettings.override.json"), @"{ ""Configuration"": ""Override"" }");
-            File.WriteAllText(Path.Combine("./configs", "appsettings.override2.json"), @"{ ""Configuration"": ""Override2"" }");
+
+            File.WriteAllText($"{Directory.GetCurrentDirectory()}/configs/appsettings.override.json", @"{ ""Configuration"": ""Override"" }");
+            File.WriteAllText($"{Directory.GetCurrentDirectory()}/configs/appsettings.override2.json", @"{ ""Configuration"": ""Override2"" }");
 
             var host = Host.CreateDefaultBuilder()
                 .ConfigureExternalConfiguration()
                 .Build();
             
-            File.Delete("./configs/appsettings.override.json");
-            File.Delete("./configs/appsettings.override2.json");
+            File.Delete($"{Directory.GetCurrentDirectory()}/configs/appsettings.override.json");
+            File.Delete($"{Directory.GetCurrentDirectory()}/configs/appsettings.override2.json");
             
             var configuration = host.Services.GetRequiredService<IConfiguration>();
 
