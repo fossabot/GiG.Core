@@ -44,7 +44,7 @@ namespace GiG.Core.Configuration.Tests.Integration.Tests
             
             // Arrange
             var host = Host.CreateDefaultBuilder()
-                .ConfigureExternalConfiguration()
+                .ConfigureExternalConfiguration("empty")
                 .Build();
             
             var configuration = host.Services.GetRequiredService<IConfiguration>();
@@ -59,15 +59,11 @@ namespace GiG.Core.Configuration.Tests.Integration.Tests
         {
             // Arrange
             const string expected = "Override";
-            
-            File.WriteAllText($"{Directory.GetCurrentDirectory()}/configs/appsettings.override.json", @"{ ""Configuration"": ""Override"" }");
-            
+
             var host = Host.CreateDefaultBuilder()
-                .ConfigureExternalConfiguration()
+                .ConfigureExternalConfiguration("config")
                 .Build();
-            
-            File.Delete($"{Directory.GetCurrentDirectory()}/configs/appsettings.override.json");
-            
+
             var configuration = host.Services.GetRequiredService<IConfiguration>();
            
             // Act - Assert
@@ -80,16 +76,10 @@ namespace GiG.Core.Configuration.Tests.Integration.Tests
         {
             // Arrange
             const string expected = "Override2";
-
-            File.WriteAllText($"{Directory.GetCurrentDirectory()}/configs/appsettings.override.json", @"{ ""Configuration"": ""Override"" }");
-            File.WriteAllText($"{Directory.GetCurrentDirectory()}/configs/appsettings.override2.json", @"{ ""Configuration"": ""Override2"" }");
-
+     
             var host = Host.CreateDefaultBuilder()
                 .ConfigureExternalConfiguration()
                 .Build();
-            
-            File.Delete($"{Directory.GetCurrentDirectory()}/configs/appsettings.override.json");
-            File.Delete($"{Directory.GetCurrentDirectory()}/configs/appsettings.override2.json");
             
             var configuration = host.Services.GetRequiredService<IConfiguration>();
 

@@ -20,7 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="empty" />
     <Folder Include="configs" />
+    <Folder Include="config" />
   </ItemGroup>
 
 </Project>
