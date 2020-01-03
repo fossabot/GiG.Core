@@ -20,6 +20,7 @@ namespace GiG.Core.Configuration.Extensions
         public static IHostBuilder ConfigureExternalConfiguration([NotNull] this IHostBuilder builder, [NotNull] string basePath = "configs")
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (string.IsNullOrWhiteSpace(basePath)) throw new ArgumentException($"'{nameof(basePath)}' must not be null, empty or whitespace.", nameof(basePath));
             
             return builder.ConfigureAppConfiguration(appConfig =>
             {
