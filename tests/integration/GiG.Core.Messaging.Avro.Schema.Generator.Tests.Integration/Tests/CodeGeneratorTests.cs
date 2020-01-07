@@ -1,5 +1,6 @@
 using Buildalyzer;
 using Buildalyzer.Workspaces;
+using GiG.Core.Messaging.Avro.Schema.Abstractions.Annotations;
 using Microsoft.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -22,15 +23,22 @@ namespace GiG.Core.Messaging.Avro.Schema.Generator.Tests.Integration.Tests
             var projectPath = assembly.Location.Substring(0, assembly.Location.IndexOf(assemblyName));
             projectPath = projectPath + assemblyName + @"/" + assemblyName + ".csproj";
 
+            Assembly attributeLib = typeof(NamedSchemaAttribute).Assembly;
+
             // Delete previous avro files - comment this out when debugging
             DeleteAvroFiles(projectPath);
 
             AnalyzerManager manager = new AnalyzerManager();
             ProjectAnalyzer analyzer = manager.GetProject(projectPath);
             using var workspace = analyzer.GetWorkspace();
-
+            
             var project = workspace.CurrentSolution.Projects.Single();
             var compilation = await project.GetCompilationAsync(new CancellationToken());
+
+            if (compilation.ReferencedAssemblyNames.Where(x => x.Name == "GiG.Core.Messaging.Avro.Schema.Abstractions").Any() == false)
+            {
+                compilation = compilation.AddReferences(MetadataReference.CreateFromFile(attributeLib.Location));
+            }
 
             // Act
             var generator = new CodeGenerator(compilation);
