@@ -1,4 +1,5 @@
 ﻿using GiG.Core.Context.Abstractions;
+using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.Web.Sample.Contracts;
 using Microsoft.Extensions.Logging;
 
@@ -8,12 +9,15 @@ namespace GiG.Core.Web.Sample.Services
     {
         private readonly ILogger _logger;
         private readonly IRequestContextAccessor _requestContextAccessor;
+        private readonly IActivityContextAccessor _activityContextAccessor;
 
         public TransactionService(ILogger<TransactionService> logger,
-            IRequestContextAccessor requestContextAccessor)
+            IRequestContextAccessor requestContextAccessor,
+            IActivityContextAccessor activityContextAccessor)
         {
             _logger = logger;
             _requestContextAccessor = requestContextAccessor;
+            _activityContextAccessor = activityContextAccessor;
         }
 
         public decimal Balance { get; private set; }
@@ -25,6 +29,12 @@ namespace GiG.Core.Web.Sample.Services
         /// <returns></returns>
         public decimal Deposit(decimal amount)
         {
+            _logger.LogInformation("Request Activity Name {OperationName}; Correlation {CorrelationId}; SpanId {SpanId}; TraceId {TraceId}",
+                _activityContextAccessor.OperationName,
+                _activityContextAccessor.CorrelationId,
+                _activityContextAccessor.SpanId,
+                _activityContextAccessor.TraceId);
+            
             _logger.LogInformation("Request IP Address {IPAddress}", _requestContextAccessor.IPAddress);
             _logger.LogInformation("Deposit {amount}", amount);
             Balance += amount;
@@ -41,7 +51,7 @@ namespace GiG.Core.Web.Sample.Services
         {
             _logger.LogInformation("Withdraw {amount}", amount);
             Balance -= amount;
-            
+
             return Balance;
         }
     }

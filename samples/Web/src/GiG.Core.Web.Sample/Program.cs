@@ -1,6 +1,6 @@
 using GiG.Core.Configuration.Extensions;
 using GiG.Core.Context.Web.Extensions;
-using GiG.Core.DistributedTracing.Web.Extensions;
+using GiG.Core.DistributedTracing.Activity.Extensions;
 using GiG.Core.Hosting.Extensions;
 using GiG.Core.Logging.All.Extensions;
 using GiG.Core.MultiTenant.Web.Extensions;
@@ -20,7 +20,7 @@ namespace GiG.Core.Web.Sample
             Host.CreateDefaultBuilder(args)
                 .UseApplicationMetadata()
                 .ConfigureServices(x => {
-                    x.AddCorrelationAccessor();
+                    x.AddActivityAccessor();
                     x.AddTenantAccessor();
                     x.AddRequestContextAccessor();
                 })
