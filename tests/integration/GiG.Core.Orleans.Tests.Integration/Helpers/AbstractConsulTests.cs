@@ -60,6 +60,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Helpers
         private static IEnumerable<Silo> GetSilosFromResult(IEnumerable<KVStoreResult> results)
         {
             return results
+                .Where(x => x.Key.EndsWith("iamalive") == false && x.Key.EndsWith("version") == false)
                 .Select(value => Convert.FromBase64String(value.Value))
                 .Select(base64EncodedBytes => System.Text.Encoding.UTF8.GetString(base64EncodedBytes))
                 .Select(decodedTxt => JsonSerializer.Deserialize<Silo>(decodedTxt))
@@ -68,6 +69,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Helpers
 
         private class KVStoreResult
         {
+            public string Key { get; set; }
             public string Value { get; set; }
         }
 

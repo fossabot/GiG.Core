@@ -1,6 +1,4 @@
-﻿using GiG.Core.DistributedTracing.Abstractions;
-using GiG.Core.DistributedTracing.Telemetry;
-using GiG.Core.DistributedTracing.Telemetry.Abstractions;
+﻿using GiG.Core.DistributedTracing.Telemetry.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,7 +34,7 @@ namespace GiG.Core.DistributedTracing.Extensions
         private static void ConfigureTracingInternal(HostBuilderContext context, [NotNull] IServiceCollection services, Action<TracingConfigurationBuilder> configureTracing, string sectionName)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            if (string.IsNullOrWhiteSpace(sectionName)) throw new ArgumentException($"Missing {nameof(sectionName)}.");
+            if (string.IsNullOrWhiteSpace(sectionName)) throw new ArgumentException($"'{nameof(sectionName)}' must not be null, empty or whitespace.", nameof(sectionName));
             
             var configuration = context.Configuration;
             var configurationSection = configuration.GetSection(sectionName);

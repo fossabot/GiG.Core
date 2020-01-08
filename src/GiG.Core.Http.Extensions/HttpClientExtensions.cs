@@ -25,7 +25,7 @@ namespace GiG.Core.Http.Extensions
         {
             if (client == null) throw new ArgumentNullException(nameof(client));
             if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection?.Path}' is incorrect.");
-            if (string.IsNullOrWhiteSpace(baseUri)) throw new ArgumentException($"Missing {nameof(baseUri)}.");
+            if (string.IsNullOrWhiteSpace(baseUri)) throw new ArgumentException($"'{nameof(baseUri)}' must not be null, empty or whitespace.", nameof(baseUri));
 
             var httpClientOptions = configurationSection.Get<HttpClientOptions>();
             if (httpClientOptions == null)
@@ -52,7 +52,7 @@ namespace GiG.Core.Http.Extensions
         {
             if (client == null) throw new ArgumentNullException(nameof(client));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-            if (string.IsNullOrWhiteSpace(sectionName)) throw new ArgumentException($"Missing {nameof(sectionName)}.");
+            if (string.IsNullOrWhiteSpace(sectionName)) throw new ArgumentException($"'{nameof(sectionName)}' must not be null, empty or whitespace.", nameof(sectionName));
 
             var defaultClientOptions =
                 configuration.GetSection(DefaultClientOptions.DefaultSectionName).Get<DefaultClientOptions>() ??

@@ -1,4 +1,6 @@
-﻿using GiG.Core.Orleans.Clustering.Consul.Extensions;
+﻿using GiG.Core.HealthChecks.Orleans.AspNetCore.Extensions;
+using GiG.Core.HealthChecks.Orleans.Extensions;
+using GiG.Core.Orleans.Clustering.Consul.Extensions;
 using GiG.Core.Orleans.Clustering.Extensions;
 using GiG.Core.Orleans.Clustering.Kubernetes.Extensions;
 using GiG.Core.Orleans.Sample.Contracts;
@@ -16,9 +18,10 @@ namespace GiG.Core.Orleans.Sample.Silo
     public static class Startup
     {
         // This method gets called by the runtime. Use this method to add services to the container.
-        public static void ConfigureServices(IServiceCollection services)
+        public static void ConfigureServices(HostBuilderContext ctx, IServiceCollection services)
         {
             services.AddStream();
+            services.AddOrleansHealthChecksSelfHosted(ctx.Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure Orleans.
@@ -32,6 +35,7 @@ namespace GiG.Core.Orleans.Sample.Silo
                     x.ConfigureConsulClustering(ctx.Configuration);
                     x.ConfigureKubernetesClustering(ctx.Configuration);
                 })
+                .AddHealthCheckDependencies()
                 .AddNpgsqlGrainStorage(Constants.StorageProviderName, ctx.Configuration)
                 .AddAssemblies(typeof(WalletGrain))
                 .AddSimpleMessageStreamProvider(Constants.StreamProviderName)

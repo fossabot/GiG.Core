@@ -1,12 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.0</TargetFramework>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
         <IsPackable>false</IsPackable>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Bogus" Version="28.4.1" />
+        <PackageReference Include="Bogus" Version="28.4.4" />
         <PackageReference Include="KubernetesClient" Version="1.6.4" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.0" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0" />
@@ -14,7 +14,7 @@
         <PackageReference Include="Microsoft.Orleans.Server" Version="3.0.0" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
         <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.6.0" />
-        <PackageReference Include="System.Text.Json" Version="4.6.0" />
+        <PackageReference Include="System.Text.Json" Version="4.7.0" />
         <PackageReference Include="xunit" Version="2.4.1" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
         <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="3.0.0">
@@ -27,6 +27,8 @@
       <ProjectReference Include="..\..\..\src\GiG.Core.Context.Web\GiG.Core.Context.Web.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Orleans\GiG.Core.DistributedTracing.Orleans.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Web\GiG.Core.DistributedTracing.Web.csproj" />
+      <ProjectReference Include="..\..\..\src\GiG.Core.HealthChecks.Orleans.AspNetCore\GiG.Core.HealthChecks.Orleans.AspNetCore.csproj" />
+      <ProjectReference Include="..\..\..\src\GiG.Core.HealthChecks.Orleans\GiG.Core.HealthChecks.Orleans.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Streams\GiG.Core.Orleans.Streams.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Client\GiG.Core.Orleans.Client.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering.Consul\GiG.Core.Orleans.Clustering.Consul.csproj" />
@@ -34,11 +36,4 @@
       <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Silo\GiG.Core.Orleans.Silo.csproj" />
     </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
 </Project>

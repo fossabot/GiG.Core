@@ -34,7 +34,7 @@ namespace GiG.Core.Web.Hosting.Extensions
         public static IApplicationBuilder UsePathBaseFromConfiguration([NotNull] this IApplicationBuilder builder, [NotNull] string configSectionName)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
-            if (configSectionName == null) throw new ArgumentException($"Missing {nameof(configSectionName)}.");
+            if (configSectionName == null) throw new ArgumentException($"'{nameof(configSectionName)}' must not be null, empty or whitespace.", nameof(configSectionName));
             
             var serviceProvider = builder.ApplicationServices;
             var configuration = serviceProvider.GetRequiredService<IConfiguration>();

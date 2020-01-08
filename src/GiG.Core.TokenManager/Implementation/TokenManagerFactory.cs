@@ -38,8 +38,8 @@ namespace GiG.Core.TokenManager.Implementation
         {
             if (options == null) throw new ArgumentNullException(nameof(options));
             if (options.Client == null) throw new ArgumentNullException(nameof(options.Client));
-            if (string.IsNullOrWhiteSpace(options.Client.AuthorityUrl)) throw new ArgumentException($"{nameof(options.Client.AuthorityUrl)} is missing.");
-            if (string.IsNullOrWhiteSpace(options.Client.ClientId)) throw new ArgumentException($"{nameof(options.Client.ClientId)} is missing.");
+            if (string.IsNullOrWhiteSpace(options.Client.AuthorityUrl)) throw new ArgumentException($"'{nameof(options.Client.AuthorityUrl)}' must not be null, empty or whitespace.", nameof(options.Client.AuthorityUrl));
+            if (string.IsNullOrWhiteSpace(options.Client.ClientId)) throw new ArgumentException($"'{nameof(options.Client.ClientId)}' must not be null, empty or whitespace.", nameof(options.Client.ClientId));
 
             return new TokenManager(_tokenClientFactory, _loggerFactory.CreateLogger<TokenManager>(), options, _dateTimeProvider);
         }

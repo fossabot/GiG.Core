@@ -28,8 +28,8 @@ namespace GiG.Core.TokenManager.Implementation
         public ITokenClient CreateClient([NotNull] TokenClientOptions tokenClientOptions)
         {
             if (tokenClientOptions == null) throw new ArgumentNullException(nameof(tokenClientOptions));
-            if (string.IsNullOrWhiteSpace(tokenClientOptions.AuthorityUrl)) throw new ArgumentException($"{nameof(tokenClientOptions.AuthorityUrl)} is missing.");
-            if (string.IsNullOrWhiteSpace(tokenClientOptions.ClientId)) throw new ArgumentException($"{nameof(tokenClientOptions.ClientId)} is missing.");
+            if (string.IsNullOrWhiteSpace(tokenClientOptions.AuthorityUrl)) throw new ArgumentException($"'{nameof(tokenClientOptions.AuthorityUrl)}' must not be null, empty or whitespace.", nameof(tokenClientOptions.AuthorityUrl));
+            if (string.IsNullOrWhiteSpace(tokenClientOptions.ClientId)) throw new ArgumentException($"'{nameof(tokenClientOptions.ClientId)}' must not be null, empty or whitespace.", nameof(tokenClientOptions.ClientId));
             
             return new TokenClient(_httpClientFactory.CreateClient(),
                 _loggerFactory.CreateLogger<TokenClient>(),

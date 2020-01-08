@@ -50,11 +50,11 @@ namespace GiG.Core.TokenManager.Tests.Unit.Tests
             var tokenClientOptions = new TokenClientOptions();
             
             var exception = Assert.Throws<ArgumentException>(() => _tokenManagerFixture.GetTokenClientFactory().CreateClient(tokenClientOptions));
-            Assert.Equal("AuthorityUrl is missing.", exception.Message);
+            Assert.Equal("'AuthorityUrl' must not be null, empty or whitespace. (Parameter 'AuthorityUrl')", exception.Message);
 
             tokenClientOptions.AuthorityUrl = "localhost";
             exception = Assert.Throws<ArgumentException>(() => _tokenManagerFixture.GetTokenClientFactory().CreateClient(tokenClientOptions));
-            Assert.Equal("ClientId is missing.", exception.Message);
+            Assert.Equal("'ClientId' must not be null, empty or whitespace. (Parameter 'ClientId')", exception.Message);
         }
     }
 }

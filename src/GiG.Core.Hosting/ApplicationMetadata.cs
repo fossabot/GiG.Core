@@ -23,6 +23,15 @@ namespace GiG.Core.Hosting
                 }
             }
         }
+        
+        /// <summary>
+        /// The application's checksum value. Which is generated upon build.
+        /// </summary>
+        public static string Checksum
+        {
+            get;
+            internal set;
+        }
 
         /// <summary>
         /// The application's assembly version.

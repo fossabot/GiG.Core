@@ -1,5 +1,5 @@
 using GiG.Core.Orleans.Tests.Integration.Contracts;
-using GiG.Core.Orleans.Tests.Integration.Fixtures;
+using GiG.Core.Orleans.Tests.Integration.Lifetimes;
 using System;
 using System.Threading.Tasks;
 using Xunit;
@@ -7,23 +7,16 @@ using Xunit;
 namespace GiG.Core.Orleans.Tests.Integration.Tests
 {
     [Trait("Category", "IntegrationWithDependency")]
-    public class OrleansClusterClientFactoryTests : IClassFixture<ClusterClientFactoryFixture>
+    public class OrleansClusterClientFactoryTests : ClusterClientFactoryLifetime
     {
-        private readonly ClusterClientFactoryFixture _clusterFixture;
-
-        public OrleansClusterClientFactoryTests(ClusterClientFactoryFixture clusterFixture)
-        {
-            _clusterFixture = clusterFixture;
-        }
-
         [Fact]
         public async Task GetValueAsync_CallGrain_ReturnsExpectedSiloName()
         {
             //Arrange
-            var grainInSiloA = _clusterFixture.OrleansClusterClientFactory.Get("ClusterA")
+            var grainInSiloA = OrleansClusterClientFactory.Get("ClusterA")
                 .GetGrain<IClusterClientFactoryTestGrain>(Guid.NewGuid().ToString());
 
-            var grainInSiloB = _clusterFixture.OrleansClusterClientFactory.Get("ClusterB")
+            var grainInSiloB = OrleansClusterClientFactory.Get("ClusterB")
                 .GetGrain<IClusterClientFactoryTestGrain>(Guid.NewGuid().ToString());
 
             //Act 
@@ -31,9 +24,9 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             var actualValueSiloB = await grainInSiloB.GetSiloNameAsync();
 
             //Assert
-            Assert.Equal(_clusterFixture.SiloNameA, actualValueSiloA);
-            Assert.Equal(_clusterFixture.SiloNameB, actualValueSiloB);
+            Assert.Equal(SiloNameA, actualValueSiloA);
+            Assert.Equal(SiloNameB, actualValueSiloB);
         }
-        
+
     }
 }

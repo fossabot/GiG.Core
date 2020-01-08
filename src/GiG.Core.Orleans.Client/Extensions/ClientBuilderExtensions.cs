@@ -84,7 +84,7 @@ namespace GiG.Core.Orleans.Client.Extensions
         {
             if (clientBuilder == null) throw new ArgumentNullException(nameof(clientBuilder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-            if (string.IsNullOrWhiteSpace(clusterName)) throw new ArgumentException($"Missing {nameof(clusterName)}.");
+            if (string.IsNullOrWhiteSpace(clusterName)) throw new ArgumentException($"'{nameof(clusterName)}' must not be null, empty or whitespace.", nameof(clusterName));
 
             var configurationSection = configuration.GetSection($"{ClusterDefaultSectionName}:{clusterName}");
             if (configurationSection?.Exists() != true)

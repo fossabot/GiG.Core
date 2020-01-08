@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -17,6 +17,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\GiG.Core.Configuration\GiG.Core.Configuration.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="empty" />
+    <Folder Include="configs" />
+    <Folder Include="config" />
   </ItemGroup>
 
 </Project>

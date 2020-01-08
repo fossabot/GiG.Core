@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
-using System.Configuration;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("GiG.Core.Hosting.Tests.Unit")]
@@ -39,9 +38,10 @@ namespace GiG.Core.Hosting.Extensions
         public static IServiceCollection ConfigureInfoManagement([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection?.Path}' is incorrect.");
+            var infoManagementOptions = configurationSection?.Get<InfoManagementOptions>() ?? new InfoManagementOptions();
+            
+            return services.Configure<InfoManagementOptions>(options => options.Url = infoManagementOptions.Url);
 
-            return services.Configure<InfoManagementOptions>(configurationSection);
         }
 
         /// <summary>

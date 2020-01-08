@@ -43,7 +43,7 @@ namespace GiG.Core.Http
         public static HttpClient GetOrAdd([NotNull] string name,
             Action<HttpClientBuilder> configureHttpClientBuilder = null)
         {
-            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException($"Missing {nameof(name)}.");
+            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException($"'{nameof(name)}' must not be null, empty or whitespace.", nameof(name));
 
             if (Instances.TryGetValue(name, out var instance))
             {

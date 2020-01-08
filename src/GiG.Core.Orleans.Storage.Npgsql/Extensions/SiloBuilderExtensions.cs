@@ -40,8 +40,8 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Extensions
         {
             if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-            if (string.IsNullOrWhiteSpace(storageName)) throw new ArgumentException($"Missing {nameof(storageName)}.");
-            if (string.IsNullOrWhiteSpace(sectionName)) throw new ArgumentException($"Missing {nameof(sectionName)}.");
+            if (string.IsNullOrWhiteSpace(storageName)) throw new ArgumentException($"'{nameof(storageName)}' must not be null, empty or whitespace.", nameof(storageName));
+            if (string.IsNullOrWhiteSpace(sectionName)) throw new ArgumentException($"'{nameof(sectionName)}' must not be null, empty or whitespace.", nameof(sectionName));
 
             var namedStorageSectionName = $"{sectionName}:{storageName}";
             var storageConfigSection = configuration.GetSection(namedStorageSectionName);
@@ -61,7 +61,7 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Extensions
         {
             if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
             if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection?.Path}' is incorrect.");
-            if (string.IsNullOrWhiteSpace(storageName)) throw new ArgumentException($"Missing {nameof(storageName)}.");
+            if (string.IsNullOrWhiteSpace(storageName)) throw new ArgumentException($"'{nameof(storageName)}' must not be null, empty or whitespace.", nameof(storageName));
 
             var npgsqlOptions = configurationSection.Get<NpgsqlOptions>();
 

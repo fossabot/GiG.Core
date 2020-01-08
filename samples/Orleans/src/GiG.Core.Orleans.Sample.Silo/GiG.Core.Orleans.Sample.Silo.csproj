@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <ServerGarbageCollection>true</ServerGarbageCollection>
     <ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
   </PropertyGroup>
@@ -10,7 +10,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0" />
     <PackageReference Include="Microsoft.Orleans.Server" Version="3.0.0" />
-    <PackageReference Include="Npgsql" Version="4.1.1" />
+    <PackageReference Include="Npgsql" Version="4.1.2" />
     <PackageReference Include="SignalR.Orleans" Version="1.5.0" />
   </ItemGroup>
 
@@ -19,6 +19,8 @@
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Context.Orleans\GiG.Core.Context.Orleans.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Data.Migration.Evolve\GiG.Core.Data.Migration.Evolve.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.DistributedTracing.Orleans\GiG.Core.DistributedTracing.Orleans.csproj" />
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.HealthChecks.Orleans.AspNetCore\GiG.Core.HealthChecks.Orleans.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.HealthChecks.Orleans\GiG.Core.HealthChecks.Orleans.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Hosting\GiG.Core.Hosting.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Logging.All\GiG.Core.Logging.All.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Silo.Dashboard\GiG.Core.Orleans.Silo.Dashboard.csproj" />

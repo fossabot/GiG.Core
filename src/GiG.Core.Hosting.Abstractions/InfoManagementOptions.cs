@@ -14,5 +14,10 @@
         /// The InfoManagement Url.
         /// </summary>
         public string Url { get; set; } = "/actuator/info";
+        
+        /// <summary>
+        /// Checksum info Options.
+        /// </summary>
+        public InfoManagementChecksumOptions Checksum { get; set; } = new InfoManagementChecksumOptions();
     }
 }

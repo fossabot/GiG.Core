@@ -52,5 +52,6 @@ public void Configure(IApplicationBuilder app)
 The below table outlines the valid Configurations.
 
 | Configuration Name  | Type	| Optional | Default Value	   |
-|---------------------|---------|----------|-------------------|
-| Url				  | String  | No	   | `/actuator/info` | 	
+|:-------------------|:-------|:---------|:-----------------|
+| Url				  | String  | No	   | `/actuator/info`  |
+| Checksum            | [InfoManagementChecksumOptions](..\src\GiG.Core.Hosting.Abstractions\InfoManagementChecksumOptions.cs) | Yes      |                          | 	

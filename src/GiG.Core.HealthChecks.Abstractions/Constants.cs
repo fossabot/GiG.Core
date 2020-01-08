@@ -14,5 +14,10 @@
         /// Live HealthCheck tag.
         /// </summary>
         public const string LiveTag = "live";
+
+        /// <summary>
+        /// Combined HealthCheck Url.
+        /// </summary>
+        public const string CombinedHealthCheckUrl = "/actuator/health";
     }
 }

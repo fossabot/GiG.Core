@@ -24,5 +24,10 @@
         /// The Dashboard Url.
         /// </summary>
         public string Path { get; set; } = "/dashboard";
+                
+        /// <summary>
+        /// Set the dashboard to host it's own http server (default is true).
+        /// </summary>
+        public bool HostSelf { get; set; } = true;
     }
 }

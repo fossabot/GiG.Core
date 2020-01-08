@@ -28,13 +28,6 @@ namespace GiG.Core.HealthChecks.Tests.Unit
         }
 
         [Fact]
-        public void ConfigureHealthChecks_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
-        {
-            var exception = Assert.Throws<ConfigurationErrorsException>(() => new ServiceCollection().ConfigureHealthChecks(configurationSection: null));
-            Assert.Equal("Configuration Section '' is incorrect.", exception.Message);
-        }
-
-        [Fact]
         public void AddCachedHealthChecks_ServiceCollectionIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddCachedHealthChecks(null));

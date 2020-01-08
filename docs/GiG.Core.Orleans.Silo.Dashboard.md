@@ -27,4 +27,18 @@ The below table outlines the valid Configurations used to override the [Dashboar
 |:-------------------|:--------|:---------|:--------------|
 | IsEnabled          | Boolean | Yes      | `false`       |
 | Port               | String  | Yes      | `8080`        |
-| Path               | String  | No       | `dashboard`   |
+| Path               | String  | No       | `/dashboard`  |
+| HostSelf           | Boolean | No       | `true`        |
+
+
+### Co-Hosting the Dashboard in Web Application
+
+The Orleans Dashboard can be hosted in its own web server using Kestrel or co-hosted in the same host of the application.
+This can be controlled using the `HostSelf` option. When set to 'false', the below code enables the dashboard to be configured on the application.
+
+```csharp
+public void Configure(IApplicationBuilder app)
+{         
+    app.UseDashboard(_configuration);              
+}
+```

@@ -42,7 +42,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Helpers
 
             using var client = new Kubernetes(config)
             {
-                BaseUri = new Uri(KubernetesSiloOptions.ApiEndpoint.Remove(KubernetesSiloOptions.ApiEndpoint.LastIndexOf("/"), 4))
+                BaseUri = new Uri(KubernetesSiloOptions.ApiEndpoint.Remove(KubernetesSiloOptions.ApiEndpoint.LastIndexOf("/", StringComparison.Ordinal), 4))
             };
             var membershipTable = await client.GetNamespacedCustomObjectAsync(KubernetesSiloOptions.Group, "v1", "orleanstest", "silos", string.Empty);
 
