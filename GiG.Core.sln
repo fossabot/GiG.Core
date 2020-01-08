@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Context.Web.md = docs\GiG.Core.Context.Web.md
 		docs\GiG.Core.Data.KVStores.md = docs\GiG.Core.Data.KVStores.md
 		docs\GiG.Core.Data.KVStores.Providers.FileProviders.md = docs\GiG.Core.Data.KVStores.Providers.FileProviders.md
-		docs\GiG.Core.DistributedTracing.OpenTelemetry.md = docs\GiG.Core.DistributedTracing.OpenTelemetry.md		
+		docs\GiG.Core.DistributedTracing.OpenTelemetry.md = docs\GiG.Core.DistributedTracing.OpenTelemetry.md
 		docs\GiG.Core.DistributedTracing.MassTransit.md = docs\GiG.Core.DistributedTracing.MassTransit.md
 		docs\GiG.Core.Data.Migration.Evolve.md = docs\GiG.Core.Data.Migration.Evolve.md
 		docs\GiG.Core.DistributedTracing.Orleans.md = docs\GiG.Core.DistributedTracing.Orleans.md
@@ -464,6 +464,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.Avro.Sample", "samples\Messaging\Avro\src\GiG.Core.Messaging.Avro.Sample\GiG.Core.Messaging.Avro.Sample.csproj", "{022ED0B9-EB30-49DD-B0AA-C8167CBB16D5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.DistributedTracing.OpenTelemetry", "src\GiG.Core.DistributedTracing.OpenTelemetry\GiG.Core.DistributedTracing.OpenTelemetry.csproj", "{EAED18D7-3073-438C-88DD-F540E36037C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.DistributedTracing.Activity", "src\GiG.Core.DistributedTracing.Activity\GiG.Core.DistributedTracing.Activity.csproj", "{77619D06-837D-4A86-9263-1CACC79255A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1023,6 +1025,10 @@ Global
 		{EAED18D7-3073-438C-88DD-F540E36037C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EAED18D7-3073-438C-88DD-F540E36037C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EAED18D7-3073-438C-88DD-F540E36037C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77619D06-837D-4A86-9263-1CACC79255A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77619D06-837D-4A86-9263-1CACC79255A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77619D06-837D-4A86-9263-1CACC79255A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77619D06-837D-4A86-9263-1CACC79255A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1215,6 +1221,7 @@ Global
 		{AE5338FC-895C-4130-8166-6934217F36F5} = {F3CE36D9-6ED4-4C5C-923C-CD1F46396134}
 		{022ED0B9-EB30-49DD-B0AA-C8167CBB16D5} = {80BE322A-30A3-4C7C-82AD-5C912FF57998}
 		{EAED18D7-3073-438C-88DD-F540E36037C3} = {F3E4EB54-9129-4327-9A32-89ABD4ADA6C5}
+		{77619D06-837D-4A86-9263-1CACC79255A6} = {F3E4EB54-9129-4327-9A32-89ABD4ADA6C5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}
