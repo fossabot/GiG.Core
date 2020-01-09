@@ -22,7 +22,7 @@ namespace GiG.Core.Messaging.Tests.Unit.MassTransit
             var exception = Assert.Throws<ArgumentNullException>(() =>
                 Bus.Factory.CreateUsingInMemory(cfg =>
                 {
-                    cfg.Host().AddDefaultConsumerObserver(null);
+                    cfg.Host.AddDefaultConsumerObserver(null);
                 }));
 
             Assert.Equal("serviceProvider", exception.ParamName);
