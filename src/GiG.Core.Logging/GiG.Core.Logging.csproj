@@ -9,7 +9,7 @@
     <PackageReference Include="Serilog.Extensions.Hosting" Version="3.0.0" PrivateAssets="compile" />    
     <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" PrivateAssets="compile" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" PrivateAssets="compile" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.6.0" PrivateAssets="compile" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" PrivateAssets="compile" />
   </ItemGroup>
 
   <ItemGroup>

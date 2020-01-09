@@ -73,7 +73,7 @@ namespace GiG.Core.DistributedTracing.MassTransit.Tests.Integration.Tests
                 x.AddConsumer<MockConsumer>();
                 x.AddBus(provider => Bus.Factory.CreateUsingInMemory(cfg =>
                 {
-                    cfg.Host.AddDefaultConsumerObserver(x.Collection.BuildServiceProvider());
+                    cfg.Host().AddDefaultConsumerObserver(x.Collection.BuildServiceProvider());
 
                     cfg.ReceiveEndpoint(typeof(MockConsumer).FullName, e =>
                     {
