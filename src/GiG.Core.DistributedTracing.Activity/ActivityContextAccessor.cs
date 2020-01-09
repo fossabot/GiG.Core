@@ -7,7 +7,7 @@ namespace GiG.Core.DistributedTracing.Activity
     internal class ActivityContextAccessor : IActivityContextAccessor
     {
         /// <inheritdoc />
-        public string CorrelationId => System.Diagnostics.Activity.Current.Id;
+        public string CorrelationId => System.Diagnostics.Activity.Current.RootId;
 
         /// <inheritdoc />
         public IEnumerable<KeyValuePair<string, string>> Baggage => System.Diagnostics.Activity.Current.Baggage;
