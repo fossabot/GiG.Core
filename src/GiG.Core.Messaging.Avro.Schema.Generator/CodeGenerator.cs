@@ -6,11 +6,9 @@ using JetBrains.Annotations;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -22,10 +20,9 @@ namespace GiG.Core.Messaging.Avro.Schema.Generator
     /// <summary>
     /// Generates the avro schema code files.
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("MicrosoftCodeAnalysisCorrectness", "RS1024:Compare symbols correctly", Justification = "<Pending>")]
     public class CodeGenerator
     {
-        private Stopwatch _stopwatch;
-        
         private static StringBuilder _serializer;
         private static StringBuilder _deserializer;
         private static string _filepath;
@@ -58,11 +55,8 @@ namespace GiG.Core.Messaging.Avro.Schema.Generator
         /// <summary>
         /// Generates the avro schema code files.
         /// </summary>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/>.</param>
-        public void GenerateCode(CancellationToken cancellationToken)
+        public void GenerateCode()
         {
-            _stopwatch = Stopwatch.StartNew();
-
             foreach (var syntaxTree in _compilation.SyntaxTrees)
             {
                 var semanticModel = _compilation.GetSemanticModel(syntaxTree);

@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace GiG.Core.Messaging.Avro.Schema.Generator.Extensions
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("MicrosoftCodeAnalysisCorrectness", "RS1024:Compare symbols correctly", Justification = "<Pending>")]
     internal static class SymbolExtensions
     {
         internal static FieldAttribute GetFieldAttribute(this IPropertySymbol property, WellKnownTypes wellKnownTypes)
