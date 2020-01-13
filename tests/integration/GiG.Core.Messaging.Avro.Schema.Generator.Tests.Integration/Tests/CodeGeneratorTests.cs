@@ -42,7 +42,7 @@ namespace GiG.Core.Messaging.Avro.Schema.Generator.Tests.Integration.Tests
 
             // Act
             var generator = new CodeGenerator(compilation);
-            generator.GenerateCode(new CancellationToken());
+            generator.GenerateCode();
 
             // Assert
             CheckFileGeneration(projectPath);
