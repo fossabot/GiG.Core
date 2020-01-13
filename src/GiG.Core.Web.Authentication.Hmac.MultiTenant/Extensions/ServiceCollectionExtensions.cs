@@ -28,7 +28,7 @@ namespace GiG.Core.Web.Authentication.Hmac.MultiTenant.Extensions
             if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection?.Path}' is incorrect.");
 
             services.AddTenantAccessor();
-            services.TryAddSingleton<IHmacOptionsProvider, MultiTenantOptionProvider>();
+            services.TryAddScoped<IHmacOptionsProvider, MultiTenantOptionProvider>();
             services.Configure<Dictionary<string,HmacOptions>>(configurationSection);
 
             return services;
