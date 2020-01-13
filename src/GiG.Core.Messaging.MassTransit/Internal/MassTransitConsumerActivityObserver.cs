@@ -34,10 +34,15 @@ namespace GiG.Core.Messaging.MassTransit.Internal
         /// <returns></returns>
         public Task PreConsume<T>(ConsumeContext<T> context) where T : class
         {
-            var parentId = context.Headers.Get<string>("CorrelationId");
-            var activity = new System.Diagnostics.Activity("Consumer");
-            activity.SetParentId(parentId);
+            var parentActivityId = context.Headers.Get<string>(Constants.ActivityIdHeader, string.Empty);
+            var activity = new System.Diagnostics.Activity("consumeMessage");
+            if (!string.IsNullOrEmpty(parentActivityId))
+            {
+                activity.SetParentId(parentActivityId);
+            }
+
             activity.Start();
+            
             return Task.CompletedTask;
         }
     }

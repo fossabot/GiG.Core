@@ -5,11 +5,14 @@ namespace GiG.Core.DistributedTracing.MassTransit.Tests.Integration
 {
     public static class State
     {
-        public static Dictionary<Guid, Guid> Messages;
+        public static Dictionary<Guid, string> Messages;
 
-        static State()
+        public static void Init()
         {
-            Messages = new Dictionary<Guid, Guid>();
+            if (Messages == null)
+            {
+                Messages = new Dictionary<Guid, string>();
+            }
         }
     }
 }
