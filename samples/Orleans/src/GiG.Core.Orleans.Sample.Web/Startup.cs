@@ -1,6 +1,7 @@
 using FluentValidation.AspNetCore;
 using GiG.Core.Context.Orleans.Extensions;
 using GiG.Core.DistributedTracing.Orleans.Extensions;
+using GiG.Core.DistributedTracing.Web.Extensions;
 using GiG.Core.HealthChecks.AspNetCore.Extensions;
 using GiG.Core.Hosting.AspNetCore.Extensions;
 using GiG.Core.Hosting.Extensions;
@@ -38,7 +39,7 @@ namespace GiG.Core.Orleans.Sample.Web
             services.AddDefaultClusterClient((builder, sp) =>
             {
                 builder.UseSignalR();
-               // builder.AddCorrelationOutgoingFilter(sp);
+                builder.AddCorrelationOutgoingFilter(sp);
                 builder.AddRequestContextOutgoingFilter(sp);
                 builder.ConfigureCluster(_configuration);
                 builder.UseMembershipProvider(_configuration, x =>
@@ -75,6 +76,7 @@ namespace GiG.Core.Orleans.Sample.Web
         {
             app.UseForwardedHeaders();
             app.UsePathBaseFromConfiguration();
+            app.UseCorrelation();
             app.UseApiDocs();
             app.UseRouting();
             app.UseFluentValidationMiddleware();

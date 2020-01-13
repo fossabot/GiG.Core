@@ -35,8 +35,8 @@ namespace GiG.Core.Orleans.Sample.Consumer.Extensions
                                 configurator.UseSsl(context => { context.Protocol = SslProtocols.Tls12; });
                             }
                         });
-                    
-                    host.AddActivityConsumerObserver();
+
+                    host.AddDefaultConsumerObserver(serviceProvider);
                     cfg.ReceiveEndpoint(host,
                         typeof(PaymentConsumer).FullName, e =>
                         {

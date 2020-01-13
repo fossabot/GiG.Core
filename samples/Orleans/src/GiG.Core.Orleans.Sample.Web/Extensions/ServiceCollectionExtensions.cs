@@ -1,7 +1,9 @@
+using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.Messaging.MassTransit.Extensions;
 using GiG.Core.Messaging.RabbitMQ.Abstractions;
 using GiG.Core.Orleans.Sample.Contracts.Messages;
 using MassTransit;
+using MassTransit.Context;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -18,6 +20,9 @@ namespace GiG.Core.Orleans.Sample.Web.Extensions
 
             services.AddMassTransit(x =>
             {
+                var contextAccessor = services.BuildServiceProvider().GetService<ICorrelationContextAccessor>();
+                MessageCorrelation.UseCorrelationId<PaymentTransactionRequested>(c => contextAccessor.Value);
+
                 x.AddBus(provider=> Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {
                     var host = cfg.Host(rabbitConfiguration.Host, (ushort)rabbitConfiguration.Port,
@@ -35,7 +40,6 @@ namespace GiG.Core.Orleans.Sample.Web.Extensions
                         });
                     cfg.UseFaultAddress<PaymentTransactionRequested>(new Uri(host.Address, "sampledlx"));
                     cfg.ConfigureEndpoints(provider);
-                    cfg.ConfigurePublish(x => x.UseActivityFilter());
                 }));
             });
 
