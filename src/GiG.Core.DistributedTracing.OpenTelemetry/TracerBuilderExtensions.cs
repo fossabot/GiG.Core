@@ -3,61 +3,56 @@ using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OpenTelemetry.Trace.Configuration;
 using System;
 using System.Configuration;
 using System.Linq;
 
-namespace GiG.Core.DistributedTracing.Extensions
+namespace GiG.Core.DistributedTracing.OpenTelemetry
 {
     /// <summary>
     /// Host Builder Extensions.
     /// </summary>
-    public static class HostBuilderExtensions
+    public static class TracerBuilderExtensions
     {
         /// <summary>
         /// Configures Tracing Exporters.
         /// </summary>
-        /// <param name="builder">The <see cref="IHostBuilder"/>.</param>
+        /// <param name="tracerBuilder">The <see cref="TracerBuilder"/>.</param>
         /// <param name="tracingConfigurationBuilder">>A delegate that is used to configure the <see cref="TracingConfigurationBuilder" />.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/>.</param>
         /// <param name="sectionName">The configuration section name.</param>
-        /// <returns>The <see cref="IHostBuilder"/>.</returns>
-        public static IHostBuilder ConfigureTracing([NotNull] this IHostBuilder builder, Action<TracingConfigurationBuilder> tracingConfigurationBuilder,
-            [NotNull] string sectionName = TracingOptions.DefaultSectionName)
+        /// <returns>The <see cref="TracerBuilder"/>.</returns>
+        public static TracerBuilder ConfigureTracing([NotNull] this TracerBuilder tracerBuilder, Action<TracingConfigurationBuilder> tracingConfigurationBuilder, IConfiguration configuration, string sectionName)
         {
-            if (builder == null) throw new ArgumentNullException(nameof(builder));
-            if (sectionName == null) throw new ArgumentNullException(nameof(sectionName));
-            
-            return builder
-                .ConfigureServices((context, services) => ConfigureTracingInternal(context, services, tracingConfigurationBuilder, sectionName));
-        }
+            if (tracerBuilder == null) throw new ArgumentNullException(nameof(tracerBuilder));
+            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-        private static void ConfigureTracingInternal(HostBuilderContext context, [NotNull] IServiceCollection services, Action<TracingConfigurationBuilder> configureTracing, string sectionName)
-        {
-            if (services == null) throw new ArgumentNullException(nameof(services));
             if (string.IsNullOrWhiteSpace(sectionName)) throw new ArgumentException($"'{nameof(sectionName)}' must not be null, empty or whitespace.", nameof(sectionName));
-            
-            var configuration = context.Configuration;
+
             var configurationSection = configuration.GetSection(sectionName);
-        
+
             var tracingOptions = configurationSection.Get<TracingOptions>();
             if (tracingOptions?.IsEnabled != true)
             {
-                return;
+                return tracerBuilder;
             }
-            
+
             if (tracingOptions?.Exporters?.Any() != true)
             {
                 throw new ConfigurationErrorsException("No tracing exporters were configured.  Please add at least one tracing exporter");
             }
 
-            var builder = new TracingConfigurationBuilder(services, tracingOptions.Exporters);
+            var builder = new TracingConfigurationBuilder(tracerBuilder, tracingOptions.Exporters, configurationSection);
 
-            configureTracing?.Invoke(builder);
+            tracingConfigurationBuilder?.Invoke(builder);
 
             if (!builder.IsConfigured)
             {
                 throw new ConfigurationErrorsException("Tracing is enabled but no tracing exporters were configured.");
             }
+
+            return tracerBuilder;
         }
     }
 }

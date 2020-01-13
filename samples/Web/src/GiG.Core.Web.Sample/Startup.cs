@@ -1,4 +1,6 @@
 using FluentValidation.AspNetCore;
+using GiG.Core.DistributedTracing.Exporters.Jaeger.External;
+using GiG.Core.DistributedTracing.OpenTelemetry;
 using GiG.Core.HealthChecks.AspNetCore.Extensions;
 using GiG.Core.HealthChecks.Extensions;
 using GiG.Core.Hosting.AspNetCore.Extensions;
@@ -57,6 +59,9 @@ namespace GiG.Core.Web.Sample
             //Authentication
             services.ConfigureOAuthAuthentication(_configuration)
                 .AddApiDocsOAuthAuthentication();
+            
+            // Distributed Tracing
+            services.AddTracing(x => x.RegisterJaeger(), _configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,4 +1,5 @@
 using GiG.Core.Context.Abstractions;
+using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.Web.Sample.Services;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -10,14 +11,16 @@ namespace GiG.Core.Web.Sample.Tests.Unit.Tests
     public class TransactionServiceTests
     {
         private readonly Mock<IRequestContextAccessor> _requestContextAccessor;
+        private readonly Mock<IActivityContextAccessor> _activityContextAccessor;
         private readonly TransactionService _sut;
 
         public TransactionServiceTests()
         {
             var logger = new Mock<ILogger<TransactionService>>();
             _requestContextAccessor = new Mock<IRequestContextAccessor>();
+            _activityContextAccessor = new Mock<IActivityContextAccessor>();
 
-            _sut = new TransactionService(logger.Object, _requestContextAccessor.Object);
+            _sut = new TransactionService(logger.Object, _requestContextAccessor.Object, _activityContextAccessor.Object);
         }
 
         [Theory]
@@ -36,7 +39,12 @@ namespace GiG.Core.Web.Sample.Tests.Unit.Tests
             // Assert
             Assert.Equal(expectedResponse, response);
             _requestContextAccessor.Verify(x => x.IPAddress, Times.Once);
+            _activityContextAccessor.Verify(x => x.OperationName, Times.Once);
+            _activityContextAccessor.Verify(x => x.CorrelationId, Times.Once);
+            _activityContextAccessor.Verify(x => x.SpanId, Times.Once);
+            _activityContextAccessor.Verify(x => x.TraceId, Times.Once);
 
+            _activityContextAccessor.VerifyNoOtherCalls();
             _requestContextAccessor.VerifyNoOtherCalls();
         }
 
@@ -56,6 +64,7 @@ namespace GiG.Core.Web.Sample.Tests.Unit.Tests
             // Assert
             Assert.Equal(expectedResponse, response);
 
+            _activityContextAccessor.VerifyNoOtherCalls();
             _requestContextAccessor.VerifyNoOtherCalls();
         }
     }
