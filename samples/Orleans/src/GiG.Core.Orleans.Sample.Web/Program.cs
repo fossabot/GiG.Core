@@ -1,6 +1,6 @@
 using GiG.Core.Configuration.Extensions;
 using GiG.Core.Context.Web.Extensions;
-using GiG.Core.DistributedTracing.Activity.Extensions;
+using GiG.Core.DistributedTracing.Web.Extensions;
 using GiG.Core.Hosting.Extensions;
 using GiG.Core.Logging.All.Extensions;
 using Microsoft.AspNetCore.Hosting;
@@ -20,7 +20,7 @@ namespace GiG.Core.Orleans.Sample.Web
                 .UseApplicationMetadata()
                 .ConfigureServices(x =>
                 {
-                    x.AddActivityAccessor();
+                    x.AddCorrelationAccessor();
                     x.AddRequestContextAccessor();
                 })
                 .ConfigureExternalConfiguration()
