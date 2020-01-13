@@ -1,4 +1,4 @@
-# GiG.Core.Data.Migration
+# GiG.Core.Data.Migration.Evolve
 
 This Library provides an API to perform Database Migrations using SQL Scripts.
 

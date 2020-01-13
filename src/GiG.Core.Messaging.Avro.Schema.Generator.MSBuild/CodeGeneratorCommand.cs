@@ -128,7 +128,7 @@ namespace GiG.Core.Messaging.Avro.Schema.Generator.MSBuild
             if (referencesValid)
             {
                 var generator = new CodeGenerator(compilation);
-                generator.GenerateCode(cancellationToken);
+                generator.GenerateCode();
             }
 
             Log.LogInformation($"GenerateCode completed in {stopwatch.ElapsedMilliseconds}ms.");
@@ -154,22 +154,13 @@ namespace GiG.Core.Messaging.Avro.Schema.Generator.MSBuild
 
         private static CompilationOptions CreateCompilationOptions(CodeGeneratorCommand command)
         {
-            OutputKind kind;
-            switch (command.OutputType)
+            var kind = command.OutputType switch
             {
-                case "Exe":
-                    kind = OutputKind.ConsoleApplication;
-                    break;
-                case "Module":
-                    kind = OutputKind.NetModule;
-                    break;
-                case "Winexe":
-                    kind = OutputKind.WindowsApplication;
-                    break;
-                default:
-                    kind = OutputKind.DynamicallyLinkedLibrary;
-                    break;
-            }
+                "Exe" => OutputKind.ConsoleApplication,
+                "Module" => OutputKind.NetModule,
+                "Winexe" => OutputKind.WindowsApplication,
+                _ => OutputKind.DynamicallyLinkedLibrary
+            };
 
             return new CSharpCompilationOptions(kind)
                 .WithMetadataImportOptions(MetadataImportOptions.All)
@@ -241,15 +232,13 @@ namespace GiG.Core.Messaging.Avro.Schema.Generator.MSBuild
 
             return true;
 
-            string ReadFile(string filePath)
+            static string ReadFile(string filePath)
             {
                 string fileContents;
                 using (var fileStream = File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 {
-                    using (var streamReader = new StreamReader(fileStream))
-                    {
-                        fileContents = streamReader.ReadToEnd();
-                    }
+                    using var streamReader = new StreamReader(fileStream);
+                    fileContents = streamReader.ReadToEnd();
                 }
 
                 return fileContents;

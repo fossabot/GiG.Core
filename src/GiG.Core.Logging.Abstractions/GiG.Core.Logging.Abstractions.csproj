@@ -10,7 +10,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.0.0" PrivateAssets="compile" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" PrivateAssets="compile" />
     <PackageReference Include="Serilog" Version="2.9.0" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.6.0" PrivateAssets="compile" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" PrivateAssets="compile" />
   </ItemGroup>
 
 </Project>

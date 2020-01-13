@@ -7,13 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation.AspNetCore" Version="8.5.1" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Configuration\GiG.Core.Configuration.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Context.Web\GiG.Core.Context.Web.csproj" />
-    <ProjectReference Include="..\..\..\..\src\GiG.Core.DistributedTracing.Web\GiG.Core.DistributedTracing.Web.csproj" />
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.DistributedTracing.Activity\GiG.Core.DistributedTracing.Activity.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.HealthChecks.AspNetCore\GiG.Core.HealthChecks.AspNetCore.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Hosting.AspNetCore\GiG.Core.Hosting.AspNetCore.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Hosting\GiG.Core.Hosting.csproj" />

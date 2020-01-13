@@ -6,16 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bogus" Version="28.4.2" />
+    <PackageReference Include="Bogus" Version="28.4.4" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0" />
-    <PackageReference Include="Microsoft.Orleans.Server" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Orleans.Server" Version="3.0.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
-    <PackageReference Include="Npgsql" Version="4.1.1" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.6.0" />
-    <PackageReference Include="System.Text.Json" Version="4.6.0" />
+    <PackageReference Include="Npgsql" Version="4.1.2" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+    <PackageReference Include="System.Text.Json" Version="4.7.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
-    <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="3.0.0">
+    <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="3.0.2">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
   </ItemGroup>

@@ -37,7 +37,7 @@ namespace GiG.Core.Http.Authentication.Hmac.Extensions
             });
            
             services.TryAddSingleton<IHmacSignatureProvider, HmacSignatureProvider>();
-            services.TryAddTransient<IHashProvider, SHA256HashProvider>();
+            services.TryAddSingleton<IHashProvider, SHA256HashProvider>();
             services.TryAddSingleton<IHashProviderFactory, HashProviderFactory>();
             services.TryAddSingleton<Func<string, IHashProvider>>(x =>
                 hash => x.GetServices<IHashProvider>().FirstOrDefault(sp => sp.Name.Equals(hash)));

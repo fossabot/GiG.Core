@@ -1,6 +1,6 @@
 ﻿# GiG.Core.Configuration
 
-This Library provides an API to add external configuration via JSON file and Environment variables.
+This Library provides an API to add external configuration files which should be 'json' files located under './configs' folder and Environment variables.
 
 ## Basic Usage
 
