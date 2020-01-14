@@ -32,8 +32,7 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry
         /// At least one Tracing Exporter Configured.
         /// </summary>
         public bool IsConfigured { get; private set; }
-        
-        
+
         /// <summary>
         /// Tracing Configuration
         /// </summary>

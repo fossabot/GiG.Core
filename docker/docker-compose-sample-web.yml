@@ -10,9 +10,9 @@ services:
       - ASPNETCORE_URLS=http://+:8080
       - PATH_BASE=/api/transactions
       - Logging__Sinks__Fluentd__IsEnabled=true
-      - Logging__Sinks__Fluentd__Hostname=fluentd      
-    depends_on:      
-      - fluentd       
+      - Logging__Sinks__Fluentd__Hostname=fluentd
+    depends_on:
+      - fluentd
     ports:
       - "7000:8080"
   
