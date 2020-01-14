@@ -2,10 +2,8 @@
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using OpenTelemetry.Trace;
 using OpenTelemetry.Trace.Configuration;
 using System;
-using System.Threading.Tasks;
 
 namespace GiG.Core.DistributedTracing.OpenTelemetry
 {
@@ -28,7 +26,7 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry
             if (services == null) throw new ArgumentNullException(nameof(services));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
             if (sectionName == null) throw new ArgumentNullException(nameof(sectionName));
-            
+
             services.AddOpenTelemetry(builder =>
             {
                 // configure tracing exporters
@@ -38,7 +36,7 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry
                 // configure tracing to collect outgoing HTTP requests
                 builder.AddDependencyCollector();
             });
-      
+
             return services;
         }
     }

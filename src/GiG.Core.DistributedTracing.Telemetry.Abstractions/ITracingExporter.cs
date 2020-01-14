@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Configuration;
 using OpenTelemetry.Trace.Configuration;
 
 namespace GiG.Core.DistributedTracing.Telemetry.Abstractions

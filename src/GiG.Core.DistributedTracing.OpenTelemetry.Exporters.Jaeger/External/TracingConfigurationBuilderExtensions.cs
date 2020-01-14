@@ -1,5 +1,5 @@
 using GiG.Core.DistributedTracing.Exporters.Jaeger.Internal;
-using GiG.Core.DistributedTracing.Telemetry.Abstractions;
+using GiG.Core.DistributedTracing.OpenTelemetry;
 using Microsoft.Extensions.Configuration;
 using JetBrains.Annotations;
 using System;

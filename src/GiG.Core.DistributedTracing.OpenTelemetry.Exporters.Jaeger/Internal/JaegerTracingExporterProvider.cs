@@ -24,7 +24,6 @@ namespace GiG.Core.DistributedTracing.Exporters.Jaeger.Internal
                 o.AgentPort = _options.AgentPort;
                 o.MaxPacketSize = _options.MaxPacketSize;
             });
-
         }
     }
 }
