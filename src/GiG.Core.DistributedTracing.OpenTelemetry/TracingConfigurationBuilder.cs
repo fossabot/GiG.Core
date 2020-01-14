@@ -41,7 +41,7 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry
         /// <summary>
         /// Tracing Configuration builder.
         /// </summary>
-        /// <param name="tracerBuilder"></param>
+        /// <param name="tracerBuilder">The <see cref="TracerBuilder"/>.</param>
         /// <param name="exporters">List of exporters.</param>
         /// <param name="configurationSection">The <see cref="IConfigurationSection"/>.</param>
         public TracingConfigurationBuilder([NotNull] TracerBuilder tracerBuilder, [NotNull] IDictionary<string, BasicExporterOptions> exporters,
