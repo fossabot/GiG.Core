@@ -1,4 +1,4 @@
-﻿using GiG.Core.DistributedTracing.Exporters.Jaeger.External;
+﻿using GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.External;
 using System;
 using Xunit;
 
@@ -6,7 +6,7 @@ using Xunit;
 
 namespace GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.Test.Unit.Tests
 {
-    [Trait("Category", "Integration")]
+    [Trait("Category", "Unit")]
     public class TracingConfigurationBuilderExtensionsTests
     {
         [Fact]

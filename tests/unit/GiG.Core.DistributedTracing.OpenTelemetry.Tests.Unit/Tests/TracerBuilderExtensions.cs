@@ -4,7 +4,7 @@ using Xunit;
 
 namespace GiG.Core.DistributedTracing.OpenTelemetry.Tests.Unit.Tests
 {
-    [Trait("Category", "Integration")]
+    [Trait("Category", "Unit")]
     public class TracerBuilderExtensionsTests
     {
         [Fact]

@@ -13,7 +13,7 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Adds the required services to support Distributed Tracing.
+        /// Adds the required services to support Distributed Tracing using OpenTelemetry.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection"/>.</param>
         /// <param name="tracingConfigurationBuilder">>A delegate that is used to configure the <see cref="TracingConfigurationBuilder" />.</param>
@@ -29,12 +29,13 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry
 
             services.AddOpenTelemetry(builder =>
             {
-                // configure tracing exporters
-                builder.ConfigureTracing(tracingConfigurationBuilder, configuration, sectionName);
-                // configure tracing to collect incoming HTTP requests
-                builder.AddRequestCollector();
-                // configure tracing to collect outgoing HTTP requests
-                builder.AddDependencyCollector();
+                builder
+                    // configure tracing exporters
+                    .ConfigureTracing(tracingConfigurationBuilder, configuration, sectionName)
+                    // configure tracing to collect incoming HTTP requests
+                    .AddRequestCollector()
+                    // configure tracing to collect outgoing HTTP requests
+                    .AddDependencyCollector();
             });
 
             return services;

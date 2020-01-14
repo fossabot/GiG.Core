@@ -1,10 +1,9 @@
-using GiG.Core.DistributedTracing.Exporters.Jaeger.Internal;
-using GiG.Core.DistributedTracing.OpenTelemetry;
-using Microsoft.Extensions.Configuration;
+using GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.Internal;
 using JetBrains.Annotations;
+using Microsoft.Extensions.Configuration;
 using System;
 
-namespace GiG.Core.DistributedTracing.Exporters.Jaeger.External
+namespace GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.External
 {
     /// <summary>
     /// Tracing Configuration Builder Extensions.

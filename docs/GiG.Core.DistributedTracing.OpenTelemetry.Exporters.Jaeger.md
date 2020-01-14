@@ -34,16 +34,16 @@ The below table outlines the valid Configurations under the Config section `Trac
 
 ```json
   {
-  "Tracing": {
-    "IsEnabled": true,
-    "Exporters": {
-      "Jaeger": {
+      "Tracing": {
         "IsEnabled": true,
-        "ServiceName": "sample-web",
-        "AgentHost": "localhost", 
-        "MaxPacketSize": 256
+        "Exporters": {
+          "Jaeger": {
+            "IsEnabled": true,
+            "ServiceName": "sample-web",
+            "AgentHost": "localhost", 
+            "MaxPacketSize": 256
+          }
+        }
       }
-    }
-  }
   }
 ```

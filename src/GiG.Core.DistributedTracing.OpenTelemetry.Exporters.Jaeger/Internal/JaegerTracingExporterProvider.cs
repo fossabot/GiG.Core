@@ -1,13 +1,14 @@
 using GiG.Core.DistributedTracing.Telemetry.Abstractions;
+using JetBrains.Annotations;
 using OpenTelemetry.Trace.Configuration;
 
-namespace GiG.Core.DistributedTracing.Exporters.Jaeger.Internal
+namespace GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.Internal
 {
    internal class JaegerTracingExporterProvider : ITracingExporter
     {
         private readonly JaegerExporterOptions _options;
 
-        public JaegerTracingExporterProvider(JaegerExporterOptions options)
+        public JaegerTracingExporterProvider([NotNull] JaegerExporterOptions options)
         {
             _options = options;
         }

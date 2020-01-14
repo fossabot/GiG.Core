@@ -19,11 +19,6 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry
         public IDictionary<string, BasicExporterOptions> Exporters { get; }
 
         /// <summary>
-        /// The Service Collection.
-        /// </summary>
-        public IServiceCollection Services { get; }
-
-        /// <summary>
         /// The Trace Builder.
         /// </summary>
         public TracerBuilder TracerBuilder { get; }
@@ -42,16 +37,14 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry
         /// Tracing Configuration builder.
         /// </summary>
         /// <param name="tracerBuilder">The <see cref="TracerBuilder"/>.</param>
-        /// <param name="exporters">List of exporters.</param>
-        /// <param name="configurationSection">The <see cref="IConfigurationSection"/>.</param>
+        /// <param name="exporters"> A <see><cref>IDictionary{string, BasicExporterOptions}</cref></see> /> of exporters.</param>
+        /// <param name="configurationSection">The <see cref="IConfiguration"/>.</param>
         public TracingConfigurationBuilder([NotNull] TracerBuilder tracerBuilder, [NotNull] IDictionary<string, BasicExporterOptions> exporters,
-            [NotNull] IConfigurationSection configurationSection)
-
+            [NotNull] IConfiguration configurationSection)
         {
             Exporters = exporters ?? throw new ArgumentNullException(nameof(exporters));
             TracingConfiguration = configurationSection ?? throw new ArgumentNullException(nameof(configurationSection));
             TracerBuilder = tracerBuilder ?? throw new ArgumentNullException(nameof(tracerBuilder));
-            
         }
 
         /// <summary>
@@ -69,7 +62,7 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry
                 return this;
             }
 
-            if (exporterOptions?.IsEnabled != true)
+            if (exporterOptions.IsEnabled != true)
             {
                 return this;
             }

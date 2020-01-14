@@ -1,6 +1,6 @@
 ﻿using GiG.Core.DistributedTracing.Telemetry.Abstractions;
 
-namespace GiG.Core.DistributedTracing.Exporters.Jaeger.Internal
+namespace GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.Internal
 {
     internal class JaegerExporterOptions : BasicExporterOptions
     {

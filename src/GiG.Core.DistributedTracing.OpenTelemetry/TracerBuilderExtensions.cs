@@ -9,7 +9,7 @@ using System.Linq;
 namespace GiG.Core.DistributedTracing.OpenTelemetry
 {
     /// <summary>
-    /// Host Builder Extensions.
+    /// Tracer Builder Extensions.
     /// </summary>
     public static class TracerBuilderExtensions
     {
@@ -17,13 +17,15 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry
         /// Configures Tracing Exporters.
         /// </summary>
         /// <param name="tracerBuilder">The <see cref="TracerBuilder"/>.</param>
-        /// <param name="tracingConfigurationBuilder">>A delegate that is used to configure the <see cref="TracingConfigurationBuilder" />.</param>
+        /// <param name="tracingConfigurationBuilder">A delegate that is used to configure the <see cref="TracingConfigurationBuilder" />.</param>
         /// <param name="configuration">The <see cref="IConfiguration"/>.</param>
         /// <param name="sectionName">The configuration section name.</param>
         /// <returns>The <see cref="TracerBuilder"/>.</returns>
-        public static TracerBuilder ConfigureTracing([NotNull] this TracerBuilder tracerBuilder, Action<TracingConfigurationBuilder> tracingConfigurationBuilder, IConfiguration configuration, string sectionName)
+        public static TracerBuilder ConfigureTracing([NotNull] this TracerBuilder tracerBuilder, Action<TracingConfigurationBuilder> tracingConfigurationBuilder, IConfiguration configuration,
+            string sectionName = TracingOptions.DefaultSectionName)
         {
             if (tracerBuilder == null) throw new ArgumentNullException(nameof(tracerBuilder));
+            if (tracingConfigurationBuilder == null) throw new ArgumentNullException(nameof(tracingConfigurationBuilder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
             if (string.IsNullOrWhiteSpace(sectionName)) throw new ArgumentException($"'{nameof(sectionName)}' must not be null, empty or whitespace.", nameof(sectionName));
