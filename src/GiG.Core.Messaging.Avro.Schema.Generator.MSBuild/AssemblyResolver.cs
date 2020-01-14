@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.Loader;
 
+[assembly: InternalsVisibleTo("GiG.Core.Messaging.Avro.Schema.Generator.Tests.Integration")]
 namespace GiG.Core.Messaging.Avro.Schema.Generator.MSBuild
 {
     /// <inheritdoc />

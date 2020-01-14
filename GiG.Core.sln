@@ -19,9 +19,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Context.Web.md = docs\GiG.Core.Context.Web.md
 		docs\GiG.Core.Data.KVStores.md = docs\GiG.Core.Data.KVStores.md
 		docs\GiG.Core.Data.KVStores.Providers.FileProviders.md = docs\GiG.Core.Data.KVStores.Providers.FileProviders.md
-		docs\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.md = docs\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.md
-		docs\GiG.Core.DistributedTracing.MassTransit.md = docs\GiG.Core.DistributedTracing.MassTransit.md
 		docs\GiG.Core.Data.Migration.Evolve.md = docs\GiG.Core.Data.Migration.Evolve.md
+		docs\GiG.Core.DistributedTracing.Activity.md = docs\GiG.Core.DistributedTracing.Activity.md
+		docs\GiG.Core.DistributedTracing.MassTransit.md = docs\GiG.Core.DistributedTracing.MassTransit.md
+		docs\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.md = docs\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.md
 		docs\GiG.Core.DistributedTracing.Orleans.md = docs\GiG.Core.DistributedTracing.Orleans.md
 		docs\GiG.Core.DistributedTracing.Web.md = docs\GiG.Core.DistributedTracing.Web.md
 		docs\GiG.Core.HealthChecks.AspNetCore.md = docs\GiG.Core.HealthChecks.AspNetCore.md
@@ -461,9 +462,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AE5338FC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.Avro.Sample", "samples\Messaging\Avro\src\GiG.Core.Messaging.Avro.Sample\GiG.Core.Messaging.Avro.Sample.csproj", "{022ED0B9-EB30-49DD-B0AA-C8167CBB16D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.DistributedTracing.OpenTelemetry", "src\GiG.Core.DistributedTracing.OpenTelemetry\GiG.Core.DistributedTracing.OpenTelemetry.csproj", "{EAED18D7-3073-438C-88DD-F540E36037C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing.OpenTelemetry", "src\GiG.Core.DistributedTracing.OpenTelemetry\GiG.Core.DistributedTracing.OpenTelemetry.csproj", "{EAED18D7-3073-438C-88DD-F540E36037C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.DistributedTracing.Activity", "src\GiG.Core.DistributedTracing.Activity\GiG.Core.DistributedTracing.Activity.csproj", "{77619D06-837D-4A86-9263-1CACC79255A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing.Activity", "src\GiG.Core.DistributedTracing.Activity\GiG.Core.DistributedTracing.Activity.csproj", "{77619D06-837D-4A86-9263-1CACC79255A6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing.Activity.Tests.Integration", "tests\integration\GiG.Core.DistributedTracing.Activity.Tests.Integration\GiG.Core.DistributedTracing.Activity.Tests.Integration.csproj", "{9E55B38C-A25F-4EDF-882F-119690536725}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.Avro.Schema.Generator.Tests.Integration", "tests\integration\GiG.Core.Messaging.Avro.Schema.Generator.Tests.Integration\GiG.Core.Messaging.Avro.Schema.Generator.Tests.Integration.csproj", "{91FA9202-0097-4CDB-B1D8-FFEC56A33386}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger", "src\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.csproj", "{ED83CA2B-9A94-4697-BA2C-19BC6D2D60F9}"
 EndProject
@@ -1029,6 +1034,14 @@ Global
 		{77619D06-837D-4A86-9263-1CACC79255A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77619D06-837D-4A86-9263-1CACC79255A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77619D06-837D-4A86-9263-1CACC79255A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E55B38C-A25F-4EDF-882F-119690536725}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E55B38C-A25F-4EDF-882F-119690536725}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E55B38C-A25F-4EDF-882F-119690536725}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E55B38C-A25F-4EDF-882F-119690536725}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91FA9202-0097-4CDB-B1D8-FFEC56A33386}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91FA9202-0097-4CDB-B1D8-FFEC56A33386}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91FA9202-0097-4CDB-B1D8-FFEC56A33386}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91FA9202-0097-4CDB-B1D8-FFEC56A33386}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ED83CA2B-9A94-4697-BA2C-19BC6D2D60F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ED83CA2B-9A94-4697-BA2C-19BC6D2D60F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED83CA2B-9A94-4697-BA2C-19BC6D2D60F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -1235,6 +1248,8 @@ Global
 		{77619D06-837D-4A86-9263-1CACC79255A6} = {F3E4EB54-9129-4327-9A32-89ABD4ADA6C5}
 		{ED83CA2B-9A94-4697-BA2C-19BC6D2D60F9} = {F3E4EB54-9129-4327-9A32-89ABD4ADA6C5}
 		{665EB7E4-3F13-4019-B42B-97CE41D6D25B} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
+		{9E55B38C-A25F-4EDF-882F-119690536725} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
+		{91FA9202-0097-4CDB-B1D8-FFEC56A33386} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 		{E77571EA-718B-4BA2-A3E9-5F5BC12BE535} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

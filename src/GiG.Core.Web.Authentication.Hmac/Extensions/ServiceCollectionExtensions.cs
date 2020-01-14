@@ -48,7 +48,7 @@ namespace GiG.Core.Web.Authentication.Hmac.Extensions
             if (services == null) throw new ArgumentNullException(nameof(services));
             if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection?.Path}' is incorrect.");
 
-            services.TryAddTransient<IHmacOptionsProvider, DefaultOptionsProvider>();
+            services.TryAddScoped<IHmacOptionsProvider, DefaultOptionsProvider>();
             services.Configure<HmacOptions>(configurationSection);
 
             return services;
