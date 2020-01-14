@@ -4,12 +4,12 @@ using System.Linq;
 
 namespace GiG.Core.Messaging.MassTransit.Internal
 {
-    internal class ActivitySpecification<T> : IPipeSpecification<T>
+    internal class ActivityFilterSpecification<T> : IPipeSpecification<T>
         where T : class, PipeContext
     {
         public void Apply(IPipeBuilder<T> builder)
         {
-            builder.AddFilter(new ActivtyFilter<T>());
+            builder.AddFilter(new ActivityFilter<T>());
         }
 
         IEnumerable<ValidationResult> ISpecification.Validate()

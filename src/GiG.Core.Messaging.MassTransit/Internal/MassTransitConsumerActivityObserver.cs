@@ -7,13 +7,6 @@ namespace GiG.Core.Messaging.MassTransit.Internal
     /// <inheritdoc />
     internal class MassTransitConsumerActivityObserver : IConsumeObserver
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MassTransitConsumerActivityObserver"/>.
-        /// </summary>
-        public MassTransitConsumerActivityObserver()
-        {
-        }
-
         /// <inheritdoc />
         public Task ConsumeFault<T>(ConsumeContext<T> context, Exception exception) where T : class
         {
@@ -35,7 +28,7 @@ namespace GiG.Core.Messaging.MassTransit.Internal
         public Task PreConsume<T>(ConsumeContext<T> context) where T : class
         {
             var parentActivityId = context.Headers.Get<string>(Constants.ActivityIdHeader, string.Empty);
-            var activity = new System.Diagnostics.Activity("consumeMessage");
+            var activity = new System.Diagnostics.Activity("ConsumeMessage");
             if (!string.IsNullOrEmpty(parentActivityId))
             {
                 activity.SetParentId(parentActivityId);

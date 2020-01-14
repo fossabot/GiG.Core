@@ -7,11 +7,11 @@ namespace GiG.Core.Messaging.MassTransit.Internal
     /// <summary>
     /// Gets the current Activity Id and sets it in the message header.
     /// </summary>
-    internal class ActivtyFilter<T> : IFilter<T> where T : class, PipeContext
+    internal class ActivityFilter<T> : IFilter<T> where T : class, PipeContext
     {
         public void Probe(ProbeContext context)
         {
-            context.CreateFilterScope("activityId");
+            context.CreateFilterScope("ActivityId");
         }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace GiG.Core.Messaging.MassTransit.Internal
             // add the current Activity Id to the headers
             var publishcontext = context.GetPayload<PublishContext>();
 
-            var currentActivity = System.Diagnostics.Activity.Current ?? new System.Diagnostics.Activity("publishMessage").Start();
+            var currentActivity = System.Diagnostics.Activity.Current ?? new System.Diagnostics.Activity("PublishMessage").Start();
 
             publishcontext.Headers.Set(Constants.ActivityIdHeader, currentActivity.Id);
 
