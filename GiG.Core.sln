@@ -470,6 +470,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing.Activity.Tests.Integration", "tests\integration\GiG.Core.DistributedTracing.Activity.Tests.Integration\GiG.Core.DistributedTracing.Activity.Tests.Integration.csproj", "{9E55B38C-A25F-4EDF-882F-119690536725}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.Avro.Schema.Generator.Tests.Integration", "tests\integration\GiG.Core.Messaging.Avro.Schema.Generator.Tests.Integration\GiG.Core.Messaging.Avro.Schema.Generator.Tests.Integration.csproj", "{91FA9202-0097-4CDB-B1D8-FFEC56A33386}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1036,6 +1038,10 @@ Global
 		{9E55B38C-A25F-4EDF-882F-119690536725}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E55B38C-A25F-4EDF-882F-119690536725}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E55B38C-A25F-4EDF-882F-119690536725}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91FA9202-0097-4CDB-B1D8-FFEC56A33386}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91FA9202-0097-4CDB-B1D8-FFEC56A33386}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91FA9202-0097-4CDB-B1D8-FFEC56A33386}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91FA9202-0097-4CDB-B1D8-FFEC56A33386}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1230,6 +1236,7 @@ Global
 		{EAED18D7-3073-438C-88DD-F540E36037C3} = {F3E4EB54-9129-4327-9A32-89ABD4ADA6C5}
 		{77619D06-837D-4A86-9263-1CACC79255A6} = {F3E4EB54-9129-4327-9A32-89ABD4ADA6C5}
 		{9E55B38C-A25F-4EDF-882F-119690536725} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
+		{91FA9202-0097-4CDB-B1D8-FFEC56A33386} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}
