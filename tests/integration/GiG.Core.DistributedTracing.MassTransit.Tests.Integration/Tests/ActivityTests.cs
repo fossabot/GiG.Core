@@ -37,7 +37,7 @@ namespace GiG.Core.DistributedTracing.MassTransit.Tests.Integration.Tests
 
             // Assert
             Assert.Contains(messageId, State.Messages.Keys);
-            Assert.Equal(expectedActivityRoot, State.Messages[messageId].ToString());
+            Assert.Equal(expectedActivityRoot, State.Messages[messageId]);
         }
 
         [Fact]

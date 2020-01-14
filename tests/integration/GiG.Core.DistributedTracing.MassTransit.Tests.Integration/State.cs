@@ -1,18 +1,24 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace GiG.Core.DistributedTracing.MassTransit.Tests.Integration
 {
     public static class State
     {
-        public static Dictionary<Guid, string> Messages;
+        public static ConcurrentDictionary<Guid, string> Messages;
+
+        private static Semaphore _initSemaphore = new Semaphore(1, 1);
 
         public static void Init()
         {
+            _initSemaphore.WaitOne();
             if (Messages == null)
             {
-                Messages = new Dictionary<Guid, string>();
+                Messages = new ConcurrentDictionary<Guid, string>();
             }
+            _initSemaphore.Release();
         }
     }
 }
