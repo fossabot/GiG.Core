@@ -20,7 +20,7 @@ namespace GiG.Core.Messaging.MassTransit.Extensions
         {
             if (configurator == null) throw new ArgumentNullException(nameof(configurator));
 
-            configurator.AddPipeSpecification(new ActivitySpecification<T>());
+            configurator.AddPipeSpecification(new ActivityFilterSpecification<T>());
 
             return configurator;
         }
