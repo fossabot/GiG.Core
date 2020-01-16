@@ -30,8 +30,8 @@
         /// </summary>
         public HealthChecksOptions()
         {
-            LiveUrl = $"{Constants.CombinedHealthCheckUrl} / {Constants.LiveTag}";
-            ReadyUrl = $"{Constants.CombinedHealthCheckUrl} / {Constants.ReadyTag}";
+            LiveUrl = $"{Constants.CombinedHealthCheckUrl}/{Constants.LiveTag}";
+            ReadyUrl = $"{Constants.CombinedHealthCheckUrl}/{Constants.ReadyTag}";
         }
     }
 }
