@@ -1,7 +1,10 @@
 ﻿using GiG.Core.Data.KVStores.Abstractions;
+using GiG.Core.Data.KVStores.Extensions;
 using GiG.Core.Data.KVStores.Providers.FileProviders.Abstractions;
+using GiG.Core.Data.KVStores.Providers.FileProviders.Extensions;
 using GiG.Core.Data.KVStores.Providers.Hosting;
-using GiG.Core.Data.KVStores.Tests.Integration.Mocks;
+using GiG.Core.Data.KVStores.Providers.Tests.Integration.Mocks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
@@ -12,17 +15,28 @@ using System.Text.Json;
 using System.Threading;
 using Xunit;
 
-namespace GiG.Core.Data.KVStores.Tests.Integration.Tests
+namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
 {
     [Trait("Category", "Integration")]
-    public class DataProviderTests
+    public class FileProviderTests
     {
         [Fact]
-        public void GetData_JsonDataProvider_ReturnsMockLanguages()
+        public void GetData_JsonFileProvider_ReturnsMockLanguages()
         {
             // Arrange.
             var host = Host.CreateDefaultBuilder()
-                .ConfigureServices(MockStartup.ConfigureServices)
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    config.AddJsonFile("appsettingsFile.json");
+                })
+                .ConfigureServices((hostContext, services) =>
+                {
+                    var configuration = hostContext.Configuration;
+
+                    services.AddKVStores<IEnumerable<MockLanguage>>()
+                        .AddMemoryDataStore()
+                        .FromJsonFile(configuration, "Languages");
+                })
                 .Build();
 
             var serviceProvider = host.Services;
@@ -37,11 +51,10 @@ namespace GiG.Core.Data.KVStores.Tests.Integration.Tests
             // Act.
             var data = dataRetriever.Get();
             
-            //Assert.
+            // Assert.
             Assert.NotNull(data);
             Assert.Equal(languages.Select(l => l.Alpha2Code), data.Select(l => l.Alpha2Code));
         }
-
 
         private IEnumerable<MockLanguage> ReadFromJson(IServiceProvider serviceProvider)
         {

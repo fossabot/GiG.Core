@@ -1,12 +1,12 @@
 using GiG.Core.Data.KVStores.Extensions;
 using GiG.Core.Data.KVStores.Providers.FileProviders.Extensions;
-using GiG.Core.Data.KVStores.Sample.Models;
-using GiG.Core.Data.KVStores.Sample.Services;
+using GiG.Core.Data.KVStores.File.Sample.Models;
+using GiG.Core.Data.KVStores.File.Sample.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Collections.Generic;
 
-namespace GiG.Core.Data.KVStores.Sample
+namespace GiG.Core.Data.KVStores.File.Sample
 {
     internal static class Startup
     {

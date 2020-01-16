@@ -1,5 +1,5 @@
 using GiG.Core.Data.KVStores.Abstractions;
-using GiG.Core.Data.KVStores.Sample.Models;
+using GiG.Core.Data.KVStores.File.Sample.Models;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GiG.Core.Data.KVStores.Sample.Services
+namespace GiG.Core.Data.KVStores.File.Sample.Services
 {
     public class LanguageService : IHostedService
     {

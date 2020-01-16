@@ -1,39 +1,52 @@
 using GiG.Core.Data.KVStores.Abstractions;
-using GiG.Core.Data.KVStores.Sample.Models;
+using GiG.Core.Data.KVStores.Etcd.Sample.Models;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GiG.Core.Data.KVStores.Sample.Services
+namespace GiG.Core.Data.KVStores.Etcd.Sample.Services
 {
     public class CurrencyService : IHostedService
     {
         private readonly IDataRetriever<IEnumerable<Currency>> _dataRetriever;
         private readonly ILogger<CurrencyService> _logger;
+        private Timer _timer;
 
         public CurrencyService(IDataRetriever<IEnumerable<Currency>> dataRetriever, ILogger<CurrencyService> logger)
         {
             _dataRetriever = dataRetriever;
             _logger = logger;
         }
-        
+
+        public void Dispose()
+        {
+            _timer.Dispose();
+        }
+
         public Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Retrieving Currencies...");
-           
-            var data = _dataRetriever.Get();
-            _logger.LogInformation(String.Join(", ", data.Select(x => $"Name: {x.Name}").ToArray()));
+
+            _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromSeconds(2));
 
             return Task.CompletedTask;
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
+            _timer?.Change(Timeout.Infinite, 0);
+
             return Task.CompletedTask;
+        }
+
+        private void DoWork(object state)
+        {
+            var data = _dataRetriever.Get();
+
+            _logger.LogInformation("Currencies: {@currencies}", data);
         }
     }
 }

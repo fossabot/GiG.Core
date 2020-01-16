@@ -10,13 +10,15 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders
     /// <inheritdoc />
     public class JsonFileDataProvider<T> : FileDataProvider<T>
     {
-        private readonly FileProviderOptions _fileProviderOptions;
-
         /// <inheritdoc />
-        public JsonFileDataProvider(ILogger<FileDataProvider<T>> logger, IDataStore<T> dataStore, IFileProvider fileProvider, IDataProviderOptions<T, FileProviderOptions> fileOptionsAccessor) : 
+        public JsonFileDataProvider(
+            ILogger<FileDataProvider<T>> logger, 
+            IDataStore<T> dataStore, 
+            IFileProvider fileProvider, 
+            IDataProviderOptions<T, FileProviderOptions> fileOptionsAccessor) : 
             base(logger, dataStore, fileProvider, fileOptionsAccessor)
         {
-          _fileProviderOptions = fileOptionsAccessor.Value;
+
         }
 
         /// <inheritdoc />
