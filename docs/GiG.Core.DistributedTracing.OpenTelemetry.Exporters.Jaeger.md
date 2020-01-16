@@ -2,7 +2,8 @@
 
 N.B. This Library is still not stable for release. Please do not use on production. 
 
-This Library provides an API to register Tracing using Open Telemetry to capture distributed traces from your application and export them to Jaeger Exporter.
+This Library provides an API to register Tracing using Open Telemetry to capture distributed traces from your application and export them to Jaeger Exporter. 
+If the default section name of Jaeger is not 'Jaeger' the custom section name can be included when calling RegisterJaeger as an optional parameter.
 
 ## Basic Usage
 

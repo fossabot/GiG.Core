@@ -16,12 +16,13 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.External
         /// Register Jaeger Exporter.
         /// </summary>
         /// <param name="builder">The <see cref="TracingConfigurationBuilder" />.</param>
+        /// <param name="sectionName">The Exporter configuration section Name. </param>
         /// <returns>The <see cref="TracingConfigurationBuilder" />.</returns>
-        public static TracingConfigurationBuilder RegisterJaeger([NotNull] this TracingConfigurationBuilder builder)
+        public static TracingConfigurationBuilder RegisterJaeger([NotNull] this TracingConfigurationBuilder builder, string sectionName = ExporterName)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
 
-            var options = builder.TracingConfiguration.GetSection($"Exporters:{ExporterName}").Get<JaegerExporterOptions>();
+            var options = builder.TracingConfiguration.GetSection($"Exporters:{sectionName}").Get<JaegerExporterOptions>();
 
             if (options == null)
             {

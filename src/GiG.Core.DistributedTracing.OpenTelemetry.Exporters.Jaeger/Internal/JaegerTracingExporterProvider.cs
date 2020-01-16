@@ -1,6 +1,7 @@
 using GiG.Core.DistributedTracing.Telemetry.Abstractions;
 using JetBrains.Annotations;
 using OpenTelemetry.Trace.Configuration;
+using System;
 
 namespace GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.Internal
 {
@@ -10,6 +11,7 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.Internal
 
         public JaegerTracingExporterProvider([NotNull] JaegerExporterOptions options)
         {
+            if (options == null) throw new ArgumentNullException(nameof(options));
             _options = options;
         }
 
