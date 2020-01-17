@@ -1,10 +1,11 @@
 ﻿using GiG.Core.DistributedTracing.Telemetry.Abstractions;
+using GiG.Core.Hosting;
 
 namespace GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.Internal
 {
     internal class JaegerExporterOptions : BasicExporterOptions
     {
-        public string ServiceName { get; set; }
+        public string ServiceName { get; set; } =  ApplicationMetadata.Name;
  
         public string AgentHost { get; set; } = "localhost";
 
