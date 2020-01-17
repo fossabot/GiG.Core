@@ -9,21 +9,24 @@ using System.Threading.Tasks;
 namespace GiG.Core.Data.KVStores.Providers.Etcd
 {
     /// <inheritdoc />
-    public abstract class EtcdDataProvider<T> : IDataProvider<T>
+    public class EtcdDataProvider<T> : IDataProvider<T>
     {
         private readonly ILogger<EtcdDataProvider<T>> _logger;
         private readonly IDataStore<T> _dataStore;
+        private readonly IDataSerializer<T> _dataSerializer;
         private readonly EtcdProviderOptions _etcdProviderOptions;
 
         private readonly EtcdClient _etcdClient;
 
         /// <inheritdoc />
-        protected EtcdDataProvider(ILogger<EtcdDataProvider<T>> logger,
+        public EtcdDataProvider(ILogger<EtcdDataProvider<T>> logger,
             IDataStore<T> dataStore,
+            IDataSerializer<T> dataSerializer,
             IDataProviderOptions<T, EtcdProviderOptions> etcdProviderOptionsAccessor)
         {
             _logger = logger;
             _dataStore = dataStore;
+            _dataSerializer = dataSerializer;
             _etcdProviderOptions = etcdProviderOptionsAccessor.Value;
 
             _etcdClient = new EtcdClient(_etcdProviderOptions.ConnectionString);
@@ -32,6 +35,8 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         /// <inheritdoc/>
         public async Task StartAsync()
         {
+            _logger.LogInformation("Start Executed for {key}", _etcdProviderOptions.Key);
+
             var value = await _etcdClient.GetValAsync(_etcdProviderOptions.Key);
 
             if (string.IsNullOrWhiteSpace(value))
@@ -40,7 +45,7 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
             }
             else
             {
-                _dataStore.Set(GetFromString(value));
+                _dataStore.Set(_dataSerializer.GetFromString(value));
             }
 
             var watchRequest = new WatchRequest()
@@ -53,10 +58,12 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
 
             _etcdClient.Watch(watchRequest, (WatchResponse response) =>
             {
+                _logger.LogInformation("Watch Executed for {key}", _etcdProviderOptions.Key);
+
                 if (response.Events.Count > 0)
                 {
                     value = response.Events[0].Kv.Value.ToStringUtf8();
-                    _dataStore.Set(GetFromString(value));
+                    _dataStore.Set(_dataSerializer.GetFromString(value));
                 }
             });
         }
@@ -64,14 +71,11 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         /// <inheritdoc/>
         public Task StopAsync()
         {
+            _logger.LogInformation("Stop Executed for {key}", _etcdProviderOptions.Key);
+
+            _etcdClient.Dispose();
+
             return Task.CompletedTask;
         }
-
-        /// <summary>
-        /// Get Model from String.
-        /// </summary>
-        /// <param name="value">The <see cref="string"/>.</param>
-        /// <returns>Generic to define type of model.</returns>
-        protected abstract T GetFromString(string value);
     }
 }

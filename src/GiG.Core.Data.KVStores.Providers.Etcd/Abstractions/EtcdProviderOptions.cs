@@ -8,7 +8,7 @@
         /// <summary>
         /// The Connection String.
         /// </summary>
-        public string ConnectionString { get; set; }
+        public string ConnectionString { get; set; } = "http://localhost:2379";
 
         /// <summary>
         /// The Key.

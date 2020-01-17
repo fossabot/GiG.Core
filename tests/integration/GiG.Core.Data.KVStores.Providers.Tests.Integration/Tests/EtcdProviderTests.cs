@@ -39,7 +39,8 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
                     var configuration = hostContext.Configuration;
 
                     services.AddKVStores<IEnumerable<MockLanguage>>()
-                        .FromJsonEtcd(configuration, "Languages");
+                        .FromEtcd(configuration, "Languages")
+                        .WithJsonSerialization();
                 })
                 .Build();
 

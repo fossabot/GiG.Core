@@ -14,16 +14,17 @@ public static void ConfigureServices(HostBuilderContext hostContext, IServiceCol
     
     services
         .AddKVStores<IEnumerable<MyModel>>()
-        .FromJsonEtcd(configuration, "MyData");
+        .FromEtcd(configuration, "MyData")
+        .WithJsonSerialization();
 }
 
 ```
 
 ### Configuration
 
-The below table outlines the valid Configurations used to configure the [EtcdProviderOptions](..\src\GiG.Core.Data.KVStores.Providers.Etcd\Abstractions\EtcdProviderOptions.cs). The options do not define a default configuration section, the needs to be provided when registering an etcd provider.
+The below table outlines the valid Configurations used to configure the [EtcdProviderOptions](..\src\GiG.Core.Data.KVStores.Providers.Etcd\Abstractions\EtcdProviderOptions.cs). The options do not define a default configuration section, that needs to be provided when registering an etcd provider.
 
 | Configuration Name | Type   | Optional | Default Value            |
 |:-------------------|:-------|:---------|:-------------------------|
-| ConnectionString   | String | No       |                          |
+| ConnectionString   | String | Yes      | http://localhost:2379    |
 | Key                | String | No       |                          |

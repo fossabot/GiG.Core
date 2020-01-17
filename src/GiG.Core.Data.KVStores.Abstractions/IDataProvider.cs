@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 namespace GiG.Core.Data.KVStores.Abstractions
 {
     /// <summary>
-    /// Data Provider. Used to fetch data from source.
+    /// The Data Provider used to fetch data from source.
     /// </summary>
     public interface IDataProvider<T>
     {

@@ -9,21 +9,24 @@ using System.Threading.Tasks;
 namespace GiG.Core.Data.KVStores.Providers.FileProviders
 {
     /// <inheritdoc />
-    public abstract class FileDataProvider<T> : IDataProvider<T>
+    public class FileDataProvider<T> : IDataProvider<T>
     {
         private readonly ILogger<FileDataProvider<T>> _logger;
         private readonly IDataStore<T> _dataStore;
+        private readonly IDataSerializer<T> _dataSerializer;
         private readonly IFileProvider _fileProvider;
         private readonly FileProviderOptions _fileOptions;
 
         /// <inheritdoc />
-        protected FileDataProvider(ILogger<FileDataProvider<T>> logger,
-            IDataStore<T> dataStore, 
+        public FileDataProvider(ILogger<FileDataProvider<T>> logger,
+            IDataStore<T> dataStore,
+            IDataSerializer<T> dataSerializer,
             IFileProvider fileProvider, 
             IDataProviderOptions<T, FileProviderOptions> fileOptionsAccessor)
         {
             _logger = logger;
             _dataStore = dataStore;
+            _dataSerializer = dataSerializer;
             _fileProvider = fileProvider;
             _fileOptions = fileOptionsAccessor.Value;
         }
@@ -31,6 +34,8 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders
         /// <inheritdoc/>
         public Task StartAsync()
         {
+            _logger.LogInformation("Start Executed for {file}", _fileOptions.Path);
+
             var model = Load();
 
             _dataStore.Set(model);
@@ -41,14 +46,11 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders
         /// <inheritdoc/>
         public Task StopAsync()
         {
+            _logger.LogInformation("Stop Executed for {file}", _fileOptions.Path);
+
             return Task.CompletedTask;
         }
 
-        /// <summary>
-        /// Loads File Into Model.
-        /// </summary>
-        /// <returns>Generic to define type of model.</returns>
-        /// <exception cref="InvalidOperationException"></exception>
         private T Load()
         {
             var file = _fileProvider.GetFileInfo(_fileOptions.Path);
@@ -59,24 +61,20 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders
             
             using (var stream = file.CreateReadStream())
             {
-                try
+                using (var reader = new StreamReader(stream))
                 {
-                    model = GetFromStream(stream);
-                }
-                catch (Exception e)
-                {
-                    _logger.LogError(e, e.Message);
+                    try
+                    {
+                        model = _dataSerializer.GetFromString(reader.ReadToEnd());
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, e.Message);
+                    }
                 }
             }
 
             return model;
         }
-
-        /// <summary>
-        /// Get Model from Stream.
-        /// </summary>
-        /// <param name="stream">The <see cref="Stream"/>.</param>
-        /// <returns>Generic to define type of model.</returns>
-        protected abstract T GetFromStream(Stream stream);
     }
 }

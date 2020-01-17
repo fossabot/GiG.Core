@@ -35,7 +35,8 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
 
                     services.AddKVStores<IEnumerable<MockLanguage>>()
                         .AddMemoryDataStore()
-                        .FromJsonFile(configuration, "Languages");
+                        .FromFile(configuration, "Languages")
+                        .WithJsonSerialization();
                 })
                 .Build();
 

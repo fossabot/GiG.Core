@@ -15,10 +15,12 @@ namespace GiG.Core.Data.KVStores.Etcd.Sample
             var configuration = hostContext.Configuration;
 
             services.AddKVStores<IEnumerable<Language>>()
-                .FromJsonEtcd(configuration, "Languages");
+                .FromEtcd(configuration, "Languages")
+                .WithJsonSerialization();
 
             services.AddKVStores<IEnumerable<Currency>>()
-                .FromJsonEtcd(configuration, "Currencies");
+                .FromEtcd(configuration, "Currencies")
+                .WithJsonSerialization();
 
             services.AddHostedService<LanguageService>();
             services.AddHostedService<CurrencyService>();

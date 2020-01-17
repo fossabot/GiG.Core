@@ -15,11 +15,13 @@ namespace GiG.Core.Data.KVStores.File.Sample
             var configuration = hostContext.Configuration;
 
             services.AddKVStores<IEnumerable<Language>>()
-                .FromJsonFile(configuration, "Languages");
+                .FromFile(configuration, "Languages")
+                .WithJsonSerialization();
 
             services.AddKVStores<IEnumerable<Currency>>()
-                .FromJsonFile(configuration, "Currencies");
-            
+                .FromFile(configuration, "Currencies")
+                .WithJsonSerialization();
+
             services.AddHostedService<LanguageService>();
             services.AddHostedService<CurrencyService>();
         }

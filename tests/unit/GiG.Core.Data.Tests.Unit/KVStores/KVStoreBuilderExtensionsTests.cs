@@ -23,14 +23,14 @@ namespace GiG.Core.Data.Tests.Unit.KVStores
         [Fact]
         public void FromJsonFile_KVStoreBuilderIsNull_ThrowsArgumentNullException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => FileProvidersKVStoreBuilderExtensions.FromJsonFile<object>(null, null, ""));
+            var exception = Assert.Throws<ArgumentNullException>(() => FileProvidersKVStoreBuilderExtensions.FromFile<object>(null, null, ""));
             Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]
         public void FromJsonFileWithConfigurationSection_KVStoreBuilderIsNull_ThrowsArgumentNullException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => FileProvidersKVStoreBuilderExtensions.FromJsonFile<object>(null, null));
+            var exception = Assert.Throws<ArgumentNullException>(() => FileProvidersKVStoreBuilderExtensions.FromFile<object>(null, null));
             Assert.Equal("builder", exception.ParamName);
         }
 
@@ -40,7 +40,7 @@ namespace GiG.Core.Data.Tests.Unit.KVStores
             var exception = Assert.Throws<ArgumentNullException>(() =>
                 Host.CreateDefaultBuilder()
                     .ConfigureServices(x =>
-                        x.AddKVStores<object>().FromJsonFile(null, ""))
+                        x.AddKVStores<object>().FromFile(null, ""))
                     .Build());
             Assert.Equal("configuration", exception.ParamName);
         }
@@ -51,7 +51,7 @@ namespace GiG.Core.Data.Tests.Unit.KVStores
             var exception = Assert.Throws<ConfigurationErrorsException>(() =>
                 Host.CreateDefaultBuilder()
                     .ConfigureServices(x =>
-                        x.AddKVStores<object>().FromJsonFile(null))
+                        x.AddKVStores<object>().FromFile(null))
                     .Build());
             Assert.Equal("Configuration section '' is incorrect.", exception.Message);
         }
@@ -62,7 +62,7 @@ namespace GiG.Core.Data.Tests.Unit.KVStores
             var exception = Assert.Throws<ArgumentException>(() =>
                 Host.CreateDefaultBuilder()
                     .ConfigureServices((x, y) =>
-                        y.AddKVStores<object>().FromJsonFile(x.Configuration, ""))
+                        y.AddKVStores<object>().FromFile(x.Configuration, ""))
                     .Build());
             Assert.Equal("'configurationSectionName' must not be null, empty or whitespace. (Parameter 'configurationSectionName')", exception.Message);
         }
