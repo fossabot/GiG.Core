@@ -16,7 +16,8 @@ namespace GiG.Core.DistributedTracing.MassTransit.Tests.Integration.Mocks
         public Task Consume(ConsumeContext<MockMessage> context)
         {
             var correlationId = _correlationContextAccessor.Value;
-            State.Messages[context.Message.Id] = correlationId;
+            State.Messages[context.Message.Id] = correlationId.ToString();
+
             return Task.CompletedTask;
         }
     }

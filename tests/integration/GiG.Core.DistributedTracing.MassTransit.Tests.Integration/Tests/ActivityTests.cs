@@ -1,4 +1,3 @@
-using GiG.Core.DistributedTracing.MassTransit.Extensions;
 using GiG.Core.DistributedTracing.MassTransit.Tests.Integration.Mocks;
 using GiG.Core.Messaging.MassTransit.Extensions;
 using MassTransit;
@@ -11,36 +10,38 @@ using Xunit;
 namespace GiG.Core.DistributedTracing.MassTransit.Tests.Integration.Tests
 {
     [Trait("Category", "Integration")]
-    public class CorrelationIdTests
+    public class ActivityTests
     {
         private IServiceProvider _serviceProvider;
 
-        public CorrelationIdTests()
+        public ActivityTests()
         {
             SetupServices();
         }
 
         [Fact]
-        public async Task CorrelationIdValue_GeneratedAndAddedToContext_ReturnsCorrelationId()
+        public async Task Activity_StartedAndAddedToContext_ReturnsActivityId()
         {
             // Arrange
             var busControl = _serviceProvider.GetRequiredService<IBusControl>();
             busControl.Start();
 
             var messageId = Guid.NewGuid();
-            var correlationId = Guid.NewGuid();
+            var activity = new System.Diagnostics.Activity("producer");
+            activity.Start();
+            var expectedActivityRoot = activity.RootId;
 
             // Act
-            await busControl.Publish(new MockMessage { Id = messageId }, x => x.CorrelationId = correlationId);
+            await busControl.Publish(new MockMessage { Id = messageId });
             await Task.Delay(500);
 
             // Assert
             Assert.Contains(messageId, State.Messages.Keys);
-            Assert.Equal(correlationId.ToString(), State.Messages[messageId]);
+            Assert.Equal(expectedActivityRoot, State.Messages[messageId]);
         }
 
         [Fact]
-        public async Task CorrelationIdValue_NotAddedToContext_ReturnsCorrelationId()
+        public async Task Activity_NotStartedAddedToContext_ReturnsActivityId()
         {
             // Arrange
             var busControl = _serviceProvider.GetRequiredService<IBusControl>();
@@ -61,9 +62,7 @@ namespace GiG.Core.DistributedTracing.MassTransit.Tests.Integration.Tests
         {
             State.Init();
             var services = new ServiceCollection();
-            services.AddCorrelationAccessor();
             AddMessageConsumer(services);
-           
             _serviceProvider = services.BuildServiceProvider();
         }
 
@@ -71,14 +70,15 @@ namespace GiG.Core.DistributedTracing.MassTransit.Tests.Integration.Tests
         {
             services.AddMassTransit(x =>
             {
-                x.AddConsumer<MockConsumer>();
+                x.AddConsumer<ActivityMockConsumer>();
                 x.AddBus(provider => Bus.Factory.CreateUsingInMemory(cfg =>
                 {
-                    cfg.Host.AddDefaultConsumerObserver(x.Collection.BuildServiceProvider());
+                    cfg.ConfigurePublish(x => x.UseActivityFilter());
+                    cfg.Host.AddActivityConsumerObserver();
 
-                    cfg.ReceiveEndpoint(typeof(MockConsumer).FullName, e =>
+                    cfg.ReceiveEndpoint(typeof(ActivityMockConsumer).FullName, e =>
                     {
-                        e.Consumer<MockConsumer>(provider);
+                        e.Consumer<ActivityMockConsumer>(provider);
                     });
                 }));
             });
