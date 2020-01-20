@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\src\GiG.Core.Data.KVStores.Providers.Etcd\GiG.Core.Data.KVStores.Providers.Etcd.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Data.KVStores.Providers.FileProviders\GiG.Core.Data.KVStores.Providers.FileProviders.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Data.KVStores\GiG.Core.Data.KVStores.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Data.Migration.Evolve\GiG.Core.Data.Migration.Evolve.csproj" />
