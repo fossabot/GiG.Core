@@ -18,7 +18,13 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
 
         private readonly EtcdClient _etcdClient;
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="logger">The <see cref="ILogger{EtcdDataProvider}"/> which will be used to log events by the provider.</param>
+        /// <param name="dataStore">The <see cref="IDataStore{T}" /> which will be used to store the data retrieved by the provider.</param>
+        /// <param name="dataSerializer">The <see cref="IDataProvider{T}"/> which will be used to deserialize data from Etcd.</param>
+        /// <param name="etcdProviderOptionsAccessor">The <see cref="IDataProviderOptions{T,TOptions}"/> which will be used to access options for the instance of the provider.</param>
         public EtcdDataProvider(ILogger<EtcdDataProvider<T>> logger,
             IDataStore<T> dataStore,
             IDataSerializer<T> dataSerializer,
@@ -35,18 +41,11 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         /// <inheritdoc/>
         public async Task StartAsync()
         {
-            _logger.LogInformation("Start Executed for {key}", _etcdProviderOptions.Key);
+            _logger.LogDebug("Start Executed for {key}", _etcdProviderOptions.Key);
 
             var value = await _etcdClient.GetValAsync(_etcdProviderOptions.Key);
 
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                _dataStore.Set(default);
-            }
-            else
-            {
-                _dataStore.Set(_dataSerializer.GetFromString(value));
-            }
+            _dataStore.Set(string.IsNullOrWhiteSpace(value) ? default : _dataSerializer.GetFromString(value));
 
             var watchRequest = new WatchRequest()
             {
