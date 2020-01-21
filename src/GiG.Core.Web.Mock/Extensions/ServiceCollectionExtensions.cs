@@ -1,4 +1,5 @@
 ﻿using GiG.Core.Context.Abstractions;
+using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.MultiTenant.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
@@ -51,6 +52,21 @@ namespace GiG.Core.Web.Mock.Extensions
             if (services == null) throw new ArgumentNullException(nameof(services));
 
             services.TryAddSingleton<ICorrelationContextAccessor>(new MockCorrelationContextAccessor());
+
+            return services;
+        }
+
+        /// <summary>
+        /// Adds required service to support <see cref="MockActivityContextAccessor"/> functionality.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection"/>.</param>
+        /// <returns>The <see cref="IServiceCollection"/> to chain additional calls.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static IServiceCollection AddMockActivityContextAccessor([NotNull] this IServiceCollection services)
+        {
+            if (services == null) throw new ArgumentNullException(nameof(services));
+
+            services.TryAddSingleton<IActivityContextAccessor>(new MockActivityContextAccessor());
 
             return services;
         }

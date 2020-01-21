@@ -15,10 +15,27 @@ namespace GiG.Core.Logging.Enrichers.DistributedTracing.Internal
         
         public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
         {
+            AddTraceId(logEvent);
+            AddSpanId(logEvent);
+            AddParentId(logEvent);
             AddBaggage(logEvent);
         }
 
-     
+        private void AddTraceId(LogEvent logEvent)
+        {
+            logEvent.AddPropertyIfAbsent(new LogEventProperty("TraceId", new ScalarValue(_activityContextAccessor.TraceId)));
+        }
+
+        private void AddSpanId(LogEvent logEvent)
+        {
+            logEvent.AddPropertyIfAbsent(new LogEventProperty("SpanId", new ScalarValue(_activityContextAccessor.SpanId)));
+        }
+
+        private void AddParentId(LogEvent logEvent)
+        {
+            logEvent.AddPropertyIfAbsent(new LogEventProperty("ParentId", new ScalarValue(_activityContextAccessor.ParentSpanId)));
+        }
+        
         private void AddBaggage(LogEvent logEvent)
         {
             foreach (var baggageEntry in _activityContextAccessor.Baggage)

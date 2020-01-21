@@ -17,6 +17,7 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Events;
 using System;
+using System.Linq;
 using Xunit;
 
 namespace GiG.Core.Logging.Tests.Integration.Tests
@@ -29,6 +30,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
         private readonly IApplicationMetadataAccessor _applicationMetadataAccessor;
         private readonly IRequestContextAccessor _requestContextAccessor;
         private readonly ICorrelationContextAccessor _correlationContextAccessor;
+        private readonly IActivityContextAccessor _activityContextAccessor;
 
         private LogEvent _logEvent;
 
@@ -40,12 +42,15 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
                     x.AddMockCorrelationAccessor();
                     x.AddMockTenantAccessor();
                     x.AddMockRequestContextAccessor();
+                    x.AddMockActivityContextAccessor();
+
                 })
                 .UseApplicationMetadata()
                 .ConfigureLogging(x => x
                     .WriteToFile()
                     .WriteToSink(new DelegatingSink(WriteLog))
                     .EnrichWithApplicationMetadata()
+                    .EnrichWithActivityContext()
                     .EnrichWithCorrelation()
                     .EnrichWithTenant()
                     .EnrichWithRequestContext()
@@ -57,8 +62,38 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
             _applicationMetadataAccessor = _host.Services.GetRequiredService<IApplicationMetadataAccessor>();
             _requestContextAccessor = _host.Services.GetRequiredService<IRequestContextAccessor>();
             _correlationContextAccessor = _host.Services.GetRequiredService<ICorrelationContextAccessor>();
+            _activityContextAccessor = _host.Services.GetRequiredService<IActivityContextAccessor>();
         }
 
+        [Fact]
+        public void LogInformation_WriteLogWithActivityContext_VerifyContents()
+        {
+            // Arrange
+            var logger = _host.Services.GetRequiredService<ILogger<LoggingEnricherTests>>();
+
+            // Act
+            logger.LogInformation(_logMessageTest);
+            
+            // Assert
+            Assert.NotNull(_logEvent);
+            var traceId = _logEvent.Properties["TraceId"].LiteralValue().ToString();
+            var spanId = _logEvent.Properties["SpanId"].LiteralValue().ToString();
+            var parentSpanId = _logEvent.Properties["ParentId"].LiteralValue().ToString();
+            var baggageTenantId = _logEvent.Properties["baggage.TenantId"].LiteralValue().ToString();
+            
+            Assert.NotNull(traceId);
+            Assert.NotNull(spanId);
+            Assert.NotNull(parentSpanId);
+            Assert.NotNull(baggageTenantId);
+            
+            Assert.Equal(_activityContextAccessor.TraceId, traceId);
+            Assert.Equal(_activityContextAccessor.SpanId, spanId);
+            Assert.Equal(_activityContextAccessor.ParentSpanId, parentSpanId);
+            Assert.Equal(
+                _activityContextAccessor.Baggage.First(x => x.Key == "TenantId").Value, 
+                baggageTenantId);
+        }
+        
         [Fact]
         public void LogInformation_WriteLogWithEnrichers_VerifyContents()
         {
