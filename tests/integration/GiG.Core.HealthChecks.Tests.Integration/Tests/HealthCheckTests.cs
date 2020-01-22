@@ -14,13 +14,6 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
     [Trait("Category", "Integration")]
     public class HealthCheckTests
     {
-        private readonly HealthChecksOptions _healthChecksOptions;
-
-        public HealthCheckTests()
-        {
-            _healthChecksOptions = new HealthChecksOptions();
-        }
-
         [Fact]
         public async Task CombinedHealthCheck_ReturnsHealthyStatus()
         {
@@ -31,7 +24,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
 
             var client = testServer.CreateClient();
 
-            using var request = new HttpRequestMessage(HttpMethod.Get, _healthChecksOptions.CombinedUrl);
+            using var request = new HttpRequestMessage(HttpMethod.Get, MockStartupWithDefaultConfiguration.CombinedUrl);
             
             // Act
             using var response = await client.SendAsync(request);
@@ -51,7 +44,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
 
             var client = testServer.CreateClient();
 
-            using var request = new HttpRequestMessage(HttpMethod.Get, _healthChecksOptions.LiveUrl);
+            using var request = new HttpRequestMessage(HttpMethod.Get, MockStartupWithDefaultConfiguration.LiveUrl);
             
             // Act
             using var response = await client.SendAsync(request);
@@ -71,7 +64,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
 
             var client = testServer.CreateClient();
 
-            using var request = new HttpRequestMessage(HttpMethod.Get, _healthChecksOptions.ReadyUrl);
+            using var request = new HttpRequestMessage(HttpMethod.Get, MockStartupWithDefaultConfiguration.ReadyUrl);
             
             // Act
             using var response = await client.SendAsync(request);
@@ -152,7 +145,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
 
             var client = testServer.CreateClient();
 
-            using var request = new HttpRequestMessage(HttpMethod.Get, _healthChecksOptions.ReadyUrl);
+            using var request = new HttpRequestMessage(HttpMethod.Get, MockStartupWithDefaultConfiguration.ReadyUrl);
             
             // Act
             using var response = await client.SendAsync(request);
@@ -173,7 +166,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
 
             var client = testServer.CreateClient();
 
-            using var request = new HttpRequestMessage(HttpMethod.Get, _healthChecksOptions.ReadyUrl);
+            using var request = new HttpRequestMessage(HttpMethod.Get, MockStartupWithDefaultConfiguration.ReadyUrl);
             
             // Act
             using var response = await client.SendAsync(request);
@@ -194,7 +187,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
 
             var client = testServer.CreateClient();
 
-            using var request = new HttpRequestMessage(HttpMethod.Get, _healthChecksOptions.LiveUrl);
+            using var request = new HttpRequestMessage(HttpMethod.Get, MockStartupWithDefaultConfiguration.LiveUrl);
             
             // Act
             using var response = await client.SendAsync(request);
@@ -215,7 +208,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
 
             var client = testServer.CreateClient();
 
-            using var request = new HttpRequestMessage(HttpMethod.Get, _healthChecksOptions.LiveUrl);
+            using var request = new HttpRequestMessage(HttpMethod.Get, MockStartupWithDefaultConfiguration.LiveUrl);
             
             // Act
             using var response = await client.SendAsync(request);
@@ -236,7 +229,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
 
             var client = testServer.CreateClient();
 
-            using var request = new HttpRequestMessage(HttpMethod.Get, _healthChecksOptions.CombinedUrl);
+            using var request = new HttpRequestMessage(HttpMethod.Get, MockStartupWithDefaultConfiguration.CombinedUrl);
             
             // Act
             using var response = await client.SendAsync(request);
@@ -257,7 +250,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
 
             var client = testServer.CreateClient();
 
-            using var request = new HttpRequestMessage(HttpMethod.Get, _healthChecksOptions.CombinedUrl);
+            using var request = new HttpRequestMessage(HttpMethod.Get, MockStartupWithDefaultConfiguration.CombinedUrl);
             
             // Act
             using var response = await client.SendAsync(request);
