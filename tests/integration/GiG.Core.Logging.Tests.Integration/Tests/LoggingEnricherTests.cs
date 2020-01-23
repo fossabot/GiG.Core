@@ -4,6 +4,7 @@ using GiG.Core.Hosting.Abstractions;
 using GiG.Core.Hosting.Extensions;
 using GiG.Core.Logging.Enrichers.ApplicationMetadata.Extensions;
 using GiG.Core.Logging.Enrichers.Context.Extensions;
+using GiG.Core.Logging.Enrichers.DistributedTracing;
 using GiG.Core.Logging.Enrichers.DistributedTracing.Extensions;
 using GiG.Core.Logging.Enrichers.MultiTenant.Extensions;
 using GiG.Core.Logging.Extensions;
@@ -70,16 +71,17 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
         {
             // Arrange
             var logger = _host.Services.GetRequiredService<ILogger<LoggingEnricherTests>>();
+            const string tenantIdKey = "TenantId";
 
             // Act
             logger.LogInformation(_logMessageTest);
             
             // Assert
             Assert.NotNull(_logEvent);
-            var traceId = _logEvent.Properties["TraceId"].LiteralValue().ToString();
-            var spanId = _logEvent.Properties["SpanId"].LiteralValue().ToString();
-            var parentSpanId = _logEvent.Properties["ParentId"].LiteralValue().ToString();
-            var baggageTenantId = _logEvent.Properties["baggage.TenantId"].LiteralValue().ToString();
+            var traceId = _logEvent.Properties[TracingFields.TraceId].LiteralValue().ToString();
+            var spanId = _logEvent.Properties[TracingFields.SpanId].LiteralValue().ToString();
+            var parentSpanId = _logEvent.Properties[TracingFields.ParentId].LiteralValue().ToString();
+            var baggageTenantId = _logEvent.Properties[$"{TracingFields.BaggagePrefix}{tenantIdKey}"].LiteralValue().ToString();
             
             Assert.NotNull(traceId);
             Assert.NotNull(spanId);
@@ -90,7 +92,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
             Assert.Equal(_activityContextAccessor.SpanId, spanId);
             Assert.Equal(_activityContextAccessor.ParentSpanId, parentSpanId);
             Assert.Equal(
-                _activityContextAccessor.Baggage.First(x => x.Key == "TenantId").Value, 
+                _activityContextAccessor.Baggage.First(x => x.Key == tenantIdKey).Value, 
                 baggageTenantId);
         }
         
