@@ -2,7 +2,6 @@
 using GiG.Core.Data.KVStores.Extensions;
 using GiG.Core.Data.KVStores.Providers.FileProviders.Abstractions;
 using GiG.Core.Data.KVStores.Providers.FileProviders.Extensions;
-using GiG.Core.Data.KVStores.Providers.Hosting;
 using GiG.Core.Data.KVStores.Providers.Tests.Integration.Mocks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
-using System.Threading;
 using Xunit;
 
 namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
@@ -20,11 +18,12 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
     [Trait("Category", "Integration")]
     public class FileProviderTests
     {
-        [Fact]
-        public void GetData_JsonFileProvider_ReturnsMockLanguages()
+        private readonly IHost _host;
+        private readonly IServiceProvider _serviceProvider;
+
+        public FileProviderTests()
         {
-            // Arrange.
-            var host = Host.CreateDefaultBuilder()
+            _host = Host.CreateDefaultBuilder()
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
                     config.AddJsonFile("appsettingsFile.json");
@@ -40,14 +39,18 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
                 })
                 .Build();
 
-            var serviceProvider = host.Services;
-            var languages = ReadFromJson(serviceProvider);
+            _serviceProvider = _host.Services;
+
+            _host.Start();
+        }
+
+        [Fact]
+        public void GetData_JsonFileProvider_ReturnsMockLanguages()
+        {
+            // Arrange.
+            var languages = ReadFromJson(_serviceProvider);
             
-            var providerHostedService = serviceProvider.GetRequiredService<IHostedService>() as ProviderHostedService<IEnumerable<MockLanguage>>;
-            
-             providerHostedService?.StartAsync(CancellationToken.None);
-            
-            var dataRetriever = serviceProvider.GetRequiredService<IDataRetriever<IEnumerable<MockLanguage>>>();
+            var dataRetriever = _serviceProvider.GetRequiredService<IDataRetriever<IEnumerable<MockLanguage>>>();
             
             // Act.
             var data = dataRetriever.Get();

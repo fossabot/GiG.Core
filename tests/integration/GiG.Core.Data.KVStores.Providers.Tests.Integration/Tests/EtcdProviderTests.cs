@@ -3,7 +3,6 @@ using GiG.Core.Data.KVStores.Abstractions;
 using GiG.Core.Data.KVStores.Extensions;
 using GiG.Core.Data.KVStores.Providers.Etcd.Abstractions;
 using GiG.Core.Data.KVStores.Providers.Etcd.Extensions;
-using GiG.Core.Data.KVStores.Providers.Hosting;
 using GiG.Core.Data.KVStores.Providers.Tests.Integration.Mocks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,7 +12,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -53,6 +51,8 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
             _etcdProviderOptions = configurationSection.Get<EtcdProviderOptions>();
 
             _etcdClient = new EtcdClient(_etcdProviderOptions.ConnectionString);
+
+            _host.Start();
         }
 
         [Fact]
@@ -64,13 +64,7 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
 
             var languages = await ReadFromEtcd(_etcdProviderOptions.Key);
 
-            var providerHostedService = _serviceProvider.GetRequiredService<IHostedService>() as ProviderHostedService<IEnumerable<MockLanguage>>;
-
-            await providerHostedService?.StartAsync(CancellationToken.None);
-
             var dataRetriever = _serviceProvider.GetRequiredService<IDataRetriever<IEnumerable<MockLanguage>>>();
-
-            await providerHostedService?.StopAsync(CancellationToken.None);
 
             // Act.
             IEnumerable<MockLanguage> data = dataRetriever.Get();
