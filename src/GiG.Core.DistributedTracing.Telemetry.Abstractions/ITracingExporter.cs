@@ -1,3 +1,5 @@
+using OpenTelemetry.Trace.Configuration;
+
 namespace GiG.Core.DistributedTracing.Telemetry.Abstractions
 {
     /// <summary>
@@ -8,6 +10,6 @@ namespace GiG.Core.DistributedTracing.Telemetry.Abstractions
         /// <summary>
         /// Register Tracing Exporter.
         /// </summary>
-        void RegisterExporter(string exporter);
+        void RegisterExporter(TracerBuilder builder);
     }
 }

@@ -28,7 +28,7 @@ namespace GiG.Core.Logging.Extensions
 
             return builder
                 .ConfigureServices((context, services) => ConfigureLoggingInternal(context, services, configureLoggingConfigurationBuilder, sectionName))
-                .UseSerilog();
+                .UseSerilog(dispose: true);
         }
 
         private static void ConfigureLoggingInternal(HostBuilderContext context, IServiceCollection services,

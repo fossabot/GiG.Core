@@ -101,7 +101,6 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
 
         public void Dispose()
         {
-            Log.CloseAndFlush();
             _host.StopAsync().Wait();
             _host.Dispose();
         }
