@@ -43,10 +43,6 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         {
             _logger.LogDebug("Start Executed for {key}", _etcdProviderOptions.Key);
 
-            var value = await _etcdClient.GetValAsync(_etcdProviderOptions.Key);
-
-            _dataStore.Set(string.IsNullOrWhiteSpace(value) ? default : _dataSerializer.GetFromString(value));
-
             var watchRequest = new WatchRequest()
             {
                 CreateRequest = new WatchCreateRequest()
@@ -54,6 +50,8 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
                     Key = ByteString.CopyFromUtf8(_etcdProviderOptions.Key)
                 }
             };
+
+            string value;
 
             _etcdClient.Watch(watchRequest, (WatchResponse response) =>
             {
@@ -65,6 +63,10 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
                     _dataStore.Set(_dataSerializer.GetFromString(value));
                 }
             });
+
+            value = await _etcdClient.GetValAsync(_etcdProviderOptions.Key);
+
+            _dataStore.Set(string.IsNullOrWhiteSpace(value) ? default : _dataSerializer.GetFromString(value));
         }
 
         /// <inheritdoc/>
