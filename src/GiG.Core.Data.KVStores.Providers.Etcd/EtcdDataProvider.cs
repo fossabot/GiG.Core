@@ -51,22 +51,30 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
                 }
             };
 
-            string value;
-
             _etcdClient.Watch(watchRequest, (WatchResponse response) =>
             {
                 _logger.LogInformation("Watch Executed for {key}", _etcdProviderOptions.Key);
 
                 if (response.Events.Count > 0)
                 {
-                    value = response.Events[0].Kv.Value.ToStringUtf8();
+                    string value = response.Events[0].Kv.Value.ToStringUtf8();
                     _dataStore.Set(_dataSerializer.GetFromString(value));
                 }
             });
 
-            value = await _etcdClient.GetValAsync(_etcdProviderOptions.Key);
+            _dataStore.Set(await GetAsync());
+        }
 
-            _dataStore.Set(string.IsNullOrWhiteSpace(value) ? default : _dataSerializer.GetFromString(value));
+        /// <inheritdoc/>
+        public async Task<T> GetAsync(params string[] keys)
+        {
+            var key = string.Concat(_etcdProviderOptions.Key, string.Join("/", keys));
+
+            _logger.LogDebug("Returning {key}", key);
+
+            var value = await _etcdClient.GetValAsync(key);
+
+            return string.IsNullOrWhiteSpace(value) ? default : _dataSerializer.GetFromString(value);
         }
 
         /// <inheritdoc/>
@@ -77,6 +85,6 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
             _etcdClient.Dispose();
 
             return Task.CompletedTask;
-        }
+        }   
     }
 }

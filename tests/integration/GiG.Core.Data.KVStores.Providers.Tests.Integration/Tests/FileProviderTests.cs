@@ -11,12 +11,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
 {
     [Trait("Category", "Integration")]
-    public class FileProviderTests
+    public class FileProviderTests : IAsyncDisposable
     {
         private readonly IHost _host;
         private readonly IServiceProvider _serviceProvider;
@@ -45,7 +46,7 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
         }
 
         [Fact]
-        public void GetData_JsonFileProvider_ReturnsMockLanguages()
+        public void GetData_FileProviderUsingRootKey_ReturnsMockLanguages()
         {
             // Arrange.
             var languages = ReadFromJson(_serviceProvider);
@@ -55,6 +56,38 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
             // Act.
             var data = dataRetriever.Get();
             
+            // Assert.
+            Assert.NotNull(data);
+            Assert.Equal(languages.Select(l => l.Alpha2Code), data.Select(l => l.Alpha2Code));
+        }
+
+        [Fact]
+        public async Task GetData_JsonFileProviderUsingValidKey_ReturnsMockLanguages()
+        {
+            // Arrange.
+            var languages = ReadFromJson(_serviceProvider);
+
+            var dataRetriever = _serviceProvider.GetRequiredService<IDataRetriever<IEnumerable<MockLanguage>>>();
+
+            // Act.
+            var data = await dataRetriever.GetAsync("temp");
+
+            // Assert.
+            Assert.NotNull(data);
+            Assert.Equal(languages.Select(l => l.Alpha2Code), data.Select(l => l.Alpha2Code));
+        }
+
+        [Fact]
+        public async Task GetData_FileProviderUsingInvalidKey_ReturnsMockLanguages()
+        {
+            // Arrange.
+            var languages = ReadFromJson(_serviceProvider);
+
+            var dataRetriever = _serviceProvider.GetRequiredService<IDataRetriever<IEnumerable<MockLanguage>>>();
+
+            // Act.
+            var data = await dataRetriever.GetAsync("temp2");
+
             // Assert.
             Assert.NotNull(data);
             Assert.Equal(languages.Select(l => l.Alpha2Code), data.Select(l => l.Alpha2Code));
@@ -70,6 +103,11 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
                 throw new InvalidOperationException($"File '{optionsAccessor.Value.Path}' does not exist");
 
             return JsonSerializer.DeserializeAsync<IEnumerable<MockLanguage>>(file.CreateReadStream()).Result;
+        }
+
+        public async ValueTask DisposeAsync()
+        {
+            await _host.StopAsync();
         }
     }
 }
