@@ -6,6 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="dotnet-etcd" Version="3.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.0.0" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
         <PackageReference Include="xunit" Version="2.4.1" />
@@ -16,6 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\..\src\GiG.Core.Data.KVStores.Providers.Etcd\GiG.Core.Data.KVStores.Providers.Etcd.csproj" />
         <ProjectReference Include="..\..\..\src\GiG.Core.Data.KVStores.Providers.FileProviders.Abstractions\GiG.Core.Data.KVStores.Providers.FileProviders.Abstractions.csproj" />
         <ProjectReference Include="..\..\..\src\GiG.Core.Data.KVStores.Providers.FileProviders\GiG.Core.Data.KVStores.Providers.FileProviders.csproj" />
         <ProjectReference Include="..\..\..\src\GiG.Core.Data.KVStores.Providers.Hosting\GiG.Core.Data.KVStores.Providers.Hosting.csproj" />
@@ -23,11 +25,18 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="appsettings.json">
+      <None Update="appsettings.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="languages.json">
+      </None>
+      <None Update="appsettingsEtcd.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-    </ItemGroup> 
+      </None>
+      <None Update="appsettingsFile.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="languages.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>

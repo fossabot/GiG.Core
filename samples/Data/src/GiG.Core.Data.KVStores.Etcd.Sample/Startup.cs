@@ -1,12 +1,12 @@
+using GiG.Core.Data.KVStores.Etcd.Sample.Models;
+using GiG.Core.Data.KVStores.Etcd.Sample.Services;
 using GiG.Core.Data.KVStores.Extensions;
-using GiG.Core.Data.KVStores.Providers.FileProviders.Extensions;
-using GiG.Core.Data.KVStores.Sample.Models;
-using GiG.Core.Data.KVStores.Sample.Services;
+using GiG.Core.Data.KVStores.Providers.Etcd.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Collections.Generic;
 
-namespace GiG.Core.Data.KVStores.Sample
+namespace GiG.Core.Data.KVStores.Etcd.Sample
 {
     internal static class Startup
     {
@@ -15,11 +15,13 @@ namespace GiG.Core.Data.KVStores.Sample
             var configuration = hostContext.Configuration;
 
             services.AddKVStores<IEnumerable<Language>>()
-                .FromJsonFile(configuration, "Languages");
+                .FromEtcd(configuration, "Languages")
+                .WithJsonSerialization();
 
             services.AddKVStores<IEnumerable<Currency>>()
-                .FromJsonFile(configuration, "Currencies");
-            
+                .FromEtcd(configuration, "Currencies")
+                .WithJsonSerialization();
+
             services.AddHostedService<LanguageService>();
             services.AddHostedService<CurrencyService>();
         }

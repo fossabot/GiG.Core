@@ -1,4 +1,5 @@
 using GiG.Core.Data.KVStores.Abstractions;
+using GiG.Core.Data.KVStores.Serializers;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
@@ -22,6 +23,17 @@ namespace GiG.Core.Data.KVStores.Extensions
             builder.Services.TryAddSingleton<IDataStore<T>, MemoryDataStore<T>>();
 
             return builder;
+        }
+
+        /// <summary>
+        /// Adds required services for Json data serialization.
+        /// </summary>
+        /// <param name="builder">The <see cref="IKVStoreBuilder{T}" /> to add the services to.</param>  
+        public static void WithJsonSerialization<T>([NotNull] this IKVStoreBuilder<T> builder)
+        {
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+
+            builder.Services.TryAddSingleton<IDataSerializer<T>, JsonDataSerializer<T>>();
         }
     }
 }
