@@ -475,11 +475,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Data.KVStores.Etcd
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.Avro.Schema.Generator.Tests.Integration", "tests\integration\GiG.Core.Messaging.Avro.Schema.Generator.Tests.Integration\GiG.Core.Messaging.Avro.Schema.Generator.Tests.Integration.csproj", "{91FA9202-0097-4CDB-B1D8-FFEC56A33386}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger", "src\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.csproj", "{ED83CA2B-9A94-4697-BA2C-19BC6D2D60F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger", "src\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.csproj", "{ED83CA2B-9A94-4697-BA2C-19BC6D2D60F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.DistributedTracing.OpenTelemetry.Tests.Unit", "tests\unit\GiG.Core.DistributedTracing.OpenTelemetry.Tests.Unit\GiG.Core.DistributedTracing.OpenTelemetry.Tests.Unit.csproj", "{665EB7E4-3F13-4019-B42B-97CE41D6D25B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing.OpenTelemetry.Tests.Unit", "tests\unit\GiG.Core.DistributedTracing.OpenTelemetry.Tests.Unit\GiG.Core.DistributedTracing.OpenTelemetry.Tests.Unit.csproj", "{665EB7E4-3F13-4019-B42B-97CE41D6D25B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.Test.Unit", "tests\unit\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.Test.Unit\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.Test.Unit.csproj", "{E77571EA-718B-4BA2-A3E9-5F5BC12BE535}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.Test.Unit", "tests\unit\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.Test.Unit\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.Test.Unit.csproj", "{E77571EA-718B-4BA2-A3E9-5F5BC12BE535}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1043,6 +1043,14 @@ Global
 		{9E55B38C-A25F-4EDF-882F-119690536725}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E55B38C-A25F-4EDF-882F-119690536725}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E55B38C-A25F-4EDF-882F-119690536725}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57E09AB9-1936-4A4C-913C-7D0F898C853A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57E09AB9-1936-4A4C-913C-7D0F898C853A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57E09AB9-1936-4A4C-913C-7D0F898C853A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57E09AB9-1936-4A4C-913C-7D0F898C853A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB7BF534-B964-4B5D-BF98-1F9BC3914057}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB7BF534-B964-4B5D-BF98-1F9BC3914057}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB7BF534-B964-4B5D-BF98-1F9BC3914057}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB7BF534-B964-4B5D-BF98-1F9BC3914057}.Release|Any CPU.Build.0 = Release|Any CPU
 		{91FA9202-0097-4CDB-B1D8-FFEC56A33386}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{91FA9202-0097-4CDB-B1D8-FFEC56A33386}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91FA9202-0097-4CDB-B1D8-FFEC56A33386}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -1059,14 +1067,6 @@ Global
 		{E77571EA-718B-4BA2-A3E9-5F5BC12BE535}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E77571EA-718B-4BA2-A3E9-5F5BC12BE535}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E77571EA-718B-4BA2-A3E9-5F5BC12BE535}.Release|Any CPU.Build.0 = Release|Any CPU
-		{57E09AB9-1936-4A4C-913C-7D0F898C853A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{57E09AB9-1936-4A4C-913C-7D0F898C853A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{57E09AB9-1936-4A4C-913C-7D0F898C853A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{57E09AB9-1936-4A4C-913C-7D0F898C853A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CB7BF534-B964-4B5D-BF98-1F9BC3914057}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CB7BF534-B964-4B5D-BF98-1F9BC3914057}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CB7BF534-B964-4B5D-BF98-1F9BC3914057}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CB7BF534-B964-4B5D-BF98-1F9BC3914057}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1259,13 +1259,13 @@ Global
 		{022ED0B9-EB30-49DD-B0AA-C8167CBB16D5} = {80BE322A-30A3-4C7C-82AD-5C912FF57998}
 		{EAED18D7-3073-438C-88DD-F540E36037C3} = {F3E4EB54-9129-4327-9A32-89ABD4ADA6C5}
 		{77619D06-837D-4A86-9263-1CACC79255A6} = {F3E4EB54-9129-4327-9A32-89ABD4ADA6C5}
-		{ED83CA2B-9A94-4697-BA2C-19BC6D2D60F9} = {F3E4EB54-9129-4327-9A32-89ABD4ADA6C5}
-		{665EB7E4-3F13-4019-B42B-97CE41D6D25B} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
 		{9E55B38C-A25F-4EDF-882F-119690536725} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
-		{91FA9202-0097-4CDB-B1D8-FFEC56A33386} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
-		{E77571EA-718B-4BA2-A3E9-5F5BC12BE535} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
 		{57E09AB9-1936-4A4C-913C-7D0F898C853A} = {412AB606-A56E-4B9E-A9C1-E2C7E02D0CF5}
 		{CB7BF534-B964-4B5D-BF98-1F9BC3914057} = {088A9253-942E-4C4E-9A2A-1C5B51BEAC83}
+		{91FA9202-0097-4CDB-B1D8-FFEC56A33386} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
+		{ED83CA2B-9A94-4697-BA2C-19BC6D2D60F9} = {F3E4EB54-9129-4327-9A32-89ABD4ADA6C5}
+		{665EB7E4-3F13-4019-B42B-97CE41D6D25B} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
+		{E77571EA-718B-4BA2-A3E9-5F5BC12BE535} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}

@@ -70,6 +70,8 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
 
             var dataRetriever = _serviceProvider.GetRequiredService<IDataRetriever<IEnumerable<MockLanguage>>>();
 
+            await providerHostedService?.StopAsync(CancellationToken.None);
+
             // Act.
             IEnumerable<MockLanguage> data = dataRetriever.Get();
 

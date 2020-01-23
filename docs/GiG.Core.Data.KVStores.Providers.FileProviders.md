@@ -4,7 +4,7 @@ This Library provides an API to register data providers which will read data fro
 
 ## Basic Usage
 
-The below code needs to be added to the `Startup.cs`. Making use of `AddJsonFile` will register a data provider which will read from file, parse from JSON to a model and store in the registered `IDataStore<T>`.
+The below code needs to be added to the `Startup.cs`. Making use of `FromFile` will register a data provider which will read from file. Using 'WithJsonSerialization' will parse from JSON to a model and store in the registered `IDataStore<T>`.
  
 ```csharp
 	
