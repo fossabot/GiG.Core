@@ -1,4 +1,6 @@
 using FluentValidation.AspNetCore;
+using GiG.Core.ApplicationMetrics;
+using GiG.Core.ApplicationMetrics.Prometheus;
 using GiG.Core.HealthChecks.AspNetCore.Extensions;
 using GiG.Core.HealthChecks.Extensions;
 using GiG.Core.Hosting.AspNetCore.Extensions;
@@ -57,6 +59,10 @@ namespace GiG.Core.Web.Sample
             //Authentication
             services.ConfigureOAuthAuthentication(_configuration)
                 .AddApiDocsOAuthAuthentication();
+            
+            //Application Metrics
+            services
+                .ConfigureApplicationMetrics(_configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,6 +73,7 @@ namespace GiG.Core.Web.Sample
             app.UseRouting();
             app.UseFluentValidationMiddleware();
             app.UseApiDocs();
+            app.UseHttpApplicationMetrics();
 
             app.UseAuthentication();
             app.UseAuthorization();
@@ -75,6 +82,7 @@ namespace GiG.Core.Web.Sample
                 endpoints.MapControllers();
                 endpoints.MapInfoManagement();
                 endpoints.MapHealthChecks();
+                endpoints.MapApplicationMetrics();
             });
         }
     }
