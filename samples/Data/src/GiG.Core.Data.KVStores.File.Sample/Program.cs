@@ -2,7 +2,7 @@
 using GiG.Core.Logging.All.Extensions;
 using Microsoft.Extensions.Hosting;
 
-namespace GiG.Core.Data.KVStores.Sample
+namespace GiG.Core.Data.KVStores.File.Sample
 {
     internal class Program
     {

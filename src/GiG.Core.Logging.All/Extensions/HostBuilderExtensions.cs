@@ -38,6 +38,7 @@ namespace GiG.Core.Logging.All.Extensions
                 .WriteToFile()
                 .EnrichWithApplicationMetadata()
                 .EnrichWithCorrelation()
+                .EnrichWithActivityContext()
                 .EnrichWithTenant()
                 .EnrichWithRequestContext()
                 , sectionName);

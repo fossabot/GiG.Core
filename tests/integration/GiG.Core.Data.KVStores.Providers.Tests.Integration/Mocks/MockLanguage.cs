@@ -1,8 +1,9 @@
-namespace GiG.Core.Data.KVStores.Sample.Models
+﻿namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Mocks
 {
-    public class Language
+    public class MockLanguage
     {
         public string Name { get; set; }
+
         public string Alpha2Code { get; set; }
     }
 }

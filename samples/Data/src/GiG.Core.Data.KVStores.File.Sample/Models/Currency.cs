@@ -1,4 +1,4 @@
-namespace GiG.Core.Data.KVStores.Sample.Models
+namespace GiG.Core.Data.KVStores.File.Sample.Models
 {
     public class Currency
     {
