@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using Xunit;
 using ApplicationMetadataExtensions = GiG.Core.Logging.Enrichers.ApplicationMetadata.Extensions;
 using ContextExtensions = GiG.Core.Logging.Enrichers.Context.Extensions;
@@ -36,6 +37,13 @@ namespace GiG.Core.Logging.Tests.Unit.Enrichers
         public void EnrichWithApplicationMetadata_LoggingConfigurationBuilderIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => ApplicationMetadataExtensions.LoggingConfigurationBuilderExtensions.EnrichWithApplicationMetadata(null));
+            Assert.Equal("builder", exception.ParamName);
+        }
+
+        [Fact]
+        public void EnrichWithActivityContext_LoggingConfigurationBuilderIsNull_ThrowsArgumentNullException()
+        {
+            var exception = Assert.Throws < ArgumentNullException>(() => DistributedTracingExtensions.LoggingConfigurationBuilderExtensions.EnrichWithActivityContext(null));
             Assert.Equal("builder", exception.ParamName);
         }
     }
