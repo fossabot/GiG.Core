@@ -1,6 +1,8 @@
 using FluentValidation.AspNetCore;
 using GiG.Core.ApplicationMetrics;
+using GiG.Core.ApplicationMetrics.Extensions;
 using GiG.Core.ApplicationMetrics.Prometheus;
+using GiG.Core.ApplicationMetrics.Prometheus.Extensions;
 using GiG.Core.HealthChecks.AspNetCore.Extensions;
 using GiG.Core.HealthChecks.Extensions;
 using GiG.Core.Hosting.AspNetCore.Extensions;

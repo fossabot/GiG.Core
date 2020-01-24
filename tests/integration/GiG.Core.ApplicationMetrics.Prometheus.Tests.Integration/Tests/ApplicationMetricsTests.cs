@@ -20,7 +20,7 @@ namespace GiG.Core.ApplicationMetrics.Prometheus.Tests.Integration.Tests
             var testServer = new TestServer(new WebHostBuilder()
                 .UseStartup<MockStartup>());
 
-            var client = testServer.CreateClient();
+            using var client = testServer.CreateClient();
 
             using var request = new HttpRequestMessage(HttpMethod.Get, new ApplicationMetricsOptions().Url);
             

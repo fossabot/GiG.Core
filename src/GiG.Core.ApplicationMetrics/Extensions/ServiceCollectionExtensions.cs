@@ -3,8 +3,9 @@ using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Configuration;
 
-namespace GiG.Core.ApplicationMetrics
+namespace GiG.Core.ApplicationMetrics.Extensions
 {
     /// <summary>
     /// Service Collection Extensions.
@@ -18,7 +19,7 @@ namespace GiG.Core.ApplicationMetrics
         /// <param name="configuration">The <see cref="IConfiguration" />.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection ConfigureApplicationMetrics([NotNull] this IServiceCollection services,
-            IConfiguration configuration)
+            [NotNull] IConfiguration configuration)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
@@ -36,7 +37,7 @@ namespace GiG.Core.ApplicationMetrics
             [NotNull] IConfigurationSection configurationSection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
+            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection?.Path}' is incorrect.");
 
             return services.Configure<ApplicationMetricsOptions>(configurationSection);
         }

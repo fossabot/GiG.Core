@@ -1,4 +1,5 @@
-﻿
+﻿using GiG.Core.ApplicationMetrics.Extensions;
+using GiG.Core.ApplicationMetrics.Prometheus.Extensions;
 using GiG.Core.Web.FluentValidation.Extensions;
 using GiG.Core.Web.Hosting.Extensions;
 using GiG.Core.Web.Mock.Extensions;

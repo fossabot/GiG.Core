@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 using Prometheus;
 using System;
 
-namespace GiG.Core.ApplicationMetrics.Prometheus
+namespace GiG.Core.ApplicationMetrics.Prometheus.Extensions
 {
     /// <summary>
     /// EndpointRouteBuilder Extensions.
@@ -17,8 +17,8 @@ namespace GiG.Core.ApplicationMetrics.Prometheus
         /// <summary>
         /// Adds route for metrics.
         /// </summary>
-        /// <param name="endpointRouteBuilder"></param>
-        /// <returns></returns>
+        /// <param name="endpointRouteBuilder">The <see cref="IEndpointRouteBuilder"/>.</param>
+        /// <returns>The <see cref="IEndpointConventionBuilder"/>.</returns>
         /// <exception cref="ArgumentNullException"></exception>
         public static IEndpointConventionBuilder MapApplicationMetrics(
             [NotNull] this IEndpointRouteBuilder endpointRouteBuilder)
