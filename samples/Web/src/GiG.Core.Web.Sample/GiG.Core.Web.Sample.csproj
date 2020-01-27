@@ -11,6 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.ApplicationMetrics.Prometheus\GiG.Core.ApplicationMetrics.Prometheus.csproj" />
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.ApplicationMetrics\GiG.Core.ApplicationMetrics.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Configuration\GiG.Core.Configuration.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Context.Web\GiG.Core.Context.Web.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.DistributedTracing.Activity\GiG.Core.DistributedTracing.Activity.csproj" />
