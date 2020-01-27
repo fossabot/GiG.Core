@@ -34,5 +34,5 @@ The below table outlines the valid Configurations used to configure the [Applica
 
 | Configuration Name | Type    | Optional | Default Value            |
 |:-------------------|:--------|:---------|:-------------------------|
-| Url                | String  | No       | `/metrics`               |
-| IsEnabled          | Boolean | Yes      | true                    |
+| Url                | String  | Yes      | `/metrics`               |
+| IsEnabled          | Boolean | Yes      | true                     |
