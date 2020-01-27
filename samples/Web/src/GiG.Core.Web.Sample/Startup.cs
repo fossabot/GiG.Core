@@ -1,7 +1,5 @@
 using FluentValidation.AspNetCore;
-using GiG.Core.ApplicationMetrics;
 using GiG.Core.ApplicationMetrics.Extensions;
-using GiG.Core.ApplicationMetrics.Prometheus;
 using GiG.Core.ApplicationMetrics.Prometheus.Extensions;
 using GiG.Core.HealthChecks.AspNetCore.Extensions;
 using GiG.Core.HealthChecks.Extensions;
@@ -50,7 +48,7 @@ namespace GiG.Core.Web.Sample
             services
                 .ConfigureApiDocs(_configuration)
                 .AddControllers()
-                   .AddFluentValidation(options => options.RegisterValidatorsFromAssemblyContaining<Startup>());
+                .AddFluentValidation(options => options.RegisterValidatorsFromAssemblyContaining<Startup>());
 
             // Forwarded Headers
             services.ConfigureForwardedHeaders();
@@ -61,7 +59,7 @@ namespace GiG.Core.Web.Sample
             //Authentication
             services.ConfigureOAuthAuthentication(_configuration)
                 .AddApiDocsOAuthAuthentication();
-            
+
             //Application Metrics
             services
                 .ConfigureApplicationMetrics(_configuration);
@@ -80,7 +78,8 @@ namespace GiG.Core.Web.Sample
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => { 
+            app.UseEndpoints(endpoints =>
+            {
                 endpoints.MapControllers();
                 endpoints.MapInfoManagement();
                 endpoints.MapHealthChecks();
