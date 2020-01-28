@@ -36,7 +36,7 @@ namespace GiG.Core.ApplicationMetrics.Extensions
             [NotNull] IConfigurationSection configurationSection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            var applicationMetricsOptions = configurationSection.Get<ApplicationMetricsOptions>() ?? new ApplicationMetricsOptions();
+            var applicationMetricsOptions = configurationSection?.Get<ApplicationMetricsOptions>() ?? new ApplicationMetricsOptions();
 
             return services.Configure<ApplicationMetricsOptions>(options =>
             {
