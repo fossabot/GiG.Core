@@ -25,10 +25,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Update="appsettings.json">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <Content Update="appsettings.json">       
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>      
       </Content>
     </ItemGroup>
 
