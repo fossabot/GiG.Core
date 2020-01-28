@@ -37,9 +37,13 @@ namespace GiG.Core.ApplicationMetrics.Extensions
             [NotNull] IConfigurationSection configurationSection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection?.Path}' is incorrect.");
+            var applicationMetricsOptions = configurationSection?.Get<ApplicationMetricsOptions>() ?? new ApplicationMetricsOptions();
 
-            return services.Configure<ApplicationMetricsOptions>(configurationSection);
+            return services.Configure<ApplicationMetricsOptions>(options =>
+            {
+                options.Url = applicationMetricsOptions.Url;
+                options.IsEnabled = applicationMetricsOptions.IsEnabled;
+            });
         }
     }
 }

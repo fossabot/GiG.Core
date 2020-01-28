@@ -2,6 +2,8 @@
 using GiG.Core.ApplicationMetrics.Prometheus.Tests.Integration.Mocks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -12,20 +14,29 @@ namespace GiG.Core.ApplicationMetrics.Prometheus.Tests.Integration.Tests
     [Trait("Category", "Integration")]
     public class ApplicationMetricsTests
     {
+        private readonly HttpClient _httpClient;
+
+        public ApplicationMetricsTests()
+        {
+            var hostBuilder = new HostBuilder()
+                .ConfigureWebHost(webHost =>
+                {
+                    webHost.UseTestServer();
+                    webHost.UseStartup<MockStartup>();
+                    webHost.ConfigureAppConfiguration(appConfig => appConfig.AddJsonFile("appsettings.json"));
+                });
+
+            _httpClient = hostBuilder.Start().GetTestClient();
+        }
        
         [Fact]
         public async Task ApplicationMetricEndpoint_ReturnsOk()
         {
             // Arrange
-            var testServer = new TestServer(new WebHostBuilder()
-                .UseStartup<MockStartup>());
-
-            using var client = testServer.CreateClient();
-
             using var request = new HttpRequestMessage(HttpMethod.Get, new ApplicationMetricsOptions().Url);
             
             // Act
-            using var response = await client.SendAsync(request);
+            using var response = await _httpClient.SendAsync(request);
 
             // Assert
             Assert.NotNull(response);
