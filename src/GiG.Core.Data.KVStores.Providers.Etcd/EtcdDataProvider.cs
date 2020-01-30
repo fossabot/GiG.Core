@@ -57,7 +57,7 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
 
                 if (response.Events.Count > 0)
                 {
-                    string value = response.Events[0].Kv.Value.ToStringUtf8();
+                    var value = response.Events[0].Kv.Value.ToStringUtf8();
                     _dataStore.Set(_dataSerializer.GetFromString(value));
                 }
             });
@@ -65,7 +65,11 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
             _dataStore.Set(await GetAsync());
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Retrieves a model from storage using list of keys. Each key is delimited by a "/" and used to retrieve a subsection of the store.
+        /// </summary>
+        /// <param name="keys">The list of keys.</param>
+        /// <returns></returns>
         public async Task<T> GetAsync(params string[] keys)
         {
             var key = string.Concat(_etcdProviderOptions.Key, string.Join("/", keys));

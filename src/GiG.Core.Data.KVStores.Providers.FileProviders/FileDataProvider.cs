@@ -56,7 +56,11 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders
             _dataStore.Set(model);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Retrieves a model from storage using list of keys. Each key is delimited by a "." and used to retrieve a subsection of the store.
+        /// </summary>
+        /// <param name="keys">The list of keys.</param>
+        /// <returns></returns>
         public async Task<T> GetAsync(params string[] keys)
         {       
             var fileName = keys.Length > 0 
