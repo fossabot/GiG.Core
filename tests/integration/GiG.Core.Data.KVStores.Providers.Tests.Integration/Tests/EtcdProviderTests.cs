@@ -18,7 +18,7 @@ using Xunit;
 namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
 {
     [Trait("Category", "IntegrationWithDependency")]
-    public class EtcdProviderTests
+    public class EtcdProviderTests : IAsyncDisposable
     {
         private readonly IHost _host;
         private readonly IServiceProvider _serviceProvider;
@@ -56,7 +56,7 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
         }
 
         [Fact]
-        public async Task GetData_JsonEtcdProvider_ReturnsMockLanguages()
+        public async Task GetData_EtcdProviderUsingRootKey_ReturnsMockLanguages()
         {
             // Arrange.
             await ClearEtcdKey(_etcdProviderOptions.Key);
@@ -72,7 +72,50 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
             // Assert.
             Assert.NotNull(data);
             Assert.Equal(languages.Select(l => l.Alpha2Code), data.Select(l => l.Alpha2Code));
-        }    
+        }
+
+        [Fact]
+        public async Task GetData_EtcdProviderUsingValidKey_ReturnsMockLanguages()
+        {
+            // Arrange.
+            await ClearEtcdKey(_etcdProviderOptions.Key);
+            await WriteToEtcd("languages.json", string.Concat(_etcdProviderOptions.Key, "/temp"));
+
+            var languages = await ReadFromEtcd(_etcdProviderOptions.Key);
+
+            var dataRetriever = _serviceProvider.GetRequiredService<IDataRetriever<IEnumerable<MockLanguage>>>();
+
+            // Act.
+            IEnumerable<MockLanguage> data = await dataRetriever.GetAsync("temp");
+
+            // Assert.
+            Assert.NotNull(data);
+            Assert.Equal(languages.Select(l => l.Alpha2Code), data.Select(l => l.Alpha2Code));
+        }
+
+        [Fact]
+        public async Task GetData_EtcdProviderUsingInvalidKey_ReturnsMockLanguages()
+        {
+            // Arrange.
+            await ClearEtcdKey(_etcdProviderOptions.Key);
+            await WriteToEtcd("languages.json", string.Concat(_etcdProviderOptions.Key, "/temp"));
+
+            var languages = await ReadFromEtcd(_etcdProviderOptions.Key);
+
+            var dataRetriever = _serviceProvider.GetRequiredService<IDataRetriever<IEnumerable<MockLanguage>>>();
+
+            // Act.
+            IEnumerable<MockLanguage> data = await dataRetriever.GetAsync("temp2");
+
+            // Assert.
+            Assert.NotNull(data);
+            Assert.Equal(languages.Select(l => l.Alpha2Code), data.Select(l => l.Alpha2Code));
+        }
+
+        public async ValueTask DisposeAsync()
+        {
+            await _host.StopAsync();
+        }
 
         private async Task ClearEtcdKey(string key)
         {
