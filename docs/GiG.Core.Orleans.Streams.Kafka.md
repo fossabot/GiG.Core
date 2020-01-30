@@ -9,7 +9,6 @@ This Library provides an API to register Kafka options from configuration.
 The below code needs to be added to the `Startup.cs` to use this extension.
 
 ```csharp
-		
 private static void ConfigureServices(Microsoft.Extensions.Hosting.HostBuilderContext ctx, IServiceCollection services)
 {
     // Orleans Client
@@ -30,13 +29,12 @@ private static void ConfigureServices(Microsoft.Extensions.Hosting.HostBuilderCo
         .AddJson()
         .Build();
     });
-}
-              
+}      
 ```
 
 ### Configuration
 
-You can change the default value for the Kafka configuration by overriding the [KafkaOptions](..\src\GiG.Core.Orleans.Streams.Kafka\Configurations\KafkaOptions.cs) by adding the following configuration settings under section `Orleans:Streams:Kafka`. The Brokers option is an array which is delimited with ';'.
+You can change the default value for the Kafka configuration by overriding the [KafkaOptions](../src/GiG.Core.Orleans.Streams.Kafka/Configurations/KafkaOptions.cs) by adding the following configuration settings under section `Orleans:Streams:Kafka`. The Brokers option is an array which is delimited with ';'.
 
 | Configuration Name | Type     | Optional | Default Value    |
 |:-------------------|:---------|:---------|:-----------------|

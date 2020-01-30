@@ -7,13 +7,11 @@ This Library provides an API to register a TenantDelegatingHandler onto the Http
 Make use of `TenantDelegatingHandler()` when configuring your HttpClientFactory. The Handler depends on 'GiG.Core.MultiTenant.Abstractions.ITenantAccessor'.
 
 ```csharp
-
 var client = HttpClientFactory.CreateClient(x =>
 {
     x.AddHttpMessageHandler(new TenantDelegatingHandler(new TenantAccessor()));
     x.BaseAddress = new Uri("http://localhost");
 });
-
 ```
 
 Make use of `AddTenantDelegatingHandler` when configuring your `HttpClient`.
@@ -29,5 +27,4 @@ public static void ConfigureServices(HostBuilderContext ctx, IServiceCollection 
             })
         .AddTenantDelegatingHandler();
 }
-
 ```

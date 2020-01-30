@@ -14,7 +14,6 @@ var client = HttpClientFactory.CreateClient(x =>
 		new HashProviderFactory(hashFuncFactory),
 		new HmacSignatureProvider()));
 });
-
 ```
 
 Make use of `AddHmacDelegatingHandler` when configuring your HttpClient.

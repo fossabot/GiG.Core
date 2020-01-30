@@ -2,6 +2,12 @@
 
 This Library provides an API to register PostgreSQL as a Grain Storage Provider.
 
+## Pre-requisites
+
+The following packages are required to consume this package:
+ - [GiG.Core.Orleans.Silo](GiG.Core.Orleans.Silo.md)
+ - Microsoft.Orleans.Server
+ 
 ## Basic Usage
 
 The below code needs to be added to the `Program.cs` when creating a new HostBuilder. This will register an Orleans Silo with PostgreSQL Grain Storage provider named 'NpgsqlProvider'.
@@ -9,7 +15,6 @@ The below code needs to be added to the `Program.cs` when creating a new HostBui
 **Note**: Multiple named Npgsql Grain Storage providers can be added as long as the Provider Name is unique.
 
 ```csharp
-		
 public class Program
 {
     public static void Main(string[] args)
@@ -30,12 +35,11 @@ public class Program
 			 .AddNpgsqlGrainStorage("NpgsqlProvider", ctx.Configuration);
     }
 }
-      
 ```
 
 ### Configuration
 
-The below table outlines the valid Configurations for [NpgsqlOptions](../src/GiG.Core.Orleans.Storage.Npgsql/Configurations/NpgsqlOptions.cs). By default the Configuration for the provider is expected to be under the section "Orleans:StorageProviders:{InstanceName}". 
+The below table outlines the valid Configurations for [NpgsqlOptions](../src/GiG.Core.Orleans.Storage.Npgsql/Abstractions/NpgsqlOptions.cs). By default the Configuration for the provider is expected to be under the section "Orleans:StorageProviders:{InstanceName}". 
 
 | Configuration Name | Type   | Required | Default Value |
 |:-------------------|:-------|:---------|:--------------|

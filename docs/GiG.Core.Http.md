@@ -36,7 +36,6 @@ var client = HttpClientFactory.GetOrAdd("Payments", x =>
 });
 ```
 
-
 ## Basic Usage using IoC
 
 It is suggested that you use the built-in `IHttpClientFactory` when possible which is found in `Microsoft.Extensions.Http` when `ServiceCollection` can be used.  The extension to configure the client from `IConfiguration` can be used as below.

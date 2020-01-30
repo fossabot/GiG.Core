@@ -7,7 +7,6 @@ This Library provides an API to register Logging using Serilog and multiple Sink
 Make use of `ConfigureLogging()` when Creating an `IHostBuilder`. Logging requires configuration.
 
 ```csharp
-
 static class Program
 {
     public static void Main()
@@ -22,5 +21,4 @@ static class Program
             .ConfigureLogging();
     }
 }
-
 ```

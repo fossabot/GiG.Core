@@ -7,7 +7,6 @@ This Library provides an API to register Tenant Id Enricher for Logging when usi
 Make use of `EnrichWithTenant()` when configuring logging. The Enricher depends on 'GiG.Core.MultiTenant.Abstractions.ITenantAccessor'.
 
 ```csharp
-
 static class Program
 {
     public static void Main()
@@ -28,5 +27,4 @@ static class Program
 			});
     }
 }
-
 ```

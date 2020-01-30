@@ -19,21 +19,18 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
                 .ConfigureEndpoints(hostBuilder.Configuration)
                 .ConfigureConsulClustering(hostBuilder.Configuration)
                 .AddAssemblies(typeof(TransactionGrain)));
-
 ```
 
 ### Configuration
 
 #### Silo
 
-The below table outlines the valid Configurations used to override the [SiloOptions](src\GiG.Core.Orleans.Silo\Abstractions\SiloOptions.cs) under the Config section `Orleans:Silo`.
-
+The below table outlines the valid Configurations used to override the [SiloOptions](../src/GiG.Core.Orleans.Silo/Abstractions/SiloOptions.cs) under the Config section `Orleans:Silo`.
 
 | Configuration Name | Type | Required | Default Value |
 |:-------------------|:-----|:---------|:--------------|
 | SiloPort           | Int  | No       | 11111         |
 | GatewayPort        | Int  | No       | 30000         |
-
 
 #### Cluster
 

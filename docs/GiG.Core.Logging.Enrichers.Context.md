@@ -7,7 +7,6 @@ This Library provides an API to register the Context Enricher for Logging when u
 Make use of `EnrichWithRequestContext()` when configuring logging. The Enricher depends on 'GiG.Core.Context.Abstractions.IRequestContextAccessor'.
 
 ```csharp
-
 static class Program
 {
     public static void Main()
@@ -28,5 +27,4 @@ static class Program
             });
     }
 }
-
 ```

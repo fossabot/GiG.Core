@@ -7,7 +7,6 @@ This Library provides an API to add external configuration files which should be
 The below code needs to be added to the `Program.cs`. Make use of `ConfigureExternalConfiguration()` when creating an `IHostBuilder`. Logging requires configuration.
 
 ```csharp
-
 static class Program
 {
     public static void Main(string[] args)
@@ -21,5 +20,4 @@ static class Program
             .ConfigureLogging()
             .ConfigureServices(Startup.ConfigureServices);
 }
-
 ```

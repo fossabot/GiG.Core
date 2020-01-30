@@ -9,7 +9,6 @@ This Library provides an API to register MassTransit related functionality to an
 The below code needs to be added in the MassTransit Producer Bus setup. This will setup the Fault Address for a message. 
 
 ```csharp
-
 public static void AddMessagePublisher(this IServiceCollection services)
 {
     services.AddMassTransit(x =>
@@ -19,5 +18,4 @@ public static void AddMessagePublisher(this IServiceCollection services)
         })
     ));
 }       
-
 ```

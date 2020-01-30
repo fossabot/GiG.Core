@@ -10,12 +10,10 @@ If the default section name of Jaeger is not 'Jaeger' the custom section name ca
 The below code needs to be added to the `Startup.cs`.
 
 ```csharp
-
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddTracing(x => x.RegisterJaeger(), _configuration);
 }
-
 ```
 
 ### Configuration

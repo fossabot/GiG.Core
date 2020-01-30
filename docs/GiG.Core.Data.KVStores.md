@@ -9,11 +9,9 @@ The below code needs to be added to the `Startup.cs`. This will register default
 The `IDataRetriever<T>` can be used to get the data required from store.
  
 ```csharp
-	
 public void ConfigureServices(IServiceCollection services)
 {
     services
         .AddKVStores<IEnumerable<MyModel>>();
 }
-
 ```

@@ -7,7 +7,6 @@ This Library provides an API to register Distributed Tracing for a MassTransit C
 The below code needs to be added to the `Startup.cs`. This will register the Correlation Id context accessor and add the Consumer Observer to the MassTransit Consumer. 
 
 ```csharp
-
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddMassTransitContext();
@@ -28,7 +27,6 @@ public void ConfigureServices(IServiceCollection services)
         }));
     });
 }
-
 ```
 
 ## Activity
@@ -36,7 +34,6 @@ public void ConfigureServices(IServiceCollection services)
 The below code needs to be added to the `Startup.cs` of the MassTransit Producer in order to inject the Activity Id in the message headers.
 
 ```csharp
-
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddMassTransit(x =>
@@ -47,7 +44,6 @@ public void ConfigureServices(IServiceCollection services)
         }));
     });
 }
-
 ```
 
 The below code needs to be added to the `Startup.cs` of the Consumer. This will register the Activity Consumer Observer to the MassTransit Consumer. 
@@ -70,3 +66,4 @@ public void ConfigureServices(IServiceCollection services)
         }));
     });
 }
+```

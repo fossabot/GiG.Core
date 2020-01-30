@@ -16,12 +16,11 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
     Host.CreateDefaultBuilder(args)
         .UseOrleans((hostBuilder, siloBuilder) =>
             siloBuilder.ConfigureDashboard(hostBuilder.Configuration);
-
 ```
 
 ### Configuration
 
-The below table outlines the valid Configurations used to override the [DashboardOptions](..\GiG.Core.Orleans.Abstractions\Configuration\DashboardOptions.cs) under the Config section `Dashboard`.
+The below table outlines the valid Configurations used to override the [DashboardOptions](../src/GiG.Core.Orleans.Silo/Abstractions/DashboardOptions.cs) under the Config section `Dashboard`.
 
 | Configuration Name | Type    | Required | Default Value |
 |:-------------------|:--------|:---------|:--------------|
@@ -29,7 +28,6 @@ The below table outlines the valid Configurations used to override the [Dashboar
 | Port               | String  | Yes      | `8080`        |
 | Path               | String  | No       | `/dashboard`  |
 | HostSelf           | Boolean | No       | `true`        |
-
 
 ### Co-Hosting the Dashboard in Web Application
 

@@ -7,7 +7,6 @@ This Library provides an API to register Logging to RabbitMQ using Serilog for a
 Make use of `ConfigureLogging(x => x.WriteToRabbitMQ())` when creating an `IHostBuilder`. Logging requires configuration.
 
 ```csharp
-
 static class Program
 {
     public static void Main()
@@ -22,7 +21,6 @@ static class Program
             .ConfigureLogging(x => x.WriteToRabbitMQ());
     }
 }
-
 ```
 
 ### Configuration

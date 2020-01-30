@@ -8,7 +8,6 @@ When using this Library your application will enrich logs with the Application's
 Make use of `EnrichWithApplicationMetadata()` when configuring logging.
 
 ```csharp
-
 static class Program
 {
     public static void Main()
@@ -25,5 +24,4 @@ static class Program
 			});
     }
 }
-
 ```

@@ -7,21 +7,17 @@ This Library provides an API to register different types of Date Time providers.
 The below code needs to be added to the `Startup.cs`. This will register the default date time provider which is UTC.
 
 ```csharp
-
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddUtcDateTimeProvider();
 }
-
 ```
 
 Other Date Time providers can be registered such as below
 
 ```csharp
-
 public void ConfigureServices(IServiceCollection services)
 {
     services.TryAddSingleton<IDateTimeProvider, LocalDateTimeProvider>();
 }
-
 ```

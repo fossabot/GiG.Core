@@ -9,18 +9,15 @@ The below code needs to be added to the `Startup.cs`. This will register the Req
 **Note**: If the client is a Web Api use the Request Context Accessor from [GiG.Core.Context.Web](../src/GiG.Core.Context.Web).
 
 ```csharp
-
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddRequestContext();
 }
-
 ```
 
 The below code needs to be added to the `Startup.cs`. This will register an Orleans Client with the Request Context Outgoing filter.
 
 ```csharp
-
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddDefaultClusterClient((x, sp) =>
@@ -30,7 +27,6 @@ public void ConfigureServices(IServiceCollection services)
         x.AddAssemblies(typeof(IGrain));
     });
 }
-
 ```
 
 ## Basic Usage - Silo
@@ -38,10 +34,8 @@ public void ConfigureServices(IServiceCollection services)
 The below code needs to be added to the `Startup.cs`. This will register the Request Context accessor.
 
 ```csharp
-
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddRequestContext();
 }
-
 ```
