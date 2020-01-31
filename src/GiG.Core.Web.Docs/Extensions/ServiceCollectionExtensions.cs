@@ -58,7 +58,6 @@ namespace GiG.Core.Web.Docs.Extensions
             });
 
             return services
-                .Configure<ApiDocsOptions>(configurationSection)
                 .AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>()
                 .AddSwaggerGen(c =>
                 {
