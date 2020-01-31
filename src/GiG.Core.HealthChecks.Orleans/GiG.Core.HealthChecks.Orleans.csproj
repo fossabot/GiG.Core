@@ -9,7 +9,7 @@
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="3.0.0" PrivateAssets="compile" />
     <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="3.0.2" PrivateAssets="compile" />
     <PackageReference Include="Microsoft.Orleans.Core.Abstractions" Version="3.0.2" PrivateAssets="compile" />
-    <PackageReference Include="Microsoft.Orleans.Runtime.Abstractions" Version="3.0.2" PrivateAssets="compile" />
+    <PackageReference Include="Microsoft.Orleans.Runtime.Abstractions" Version="3.0.2" />
   </ItemGroup>
 
   <ItemGroup>

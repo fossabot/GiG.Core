@@ -7,6 +7,7 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 
 ## Libraries
 
+- [GiG.Core.ApplicationMetrics](docs/GiG.Core.ApplicationMetrics.md) - Provides an API to register application metrics configuration options.
 - [GiG.Core.ApplicationMetrics.Prometheus](docs/GiG.Core.ApplicationMetrics.Prometheus.md) - Provides an API to add application metrics which can be consumed by Prometheus.
 - [GiG.Core.Configuration](docs/GiG.Core.Configuration.md) - Provides an API to add external configuration via JSON file and Environment variables.
 - [GiG.Core.Context.Orleans](docs/GiG.Core.Context.Orleans.md) - Provides an API to register the Request Context Accessor functionality for Orleans.

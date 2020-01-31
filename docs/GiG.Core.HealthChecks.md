@@ -2,7 +2,6 @@
 
 This Library provides an API to register Health Checks for an application.
 
-
 ## Basic Usage
 
 The below code needs to be added to the `Startup.cs`. This will register the Live and Ready Health Check Endpoints.
@@ -37,6 +36,17 @@ private readonly IConfiguration _configuration;
 public void ConfigureServices(IServiceCollection services)
 {
     services.ConfigureHealthChecks(_configuration);
+}
+```
+
+#### Sample Configuration
+
+```json
+{
+  "HealthChecks": {
+    "LiveUrl": "/hc/live",
+    "ReadyUrl": "/hc/ready"
+  }
 }
 ```
 

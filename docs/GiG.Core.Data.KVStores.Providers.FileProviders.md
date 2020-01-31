@@ -13,7 +13,7 @@ public static void ConfigureServices(HostBuilderContext hostContext, IServiceCol
     
     services
         .AddKVStores<IEnumerable<MyModel>>()
-        .FromFile(configuration, "MyData")
+        .FromFile(configuration, "MyConfigSection")
         .WithJsonSerialization();
 }
 ```
@@ -25,3 +25,13 @@ The below table outlines the valid Configurations used to configure the [FilePro
 | Configuration Name | Type   | Optional | Default Value            |
 |:-------------------|:-------|:---------|:-------------------------|
 | Path               | String | No       |                          |
+
+#### Sample Configuration
+
+```json
+{
+  "MyConfigSection": {
+    "Path": "languages.json"
+  }
+}
+```

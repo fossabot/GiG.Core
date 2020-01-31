@@ -27,8 +27,7 @@ public void ConfigureServices(IServiceCollection services)
 {
     services
         .AddDbMigration(new NpgsqlConnection(configuration["ConnectionStrings:DefaultConnection"]))
-        .AddDbMigration(connection)
-        .AddLocation("CustomScripts");
+        .AddLocation("CustomScripts")
         .Migrate();
 }
 ```
@@ -42,9 +41,8 @@ public void ConfigureServices(IServiceCollection services)
 {
     services
         .AddDbMigration(new NpgsqlConnection(configuration["ConnectionStrings:DefaultConnection"]))
-        .AddDbMigration(connection)
         .AddDefaultMigrationOptions()
-        .AddMetadataTableName("customchangelog");
+        .AddMetadataTableName("customchangelog")
         .Migrate();
 	}
 ```

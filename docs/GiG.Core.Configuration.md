@@ -17,7 +17,6 @@ static class Program
     private static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
             .ConfigureExternalConfiguration()
-            .ConfigureLogging()
             .ConfigureServices(Startup.ConfigureServices);
 }
 ```

@@ -2,7 +2,6 @@
 
 This Library provides an API to register Health Checks for an Orleans Silo.
 
-
 ## Basic Usage
 
 The below code needs to be added to the `Startup.cs`. This will register the Live and Ready Health Check Endpoints.
@@ -32,3 +31,14 @@ The below table outlines the valid Configurations used to override the [HealthCh
 | DomainFilter       | String  | Yes      | `*`           |
 | Port               | Int     | Yes      | 5555          |
 | HostSelf           | Boolean | Yes      | true          |
+
+#### Sample Configuration
+
+```json
+{
+  "HealthChecks": {
+    "Port": 7777
+  }
+}
+```
+

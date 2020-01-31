@@ -13,7 +13,7 @@ public static void ConfigureServices(HostBuilderContext hostContext, IServiceCol
     
     services
         .AddKVStores<IEnumerable<MyModel>>()
-        .FromEtcd(configuration, "MyData")
+        .FromEtcd(configuration, "MyConfigSection")
         .WithJsonSerialization();
 }
 ```
@@ -26,3 +26,15 @@ The below table outlines the valid Configurations used to configure the [EtcdPro
 |:-------------------|:-------|:---------|:-------------------------|
 | ConnectionString   | String | Yes      | http://localhost:2379    |
 | Key                | String | No       |                          |
+
+
+#### Sample Configuration
+
+```json
+{
+  "MyConfigSection": {
+    "ConnectionString": "http://localhost:2379",
+    "Key": "languages"
+  }
+}
+```
