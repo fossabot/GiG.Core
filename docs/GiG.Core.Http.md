@@ -11,7 +11,7 @@ var client = HttpClientFactory.Create(x =>
 {
     x.AddDelegatingHandler(new LoggingDelegatingHandler());
     x.AddDelegatingHandler(new CorrelationIdDelegatingHandler(new CorrelationContextAccessor()));
-    x.BaseAddress = new Uri("http://localhost");
+    x.Options.WithBaseAddress(new Uri("http://localhost"));
 });
 ```
 
@@ -22,7 +22,7 @@ var client = HttpClientFactory.GetOrAdd<PaymentClient>(x =>
 {
     x.AddDelegatingHandler(new LoggingDelegatingHandler());
     x.AddDelegatingHandler(new CorrelationIdDelegatingHandler(new CorrelationContextAccessor()));
-    x.BaseAddress = new Uri("http://localhost");
+    x.Options.WithBaseAddress(new Uri("http://localhost"));
 });
 ```
 or using named instance
@@ -32,13 +32,14 @@ var client = HttpClientFactory.GetOrAdd("Payments", x =>
 {
     x.AddDelegatingHandler(new LoggingDelegatingHandler());
     x.AddDelegatingHandler(new CorrelationIdDelegatingHandler(new CorrelationContextAccessor()));
-    x.BaseAddress = new Uri("http://localhost");
+    x.Options.WithBaseAddress(new Uri("http://localhost"));
 });
 ```
 
 ## Basic Usage using IoC
 
 It is suggested that you use the built-in `IHttpClientFactory` when possible which is found in `Microsoft.Extensions.Http` when `ServiceCollection` can be used.  The extension to configure the client from `IConfiguration` can be used as below.
+**Note**: The `FromConfiguration` extension can be found in the nuget package ```GiG.Core.Http.Extensions```
 
 ```csharp
 services.AddHttpClient("Payments", client =>

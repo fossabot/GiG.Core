@@ -2,6 +2,11 @@
 
 This Library provides an API to register Logging to File using Serilog for an application.
 
+## Pre-requisites
+
+The following package is required to consume this package:
+ - GiG.Core.Logging
+ 
 ## Basic Usage
 
 Make use of `ConfigureLogging(x => x.WriteToFile())` when creating an `IHostBuilder`. Logging requires configuration.

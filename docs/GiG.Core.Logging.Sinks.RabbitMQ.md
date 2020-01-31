@@ -2,6 +2,11 @@
 
 This Library provides an API to register Logging to RabbitMQ using Serilog for an application.
 
+## Pre-requisites
+
+The following package is required to consume this package:
+ - GiG.Core.Logging
+ 
 ## Basic Usage
 
 Make use of `ConfigureLogging(x => x.WriteToRabbitMQ())` when creating an `IHostBuilder`. Logging requires configuration.
@@ -61,11 +66,7 @@ The below table outlines the valid Configurations used to override the [RabbitMQ
         "ExchangeType": "direct",
         "Username": "guest",
         "Password": "guest",
-        "VHost": "/",
-        "BatchPostingLimit": 5,
-        "PeriodInSeconds": 5,
-        "DeliveryMode": "NonDurable",
-        "Heartbeat": 30
+        "VHost": "/"
       }
      }
    }

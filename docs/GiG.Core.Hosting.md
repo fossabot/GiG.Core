@@ -51,4 +51,14 @@ The below table outlines the valid Configurations.
 | Configuration Name  | Type	| Optional | Default Value	   |
 |:-------------------|:-------|:---------|:-----------------|
 | Url				  | String  | No	   | `/actuator/info`  |
-| Checksum            | [InfoManagementChecksumOptions](../src/GiG.Core.Hosting.Abstractions/InfoManagementChecksumOptions.cs) | Yes      |                          | 	
+| Checksum            | [InfoManagementChecksumOptions](../src/GiG.Core.Hosting.Abstractions/InfoManagementChecksumOptions.cs) | Yes      |                          |
+
+#### Sample Configuration
+
+```json
+{
+  "InfoManagement": {
+    "Url": "/info"       
+  }
+}
+```

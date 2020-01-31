@@ -154,3 +154,16 @@ The below table outlines the valid Configurations used to override the [KafkaPro
 | SaslMechanism           | SaslMechanism               | Yes      | `SaslMechanism.Plain`        |
 | AdditionalConfiguration | IDictionary<string, string> | Yes      | `dev`                        |
 | SchemaRegistry          | String                      | Yes      | `http://localhost:8081`      |
+
+#### Sample Configuration
+
+```json
+{
+  "EventProvider": {
+    "BootstrapServers": "localhost:9092",
+    "GroupId": "producerconsumer.group.01",
+    "Topic": "person",
+    "EnableAutoCommit": "true"
+  }
+}
+```
