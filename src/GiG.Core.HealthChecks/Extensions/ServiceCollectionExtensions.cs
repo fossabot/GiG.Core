@@ -37,14 +37,13 @@ namespace GiG.Core.HealthChecks.Extensions
             if (services == null) throw new ArgumentNullException(nameof(services));
 
             var healthCheckOptions = configurationSection?.Get<HealthChecksOptions>() ?? new HealthChecksOptions();
-            services.Configure<HealthChecksOptions>(options =>
+            
+            return services.Configure<HealthChecksOptions>(options =>
             {
                 options.CombinedUrl = healthCheckOptions.CombinedUrl;
                 options.LiveUrl = healthCheckOptions.LiveUrl;
                 options.ReadyUrl = healthCheckOptions.ReadyUrl;
             });
-
-            return services.Configure<HealthChecksOptions>(configurationSection);
         }
 
         /// <summary>
