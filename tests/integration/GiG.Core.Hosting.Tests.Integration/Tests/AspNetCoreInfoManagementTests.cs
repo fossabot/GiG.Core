@@ -1,6 +1,5 @@
 ﻿using GiG.Core.Hosting.Extensions;
 using GiG.Core.Hosting.Tests.Integration.Mocks;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;

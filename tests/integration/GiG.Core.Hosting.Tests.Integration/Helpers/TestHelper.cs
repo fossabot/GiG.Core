@@ -1,6 +1,4 @@
-﻿using System;
-using System.Reflection;
-using Microsoft.Extensions.FileProviders;
+﻿using System.Reflection;
 
 namespace GiG.Core.Hosting.Tests.Integration.Helpers
 {

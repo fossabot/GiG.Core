@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq.Expressions;
 using Xunit;
 using ApplicationMetadataExtensions = GiG.Core.Logging.Enrichers.ApplicationMetadata.Extensions;
 using ContextExtensions = GiG.Core.Logging.Enrichers.Context.Extensions;
