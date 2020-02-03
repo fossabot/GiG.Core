@@ -7,6 +7,7 @@ This Library provides Extension Methods to register Orleans Silo Membership Prov
 ### Registering an Orleans Client
 
 The below code needs to be added to the `Startup.cs`. This will register an Orleans Client running either on Consul or Kubernetes according to the configuration.
+**Note**: The `AddDefaultClusterClient` and `ConfigureCluster` extensions can be found in the nuget package ```GiG.Core.Orleans.Client```
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -27,12 +28,15 @@ public void ConfigureServices(IServiceCollection services)
 ### Registering an Orleans Silo
 
 The below code needs to be added to the `Startup.cs`. This will register an Orleans Silo running either on Consul or Kubernetes according to the configuration.
+**Note**: The `ConfigureCluster` and `ConfigureEndpoints` extensions can be found in the nuget package ```GiG.Core.Orleans.Silo```
+**Note**: The `ConfigureConsulClustering` extension can be found in the nuget package ```GiG.Core.Orleans.Clustering.Consul```
+**Note**: The `ConfigureKubernetesClustering` extension can be found in the nuget package ```GiG.Core.Orleans.Clustering.Kubernetes```
 
 ```csharp
 private static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builder)
 {
     builder.ConfigureCluster(ctx.Configuration)                
-        .ConfigureEndpoints()
+        .ConfigureEndpoints(ctx.Configuration)
         .UseMembershipProvider(ctx.Configuration, x =>
         {
             x.ConfigureConsulClustering(ctx.Configuration);

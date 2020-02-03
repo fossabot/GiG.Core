@@ -8,6 +8,7 @@
   <ItemGroup>
     <PackageReference Include="Confluent.Apache.Avro" Version="1.7.7.7" />
     <PackageReference Include="Buildalyzer.Workspaces" Version="2.4.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
     <PackageReference Include="Moq" Version="4.13.1" />

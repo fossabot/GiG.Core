@@ -5,6 +5,7 @@ This Library provides an API to register an Orleans Silo in an application.
 ## Basic Usage
 
 The below code needs to be added to the `Program.cs` when creating a new HostBuilder.
+**Note**: The `UseOrleans` extension can be found in the nuget package ```Microsoft.Orleans.Server```
 
 ```csharp
 public static void Main(string[] args)
@@ -17,7 +18,6 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
         .UseOrleans((hostBuilder, siloBuilder) =>
             siloBuilder.ConfigureCluster(hostBuilder.Configuration)
                 .ConfigureEndpoints(hostBuilder.Configuration)
-                .ConfigureConsulClustering(hostBuilder.Configuration)
                 .AddAssemblies(typeof(TransactionGrain)));
 ```
 
@@ -40,3 +40,20 @@ The below table outlines the valid Configurations used to override the [ClusterO
 |:-------------------|:-------|:---------|:--------------|
 | ClusterId          | String | No       | `dev`         |
 | ServiceId          | String | No       | `dev`         |
+
+#### Sample Configuration
+
+```json
+{
+  "Orleans": {
+    "Silo": {
+      "SiloPort": "22222",
+      "GatewayPort": "40000"
+    },
+    "Cluster": {
+      "ClusterId": "dev",
+      "ServiceId": "sample"
+    }
+  }
+}
+```
