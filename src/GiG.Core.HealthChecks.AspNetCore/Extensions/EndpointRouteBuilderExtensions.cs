@@ -23,21 +23,21 @@ namespace GiG.Core.HealthChecks.AspNetCore.Extensions
         {
             if (endpointRouteBuilder == null) throw new ArgumentNullException(nameof(endpointRouteBuilder));
 
-            var options = endpointRouteBuilder.ServiceProvider.GetService<IOptions<HealthChecksOptions>>()?.Value ?? new HealthChecksOptions();
+            var healthCheckOptions = endpointRouteBuilder.ServiceProvider.GetService<IOptions<HealthChecksOptions>>()?.Value ?? new HealthChecksOptions();
 
             return new HealthCheckEndpoints
             {
-                Ready = endpointRouteBuilder.MapHealthChecks(options.ReadyUrl, new HealthCheckOptions
+                Ready = endpointRouteBuilder.MapHealthChecks(healthCheckOptions.ReadyUrl, new HealthCheckOptions
                 {
                     Predicate = check => check.Tags.Contains(Constants.ReadyTag),
                     ResponseWriter = HealthCheckEndpointWriter.WriteJsonResponseWriter
                 }),
-                Live = endpointRouteBuilder.MapHealthChecks(options.LiveUrl, new HealthCheckOptions
+                Live = endpointRouteBuilder.MapHealthChecks(healthCheckOptions.LiveUrl, new HealthCheckOptions
                 {
                     Predicate = check => check.Tags.Contains(Constants.LiveTag),
                     ResponseWriter = HealthCheckEndpointWriter.WriteJsonResponseWriter
                 }),
-                Combined = endpointRouteBuilder.MapHealthChecks(options.CombinedUrl, new HealthCheckOptions
+                Combined = endpointRouteBuilder.MapHealthChecks(healthCheckOptions.CombinedUrl, new HealthCheckOptions
                 {
                     ResponseWriter = HealthCheckEndpointWriter.WriteJsonResponseWriter
                 })
