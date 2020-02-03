@@ -9,7 +9,6 @@ This Library provides an API to use Kubernetes as a Membership Provider for Orle
 The below code needs to be added to the `Startup.cs`. This will register an Orleans Client running on Kubernetes.
 
 ```csharp
-
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddDefaultClusterClient((x, sp) =>
@@ -19,7 +18,6 @@ public void ConfigureServices(IServiceCollection services)
         x.AddAssemblies(typeof(ITransactionGrain));
     });
 }
-
 ```
 
 ### Registering an Orleans Silo
@@ -27,7 +25,6 @@ public void ConfigureServices(IServiceCollection services)
 The below code needs to be added to the `Program.cs`. This will register an Orleans Silo running on Kubernetes.
 
 ```csharp
-
 static class Program
 {
     public static void Main(string[] args)
@@ -48,14 +45,13 @@ static class Program
             .AddAssemblies(typeof(Grain));
     }
 } 
-
 ```
 
 ### Configuration
 
 #### Silo
 
-The below table outlines the valid Configurations used to override the [KubernetesSiloOptions](..\src\GiG.Core.Orleans.Clustering.Kubernetes\Configurations\KubernetesSiloOptions.cs) under the Config section `Orleans:Kubernetes`.
+The below table outlines the valid Configurations used to override the [KubernetesSiloOptions](../src/GiG.Core.Orleans.Clustering.Kubernetes/Abstractions/KubernetesSiloOptions.cs) under the Config section `Orleans:Kubernetes`.
 
 | Configuration Name  | Type   | Optional | Default Value                                                     |
 |:--------------------|:-------|:---------|:------------------------------------------------------------------|
@@ -68,7 +64,7 @@ The below table outlines the valid Configurations used to override the [Kubernet
 
 #### Client
 
-The below table outlines the valid Configurations used to override the [KubernetesClientOptions](..\src\GiG.Core.Orleans.Clustering.Kubernetes\Configurations\KubernetesClientOptions.cs) under the Config section `Orleans:Kubernetes`.
+The below table outlines the valid Configurations used to override the [KubernetesClientOptions](../src/GiG.Core.Orleans.Clustering.Kubernetes/Abstractions/KubernetesClientOptions.cs) under the Config section `Orleans:Kubernetes`.
 
 | Configuration Name  | Type   | Optional | Default Value                                                     |
 |:--------------------|:-------|:---------|:------------------------------------------------------------------|

@@ -5,14 +5,15 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 [![Build status](https://img.shields.io/bitbucket/pipelines/atlassian/adf-builder-javascript/master)](https://img.shields.io/bitbucket/pipelines/atlassian/adf-builder-javascript/master) 
 [![NuGet](https://img.shields.io/nuget/v/GiG.Core.svg)](https://nuget.org/packages/GiG.Core)
 
-
 ## Libraries
 
+- [GiG.Core.ApplicationMetrics](docs/GiG.Core.ApplicationMetrics.md) - Provides an API to register application metrics configuration options.
 - [GiG.Core.ApplicationMetrics.Prometheus](docs/GiG.Core.ApplicationMetrics.Prometheus.md) - Provides an API to add application metrics which can be consumed by Prometheus.
 - [GiG.Core.Configuration](docs/GiG.Core.Configuration.md) - Provides an API to add external configuration via JSON file and Environment variables.
 - [GiG.Core.Context.Orleans](docs/GiG.Core.Context.Orleans.md) - Provides an API to register the Request Context Accessor functionality for Orleans.
 - [GiG.Core.Context.Web](docs/GiG.Core.Context.Web.md) - Provides an API to register the Request Context Accessor functionality for a web application.
 - [GiG.Core.Data.KVStores](docs/GiG.Core.Data.KVStores.md) - Provides an API to register the required services needed by the KV Stores Data Providers.
+- [GiG.Core.Data.KVStores.Providers.Etcd](docs/GiG.Core.Data.KVStores.Providers.Etcd.md) - Provides an API to register data providers which will read data from etcd.
 - [GiG.Core.Data.KVStores.Providers.FileProviders](docs/GiG.Core.Data.KVStores.Providers.FileProviders.md) - Provides an API to register data providers which will read data from file.
 - [GiG.Core.Data.Migration.Evolve](docs/GiG.Core.Data.Migration.Evolve.md) - Provides an API to perform Database Migrations using SQL Scripts.
 - [GiG.Core.DistributedTracing.Activity](docs/GiG.Core.DistributedTracing.Activity.md) - Provides an API to register Distributed Tracing using System.Diagnostics.Activity.
@@ -30,14 +31,14 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Http.MultiTenant](docs/GiG.Core.Http.MultiTenant.md) - Provides an API to register a `TenantDelegatingHandler` onto the `HttpClient`
 - [GiG.Core.Http.Authentication.Hmac](docs/GiG.Core.Http.Authentication.Hmac.md) - Provides an API to register an `HmacDelegatingHandler` onto the `HttpClient`.
 - [GiG.Core.Logging.All](docs/GiG.Core.Logging.All.md) - Provides an API to register Logging using Serilog and multiple Sinks and Enrichers for an application.
-- [GiG.Core.Logging.Sinks.Console](docs/GiG.Core.Logging.Sinks.Console.md) - Provides an API to register Logging to a Console using Serilog for an application.
-- [GiG.Core.Logging.Sinks.File](docs/GiG.Core.Logging.Sinks.File.md) - Provides an API to register Logging to a File using Serilog for an application.
-- [GiG.Core.Logging.Sinks.Fluentd](docs/GiG.Core.Logging.Sinks.Fluentd.md) - Provides an API to register Logging to Fluentd using Serilog for an application.
-- [GiG.Core.Logging.Sinks.RabbitMQ](docs/GiG.Core.Logging.Sinks.RabbitMQ.md) - Provides an API to register Logging to RabbitMQ using Serilog for an application.
 - [GiG.Core.Logging.Enrichers.ApplicationMetadata](docs/GiG.Core.Logging.Enrichers.ApplicationMetadata.md) - Provides an API to register and ApplicationMetadata Enricher for Logging when using Serilog.
 - [GiG.Core.Logging.Enrichers.Context](docs/GiG.Core.Logging.Enrichers.Context.md) - Provides an API to register the Context Enricher for Logging when using Serilog.
 - [GiG.Core.Logging.Enrichers.DistributedTracing](docs/GiG.Core.Logging.Enrichers.DistributedTracing.md) - Provides an API to register the Correlation Id Enricher for Logging when using Serilog.
 - [GiG.Core.Logging.Enrichers.MultiTenant](docs/GiG.Core.Logging.Enrichers.MultiTenant.md) - Provides an API to register Tenant Id Enricher for Logging when using Serilog.
+- [GiG.Core.Logging.Sinks.Console](docs/GiG.Core.Logging.Sinks.Console.md) - Provides an API to register Logging to a Console using Serilog for an application.
+- [GiG.Core.Logging.Sinks.File](docs/GiG.Core.Logging.Sinks.File.md) - Provides an API to register Logging to a File using Serilog for an application.
+- [GiG.Core.Logging.Sinks.Fluentd](docs/GiG.Core.Logging.Sinks.Fluentd.md) - Provides an API to register Logging to Fluentd using Serilog for an application.
+- [GiG.Core.Logging.Sinks.RabbitMQ](docs/GiG.Core.Logging.Sinks.RabbitMQ.md) - Provides an API to register Logging to RabbitMQ using Serilog for an application.
 - [GiG.Core.Messaging.Avro.Schema.Generator.MSBuild](docs/GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.md) - This Library provides a Code Generator that generates the Avro schema for Public Events objects.
 - [GiG.Core.Messaging.Kafka](docs/GiG.Core.Messaging.Kafka.md) - This Library provides an API to register Kafka Producers, Consumers and their dependencies for an application.
 - [GiG.Core.Messaging.MassTransit](docs/GiG.Core.Messaging.MassTransit.md) - Provides an API to register MassTransit related functionality to an application.
@@ -62,7 +63,6 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Web.FluentValidation](docs/GiG.Core.Web.FluentValidation.md) - Provides an API to register the Fluent Validation Exception Middleware in an application.
 - [GiG.Core.Web.Hosting](docs/GiG.Core.Web.Hosting.md) - Provides an API to configure `BASE_PATH` and Forwarded Headers.
 - [GiG.Core.Web.Mock](docs/GiG.Core.Web.Mock.md) - Provides a MockStartupBase class to be used for Testing.
-
 
 ## Build
 

@@ -20,7 +20,6 @@ static class Program
         Host.CreateDefaultBuilder(args)
             .UseApplicationMetadata();
 }
-
 ```
 
 ### Configuration
@@ -34,7 +33,6 @@ The `ApplicationName` should be configured from the `appsettings.json`. By defau
 The below code needs to be added to the `Startup.cs` to register an information endpoint.
 
 ```csharp
-
 public void ConfigureServices(IServiceCollection services)
 {
 	services.ConfigureInfoManagement(_configuration);
@@ -44,7 +42,6 @@ public void Configure(IApplicationBuilder app)
 {           
 	app.UseInfoManagement();           
 }
-
 ```
 
 ### Configuration
@@ -54,4 +51,14 @@ The below table outlines the valid Configurations.
 | Configuration Name  | Type	| Optional | Default Value	   |
 |:-------------------|:-------|:---------|:-----------------|
 | Url				  | String  | No	   | `/actuator/info`  |
-| Checksum            | [InfoManagementChecksumOptions](..\src\GiG.Core.Hosting.Abstractions\InfoManagementChecksumOptions.cs) | Yes      |                          | 	
+| Checksum            | [InfoManagementChecksumOptions](../src/GiG.Core.Hosting.Abstractions/InfoManagementChecksumOptions.cs) | Yes      |                          |
+
+#### Sample Configuration
+
+```json
+{
+  "InfoManagement": {
+    "Url": "/info"       
+  }
+}
+```

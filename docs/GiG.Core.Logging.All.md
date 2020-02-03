@@ -7,6 +7,7 @@ This Library provides an API to register Logging using Serilog and multiple Sink
 Make use of `ConfigureLogging()` when Creating an `IHostBuilder`. Logging requires configuration.
 
 ```csharp
+using GiG.Core.Logging.All.Extensions;
 
 static class Program
 {
@@ -22,5 +23,23 @@ static class Program
             .ConfigureLogging();
     }
 }
+```
 
+#### Sample Configuration
+
+```json
+{
+  "Logging": {
+    "MinimumLevel": "Debug",
+    "Sinks": {
+      "Console": {
+        "IsEnabled": true
+      },
+      "RabbitMQ": {
+        "IsEnabled": false,
+        "Exchange": "logging"
+      }
+    }
+  }
+}
 ```

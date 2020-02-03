@@ -9,7 +9,6 @@ This Library provides Extension Methods to register Orleans Silo Membership Prov
 The below code needs to be added to the `Startup.cs`. This will register an Orleans Client running either on Consul or Kubernetes according to the configuration.
 
 ```csharp
-
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddDefaultClusterClient((x, sp) =>
@@ -23,7 +22,6 @@ public void ConfigureServices(IServiceCollection services)
         x.AddAssemblies(typeof(ITransactionGrain));
     });
 }
-
 ```
 
 ### Registering an Orleans Silo
@@ -31,7 +29,6 @@ public void ConfigureServices(IServiceCollection services)
 The below code needs to be added to the `Startup.cs`. This will register an Orleans Silo running either on Consul or Kubernetes according to the configuration.
 
 ```csharp
-
 private static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builder)
 {
     builder.ConfigureCluster(ctx.Configuration)                
@@ -43,12 +40,11 @@ private static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builde
         })
         .AddAssemblies(typeof(Grain));
 }
-
 ```
 
 ### Configuration
 
-The below table outlines the valid Configurations used to override the [MembershipProviderOptions](..\src\GiG.Core.Orleans.Clustering\MembershipProviderOptions.cs) under the Config section `Orleans:MembershipProvider`.
+The below table outlines the valid Configurations used to override the [MembershipProviderOptions](../src/GiG.Core.Orleans.Clustering.Abstractions/MembershipProviderOptions.cs) under the Config section `Orleans:MembershipProvider`.
 
 | Configuration Name | Type   | Optional | Default Value            |
 |:-------------------|:-------|:---------|:-------------------------|

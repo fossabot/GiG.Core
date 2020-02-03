@@ -7,7 +7,6 @@ This Library provides an API to register an Orleans Client in an application.
 The below code needs to be added to the `Startup.cs`. This will register an Orleans Client.
 
 ```csharp
-
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddDefaultClusterClient((x, sp) =>
@@ -16,7 +15,6 @@ public void ConfigureServices(IServiceCollection services)
         x.AddAssemblies(typeof(IGrain));
     });
 }
-
 ```
 
 ### Configuration
@@ -30,9 +28,9 @@ The below table outlines the valid Configurations used to override the [ClusterO
 
 ## Cluster Client Factory
 
-The [OrleansClusterClientFactory](../src/GiG.Core.Orleans.Client/OrleansClusterClientFactory.cs) can be used to register multiple named Orleans Cluster Clients.
+The [ClusterClientFactory](../src/GiG.Core.Orleans.Client/ClusterClientFactory.cs) can be used to register multiple named Orleans Cluster Clients.
 
-The below code creates, sets up and registers an [OrleansClusterClientFactory](../src/GiG.Core.Orleans.Client/OrleansClusterClientFactory.cs).
+The below code creates, sets up and registers an [ClusterClientFactory](../src/GiG.Core.Orleans.Client/ClusterClientFactory.cs).
 Cluster Clients can be added to the factory either via a created instance or an anonymous Func.
 
 ```csharp
@@ -57,8 +55,9 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-The below code is an example of how the [OrleansClusterClientFactory](../src/GiG.Core.Orleans.Client/OrleansClusterClientFactory.cs) can be used.
+The below code is an example of how the [ClusterClientFactory](../src/GiG.Core.Orleans.Client/ClusterClientFactory.cs) can be used.
 A sample usage can also be found in the sample controller [EchoController](../samples/Orleans/src/GiG.Core.Orleans.MultiCluster.Client/Controllers/EchoController.cs).
+
 ```csharp
 private readonly IClusterClientFactory _clusterClientFactory;
 
@@ -68,10 +67,8 @@ public async Task<string> PingAsync(string clusterName, string graindId)
     var grain = clusterClient.GetGrain<IEchoGrain>(grainId); 
 
     return await grain.Ping();
-}        
-
+}
 ```
-
 
 ### Configuration
 
@@ -83,11 +80,9 @@ services.CreateClusterClient((builder) =>
     builder.ConfigureCluster("ClusterA", _configuration);
     builder.ConfigureConsulClustering(_configuration);
 });
-
 ```
 
 Sample Configuration:
-
 
 ```json
 {
@@ -106,18 +101,13 @@ Sample Configuration:
 }   
 ```
 
-
-
-
 ## Correlation Id
 
 Add the below to your Startup class to add CorrelationId. 
  
 ```csharp
-
-      public void ConfigureServices(IServiceCollection services)
-      {
-         x.AddCorrelationOutgoingFilter(sp);
-      }
-
+  public void ConfigureServices(IServiceCollection services)
+  {
+     x.AddCorrelationOutgoingFilter(sp);
+  }
 ```

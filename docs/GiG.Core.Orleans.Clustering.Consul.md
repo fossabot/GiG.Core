@@ -9,7 +9,6 @@ This Library provides an API to use Consul as a Membership Provider for Orleans 
 The below code needs to be added to the `Startup.cs`. This will register an Orleans Client running on Consul.
 
 ```csharp
-
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddDefaultClusterClient((x, sp) =>
@@ -19,7 +18,6 @@ public void ConfigureServices(IServiceCollection services)
         x.AddAssemblies(typeof(ITransactionGrain));
     });
 }
-
 ```
 
 ### Registering an Orleans Silo
@@ -27,7 +25,6 @@ public void ConfigureServices(IServiceCollection services)
 The below code needs to be added to the `Program.cs`. This will register an Orleans Silo running on Consul.
 
 ```csharp
-		
 static class Program
 {
     public static void Main(string[] args)
@@ -47,13 +44,12 @@ static class Program
             .ConfigureConsulClustering(ctx.Configuration)
             .AddAssemblies(typeof(Grain));
     }
-}
-        
+}    
 ```
 
 ### Configuration
 
-The below table outlines the valid Configurations used to override the [ConsulOptions](..\src\GiG.Core.Orleans.Clustering.Consul\Configurations\ConsulOptions.cs) under the Config section `Orleans:Consul`.
+The below table outlines the valid Configurations used to override the [ConsulOptions](../src/GiG.Core.Orleans.Clustering.Consul/Abstractions/ConsulOptions.cs) under the Config section `Orleans:Consul`.
 
 | Configuration Name | Type   | Optional | Default Value            |
 |:-------------------|:-------|:---------|:-------------------------|

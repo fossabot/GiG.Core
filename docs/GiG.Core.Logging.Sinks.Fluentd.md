@@ -2,12 +2,16 @@
 
 This Library provides an API to register Logging to Fluentd using Serilog for an application.
 
+## Pre-requisites
+
+The following package is required to consume this package:
+ - GiG.Core.Logging
+ 
 ## Basic Usage
 
 Make use of `ConfigureLogging(x => x.WriteToFluentd())` when creating an `IHostBuilder`. Logging requires configuration.
 
 ```csharp
-
 static class Program
 {
     public static void Main()
@@ -22,7 +26,6 @@ static class Program
             .ConfigureLogging(x => x.WriteToFluentd());
     }
 }
-
 ```
 
 ### Configuration

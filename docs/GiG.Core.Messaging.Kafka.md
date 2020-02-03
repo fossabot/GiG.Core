@@ -7,7 +7,6 @@ This Library provides an API to register Kafka Producers, Consumers and their de
 The below code needs to be added to the `Startup.cs` class. This will register the Producer together with the required Options.
 
 ```csharp
-
 public void ConfigureServices(IServiceCollection services)
 {
     // Configuration
@@ -18,7 +17,6 @@ public void ConfigureServices(IServiceCollection services)
         .FromConfiguration(_configuration)
         .WithTopic("new-person-topic"));
 }
-
 ```
 
 To consume the Producer, inject the KafkaProducer<TKey, TValue>, and pass the message to the ProduceAsync method.
@@ -51,7 +49,6 @@ public class PersonService
         await _kafkaProducer.ProduceAsync(message);
     }
 }
-
 ```
 
 ## Consumer Basic Usage
@@ -60,7 +57,6 @@ The below code can be added to the `Program.cs` class. In this case we are regis
 This will register the Consumer together with the required Options and dependencies.
 
 ```csharp
-
 private static IHostBuilder CreateHostBuilder(string[] args) =>
     Host.CreateDefaultBuilder(args)
         .ConfigureServices((hostContext, services) =>
@@ -74,7 +70,6 @@ private static IHostBuilder CreateHostBuilder(string[] args) =>
                     .WithTopic("new-person-topic"))
                 .AddHostedService<ConsumerService>();
         });
-
 ```
 
 To use the Consumer, inject the IKafkaConsumer<TKey, TValue>, and use the Consume and Commit methods.
@@ -139,12 +134,11 @@ public class ConsumerService : BackgroundService
         }
     }
 }
-
 ```
 
 ### Configuration
 
-The below table outlines the valid Configurations used to override the [KafkaProviderOptions](..\src\GiG.Core.Messaging.Kafka.Abstractions\KafkaProviderOptions.cs) under the default Config section `EventProvider`.
+The below table outlines the valid Configurations used to override the [KafkaProviderOptions](../src/GiG.Core.Messaging.Kafka.Abstractions/KafkaProviderOptions.cs) under the default Config section `EventProvider`.
 
 | Configuration Name      | Type                        | Optional | Default Value                |
 |:------------------------|:----------------------------|:---------|:-----------------------------|
@@ -160,3 +154,16 @@ The below table outlines the valid Configurations used to override the [KafkaPro
 | SaslMechanism           | SaslMechanism               | Yes      | `SaslMechanism.Plain`        |
 | AdditionalConfiguration | IDictionary<string, string> | Yes      | `dev`                        |
 | SchemaRegistry          | String                      | Yes      | `http://localhost:8081`      |
+
+#### Sample Configuration
+
+```json
+{
+  "EventProvider": {
+    "BootstrapServers": "localhost:9092",
+    "GroupId": "producerconsumer.group.01",
+    "Topic": "person",
+    "EnableAutoCommit": "true"
+  }
+}
+```

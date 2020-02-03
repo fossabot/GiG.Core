@@ -14,10 +14,10 @@ var client = HttpClientFactory.CreateClient(x =>
 		new HashProviderFactory(hashFuncFactory),
 		new HmacSignatureProvider()));
 });
-
 ```
 
 Make use of `AddHmacDelegatingHandler` when configuring your HttpClient.
+**Note**: The `FromConfiguration` extension can be found in the nuget package ```GiG.Core.Http.Extensions```
 
 ```charp
 public static void ConfigureServices(HostBuilderContext ctx, IServiceCollection services)
