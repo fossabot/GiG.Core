@@ -90,8 +90,16 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
         
         public async Task DisposeAsync()
         {
-            await _siloHostA?.StopAsync();
-            await _siloHostB?.StopAsync();
+            if (_siloHostA != null)
+            {
+                await _siloHostA?.StopAsync();
+            }
+
+            if (_siloHostB != null)
+            {
+                await _siloHostB?.StopAsync();
+            }
+
             OrleansClusterClientFactory?.Dispose();
         }
     }

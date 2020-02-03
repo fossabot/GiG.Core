@@ -8,16 +8,16 @@ namespace GiG.Core.DistributedTracing.MassTransit.Tests.Integration
     {
         public static ConcurrentDictionary<Guid, string> Messages;
 
-        private static Semaphore _initSemaphore = new Semaphore(1, 1);
+        private static readonly Semaphore InitSemaphore = new Semaphore(1, 1);
 
         public static void Init()
         {
-            _initSemaphore.WaitOne();
+            InitSemaphore.WaitOne();
             if (Messages == null)
             {
                 Messages = new ConcurrentDictionary<Guid, string>();
             }
-            _initSemaphore.Release();
+            InitSemaphore.Release();
         }
     }
 }

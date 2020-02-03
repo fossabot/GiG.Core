@@ -6,7 +6,10 @@ namespace GiG.Core.Data.KVStores
     /// <inheritdoc />
     public class KVStoreBuilder<T> : IKVStoreBuilder<T>
     {
-        /// <inheritdoc />
+        /// <summary>
+        /// Initializes a new instance of the KVStoreBuilder class.
+        /// </summary>
+        /// <param name="services"></param>
         public KVStoreBuilder(IServiceCollection services)
         {
             Services = services;

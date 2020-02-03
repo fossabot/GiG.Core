@@ -77,7 +77,7 @@ namespace GiG.Core.HealthChecks.Orleans.AspNetCore.Internal
             await base.StopAsync(cancellationToken);
             try
             {
-                _host?.StopAsync();
+                _host?.StopAsync(cancellationToken);
                 _host?.WaitForShutdown();
                 _host?.Dispose();
             }

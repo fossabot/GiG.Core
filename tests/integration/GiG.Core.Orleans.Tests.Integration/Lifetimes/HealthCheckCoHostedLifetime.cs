@@ -35,9 +35,12 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
 
         public async Task DisposeAsync()
         {
-            await _host?.StopAsync();
-            await _host?.WaitForShutdownAsync();
-            _host.Dispose();
+            if (_host != null)
+            {
+                await _host?.StopAsync();
+                await _host?.WaitForShutdownAsync();
+                _host.Dispose();
+            }
         }
     }
 }

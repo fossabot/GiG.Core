@@ -2,6 +2,6 @@
 {
     public abstract class CorrelationIdClusterLifetime : ClusterLifetime
     {
-        public CorrelationIdClusterLifetime() : base("Orleans:CorrelationIdSilo") { }
+        protected CorrelationIdClusterLifetime() : base("Orleans:CorrelationIdSilo") { }
     }
 }

@@ -35,7 +35,7 @@ namespace GiG.Core.Messaging.Avro.Schema.Generator.Tests.Integration.Tests
             var project = workspace.CurrentSolution.Projects.Single();
             var compilation = await project.GetCompilationAsync(new CancellationToken());
 
-            if (compilation.ReferencedAssemblyNames.Where(x => x.Name == "GiG.Core.Messaging.Avro.Schema.Abstractions").Any() == false)
+            if (compilation.ReferencedAssemblyNames.Any(x => x.Name == "GiG.Core.Messaging.Avro.Schema.Abstractions") == false)
             {
                 compilation = compilation.AddReferences(MetadataReference.CreateFromFile(attributeLib.Location));
             }

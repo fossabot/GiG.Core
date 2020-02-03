@@ -34,10 +34,10 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
                 })
                 .ConfigureServices((hostContext, services) =>
                 {
-                    var configuration = hostContext.Configuration;
+                    var hostContextConfiguration = hostContext.Configuration;
 
                     services.AddKVStores<IEnumerable<MockLanguage>>()
-                        .FromEtcd(configuration, "Languages")
+                        .FromEtcd(hostContextConfiguration, "Languages")
                         .WithJsonSerialization();
                 })
                 .Build();

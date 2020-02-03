@@ -19,8 +19,7 @@ namespace GiG.Core.Messaging.Kafka.Factories
         private readonly IDateTimeProvider _dateTimeProvider;
         private readonly ITenantAccessor _tenantAccessor;
         private readonly ICorrelationContextAccessor _correlationContextAccessor;
-
-        /// <inheritdoc />
+        
         public MessageFactory([NotNull] IDateTimeProvider dateTimeProvider, ITenantAccessor tenantAccessor = null, ICorrelationContextAccessor correlationContextAccessor = null)
         {
             _dateTimeProvider = dateTimeProvider;

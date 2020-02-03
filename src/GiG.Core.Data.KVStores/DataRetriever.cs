@@ -9,7 +9,11 @@ namespace GiG.Core.Data.KVStores
         private readonly IDataStore<T> _dataStore;
         private readonly IDataProvider<T> _dataProvider;
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Initializes a new instance of the DataRetriever class.
+        /// </summary>
+        /// <param name="dataStore"></param>
+        /// <param name="dataProvider"></param>
         public DataRetriever(IDataStore<T> dataStore, IDataProvider<T> dataProvider)
         {
             _dataStore = dataStore;

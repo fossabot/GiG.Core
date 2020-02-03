@@ -12,7 +12,7 @@ namespace GiG.Core.Benchmarks.Orleans.Streams.Grains
 
         private readonly string _providerName;
 
-        public ProducerGrain(string providerName)
+        protected ProducerGrain(string providerName)
         {
             _providerName = providerName;
         }

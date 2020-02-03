@@ -10,8 +10,8 @@ namespace GiG.Core.Orleans.Tests.Integration.Grains
     {
         public Task<string> GetSiloNameAsync()
         {
-            var siloOptions = this.ServiceProvider.GetService(typeof(IOptions<SiloOptions>)) as IOptions<SiloOptions>;
-            return Task.FromResult(siloOptions.Value.SiloName);
+            var siloOptions = ServiceProvider.GetService(typeof(IOptions<SiloOptions>)) as IOptions<SiloOptions>;
+            return Task.FromResult(siloOptions?.Value.SiloName);
         }
     }
 }

@@ -10,7 +10,10 @@ namespace GiG.Core.Providers.DateTime
     {
         private readonly TimeZoneInfo _timezone;
         
-        /// <inheritdoc />
+        /// <summary>
+        /// Initializes a new instance of the FixedTimeZoneDateTimeProvider class.
+        /// </summary>
+        /// <param name="timezoneId"></param>
         public FixedTimeZoneDateTimeProvider(string timezoneId) => _timezone = TimeZoneInfo.FindSystemTimeZoneById(timezoneId);
 
         /// <inheritdoc />

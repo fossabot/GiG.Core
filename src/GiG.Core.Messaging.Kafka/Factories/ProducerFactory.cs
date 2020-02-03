@@ -12,8 +12,7 @@ namespace GiG.Core.Messaging.Kafka.Factories
     {
         private readonly ILoggerFactory _loggerFactory;
         private readonly IMessageFactory _messageFactory;
-
-        /// <inheritdoc />
+        
         public ProducerFactory([NotNull] ILoggerFactory loggerFactory, [NotNull] IMessageFactory messageFactory)
         {
             _loggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
