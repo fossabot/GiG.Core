@@ -39,7 +39,6 @@ public void ConfigureServices(IServiceCollection services)
     var clusterB = services.CreateClusterClient((builder) =>
         {
             builder.ConfigureCluster(ctx.Configuration.GetSection("Orleans:ClusterB"));
-            builder.ConfigureConsulClustering(ctx.Configuration);
         });
 
     services.AddClusterClientFactory()
@@ -48,7 +47,6 @@ public void ConfigureServices(IServiceCollection services)
             return services.CreateClusterClient((builder) =>
             {
                 builder.ConfigureCluster(ctx.Configuration.GetSection("Orleans:ClusterA"));
-                builder.ConfigureConsulClustering(ctx.Configuration);
             });
         })
         .AddClusterClient("ClusterB", clusterB);
@@ -78,7 +76,6 @@ If you use the below extension method to configure the Cluster Client, the Build
 services.CreateClusterClient((builder) =>
 {
     builder.ConfigureCluster("ClusterA", _configuration);
-    builder.ConfigureConsulClustering(_configuration);
 });
 ```
 
@@ -99,15 +96,4 @@ Sample Configuration:
         }
     }
 }   
-```
-
-## Correlation Id
-
-Add the below to your Startup class to add CorrelationId. 
- 
-```csharp
-  public void ConfigureServices(IServiceCollection services)
-  {
-     x.AddCorrelationOutgoingFilter(sp);
-  }
 ```

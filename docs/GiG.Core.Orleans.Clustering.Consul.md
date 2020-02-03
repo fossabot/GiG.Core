@@ -7,6 +7,7 @@ This Library provides an API to use Consul as a Membership Provider for Orleans 
 ### Registering an Orleans Client
 
 The below code needs to be added to the `Startup.cs`. This will register an Orleans Client running on Consul.
+**Note**: The `ConfigureCluster` and `AddDefaultClusterClient` extensions can be found in the nuget package ```GiG.Core.Orleans.Client```
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -23,6 +24,8 @@ public void ConfigureServices(IServiceCollection services)
 ### Registering an Orleans Silo
 
 The below code needs to be added to the `Program.cs`. This will register an Orleans Silo running on Consul.
+**Note**: The `ConfigureCluster` extension can be found in the nuget package ```GiG.Core.Orleans.Silo```
+**Note**: The `UseOrleans` extension can be found in the nuget package ```Microsoft.Orleans.Server```
 
 ```csharp
 static class Program
@@ -55,3 +58,15 @@ The below table outlines the valid Configurations used to override the [ConsulOp
 |:-------------------|:-------|:---------|:-------------------------|
 | Address            | String | Yes      | `http://localhost:8500"` |
 | KvRootFolder       | String | Yes      | `dev`                    |
+
+#### Sample Configuration
+
+```json
+{
+  "Orleans": {
+    "MembershipProvider": {
+      "Name": "Consul"
+    }
+  }
+}
+```

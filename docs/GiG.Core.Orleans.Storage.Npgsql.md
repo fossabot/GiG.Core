@@ -14,6 +14,9 @@ The below code needs to be added to the `Program.cs` when creating a new HostBui
 
 **Note**: Multiple named Npgsql Grain Storage providers can be added as long as the Provider Name is unique.
 
+**Note**: The `UseOrleans` extension can be found in the nuget package ```Microsoft.Orleans.Server```
+**Note**: The `ConfigureCluster` and `ConfigureEndpoints` extensions can be found in the nuget package ```GiG.Core.Orleans.Silo```
+
 ```csharp
 public class Program
 {
@@ -44,3 +47,17 @@ The below table outlines the valid Configurations for [NpgsqlOptions](../src/GiG
 | Configuration Name | Type   | Required | Default Value |
 |:-------------------|:-------|:---------|:--------------|
 | ConnectionString   | String | Yes      |               |
+
+#### Sample Configuration
+
+```json
+{
+  "Orleans": {
+    "StorageProviders": {
+      "SampleDb": {
+        "ConnectionString": "Host=localhost;Username=postgres;Password=postgres;Database=sample"
+      }
+    }
+  }
+}
+```
