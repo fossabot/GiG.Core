@@ -23,7 +23,7 @@ namespace GiG.Core.Messaging.Kafka.Sample
         /// <inheritdoc />
         public Task StartAsync(CancellationToken cancellationToken = default)
         {
-            Task.Run(() => RunProducer(cancellationToken), cancellationToken);
+            Task.Run(RunProducer, cancellationToken);
             return Task.CompletedTask;
         }
 
@@ -34,7 +34,7 @@ namespace GiG.Core.Messaging.Kafka.Sample
             return Task.CompletedTask;
         }
 
-        private async Task RunProducer(CancellationToken token = default)
+        private async Task RunProducer()
         {
             try
             {

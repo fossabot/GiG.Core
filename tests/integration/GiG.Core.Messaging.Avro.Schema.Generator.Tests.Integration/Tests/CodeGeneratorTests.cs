@@ -2,6 +2,7 @@ using Buildalyzer;
 using Buildalyzer.Workspaces;
 using GiG.Core.Messaging.Avro.Schema.Abstractions.Annotations;
 using Microsoft.CodeAnalysis;
+using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -20,7 +21,7 @@ namespace GiG.Core.Messaging.Avro.Schema.Generator.Tests.Integration.Tests
             // Arrange
             Assembly assembly = typeof(CodeGeneratorTests).Assembly;
             var assemblyName = assembly.GetName().Name;
-            var projectPath = assembly.Location.Substring(0, assembly.Location.IndexOf(assemblyName));
+            var projectPath = assembly.Location.Substring(0, assembly.Location.IndexOf(assemblyName, StringComparison.Ordinal));
             projectPath = projectPath + assemblyName + @"/" + assemblyName + ".csproj";
 
             Assembly attributeLib = typeof(NamedSchemaAttribute).Assembly;

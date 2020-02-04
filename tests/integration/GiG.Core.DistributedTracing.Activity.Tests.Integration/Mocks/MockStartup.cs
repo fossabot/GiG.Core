@@ -13,10 +13,5 @@ namespace GiG.Core.DistributedTracing.Activity.Tests.Integration.Mocks
             services.AddHttpClient();
             base.ConfigureServices(services);
         }
-
-        public override void Configure(IApplicationBuilder app)
-        {
-            base.Configure(app);
-        }
     }
 }
