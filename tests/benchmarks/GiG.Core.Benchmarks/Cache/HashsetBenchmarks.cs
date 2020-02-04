@@ -30,7 +30,6 @@ namespace GiG.Core.Benchmarks.Cache
                 var index = random.Next(1, SearchListCount);
                 var searchTerm = _searchList[index];
 
-                // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
                 _cache.Contains(searchTerm);
             }
         }
@@ -48,14 +47,12 @@ namespace GiG.Core.Benchmarks.Cache
 
                 searchTerm.Value = $"{searchTerm.Value} + 3fn89r";
 
-                // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
                 _cache.Contains(searchTerm);
             }
         }
 
         private static HashSet<PasswordBlacklist> BuildCache()
-        {          
-            // ReSharper disable once StringLiteralTypo
+        {
             var passwordEntries = File.ReadAllLines("Cache\\Mocks\\passwordblacklist.txt");
 
             var passwordBlacklist = new List<PasswordBlacklist>();
