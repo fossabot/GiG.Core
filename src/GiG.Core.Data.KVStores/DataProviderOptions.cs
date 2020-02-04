@@ -8,7 +8,7 @@ namespace GiG.Core.Data.KVStores
         /// <summary>
         /// Initializes a new instance of the DataProviderOptions class.
         /// </summary>
-        /// <param name="options"></param>
+        /// <param name="options">The provider options.</param>
         public DataProviderOptions(TOptions options)
         {
             Value = options;

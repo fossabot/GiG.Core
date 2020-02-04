@@ -9,7 +9,7 @@ namespace GiG.Core.Data.KVStores
         /// <summary>
         /// Initializes a new instance of the KVStoreBuilder class.
         /// </summary>
-        /// <param name="services"></param>
+        /// <param name="services">The <see cref="IServiceCollection"/>.</param>
         public KVStoreBuilder(IServiceCollection services)
         {
             Services = services;

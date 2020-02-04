@@ -12,8 +12,8 @@ namespace GiG.Core.Data.KVStores
         /// <summary>
         /// Initializes a new instance of the DataRetriever class.
         /// </summary>
-        /// <param name="dataStore"></param>
-        /// <param name="dataProvider"></param>
+        /// <param name="dataStore">The data store.</param>
+        /// <param name="dataProvider">The Data Provider used to fetch data from source.</param>
         public DataRetriever(IDataStore<T> dataStore, IDataProvider<T> dataProvider)
         {
             _dataStore = dataStore;

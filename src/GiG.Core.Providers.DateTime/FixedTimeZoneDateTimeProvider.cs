@@ -13,7 +13,7 @@ namespace GiG.Core.Providers.DateTime
         /// <summary>
         /// Initializes a new instance of the FixedTimeZoneDateTimeProvider class.
         /// </summary>
-        /// <param name="timezoneId"></param>
+        /// <param name="timezoneId">The time zone id.</param>
         public FixedTimeZoneDateTimeProvider(string timezoneId) => _timezone = TimeZoneInfo.FindSystemTimeZoneById(timezoneId);
 
         /// <inheritdoc />

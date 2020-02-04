@@ -10,7 +10,7 @@ namespace GiG.Core.Security.Cryptography
         /// <summary>
         /// Initializes a new instance of the HashProviderFactory class.
         /// </summary>
-        /// <param name="signatureProviderFactory"></param>
+        /// <param name="signatureProviderFactory">The signature provider factory.</param>
         public HashProviderFactory(Func<string, IHashProvider> signatureProviderFactory)
         {
             _signatureProviderFactory = signatureProviderFactory;

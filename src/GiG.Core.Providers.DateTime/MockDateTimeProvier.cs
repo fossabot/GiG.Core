@@ -11,7 +11,7 @@ namespace GiG.Core.Providers.DateTime
         /// <summary>
         /// Initializes a new instance of the MockDateTimeProvider class.
         /// </summary>
-        /// <param name="desiredDateTimeOffset"></param>
+        /// <param name="desiredDateTimeOffset">The date time offset.</param>
         public MockDateTimeProvider(DateTimeOffset desiredDateTimeOffset) => Now = desiredDateTimeOffset;
 
         /// <inheritdoc />
