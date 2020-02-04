@@ -1,6 +1,5 @@
 ﻿using GiG.Core.DistributedTracing.Activity.Extensions;
 using GiG.Core.Web.Mock;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GiG.Core.DistributedTracing.Activity.Tests.Integration.Mocks

@@ -31,7 +31,7 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
         {
             _orleansSampleWalletTransactionsService.SetHeaders(_sampleApiTestsFixture.PlayerId, ipAddress);
 
-            Response<List<WalletTransaction>> response = _orleansSampleWalletTransactionsService.GetWalletTransactionsAsync().GetAwaiter().GetResult();
+            var response = _orleansSampleWalletTransactionsService.GetWalletTransactionsAsync().GetAwaiter().GetResult();
             _scenarioContext.Add(_apiEndpointKey, response);
         }
 
@@ -44,14 +44,14 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
         [Then(@"the number of transactions is '(.*)' with transaction types '(.*)', amount '(.*)' and new balance '(.*)'")]
         public void ThenTheNumberOfTransactionsIsWithTransactionTypesAmountAndNewBalance(int numberOfTransactions, string transactionTypes, string amount, string newBalance)
         {
-            List<WalletTransaction> walletTransactions = DeserializeResponseObject(_scenarioContext.Get<Response<List<WalletTransaction>>>(_apiEndpointKey).StringContent);
-            List<string> transactionTypesList = transactionTypes.Split(",").ToList();
-            List<string> amountList = amount.Split(",").ToList();
-            List<string> newBalanceList = newBalance.Split(",").ToList();
+            var walletTransactions = DeserializeResponseObject(_scenarioContext.Get<Response<List<WalletTransaction>>>(_apiEndpointKey).StringContent);
+            var transactionTypesList = transactionTypes.Split(",").ToList();
+            var amountList = amount.Split(",").ToList();
+            var newBalanceList = newBalance.Split(",").ToList();
 
             Assert.Equal(numberOfTransactions, walletTransactions.Count);
 
-            for (int i = 0; i < numberOfTransactions; i++)
+            for (var i = 0; i < numberOfTransactions; i++)
             {
                 Assert.Equal(Convert.ToDecimal(amountList[i]), walletTransactions[i].Amount);
                 Assert.Equal(Convert.ToDecimal(newBalanceList[i]), walletTransactions[i].NewBalance);

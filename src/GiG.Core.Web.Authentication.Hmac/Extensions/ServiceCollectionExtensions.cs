@@ -2,7 +2,6 @@
 using GiG.Core.Authentication.Hmac.Abstractions;
 using GiG.Core.Web.Authentication.Hmac.Abstractions;
 using GiG.Core.Web.Authentication.Hmac.Internal;
-using GiG.Core.Web.Security.Authentication.Internal;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,7 +25,7 @@ namespace GiG.Core.Web.Authentication.Hmac.Extensions
         public static IServiceCollection AddHmacAuthentication([NotNull]this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            services.AddAuthentication(SecuritySechemes.Hmac).AddScheme<HmacRequirement, HmacAuthenticationHandler>("hmac", x => new HmacOptions());
+            services.AddAuthentication(SecuritySchemes.Hmac).AddScheme<HmacRequirement, HmacAuthenticationHandler>("hmac", x => new HmacOptions());
 
             services
                 .TryAddSingleton<IHashProvider, SHA256HashProvider>();

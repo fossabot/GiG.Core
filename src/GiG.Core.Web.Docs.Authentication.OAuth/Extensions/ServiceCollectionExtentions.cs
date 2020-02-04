@@ -4,12 +4,12 @@ using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 
-namespace GiG.Core.Web.Docs.Authentication.OAuth.Extentions
+namespace GiG.Core.Web.Docs.Authentication.OAuth.Extensions
 {
     /// <summary>
     /// Service Collection Extensions.
     /// </summary>
-    public static class ServiceCollectionExtentions
+    public static class ServiceCollectionExtensions
     {
         /// <summary>
         /// Adds OAuth Authentication for Api Docs.

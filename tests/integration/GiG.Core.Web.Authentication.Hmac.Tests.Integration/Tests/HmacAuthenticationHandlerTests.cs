@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+// ReSharper disable StringLiteralTypo
 
 namespace GiG.Core.Web.Authentication.Hmac.Tests.Integration.Tests
 {
@@ -87,8 +88,6 @@ namespace GiG.Core.Web.Authentication.Hmac.Tests.Integration.Tests
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal("abccccc", await response.Content.ReadAsStringAsync());
         }
-
-
 
         [Fact]
         public async Task AuthenticateAsync_MultipleInstances_ReturnsOK()

@@ -11,8 +11,7 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.Internal
 
         public JaegerTracingExporterProvider([NotNull] JaegerExporterOptions options)
         {
-            if (options == null) throw new ArgumentNullException(nameof(options));
-            _options = options;
+            _options = options ?? throw new ArgumentNullException(nameof(options));
         }
 
         public void RegisterExporter(TracerBuilder builder)

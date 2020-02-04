@@ -2,7 +2,7 @@
 
  namespace GiG.Core.Messaging.Avro.Schema.Generator.Tests.Integration.Models
 {
-    [NamedSchema(doc: "Provides all supported countries")]
+    [NamedSchema("Provides all supported countries")]
     public enum Country
     {
         Unspecified = 0,

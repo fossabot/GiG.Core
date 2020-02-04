@@ -12,7 +12,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
     public class HealthCheckCoHostedLifetime : IAsyncLifetime
     {
         internal IHttpClientFactory HttpClientFactory;
-        internal readonly int Port = 7777;
+        internal const int Port = 7777;
 
         private IHost _host;
 

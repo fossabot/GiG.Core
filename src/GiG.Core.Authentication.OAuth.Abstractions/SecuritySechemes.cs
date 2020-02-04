@@ -3,9 +3,9 @@
     /// <summary>
     /// Security Scheme Constants.
     /// </summary>
-    public class SecuritySechemes
+    public class SecuritySchemes
     {
         /// Oauth2.
-        public static string OAuth2 = "oauth2";
+        public const string OAuth2 = "oauth2";
     }
 }

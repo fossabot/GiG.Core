@@ -5,8 +5,6 @@ using Microsoft.CodeAnalysis;
 using System;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -19,22 +17,22 @@ namespace GiG.Core.Messaging.Avro.Schema.Generator.Tests.Integration.Tests
         public async Task CodeGenerator_GenerateSchemaFiles_Success()
         {
             // Arrange
-            Assembly assembly = typeof(CodeGeneratorTests).Assembly;
+            var assembly = typeof(CodeGeneratorTests).Assembly;
             var assemblyName = assembly.GetName().Name;
             var projectPath = assembly.Location.Substring(0, assembly.Location.IndexOf(assemblyName, StringComparison.Ordinal));
             projectPath = projectPath + assemblyName + @"/" + assemblyName + ".csproj";
 
-            Assembly attributeLib = typeof(NamedSchemaAttribute).Assembly;
+            var attributeLib = typeof(NamedSchemaAttribute).Assembly;
 
             // Delete previous avro files - comment this out when debugging
             DeleteAvroFiles(projectPath);
 
-            AnalyzerManager manager = new AnalyzerManager();
-            ProjectAnalyzer analyzer = manager.GetProject(projectPath);
+            var manager = new AnalyzerManager();
+            var analyzer = manager.GetProject(projectPath);
             using var workspace = analyzer.GetWorkspace();
             
             var project = workspace.CurrentSolution.Projects.Single();
-            var compilation = await project.GetCompilationAsync(new CancellationToken());
+            var compilation = await project.GetCompilationAsync();
 
             if (compilation.ReferencedAssemblyNames.Any(x => x.Name == "GiG.Core.Messaging.Avro.Schema.Abstractions") == false)
             {
@@ -53,8 +51,8 @@ namespace GiG.Core.Messaging.Avro.Schema.Generator.Tests.Integration.Tests
 
         private void DeleteAvroFiles(string projectPath)
         {
-            AnalyzerManager manager = new AnalyzerManager();
-            ProjectAnalyzer analyzer = manager.GetProject(projectPath);
+            var manager = new AnalyzerManager();
+            var analyzer = manager.GetProject(projectPath);
             using var workspace = analyzer.GetWorkspace();
             var project = workspace.CurrentSolution.Projects.Single();
 
@@ -64,11 +62,11 @@ namespace GiG.Core.Messaging.Avro.Schema.Generator.Tests.Integration.Tests
 
         private void CheckFileGeneration(string projectPath)
         {
-            AnalyzerManager manager = new AnalyzerManager();
-            ProjectAnalyzer analyzer = manager.GetProject(projectPath);
+            var manager = new AnalyzerManager();
+            var analyzer = manager.GetProject(projectPath);
             using var workspace = analyzer.GetWorkspace();
 
-            Project project = workspace.CurrentSolution.Projects.Single();
+            var project = workspace.CurrentSolution.Projects.Single();
 
             var addressAvro = project.Documents.FirstOrDefault(x => x.Name.Equals("Address.Avro.cs"));
             var personAvro = project.Documents.FirstOrDefault(x => x.Name.Equals("Person.Avro.cs"));

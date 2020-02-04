@@ -42,7 +42,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Clustering
             var config = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .Build();
-            var exception = Assert.Throws<ArgumentNullException>(() => new ClientBuilder().UseMembershipProvider(configurationSection: config.GetSection("Orleans:ClusterA"), null));
+            var exception = Assert.Throws<ArgumentNullException>(() => new ClientBuilder().UseMembershipProvider(config.GetSection("Orleans:ClusterA"), null));
             Assert.Equal("configureProvider", exception.ParamName);
             
             exception = Assert.Throws<ArgumentNullException>(() => new ClientBuilder().UseMembershipProvider(new ConfigurationBuilder().Build(), null));

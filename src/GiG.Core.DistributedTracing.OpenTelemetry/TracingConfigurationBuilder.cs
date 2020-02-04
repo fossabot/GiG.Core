@@ -1,7 +1,6 @@
 using GiG.Core.DistributedTracing.Telemetry.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using OpenTelemetry.Trace.Configuration;
 using System;
 using System.Collections.Generic;

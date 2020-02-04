@@ -22,12 +22,14 @@ namespace GiG.Core.Benchmarks.Logging
         {
             _consoleHost = new HostBuilder()
                 .ConfigureHostConfiguration(builder => builder
+                    // ReSharper disable once StringLiteralTypo
                     .AddJsonFile("appsettings.consolelogger.json"))
                 .ConfigureLogging()
                 .Build();
 
             _fluentDHost = new HostBuilder()
                 .ConfigureHostConfiguration(builder => builder
+                    // ReSharper disable once StringLiteralTypo
                     .AddJsonFile("appsettings.fluentdlogger.json"))
                 .ConfigureLogging()
                 .Build();

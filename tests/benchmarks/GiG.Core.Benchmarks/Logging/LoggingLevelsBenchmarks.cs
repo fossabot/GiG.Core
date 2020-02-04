@@ -17,6 +17,7 @@ namespace GiG.Core.Benchmarks.Logging
         {
             ConsoleHost = new HostBuilder()
                 .ConfigureHostConfiguration(builder => builder
+                    // ReSharper disable once StringLiteralTypo
                     .AddJsonFile("appsettings.minimumloglevel.json"))
                 .ConfigureLogging()
                 .Build();

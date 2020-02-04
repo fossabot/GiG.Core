@@ -1,6 +1,5 @@
 ﻿using Confluent.Kafka;
 using GiG.Core.DistributedTracing.Abstractions;
-using GiG.Core.Messaging.Kafka.Abstractions;
 using GiG.Core.Messaging.Kafka.Abstractions.Extensions;
 using GiG.Core.Messaging.Kafka.Abstractions.Interfaces;
 using GiG.Core.MultiTenant.Abstractions;
@@ -8,7 +7,6 @@ using GiG.Core.Providers.DateTime.Abstractions;
 using JetBrains.Annotations;
 using System;
 using System.Linq;
-using System.Runtime.InteropServices;
 using Constants = GiG.Core.Messaging.Kafka.Abstractions.Constants;
 
 namespace GiG.Core.Messaging.Kafka.Factories

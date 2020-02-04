@@ -26,7 +26,7 @@
         public const string StreamsMemoryStorageName = "PubSubStore";
 
         /// <summary>
-        /// The storage prodiver to use for grain persistance.
+        /// The storage provider to use for grain persistence.
         /// </summary>
         public const string StorageProviderName = "SampleDb";
     }

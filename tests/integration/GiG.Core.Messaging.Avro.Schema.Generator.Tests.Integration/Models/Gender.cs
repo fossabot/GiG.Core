@@ -2,7 +2,7 @@
 
  namespace GiG.Core.Messaging.Avro.Schema.Generator.Tests.Integration.Models
 {
-    [NamedSchema(doc: "Provides all supported genders")]
+    [NamedSchema("Provides all supported genders")]
     public enum Gender
     {
         Unspecified = 0,

@@ -36,7 +36,7 @@ namespace GiG.Core.Orleans.Sample.Tests.Unit.Tests
             state.Amount = amount;
             var grain = await Silo.CreateGrainAsync<WalletGrain>(grainId);
             var actualBalance = await grain.GetBalanceAsync();
-            var storageStats = this.Silo.StorageStats();
+            var storageStats = Silo.StorageStats();
 
             // Assert
             Assert.Equal(amount, actualBalance);
@@ -59,7 +59,7 @@ namespace GiG.Core.Orleans.Sample.Tests.Unit.Tests
             // Act
             var grain = await Silo.CreateGrainAsync<WalletGrain>(grainId);
             var actualBalance = await grain.CreditAsync(amount);
-            var storageStats = this.Silo.StorageStats();
+            var storageStats = Silo.StorageStats();
 
             // Assert
             Assert.Equal(1, storageStats.Writes);
@@ -83,7 +83,7 @@ namespace GiG.Core.Orleans.Sample.Tests.Unit.Tests
             // Act
             var grain = await Silo.CreateGrainAsync<WalletGrain>(grainId);
             var actualBalance = await grain.DebitAsync(amount);
-            var storageStats = this.Silo.StorageStats();
+            var storageStats = Silo.StorageStats();
 
             // Assert
             Assert.Equal(1, storageStats.Writes);
@@ -110,8 +110,8 @@ namespace GiG.Core.Orleans.Sample.Tests.Unit.Tests
             // Act
             var grain = await Silo.CreateGrainAsync<WalletGrain>(grainId);
             await grain.OnNextAsync(transactionMessage);
-            var storageStats = this.Silo.StorageStats();
-            var balanceState = this.Silo.State<BalanceState>();
+            var storageStats = Silo.StorageStats();
+            var balanceState = Silo.State<BalanceState>();
 
             // Assert
             Assert.Equal(1, storageStats.Writes);
@@ -138,8 +138,8 @@ namespace GiG.Core.Orleans.Sample.Tests.Unit.Tests
             // Act
             var grain = await Silo.CreateGrainAsync<WalletGrain>(grainId);
             await grain.OnNextAsync(transactionMessage);
-            var storageStats = this.Silo.StorageStats();
-            var balanceState = this.Silo.State<BalanceState>();
+            var storageStats = Silo.StorageStats();
+            var balanceState = Silo.State<BalanceState>();
 
             // Assert
             Assert.Equal(1, storageStats.Writes);

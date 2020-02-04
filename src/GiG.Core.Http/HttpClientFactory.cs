@@ -45,6 +45,8 @@ namespace GiG.Core.Http
         {
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException($"'{nameof(name)}' must not be null, empty or whitespace.", nameof(name));
 
+            // ReSharper disable once InconsistentlySynchronizedField
+            // This is being done outside of lock for optimistic locking.
             if (Instances.TryGetValue(name, out var instance))
             {
                 return instance;

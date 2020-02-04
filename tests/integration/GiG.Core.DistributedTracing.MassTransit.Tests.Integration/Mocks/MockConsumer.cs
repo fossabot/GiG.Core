@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace GiG.Core.DistributedTracing.MassTransit.Tests.Integration.Mocks
 {
-    class MockConsumer : IConsumer<MockMessage>
+    internal class MockConsumer : IConsumer<MockMessage>
     {
         private readonly ICorrelationContextAccessor _correlationContextAccessor;
 

@@ -7,9 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GiG.Core.Web.Docs.Authentication.OAuth.Extentions
+namespace GiG.Core.Web.Docs.Authentication.OAuth.Extensions
 {
-    internal static class SwaggerGenOptionsExtentions
+    internal static class SwaggerGenOptionsExtensions
     {
         internal static void AddOAuth2SecurityDefinition(this SwaggerGenOptions options, OAuthAuthenticationOptions oauthAuthenticationOptions)
         {
@@ -31,7 +31,7 @@ namespace GiG.Core.Web.Docs.Authentication.OAuth.Extentions
                     }
                 }
 
-                options.AddSecurityDefinition(SecuritySechemes.OAuth2, new OpenApiSecurityScheme
+                options.AddSecurityDefinition(SecuritySchemes.OAuth2, new OpenApiSecurityScheme
                 {
                     Type = SecuritySchemeType.OAuth2,
                     Flows = new OpenApiOAuthFlows
@@ -40,7 +40,7 @@ namespace GiG.Core.Web.Docs.Authentication.OAuth.Extentions
                         {
                             AuthorizationUrl = new Uri(string.Concat(oauthAuthenticationOptions.Authority, "/connect/authorize"), UriKind.Absolute),
                             Scopes = scopes,
-                            TokenUrl = new Uri(string.Concat(oauthAuthenticationOptions.Authority, "/connect/token"), UriKind.Absolute),
+                            TokenUrl = new Uri(string.Concat(oauthAuthenticationOptions.Authority, "/connect/token"), UriKind.Absolute)
                         }
                     }
                 });
@@ -53,7 +53,7 @@ namespace GiG.Core.Web.Docs.Authentication.OAuth.Extentions
                             Reference = new OpenApiReference
                             {
                                 Type = ReferenceType.SecurityScheme,
-                                Id = SecuritySechemes.OAuth2
+                                Id = SecuritySchemes.OAuth2
                             }
                         },
                         scopes.Select(x => x.Key).ToList()

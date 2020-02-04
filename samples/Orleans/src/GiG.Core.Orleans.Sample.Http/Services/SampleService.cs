@@ -27,7 +27,7 @@ namespace GiG.Core.Orleans.Sample.Http.Services
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             var playerId = Guid.NewGuid().ToString();
-            var transactionRequest = new TransactionRequest() {Amount = 50};
+            var transactionRequest = new TransactionRequest {Amount = 50};
 
             var paymentsResponse = await _paymentsClient.DepositAsync(playerId, transactionRequest);
             var paymentsCorrelationId = paymentsResponse.Headers.GetValues(Constants.Header).First();

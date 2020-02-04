@@ -80,6 +80,7 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Tests.Integration.Tests
 
             var stateQueryCommand = connection.CreateCommand();
             stateQueryCommand.CommandText = StateQuery;
+            // ReSharper disable once StringLiteralTypo
             stateQueryCommand.Parameters.Add(new NpgsqlParameter("grainidextensionstring", grainId));
             var result = stateQueryCommand.ExecuteScalar();
 
@@ -95,6 +96,5 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Tests.Integration.Tests
 
             return stateElement.Value.GetString();
         }
-
     }
 }

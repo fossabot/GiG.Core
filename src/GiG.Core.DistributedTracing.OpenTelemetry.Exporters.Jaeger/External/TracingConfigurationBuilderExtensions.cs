@@ -24,12 +24,7 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.External
 
             var options = builder.TracingConfiguration.GetSection($"Exporters:{sectionName}").Get<JaegerExporterOptions>();
 
-            if (options == null)
-            {
-                return builder;
-            }
-                
-            return builder.RegisterExporter(ExporterName, new JaegerTracingExporterProvider(options));
+            return options == null ? builder : builder.RegisterExporter(ExporterName, new JaegerTracingExporterProvider(options));
         }
     }
 }

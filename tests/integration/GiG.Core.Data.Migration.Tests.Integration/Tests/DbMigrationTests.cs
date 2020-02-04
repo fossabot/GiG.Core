@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Hosting.Internal;
 using System.IO;
 using Xunit;
+// ReSharper disable StringLiteralTypo
 
 namespace GiG.Core.Data.Migration.Tests.Integration.Tests
 {

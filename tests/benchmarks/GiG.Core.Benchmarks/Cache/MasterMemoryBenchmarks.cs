@@ -103,6 +103,7 @@ namespace GiG.Core.Benchmarks.Cache
             var builder = new DatabaseBuilder();
 
             // the file contains 1 million password blacklist entries
+            // ReSharper disable once StringLiteralTypo
             var passwordEntries = File.ReadAllLines("Cache\\Mocks\\passwordblacklist.txt");
             var passwordBlacklist = passwordEntries.Select(entry => new PasswordBlacklist {Value = entry}).ToList();
 

@@ -24,7 +24,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Clustering.Consul
         [Fact]
         public void ConfigureConsulClustering_ConfigurationIsNull_ThrowsConfigurationErrorsException()
         {
-            var exception = Assert.Throws<ConfigurationErrorsException>(() => new ClientBuilder().ConfigureConsulClustering(configurationSection: null));
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => new ClientBuilder().ConfigureConsulClustering(null));
             Assert.Equal("Configuration section '' is incorrect.", exception.Message);
         }
 

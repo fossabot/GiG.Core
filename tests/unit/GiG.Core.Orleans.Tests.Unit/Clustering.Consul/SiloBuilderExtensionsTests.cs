@@ -17,7 +17,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Clustering.Consul
             var exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.ConfigureConsulClustering(null, configuration: null));
             Assert.Equal("siloBuilder", exception.ParamName);
 
-            exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.ConfigureConsulClustering(null, configurationSection: null));
+            exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.ConfigureConsulClustering(null, null));
             Assert.Equal("siloBuilder", exception.ParamName);
         }
 
@@ -38,7 +38,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Clustering.Consul
             var exception = Assert.Throws<ConfigurationErrorsException>(() => Host.CreateDefaultBuilder()
                 .UseOrleans((ctx, sb) =>
                 {
-                    sb.ConfigureConsulClustering(configurationSection: null);
+                    sb.ConfigureConsulClustering(null);
                 }).Build());
             Assert.Equal("Configuration section '' is incorrect.", exception.Message);
         }

@@ -67,7 +67,7 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
             var dataRetriever = _serviceProvider.GetRequiredService<IDataRetriever<IEnumerable<MockLanguage>>>();
 
             // Act.
-            IEnumerable<MockLanguage> data = dataRetriever.Get();
+            var data = dataRetriever.Get();
 
             // Assert.
             Assert.NotNull(data);
@@ -86,7 +86,7 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
             var dataRetriever = _serviceProvider.GetRequiredService<IDataRetriever<IEnumerable<MockLanguage>>>();
 
             // Act.
-            IEnumerable<MockLanguage> data = await dataRetriever.GetAsync("temp");
+            var data = await dataRetriever.GetAsync("temp");
 
             // Assert.
             Assert.NotNull(data);
@@ -105,7 +105,7 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
             var dataRetriever = _serviceProvider.GetRequiredService<IDataRetriever<IEnumerable<MockLanguage>>>();
 
             // Act.
-            IEnumerable<MockLanguage> data = await dataRetriever.GetAsync("temp2");
+            var data = await dataRetriever.GetAsync("temp2");
 
             // Assert.
             Assert.NotNull(data);

@@ -2,7 +2,6 @@ using GiG.Core.Data.KVStores.Abstractions;
 using GiG.Core.Data.KVStores.File.Sample.Models;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -26,7 +25,7 @@ namespace GiG.Core.Data.KVStores.File.Sample.Services
             _logger.LogInformation("Retrieving Languages...");
             
             var data = _dataRetriever.Get();
-            _logger.LogInformation(String.Join(", ", data.Select(x=>$"Name: {x.Name}, Alpha2Code: {x.Alpha2Code}").ToArray()));
+            _logger.LogInformation(string.Join(", ", data.Select(x=>$"Name: {x.Name}, Alpha2Code: {x.Alpha2Code}").ToArray()));
 
             return Task.CompletedTask;
         }

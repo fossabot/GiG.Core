@@ -12,7 +12,7 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.Services
 
         public OrleansSampleWalletTransactionsService()
         {
-            string microServiceUrl = SampleApiTestSettings.ApiUrl() + "WalletTransactions/";
+            var microServiceUrl = SampleApiTestSettings.ApiUrl() + "WalletTransactions/";
             _orleansSampleWalletTransactionsService = RestClient.For<IOrleansSampleWalletTransactionsService>(microServiceUrl);
         }
 

@@ -43,7 +43,7 @@ namespace GiG.Core.Orleans.Sample.Consumer.Extensions
                             e.Consumer<PaymentConsumer>(provider);
                             e.UseMessageRetry(r =>
                             {
-                                r.Ignore(new Type[] { typeof(NullReferenceException), typeof(ArgumentException), typeof(ArgumentNullException) });
+                                r.Ignore(typeof(NullReferenceException), typeof(ArgumentException), typeof(ArgumentNullException));
                                 r.Incremental(5, TimeSpan.FromMilliseconds(200), TimeSpan.FromMilliseconds(200));
                             });
                         });

@@ -82,7 +82,7 @@ namespace GiG.Core.HealthChecks.Orleans.AspNetCore.Internal
             }
             catch(Exception ex)
             {
-                _logger.LogError("Orleans HealthCheckd Dispose failed.", ex);
+                _logger.LogError("Orleans HealthCheck Dispose failed.", ex);
             }
         }
     }

@@ -49,7 +49,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Clustering.Consul
         [Fact]
         public void ConfigureConsulClustering_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
         {
-            var exception = Assert.Throws<ConfigurationErrorsException>(() => new ClientBuilder().ConfigureConsulClustering(configurationSection: null));
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => new ClientBuilder().ConfigureConsulClustering(null));
             Assert.Equal("Configuration section '' is incorrect.", exception.Message);
 
             exception = Assert.Throws<ConfigurationErrorsException>(() => Host.CreateDefaultBuilder()
@@ -57,7 +57,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Clustering.Consul
                 {
                     sb.UseMembershipProvider(ctx.Configuration, x =>
                     {
-                        x.ConfigureConsulClustering(configurationSection: null);
+                        x.ConfigureConsulClustering(null);
                     });
                 }).Build());
 

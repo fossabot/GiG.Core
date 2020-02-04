@@ -27,7 +27,7 @@ namespace GiG.Core.Messaging.MassTransit.Internal
         /// <returns></returns>
         public Task PreConsume<T>(ConsumeContext<T> context) where T : class
         {
-            var parentActivityId = context.Headers.Get<string>(Constants.ActivityIdHeader, string.Empty);
+            var parentActivityId = context.Headers.Get(Constants.ActivityIdHeader, string.Empty);
             var activity = new System.Diagnostics.Activity("ConsumeMessage");
             if (!string.IsNullOrEmpty(parentActivityId))
             {

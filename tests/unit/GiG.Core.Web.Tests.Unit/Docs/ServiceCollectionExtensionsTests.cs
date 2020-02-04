@@ -13,7 +13,7 @@ namespace GiG.Core.Web.Tests.Unit.Docs
         [Fact]
         public void ConfigureApiDocs_ServiceCollectionIsNull_ThrowsArgumentNullException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.ConfigureApiDocs(null, configurationSection: null));
+            var exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.ConfigureApiDocs(null, null));
             Assert.Equal("services", exception.ParamName);
         }
 

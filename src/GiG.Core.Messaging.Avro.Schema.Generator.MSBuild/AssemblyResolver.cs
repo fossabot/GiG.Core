@@ -81,10 +81,9 @@ namespace GiG.Core.Messaging.Avro.Schema.Generator.MSBuild
             var assemblies = new List<string>();
             if (_assemblyResolver.TryResolveAssemblyPaths(wrapper, assemblies))
             {
-                foreach (var asm in assemblies)
+                foreach (var assembly in assemblies.Select(TryLoadAssemblyFromPath).Where(assembly => assembly != null))
                 {
-                    var assembly = TryLoadAssemblyFromPath(asm);
-                    if (assembly != null) return assembly;
+                    return assembly;
                 }
             }
 

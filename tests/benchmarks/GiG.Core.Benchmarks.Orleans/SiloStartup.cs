@@ -26,7 +26,7 @@ namespace GiG.Core.Benchmarks.Orleans
                 .AddAssemblies(typeof(ProducerGrain))
                 .AddSimpleMessageStreamProvider(Constants.SMSProviderName)
                 .AddMemoryGrainStorage(Constants.StreamsMemoryStorageName)
-                .AddMemoryGrainStorage(name: StorageProvidersConstants.InMemory)
+                .AddMemoryGrainStorage(StorageProvidersConstants.InMemory)
                 .UseMongoDBClient(GetConnectionString(ctx.Configuration, StorageProvidersConstants.MongoDb))
                 .AddMongoDBGrainStorage(StorageProvidersConstants.MongoDb, options =>
                 {

@@ -28,7 +28,7 @@ namespace GiG.Core.Logging.Sinks.RabbitMQ.Internal
             }
 
             var sslOptions = _options.Ssl ?? new RabbitMQSinkSslOptions();
-            var rabbitMqClientConfiguration = new RabbitMQClientConfiguration()
+            var rabbitMqClientConfiguration = new RabbitMQClientConfiguration
             {
                 DeliveryMode = deliveryMode,
                 Exchange = _options.Exchange,
@@ -49,7 +49,7 @@ namespace GiG.Core.Logging.Sinks.RabbitMQ.Internal
             };
             rabbitMqClientConfiguration.Hostnames.Add(_options.Hostname);
 
-            sinkConfiguration.RabbitMQ(rabbitMqClientConfiguration, new RabbitMQSinkConfiguration()
+            sinkConfiguration.RabbitMQ(rabbitMqClientConfiguration, new RabbitMQSinkConfiguration
             {
                 BatchPostingLimit = _options.BatchPostingLimit,
                 Period = TimeSpan.FromSeconds(_options.PeriodInSeconds),

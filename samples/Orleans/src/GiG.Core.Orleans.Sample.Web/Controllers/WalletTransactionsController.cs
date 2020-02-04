@@ -25,7 +25,7 @@ namespace GiG.Core.Orleans.Sample.Web.Controllers
         /// Gets the Payment Transactions.
         /// </summary>
         /// <returns></returns>
-        [HttpGet()]
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<WalletTransaction>>> Get()
         {
             var playerId = _playerInformationAccessor.PlayerId;

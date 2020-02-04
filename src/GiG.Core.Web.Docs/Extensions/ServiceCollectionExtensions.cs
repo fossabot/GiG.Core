@@ -50,6 +50,7 @@ namespace GiG.Core.Web.Docs.Extensions
 
             services.AddVersionedApiExplorer(options =>
             {
+                // ReSharper disable once CommentTypo
                 //The format of the version added to the route URL: "'v'major"
                 options.GroupNameFormat = "'v'V";
 

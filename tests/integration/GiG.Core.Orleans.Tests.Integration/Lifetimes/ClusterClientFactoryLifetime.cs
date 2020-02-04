@@ -66,7 +66,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                     services.AddClusterClientFactory()
                         .AddClusterClient("ClusterA", () =>
                         {
-                            return services.CreateClusterClient((builder) =>
+                            return services.CreateClusterClient(builder =>
                             {
                                 builder.ConfigureCluster(ctx.Configuration.GetSection("Orleans:ClusterFactoryA"));
                                 builder.ConfigureConsulClustering(ctx.Configuration);
@@ -74,7 +74,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                             });
                         })
                         .AddClusterClient("ClusterB", () => {
-                            return services.CreateClusterClient((builder) =>
+                            return services.CreateClusterClient(builder =>
                             {
                                 builder.ConfigureCluster(ctx.Configuration.GetSection("Orleans:ClusterFactoryB"));
                                 builder.ConfigureConsulClustering(ctx.Configuration);

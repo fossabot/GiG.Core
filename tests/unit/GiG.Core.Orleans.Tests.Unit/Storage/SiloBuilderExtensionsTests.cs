@@ -13,13 +13,13 @@ namespace GiG.Core.Orleans.Tests.Unit.Storage
         [Fact]
         public void AddNpgsqlGrainStorage_SiloBuilderIsNull_ThrowsArgumentNullException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.AddNpgsqlGrainStorage(null, storageName: null, configuration: null));
+            var exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.AddNpgsqlGrainStorage(null, null, configuration: null));
             Assert.Equal("siloBuilder", exception.ParamName);
 
-            exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.AddNpgsqlGrainStorage(null, storageName: null, configurationSection: null));
+            exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.AddNpgsqlGrainStorage(null, null, null));
             Assert.Equal("siloBuilder", exception.ParamName);
 
-            exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.AddNpgsqlGrainStorage(null, storageName: null, configuration: null, sectionName: null));
+            exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.AddNpgsqlGrainStorage(null, null, null, null));
             Assert.Equal("siloBuilder", exception.ParamName);
         }
 
@@ -27,11 +27,11 @@ namespace GiG.Core.Orleans.Tests.Unit.Storage
         public void AddNpgsqlGrainStorage_ConfigurationIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() =>
-                            Host.CreateDefaultBuilder().UseOrleans(sb => sb.AddNpgsqlGrainStorage(storageName: null, configuration: null)).Build());
+                            Host.CreateDefaultBuilder().UseOrleans(sb => sb.AddNpgsqlGrainStorage(null, configuration: null)).Build());
             Assert.Equal("configuration", exception.ParamName);
 
             exception = Assert.Throws<ArgumentNullException>(() =>
-                            Host.CreateDefaultBuilder().UseOrleans(sb => sb.AddNpgsqlGrainStorage(storageName: null, configuration: null, sectionName: null)).Build());
+                            Host.CreateDefaultBuilder().UseOrleans(sb => sb.AddNpgsqlGrainStorage(storageName: null, null, null)).Build());
             Assert.Equal("configuration", exception.ParamName);
         }
 
@@ -39,7 +39,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Storage
         public void AddNpgsqlGrainStorage_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
         {
             var exception = Assert.Throws<ConfigurationErrorsException>(() =>
-                            Host.CreateDefaultBuilder().UseOrleans(sb => sb.AddNpgsqlGrainStorage(storageName: null, configurationSection: null)).Build());
+                            Host.CreateDefaultBuilder().UseOrleans(sb => sb.AddNpgsqlGrainStorage(null, null)).Build());
             Assert.Equal("Configuration section '' is incorrect.", exception.Message);
         }
 

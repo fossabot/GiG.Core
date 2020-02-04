@@ -103,7 +103,7 @@ namespace GiG.Core.Messaging.Avro.Schema.Generator.MSBuild
                 CreateCompilationOptions(this),
                 documents: GetDocuments(Compile, projectId),
                 metadataReferences: GetMetadataReferences(Reference),
-                parseOptions: new CSharpParseOptions(preprocessorSymbols: this.DefineConstants)
+                parseOptions: new CSharpParseOptions(preprocessorSymbols: DefineConstants)
             );
 
             var workspace = new AdhocWorkspace();
