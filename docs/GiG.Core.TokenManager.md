@@ -21,9 +21,26 @@ public void ConfigureServices(IServiceCollection services)
 The below table outlines the valid Configurations used to configure the [TokenManagerOptions](../src/GiG.Core.TokenManager.Abstractions/Models/TokenManagerOptions.cs). 
 The default configuration section is set to 'TokenManager'.
 
-
 | Configuration Name | Type                                                                                         | Optional | Default Value |
 |:-------------------|:---------------------------------------------------------------------------------------------|:---------|:--------------|
 | Username           | String                                                                                       | No       |               |
 | Password           | String                                                                                       | No       |               |
 | Client             | [TokenClientOptions](../src/GiG.Core.TokenManager.Abstractions/Models/TokenClientOptions.cs) | No       |               |
+
+#### Sample Configuration
+
+```json
+{
+  "TokenManager": {
+    "Client": {
+      "AuthorityUrl": "https://dev.test/api/identity",
+      "ClientId": "tokenmanager",
+      "ClientSecret": "TokenManager123",
+      "Scopes": "openid profile offline_access",
+      "RequireHttps": false
+    },
+    "Username": "username",
+    "Password": "password"
+  }
+}
+```
