@@ -117,8 +117,15 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
 
         public async Task DisposeAsync()
         {
-            await _siloHost.StopAsync();
-            await ClusterClient.Close();
+            if (_siloHost != null)
+            {
+                await _siloHost.StopAsync();
+            }
+
+            if (ClusterClient != null)
+            {
+                await ClusterClient.Close();
+            }
         }
     }
 }

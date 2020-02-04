@@ -74,12 +74,12 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
         {
             if (_siloHost != null)
             {
-                await _siloHost?.StopAsync();
+                await _siloHost.StopAsync();
             }
 
             if (ClusterClient != null)
             {
-                await ClusterClient?.Close();
+                await ClusterClient.Close();
             }
         }
     }

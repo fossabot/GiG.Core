@@ -37,8 +37,8 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
         {
             if (_host != null)
             {
-                await _host?.StopAsync();
-                await _host?.WaitForShutdownAsync();
+                await _host.StopAsync();
+                await _host.WaitForShutdownAsync();
                 _host.Dispose();
             }
         }
