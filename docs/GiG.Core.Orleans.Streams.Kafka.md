@@ -7,7 +7,7 @@ This Library provides an API to register Kafka options from configuration.
 ### Startup
 
 The below code needs to be added to the `Startup.cs` to use this extension.
-*Note**: The `AddDefaultClusterClient` and `ConfigureCluster` extensions can be found in the nuget package ```GiG.Core.Orleans.Client```
+**Note**: The `AddDefaultClusterClient` and `ConfigureCluster` extensions can be found in the nuget package ```GiG.Core.Orleans.Client```
 
 ```csharp
 private static void ConfigureServices(Microsoft.Extensions.Hosting.HostBuilderContext ctx, IServiceCollection services)

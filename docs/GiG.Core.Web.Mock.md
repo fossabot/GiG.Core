@@ -15,6 +15,7 @@ And the following in `Configure(IApplicationBuilder app)`:
  * UseForwardedHeaders()
  * UsePathBaseFromConfiguration()
  * UseRouting()
+ * UseFluentValidationMiddleware()
  * UseEndpoints(endpoints => { endpoints.MapControllers(); })
 
 ## Basic Usage

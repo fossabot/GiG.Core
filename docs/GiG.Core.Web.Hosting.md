@@ -9,14 +9,14 @@ The below code needs to be added to the `Startup.cs` class. This will configure 
 ```csharp
 public void Configure(IApplicationBuilder app)
 {   
-    app.ConfigurePathBase();
+    app.UsePathBaseFromConfiguration();
 }
 ```
 
 By default the Base Path will be retrieved from the configuration key `BASE_PATH`.  The name of the configuration key can be overridden by using the extension method which accepts the config key Name as a parameter.  
 
 ```csharp
-app.ConfigurePathBase("configKeyName");
+app.UsePathBaseFromConfiguration("configKeyName");
 ```
 
 ##  Forwarded Headers

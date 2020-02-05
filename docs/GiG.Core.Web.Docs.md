@@ -37,3 +37,14 @@ The below table outlines the valid Configurations used to override the [ApiDocsO
 | Title                 | String  | No       | <null>        |
 | Description           | String  | No       | <null>        |
 | IsForwardedForEnabled | Boolean | No       | `true`        |
+
+#### Sample Configuration
+
+```json
+{
+  "ApiDocs": {
+    "IsEnabled": true,
+    "Description": "Sample Web Application"
+  }
+}
+```
