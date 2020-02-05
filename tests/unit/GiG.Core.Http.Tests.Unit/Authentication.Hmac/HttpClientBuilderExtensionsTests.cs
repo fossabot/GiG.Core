@@ -6,7 +6,7 @@ using Xunit;
 using HttpClientBuilderExtensions = GiG.Core.Http.Authentication.Hmac.Extensions.HttpClientBuilderExtensions;
 // ReSharper disable AssignNullToNotNullAttribute
 
-namespace GiG.Core.Http.Tests.Unit.Security
+namespace GiG.Core.Http.Tests.Unit.Authentication.Hmac
 {
     [Trait("Category", "Unit")]
     public class HttpClientBuilderExtensionsTests
@@ -24,7 +24,7 @@ namespace GiG.Core.Http.Tests.Unit.Security
             var exception = Assert.Throws<ArgumentNullException>(() => HttpClientBuilderExtensions.ConfigureDefaultHmacDelegatingHandlerOptionProvider(null, configuration: null));
             Assert.Equal("httpClientBuilder", exception.ParamName);
 
-            exception = Assert.Throws<ArgumentNullException>(() => HttpClientBuilderExtensions.ConfigureDefaultHmacDelegatingHandlerOptionProvider(null, configurationSection: null));
+            exception = Assert.Throws<ArgumentNullException>(() => HttpClientBuilderExtensions.ConfigureDefaultHmacDelegatingHandlerOptionProvider(null, null));
             Assert.Equal("httpClientBuilder", exception.ParamName);
         }
 
@@ -40,7 +40,7 @@ namespace GiG.Core.Http.Tests.Unit.Security
         public void ConfigureDefaultHmacDelegatingHandlerOptionProvider_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
         {
             var exception = Assert.Throws<ConfigurationErrorsException>(() =>
-                    new ServiceCollection().AddHttpClient("Default").ConfigureDefaultHmacDelegatingHandlerOptionProvider(configurationSection: null));
+                    new ServiceCollection().AddHttpClient("Default").ConfigureDefaultHmacDelegatingHandlerOptionProvider(null));
             Assert.Equal("Configuration Section '' is incorrect.", exception.Message);
         }
     }

@@ -4,6 +4,6 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
 {
     public abstract class DefaultClusterLifetime : ClusterLifetime
     {
-        public DefaultClusterLifetime() : base(SiloOptions.DefaultSectionName) { }
+        protected DefaultClusterLifetime() : base(SiloOptions.DefaultSectionName) { }
     }
 }

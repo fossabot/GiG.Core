@@ -29,12 +29,7 @@ namespace GiG.Core.ApplicationMetrics.Prometheus.Extensions
                 endpointRouteBuilder.ServiceProvider.GetService<IOptions<ApplicationMetricsOptions>>()?.Value ??
                 new ApplicationMetricsOptions();
 
-            if (!options.IsEnabled)
-            {
-                return null;
-            }
-
-            return endpointRouteBuilder.MapMetrics(options.Url);
+            return options.IsEnabled ? endpointRouteBuilder.MapMetrics(options.Url) : null;
         }
     }
 }

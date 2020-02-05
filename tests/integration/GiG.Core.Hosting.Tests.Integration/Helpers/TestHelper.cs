@@ -1,6 +1,4 @@
-﻿using System;
-using System.Reflection;
-using Microsoft.Extensions.FileProviders;
+﻿using System.Reflection;
 
 namespace GiG.Core.Hosting.Tests.Integration.Helpers
 {
@@ -11,7 +9,7 @@ namespace GiG.Core.Hosting.Tests.Integration.Helpers
         public static readonly string Version = Assembly.GetEntryAssembly()?.GetName().Version.ToString();
 
         public static readonly string InformationalVersion = Assembly.GetEntryAssembly()?.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
-        
-        public static readonly string Checksum = "6f9d5871643588dd26a3a8bc26a39ec8";
+
+        public const string Checksum = "6f9d5871643588dd26a3a8bc26a39ec8";
     }
 }

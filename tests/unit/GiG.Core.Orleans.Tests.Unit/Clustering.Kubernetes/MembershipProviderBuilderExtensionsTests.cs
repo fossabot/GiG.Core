@@ -49,7 +49,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Clustering.Kubernetes
         [Fact]
         public void ConfigureKubernetesClustering_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
         {
-            var exception = Assert.Throws<ConfigurationErrorsException>(() => new ClientBuilder().ConfigureKubernetesClustering(configurationSection: null));
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => new ClientBuilder().ConfigureKubernetesClustering(null));
             Assert.Equal("Configuration section '' is incorrect.", exception.Message);
 
             exception = Assert.Throws<ConfigurationErrorsException>(() => Host.CreateDefaultBuilder()
@@ -57,7 +57,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Clustering.Kubernetes
                 {
                     sb.UseMembershipProvider(ctx.Configuration, x =>
                     {
-                        x.ConfigureKubernetesClustering(configurationSection: null);
+                        x.ConfigureKubernetesClustering(null);
                     });
                 }).Build());
 

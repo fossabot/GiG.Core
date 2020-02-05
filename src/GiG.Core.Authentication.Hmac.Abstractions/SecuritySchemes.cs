@@ -3,9 +3,9 @@
     /// <summary>
     /// Security Scheme Constants.
     /// </summary>
-    public class SecuritySechemes
+    public class SecuritySchemes
     {
         /// Hmac.
-        public static string Hmac = "hmac";
+        public const string Hmac = "hmac";
     }
 }

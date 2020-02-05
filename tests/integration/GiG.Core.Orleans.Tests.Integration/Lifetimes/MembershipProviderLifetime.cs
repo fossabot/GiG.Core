@@ -46,7 +46,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
 
         internal string SiloName;
 
-        public MembershipProviderLifetime(string membershipProviderSectionName, string clusterOptionsSectionName, string siloOptionsSectionName)
+        protected MembershipProviderLifetime(string membershipProviderSectionName, string clusterOptionsSectionName, string siloOptionsSectionName)
         {
             _membershipProviderSectionName = membershipProviderSectionName;
             _clusterOptionsSectionName = clusterOptionsSectionName;
@@ -117,8 +117,15 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
 
         public async Task DisposeAsync()
         {
-            await _siloHost.StopAsync();
-            await ClusterClient.Close();
+            if (_siloHost != null)
+            {
+                await _siloHost.StopAsync();
+            }
+
+            if (ClusterClient != null)
+            {
+                await ClusterClient.Close();
+            }
         }
     }
 }

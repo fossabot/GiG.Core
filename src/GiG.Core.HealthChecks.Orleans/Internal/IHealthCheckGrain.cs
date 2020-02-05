@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace GiG.Core.HealthChecks.Orleans.Internal
 {
-    interface IHealthCheckGrain : IGrainWithGuidKey
+    internal interface IHealthCheckGrain : IGrainWithGuidKey
     {
         Task<bool> IsHealthyAsync();
     }

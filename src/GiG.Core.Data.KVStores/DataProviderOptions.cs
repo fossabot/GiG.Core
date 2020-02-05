@@ -5,7 +5,10 @@ namespace GiG.Core.Data.KVStores
     /// <inheritdoc />
     public class DataProviderOptions<T, TOptions> : IDataProviderOptions<T, TOptions>
     {
-        /// <inheritdoc />
+        /// <summary>
+        /// Initializes a new instance of the DataProviderOptions class.
+        /// </summary>
+        /// <param name="options">The provider options.</param>
         public DataProviderOptions(TOptions options)
         {
             Value = options;

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace GiG.Core.DistributedTracing.MassTransit.Tests.Integration.Mocks
 {
-    class ActivityMockConsumer : IConsumer<MockMessage>
+    internal class ActivityMockConsumer : IConsumer<MockMessage>
     {
         public Task Consume(ConsumeContext<MockMessage> context)
         {

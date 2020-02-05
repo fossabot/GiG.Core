@@ -6,13 +6,13 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests
     {
         public static string ApiUrl()
         {
-            TestConfigurationOptions config = GetConfiguration();
-            return config.BaseUrl + config.ApiPath + config.ApiVersion;
+            var config = GetConfiguration();
+            return $"{config.BaseUrl}{config.ApiPath}{config.ApiVersion}";
         }
 
         public static string NotificationsUrl()
         {
-            TestConfigurationOptions config = GetConfiguration();
+            var config = GetConfiguration();
             return config.BaseUrl + config.NotificationsPath;
         }
 

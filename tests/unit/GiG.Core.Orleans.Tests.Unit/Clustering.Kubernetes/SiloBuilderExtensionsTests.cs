@@ -16,7 +16,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Clustering.Kubernetes
             var exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.ConfigureKubernetesClustering(null, configuration: null));
             Assert.Equal("siloBuilder", exception.ParamName);
 
-            exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.ConfigureKubernetesClustering(null, configurationSection: null));
+            exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.ConfigureKubernetesClustering(null, null));
             Assert.Equal("siloBuilder", exception.ParamName);
         }
 
@@ -37,7 +37,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Clustering.Kubernetes
             var exception = Assert.Throws<ConfigurationErrorsException>(() => Host.CreateDefaultBuilder()
                 .UseOrleans((ctx, sb) =>
                 {
-                    sb.ConfigureKubernetesClustering(configurationSection: null);
+                    sb.ConfigureKubernetesClustering(null);
                 }).Build());
             Assert.Equal("Configuration section '' is incorrect.", exception.Message);
         }

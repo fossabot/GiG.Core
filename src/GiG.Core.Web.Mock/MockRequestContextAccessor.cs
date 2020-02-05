@@ -10,7 +10,9 @@ namespace GiG.Core.Web.Mock
         /// <inheritdoc />
         public IPAddress IPAddress { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Initializes a new instance of the MockRequestContextAccessor class.
+        /// </summary>
         public MockRequestContextAccessor()
         {
             IPAddress = new Faker().Internet.IpAddress();

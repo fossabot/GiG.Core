@@ -10,7 +10,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace GiG.Core.Web.Security.Hmac.MultiTenant.Tests.Integration.Tests
+namespace GiG.Core.Web.Authentication.Hmac.MultiTenant.Tests.Integration.Tests
 {
     [Trait("Category", "Integration")]
     public class HmacAuthenticationHandlerTests

@@ -50,7 +50,7 @@ namespace GiG.Core.Web.Authentication.Hmac.Internal
 
             if (hmacOptions == null)
             {
-                return AuthenticateResult.Fail($"Hmac configuration not set.");
+                return AuthenticateResult.Fail("Hmac configuration not set.");
             }
 
             if (!Request.Headers.TryGetValue(Headers.Nonce,out var nonceValue))
@@ -74,7 +74,7 @@ namespace GiG.Core.Web.Authentication.Hmac.Internal
             if (!signature.Equals(authHeader.Parameter))
             {
                 _logger.LogDebug("Signature {signature}",clearSignature);
-                return AuthenticateResult.Fail($"Hmac does not match.");
+                return AuthenticateResult.Fail("Hmac does not match.");
             }
 
             var identity = new ClaimsIdentity(Scheme.Name); // the name of our auth scheme

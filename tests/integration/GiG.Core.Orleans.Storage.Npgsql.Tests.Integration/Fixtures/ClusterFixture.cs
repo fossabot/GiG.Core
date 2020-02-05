@@ -8,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Orleans;
 using Orleans.Hosting;
-using System;
 
 namespace GiG.Core.Orleans.Storage.Npgsql.Tests.Integration.Fixtures
 {
@@ -16,9 +15,7 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Tests.Integration.Fixtures
     {
         internal readonly IClusterClient ClusterClient;
 
-        internal readonly IServiceProvider ClientServiceProvider;
-
-        internal readonly string CustomSectionName = "CustomStorageSection";
+        private const string CustomSectionName = "CustomStorageSection";
 
         public string ConnectionString { get; }
         public string CustomSectionConnectionString { get; }
@@ -52,9 +49,9 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Tests.Integration.Fixtures
                 })
                 .Build();
 
-            ClientServiceProvider = clientHost.Services;
+            var clientServiceProvider = clientHost.Services;
 
-            ClusterClient = ClientServiceProvider.GetRequiredService<IClusterClient>();
+            ClusterClient = clientServiceProvider.GetRequiredService<IClusterClient>();
         }
     }
 }

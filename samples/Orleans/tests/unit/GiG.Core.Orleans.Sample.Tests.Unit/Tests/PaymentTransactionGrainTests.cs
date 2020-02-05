@@ -20,7 +20,7 @@ namespace GiG.Core.Orleans.Sample.Tests.Unit.Tests
             // Act
             var grain = await Silo.CreateGrainAsync<PaymentTransactionGrain>(grainId);
             var actualTransactions = await grain.GetAllAsync();
-            var storageStats = this.Silo.StorageStats();
+            var storageStats = Silo.StorageStats();
 
             // Assert
             Assert.NotNull(actualTransactions);
@@ -43,7 +43,7 @@ namespace GiG.Core.Orleans.Sample.Tests.Unit.Tests
             var grain = await Silo.CreateGrainAsync<PaymentTransactionGrain>(grainId);
             await grain.OnNextAsync(transaction);
             var actualTransactions = await grain.GetAllAsync();
-            var storageStats = this.Silo.StorageStats();
+            var storageStats = Silo.StorageStats();
 
             // Assert
             Assert.NotNull(actualTransactions);
@@ -67,7 +67,7 @@ namespace GiG.Core.Orleans.Sample.Tests.Unit.Tests
             var grain = await Silo.CreateGrainAsync<PaymentTransactionGrain>(grainId);
             transactions.ForEach(async x => await grain.OnNextAsync(x));
             var actualTransactions = await grain.GetAllAsync();
-            var storageStats = this.Silo.StorageStats();
+            var storageStats = Silo.StorageStats();
 
             // Assert
             Assert.NotNull(transactions);

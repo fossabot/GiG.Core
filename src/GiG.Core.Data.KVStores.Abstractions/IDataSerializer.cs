@@ -3,7 +3,7 @@
     /// <summary>
     /// The Data Serializer used to fetch data from source.
     /// </summary>
-    public interface IDataSerializer<T>
+    public interface IDataSerializer<out T>
     {
         /// <summary>
         /// Returns a Model from String.

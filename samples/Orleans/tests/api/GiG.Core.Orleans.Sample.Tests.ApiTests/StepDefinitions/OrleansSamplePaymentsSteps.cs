@@ -1,6 +1,7 @@
 ﻿using GiG.Core.Orleans.Sample.Tests.ApiTests.Contracts;
 using GiG.Core.Orleans.Sample.Tests.ApiTests.Services;
 using RestEase;
+using System;
 using TechTalk.SpecFlow;
 using Xunit;
 
@@ -27,15 +28,22 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
 
             void DepositOperation()
             {
-                Response<decimal> response = _orleansSamplePaymentsService.DepositAsync(new TransactionRequest {Amount = depositAmount})
+                var response = _orleansSamplePaymentsService.DepositAsync(new TransactionRequest {Amount = depositAmount})
                     .GetAwaiter().GetResult();
                 _scenarioContext.Add(SampleApiEndpointKeys.Deposit.ToString(), response);
             }
 
-            if(depositState.Equals(DepositState.Unsuccessfully))
-                DepositOperation();
-            else if (depositState.Equals(DepositState.Successfully))
-                _scenarioContext.Add(SampleApiEndpointKeys.DepositBalance.ToString(), _sampleApiTestsFixture.GetPlayerBalanceNotification(_sampleApiTestsFixture.PlayerId, DepositOperation).GetAwaiter().GetResult());
+            switch (depositState)
+            {
+                case DepositState.Unsuccessfully:
+                    DepositOperation();
+                    break;
+                case DepositState.Successfully:
+                    _scenarioContext.Add(SampleApiEndpointKeys.DepositBalance.ToString(), _sampleApiTestsFixture.GetPlayerBalanceNotification(_sampleApiTestsFixture.PlayerId, DepositOperation).GetAwaiter().GetResult());
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(depositState), depositState, null);
+            }
             
         }
 
@@ -47,14 +55,21 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
 
             void WithdrawOperation()
             {
-                Response<decimal> response = _orleansSamplePaymentsService.WithdrawAsync(new TransactionRequest {Amount = withdrawalAmount}).GetAwaiter().GetResult();
+                var response = _orleansSamplePaymentsService.WithdrawAsync(new TransactionRequest {Amount = withdrawalAmount}).GetAwaiter().GetResult();
                 _scenarioContext.Add(SampleApiEndpointKeys.Withdraw.ToString(), response);
             }
 
-            if (depositState.Equals(DepositState.Unsuccessfully))
-                WithdrawOperation();
-            else if(depositState.Equals(DepositState.Successfully))
-                _scenarioContext.Add(SampleApiEndpointKeys.WithdrawalBalance.ToString(), _sampleApiTestsFixture.GetPlayerBalanceNotification(_sampleApiTestsFixture.PlayerId, WithdrawOperation).GetAwaiter().GetResult());
+            switch (depositState)
+            {
+                case DepositState.Unsuccessfully:
+                    WithdrawOperation();
+                    break;
+                case DepositState.Successfully:
+                    _scenarioContext.Add(SampleApiEndpointKeys.WithdrawalBalance.ToString(), _sampleApiTestsFixture.GetPlayerBalanceNotification(_sampleApiTestsFixture.PlayerId, WithdrawOperation).GetAwaiter().GetResult());
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(depositState), depositState, null);
+            }
         }
 
         [Then(@"the status code for '(Deposit|Withdraw)' is '(.*)'")]
@@ -72,7 +87,7 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests.StepDefinitions
         [Then(@"the error message for '(Deposit|Withdraw)' is '(.*)'")]
         public void ThenTheErrorMessageUsingKeyIs(SampleApiEndpointKeys endpointKey, string message)
         {
-            string errorMessage = _sampleApiTestsFixture.ParseErrorMessage(_scenarioContext.Get<Response<decimal>>(endpointKey.ToString()).StringContent);
+            var errorMessage = _sampleApiTestsFixture.ParseErrorMessage(_scenarioContext.Get<Response<decimal>>(endpointKey.ToString()).StringContent);
             Assert.Equal(message, errorMessage);
         }
        

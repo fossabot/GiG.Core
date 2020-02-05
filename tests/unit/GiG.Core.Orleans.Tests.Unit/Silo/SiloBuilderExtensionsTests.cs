@@ -42,7 +42,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Silo
             var exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.ConfigureCluster(null, configuration: null));
             Assert.Equal("siloBuilder", exception.ParamName);
 
-            exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.ConfigureCluster(null, configurationSection: null));
+            exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.ConfigureCluster(null, null));
             Assert.Equal("siloBuilder", exception.ParamName);
         }
 
@@ -58,7 +58,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Silo
         public void ConfigureCluster_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
         {
             var exception = Assert.Throws<ConfigurationErrorsException>(() => 
-                            Host.CreateDefaultBuilder().UseOrleans(sb => sb.ConfigureCluster(configurationSection: null)).Build());
+                            Host.CreateDefaultBuilder().UseOrleans(sb => sb.ConfigureCluster(null)).Build());
             Assert.Equal("Configuration section '' is incorrect.", exception.Message);
         }
 
@@ -68,7 +68,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Silo
             var exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.ConfigureEndpoints(null, configuration: null));
             Assert.Equal("siloBuilder", exception.ParamName);
 
-            exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.ConfigureEndpoints(null, configurationSection: null));
+            exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.ConfigureEndpoints(null, null));
             Assert.Equal("siloBuilder", exception.ParamName);
         }
 

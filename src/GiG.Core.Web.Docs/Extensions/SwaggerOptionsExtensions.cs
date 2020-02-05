@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace GiG.Core.Web.Docs.Extensions
 {
-    internal static class SwaggerOptionsExtentions
+    internal static class SwaggerOptionsExtensions
     {
         internal static void IncludeXmlComments(this SwaggerGenOptions options)
         {

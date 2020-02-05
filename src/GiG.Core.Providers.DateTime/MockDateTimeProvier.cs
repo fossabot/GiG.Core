@@ -8,15 +8,13 @@ namespace GiG.Core.Providers.DateTime
     /// </summary>
     public class MockDateTimeProvider : IDateTimeProvider //TODO: maybe rename GiG.Core.Web.Mock to GiG.Core.Mock and move there.
     {
-        private readonly DateTimeOffset _desiredDateTimeOffset;
+        /// <summary>
+        /// Initializes a new instance of the MockDateTimeProvider class.
+        /// </summary>
+        /// <param name="desiredDateTimeOffset">The date time offset.</param>
+        public MockDateTimeProvider(DateTimeOffset desiredDateTimeOffset) => Now = desiredDateTimeOffset;
 
         /// <inheritdoc />
-        public MockDateTimeProvider(DateTimeOffset desiredDateTimeOffset)
-        {
-            _desiredDateTimeOffset = desiredDateTimeOffset;
-        }
-        
-        /// <inheritdoc />
-        public DateTimeOffset Now => _desiredDateTimeOffset;
+        public DateTimeOffset Now { get; }
     }
 }

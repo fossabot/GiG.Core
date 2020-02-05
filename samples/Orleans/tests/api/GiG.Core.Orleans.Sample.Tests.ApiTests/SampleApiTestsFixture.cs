@@ -27,7 +27,7 @@ namespace GiG.Core.Orleans.Sample.Tests.ApiTests
             try
             {
                 var response = JsonConvert.DeserializeObject<JObject>(responseContent);
-                errorMessage = response.SelectToken("$.errors").Values().FirstOrDefault().AsJEnumerable().FirstOrDefault().ToString();
+                errorMessage = response.SelectToken("$.errors").Values().FirstOrDefault().AsJEnumerable().FirstOrDefault()?.ToString();
             }
             catch (JsonReaderException)
             {

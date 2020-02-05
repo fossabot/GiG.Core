@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Orleans;
-using Orleans.Hosting;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
@@ -14,7 +12,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
     public class HealthCheckCoHostedLifetime : IAsyncLifetime
     {
         internal IHttpClientFactory HttpClientFactory;
-        internal readonly int Port = 7777;
+        internal const int Port = 7777;
 
         private IHost _host;
 
@@ -37,9 +35,12 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
 
         public async Task DisposeAsync()
         {
-            await _host?.StopAsync();
-            await _host?.WaitForShutdownAsync();
-            _host.Dispose();
+            if (_host != null)
+            {
+                await _host.StopAsync();
+                await _host.WaitForShutdownAsync();
+                _host.Dispose();
+            }
         }
     }
 }

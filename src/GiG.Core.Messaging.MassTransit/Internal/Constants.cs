@@ -8,6 +8,6 @@
         /// <summary>
         /// The name of the header containing the Activity Id.
         /// </summary>
-        public static string ActivityIdHeader = "Activity-Id";
+        public const string ActivityIdHeader = "Activity-Id";
     }
 }

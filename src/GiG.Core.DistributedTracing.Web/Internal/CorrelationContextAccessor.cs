@@ -7,8 +7,7 @@ namespace GiG.Core.DistributedTracing.Web.Internal
     internal class CorrelationContextAccessor : ICorrelationContextAccessor
     {
         private readonly CorrelationId.ICorrelationContextAccessor _correlationContextAccessor;
-
-        /// <inheritdoc />
+        
         public CorrelationContextAccessor(CorrelationId.ICorrelationContextAccessor correlationContextAccessor)
         {
             _correlationContextAccessor = correlationContextAccessor;   

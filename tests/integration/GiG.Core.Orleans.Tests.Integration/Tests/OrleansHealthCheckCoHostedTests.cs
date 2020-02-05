@@ -22,7 +22,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
 
             HttpClientFactory = _healthCheckLifetime.HttpClientFactory;
             HealthChecksOptions = new HealthChecksOptions();
-            Port = _healthCheckLifetime.Port;
+            Port = HealthCheckCoHostedLifetime.Port;
         }
 
         public async Task DisposeAsync()

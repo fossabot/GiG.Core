@@ -106,7 +106,7 @@ namespace GiG.Core.TokenManager.Implementation
             var discoveryResponse = await GetDiscoveryAsync();
 
             var tokenResponse =
-                await _client.RequestRefreshTokenAsync(new RefreshTokenRequest()
+                await _client.RequestRefreshTokenAsync(new RefreshTokenRequest
                 {
                     Scope = _tokenClientOptions.Scopes,
                     ClientId = _tokenClientOptions.ClientId,

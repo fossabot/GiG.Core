@@ -2,7 +2,7 @@ using GiG.Core.Messaging.Avro.Schema.Abstractions.Annotations;
 
 namespace GiG.Core.Messaging.Avro.Sample.Models
 {
-    [NamedSchema(doc: "Represents an address")]
+    [NamedSchema("Represents an address")]
     public partial class Address
     {
         [Field(nameof(AddressLine1))]

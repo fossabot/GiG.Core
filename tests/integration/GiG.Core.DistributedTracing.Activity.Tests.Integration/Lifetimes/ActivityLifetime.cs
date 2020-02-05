@@ -13,7 +13,7 @@ namespace GiG.Core.DistributedTracing.Activity.Tests.Integration.Lifetimes
     {
         internal IHttpClientFactory HttpClientFactory;
         internal IActivityContextAccessor ActivityContextAccessor;
-        internal string BaseUrl = "http://localhost:56561";
+        internal const string BaseUrl = "http://localhost:56561";
         private IHost _host;
        
         public async Task InitializeAsync()
@@ -33,9 +33,12 @@ namespace GiG.Core.DistributedTracing.Activity.Tests.Integration.Lifetimes
 
         public async Task DisposeAsync()
         {
-            await _host?.StopAsync();
-            await _host?.WaitForShutdownAsync();
-            _host.Dispose();
+            if (_host != null)
+            {
+                await _host?.StopAsync();
+                await _host?.WaitForShutdownAsync();
+                _host.Dispose();
+            }
         }
     }
 }

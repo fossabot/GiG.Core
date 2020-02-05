@@ -3,9 +3,10 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Configuration;
 using Xunit;
+
 // ReSharper disable AssignNullToNotNullAttribute
 
-namespace GiG.Core.Web.Tests.Unit.Security.Hmac.MultiTenant
+namespace GiG.Core.Web.Tests.Unit.Authentication.Hmac.MultiTenant
 {
     [Trait("Category", "Unit")]
     public class ServiceCollectionExtensionsTests
@@ -16,7 +17,7 @@ namespace GiG.Core.Web.Tests.Unit.Security.Hmac.MultiTenant
             var exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.ConfigureMultiTenantHmacOptionProvider(null, configuration: null));
             Assert.Equal("services", exception.ParamName);
 
-            exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.ConfigureMultiTenantHmacOptionProvider(null, configurationSection: null));
+            exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.ConfigureMultiTenantHmacOptionProvider(null, null));
             Assert.Equal("services", exception.ParamName);
         }
 
@@ -30,7 +31,7 @@ namespace GiG.Core.Web.Tests.Unit.Security.Hmac.MultiTenant
         [Fact]
         public void ConfigureMultiTenantHmacOptionProvider_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
         {
-            var exception = Assert.Throws<ConfigurationErrorsException>(() => new ServiceCollection().ConfigureMultiTenantHmacOptionProvider(configurationSection: null));
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => new ServiceCollection().ConfigureMultiTenantHmacOptionProvider(null));
             Assert.Equal("Configuration Section '' is incorrect.", exception.Message);
         }
     }

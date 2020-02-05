@@ -16,7 +16,7 @@ namespace GiG.Core.Http.Tests.Unit
         public HttpClientExtensionsTests()
         {
             _configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", optional: true)
+                .AddJsonFile("appsettings.json", true)
                 .Build();
         }
 

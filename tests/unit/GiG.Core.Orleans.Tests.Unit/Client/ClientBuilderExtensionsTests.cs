@@ -36,7 +36,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Client
         [Fact]
         public void ConfigureCluster_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
         {
-            var exception = Assert.Throws<ConfigurationErrorsException>(() => new ClientBuilder().ConfigureCluster(configurationSection: null));
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => new ClientBuilder().ConfigureCluster(null));
             Assert.Equal("Configuration section '' is incorrect.", exception.Message);
         }
 

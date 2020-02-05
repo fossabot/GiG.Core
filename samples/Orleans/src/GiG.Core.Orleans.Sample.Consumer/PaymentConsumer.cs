@@ -30,10 +30,10 @@ namespace GiG.Core.Orleans.Sample.Consumer
             var streamProvider = _client.GetStreamProvider(Constants.StreamProviderName);
             _stream =  _streamFactory.GetStream<PaymentTransaction>(streamProvider, context.Message.PlayerId, Constants.PaymentTransactionsStreamNamespace);
 
-            var transactionModel = new PaymentTransaction()
+            var transactionModel = new PaymentTransaction
             {
                 Amount = context.Message.Amount,
-                TransactionType = (context.Message.TransactionType == TransactionType.Deposit) ? PaymentTransactionType.Deposit : PaymentTransactionType.Withdrawal
+                TransactionType = context.Message.TransactionType == TransactionType.Deposit ? PaymentTransactionType.Deposit : PaymentTransactionType.Withdrawal
             };
 
             await _stream.PublishAsync(transactionModel);

@@ -48,7 +48,7 @@ namespace GiG.Core.Orleans.Sample.Grains
             _logger.LogInformation("Debit {amount}", amount);
             State.Amount -= amount;
 
-            var transactionModel = new WalletTransaction()
+            var transactionModel = new WalletTransaction
             {
                 Amount = amount,
                 NewBalance = State.Amount,
@@ -76,7 +76,7 @@ namespace GiG.Core.Orleans.Sample.Grains
             _logger.LogInformation("Credit {amount}", amount);
             State.Amount += amount;
 
-            var transactionModel = new WalletTransaction()
+            var transactionModel = new WalletTransaction
             {
                 Amount = amount,
                 NewBalance = State.Amount,
@@ -108,6 +108,8 @@ namespace GiG.Core.Orleans.Sample.Grains
                 case PaymentTransactionType.Withdrawal:
                     await DebitAsync(item.Amount);
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             // Publish new balance to SignalR hub.

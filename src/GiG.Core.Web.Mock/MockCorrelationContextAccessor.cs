@@ -9,7 +9,9 @@ namespace GiG.Core.Web.Mock
         /// <inheritdoc />
         public Guid Value { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Initializes a new instance of the MockCorrelationContextAccessor class.
+        /// </summary>
         public MockCorrelationContextAccessor()
         {
             Value = Guid.NewGuid();

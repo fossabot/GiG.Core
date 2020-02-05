@@ -6,7 +6,6 @@ using GiG.Core.Orleans.Silo.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Orleans;
 using Orleans.Hosting;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -49,9 +48,12 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
 
         public async Task DisposeAsync()
         {
-            await _host?.StopAsync();
-            await _host?.WaitForShutdownAsync();
-            _host.Dispose();
+            if (_host != null)
+            {
+                await _host.StopAsync();
+                await _host.WaitForShutdownAsync();
+                _host.Dispose();
+            }
         }
 
     }

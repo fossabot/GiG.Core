@@ -57,10 +57,10 @@ namespace GiG.Core.Benchmarks.Orleans.StorageProviders.Benchmarks
         
         private async Task WritePlayerDetailsAsync()
         {
-            var ranomizer = new Faker().Random;
+            var randomizer = new Faker().Random;
 
-            var firstName = ranomizer.String2(10);
-            var lastName = ranomizer.String2(12);
+            var firstName = randomizer.String2(10);
+            var lastName = randomizer.String2(12);
 
             await _memoryPlayerStateWritesGrain.WritePlayerDetailAsync(firstName, lastName);
             await _mongoPlayerStateWriterGrain.WritePlayerDetailAsync(firstName, lastName);

@@ -3,9 +3,10 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Configuration;
 using Xunit;
+
 // ReSharper disable AssignNullToNotNullAttribute
 
-namespace GiG.Core.Web.Tests.Unit.Security.Hmac
+namespace GiG.Core.Web.Tests.Unit.Authentication.Hmac
 {
     [Trait("Category", "Unit")]
     public class ServiceCollectionExtensionsTests
@@ -20,7 +21,7 @@ namespace GiG.Core.Web.Tests.Unit.Security.Hmac
         [Fact]
         public void ConfigureDefaultHmacOptionProvider_ServiceCollectionIsNull_ThrowsArgumentNullException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.ConfigureDefaultHmacOptionProvider(null, configurationSection: null));
+            var exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.ConfigureDefaultHmacOptionProvider(null, null));
             Assert.Equal("services", exception.ParamName);
 
             exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.ConfigureDefaultHmacOptionProvider(null, configuration: null));
@@ -37,7 +38,7 @@ namespace GiG.Core.Web.Tests.Unit.Security.Hmac
         [Fact]
         public void ConfigureDefaultHmacOptionProvider_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
         {
-            var exception = Assert.Throws<ConfigurationErrorsException>(() => new ServiceCollection().ConfigureDefaultHmacOptionProvider(configurationSection: null));
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => new ServiceCollection().ConfigureDefaultHmacOptionProvider(null));
             Assert.Equal("Configuration Section '' is incorrect.", exception.Message);
         }
     }

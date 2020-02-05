@@ -14,7 +14,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Streams.Kafka
         [Fact]
         public void FromConfiguration_KafkaStreamOptionsIsNull_ThrowsArgumentNullException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => KafkaStreamOptionsExtensions.FromConfiguration(null, configurationSection: null));
+            var exception = Assert.Throws<ArgumentNullException>(() => KafkaStreamOptionsExtensions.FromConfiguration(null, null));
             Assert.Equal("options", exception.ParamName);
 
             exception = Assert.Throws<ArgumentNullException>(() => KafkaStreamOptionsExtensions.FromConfiguration(null, configuration: null));
@@ -31,7 +31,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Streams.Kafka
         [Fact]
         public void FromConfiguration_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
         {
-            var exception = Assert.Throws<ConfigurationErrorsException>(() => new KafkaStreamOptions().FromConfiguration(configurationSection: null));
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => new KafkaStreamOptions().FromConfiguration(null));
             Assert.Equal("Configuration section '' is incorrect.", exception.Message);
         }
         

@@ -1,5 +1,4 @@
-﻿using GiG.Core.HealthChecks.Abstractions;
-using GiG.Core.HealthChecks.Extensions;
+﻿using GiG.Core.HealthChecks.Extensions;
 using GiG.Core.HealthChecks.Tests.Integration.Mocks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
@@ -25,7 +24,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             var client = testServer.CreateClient();
 
             using var request = new HttpRequestMessage(HttpMethod.Get, MockStartupWithDefaultConfiguration.CombinedUrl);
-            
+
             // Act
             using var response = await client.SendAsync(request);
 
@@ -45,7 +44,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             var client = testServer.CreateClient();
 
             using var request = new HttpRequestMessage(HttpMethod.Get, MockStartupWithDefaultConfiguration.LiveUrl);
-            
+
             // Act
             using var response = await client.SendAsync(request);
 
@@ -65,7 +64,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             var client = testServer.CreateClient();
 
             using var request = new HttpRequestMessage(HttpMethod.Get, MockStartupWithDefaultConfiguration.ReadyUrl);
-            
+
             // Act
             using var response = await client.SendAsync(request);
 
@@ -85,7 +84,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             var client = testServer.CreateClient();
 
             using var request = new HttpRequestMessage(HttpMethod.Get, MockStartupWithCustomConfiguration.CombinedUrl);
-            
+
             // Act
             using var response = await client.SendAsync(request);
 
@@ -105,7 +104,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             var client = testServer.CreateClient();
 
             using var request = new HttpRequestMessage(HttpMethod.Get, MockStartupWithCustomConfiguration.LiveUrl);
-            
+
             // Act
             using var response = await client.SendAsync(request);
 
@@ -125,7 +124,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             var client = testServer.CreateClient();
 
             using var request = new HttpRequestMessage(HttpMethod.Get, MockStartupWithCustomConfiguration.ReadyUrl);
-            
+
             // Act
             using var response = await client.SendAsync(request);
 
@@ -146,7 +145,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             var client = testServer.CreateClient();
 
             using var request = new HttpRequestMessage(HttpMethod.Get, MockStartupWithDefaultConfiguration.ReadyUrl);
-            
+
             // Act
             using var response = await client.SendAsync(request);
 
@@ -167,7 +166,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             var client = testServer.CreateClient();
 
             using var request = new HttpRequestMessage(HttpMethod.Get, MockStartupWithDefaultConfiguration.ReadyUrl);
-            
+
             // Act
             using var response = await client.SendAsync(request);
 
@@ -188,7 +187,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             var client = testServer.CreateClient();
 
             using var request = new HttpRequestMessage(HttpMethod.Get, MockStartupWithDefaultConfiguration.LiveUrl);
-            
+
             // Act
             using var response = await client.SendAsync(request);
 
@@ -209,7 +208,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             var client = testServer.CreateClient();
 
             using var request = new HttpRequestMessage(HttpMethod.Get, MockStartupWithDefaultConfiguration.LiveUrl);
-            
+
             // Act
             using var response = await client.SendAsync(request);
 
@@ -230,7 +229,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             var client = testServer.CreateClient();
 
             using var request = new HttpRequestMessage(HttpMethod.Get, MockStartupWithDefaultConfiguration.CombinedUrl);
-            
+
             // Act
             using var response = await client.SendAsync(request);
 
@@ -251,7 +250,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             var client = testServer.CreateClient();
 
             using var request = new HttpRequestMessage(HttpMethod.Get, MockStartupWithDefaultConfiguration.CombinedUrl);
-            
+
             // Act
             using var response = await client.SendAsync(request);
 

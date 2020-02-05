@@ -47,11 +47,11 @@ namespace GiG.Core.Benchmarks.Orleans.StorageProviders.Benchmarks
 
         private async Task WriteStateAsync(IPlayerStateWriterGrain grain)
         {
-            var ranomizer = new Faker().Random;
+            var randomizer = new Faker().Random;
             
             for (var i = 0; i < Counter; i++)
             {
-                await grain.WritePlayerDetailAsync(ranomizer.String2(10), ranomizer.String2(12));
+                await grain.WritePlayerDetailAsync(randomizer.String2(10), randomizer.String2(12));
             }
         }
     }
