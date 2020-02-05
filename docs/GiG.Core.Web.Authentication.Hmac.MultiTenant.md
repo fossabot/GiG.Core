@@ -5,6 +5,7 @@ This Library provides an API to register the `HmacAuthenticationHandler` in `ISe
 ## Basic Usage
 
 The below code needs to be added to the `Startup.cs` class. This will register the HmacAuthenticationHandler.
+**Note**: The `AddHmacAuthentication` extension can be found in the nuget package ```GiG.Core.Web.Authentication.Hmac```
 
 ```chsarp
 public void ConfigureServices(IServiceCollection services)

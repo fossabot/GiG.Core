@@ -19,3 +19,34 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     app.UseAuthorization();
 }
 ```
+
+### Configuration
+
+The below table outlines the valid Configurations used to configure the [OAuthAuthenticationOptions](../src/GiG.Core.Web.Authentication.OAuth.Abstractions/OAuthAuthenticationOptions.cs).
+
+| Configuration Name        | Type    | Optional | Default Value    |
+|:--------------------------|:--------|:---------|:-----------------|
+| IsEnabled                 | Boolean | Yes      | true             |
+| Authority                 | String  | No       |                  |
+| ApiName                   | String  | Yes      |                  |
+| ApiSecret                 | String  | Yes      |                  |
+| Scopes                    | String  | Yes      |                  |
+| SupportedTokens           | String  | Yes      | `JWT`            |
+| RequireHttpsMetadata      | Boolean | Yes      | true             |
+| LegacyAudienceValidation  | Boolean | Yes      |                  |
+
+#### Sample Configuration
+
+```json
+{
+  "Authentication": {
+    "OAuth": {
+      "IsEnabled": true,
+      "Authority": "http://localhost:7070",
+      "ApiName": "sample-web",
+      "RequireHttpsMetadata": false,
+      "Scopes": "openid profile"
+    }
+  }
+}
+```
