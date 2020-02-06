@@ -6,30 +6,45 @@ This Library provides an API to register Kafka options from configuration.
 
 ### Startup
 
+### Client
+
 The below code needs to be added to the `Startup.cs` to use this extension.
-**Note**: The `AddDefaultClusterClient` and `ConfigureCluster` extensions can be found in the nuget package ```GiG.Core.Orleans.Client```
+**Note**: The `AddDefaultClusterClient` extension can be found in the nuget package ```GiG.Core.Orleans.Client```.
 
 ```csharp
-private static void ConfigureServices(Microsoft.Extensions.Hosting.HostBuilderContext ctx, IServiceCollection services)
+private static void ConfigureServices(HostBuilderContext ctx, IServiceCollection services)
 {
-    // Orleans Client
-    services.AddDefaultClusterClient((builder, sp) =>
+  // Orleans Client
+  services.AddDefaultClusterClient((builder, sp) =>
+  {
+    builder
+    .AddKafka("KafkaProvider")
+    .WithOptions(options =>
     {
-        builder.UseLocalhostClustering()
-        .AddAssemblies(typeof(ISMSProviderProducerGrain))
-        .AddMemoryGrainStorage("PubSubStore")
-        .AddKafka("KafkaProvider")
-        .WithOptions(options =>
-        {
-            options.FromConfiguration(ctx.Configuration);
-            options.ConsumeMode = ConsumeMode.StreamStart;
+      options.FromConfiguration(ctx.Configuration);
+      options.AddTopic("MyTopic");
+    })
+    .AddJson()
+    .Build();
+  });
+}      
+```
+### Silo
 
-            options
-                .AddTopic("MyTopic");
-        })
-        .AddJson()
-        .Build();
-    });
+```csharp
+private static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builder)
+{
+  builder
+    .AddMemoryGrainStorage("PubSubStore")
+    .AddKafka(Constants.StreamProviderName)
+    .WithOptions(kafkaOptions =>
+    {
+      kafkaOptions.FromConfiguration(ctx.Configuration);
+      kafkaOptions.ConsumeMode = ConsumeMode.StreamStart;
+      kafkaOptions.AddTopic("MyTopic");
+    })
+    .AddJson()
+    .Build();
 }      
 ```
 
