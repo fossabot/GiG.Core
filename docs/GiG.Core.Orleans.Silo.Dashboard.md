@@ -23,19 +23,19 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 The below table outlines the valid Configurations used to override the [DashboardOptions](../src/GiG.Core.Orleans.Silo/Abstractions/DashboardOptions.cs) under the Config section `Dashboard`.
 
-| Configuration Name | Type    | Required | Default Value |
-|:-------------------|:--------|:---------|:--------------|
-| IsEnabled          | Boolean | Yes      | `false`       |
-| Port               | String  | Yes      | `8080`        |
-| Path               | String  | No       | `/dashboard`  |
-| HostSelf           | Boolean | No       | `true`        |
+| Configuration Name | Type    | Required                  | Default Value |
+|:-------------------|:--------|:--------------------------|:--------------|
+| IsEnabled          | Boolean | No                        | `true`        |
+| Port               | String  | Yes (If HostSelf is true) | `8080`        |
+| Path               | String  | No                        | `/dashboard`  |
+| HostSelf           | Boolean | No                        | `false`       |
 
 #### Sample Configuration
 
 ```json
 {
   "Dashboard": {
-    "IsEnabled": true
+    "HostSelf": true
   }
 }
  ```
