@@ -4,6 +4,8 @@ using GiG.Core.Data.KVStores.Abstractions;
 using GiG.Core.Data.KVStores.Providers.Etcd.Abstractions;
 using Google.Protobuf;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GiG.Core.Data.KVStores.Providers.Etcd
@@ -35,7 +37,10 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
             _dataSerializer = dataSerializer;
             _etcdProviderOptions = etcdProviderOptionsAccessor.Value;
 
-            _etcdClient = new EtcdClient(_etcdProviderOptions.ConnectionString);
+            _etcdClient = new EtcdClient(_etcdProviderOptions.ConnectionString, _etcdProviderOptions.Port,
+                _etcdProviderOptions.Username, _etcdProviderOptions.Password, _etcdProviderOptions.CaCertificate,
+                _etcdProviderOptions.ClientCertificate, _etcdProviderOptions.ClientKey,
+                _etcdProviderOptions.IsPublicRootCa);
         }
 
         /// <inheritdoc/>
@@ -72,13 +77,28 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         /// <returns></returns>
         public async Task<T> GetAsync(params string[] keys)
         {
-            var key = string.Concat(_etcdProviderOptions.Key, string.Join("/", keys));
+            async Task<T> GetValueAsync(string key)
+            {
+                _logger.LogDebug("Returning {key}", key);
 
-            _logger.LogDebug("Returning {key}", key);
+                var value = await _etcdClient.GetValAsync(key);
 
-            var value = await _etcdClient.GetValAsync(key);
+                return string.IsNullOrWhiteSpace(value) ? default : _dataSerializer.GetFromString(value);
+            }
 
-            return string.IsNullOrWhiteSpace(value) ? default : _dataSerializer.GetFromString(value);
+            if (keys.Any())
+            {
+                var nestedKey = string.Concat(_etcdProviderOptions.Key, "/", string.Join("/", keys));
+
+                var value = await GetValueAsync(nestedKey);
+
+                if (value != null)
+                {
+                    return value;
+                }
+            }
+
+            return await GetValueAsync(_etcdProviderOptions.Key);
         }
 
         /// <inheritdoc/>
@@ -89,6 +109,6 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
             _etcdClient.Dispose();
 
             return Task.CompletedTask;
-        }   
+        }
     }
 }
