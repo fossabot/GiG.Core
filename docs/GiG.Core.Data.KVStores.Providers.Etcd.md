@@ -32,6 +32,7 @@ The below table outlines the valid Configurations used to configure the [EtcdPro
 | ClientCertificate  | String | Yes      | ''                       |
 | ClientKey          | String | Yes      | ''                       |
 | IsPublicRootCa     | Boolean| Yes      | false                    |
+| Key                | String | No       |                          |
 
 #### Sample Configuration
 
