@@ -4,9 +4,7 @@ This Library provides an API to register Kafka options from configuration.
 
 ## Basic Usage
 
-### Startup
-
-### Client
+### Client Startup
 
 The below code needs to be added to the `Startup.cs` to use this extension.
 **Note**: The `AddDefaultClusterClient` extension can be found in the nuget package ```GiG.Core.Orleans.Client```.
@@ -27,9 +25,10 @@ private static void ConfigureServices(HostBuilderContext ctx, IServiceCollection
     .AddJson()
     .Build();
   });
-}      
+}  
+
 ```
-### Silo
+### Silo Startup
 
 ```csharp
 private static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builder)
