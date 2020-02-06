@@ -17,15 +17,15 @@ private static void ConfigureServices(Microsoft.Extensions.Hosting.HostBuilderCo
     {
         builder.UseLocalhostClustering()
         .AddAssemblies(typeof(ISMSProviderProducerGrain))
-        .AddSimpleMessageStreamProvider(Constants.SMSProviderName)
-        .AddKafka(Constants.KafkaProviderName)
+        .AddMemoryGrainStorage("PubSubStore")
+        .AddKafka("KafkaProvider")
         .WithOptions(options =>
         {
             options.FromConfiguration(ctx.Configuration);
             options.ConsumeMode = ConsumeMode.StreamStart;
 
             options
-                .AddTopic(Constants.MessageNamespace);
+                .AddTopic("MyTopic");
         })
         .AddJson()
         .Build();
