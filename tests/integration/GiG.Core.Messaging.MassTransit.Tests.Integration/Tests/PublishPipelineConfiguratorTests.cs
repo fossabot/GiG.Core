@@ -13,6 +13,7 @@ namespace GiG.Core.Messaging.MassTransit.Tests.Integration.Tests
     public class PublishPipelineConfiguratorTests
     {
         private IServiceProvider _serviceProvider;
+        // ReSharper disable once StringLiteralTypo
         private readonly Uri _faultAddress = new Uri("rabbitmq://localhost:15672/testdlx");
 
         public PublishPipelineConfiguratorTests()

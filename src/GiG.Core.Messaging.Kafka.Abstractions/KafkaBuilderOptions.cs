@@ -6,10 +6,15 @@ namespace GiG.Core.Messaging.Kafka.Abstractions
     /// <inheritdoc cref="IKafkaBuilderOptions{TKey,TValue}" />
     public class KafkaBuilderOptions<TKey, TValue> : IOptions<KafkaBuilderOptions<TKey, TValue>>, IKafkaBuilderOptions<TKey, TValue>
     {
-        /// <inheritdoc />
+        /// <summary>
+        /// Initializes a new instance of the KafkaBuilderOptions class.
+        /// </summary>
         public KafkaBuilderOptions() { }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Initializes a new instance of the KafkaBuilderOptions class.
+        /// </summary>
+        /// <param name="messageFactory">The Message Factory to create an instance of "Message{TKey,TValue}"</param>
         public KafkaBuilderOptions(IMessageFactory messageFactory) => MessageFactory = messageFactory;
         
         /// <inheritdoc />

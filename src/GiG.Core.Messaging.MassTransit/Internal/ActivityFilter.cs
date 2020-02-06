@@ -22,11 +22,11 @@ namespace GiG.Core.Messaging.MassTransit.Internal
         public async Task Send(T context, IPipe<T> next)
         {
             // add the current Activity Id to the headers
-            var publishcontext = context.GetPayload<PublishContext>();
+            var publishContext = context.GetPayload<PublishContext>();
 
             var currentActivity = System.Diagnostics.Activity.Current ?? new System.Diagnostics.Activity("PublishMessage").Start();
 
-            publishcontext.Headers.Set(Constants.ActivityIdHeader, currentActivity.Id);
+            publishContext.Headers.Set(Constants.ActivityIdHeader, currentActivity.Id);
 
             // call the next filter in the pipe
             await next.Send(context);

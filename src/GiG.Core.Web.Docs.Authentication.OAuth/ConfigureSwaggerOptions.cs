@@ -1,5 +1,5 @@
 ﻿using GiG.Core.Web.Authentication.OAuth.Abstractions;
-using GiG.Core.Web.Docs.Authentication.OAuth.Extentions;
+using GiG.Core.Web.Docs.Authentication.OAuth.Extensions;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 

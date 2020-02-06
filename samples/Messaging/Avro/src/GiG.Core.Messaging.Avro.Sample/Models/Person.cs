@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace GiG.Core.Messaging.Avro.Sample.Models
 {
-    [NamedSchema(doc: "Represents a person")]
+    [NamedSchema("Represents a person")]
     public partial class Person
     {
         [Field(nameof(Email), "Email")]
@@ -41,7 +41,7 @@ namespace GiG.Core.Messaging.Avro.Sample.Models
         public float? MySingle { get; set; }
         
         [Field(nameof(MyLong))]
-        public Int64? MyLong { get; set; }
+        public long? MyLong { get; set; }
         
         [Field(nameof(Id))]
         public Guid? Id { get; set; }

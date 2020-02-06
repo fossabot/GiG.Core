@@ -13,7 +13,8 @@ namespace GiG.Core.Web.Authentication.Hmac.Tests.Unit
     {
         private readonly string _nonceHeader;
         private readonly string _nonceValue;
-
+        private const string Body = "woop woop I unit tested the body woop woop";
+        
         public HttpRequestExtensionsTests()
         {
             _nonceHeader = Headers.Nonce;
@@ -50,10 +51,10 @@ namespace GiG.Core.Web.Authentication.Hmac.Tests.Unit
                 Path = new PathString("/api/test")
             };
             request.Headers.Add(_nonceHeader, _nonceValue);
-            var body = "woop woop I unit tested the body woop woop";
+            
             request.Body = new MemoryStream();
-            using StreamWriter bodyWriter = new StreamWriter(request.Body);
-            bodyWriter.Write(body);
+            await using var bodyWriter = new StreamWriter(request.Body);
+            bodyWriter.Write(Body);
             bodyWriter.Flush();
             request.Body.Position = 0;
 
@@ -62,7 +63,7 @@ namespace GiG.Core.Web.Authentication.Hmac.Tests.Unit
 
             //Assert
             Assert.Equal(0, request.Body.Position);
-            Assert.Equal(body, result);
+            Assert.Equal(Body, result);
         }
 
         [Fact]
@@ -76,10 +77,9 @@ namespace GiG.Core.Web.Authentication.Hmac.Tests.Unit
                 Path = new PathString("/api/test")
             };
             request.Headers.Add(_nonceHeader, _nonceValue);
-            var body = "woop woop I unit tested the body woop woop";
             request.Body = new MemoryStream();
-            using StreamWriter bodyWriter = new StreamWriter(request.Body);
-            bodyWriter.Write(body);
+            await using var bodyWriter = new StreamWriter(request.Body);
+            bodyWriter.Write(Body);
             bodyWriter.Flush();
             request.Body.Position = 0;
 
@@ -88,7 +88,7 @@ namespace GiG.Core.Web.Authentication.Hmac.Tests.Unit
 
             //Assert
             Assert.Equal(0, request.Body.Position);
-            Assert.Equal(body, result);
+            Assert.Equal(Body, result);
         }
 
         [Fact]
@@ -102,10 +102,9 @@ namespace GiG.Core.Web.Authentication.Hmac.Tests.Unit
                 Path = new PathString("/api/test")
             };
             request.Headers.Add(_nonceHeader, _nonceValue);
-            var body = "woop woop I unit tested the body woop woop";
             request.Body = new MemoryStream();
-            using StreamWriter bodyWriter = new StreamWriter(request.Body);
-            bodyWriter.Write(body);
+            await using var bodyWriter = new StreamWriter(request.Body);
+            bodyWriter.Write(Body);
             bodyWriter.Flush();
             request.Body.Position = 0;
 
@@ -114,7 +113,7 @@ namespace GiG.Core.Web.Authentication.Hmac.Tests.Unit
 
             //Assert
             Assert.Equal(0, request.Body.Position);
-            Assert.Equal(body, result);
+            Assert.Equal(Body, result);
         }
     }
 }

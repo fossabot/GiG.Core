@@ -1,7 +1,6 @@
 using GiG.Core.DistributedTracing.Telemetry.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using OpenTelemetry.Trace.Configuration;
 using System;
 using System.Collections.Generic;
@@ -31,7 +30,7 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry
         /// <summary>
         /// Tracing Configuration
         /// </summary>
-        public IConfiguration TracingConfiguration { get; private set; }
+        public IConfiguration TracingConfiguration { get; }
 
         /// <summary>
         /// Tracing Configuration builder.

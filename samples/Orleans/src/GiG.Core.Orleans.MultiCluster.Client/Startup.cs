@@ -27,7 +27,7 @@ namespace GiG.Core.Orleans.MultiCluster.Client
             services.AddClusterClientFactory()
                 .AddClusterClient("Payments", () =>
                 {
-                    return services.CreateClusterClient((builder) =>
+                    return services.CreateClusterClient(builder =>
                     {
                         builder.ConfigureCluster("Payments", _configuration);
                         builder.UseMembershipProvider(_configuration, x =>
@@ -40,7 +40,7 @@ namespace GiG.Core.Orleans.MultiCluster.Client
                 })
                 .AddClusterClient("Games", () =>
                 {
-                    return services.CreateClusterClient((builder) =>
+                    return services.CreateClusterClient(builder =>
                     {
                         builder.ConfigureCluster("Games", _configuration);
                         builder.UseMembershipProvider(_configuration, x =>

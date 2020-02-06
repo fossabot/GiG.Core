@@ -26,7 +26,7 @@ namespace GiG.Core.Web.Hosting.Tests.Integration.Tests
         }
 
         [Fact]
-        public async Task RequestPathBase_WebHostingMiddlewareConfigurePathBase_ReturnsPathBase()
+        public async Task RequestPathBase_WebHostingMiddlewareUsePathBaseFromConfiguration_ReturnsPathBase()
         {
             // Arrange
             var client = _server.CreateClient();

@@ -17,14 +17,14 @@ namespace GiG.Core.Orleans.Tests.Unit.Clustering.Kubernetes
             var exception = Assert.Throws<ArgumentNullException>(() => ClientBuilderExtensions.ConfigureKubernetesClustering(null, configuration: null));
             Assert.Equal("clientBuilder", exception.ParamName);
 
-            exception = Assert.Throws<ArgumentNullException>(() => ClientBuilderExtensions.ConfigureKubernetesClustering(null, configurationSection: null));
+            exception = Assert.Throws<ArgumentNullException>(() => ClientBuilderExtensions.ConfigureKubernetesClustering(null, null));
             Assert.Equal("clientBuilder", exception.ParamName);
         }
 
         [Fact]
         public void ConfigureKubernetesClustering_ConfigurationIsNull_ThrowsConfigurationErrorsException()
         {
-            var exception = Assert.Throws<ConfigurationErrorsException>(() => new ClientBuilder().ConfigureKubernetesClustering(configurationSection: null));
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => new ClientBuilder().ConfigureKubernetesClustering(null));
             Assert.Equal("Configuration section '' is incorrect.", exception.Message);
         }
 

@@ -41,7 +41,7 @@
         public string SupportedTokens { get; set; } = "Jwt";
 
         /// <summary>
-        /// A value to indicate if the ApiAuthenticatiion requires Https Metadata.
+        /// A value to indicate if the Api Authentication requires Https Metadata.
         /// </summary>
         public bool RequireHttpsMetadata { get; set; } = true;
 

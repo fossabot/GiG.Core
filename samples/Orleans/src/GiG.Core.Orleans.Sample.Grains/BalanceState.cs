@@ -8,6 +8,6 @@ namespace GiG.Core.Orleans.Sample.Grains
         /// <summary>
         /// The balance.
         /// </summary>
-        public decimal Amount { get; set; } = 0;
+        public decimal Amount { get; set; }
     }
 }

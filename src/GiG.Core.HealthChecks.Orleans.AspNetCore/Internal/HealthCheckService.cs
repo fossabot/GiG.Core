@@ -2,7 +2,6 @@
 using GiG.Core.HealthChecks.Orleans.Abstractions;
 using GiG.Core.HealthChecks.Orleans.AspNetCore.Extensions;
 using GiG.Core.HealthChecks.Orleans.Extensions;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace GiG.Core.HealthChecks.Orleans.AspNetCore.Internal
 {
-    internal class HealthCheckService : BackgroundService, IHostedService
+    internal class HealthCheckService : BackgroundService
     {
         private IHost _host;
 
@@ -77,13 +76,13 @@ namespace GiG.Core.HealthChecks.Orleans.AspNetCore.Internal
             await base.StopAsync(cancellationToken);
             try
             {
-                _host?.StopAsync();
+                _host?.StopAsync(cancellationToken);
                 _host?.WaitForShutdown();
                 _host?.Dispose();
             }
             catch(Exception ex)
             {
-                _logger.LogError("Orleans HealthCheckd Dispose failed.", ex);
+                _logger.LogError("Orleans HealthCheck Dispose failed.", ex);
             }
         }
     }

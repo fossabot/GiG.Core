@@ -46,7 +46,7 @@ namespace GiG.Core.Http.Authentication.Hmac
                 throw new ConfigurationErrorsException("Options not set for HMAC.");
             }
 
-            if(!request.Headers.TryGetValues(Headers.Nonce, out var nonceValue) || nonceValue.Count() == 0)
+            if(!request.Headers.TryGetValues(Headers.Nonce, out var nonceValue) || !nonceValue.Any())
             {
                 throw new ArgumentException($"'{Headers.Nonce}' must not be null or empty.", Headers.Nonce);
             }

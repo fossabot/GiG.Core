@@ -20,7 +20,7 @@ namespace GiG.Core.TokenManager.Tests.Unit.Tests
         [Fact]
         public void AddTokenManager_ConfigurationSectionIsNull_ThrowsConfigurationErrorsException()
         {
-            var exception = Assert.Throws<ConfigurationErrorsException>(() => new ServiceCollection().AddTokenManager(configurationSection: null));
+            var exception = Assert.Throws<ConfigurationErrorsException>(() => new ServiceCollection().AddTokenManager(null));
             Assert.Equal("Configuration Section '' is incorrect.", exception.Message);
         }
         

@@ -7,7 +7,7 @@ namespace GiG.Core.Orleans.Sample.Web
 {
     public class BusHostedService : IHostedService
     {
-        readonly IBusControl _bus;
+        private readonly IBusControl _bus;
 
         public BusHostedService(IBusControl bus)
         {

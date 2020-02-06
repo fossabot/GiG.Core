@@ -51,7 +51,7 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
                 _etcdProviderOptions.Username, _etcdProviderOptions.Password, _etcdProviderOptions.CaCertificate,
                 _etcdProviderOptions.ClientCertificate, _etcdProviderOptions.ClientKey,
                 _etcdProviderOptions.IsPublicRootCa);
-            
+
             _host.Start();
         }
 
@@ -60,7 +60,7 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
         {
             // Arrange.
             var key = _etcdProviderOptions.Key;
-      
+
             await WriteToEtcd("languages.json", key);
 
             var languages = await ReadFromEtcd(key);
@@ -68,7 +68,7 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
             var dataRetriever = _serviceProvider.GetRequiredService<IDataRetriever<IEnumerable<MockLanguage>>>();
 
             // Act.
-            IEnumerable<MockLanguage> data = await dataRetriever.GetAsync();
+            var data = await dataRetriever.GetAsync();
 
             // Assert.
             Assert.NotNull(data);
@@ -80,9 +80,9 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
         {
             // Arrange.
             var tenantId = Guid.NewGuid().ToString();
-            
+
             var key = string.Concat(_etcdProviderOptions.Key, "/", tenantId);
-   
+
             await WriteToEtcd("languages.json", key);
 
             var languages = await ReadFromEtcd(key);
@@ -90,7 +90,7 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
             var dataRetriever = _serviceProvider.GetRequiredService<IDataRetriever<IEnumerable<MockLanguage>>>();
 
             // Act.
-            IEnumerable<MockLanguage> data = await dataRetriever.GetAsync(tenantId);
+            var data = await dataRetriever.GetAsync(tenantId);
 
             // Assert.
             Assert.NotNull(data);
@@ -102,7 +102,7 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
         {
             // Arrange.
             var key = _etcdProviderOptions.Key;
-        
+
             await WriteToEtcd("languages.json", key);
 
             var languages = await ReadFromEtcd(key);
@@ -110,7 +110,7 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
             var dataRetriever = _serviceProvider.GetRequiredService<IDataRetriever<IEnumerable<MockLanguage>>>();
 
             // Act.
-            IEnumerable<MockLanguage> data = await dataRetriever.GetAsync("temp2");
+            var data = await dataRetriever.GetAsync("temp2");
 
             // Assert.
             Assert.NotNull(data);
@@ -121,7 +121,7 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
         {
             await _host.StopAsync();
         }
-        
+
         private async Task WriteToEtcd(string filePath, string key)
         {
             var fileInfo = new FileInfo(filePath);
@@ -131,12 +131,14 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
 
             await _etcdClient.PutAsync(key, fileInfo.OpenText().ReadToEnd());
         }
-        
+
         private async Task<IEnumerable<MockLanguage>> ReadFromEtcd(string key)
         {
             var value = await _etcdClient.GetValAsync(key);
 
-            return string.IsNullOrEmpty(value) ? new List<MockLanguage>() : JsonSerializer.Deserialize<IEnumerable<MockLanguage>>(value);
+            return string.IsNullOrEmpty(value)
+                ? new List<MockLanguage>()
+                : JsonSerializer.Deserialize<IEnumerable<MockLanguage>>(value);
         }
     }
 }

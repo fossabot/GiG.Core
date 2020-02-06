@@ -2,7 +2,7 @@
 
  namespace GiG.Core.Messaging.Avro.Schema.Generator.Tests.Integration.Models
 {
-    [NamedSchema(doc: "Represents a Region")]
+    [NamedSchema("Represents a Region")]
     public partial class Region
     {
         [Field(nameof(Name))]

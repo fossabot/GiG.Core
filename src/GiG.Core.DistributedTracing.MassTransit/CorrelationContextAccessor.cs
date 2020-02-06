@@ -5,11 +5,10 @@ using System;
 namespace GiG.Core.DistributedTracing.MassTransit
 {
     /// <inheritdoc />
-    public class CorrelationContextAccessor : ICorrelationContextAccessor
+    internal class CorrelationContextAccessor : ICorrelationContextAccessor
     {
         private readonly IMassTransitContextAccessor _massTransitContextAccessor;
 
-        /// <inheritdoc />
         public CorrelationContextAccessor(IMassTransitContextAccessor massTransitContextAccessor)
         {
             _massTransitContextAccessor = massTransitContextAccessor;

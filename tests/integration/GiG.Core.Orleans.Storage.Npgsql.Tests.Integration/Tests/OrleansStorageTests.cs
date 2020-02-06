@@ -95,6 +95,5 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Tests.Integration.Tests
 
             return stateElement.Value.GetString();
         }
-
     }
 }

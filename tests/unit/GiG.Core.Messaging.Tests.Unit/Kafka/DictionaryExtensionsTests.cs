@@ -94,7 +94,7 @@ namespace GiG.Core.Messaging.Tests.Unit.Kafka
             var dictionary = new Dictionary<string, string>
             {
                 {"Header1", "HeaderValue1"},
-                {"Header2", "HeaderValue2"},
+                {"Header2", "HeaderValue2"}
             };
 
             // Act

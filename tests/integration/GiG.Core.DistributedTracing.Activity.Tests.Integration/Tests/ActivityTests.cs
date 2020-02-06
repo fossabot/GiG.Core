@@ -58,7 +58,7 @@ namespace GiG.Core.DistributedTracing.Activity.Tests.Integration.Tests
         public async Task ActivityAccessor_HttpCall_ReturnsActivity()
         {
             // Arrange
-            var testEndpointUrl = @$"{_activityLifetime.BaseUrl}/api/mock";
+            var testEndpointUrl = @$"{ActivityLifetime.BaseUrl}/api/mock";
             using var client = _activityLifetime.HttpClientFactory.CreateClient();
 
             //Act 
@@ -86,7 +86,7 @@ namespace GiG.Core.DistributedTracing.Activity.Tests.Integration.Tests
             activity.Start();
             var expectedCorrelationId = activity.RootId;
 
-            var testEndpointUrl = @$"{_activityLifetime.BaseUrl}/api/mock";
+            var testEndpointUrl = @$"{ActivityLifetime.BaseUrl}/api/mock";
             using var client = _activityLifetime.HttpClientFactory.CreateClient();
             
             //Act 

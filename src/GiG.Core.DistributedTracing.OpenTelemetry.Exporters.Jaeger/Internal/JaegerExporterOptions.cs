@@ -11,6 +11,6 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.Internal
 
         public int AgentPort { get; set; } = 6831;
 
-        public int? MaxPacketSize { get; set; } = new int?(65000);
+        public int? MaxPacketSize { get; set; } = 65000;
     }
 }

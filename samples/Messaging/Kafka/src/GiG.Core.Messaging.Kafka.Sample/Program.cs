@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace GiG.Core.Messaging.Kafka.Sample
 {
-    class Program
+    internal static class Program
     {
         public static void Main(string[] args)
         {

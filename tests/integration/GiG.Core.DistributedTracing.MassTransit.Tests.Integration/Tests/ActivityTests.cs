@@ -3,7 +3,6 @@ using GiG.Core.Messaging.MassTransit.Extensions;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -73,7 +72,7 @@ namespace GiG.Core.DistributedTracing.MassTransit.Tests.Integration.Tests
                 x.AddConsumer<ActivityMockConsumer>();
                 x.AddBus(provider => Bus.Factory.CreateUsingInMemory(cfg =>
                 {
-                    cfg.ConfigurePublish(x => x.UseActivityFilter());
+                    cfg.ConfigurePublish(y => y.UseActivityFilter());
                     cfg.Host.AddActivityConsumerObserver();
 
                     cfg.ReceiveEndpoint(typeof(ActivityMockConsumer).FullName, e =>

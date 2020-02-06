@@ -38,7 +38,7 @@ namespace GiG.Core.Orleans.Sample.Web.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<ActionResult>Deposit([CustomizeValidator(RuleSet = "Deposit")] TransactionRequest request)
         {           
-            await _publishEndpoint.Publish(new PaymentTransactionRequested()
+            await _publishEndpoint.Publish(new PaymentTransactionRequested
             {
                 PlayerId = _playerInformationAccessor.PlayerId,
                 Amount = request.Amount,
@@ -66,7 +66,7 @@ namespace GiG.Core.Orleans.Sample.Web.Controllers
                 return BadRequest("Withdraw Amount must be smaller or equal to the Balance, and greater than 0.");
             }
 
-            await _publishEndpoint.Publish(new PaymentTransactionRequested()
+            await _publishEndpoint.Publish(new PaymentTransactionRequested
             {
                 PlayerId = _playerInformationAccessor.PlayerId,
                 Amount = request.Amount,

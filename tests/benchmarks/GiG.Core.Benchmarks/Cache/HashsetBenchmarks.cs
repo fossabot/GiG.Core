@@ -52,7 +52,7 @@ namespace GiG.Core.Benchmarks.Cache
         }
 
         private static HashSet<PasswordBlacklist> BuildCache()
-        {          
+        {
             var passwordEntries = File.ReadAllLines("Cache\\Mocks\\passwordblacklist.txt");
 
             var passwordBlacklist = new List<PasswordBlacklist>();

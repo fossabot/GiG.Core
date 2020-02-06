@@ -12,7 +12,7 @@ namespace GiG.Core.Benchmarks.Orleans.Streams.Grains
 
         private readonly string _providerName;
 
-        public ProducerGrain(string providerName)
+        protected ProducerGrain(string providerName)
         {
             _providerName = providerName;
         }
@@ -27,7 +27,7 @@ namespace GiG.Core.Benchmarks.Orleans.Streams.Grains
 
         public async Task ProduceAsync(string header, string body)
         {
-            var message = new Message()
+            var message = new Message
             {
                 Header = header,
                 Body = body
