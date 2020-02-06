@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GiG.Core.Data.KVStores.Providers.Etcd.Abstractions
+﻿namespace GiG.Core.Data.KVStores.Providers.Etcd.Abstractions
 {
     /// <summary>
     /// Etcd Provider Options.
