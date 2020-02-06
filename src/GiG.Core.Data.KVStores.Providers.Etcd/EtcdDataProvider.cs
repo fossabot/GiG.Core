@@ -76,28 +76,15 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         /// <returns></returns>
         public async Task<T> GetAsync(params string[] keys)
         {
-            async Task<T> GetValueAsync(string key)
-            {
-                _logger.LogDebug("Returning {key}", key);
+            var key = keys.Any()
+                ? string.Concat(_etcdProviderOptions.Key, "/", string.Join("/", keys))
+                : _etcdProviderOptions.Key;
 
-                var value = await _etcdClient.GetValAsync(key);
+            _logger.LogDebug("Returning {key}", key);
 
-                return string.IsNullOrWhiteSpace(value) ? default : _dataSerializer.GetFromString(value);
-            }
+            var value = await _etcdClient.GetValAsync(key);
 
-            if (keys.Any())
-            {
-                var nestedKey = string.Concat(_etcdProviderOptions.Key, "/", string.Join("/", keys));
-
-                var value = await GetValueAsync(nestedKey);
-
-                if (value != null)
-                {
-                    return value;
-                }
-            }
-
-            return await GetValueAsync(_etcdProviderOptions.Key);
+            return string.IsNullOrWhiteSpace(value) ? default : _dataSerializer.GetFromString(value);
         }
 
         /// <inheritdoc/>

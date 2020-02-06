@@ -25,8 +25,13 @@ The below table outlines the valid Configurations used to configure the [EtcdPro
 | Configuration Name | Type   | Optional | Default Value            |
 |:-------------------|:-------|:---------|:-------------------------|
 | ConnectionString   | String | Yes      | http://localhost:2379    |
-| Key                | String | No       |                          |
-
+| Port               | Integer| Yes      | 2379                     |
+| Username           | String | Yes      | ''                       |
+| Password           | String | Yes      | ''                       |
+| CaCertificate      | String | Yes      | ''                       |
+| ClientCertificate  | String | Yes      | ''                       |
+| ClientKey          | String | Yes      | ''                       |
+| IsPublicRootCa     | Boolean| Yes      | false                    |
 
 #### Sample Configuration
 

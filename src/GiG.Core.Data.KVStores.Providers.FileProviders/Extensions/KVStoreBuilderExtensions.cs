@@ -19,7 +19,7 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders.Extensions
     {
         /// <summary>
         /// Registers a KV Store from File.
-        /// </summary>
+        /// </summary>`
         /// <param name="builder">The <see cref="IKVStoreBuilder{T}" /> to add the services to.</param>        
         /// <param name="configuration">The <see cref="IConfiguration" /> which contains data to be consumed.</param>
         /// <param name="configurationSectionName">Configuration section name. </param>
