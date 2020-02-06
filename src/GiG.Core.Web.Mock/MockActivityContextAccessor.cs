@@ -17,6 +17,7 @@ namespace GiG.Core.Web.Mock
             CorrelationId = random.Guid().ToString();
             TraceId = random.String2(16);
             SpanId = random.String2(8);
+            ParentId = random.String2(8);
             ParentSpanId = random.String2(8);
             OperationName = random.String2(10);
 
@@ -34,6 +35,9 @@ namespace GiG.Core.Web.Mock
 
         /// <inheritdoc />
         public string SpanId { get; }
+
+        /// <inheritdoc />
+        public string ParentId { get; }
 
         /// <inheritdoc />
         public string ParentSpanId { get; }
