@@ -3,6 +3,7 @@ using GiG.Core.Data.KVStores.Providers.FileProviders.Abstractions;
 using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GiG.Core.Data.KVStores.Providers.FileProviders
@@ -63,7 +64,7 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders
         /// <returns></returns>
         public async Task<T> GetAsync(params string[] keys)
         {       
-            var fileName = keys.Length > 0 
+            var fileName = keys.Any()
                 ? string.Concat(_fileName.Replace(_fileExtension, string.Empty), ".", string.Join(".", keys), _fileExtension)
                 : _fileName;
 
