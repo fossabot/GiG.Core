@@ -19,7 +19,7 @@ namespace GiG.Core.DistributedTracing.Activity
         public string SpanId => System.Diagnostics.Activity.Current?.SpanId.ToString() ?? string.Empty;
 
         /// <inheritdoc />
-        public string ParentId => System.Diagnostics.Activity.Current?.ParentId.ToString() ?? string.Empty;
+        public string ParentId => System.Diagnostics.Activity.Current?.ParentId?.ToString() ?? string.Empty;
 
         /// <inheritdoc />
         public string ParentSpanId => System.Diagnostics.Activity.Current?.ParentSpanId.ToString() ?? string.Empty;

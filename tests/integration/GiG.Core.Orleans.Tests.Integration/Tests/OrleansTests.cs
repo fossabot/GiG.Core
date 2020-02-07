@@ -13,7 +13,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
     [Trait("Category", "Integration")]
     public class OrleansTests : DefaultClusterLifetime
     {
-        //[Fact]
+        [Fact]
         public async Task GetValueAsync_CallGrain_ReturnsExpectedInteger()
         {
             //Arrange
@@ -28,7 +28,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             Assert.Equal(expectedValue, actualValue);
         }
         
-        //[Fact]
+        [Fact]
         public async Task GetCorrelationIdAsync_CallGrain_ReturnsExpectedCorrelationGuid()
         {
             //Arrange
@@ -43,7 +43,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             Assert.Equal(expectedValue, actualValue);
         }
 
-        //[Fact]
+        [Fact]
         public async Task GetIPAddressAsync_CallGrain_ReturnsExpectedIPAddress()
         {
             //Arrange

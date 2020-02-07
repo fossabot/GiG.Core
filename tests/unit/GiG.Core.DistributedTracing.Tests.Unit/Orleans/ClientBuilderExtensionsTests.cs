@@ -23,5 +23,20 @@ namespace GiG.Core.DistributedTracing.Tests.Unit.Orleans
             var exception = Assert.Throws<ArgumentNullException>(() => new ClientBuilder().AddCorrelationOutgoingFilter(null));
             Assert.Equal("serviceProvider", exception.ParamName);
         }
+
+
+        [Fact]
+        public void AddActivityOutgoingFilter_ClientBuilderIsNull_ThrowsArgumentNullException()
+        {
+            var exception = Assert.Throws<ArgumentNullException>(() => ClientBuilderExtensions.AddActivityOutgoingFilter(null, null));
+            Assert.Equal("builder", exception.ParamName);
+        }
+
+        [Fact]
+        public void AddActivityOutgoingFilter_ServiceProviderIsNull_ThrowsArgumentNullException()
+        {
+            var exception = Assert.Throws<ArgumentNullException>(() => new ClientBuilder().AddActivityOutgoingFilter(null));
+            Assert.Equal("serviceProvider", exception.ParamName);
+        }
     }
 }
