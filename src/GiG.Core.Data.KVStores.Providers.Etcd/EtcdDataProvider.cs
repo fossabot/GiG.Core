@@ -62,7 +62,15 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
                 if (response.Events.Count > 0)
                 {
                     var value = response.Events[0].Kv.Value.ToStringUtf8();
-                    _dataStore.Set(_dataSerializer.GetFromString(value));
+
+                    if (!string.IsNullOrWhiteSpace(value))
+                    {
+                        _dataStore.Set(_dataSerializer.GetFromString(value));
+                    }
+                    else
+                    {
+                        _dataStore.Set(default);
+                    }
                 }
             });
 

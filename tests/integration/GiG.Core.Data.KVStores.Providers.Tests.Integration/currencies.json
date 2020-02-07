@@ -1,0 +1,10 @@
+﻿[
+  {
+    "Name": "Euro",
+    "Code" : "EUR"
+  },
+  {
+    "Name": "American Dollar",
+    "Code": "USD"
+  }
+]
