@@ -14,10 +14,13 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
         [Fact]
         public async Task GetActivityAsync_NoParentActivity_ReturnsActivity()
         {
+            // Arrange
             var grain = ClusterClient.GetGrain<IActivityTestGrain>("activity_test");
 
+            // Act
             var activityResponse = await grain.GetActivityAsync();
 
+            // Assert
             Assert.NotNull(activityResponse);
             Assert.NotEmpty(activityResponse.TraceId);
             Assert.Empty(activityResponse.ParentId);
@@ -26,12 +29,15 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
         [Fact]
         public async Task GetActivityAsync_WithParentActivity_ReturnsActivityIncludingParentTraceId()
         {
+            // Arrange
             var activity = new System.Diagnostics.Activity("test");
             activity.Start();
             var grain = ClusterClient.GetGrain<IActivityTestGrain>("activity_test");
 
+            // Act
             var activityResponse = await grain.GetActivityAsync();
 
+            // Assert
             Assert.NotNull(activityResponse);
             Assert.NotEmpty(activityResponse.TraceId);
             Assert.Equal(activity.TraceId.ToString(), activityResponse.ParentId);
