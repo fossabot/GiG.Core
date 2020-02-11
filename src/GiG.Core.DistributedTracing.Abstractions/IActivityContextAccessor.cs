@@ -28,7 +28,12 @@ namespace GiG.Core.DistributedTracing.Abstractions
         /// The current Activity's Span Id.
         /// </summary>
         string SpanId { get; }
-        
+
+        /// <summary>
+        /// The current Activity's Parent Id.
+        /// </summary>
+        string ParentId { get; }
+
         /// <summary>
         /// The current Activity's Parent Span Id.
         /// </summary>
