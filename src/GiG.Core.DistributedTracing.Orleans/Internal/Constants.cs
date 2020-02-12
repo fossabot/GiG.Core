@@ -6,7 +6,7 @@
     internal static class Constants
     {
         /// <summary>
-        /// The Header for Correlation ID.
+        /// The Name of the Activity to be started by the Incoming Grain Filter.
         /// </summary>
         public const string IncomingGrainFilterActivityName = "IncomingGrainCall";
     }
