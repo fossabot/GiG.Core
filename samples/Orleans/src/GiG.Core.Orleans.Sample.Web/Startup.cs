@@ -39,7 +39,7 @@ namespace GiG.Core.Orleans.Sample.Web
             services.AddDefaultClusterClient((builder, sp) =>
             {
                 builder.UseSignalR();
-                builder.AddCorrelationOutgoingFilter(sp);
+                builder.AddActivityOutgoingFilter(sp);
                 builder.AddRequestContextOutgoingFilter(sp);
                 builder.ConfigureCluster(_configuration);
                 builder.UseMembershipProvider(_configuration, x =>
@@ -76,7 +76,6 @@ namespace GiG.Core.Orleans.Sample.Web
         {
             app.UseForwardedHeaders();
             app.UsePathBaseFromConfiguration();
-            app.UseCorrelation();
             app.UseApiDocs();
             app.UseRouting();
             app.UseFluentValidationMiddleware();

@@ -36,7 +36,7 @@ namespace GiG.Core.Orleans.Sample.Consumer.Extensions
                             }
                         });
 
-                    host.AddDefaultConsumerObserver(serviceProvider);
+                    host.AddActivityConsumerObserver();
                     cfg.ReceiveEndpoint(host,
                         typeof(PaymentConsumer).FullName, e =>
                         {

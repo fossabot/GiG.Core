@@ -36,7 +36,7 @@ namespace GiG.Core.Orleans.Sample.Grains
         public Task OnNextAsync(PaymentTransaction item, StreamSequenceToken token = null)
         {
             State.Add(item);
-            _logger.LogInformation("New {transactionType}. Amount: {amount}. CorrelationId : {activityId}", item.TransactionType, item.Amount, RequestContext.ActivityId.ToString());
+            _logger.LogInformation("New {transactionType}. Amount: {amount}. CorrelationId : {activityId}", item.TransactionType, item.Amount, System.Diagnostics.Activity.Current.ParentId);
 
             return Task.CompletedTask;
         }

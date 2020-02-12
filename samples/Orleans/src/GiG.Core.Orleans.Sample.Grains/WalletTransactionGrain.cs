@@ -19,12 +19,12 @@ namespace GiG.Core.Orleans.Sample.Grains
     {
         private IAsyncStream<WalletTransaction> _stream;
         private readonly ILogger _logger;
-        private readonly ICorrelationContextAccessor _correlationAccessor;
+        private readonly IActivityContextAccessor _activityContextAccessor;
       
-        public WalletTransactionGrain(ILogger<WalletTransactionGrain> logger, ICorrelationContextAccessor correlationAccessor)
+        public WalletTransactionGrain(ILogger<WalletTransactionGrain> logger, IActivityContextAccessor activityContextAccessor)
         {
             _logger = logger;
-            _correlationAccessor = correlationAccessor;
+            _activityContextAccessor = activityContextAccessor;
         }
         
         public override async Task OnActivateAsync()
@@ -40,7 +40,7 @@ namespace GiG.Core.Orleans.Sample.Grains
         {
             State.Add(item);
 
-            _logger.LogInformation("Correlation Id {correlationId}", _correlationAccessor.Value);
+            _logger.LogInformation("Activity Id {correlationId}", _activityContextAccessor.TraceId);
             _logger.LogInformation("New {transactionType}. Amount: {amount}. New Balance: {newBalance}", item.TransactionType.ToString(), item.Amount, item.NewBalance);
 
             return Task.CompletedTask;

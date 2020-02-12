@@ -14,7 +14,9 @@
     </ItemGroup>
     
     <ItemGroup>
+        <ProjectReference Include="..\..\..\..\src\GiG.Core.DistributedTracing.Activity\GiG.Core.DistributedTracing.Activity.csproj" />
         <ProjectReference Include="..\..\..\..\src\GiG.Core.DistributedTracing.MassTransit\GiG.Core.DistributedTracing.MassTransit.csproj" />
+        <ProjectReference Include="..\..\..\..\src\GiG.Core.DistributedTracing.Orleans\GiG.Core.DistributedTracing.Orleans.csproj" />
         <ProjectReference Include="..\..\..\..\src\GiG.Core.Messaging.MassTransit\GiG.Core.Messaging.MassTransit.csproj" />
         <ProjectReference Include="..\..\..\..\src\GiG.Core.Messaging.RabbitMQ.Abstractions\GiG.Core.Messaging.RabbitMQ.Abstractions.csproj" />
         <ProjectReference Include="..\..\..\..\src\GiG.Core.Orleans.Client\GiG.Core.Orleans.Client.csproj" />
