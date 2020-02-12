@@ -14,33 +14,32 @@ namespace GiG.Core.Orleans.Streams
     public class Stream<TMessage> : IStream<TMessage>
     {
         private readonly IAsyncStream<TMessage> _asyncStream;
-        private readonly ICorrelationContextAccessor _correlationContextAccessor;
+        private readonly IActivityContextAccessor _activityContextAccessor;
 
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="asyncStream">The <see cref="IAsyncStream{TMessage}"/> to be used in the Stream Publisher./></param>
-        /// <param name="correlationContextAccessor">The <see cref="ICorrelationContextAccessor" /> to use to add the Correlation ID within RequestContext.</param>
-        public Stream(IAsyncStream<TMessage> asyncStream, ICorrelationContextAccessor correlationContextAccessor)
+        /// <param name="activityContextAccessor">The <see cref="IActivityContextAccessor" /> to use to add the Activity ID within RequestContext.</param>
+        public Stream(IAsyncStream<TMessage> asyncStream, IActivityContextAccessor activityContextAccessor)
         {
             _asyncStream = asyncStream ?? throw new ArgumentNullException(nameof(asyncStream));
-            _correlationContextAccessor = correlationContextAccessor ?? throw new ArgumentNullException(nameof(correlationContextAccessor));
+            _activityContextAccessor = activityContextAccessor;
         }
 
         /// <summary>
-        /// Used to publish the message using the underlying stream. Before sending the message the correlation id is set if not already present.
+        /// Used to publish the message using the underlying stream. Before sending the message the activity id is set if not already present.
         /// </summary>
         /// <param name="message">The Message to be published.</param>
         /// <param name="token">The <see cref="StreamSequenceToken"/> to send with the Message.</param>
         /// <returns></returns>
         public async Task PublishAsync(TMessage message, StreamSequenceToken token = null)
         {
-            var correlationId = _correlationContextAccessor.Value;
-
+            var activityId = _activityContextAccessor?.ParentId;
             // This is to ensure that the correlation id provided by the accessor is propagated in the orleans request context.
-            if (correlationId != RequestContext.ActivityId)
+            if (!string.IsNullOrWhiteSpace(activityId))// && activityId != RequestContext.ActivityId
             {
-                RequestContext.ActivityId = correlationId;
+                RequestContext.Set(Constants.ActivityHeader, activityId);
             }
           
             await _asyncStream.OnNextAsync(message, token);

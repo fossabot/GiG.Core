@@ -53,7 +53,6 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                 })
                 .ConfigureServices(x =>
                 {
-                    x.AddCorrelationAccessor();
                     x.AddRequestContextAccessor();
                     x.AddStream();
                 })
@@ -66,11 +65,9 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
             var clientHost = new HostBuilder()
                 .ConfigureServices(services =>
                 {
-                    services.AddSingleton<ICorrelationContextAccessor, CorrelationContextAccessor>();
                     services.AddSingleton<IRequestContextAccessor, MockRequestContextAccessor>();
                     services.AddDefaultClusterClient((x, sp) =>
                     {
-                        x.AddCorrelationOutgoingFilter(sp);
                         x.AddRequestContextOutgoingFilter(sp);
                         x.UseLocalhostClustering(options.GatewayPort, serviceId, clusterId);
                         x.AddAssemblies(typeof(IEchoTestGrain));

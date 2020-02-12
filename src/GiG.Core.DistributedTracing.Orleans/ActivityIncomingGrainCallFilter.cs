@@ -18,8 +18,8 @@ namespace GiG.Core.DistributedTracing.Orleans
         public async Task Invoke(IIncomingGrainCallContext context)
         {
             var traceId = RequestContext.Get(Constants.ActivityHeader) as string;
-            
-            var activity = new System.Diagnostics.Activity("IncomingGrainCall").Start();
+
+            var activity = new System.Diagnostics.Activity("IncomingGrainCall");
             if (!string.IsNullOrWhiteSpace(traceId))
             {
                 activity.SetParentId(traceId);
