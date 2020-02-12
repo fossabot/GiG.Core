@@ -1,4 +1,5 @@
 ﻿using GiG.Core.Hosting;
+using GiG.Core.Web.Docs.Abstractions;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -10,8 +11,13 @@ namespace GiG.Core.Web.Docs
     internal class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
     {
         private readonly IApiVersionDescriptionProvider _provider;
+        private readonly ApiDocsOptions _apiDocsOptions;
 
-        public ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider) => _provider = provider;
+        public ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider, IOptionsMonitor<ApiDocsOptions> apiDocsOptions)
+        {
+            _provider = provider;
+            _apiDocsOptions = apiDocsOptions.CurrentValue;
+        }
 
         public void Configure(SwaggerGenOptions options)
         {
@@ -22,7 +28,7 @@ namespace GiG.Core.Web.Docs
                     new OpenApiInfo
                     {
                         Title = ApplicationMetadata.Name,
-                        Description = $"{(description.IsDeprecated ? "DEPRECATED." : string.Empty)}",
+                        Description = $"{_apiDocsOptions.Description}{(description.IsDeprecated ? " [DEPRECATED]." : string.Empty)}",
                         Version = description.ApiVersion.ToString()
                     });
             }
