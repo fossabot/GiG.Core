@@ -26,7 +26,7 @@ namespace GiG.Core.Messaging.MassTransit.Internal
 
             var currentActivity = System.Diagnostics.Activity.Current ?? new System.Diagnostics.Activity("PublishMessage").Start();
 
-            publishContext.Headers.Set(Constants.ActivityIdHeader, currentActivity.Id);
+            publishContext.Headers.Set(Constants.ActivityIdHeader, currentActivity.RootId);
 
             // call the next filter in the pipe
             await next.Send(context);

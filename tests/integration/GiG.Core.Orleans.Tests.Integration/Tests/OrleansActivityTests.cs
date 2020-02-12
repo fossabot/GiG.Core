@@ -40,7 +40,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             // Assert
             Assert.NotNull(activityResponse);
             Assert.NotEmpty(activityResponse.TraceId);
-            Assert.Equal(activity.TraceId.ToString(), activityResponse.ParentId);
+            Assert.Equal(activity.RootId.ToString(), activityResponse.ParentId);
         }
     }
 }

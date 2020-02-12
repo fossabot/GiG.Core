@@ -2,6 +2,7 @@
 using Orleans;
 using Orleans.Runtime;
 using System.Threading.Tasks;
+using OrleansDistributedTracingConstants = GiG.Core.DistributedTracing.Orleans.Internal.Constants;
 
 namespace GiG.Core.DistributedTracing.Orleans
 {
@@ -19,7 +20,7 @@ namespace GiG.Core.DistributedTracing.Orleans
         {
             var traceId = RequestContext.Get(Constants.ActivityHeader) as string;
 
-            var activity = new System.Diagnostics.Activity("IncomingGrainCall");
+            var activity = new System.Diagnostics.Activity(OrleansDistributedTracingConstants.IncomingGrainFilterActivityName);
             if (!string.IsNullOrWhiteSpace(traceId))
             {
                 activity.SetParentId(traceId);
