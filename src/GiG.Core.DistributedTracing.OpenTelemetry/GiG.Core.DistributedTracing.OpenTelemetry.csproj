@@ -9,7 +9,7 @@
         <PackageReference Include="OpenTelemetry.Collector.AspNetCore" Version="0.2.0-alpha.179" PrivateAssets="compile" />
         <PackageReference Include="OpenTelemetry.Hosting" Version="0.2.0-alpha.179" PrivateAssets="compile" />
         <PackageReference Include="OpenTelemetry.Collector.Dependencies" Version="0.2.0-alpha.179" PrivateAssets="compile" />
-        <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" PrivateAssets="compile" />
+        <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" PrivateAssets="compile" />
     </ItemGroup>
     
     <ItemGroup>
