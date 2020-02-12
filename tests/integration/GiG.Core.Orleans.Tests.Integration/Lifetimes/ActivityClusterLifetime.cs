@@ -1,9 +1,7 @@
 using Bogus;
 using GiG.Core.Context.Abstractions;
 using GiG.Core.Context.Orleans.Extensions;
-using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.DistributedTracing.Activity.Extensions;
-using GiG.Core.DistributedTracing.Orleans;
 using GiG.Core.DistributedTracing.Orleans.Extensions;
 using GiG.Core.Orleans.Client.Extensions;
 using GiG.Core.Orleans.Silo.Abstractions;
@@ -47,8 +45,9 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                     x.ConfigureEndpoints(ctx.Configuration.GetSection(_siloSectionName));
                     x.UseLocalhostClustering(siloOptions.SiloPort, siloOptions.GatewayPort, null, serviceId, clusterId);
                     x.AddAssemblies(typeof(EchoTestGrain));
-                    x.AddSimpleMessageStreamProvider("SMSProvider");
-                    x.AddMemoryGrainStorage("PubSubStore");
+                    x.AddSimpleMessageStreamProvider(Constants.StreamProviderName);
+                    x.AddMemoryGrainStorage(Constants.StreamsMemoryStorageName);
+                    x.AddMemoryGrainStorage(Constants.StorageProviderName);
                 })
                 .ConfigureServices(x =>
                 {
@@ -66,6 +65,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                 .ConfigureServices(services =>
                 {
                     services.AddActivityAccessor();
+                    services.AddStream();
                     services.AddSingleton<IRequestContextAccessor, MockRequestContextAccessor>();
                     services.AddDefaultClusterClient((x, sp) =>
                     {
@@ -73,6 +73,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                         x.AddRequestContextOutgoingFilter(sp);
                         x.UseLocalhostClustering(options.GatewayPort, serviceId, clusterId);
                         x.AddAssemblies(typeof(IEchoTestGrain));
+                        x.AddSimpleMessageStreamProvider(Constants.StreamProviderName);
                     });
                 })
                 .Build();

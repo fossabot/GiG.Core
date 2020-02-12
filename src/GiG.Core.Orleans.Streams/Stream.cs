@@ -35,9 +35,9 @@ namespace GiG.Core.Orleans.Streams
         /// <returns></returns>
         public async Task PublishAsync(TMessage message, StreamSequenceToken token = null)
         {
-            var activityId = _activityContextAccessor?.ParentId;
+            var activityId = _activityContextAccessor?.CorrelationId;
             // This is to ensure that the correlation id provided by the accessor is propagated in the orleans request context.
-            if (!string.IsNullOrWhiteSpace(activityId))// && activityId != RequestContext.ActivityId
+            if (!string.IsNullOrWhiteSpace(activityId))
             {
                 RequestContext.Set(Constants.ActivityHeader, activityId);
             }
