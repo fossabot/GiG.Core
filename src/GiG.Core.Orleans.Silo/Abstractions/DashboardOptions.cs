@@ -13,7 +13,7 @@
         /// <summary>
         /// A value to indicate if the Dashboard is enabled or not.
         /// </summary>
-        public bool IsEnabled { get; set; } = false;
+        public bool IsEnabled { get; set; } = true;
         
         /// <summary>
         /// The Dashboard port.
@@ -26,8 +26,8 @@
         public string Path { get; set; } = "/dashboard";
                 
         /// <summary>
-        /// Set the dashboard to host it's own http server (default is true).
+        /// Set the dashboard to host it's own HTTP server.
         /// </summary>
-        public bool HostSelf { get; set; } = true;
+        public bool HostSelf { get; set; } = false;
     }
 }

@@ -1,6 +1,6 @@
-FROM igcproget.igc.zone/gig-common-docker/dotnet/runtime:3.1.0-0.1.0.4 AS base
+FROM igcproget.igc.zone/gig-common-docker/dotnet/runtime:3.1.1-0.1.0.5 AS base
 
-FROM igcproget.igc.zone/gig-common-docker/dotnet/sdk:3.1.100-0.1.0.4 AS build
+FROM igcproget.igc.zone/gig-common-docker/dotnet/sdk:3.1.101-0.1.0.5 AS build
 
 COPY ["samples/Data/src/GiG.Core.Data.Migration.Sample/GiG.Core.Data.Migration.Sample.csproj", "samples/Data/src/GiG.Core.Data.Migration.Sample/"]
 RUN dotnet restore "samples/Data/src/GiG.Core.Data.Migration.Sample/GiG.Core.Data.Migration.Sample.csproj"

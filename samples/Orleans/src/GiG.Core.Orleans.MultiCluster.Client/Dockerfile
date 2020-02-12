@@ -1,7 +1,7 @@
-FROM igcproget.igc.zone/gig-common-docker/dotnet/aspnet:3.1.0-0.1.0.4 AS base
+FROM igcproget.igc.zone/gig-common-docker/dotnet/aspnet:3.1.1-0.1.0.5 AS base
 EXPOSE 8080
 
-FROM igcproget.igc.zone/gig-common-docker/dotnet/sdk:3.1.100-0.1.0.4 AS build
+FROM igcproget.igc.zone/gig-common-docker/dotnet/sdk:3.1.101-0.1.0.5 AS build
 
 COPY ["samples/Orleans/src/GiG.Core.Orleans.MultiCluster.Client/GiG.Core.Orleans.MultiCluster.Client.csproj", "samples/Orleans/src/GiG.Core.Orleans.MultiCluster.Client/"]
 RUN dotnet restore "samples/Orleans/src/GiG.Core.Orleans.MultiCluster.Client/GiG.Core.Orleans.MultiCluster.Client.csproj"

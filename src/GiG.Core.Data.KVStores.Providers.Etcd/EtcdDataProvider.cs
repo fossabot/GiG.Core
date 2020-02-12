@@ -4,6 +4,7 @@ using GiG.Core.Data.KVStores.Abstractions;
 using GiG.Core.Data.KVStores.Providers.Etcd.Abstractions;
 using Google.Protobuf;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GiG.Core.Data.KVStores.Providers.Etcd
@@ -35,7 +36,10 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
             _dataSerializer = dataSerializer;
             _etcdProviderOptions = etcdProviderOptionsAccessor.Value;
 
-            _etcdClient = new EtcdClient(_etcdProviderOptions.ConnectionString);
+            _etcdClient = new EtcdClient(_etcdProviderOptions.ConnectionString, _etcdProviderOptions.Port,
+                _etcdProviderOptions.Username, _etcdProviderOptions.Password, _etcdProviderOptions.CaCertificate,
+                _etcdProviderOptions.ClientCertificate, _etcdProviderOptions.ClientKey,
+                _etcdProviderOptions.IsPublicRootCa);
         }
 
         /// <inheritdoc/>
@@ -58,7 +62,15 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
                 if (response.Events.Count > 0)
                 {
                     var value = response.Events[0].Kv.Value.ToStringUtf8();
-                    _dataStore.Set(_dataSerializer.GetFromString(value));
+
+                    if (!string.IsNullOrWhiteSpace(value))
+                    {
+                        _dataStore.Set(_dataSerializer.GetFromString(value));
+                    }
+                    else
+                    {
+                        _dataStore.Set(default);
+                    }
                 }
             });
 
@@ -72,7 +84,9 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         /// <returns></returns>
         public async Task<T> GetAsync(params string[] keys)
         {
-            var key = string.Concat(_etcdProviderOptions.Key, string.Join("/", keys));
+            var key = keys.Any()
+                ? string.Concat(_etcdProviderOptions.Key, "/", string.Join("/", keys))
+                : _etcdProviderOptions.Key;
 
             _logger.LogDebug("Returning {key}", key);
 
@@ -89,6 +103,6 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
             _etcdClient.Dispose();
 
             return Task.CompletedTask;
-        }   
+        }
     }
 }
