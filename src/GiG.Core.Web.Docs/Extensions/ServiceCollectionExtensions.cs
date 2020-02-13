@@ -35,6 +35,7 @@ namespace GiG.Core.Web.Docs.Extensions
                 options.IsForwardedForEnabled = apiDocsOptions.IsForwardedForEnabled;
                 options.Title = apiDocsOptions.Title;
                 options.Url = apiDocsOptions.Url;
+                options.XTenantIdEnabled = apiDocsOptions.XTenantIdEnabled;
             });
 
             if (!apiDocsOptions.IsEnabled)
@@ -64,6 +65,7 @@ namespace GiG.Core.Web.Docs.Extensions
                     c.IncludeXmlComments();
                     c.IncludeFullNameCustomSchemaId();
                     c.IncludeForwardedForFilter(apiDocsOptions.IsForwardedForEnabled);
+                    c.IncludeXTenantIdFilter(apiDocsOptions.XTenantIdEnabled);
                     c.OperationFilter<DeprecatedOperationFilter>();
                     configureOptions?.Invoke(c);
                 });
