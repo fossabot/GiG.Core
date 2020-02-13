@@ -35,7 +35,6 @@ namespace GiG.Core.Benchmarks.Orleans
                 .UseApplicationMetadata()
                 .ConfigureServices(services =>
                 {
-                    services.AddCorrelationAccessor();
                     services.AddRequestContextAccessor();
                 })
                 .ConfigureExternalConfiguration()

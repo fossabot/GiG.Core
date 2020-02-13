@@ -31,10 +31,13 @@ namespace GiG.Core.DistributedTracing.Activity.Tests.Integration.Tests
         }
 
         [Fact]
-        public void ActivityAccessor_NullActivity_ThrowsNullReferenceException()
+        public void ActivityAccessor_NullActivity_ShouldNotThrow()
         {
-            // Act & Assert
-            Assert.Throws<NullReferenceException>(() =>  _activityLifetime.ActivityContextAccessor.CorrelationId);
+            // Act
+            var correlationId = _activityLifetime.ActivityContextAccessor.CorrelationId;
+
+            // Assert 
+            Assert.Equal(string.Empty, correlationId);
         }
 
         [Fact]

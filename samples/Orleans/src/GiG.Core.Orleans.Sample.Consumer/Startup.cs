@@ -1,4 +1,5 @@
-using GiG.Core.DistributedTracing.MassTransit.Extensions;
+using GiG.Core.DistributedTracing.Activity.Extensions;
+using GiG.Core.DistributedTracing.Orleans.Extensions;
 using GiG.Core.Messaging.MassTransit.Extensions;
 using GiG.Core.Orleans.Client.Extensions;
 using GiG.Core.Orleans.Clustering.Consul.Extensions;
@@ -22,7 +23,7 @@ namespace GiG.Core.Orleans.Sample.Consumer
             var configuration = ctx.Configuration;
 
             services.AddMassTransitContext();
-            services.AddCorrelationAccessor();
+            services.AddActivityAccessor();
             services.AddStream();
 
             services.AddMessageConsumer(configuration);

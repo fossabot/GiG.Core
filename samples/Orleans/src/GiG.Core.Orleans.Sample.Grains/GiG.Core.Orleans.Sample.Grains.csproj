@@ -10,7 +10,8 @@
     <PackageReference Include="Microsoft.Orleans.Core.Abstractions" Version="3.0.2" />
     <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="3.0.2">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>    
+    </PackageReference>
+    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>

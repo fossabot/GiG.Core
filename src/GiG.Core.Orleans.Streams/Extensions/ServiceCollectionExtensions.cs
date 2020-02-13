@@ -1,4 +1,5 @@
-﻿using GiG.Core.Orleans.Streams.Abstractions;
+﻿using GiG.Core.DistributedTracing.Activity.Extensions;
+using GiG.Core.Orleans.Streams.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -20,6 +21,7 @@ namespace GiG.Core.Orleans.Streams.Extensions
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
+            services.AddActivityAccessor();
             services.TryAddSingleton<IStreamFactory, StreamFactory>();
             return services;
         }

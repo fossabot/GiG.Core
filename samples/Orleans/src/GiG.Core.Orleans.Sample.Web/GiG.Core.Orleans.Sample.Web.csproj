@@ -19,6 +19,7 @@
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Configuration\GiG.Core.Configuration.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Context.Orleans\GiG.Core.Context.Orleans.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Context.Web\GiG.Core.Context.Web.csproj" />
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.DistributedTracing.Activity\GiG.Core.DistributedTracing.Activity.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.DistributedTracing.Orleans\GiG.Core.DistributedTracing.Orleans.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.DistributedTracing.Web\GiG.Core.DistributedTracing.Web.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.HealthChecks.AspNetCore\GiG.Core.HealthChecks.AspNetCore.csproj" />

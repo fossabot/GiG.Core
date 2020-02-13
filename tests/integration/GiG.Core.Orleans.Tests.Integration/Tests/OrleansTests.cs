@@ -27,21 +27,6 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             //Assert
             Assert.Equal(expectedValue, actualValue);
         }
-        
-        [Fact]
-        public async Task GetCorrelationIdAsync_CallGrain_ReturnsExpectedCorrelationGuid()
-        {
-            //Arrange
-            var grain = ClusterClient.GetGrain<ICorrelationTestGrain>(Guid.NewGuid().ToString());
-            var correlationAccessor = ClientServiceProvider.GetRequiredService<ICorrelationContextAccessor>();
-            var expectedValue = correlationAccessor.Value;
-
-            //Act 
-            var actualValue = await grain.GetCorrelationIdAsync();
-
-            //Assert
-            Assert.Equal(expectedValue, actualValue);
-        }
 
         [Fact]
         public async Task GetIPAddressAsync_CallGrain_ReturnsExpectedIPAddress()

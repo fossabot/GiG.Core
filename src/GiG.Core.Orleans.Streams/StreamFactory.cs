@@ -11,15 +11,15 @@ namespace GiG.Core.Orleans.Streams
     /// </summary>
     public class StreamFactory : IStreamFactory
     {
-        private readonly ICorrelationContextAccessor _correlationContextAccessor;
+        private readonly IActivityContextAccessor _activityContextAccessor;
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="correlationContextAccessor">The <see cref="ICorrelationContextAccessor" /> to use to add correlationId within RequestContext.</param>
-        public StreamFactory(ICorrelationContextAccessor correlationContextAccessor)
+        /// <param name="activityContextAccessor">The <see cref="IActivityContextAccessor" /> to use to add activity id within RequestContext.</param>
+        public StreamFactory(IActivityContextAccessor activityContextAccessor)
         {
-            _correlationContextAccessor = correlationContextAccessor;
+            _activityContextAccessor = activityContextAccessor;
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace GiG.Core.Orleans.Streams
         {
             var stream = streamProvider.GetStream<TMessage>(streamId, streamNameSpace);
           
-            return new Stream<TMessage>(stream, _correlationContextAccessor);
+            return new Stream<TMessage>(stream, _activityContextAccessor);
         }
     }
 }
