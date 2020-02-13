@@ -34,5 +34,13 @@ namespace GiG.Core.Web.Docs.Extensions
                 options.OperationFilter<ForwardedForOperationFilter>();
             }
         }
+
+        internal static void IncludeXTenantIdFilter(this SwaggerGenOptions options, bool isEnabled)
+        {
+            if (isEnabled)
+            {
+                options.OperationFilter<XTenantIdOperationFilter>();
+            }
+        }
     }
 }

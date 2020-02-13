@@ -34,5 +34,10 @@
         /// A value to indicate if the IsForwardedFor is enabled or not.
         /// </summary>
         public bool IsForwardedForEnabled { get; set; } = true;
+
+        /// <summary>
+        /// A value to indicate if X-Tenant-ID is enabled or not.
+        /// </summary>
+        public bool XTenantIdEnabled { get; set; } = true;
     }
 }

@@ -37,6 +37,7 @@ The below table outlines the valid Configurations used to override the [ApiDocsO
 | Title                 | String  | No       | <null>        |
 | Description           | String  | No       | <null>        |
 | IsForwardedForEnabled | Boolean | No       | `true`        |
+| XTenantIdEnabled      | Boolean | No       | `true`        |
 
 #### Sample Configuration
 
