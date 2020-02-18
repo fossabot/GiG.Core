@@ -25,7 +25,11 @@ namespace GiG.Core.Orleans.Silo.Dashboard.Extensions
                 {
                     HostSelf = options.HostSelf,
                     Port = options.Port,
-                    BasePath = options.Path
+                    BasePath = options.Path,
+                    Username = options.Username,
+                    Password = options.Password,
+                    HideTrace = options.HideTrace,
+                    CounterUpdateIntervalMs = options.CounterUpdateIntervalMs
                 });    
             }
         }
