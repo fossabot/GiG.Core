@@ -25,19 +25,47 @@ static class Program
 }
 ```
 
+### Configuration
+
+The below table outlines the valid Configurations under the Config section `Logging`.
+
+| Configuration Name | Type                                    | Optional |
+|:-------------------|:----------------------------------------|:---------|
+| MinimumLevel       | String or Object (to specify overrides) | No       |
+| Sinks              | List of Sinks configuration             | No       |
+
 #### Sample Configuration
+
+The following sample includes a basic usage with a minimum log levels that applies to all namespaces and categories.
+
 
 ```json
 {
   "Logging": {
-    "MinimumLevel": "Debug",
+    "MinimumLevel": "Information",
     "Sinks": {
       "Console": {
         "IsEnabled": true
-      },
-      "RabbitMQ": {
-        "IsEnabled": false,
-        "Exchange": "logging"
+      }
+    }
+  }
+}
+```
+
+The following sample also includes a list of overrides to configure minimum log level for a specified namespace or category.
+
+```json
+{
+  "Logging": {
+    "MinimumLevel": {
+      "Default": "Information",
+      "Override": {
+        "Microsoft": "Warning"
+      }
+    },
+    "Sinks": {
+      "Console": {
+        "IsEnabled": true
       }
     }
   }
