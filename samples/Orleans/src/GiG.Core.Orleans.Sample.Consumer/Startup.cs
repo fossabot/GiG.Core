@@ -1,5 +1,4 @@
 using GiG.Core.DistributedTracing.Activity.Extensions;
-using GiG.Core.DistributedTracing.Orleans.Extensions;
 using GiG.Core.Messaging.MassTransit.Extensions;
 using GiG.Core.Orleans.Client.Extensions;
 using GiG.Core.Orleans.Clustering.Consul.Extensions;

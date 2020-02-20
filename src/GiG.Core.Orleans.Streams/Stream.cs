@@ -11,7 +11,7 @@ namespace GiG.Core.Orleans.Streams
     /// Stream to publish Event Messages over Orleans Streams.
     /// </summary>
     /// <typeparam name="TMessage">Stream Message.</typeparam>
-    public class Stream<TMessage> : IStream<TMessage>
+    public class Stream<TMessage> : IStream<TMessage> where TMessage : IMessage
     {
         private readonly IAsyncStream<TMessage> _asyncStream;
         private readonly IActivityContextAccessor _activityContextAccessor;

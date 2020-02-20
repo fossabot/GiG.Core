@@ -7,7 +7,7 @@ namespace GiG.Core.Orleans.Streams.Abstractions
     /// An abstraction for a stream publisher.
     /// </summary>
     /// <typeparam name="TMessage"></typeparam>
-    public interface IStream<in TMessage>
+    public interface IStream<in TMessage> where TMessage : IMessage
     {
         /// <summary>
         /// Publishes a message using the underlying provider from which the stream publisher was created.

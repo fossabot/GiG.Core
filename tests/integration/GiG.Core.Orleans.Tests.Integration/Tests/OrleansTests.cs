@@ -1,6 +1,5 @@
 using Bogus;
 using GiG.Core.Context.Abstractions;
-using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.Orleans.Tests.Integration.Contracts;
 using GiG.Core.Orleans.Tests.Integration.Lifetimes;
 using Microsoft.Extensions.DependencyInjection;
