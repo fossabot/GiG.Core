@@ -18,7 +18,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Streams.Kafka
         [Fact]
         public void AddKafkaStreamProvider_ProviderNameIsNull_ThrowsArgumentNullException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => ClientBuilderExtensions.AddKafkaStreamProvider(new ClientBuilder(), null, null));
+            var exception = Assert.Throws<ArgumentException>(() => ClientBuilderExtensions.AddKafkaStreamProvider(new ClientBuilder(), null, null));
             Assert.Equal("providerName", exception.ParamName);
         }
         

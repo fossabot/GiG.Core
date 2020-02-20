@@ -41,7 +41,6 @@ private static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builde
         kafkaBuilder.WithOptions(kafkaOptions =>
         {
             kafkaOptions.FromConfiguration(ctx.Configuration);
-            kafkaOptions.ConsumeMode = ConsumeMode.StreamStart;
             kafkaOptions.AddTopic("MyTopic");
         })
         .AddJson();

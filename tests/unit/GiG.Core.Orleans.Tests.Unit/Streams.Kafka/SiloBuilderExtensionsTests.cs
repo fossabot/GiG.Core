@@ -6,7 +6,7 @@ using Xunit;
 namespace GiG.Core.Orleans.Tests.Unit.Streams.Kafka
 {
     [Trait("Category", "Unit")]
-    public class SilpBuilderExtensionsTests
+    public class SiloBuilderExtensionsTests
     {
         [Fact]
         public void AddKafkaStreamProvider_ClientBuilderIsNull_ThrowsArgumentNullException()
@@ -20,7 +20,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Streams.Kafka
         [Fact]
         public void AddKafkaStreamProvider_ProviderNameIsNull_ThrowsArgumentNullException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => Host.CreateDefaultBuilder()
+            var exception = Assert.Throws<ArgumentException>(() => Host.CreateDefaultBuilder()
                 .UseOrleans((ctx, sb) => { sb.AddKafkaStreamProvider(null, null); })
                 .Build());
 

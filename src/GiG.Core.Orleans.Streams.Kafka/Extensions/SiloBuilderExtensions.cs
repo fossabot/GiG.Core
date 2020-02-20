@@ -21,7 +21,7 @@ namespace GiG.Core.Orleans.Streams.Kafka.Extensions
             [NotNull] Action<KafkaStreamSiloBuilder> kafkaBuilderConfig)
         {
             if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
-            if (string.IsNullOrWhiteSpace(providerName)) throw new ArgumentNullException(nameof(providerName));
+            if (string.IsNullOrWhiteSpace(providerName)) throw new ArgumentException($"'{nameof(providerName)}' must not be null, empty or whitespace.", nameof(providerName));
             if (kafkaBuilderConfig == null) throw new ArgumentNullException(nameof(kafkaBuilderConfig));
             
             var kafkaBuilder = siloBuilder.AddKafka(providerName);
