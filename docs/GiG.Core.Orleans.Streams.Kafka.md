@@ -12,19 +12,20 @@ The below code needs to be added to the `Startup.cs` to use this extension.
 ```csharp
 private static void ConfigureServices(HostBuilderContext ctx, IServiceCollection services)
 {
-  // Orleans Client
-  services.AddDefaultClusterClient((builder, sp) =>
-  {
-    builder
-    .AddKafka("KafkaProvider")
-    .WithOptions(options =>
+// Orleans Client
+    services
+    .AddDefaultClusterClient((builder, sp) =>
     {
-      options.FromConfiguration(ctx.Configuration);
-      options.AddTopic("MyTopic");
-    })
-    .AddJson()
-    .Build();
-  });
+        builder.AddKafkaStreamProvider("KafkaProvider", kafkaBuilder =>
+        {
+            kafkaBuilder.WithOptions(options =>
+            {
+                options.FromConfiguration(ctx.Configuration);
+                options.AddTopic("MyTopic");
+            })
+            .AddJson();
+        });
+    });
 }  
 
 ```
@@ -33,17 +34,17 @@ private static void ConfigureServices(HostBuilderContext ctx, IServiceCollection
 ```csharp
 private static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builder)
 {
-  builder
-    .AddMemoryGrainStorage("PubSubStore")
-    .AddKafka("KafkaProvider")
-    .WithOptions(kafkaOptions =>
+    builder
+    .AddMemoryGrainStorage("PubSubStore")    
+    .AddKafkaStreamProvider("KafkaProvider", kafkaBuilder =>
     {
-      kafkaOptions.FromConfiguration(ctx.Configuration);
-      kafkaOptions.ConsumeMode = ConsumeMode.StreamStart;
-      kafkaOptions.AddTopic("MyTopic");
-    })
-    .AddJson()
-    .Build();
+        kafkaBuilder.WithOptions(kafkaOptions =>
+        {
+            kafkaOptions.FromConfiguration(ctx.Configuration);
+            kafkaOptions.AddTopic("MyTopic");
+        })
+        .AddJson();
+    });
 }      
 ```
 
