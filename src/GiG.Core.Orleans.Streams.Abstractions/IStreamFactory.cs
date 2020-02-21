@@ -16,6 +16,6 @@ namespace GiG.Core.Orleans.Streams.Abstractions
         /// <param name="streamNameSpace">The stream namespace on which the messages are published.</param>
         /// <typeparam name="TMessage">The type to which the message is serialized.</typeparam>
         /// <returns>An implementation of an stream publisher.</returns>
-        IStream<TMessage> GetStream<TMessage>(IStreamProvider streamProvider, Guid streamId, string streamNameSpace);
+        IStream<TMessage> GetStream<TMessage>(IStreamProvider streamProvider, Guid streamId, string streamNameSpace) where TMessage : IMessage;
     }
 }

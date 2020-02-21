@@ -1,7 +1,6 @@
 using FluentValidation.AspNetCore;
 using GiG.Core.Context.Orleans.Extensions;
 using GiG.Core.DistributedTracing.Orleans.Extensions;
-using GiG.Core.DistributedTracing.Web.Extensions;
 using GiG.Core.HealthChecks.AspNetCore.Extensions;
 using GiG.Core.Hosting.AspNetCore.Extensions;
 using GiG.Core.Hosting.Extensions;

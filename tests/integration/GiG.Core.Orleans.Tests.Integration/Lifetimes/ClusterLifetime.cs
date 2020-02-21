@@ -1,9 +1,6 @@
 using Bogus;
 using GiG.Core.Context.Abstractions;
 using GiG.Core.Context.Orleans.Extensions;
-using GiG.Core.DistributedTracing.Abstractions;
-using GiG.Core.DistributedTracing.Orleans;
-using GiG.Core.DistributedTracing.Orleans.Extensions;
 using GiG.Core.Orleans.Client.Extensions;
 using GiG.Core.Orleans.Silo.Abstractions;
 using GiG.Core.Orleans.Silo.Extensions;

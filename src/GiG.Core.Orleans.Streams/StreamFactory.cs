@@ -30,7 +30,7 @@ namespace GiG.Core.Orleans.Streams
         /// <param name="streamNameSpace">The stream namespace.</param>
         /// <typeparam name="TMessage">Stream Message.</typeparam>
         /// <returns>The <see cref="IStream{TMessage}"/> stream. </returns>
-        public IStream<TMessage> GetStream<TMessage>(IStreamProvider streamProvider, Guid streamId, string streamNameSpace)
+        public IStream<TMessage> GetStream<TMessage>(IStreamProvider streamProvider, Guid streamId, string streamNameSpace) where TMessage : IMessage
         {
             var stream = streamProvider.GetStream<TMessage>(streamId, streamNameSpace);
           
