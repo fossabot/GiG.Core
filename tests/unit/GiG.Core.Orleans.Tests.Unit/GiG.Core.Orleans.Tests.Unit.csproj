@@ -26,6 +26,7 @@
         <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering.Consul\GiG.Core.Orleans.Clustering.Consul.csproj" />
         <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering.Kubernetes\GiG.Core.Orleans.Clustering.Kubernetes.csproj" />
         <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering\GiG.Core.Orleans.Clustering.csproj" />
+        <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Reminders.Npgsql\GiG.Core.Orleans.Reminders.Npgsql.csproj" />
         <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Silo.Dashboard\GiG.Core.Orleans.Silo.Dashboard.csproj" />
         <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Silo\GiG.Core.Orleans.Silo.csproj" />
         <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Storage.Npgsql\GiG.Core.Orleans.Storage.Npgsql.csproj" />

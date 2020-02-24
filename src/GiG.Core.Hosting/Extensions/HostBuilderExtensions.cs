@@ -33,12 +33,11 @@ namespace GiG.Core.Hosting.Extensions
             });
         }
         
-
         private static string GetCheckSum(IConfiguration configuration)
         {
             var checksumConfiguration = configuration.GetSection(InfoManagementChecksumOptions.DefaultSectionName)
                 .Get<InfoManagementChecksumOptions>() ?? new InfoManagementChecksumOptions();
-            
+             
             var physicalFileProvider = new PhysicalFileProvider(checksumConfiguration.Root);
             var fileInfo = physicalFileProvider.GetFileInfo(checksumConfiguration.FilePath);
             
