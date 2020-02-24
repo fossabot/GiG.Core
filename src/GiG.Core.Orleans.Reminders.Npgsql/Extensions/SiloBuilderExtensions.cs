@@ -18,12 +18,13 @@ namespace GiG.Core.Orleans.Reminders.Npgsql.Extensions
         /// Use Npgsql Reminder Service.
         /// </summary>
         /// <param name="siloBuilder">The <see cref="ISiloBuilder"/>.</param>
-        /// <param name="storageName">The Grain Storage name.</param>
+        /// <param name="storageName">The Reminder Storage name.</param>
         /// <param name="configuration">The <see cref="IConfiguration"/>.</param>
         /// <returns>The<see cref="ISiloBuilder"/>.</returns>
         public static ISiloBuilder UseNpgsqlReminderService([NotNull] this ISiloBuilder siloBuilder, [NotNull] string storageName, [NotNull] IConfiguration configuration)
         {
             if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
+            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
             
             return siloBuilder.UseNpgsqlReminderService(storageName, configuration, NpgsqlOptions.DefaultSectionName);
         }

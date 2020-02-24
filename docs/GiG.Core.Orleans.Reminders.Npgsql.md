@@ -35,7 +35,7 @@ public class Program
         builder.ConfigureCluster(ctx.Configuration)
             .ConfigureEndpoints(ctx.Configuration)
             .AddAssemblies(typeof(Grain))
-			 .UseNpgsqlReminderService("NpgsqlProvider", ctx.Configuration);
+			 .UseNpgsqlReminderService("SampleDb", ctx.Configuration);
     }
 }
 ```
