@@ -2,6 +2,7 @@
 using GiG.Core.Orleans.Tests.Integration.Contracts;
 using GiG.Core.Orleans.Tests.Integration.Lifetimes;
 using GiG.Core.Orleans.Tests.Integration.Mocks;
+using Orleans.Runtime;
 using System;
 using System.Threading.Tasks;
 using Xunit;

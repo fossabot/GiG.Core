@@ -2,6 +2,7 @@
 using GiG.Core.Benchmarks.Orleans.Streams;
 using GiG.Core.Configuration.Extensions;
 using GiG.Core.Context.Orleans.Extensions;
+using GiG.Core.DistributedTracing.Orleans.Extensions;
 using GiG.Core.Hosting.Extensions;
 using GiG.Core.Logging.All.Extensions;
 using Microsoft.Extensions.DependencyInjection;
