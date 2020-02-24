@@ -3,6 +3,7 @@ using GiG.Core.Orleans.Sample.Contracts.Models.Payment;
 using Microsoft.Extensions.Logging;
 using Orleans;
 using Orleans.Providers;
+using Orleans.Runtime;
 using Orleans.Streams;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,5 @@
 using GiG.Core.DistributedTracing.Abstractions;
+using GiG.Core.Orleans.Sample.Contracts;
 using GiG.Core.Orleans.Sample.Contracts.Messages;
 using GiG.Core.Orleans.Sample.Contracts.Models.Payment;
 using GiG.Core.Orleans.Streams.Abstractions;
