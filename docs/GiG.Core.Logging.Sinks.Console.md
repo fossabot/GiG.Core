@@ -32,9 +32,10 @@ static class Program
 
 The below table outlines the valid Configurations under the Config section `Logging:Sinks:Console`.
 
-| Configuration Name | Type    | Optional | Default Value |
-|:-------------------|:--------|:---------|:--------------|
-| IsEnabled          | Boolean | Yes      | false         |
+| Configuration Name   | Type    | Optional | Default Value |
+|:---------------------|:--------|:---------|:--------------|
+| IsEnabled            | Boolean | Yes      | false         |
+| UseStructuredLogging | Boolean | Yes      | false         |
 
 #### Sample Configuration
 
@@ -44,7 +45,8 @@ The below table outlines the valid Configurations under the Config section `Logg
      "MinimumLevel": "Debug",
      "Sinks": {
       "Console": {
-        "IsEnabled": true
+        "IsEnabled": true,
+        "UseStructuredLogging" : true
       }
      }
    }
