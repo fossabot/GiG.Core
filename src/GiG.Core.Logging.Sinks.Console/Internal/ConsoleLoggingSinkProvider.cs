@@ -17,8 +17,10 @@ namespace GiG.Core.Logging.Sinks.Console.Internal
         
         public void RegisterSink(LoggerSinkConfiguration sinkConfiguration)
         {
-            if (_sinkOptions.UseStructuredLogging) sinkConfiguration.Console(new ElasticsearchJsonFormatter());
-            else sinkConfiguration.Console();
+            if (_sinkOptions.UseStructuredLogging) 
+                sinkConfiguration.Console(new ElasticsearchJsonFormatter());
+            else 
+                sinkConfiguration.Console();
         }
     }
 }
