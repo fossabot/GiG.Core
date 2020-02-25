@@ -63,6 +63,7 @@ namespace GiG.Core.Hosting.Tests.Integration.Tests
                 {
                     webHost.UseTestServer();
                     webHost.UseStartup<AspNetCoreMockStartup>();
+                    webHost.ConfigureAppConfiguration(appConfig => appConfig.AddJsonFile("appsettingsFileDoesNotExist.json"));
                 });
 
             var httpClient = hostBuilder.Start().GetTestClient();
