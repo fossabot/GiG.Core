@@ -37,7 +37,10 @@ namespace GiG.Core.Hosting.Extensions
         {
             var checksumConfiguration = configuration.GetSection(InfoManagementChecksumOptions.DefaultSectionName)
                 .Get<InfoManagementChecksumOptions>() ?? new InfoManagementChecksumOptions();
-             
+
+            if (!Directory.Exists(checksumConfiguration.Root))
+                return null;
+
             var physicalFileProvider = new PhysicalFileProvider(checksumConfiguration.Root);
             var fileInfo = physicalFileProvider.GetFileInfo(checksumConfiguration.FilePath);
             

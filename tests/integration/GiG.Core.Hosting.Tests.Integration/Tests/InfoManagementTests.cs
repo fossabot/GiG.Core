@@ -16,10 +16,10 @@ namespace GiG.Core.Hosting.Tests.Integration.Tests
     [Trait("Category", "Integration")]
     public class InfoManagementTests
     {
-        private readonly HttpClient _httpClient;
-
-        public InfoManagementTests()
+        [Fact]
+        public async Task InfoManagement_CallEndpoint_ReturnsApplicationMetadata()
         {
+            //Arrange
             var hostBuilder = new HostBuilder()
                 .UseApplicationMetadata()
                 .ConfigureWebHost(webHost =>
@@ -29,27 +29,101 @@ namespace GiG.Core.Hosting.Tests.Integration.Tests
                     webHost.ConfigureAppConfiguration(appConfig => appConfig.AddJsonFile("appsettings.json"));
                 });
 
-            _httpClient = hostBuilder.Start().GetTestClient();
-        }
+            var httpClient = hostBuilder.Start().GetTestClient();
 
-        [Fact]
-        public async Task InfoManagement_CallEndpoint_ReturnsApplicationMetadata()
-        {
-            //Arrange
             const HttpStatusCode expectedStatusCode = HttpStatusCode.OK;
 
             //Act
             using var request = new HttpRequestMessage(HttpMethod.Get, "/actuator/info");
-            using var response = await _httpClient.SendAsync(request);
+            using var response = await httpClient.SendAsync(request);
 
             var applicationMetadataDictionary = JsonSerializer.Deserialize<Dictionary<string, string>>(await response.Content.ReadAsStringAsync());
 
             //Assert
-            Assert.Equal(expectedStatusCode, response.StatusCode);            
+            Assert.Equal(expectedStatusCode, response.StatusCode);  
+            
             Assert.Equal(applicationMetadataDictionary[nameof(ApplicationMetadata.Name)], ApplicationMetadata.Name);
             Assert.Equal(applicationMetadataDictionary[nameof(ApplicationMetadata.Version)], ApplicationMetadata.Version);
             Assert.Equal(applicationMetadataDictionary[nameof(ApplicationMetadata.InformationalVersion)], ApplicationMetadata.InformationalVersion);
             Assert.Equal(applicationMetadataDictionary[nameof(ApplicationMetadata.Checksum)], ApplicationMetadata.Checksum);
+            
+            Assert.NotNull(ApplicationMetadata.Name);
+            Assert.NotNull(ApplicationMetadata.Version);
+            Assert.NotNull(ApplicationMetadata.InformationalVersion);
+            Assert.NotNull(ApplicationMetadata.Checksum);
+        }
+
+        [Fact]
+        public async Task InfoManagement_CallEndpointWhenFileDoesNotExist_ReturnsNullChecksum()
+        {
+            //Arrange
+            var hostBuilder = new HostBuilder()
+                .UseApplicationMetadata()
+                .ConfigureWebHost(webHost =>
+                {
+                    webHost.UseTestServer();
+                    webHost.UseStartup<AspNetCoreMockStartup>();
+                });
+
+            var httpClient = hostBuilder.Start().GetTestClient();
+
+            const HttpStatusCode expectedStatusCode = HttpStatusCode.OK;
+
+            //Act
+            using var request = new HttpRequestMessage(HttpMethod.Get, "/actuator/info");
+            using var response = await httpClient.SendAsync(request);
+
+            var applicationMetadataDictionary = JsonSerializer.Deserialize<Dictionary<string, string>>(await response.Content.ReadAsStringAsync());
+
+            //Assert
+            Assert.Equal(expectedStatusCode, response.StatusCode);
+            
+            Assert.Equal(applicationMetadataDictionary[nameof(ApplicationMetadata.Name)], ApplicationMetadata.Name);
+            Assert.Equal(applicationMetadataDictionary[nameof(ApplicationMetadata.Version)], ApplicationMetadata.Version);
+            Assert.Equal(applicationMetadataDictionary[nameof(ApplicationMetadata.InformationalVersion)], ApplicationMetadata.InformationalVersion);
+            Assert.Equal(applicationMetadataDictionary[nameof(ApplicationMetadata.Checksum)], ApplicationMetadata.Checksum);
+
+            Assert.NotNull(ApplicationMetadata.Name);
+            Assert.NotNull(ApplicationMetadata.Version);
+            Assert.NotNull(ApplicationMetadata.InformationalVersion);
+            Assert.Null(ApplicationMetadata.Checksum);
+        }
+
+        [Fact]
+        public async Task InfoManagement_CallEndpointWhenDirectoryDoesNotExist_ReturnsNullChecksum()
+        {
+            //Arrange
+            var hostBuilder = new HostBuilder()
+                .UseApplicationMetadata()
+                .ConfigureWebHost(webHost =>
+                {
+                    webHost.UseTestServer();
+                    webHost.UseStartup<AspNetCoreMockStartup>();
+                    webHost.ConfigureAppConfiguration(appConfig => appConfig.AddJsonFile("appsettingsDirectoryDoesNotExist.json"));
+                });
+
+            var httpClient = hostBuilder.Start().GetTestClient();
+
+            const HttpStatusCode expectedStatusCode = HttpStatusCode.OK;
+
+            //Act
+            using var request = new HttpRequestMessage(HttpMethod.Get, "/actuator/info");
+            using var response = await httpClient.SendAsync(request);
+
+            var applicationMetadataDictionary = JsonSerializer.Deserialize<Dictionary<string, string>>(await response.Content.ReadAsStringAsync());
+
+            //Assert
+            Assert.Equal(expectedStatusCode, response.StatusCode);
+
+            Assert.Equal(applicationMetadataDictionary[nameof(ApplicationMetadata.Name)], ApplicationMetadata.Name);
+            Assert.Equal(applicationMetadataDictionary[nameof(ApplicationMetadata.Version)], ApplicationMetadata.Version);
+            Assert.Equal(applicationMetadataDictionary[nameof(ApplicationMetadata.InformationalVersion)], ApplicationMetadata.InformationalVersion);
+            Assert.Equal(applicationMetadataDictionary[nameof(ApplicationMetadata.Checksum)], ApplicationMetadata.Checksum);
+
+            Assert.NotNull(ApplicationMetadata.Name);
+            Assert.NotNull(ApplicationMetadata.Version);
+            Assert.NotNull(ApplicationMetadata.InformationalVersion);
+            Assert.Null(ApplicationMetadata.Checksum);
         }
     }
 }
