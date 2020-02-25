@@ -22,7 +22,7 @@ namespace GiG.Core.DistributedTracing.Activity
         public string SpanId => Current.SpanId.ToString() ?? string.Empty;
 
         /// <inheritdoc />
-        public string ParentId => Current.ParentId ?? string.Empty;
+        public string ParentId => Current.ParentId;
 
         /// <inheritdoc />
         public string ParentSpanId => Current.ParentSpanId.ToString() ?? string.Empty;
