@@ -43,7 +43,6 @@ namespace GiG.Core.DistributedTracing.Activity
                 var newActivity = new System.Diagnostics.Activity(ActivityName);
                 newActivity.Start();
                 return newActivity;
-
             }
         }
     }
