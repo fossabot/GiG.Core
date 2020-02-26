@@ -22,6 +22,17 @@ private static void ConfigureServices(HostBuilderContext ctx, IServiceCollection
             {
                 options.FromConfiguration(ctx.Configuration);
                 options.AddTopic("MyTopic");
+                
+                var kafkaOptions = ctx.Configuration.GetSection(KafkaOptions.DefaultSectionName).Get<KafkaOptions>();
+                
+                options.SecurityProtocol = kafkaOptions.SecurityProtocol;
+                options.WithSaslOptions(
+                    new Credentials
+                    {
+                        UserName = kafkaOptions.SaslUsername,
+                        Password = kafkaOptions.SaslPassword
+                    },
+                    kafkaOptions.SaslMechanism);
             })
             .AddJson();
         });
@@ -56,6 +67,11 @@ You can change the default value for the Kafka configuration by overriding the [
 |:-------------------|:---------|:---------|:-----------------|
 | Brokers            | String[] | No       | `localhost:9092` |
 | ConsumerGroupId    | String   | No       | `null`           |
+| SaslUsername       | String   | No       | `null`           |
+| SaslPassword       | String   | No       | `null`           |
+| SecurityProtocol   | String   | Yes      | `Plaintext`      |
+| SaslMechanism      | String   | Yes      | `Plain`          |
+
 
 #### Sample Configuration
 
@@ -65,7 +81,9 @@ You can change the default value for the Kafka configuration by overriding the [
     "Streams": {
       "Kafka": {
         "Brokers": "localhost:9092",
-        "ConsumerGroupId": "OrleansStreamsBenchmark"
+        "ConsumerGroupId": "OrleansStreamsBenchmark",
+        "SaslUsername": "user",
+        "SaslPassword": "password"
       }
     }
   }
