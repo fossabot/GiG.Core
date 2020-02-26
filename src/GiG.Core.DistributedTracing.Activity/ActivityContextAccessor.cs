@@ -35,14 +35,15 @@ namespace GiG.Core.DistributedTracing.Activity
             get
             {
                 var activity = System.Diagnostics.Activity.Current;
-                if (activity == null)
+                if (activity != null)
                 {
-                    var newActivity = new System.Diagnostics.Activity(ActivityName);
-                    newActivity.Start();
-                    return newActivity;
+                    return activity;
                 }
+                
+                var newActivity = new System.Diagnostics.Activity(ActivityName);
+                newActivity.Start();
+                return newActivity;
 
-                return activity;
             }
         }
     }
