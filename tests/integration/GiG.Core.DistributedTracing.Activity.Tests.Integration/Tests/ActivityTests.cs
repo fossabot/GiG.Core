@@ -71,6 +71,27 @@ namespace GiG.Core.DistributedTracing.Activity.Tests.Integration.Tests
             // Assert
             Assert.Equal(expectedCorrelationId, actualCorrelationId);
         }
+        
+        
+        [Fact]
+        public void ActivityAccessor_ActivityCalledTwice_ReturnsSameCorrelationId()
+        {
+            // Arrange
+            var activity = new System.Diagnostics.Activity("Tests");
+            activity.Start();
+
+            var expectedCorrelationId = activity.RootId;
+
+            // Act
+            var firstActualCorrelationId = _activityLifetime.ActivityContextAccessor.CorrelationId;
+            var secondActualCorrelationId = _activityLifetime.ActivityContextAccessor.CorrelationId;
+            
+            activity.Stop();
+
+            // Assert
+            Assert.Equal(expectedCorrelationId, firstActualCorrelationId);
+            Assert.Equal(expectedCorrelationId, secondActualCorrelationId);
+        }
 
         [Fact]
         public async Task ActivityAccessor_HttpCall_ReturnsActivity()
