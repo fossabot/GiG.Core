@@ -21,7 +21,7 @@ namespace GiG.Core.Logging.Sinks.Console.Extensions
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
 
-            return builder.RegisterSink(SinkName, new ConsoleLoggingSinkProvider());
+            return builder.RegisterSink(SinkName, new ConsoleLoggingSinkProvider(builder.SinkConfiguration.GetSection(SinkName)));
         }
     }
 }
