@@ -1,4 +1,5 @@
 ﻿using GiG.Core.DistributedTracing.Abstractions;
+using System;
 using System.Collections.Generic;
 
 namespace GiG.Core.DistributedTracing.Activity
@@ -6,25 +7,43 @@ namespace GiG.Core.DistributedTracing.Activity
     /// <inheritdoc />
     internal class ActivityContextAccessor : IActivityContextAccessor
     {
+        private const string ActivityName = "GiG.Core.DistributedTracing.Activity";
+       
         /// <inheritdoc />
-        public string CorrelationId => System.Diagnostics.Activity.Current?.RootId ?? string.Empty;
+        public string CorrelationId => Current.RootId ?? string.Empty;
 
         /// <inheritdoc />
-        public IEnumerable<KeyValuePair<string, string>> Baggage => System.Diagnostics.Activity.Current?.Baggage ?? new List<KeyValuePair<string,string>>();
+        public IEnumerable<KeyValuePair<string, string>> Baggage => Current.Baggage ?? new List<KeyValuePair<string,string>>();
 
         /// <inheritdoc />
-        public string TraceId => System.Diagnostics.Activity.Current?.TraceId.ToString() ?? string.Empty;
+        public string TraceId => Current.TraceId.ToString() ?? string.Empty;
 
         /// <inheritdoc />
-        public string SpanId => System.Diagnostics.Activity.Current?.SpanId.ToString() ?? string.Empty;
+        public string SpanId => Current.SpanId.ToString() ?? string.Empty;
 
         /// <inheritdoc />
-        public string ParentId => System.Diagnostics.Activity.Current?.ParentId?.ToString() ?? string.Empty;
+        public string ParentId => Current.ParentId;
 
         /// <inheritdoc />
-        public string ParentSpanId => System.Diagnostics.Activity.Current?.ParentSpanId.ToString() ?? string.Empty;
+        public string ParentSpanId => Current.ParentSpanId.ToString() ?? string.Empty;
 
         /// <inheritdoc />
-        public string OperationName => System.Diagnostics.Activity.Current?.OperationName ?? string.Empty;
+        public string OperationName => Current.OperationName ?? ActivityName;
+        
+        private static System.Diagnostics.Activity Current
+        {
+            get
+            {
+                var activity = System.Diagnostics.Activity.Current;
+                if (activity != null)
+                {
+                    return activity;
+                }
+                
+                var newActivity = new System.Diagnostics.Activity(ActivityName);
+                newActivity.Start();
+                return newActivity;
+            }
+        }
     }
 }
