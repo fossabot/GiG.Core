@@ -1,6 +1,4 @@
-﻿using Orleans.Streams.Kafka.Config;
-
-namespace GiG.Core.Orleans.Streams.Kafka.Configurations
+﻿namespace GiG.Core.Orleans.Streams.Kafka.Configurations
 {
     /// <summary>
     /// Kafka Settings for Orleans Streams.
@@ -23,23 +21,8 @@ namespace GiG.Core.Orleans.Streams.Kafka.Configurations
         public string ConsumerGroupId { get; set; }
         
         /// <summary>
-        /// The Sasl Username.
+        /// SSL Options for Kafka Provider.
         /// </summary>
-        public string SaslUsername { get; set; }
-
-        /// <summary>
-        /// The Sasl Password.
-        /// </summary>
-        public string SaslPassword { get; set; }
-
-        /// <summary>
-        /// SecurityProtocol enum value.
-        /// </summary>
-        public SecurityProtocol SecurityProtocol { get; set; } = SecurityProtocol.Plaintext;
-
-        /// <summary>
-        /// The SaslMechanism to use.
-        /// </summary>
-        public SaslMechanism SaslMechanism { get; set; } = SaslMechanism.Plain;
+        public KafkaSSlOptions SSl { get; set; } = new KafkaSSlOptions();
     }
 }

@@ -21,18 +21,7 @@ private static void ConfigureServices(HostBuilderContext ctx, IServiceCollection
             kafkaBuilder.WithOptions(options =>
             {
                 options.FromConfiguration(ctx.Configuration);
-                options.AddTopic("MyTopic");
-                
-                var kafkaOptions = ctx.Configuration.GetSection(KafkaOptions.DefaultSectionName).Get<KafkaOptions>();
-                
-                options.SecurityProtocol = kafkaOptions.SecurityProtocol;
-                options.WithSaslOptions(
-                    new Credentials
-                    {
-                        UserName = kafkaOptions.SaslUsername,
-                        Password = kafkaOptions.SaslPassword
-                    },
-                    kafkaOptions.SaslMechanism);
+                options.AddTopic("MyTopic");                                
             })
             .AddJson();
         });
@@ -63,15 +52,17 @@ private static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builde
 
 You can change the default value for the Kafka configuration by overriding the [KafkaOptions](../src/GiG.Core.Orleans.Streams.Kafka/Configurations/KafkaOptions.cs) by adding the following configuration settings under section `Orleans:Streams:Kafka`. The Brokers option is an array which is delimited with ';'.
 
-| Configuration Name | Type     | Optional | Default Value    |
-|:-------------------|:---------|:---------|:-----------------|
-| Brokers            | String[] | No       | `localhost:9092` |
-| ConsumerGroupId    | String   | No       | `null`           |
-| SaslUsername       | String   | No       | `null`           |
-| SaslPassword       | String   | No       | `null`           |
-| SecurityProtocol   | String   | Yes      | `Plaintext`      |
-| SaslMechanism      | String   | Yes      | `Plain`          |
+| Configuration Name   | Type     | Optional | Default Value    |
+|:---------------------|:---------|:---------|:-----------------|
+| Brokers              | String[] | No       | `localhost:9092` |
+| ConsumerGroupId      | String   | No       | `null`           |
+| Ssl:IsEnabled        | String   | Yes      | `false`          |
+| Ssl:SaslUsername     | String   | No       | `null`           |
+| Ssl:SaslPassword     | String   | No       | `null`           |
+| Ssl:SecurityProtocol | String   | Yes      | `Plaintext`      |
+| Ssl:SaslMechanism    | String   | Yes      | `Plain`          |
 
+When the Ssl section is enabled, both username and password are validated so they cannot be left empty.
 
 #### Sample Configuration
 
@@ -82,8 +73,11 @@ You can change the default value for the Kafka configuration by overriding the [
       "Kafka": {
         "Brokers": "localhost:9092",
         "ConsumerGroupId": "OrleansStreamsBenchmark",
-        "SaslUsername": "user",
-        "SaslPassword": "password"
+        "Ssl": {
+          "IsEnabled": true,
+          "SaslUsername": "user",
+          "SaslPassword": "password"
+        }
       }
     }
   }
