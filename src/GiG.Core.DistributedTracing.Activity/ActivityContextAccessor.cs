@@ -10,7 +10,7 @@ namespace GiG.Core.DistributedTracing.Activity
         private const string ActivityName = "GiG.Core.DistributedTracing.Activity";
        
         /// <inheritdoc />
-        string IActivityContextAccessor.CorrelationId => Current.RootId ?? string.Empty;
+        public string CorrelationId => Current.RootId ?? string.Empty;
 
         /// <inheritdoc />
         public IEnumerable<KeyValuePair<string, string>> Baggage => Current.Baggage ?? new List<KeyValuePair<string,string>>();
