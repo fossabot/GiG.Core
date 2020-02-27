@@ -63,7 +63,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Streams.Kafka
         {
             //Arrange
             var config = new ConfigurationBuilder()
-                .AddJsonFile("appSettingsSsl.json")
+                .AddJsonFile("appsettingsSsl.json")
                 .Build();
 
             //Act  - Assert
