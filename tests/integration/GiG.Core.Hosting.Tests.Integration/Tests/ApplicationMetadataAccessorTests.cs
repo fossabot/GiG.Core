@@ -8,6 +8,8 @@ using Xunit;
 namespace GiG.Core.Hosting.Tests.Integration.Tests
 {
     [Trait("Category", "Integration")]
+    [CollectionDefinition("ApplicationMetadataTests", DisableParallelization = true)]
+    [Collection("ApplicationMetadataTests")]
     public class ApplicationMetadataAccessorTests
     {
         private readonly IApplicationMetadataAccessor _applicationMetadataAccessor;
