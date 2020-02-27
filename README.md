@@ -48,7 +48,7 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Orleans.Clustering](docs/GiG.Core.Orleans.Clustering.md) - Provides Extension Methods to register Orleans Silo Membership Providers.
 - [GiG.Core.Orleans.Clustering.Consul](docs/GiG.Core.Orleans.Clustering.Consul.md) - Provides an API to use Consul as a Membership Provider for Orleans Silos.
 - [GiG.Core.Orleans.Clustering.Kubernetes](docs/GiG.Core.Orleans.Clustering.Kubernetes.md) - Provides an API to use Kubernetes as a Membership Provider for Orleans Silos.
-- [GiG.Core.Orleans.Reminders.Npgsql] (docs/GiG.Core.Orleans.Reminders.Npgsql.md) - Provides an API to register PostgreSQL as a Storage Provider for Reminders.
+- [GiG.Core.Orleans.Reminders.Npgsql](docs/GiG.Core.Orleans.Reminders.Npgsql.md) - Provides an API to register PostgreSQL as a Storage Provider for Reminders.
 - [GiG.Core.Orleans.Silo](docs/GiG.Core.Orleans.Silo.md) - Provides an API to register an Orleans Silo in an application.
 - [GiG.Core.Orleans.Silo.Dashboard](docs/GiG.Core.Orleans.Silo.Dashboard.md) - Provides an API to register the Orleans Silo Dashboard.
 - [GiG.Core.Orleans.Storage.Npgsql](docs/GiG.Core.Orleans.Storage.Npgsql.md) - Provides an API to register PostgreSQL as a Grain Storage Provider.
