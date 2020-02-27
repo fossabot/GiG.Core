@@ -21,7 +21,7 @@ private static void ConfigureServices(HostBuilderContext ctx, IServiceCollection
             kafkaBuilder.WithOptions(options =>
             {
                 options.FromConfiguration(ctx.Configuration);
-                options.AddTopic("MyTopic");
+                options.AddTopic("MyTopic");                                
             })
             .AddJson();
         });
@@ -52,10 +52,17 @@ private static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builde
 
 You can change the default value for the Kafka configuration by overriding the [KafkaOptions](../src/GiG.Core.Orleans.Streams.Kafka/Configurations/KafkaOptions.cs) by adding the following configuration settings under section `Orleans:Streams:Kafka`. The Brokers option is an array which is delimited with ';'.
 
-| Configuration Name | Type     | Optional | Default Value    |
-|:-------------------|:---------|:---------|:-----------------|
-| Brokers            | String[] | No       | `localhost:9092` |
-| ConsumerGroupId    | String   | No       | `null`           |
+| Configuration Name   | Type     | Optional | Default Value    |
+|:---------------------|:---------|:---------|:-----------------|
+| Brokers              | String[] | No       | `localhost:9092` |
+| ConsumerGroupId      | String   | No       | `null`           |
+| Ssl:IsEnabled        | String   | Yes      | `false`          |
+| Ssl:SaslUsername     | String   | No       | `null`           |
+| Ssl:SaslPassword     | String   | No       | `null`           |
+| Ssl:SecurityProtocol | String   | Yes      | `Plaintext`      |
+| Ssl:SaslMechanism    | String   | Yes      | `Plain`          |
+
+When the Ssl section is enabled, both username and password are validated so they cannot be left empty.
 
 #### Sample Configuration
 
@@ -65,7 +72,12 @@ You can change the default value for the Kafka configuration by overriding the [
     "Streams": {
       "Kafka": {
         "Brokers": "localhost:9092",
-        "ConsumerGroupId": "OrleansStreamsBenchmark"
+        "ConsumerGroupId": "OrleansStreamsBenchmark",
+        "Ssl": {
+          "IsEnabled": true,
+          "SaslUsername": "user",
+          "SaslPassword": "password"
+        }
       }
     }
   }

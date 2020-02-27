@@ -19,5 +19,10 @@
         /// Consumer Group Identifier.
         /// </summary>
         public string ConsumerGroupId { get; set; }
+        
+        /// <summary>
+        /// SSL Options for Kafka Provider.
+        /// </summary>
+        public KafkaSSlOptions SSl { get; set; } = new KafkaSSlOptions();
     }
 }
