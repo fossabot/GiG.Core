@@ -14,6 +14,8 @@ using Xunit;
 namespace GiG.Core.Hosting.Tests.Integration.Tests
 {
     [Trait("Category", "Integration")]
+    [CollectionDefinition("ApplicationMetadataTests", DisableParallelization = true)]
+    [Collection("ApplicationMetadataTests")]
     public class InfoManagementTests
     {
         [Fact]
@@ -63,6 +65,7 @@ namespace GiG.Core.Hosting.Tests.Integration.Tests
                 {
                     webHost.UseTestServer();
                     webHost.UseStartup<AspNetCoreMockStartup>();
+                    webHost.ConfigureAppConfiguration(appConfig => appConfig.AddJsonFile("appsettingsFileDoesNotExist.json"));
                 });
 
             var httpClient = hostBuilder.Start().GetTestClient();
