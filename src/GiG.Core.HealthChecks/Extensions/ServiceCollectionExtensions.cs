@@ -36,7 +36,7 @@ namespace GiG.Core.HealthChecks.Extensions
         public static IServiceCollection ConfigureHealthChecks([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection?.Path}' is incorrect.");
+            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
 
             return services.Configure<HealthChecksOptions>(configurationSection);
         }
