@@ -85,10 +85,10 @@ namespace GiG.Core.Orleans.Tests.Unit.Streams.Kafka
             
             //Assert
             Assert.NotNull(kafkaStreamOptions);
-            Assert.Equal(expectedConfig.SSl.SaslUsername, kafkaStreamOptions.SaslUserName);
-            Assert.Equal(expectedConfig.SSl.SaslPassword, kafkaStreamOptions.SaslPassword);
-            Assert.Equal(expectedConfig.SSl.SaslMechanism, kafkaStreamOptions.SaslMechanism);
-            Assert.Equal(expectedConfig.SSl.SecurityProtocol, kafkaStreamOptions.SecurityProtocol);
+            Assert.Equal(expectedConfig.Ssl.SaslUsername, kafkaStreamOptions.SaslUserName);
+            Assert.Equal(expectedConfig.Ssl.SaslPassword, kafkaStreamOptions.SaslPassword);
+            Assert.Equal(expectedConfig.Ssl.SaslMechanism, kafkaStreamOptions.SaslMechanism);
+            Assert.Equal(expectedConfig.Ssl.SecurityProtocol, kafkaStreamOptions.SecurityProtocol);
         }
         
         [Fact]
