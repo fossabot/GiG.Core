@@ -5,7 +5,7 @@ namespace GiG.Core.Orleans.Streams.Kafka.Configurations
     /// <summary>
     /// Kafka Stream Provider Ssl Options
     /// </summary>
-    public class KafkaSSlOptions
+    public class KafkaSslOptions
     {
         /// <summary>
         /// Enable or Disable SSL Options.

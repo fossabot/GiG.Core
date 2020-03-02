@@ -37,15 +37,15 @@ namespace GiG.Core.Orleans.Streams.Kafka.Extensions
 
             options.ConsumerGroupId = kafkaOptions.ConsumerGroupId;
 
-            if (kafkaOptions.SSl.IsEnabled)
+            if (kafkaOptions.Ssl.IsEnabled)
             {
-                if (string.IsNullOrWhiteSpace(kafkaOptions.SSl.SaslUsername)) throw new ConfigurationErrorsException($"SSL is enabled but username is empty");
-                if (string.IsNullOrEmpty(kafkaOptions.SSl.SaslPassword)) throw new ConfigurationErrorsException($"SSL is enabled but password is empty");
+                if (string.IsNullOrWhiteSpace(kafkaOptions.Ssl.SaslUsername)) throw new ConfigurationErrorsException($"SSL is enabled but username is empty");
+                if (string.IsNullOrEmpty(kafkaOptions.Ssl.SaslPassword)) throw new ConfigurationErrorsException($"SSL is enabled but password is empty");
                 
-                options.SecurityProtocol = kafkaOptions.SSl.SecurityProtocol;
-                options.SaslUserName = kafkaOptions.SSl.SaslUsername;
-                options.SaslPassword = kafkaOptions.SSl.SaslPassword;
-                options.SaslMechanism = kafkaOptions.SSl.SaslMechanism;    
+                options.SecurityProtocol = kafkaOptions.Ssl.SecurityProtocol;
+                options.SaslUserName = kafkaOptions.Ssl.SaslUsername;
+                options.SaslPassword = kafkaOptions.Ssl.SaslPassword;
+                options.SaslMechanism = kafkaOptions.Ssl.SaslMechanism;    
             }
             
             return options;
