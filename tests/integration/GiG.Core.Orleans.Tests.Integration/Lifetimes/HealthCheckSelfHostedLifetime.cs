@@ -1,6 +1,7 @@
 using Bogus;
 using GiG.Core.HealthChecks.Orleans.AspNetCore.Extensions;
 using GiG.Core.HealthChecks.Orleans.Extensions;
+using GiG.Core.Orleans.Clustering.Localhost.Extensions;
 using GiG.Core.Orleans.Silo.Abstractions;
 using GiG.Core.Orleans.Silo.Extensions;
 using Microsoft.Extensions.Configuration;
@@ -30,7 +31,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
               {
                   var options = ctx.Configuration.GetSection("Orleans:HealthChecksSelfHostedSilo").Get<SiloOptions>() ?? new SiloOptions();
                   x.ConfigureEndpoints(ctx.Configuration.GetSection("Orleans:HealthChecksSelfHostedSilo"));
-                  x.UseLocalhostClustering(options.SiloPort, options.GatewayPort, null, serviceId, clusterId);
+                  x.ConfigureLocalhostClustering(options.SiloPort, options.GatewayPort, null, serviceId, clusterId);
                   x.AddHealthCheckDependencies();
               })
               .ConfigureServices((ctx, x) =>

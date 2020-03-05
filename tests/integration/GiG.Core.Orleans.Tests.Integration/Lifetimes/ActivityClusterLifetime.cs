@@ -4,6 +4,7 @@ using GiG.Core.Context.Orleans.Extensions;
 using GiG.Core.DistributedTracing.Activity.Extensions;
 using GiG.Core.DistributedTracing.Orleans.Extensions;
 using GiG.Core.Orleans.Client.Extensions;
+using GiG.Core.Orleans.Clustering.Localhost.Extensions;
 using GiG.Core.Orleans.Silo.Abstractions;
 using GiG.Core.Orleans.Silo.Extensions;
 using GiG.Core.Orleans.Streams.Extensions;
@@ -43,7 +44,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                     var siloOptions = ctx.Configuration.GetSection(_siloSectionName).Get<SiloOptions>() ?? new SiloOptions();
                     x.AddActivityIncomingFilter();
                     x.ConfigureEndpoints(ctx.Configuration.GetSection(_siloSectionName));
-                    x.UseLocalhostClustering(siloOptions.SiloPort, siloOptions.GatewayPort, null, serviceId, clusterId);
+                    x.ConfigureLocalhostClustering(siloOptions.SiloPort, siloOptions.GatewayPort, null, serviceId, clusterId);
                     x.AddAssemblies(typeof(EchoTestGrain));
                     x.AddSimpleMessageStreamProvider(Constants.StreamProviderName);
                     x.AddMemoryGrainStorage(Constants.StreamsMemoryStorageName);
@@ -71,7 +72,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                     {
                         x.AddActivityOutgoingFilter(sp);
                         x.AddRequestContextOutgoingFilter(sp);
-                        x.UseLocalhostClustering(options.GatewayPort, serviceId, clusterId);
+                        x.ConfigureLocalhostClustering(options.GatewayPort, serviceId, clusterId);
                         x.AddAssemblies(typeof(IEchoTestGrain));
                         x.AddSimpleMessageStreamProvider(Constants.StreamProviderName);
                     });

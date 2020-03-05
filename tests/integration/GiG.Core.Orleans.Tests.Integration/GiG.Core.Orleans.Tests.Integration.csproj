@@ -30,6 +30,7 @@
       <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Web\GiG.Core.DistributedTracing.Web.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.HealthChecks.Orleans.AspNetCore\GiG.Core.HealthChecks.Orleans.AspNetCore.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.HealthChecks.Orleans\GiG.Core.HealthChecks.Orleans.csproj" />
+      <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering.Localhost\GiG.Core.Orleans.Clustering.Localhost.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Streams\GiG.Core.Orleans.Streams.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Client\GiG.Core.Orleans.Client.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering.Consul\GiG.Core.Orleans.Clustering.Consul.csproj" />
