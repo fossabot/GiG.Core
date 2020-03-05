@@ -23,5 +23,13 @@ namespace GiG.Core.Data.KVStores.Abstractions
         /// <param name="keys">The key.</param>
         /// <returns></returns>
         Task<T> GetAsync(params string[] keys);
+
+        /// <summary>
+        /// Saves a model to storage using a key.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <param name="keys">The key.</param>
+        /// <returns></returns>
+        Task WriteAsync(T model, params string[] keys);
     }
 }

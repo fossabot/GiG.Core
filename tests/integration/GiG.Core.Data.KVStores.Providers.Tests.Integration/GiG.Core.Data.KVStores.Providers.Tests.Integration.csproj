@@ -6,6 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Bogus" Version="28.4.4" />
         <PackageReference Include="dotnet-etcd" Version="3.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.0.0" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
@@ -32,13 +33,22 @@
       <None Update="appsettingsEtcd.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="appsettingsFile.json">
+      <None Update="appsettingsFileWrite.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="languages.json">
+      <None Update="appsettingsFileRead.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="languages.temp.json">
+      <None Update="languagesWrite.temp.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="languagesWrite.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="languagesRead.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="languagesRead.temp.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
       <None Update="currencies.json">

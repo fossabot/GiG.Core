@@ -2,7 +2,6 @@
 using Etcdserverpb;
 using GiG.Core.Data.KVStores.Abstractions;
 using GiG.Core.Data.KVStores.Providers.Etcd.Abstractions;
-using Google.Protobuf;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Threading.Tasks;
@@ -47,15 +46,7 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         {
             _logger.LogDebug("Start Executed for {key}", _etcdProviderOptions.Key);
 
-            var watchRequest = new WatchRequest()
-            {
-                CreateRequest = new WatchCreateRequest()
-                {
-                    Key = ByteString.CopyFromUtf8(_etcdProviderOptions.Key)
-                }
-            };
-
-            _etcdClient.Watch(watchRequest, (WatchResponse response) =>
+            _etcdClient.Watch(_etcdProviderOptions.Key, (WatchResponse response) =>
             {
                 _logger.LogInformation("Watch Executed for {key}", _etcdProviderOptions.Key);
 
@@ -93,6 +84,22 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
             var value = await _etcdClient.GetValAsync(key);
 
             return string.IsNullOrWhiteSpace(value) ? default : _dataSerializer.GetFromString(value);
+        }
+
+        /// <inheritdoc/>
+        public async Task WriteAsync(T model, params string[] keys)
+        {
+            var key = keys.Any()
+                ? string.Concat(_etcdProviderOptions.Key, "/", string.Join("/", keys))
+                : _etcdProviderOptions.Key;
+
+            _logger.LogDebug("Writing {key}", key);
+
+            var lockResponse = await _etcdClient.LockAsync(key);
+
+            await _etcdClient.PutAsync(key, _dataSerializer.ConvertToString(model));
+
+            await _etcdClient.UnlockAsync(lockResponse.Key.ToStringUtf8());
         }
 
         /// <inheritdoc/>

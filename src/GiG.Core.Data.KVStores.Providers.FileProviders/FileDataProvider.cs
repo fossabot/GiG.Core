@@ -19,6 +19,8 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders
         private string _fileName;
         private string _fileExtension;
 
+        private readonly object _fileLock = new object();
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -88,6 +90,26 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders
             }
             
             return await Task.FromResult(model);
+        }
+
+        /// <inheritdoc/>
+        public Task WriteAsync(T model, params string[] keys)
+        {
+            var fileName = keys.Any()
+                ? string.Concat(_fileName.Replace(_fileExtension, string.Empty), ".", string.Join(".", keys), _fileExtension)
+                : _fileName;
+
+            var fileInfo = new FileInfo(fileName);
+
+            if (fileInfo.Exists)
+            {
+                lock(_fileLock)
+                {
+                    File.WriteAllLinesAsync(fileInfo.FullName, new string[] { _dataSerializer.ConvertToString(model) }); 
+                }
+            }
+
+            return Task.CompletedTask;
         }
 
         /// <inheritdoc/>

@@ -1,4 +1,5 @@
-﻿using dotnet_etcd;
+﻿using Bogus;
+using dotnet_etcd;
 using GiG.Core.Data.KVStores.Abstractions;
 using GiG.Core.Data.KVStores.Extensions;
 using GiG.Core.Data.KVStores.Providers.Etcd.Abstractions;
@@ -114,6 +115,32 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
                 Assert.Equal(actualData.Select(l => l.Code), expectedData.Select(l => l.Code));
                 return Task.FromResult(true);
             });
+        }
+
+        [Fact]
+        public async Task EtcdProviderDataWriteAsync_Languages_Success()
+        {
+            // Arrange.
+            await Task.Delay(1000);
+            var key = "languages";
+            await _etcdClient.DeleteAsync(key);
+
+            var dataProvider = _serviceProvider.GetRequiredService<IDataProvider<IEnumerable<MockLanguage>>>();
+
+            var languages = new Faker<MockLanguage>()
+                .RuleFor(x => x.Alpha2Code, new Randomizer().String(2, 'a', 'z'))
+                .RuleFor(x => x.Name, new Randomizer().String(100, 'a', 'z'))
+                .Generate(5)
+                .AsEnumerable();
+
+            await dataProvider.WriteAsync(languages, key);
+
+            // Act.
+            IEnumerable<MockLanguage> actualData = await dataProvider.GetAsync(key);
+
+            // Assert.
+            Assert.NotNull(actualData);
+            Assert.Equal(languages.Select(l => l.Alpha2Code), actualData.Select(l => l.Alpha2Code));
         }
 
         private async Task WriteToEtcdAsync(string filePath, string key)

@@ -1,4 +1,5 @@
-﻿using GiG.Core.Data.KVStores.Abstractions;
+﻿using Bogus;
+using GiG.Core.Data.KVStores.Abstractions;
 using GiG.Core.Data.KVStores.Extensions;
 using GiG.Core.Data.KVStores.Providers.FileProviders.Abstractions;
 using GiG.Core.Data.KVStores.Providers.FileProviders.Extensions;
@@ -19,15 +20,43 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
     [Trait("Category", "Integration")]
     public class FileProviderTests : IAsyncDisposable
     {
-        private readonly IHost _host;
-        private readonly IServiceProvider _serviceProvider;
+        private IHost _host;
+        private IServiceProvider _serviceProvider;
 
         public FileProviderTests()
+        {
+            
+        }
+
+        private void InitForRead()
         {
             _host = Host.CreateDefaultBuilder()
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
-                    config.AddJsonFile("appsettingsFile.json");
+                    config.AddJsonFile("appsettingsFileRead.json");
+                })
+                .ConfigureServices((hostContext, services) =>
+                {
+                    var configuration = hostContext.Configuration;
+
+                    services.AddKVStores<IEnumerable<MockLanguage>>()
+                        .AddMemoryDataStore()
+                        .FromFile(configuration, "Languages")
+                        .WithJsonSerialization();
+                })
+                .Build();
+
+            _serviceProvider = _host.Services;
+
+            _host.Start();
+        }
+
+        private void InitForWrite()
+        {
+            _host = Host.CreateDefaultBuilder()
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    config.AddJsonFile("appsettingsFileWrite.json");
                 })
                 .ConfigureServices((hostContext, services) =>
                 {
@@ -46,9 +75,10 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
         }
 
         [Fact]
-        public void GetData_FileProviderUsingRootKey_ReturnsMockLanguages()
+        public void GetData_JsonFileProviderUsingRootKey_ReturnsMockLanguages()
         {
             // Arrange.
+            InitForRead();
             var languages = ReadFromJson(_serviceProvider);
             
             var dataRetriever = _serviceProvider.GetRequiredService<IDataRetriever<IEnumerable<MockLanguage>>>();
@@ -65,6 +95,7 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
         public async Task GetData_JsonFileProviderUsingValidKey_ReturnsMockLanguages()
         {
             // Arrange.
+            InitForRead();
             var languages = ReadFromJson(_serviceProvider);
 
             var dataRetriever = _serviceProvider.GetRequiredService<IDataRetriever<IEnumerable<MockLanguage>>>();
@@ -77,10 +108,11 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
             Assert.Equal(languages.Select(l => l.Alpha2Code), data.Select(l => l.Alpha2Code));
         }
 
-        [Fact]
-        public async Task GetData_FileProviderUsingInvalidKey_ReturnsMockLanguages()
+        [Fact] 
+        public async Task GetData_JsonFileProviderUsingInvalidKey_ReturnsMockLanguages()
         {
             // Arrange.
+            InitForRead();
             var languages = ReadFromJson(_serviceProvider);
 
             var dataRetriever = _serviceProvider.GetRequiredService<IDataRetriever<IEnumerable<MockLanguage>>>();
@@ -91,6 +123,74 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
             // Assert.
             Assert.NotNull(data);
             Assert.Equal(languages.Select(l => l.Alpha2Code), data.Select(l => l.Alpha2Code));
+        }
+
+        [Fact]
+        public async Task WriteAsync_JsonFileProviderUsingRootKey_Success()
+        {
+            // Arrange.
+            InitForWrite();
+            var dataProvider = _serviceProvider.GetRequiredService<IDataProvider<IEnumerable<MockLanguage>>>();
+
+            var languages = new Faker<MockLanguage>()
+                .RuleFor(x => x.Alpha2Code, new Randomizer().String(2, 'a', 'z'))
+                .RuleFor(x => x.Name, new Randomizer().String(100, 'a', 'z'))
+                .Generate(5)
+                .AsEnumerable();
+
+            await dataProvider.WriteAsync(languages);
+
+            // Act.
+            IEnumerable<MockLanguage> actualData = await dataProvider.GetAsync();
+
+            // Assert.
+            Assert.NotNull(actualData);
+            Assert.Equal(languages.Select(l => l.Alpha2Code), actualData.Select(l => l.Alpha2Code));
+        }
+
+        [Fact]
+        public async Task WriteAsync_JsonFileProviderUsingValidKey_Success()
+        {
+            // Arrange.
+            InitForWrite();
+            var dataProvider = _serviceProvider.GetRequiredService<IDataProvider<IEnumerable<MockLanguage>>>();
+
+            var languages = new Faker<MockLanguage>()
+                .RuleFor(x => x.Alpha2Code, new Randomizer().String(2, 'a', 'z'))
+                .RuleFor(x => x.Name, new Randomizer().String(100, 'a', 'z'))
+                .Generate(5)
+                .AsEnumerable();
+
+            await dataProvider.WriteAsync(languages, "temp");
+
+            // Act.
+            IEnumerable<MockLanguage> actualData = await dataProvider.GetAsync("temp");
+
+            // Assert.
+            Assert.NotNull(actualData);
+            Assert.Equal(languages.Select(l => l.Alpha2Code), actualData.Select(l => l.Alpha2Code));
+        }
+
+        [Fact]
+        public async Task WriteAsync_JsonFileProviderUsingInvalidKey_Success()
+        {
+            // Arrange.
+            InitForWrite();
+            var dataProvider = _serviceProvider.GetRequiredService<IDataProvider<IEnumerable<MockLanguage>>>();
+
+            var languages = new Faker<MockLanguage>()
+                .RuleFor(x => x.Alpha2Code, new Randomizer().String(2, 'a', 'z'))
+                .RuleFor(x => x.Name, new Randomizer().String(100, 'a', 'z'))
+                .Generate(5)
+                .AsEnumerable();
+
+            await dataProvider.WriteAsync(languages, "temp2");
+
+            // Act.
+            IEnumerable<MockLanguage> actualData = await dataProvider.GetAsync("temp2");
+
+            // Assert.
+            Assert.Null(actualData);
         }
 
         private IEnumerable<MockLanguage> ReadFromJson(IServiceProvider serviceProvider)

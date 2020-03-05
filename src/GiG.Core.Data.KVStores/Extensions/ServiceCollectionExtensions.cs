@@ -24,6 +24,8 @@ namespace GiG.Core.Data.KVStores.Extensions
             
             services.TryAddSingleton(typeof(IDataStore<>), typeof(MemoryDataStore<>));
             services.TryAddSingleton(typeof(IDataRetriever<>), typeof(DataRetriever<>));
+            services.TryAddSingleton(typeof(IDataWriter<>), typeof(DataWriter<>));
+
             services.AddHostedService<ProviderHostedService<T>>();
             
             return new KVStoreBuilder<T>(services);
