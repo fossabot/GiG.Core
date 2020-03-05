@@ -190,7 +190,8 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
             IEnumerable<MockLanguage> actualData = await dataProvider.GetAsync("temp2");
 
             // Assert.
-            Assert.Null(actualData);
+            Assert.NotNull(actualData);
+            Assert.Equal(languages.Select(l => l.Alpha2Code), actualData.Select(l => l.Alpha2Code));
         }
 
         private IEnumerable<MockLanguage> ReadFromJson(IServiceProvider serviceProvider)

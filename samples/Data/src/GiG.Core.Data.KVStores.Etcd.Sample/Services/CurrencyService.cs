@@ -11,11 +11,16 @@ namespace GiG.Core.Data.KVStores.Etcd.Sample.Services
 {
     public class CurrencyService : IHostedService
     {
+        private readonly IDataRetriever<IEnumerable<Currency>> _dataRetriever;
         private readonly IDataProvider<IEnumerable<Currency>> _dataProvider;
         private readonly ILogger<CurrencyService> _logger;
 
-        public CurrencyService(IDataProvider<IEnumerable<Currency>> dataProvider, ILogger<CurrencyService> logger)
+        public CurrencyService(
+            IDataRetriever<IEnumerable<Currency>> dataRetriever, 
+            IDataProvider<IEnumerable<Currency>> dataProvider, 
+            ILogger<CurrencyService> logger)
         {
+            _dataRetriever = dataRetriever;
             _dataProvider = dataProvider;
             _logger = logger;
         }
@@ -34,7 +39,7 @@ namespace GiG.Core.Data.KVStores.Etcd.Sample.Services
 
             _logger.LogInformation("Reading Currencies...");
 
-            currencies = await _dataProvider.GetAsync();
+            currencies = await _dataRetriever.GetAsync();
 
             _logger.LogInformation("Currencies: {@currencies}", currencies);
         }

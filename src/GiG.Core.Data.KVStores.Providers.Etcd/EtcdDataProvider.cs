@@ -75,9 +75,7 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         /// <returns></returns>
         public async Task<T> GetAsync(params string[] keys)
         {
-            var key = keys.Any()
-                ? string.Concat(_etcdProviderOptions.Key, "/", string.Join("/", keys))
-                : _etcdProviderOptions.Key;
+            var key = GetKey();
 
             _logger.LogDebug("Returning {key}", key);
 
@@ -89,9 +87,7 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         /// <inheritdoc/>
         public async Task WriteAsync(T model, params string[] keys)
         {
-            var key = keys.Any()
-                ? string.Concat(_etcdProviderOptions.Key, "/", string.Join("/", keys))
-                : _etcdProviderOptions.Key;
+            var key = GetKey();
 
             _logger.LogDebug("Writing {key}", key);
 
@@ -110,6 +106,13 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
             _etcdClient.Dispose();
 
             return Task.CompletedTask;
+        }
+
+        private string GetKey(params string[] keys)
+        {
+            return keys.Any()
+                ? string.Concat(_etcdProviderOptions.Key, "/", string.Join("/", keys))
+                : _etcdProviderOptions.Key;
         }
     }
 }

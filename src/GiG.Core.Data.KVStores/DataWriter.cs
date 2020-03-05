@@ -20,7 +20,7 @@ namespace GiG.Core.Data.KVStores
         /// <inheritdoc />
         public Task WriteAsync(T value, params string[] keys)
         {
-            return _dataProvider.WriteAsync(value);
+            return _dataProvider.WriteAsync(value, keys);
         }
     }
 }

@@ -66,9 +66,7 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders
         /// <returns></returns>
         public async Task<T> GetAsync(params string[] keys)
         {       
-            var fileName = keys.Any()
-                ? string.Concat(_fileName.Replace(_fileExtension, string.Empty), ".", string.Join(".", keys), _fileExtension)
-                : _fileName;
+            var fileName = GetKey(keys);
 
             var model = default(T);
 
@@ -95,18 +93,11 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders
         /// <inheritdoc/>
         public Task WriteAsync(T model, params string[] keys)
         {
-            var fileName = keys.Any()
-                ? string.Concat(_fileName.Replace(_fileExtension, string.Empty), ".", string.Join(".", keys), _fileExtension)
-                : _fileName;
+            var fileName = GetKey(keys);
 
-            var fileInfo = new FileInfo(fileName);
-
-            if (fileInfo.Exists)
+            lock (_fileLock)
             {
-                lock(_fileLock)
-                {
-                    File.WriteAllLinesAsync(fileInfo.FullName, new string[] { _dataSerializer.ConvertToString(model) }); 
-                }
+                File.WriteAllTextAsync(fileName, _dataSerializer.ConvertToString(model));
             }
 
             return Task.CompletedTask;
@@ -118,6 +109,13 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders
             _logger.LogDebug("Stop Executed for {file}", _fileOptions.Path);
 
             return Task.CompletedTask;
+        }
+
+        private string GetKey(params string[] keys)
+        {
+            return keys.Any()
+                ? string.Concat(_fileName.Replace(_fileExtension, string.Empty), ".", string.Join(".", keys), _fileExtension)
+                : _fileName;
         }
     }
 }
