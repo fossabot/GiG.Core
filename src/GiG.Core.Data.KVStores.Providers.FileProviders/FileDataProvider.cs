@@ -66,7 +66,7 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders
         /// <returns></returns>
         public async Task<T> GetAsync(params string[] keys)
         {       
-            var fileName = GetKey(keys);
+            var fileName = GetFileName(keys);
 
             var model = default(T);
 
@@ -93,7 +93,7 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders
         /// <inheritdoc/>
         public Task WriteAsync(T model, params string[] keys)
         {
-            var fileName = GetKey(keys);
+            var fileName = GetFileName(keys);
 
             lock (_fileLock)
             {
@@ -111,7 +111,7 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders
             return Task.CompletedTask;
         }
 
-        private string GetKey(params string[] keys)
+        private string GetFileName(params string[] keys)
         {
             return keys.Any()
                 ? string.Concat(_fileName.Replace(_fileExtension, string.Empty), ".", string.Join(".", keys), _fileExtension)
