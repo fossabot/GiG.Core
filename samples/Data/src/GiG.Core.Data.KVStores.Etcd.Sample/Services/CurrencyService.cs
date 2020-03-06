@@ -12,16 +12,16 @@ namespace GiG.Core.Data.KVStores.Etcd.Sample.Services
     public class CurrencyService : IHostedService
     {
         private readonly IDataRetriever<IEnumerable<Currency>> _dataRetriever;
-        private readonly IDataProvider<IEnumerable<Currency>> _dataProvider;
+        private readonly IDataWriter<IEnumerable<Currency>> _dataWriter;
         private readonly ILogger<CurrencyService> _logger;
 
         public CurrencyService(
             IDataRetriever<IEnumerable<Currency>> dataRetriever, 
-            IDataProvider<IEnumerable<Currency>> dataProvider, 
+            IDataWriter<IEnumerable<Currency>> dataWriter, 
             ILogger<CurrencyService> logger)
         {
             _dataRetriever = dataRetriever;
-            _dataProvider = dataProvider;
+            _dataWriter = dataWriter;
             _logger = logger;
         }
 
@@ -35,7 +35,7 @@ namespace GiG.Core.Data.KVStores.Etcd.Sample.Services
                 new Currency { Name = "Dollar"}
             }.AsEnumerable();
 
-            await _dataProvider.WriteAsync(currencies);
+            await _dataWriter.WriteAsync(currencies);
 
             _logger.LogInformation("Reading Currencies...");
 
