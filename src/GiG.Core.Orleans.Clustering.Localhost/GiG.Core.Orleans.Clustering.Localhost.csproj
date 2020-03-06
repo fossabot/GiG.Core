@@ -9,4 +9,8 @@
     <PackageReference Include="Microsoft.Orleans.OrleansRuntime" Version="3.0.2" PrivateAssets="compile" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GiG.Core.Orleans.Clustering.Abstractions\GiG.Core.Orleans.Clustering.Abstractions.csproj" />
+  </ItemGroup>
+
 </Project>

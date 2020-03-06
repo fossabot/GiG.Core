@@ -16,7 +16,10 @@ public void ConfigureServices(IServiceCollection services)
     services.AddDefaultClusterClient((x, sp) =>
     {              
         x.ConfigureCluster(_configuration);
-        x.ConfigureLocalhostClustering();
+        x.UseMembershipProvider(_configuration, y => 
+        {
+            y.ConfigureLocalhostClustering(); 
+        });
         x.AddAssemblies(typeof(ITransactionGrain));
     });
 }
@@ -47,7 +50,10 @@ static class Program
     {
         builder.ConfigureCluster(ctx.Configuration)
             .ConfigureEndpoints(ctx.Configuration)
-            .ConfigureLocalhostClustering()
+            .UseMembershipProvider(ctx.Configuration, y =>
+            {
+                y.ConfigureLocalhostClustering();
+            });
             .AddAssemblies(typeof(Grain));
     }
 }    

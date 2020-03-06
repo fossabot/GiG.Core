@@ -4,6 +4,7 @@ using GiG.Core.Context.Orleans.Extensions;
 using GiG.Core.DistributedTracing.Activity.Extensions;
 using GiG.Core.DistributedTracing.Orleans.Extensions;
 using GiG.Core.Orleans.Client.Extensions;
+using GiG.Core.Orleans.Clustering.Extensions;
 using GiG.Core.Orleans.Clustering.Localhost.Extensions;
 using GiG.Core.Orleans.Silo.Abstractions;
 using GiG.Core.Orleans.Silo.Extensions;
@@ -24,8 +25,8 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
 {
     public abstract class ActivityClusterLifetime : IAsyncLifetime
     {
-        private const string _siloSectionName = "ActivitySilo";
-        
+        private const string SiloSectionName = "Orleans:ActivitySilo";
+
         internal IClusterClient ClusterClient;
 
         internal IServiceProvider ClientServiceProvider;
@@ -41,10 +42,13 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                 .ConfigureAppConfiguration(a => a.AddJsonFile("appsettings.json"))
                 .UseOrleans((ctx, x) =>
                 {
-                    var siloOptions = ctx.Configuration.GetSection(_siloSectionName).Get<SiloOptions>() ?? new SiloOptions();
+                    var siloOptions = ctx.Configuration.GetSection(SiloSectionName).Get<SiloOptions>() ?? new SiloOptions();
                     x.AddActivityIncomingFilter();
-                    x.ConfigureEndpoints(ctx.Configuration.GetSection(_siloSectionName));
-                    x.ConfigureLocalhostClustering(siloOptions.SiloPort, siloOptions.GatewayPort, null, serviceId, clusterId);
+                    x.ConfigureEndpoints(ctx.Configuration.GetSection(SiloSectionName));
+                    x.UseMembershipProvider(ctx.Configuration, y =>
+                    {
+                        y.ConfigureLocalhostClustering(siloOptions.SiloPort, siloOptions.GatewayPort, null, serviceId, clusterId);
+                    });
                     x.AddAssemblies(typeof(EchoTestGrain));
                     x.AddSimpleMessageStreamProvider(Constants.StreamProviderName);
                     x.AddMemoryGrainStorage(Constants.StreamsMemoryStorageName);
@@ -60,7 +64,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
             await _siloHost.StartAsync();
 
             var config = _siloHost.Services.GetService<IConfiguration>();
-            var options = config.GetSection(_siloSectionName).Get<SiloOptions>() ?? new SiloOptions();
+            var options = config.GetSection(SiloSectionName).Get<SiloOptions>() ?? new SiloOptions();
 
             var clientHost = new HostBuilder()
                 .ConfigureServices(services =>
@@ -72,7 +76,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                     {
                         x.AddActivityOutgoingFilter(sp);
                         x.AddRequestContextOutgoingFilter(sp);
-                        x.ConfigureLocalhostClustering(options.GatewayPort, serviceId, clusterId);
+                        x.UseMembershipProvider(config, y => { y.ConfigureLocalhostClustering(options.GatewayPort, serviceId, clusterId); });
                         x.AddAssemblies(typeof(IEchoTestGrain));
                         x.AddSimpleMessageStreamProvider(Constants.StreamProviderName);
                     });

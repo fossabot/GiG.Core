@@ -38,7 +38,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                 {
                     sb.ConfigureCluster(ctx.Configuration.GetSection("Orleans:ClusterFactoryA"));
                     sb.ConfigureEndpoints(ctx.Configuration.GetSection("Orleans:ClusterFactoryA:Silo"));
-                    sb.ConfigureConsulClustering(ctx.Configuration);
+                    sb.ConfigureConsulClustering(ctx.Configuration.GetSection("Orleans:ConsulMembershipProvider"));
                     sb.AddAssemblies(typeof(ClusterClientFactoryTestGrain));
                     sb.Configure<SiloOptions>(options => options.SiloName = SiloNameA);
                 })
@@ -51,7 +51,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                {
                    sb.ConfigureCluster(ctx.Configuration.GetSection("Orleans:ClusterFactoryB"));
                    sb.ConfigureEndpoints(ctx.Configuration.GetSection("Orleans:ClusterFactoryB:Silo"));
-                   sb.ConfigureConsulClustering(ctx.Configuration);
+                   sb.ConfigureConsulClustering(ctx.Configuration.GetSection("Orleans:ConsulMembershipProvider"));
                    sb.AddAssemblies(typeof(ClusterClientFactoryTestGrain));
                    sb.Configure<SiloOptions>(options => options.SiloName = SiloNameB);
                })
@@ -69,7 +69,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                             return services.CreateClusterClient(builder =>
                             {
                                 builder.ConfigureCluster(ctx.Configuration.GetSection("Orleans:ClusterFactoryA"));
-                                builder.ConfigureConsulClustering(ctx.Configuration);
+                                builder.ConfigureConsulClustering(ctx.Configuration.GetSection("Orleans:ConsulMembershipProvider"));
                                 builder.AddAssemblies(typeof(IClusterClientFactoryTestGrain));
                             });
                         })
@@ -77,7 +77,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                             return services.CreateClusterClient(builder =>
                             {
                                 builder.ConfigureCluster(ctx.Configuration.GetSection("Orleans:ClusterFactoryB"));
-                                builder.ConfigureConsulClustering(ctx.Configuration);
+                                builder.ConfigureConsulClustering(ctx.Configuration.GetSection("Orleans:ConsulMembershipProvider"));
                                 builder.AddAssemblies(typeof(IClusterClientFactoryTestGrain));
                             });
                         });
