@@ -43,7 +43,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                 {
                     sb.ConfigureCluster(ctx.Configuration);
                     sb.ConfigureEndpoints(ctx.Configuration.GetSection("Orleans:ConsulSilo"));
-                    sb.ConfigureConsulClustering(ctx.Configuration);
+                    sb.ConfigureConsulClustering(ctx.Configuration.GetSection("Orleans:ConsulMembershipProvider"));
                     sb.AddAssemblies(typeof(EchoTestGrain));
                     sb.Configure<SiloOptions>(siloOptions => siloOptions.SiloName = SiloName);
                 })
@@ -60,7 +60,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                     services.AddDefaultClusterClient(x =>
                     {
                         x.ConfigureCluster(ctx.Configuration);
-                        x.ConfigureConsulClustering(ctx.Configuration);
+                        x.ConfigureConsulClustering(ctx.Configuration.GetSection("Orleans:ConsulMembershipProvider"));
                         x.AddAssemblies(typeof(IEchoTestGrain));
                     });
                 })

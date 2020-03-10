@@ -1,12 +1,13 @@
 using Bogus;
 using GiG.Core.HealthChecks.Orleans.AspNetCore.Extensions;
 using GiG.Core.HealthChecks.Orleans.Extensions;
+using GiG.Core.Orleans.Clustering.Extensions;
+using GiG.Core.Orleans.Clustering.Localhost.Extensions;
 using GiG.Core.Orleans.Silo.Abstractions;
 using GiG.Core.Orleans.Silo.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Orleans.Hosting;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
@@ -18,7 +19,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
         internal IHttpClientFactory HttpClientFactory;
 
         private IHost _host;
-       
+
         public async Task InitializeAsync()
         {
             var serviceId = new Randomizer().String2(8);
@@ -30,7 +31,8 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
               {
                   var options = ctx.Configuration.GetSection("Orleans:HealthChecksSelfHostedSilo").Get<SiloOptions>() ?? new SiloOptions();
                   x.ConfigureEndpoints(ctx.Configuration.GetSection("Orleans:HealthChecksSelfHostedSilo"));
-                  x.UseLocalhostClustering(options.SiloPort, options.GatewayPort, null, serviceId, clusterId);
+                  x.UseMembershipProvider(ctx.Configuration,
+                      y => { y.ConfigureLocalhostClustering(options.SiloPort, options.GatewayPort, null, serviceId, clusterId); });
                   x.AddHealthCheckDependencies();
               })
               .ConfigureServices((ctx, x) =>
@@ -55,6 +57,5 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                 _host.Dispose();
             }
         }
-
     }
 }
