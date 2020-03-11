@@ -120,7 +120,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
         }
         
         [Fact]
-        public async Task DispatchAsync_WithSuccessAndFailureEvents_Throws()
+        public async Task DispatchAsync_WithSuccessAndFailureEvents_ThrowsTaskCanceledException()
         {
             // Arrange
             var grainId = Guid.NewGuid();
