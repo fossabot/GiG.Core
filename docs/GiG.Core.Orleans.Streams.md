@@ -75,10 +75,11 @@ The below code shows how to setup and dispatch the command, and wait for Success
 
 ```csharp
 var grainId = Guid.NewGuid();
-var commandDispatcher = _commandDispatcherFactory.Create(grainId, "SMSProvider")
+using (var commandDispatcher = _commandDispatcherFactory.Create(grainId, "SMSProvider")
 						 .WithCommand(new TestCommand(), TestCommand.TestCommandNamespace)
                 		 .WithSuccessEvent(TestSuccessEvent.TestSuccessEventNamespace)
-                     	 .WithFailureEvent(TestFailureEvent.TestFailureEventNamespace);
-
-var response = await commandDispatcher.DispatchAsync(5000);             
+                     	 .WithFailureEvent(TestFailureEvent.TestFailureEventNamespace))
+{
+    var response = await commandDispatcher.DispatchAsync(5000);             
+}
 ```
