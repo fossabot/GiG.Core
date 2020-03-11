@@ -1,5 +1,4 @@
 ﻿using GiG.Core.DistributedTracing.Abstractions;
-using System;
 using System.Collections.Generic;
 
 namespace GiG.Core.DistributedTracing.Activity

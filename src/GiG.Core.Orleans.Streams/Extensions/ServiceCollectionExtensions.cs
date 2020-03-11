@@ -25,5 +25,18 @@ namespace GiG.Core.Orleans.Streams.Extensions
             services.TryAddSingleton<IStreamFactory, StreamFactory>();
             return services;
         }
+        
+        /// <summary>
+        /// Creates and registers a new <see cref="ICommandDispatcherFactory{TCommand, TSuccess, TFailure}"/>.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection"/>.</param>
+        /// <returns>The <see cref="IServiceCollection"/>.</returns>
+        public static IServiceCollection AddCommandDispatcher([NotNull] this IServiceCollection services)
+        {
+            if (services == null) throw new ArgumentNullException(nameof(services));
+
+            services.TryAddScoped(typeof(ICommandDispatcherFactory<,,>), typeof(CommandDispatcherFactory<,,>));
+            return services;
+        }
     }
 }
