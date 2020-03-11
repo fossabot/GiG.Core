@@ -3,7 +3,7 @@
 namespace GiG.Core.Orleans.Streams.Abstractions
 {
     /// <summary>
-    /// Command Dispatcher Factory
+    /// Command Dispatcher Factory.
     /// </summary>
     public interface ICommandDispatcherFactory<in TCommand, TSuccess, TFailure>
         where TCommand : class

@@ -1,7 +1,7 @@
 ﻿namespace GiG.Core.Orleans.Streams.Abstractions.Models
 {
     /// <summary>
-    /// The Command Dispatcher Response
+    /// The Command Dispatcher Response.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class CommandDispatcherResponse<T> where T : class
