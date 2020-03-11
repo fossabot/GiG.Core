@@ -11,10 +11,12 @@ namespace GiG.Core.Orleans.Streams.Abstractions.Models
         /// The Failed Event Id.
         /// </summary>
         public Guid Id { get; set; }
+        
         /// <summary>
         /// The Error Code.
         /// </summary>
         public string ErrorCode { get; set; }
+        
         /// <summary>
         /// The Error Message.
         /// </summary>

@@ -35,7 +35,7 @@ namespace GiG.Core.Orleans.Streams.Extensions
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services.TryAddScoped(typeof(ICommandDispatcherFactory<,,>), typeof(CommandDispatcherFactory<,,>));
+            services.TryAddSingleton(typeof(ICommandDispatcherFactory<,,>), typeof(CommandDispatcherFactory<,,>));
             return services;
         }
     }

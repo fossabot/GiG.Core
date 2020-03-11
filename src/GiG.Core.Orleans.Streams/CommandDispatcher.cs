@@ -52,17 +52,6 @@ namespace GiG.Core.Orleans.Streams
 
             _semaphore = new SemaphoreSlim(0, 1);
 
-            _success = default;
-            _failure = default;
-            _command = default;
-
-            _commandStream = default;
-            _successStream = default;
-            _failureStream = default;
-
-            _successStreamHandle?.UnsubscribeAsync();
-            _failureStreamHandle?.UnsubscribeAsync();
-
             _streamId = streamId;
         }
 

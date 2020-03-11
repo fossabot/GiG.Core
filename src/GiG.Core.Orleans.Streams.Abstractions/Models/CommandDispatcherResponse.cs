@@ -7,17 +7,17 @@
     public class CommandDispatcherResponse<T> where T : class
     {
         /// <summary>
-        /// The Data
+        /// The Data.
         /// </summary>
         public T Data { get; set; }
         
         /// <summary>
-        /// The Error Code
+        /// The Error Code.
         /// </summary>
         public string ErrorCode { get; set; }
         
         /// <summary>
-        /// The Error Message
+        /// The Error Message.
         /// </summary>
         public string ErrorMessage { get; set; }
     }
