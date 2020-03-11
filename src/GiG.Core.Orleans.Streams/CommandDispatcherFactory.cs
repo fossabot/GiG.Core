@@ -30,8 +30,8 @@ namespace GiG.Core.Orleans.Streams
         /// <inheritdoc />
         public ICommandDispatcher<TCommand, TSuccess, TFailure> Create(Guid streamId, [NotNull] string streamProviderName)
         {
-            if (string.IsNullOrEmpty(streamProviderName)) throw new ArgumentException("", nameof(streamProviderName));
-
+            if (string.IsNullOrEmpty(streamProviderName)) throw new ArgumentException($"'{nameof(streamProviderName)}' must not be null, empty or whitespace.", nameof(streamProviderName));
+            
             var logger = _loggerFactory.CreateLogger<CommandDispatcher<TCommand, TSuccess, TFailure>>();
 
             return new CommandDispatcher<TCommand, TSuccess, TFailure>(_clusterClient, logger, streamId, streamProviderName);

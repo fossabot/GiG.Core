@@ -10,15 +10,8 @@ using Xunit;
 namespace GiG.Core.Orleans.Tests.Integration.Tests
 {
     [Trait("Category", "Integration")]
-    public class OrleansCommandDispatcherTests : IClassFixture<BasicClusterFixture>
+    public class OrleansCommandDispatcherTests : BasicClusterLifeTime
     {
-        private readonly BasicClusterFixture _fixture;
-
-        public OrleansCommandDispatcherTests(BasicClusterFixture fixture)
-        {
-            _fixture = fixture;
-        }
-        
         [Fact]
         public async Task DispatchAsync_NoEvents_ReturnsTimeout()
         {
@@ -26,7 +19,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             var grainId = Guid.NewGuid();
 
             // Act
-            var commandDispatcher = _fixture.ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
+            var commandDispatcher = ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
                 .Create(grainId, Constants.StreamProviderName)
                 .WithCommand(new MockCommand(true), MockCommand.MockCommandNamespace);
 
@@ -44,7 +37,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             var grainId = Guid.NewGuid();
 
             // Act
-            var commandDispatcher = _fixture.ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
+            var commandDispatcher = ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
                 .Create(grainId, Constants.StreamProviderName)
                 .WithCommand(new MockCommand(true), MockCommand.MockCommandNamespace)
                 .WithSuccessEvent(MockSuccessEvent.MockSuccessEventNamespace);
@@ -64,7 +57,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             var grainId = Guid.NewGuid();
 
             // Act
-            var commandDispatcher = _fixture.ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
+            var commandDispatcher = ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
                 .Create(grainId, Constants.StreamProviderName)
                 .WithCommand(new MockCommand(false), MockCommand.MockCommandNamespace)
                 .WithFailureEvent(MockFailureEvent.MockFailureEventNamespace);
@@ -84,7 +77,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             var grainId = Guid.NewGuid();
 
             // Act
-            var commandDispatcher = _fixture.ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
+            var commandDispatcher = ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
                 .Create(grainId, Constants.StreamProviderName)
                 .WithCommand(new MockCommand(true), MockCommand.MockCommandNamespace)
                 .WithSuccessEvent(MockSuccessEvent.MockSuccessEventNamespace)
@@ -105,7 +98,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             var grainId = Guid.NewGuid();
 
             // Act
-            var commandDispatcher =  _fixture.ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
+            var commandDispatcher =  ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
                 .Create(grainId, Constants.StreamProviderName)
                 .WithCommand(new MockCommand(false), MockCommand.MockCommandNamespace)
                 .WithSuccessEvent(MockSuccessEvent.MockSuccessEventNamespace)
@@ -127,7 +120,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             var cts = new CancellationTokenSource();
     
             // Act
-            var commandDispatcher = _fixture.ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
+            var commandDispatcher = ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
                 .Create(grainId, Constants.StreamProviderName)
                 .WithCommand(new MockCommand(true), MockCommand.MockCommandNamespace)
                 .WithSuccessEvent(MockSuccessEvent.MockSuccessEventNamespace)

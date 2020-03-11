@@ -14,23 +14,19 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Orleans;
 using Orleans.Hosting;
+using Xunit;
 
 namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
 {
-    public class BasicClusterFixture : IAsyncDisposable
+    public class BasicClusterLifeTime : IAsyncLifetime
     {
-        private const string SiloSectionName = "Orleans:ActivitySilo";
+        private const string SiloSectionName = "Orleans:BasicClusterSilo";
 
         internal IClusterClient ClusterClient;
 
         internal IServiceProvider ClientServiceProvider;
 
         private IHost _siloHost;
-
-        public BasicClusterFixture()
-        {
-            InitializeAsync().Wait();
-        }
         
         public async Task InitializeAsync()
         {
@@ -80,7 +76,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
             ClusterClient = ClientServiceProvider.GetRequiredService<IClusterClient>();
         }
 
-        public async ValueTask DisposeAsync()
+        public async Task DisposeAsync()
         {
             if (ClusterClient != null)
             {
