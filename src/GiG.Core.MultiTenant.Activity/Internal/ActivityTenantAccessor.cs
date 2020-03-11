@@ -20,7 +20,8 @@ namespace GiG.Core.MultiTenant.Activity
 
         /// <inheritdoc />
         public IImmutableSet<string> Values =>
-            _activityContextAccessor.Baggage.Where(x => x.Key == Constants.TenantIdBaggageKey)
-                .Select(x => x.Value).ToImmutableHashSet();
+            _activityContextAccessor.Baggage
+                                    .Where(x => x.Key == Constants.TenantIdBaggageKey)
+                                    .Select(x => x.Value).ToImmutableHashSet();
     }
 }

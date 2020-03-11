@@ -1,10 +1,6 @@
 using GiG.Core.DistributedTracing.Activity.Extensions;
-using GiG.Core.MultiTenant.Activity.Extensions;
 using GiG.Core.MultiTenant.Web.Extensions;
-using GiG.Core.MultiTenant.Web.Internal;
-using GiG.Core.Web.FluentValidation.Extensions;
 using GiG.Core.Web.Mock;
-using GiG.Core.Web.Mock.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
