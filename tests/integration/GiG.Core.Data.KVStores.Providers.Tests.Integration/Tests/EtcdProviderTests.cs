@@ -125,7 +125,8 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
             var key = "languages";
             await _etcdClient.DeleteAsync(key);
 
-            var dataProvider = _serviceProvider.GetRequiredService<IDataProvider<IEnumerable<MockLanguage>>>();
+            var dataRetriever = _serviceProvider.GetRequiredService<IDataRetriever<IEnumerable<MockLanguage>>>();
+            var dataWriter = _serviceProvider.GetRequiredService<IDataWriter<IEnumerable<MockLanguage>>>();
 
             var languages = new Faker<MockLanguage>()
                 .RuleFor(x => x.Alpha2Code, new Randomizer().String(2, 'a', 'z'))
@@ -133,10 +134,10 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
                 .Generate(5)
                 .AsEnumerable();
 
-            await dataProvider.WriteAsync(languages, key);
+            await dataWriter.WriteAsync(languages, key);
 
             // Act.
-            IEnumerable<MockLanguage> actualData = await dataProvider.GetAsync(key);
+            IEnumerable<MockLanguage> actualData = await dataRetriever.GetAsync(key);
 
             // Assert.
             Assert.NotNull(actualData);
