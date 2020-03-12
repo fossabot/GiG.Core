@@ -15,7 +15,10 @@ public void ConfigureServices(IServiceCollection services)
     services.AddDefaultClusterClient((x, sp) =>
     {              
         x.ConfigureCluster(_configuration);
-        x.ConfigureConsulClustering(_configuration);
+        x.UseMembershipProvider(_configuration, y =>
+        {
+            y.ConfigureConsulClustering(_configuration);
+        });
         x.AddAssemblies(typeof(ITransactionGrain));
     });
 }
@@ -44,7 +47,10 @@ static class Program
     {
         builder.ConfigureCluster(ctx.Configuration)
             .ConfigureEndpoints(ctx.Configuration)
-            .ConfigureConsulClustering(ctx.Configuration)
+            .UseMembershipProvider(ctx.Configuration, x =>
+            {
+                x.ConfigureConsulClustering(ctx.Configuration);
+            });
             .AddAssemblies(typeof(Grain));
     }
 }    

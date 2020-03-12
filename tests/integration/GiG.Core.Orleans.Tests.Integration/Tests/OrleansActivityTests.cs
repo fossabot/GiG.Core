@@ -2,7 +2,6 @@
 using GiG.Core.Orleans.Tests.Integration.Contracts;
 using GiG.Core.Orleans.Tests.Integration.Lifetimes;
 using GiG.Core.Orleans.Tests.Integration.Mocks;
-using Orleans.Runtime;
 using System;
 using System.Threading.Tasks;
 using Xunit;
@@ -24,8 +23,8 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
 
             // Assert
             Assert.NotNull(activityResponse);
-            Assert.NotEmpty(activityResponse.TraceId);
-            Assert.Empty(activityResponse.ParentId);
+            Assert.NotNull(activityResponse.TraceId);
+            Assert.False(string.IsNullOrEmpty(activityResponse.ParentId));
         }
 
         [Fact]
@@ -42,8 +41,8 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
 
             // Assert
             Assert.NotNull(activityResponse);
-            Assert.NotEmpty(activityResponse.TraceId);
-            Assert.Equal(activity.RootId.ToString(), activityResponse.ParentId);
+            Assert.NotNull(activityResponse.TraceId);
+            Assert.Equal(activity.Id, activityResponse.ParentId);
         }
 
         [Fact]
@@ -63,8 +62,8 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
 
             // Assert
             Assert.NotNull(activityResponse);
-            Assert.NotEmpty(activityResponse.TraceId);
-            Assert.Equal(activity.RootId.ToString(), activityResponse.ParentId);
+            Assert.NotNull(activityResponse.TraceId);
+            Assert.Equal(activity.Id, activityResponse.ParentId);
         }
     }
 }
