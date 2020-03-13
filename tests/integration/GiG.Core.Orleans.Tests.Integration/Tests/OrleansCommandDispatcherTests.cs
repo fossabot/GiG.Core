@@ -19,7 +19,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             var grainId = Guid.NewGuid();
 
             // Act
-            using var commandDispatcher = ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
+            await using var commandDispatcher = ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
                 .Create(grainId, Constants.StreamProviderName)
                 .WithCommand(new MockCommand(true), MockCommand.MockCommandNamespace);
 
@@ -37,13 +37,14 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             var grainId = Guid.NewGuid();
 
             // Act
-            using var commandDispatcher = ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
+            await using var commandDispatcher = ClientServiceProvider
+                .GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
                 .Create(grainId, Constants.StreamProviderName)
                 .WithCommand(new MockCommand(true), MockCommand.MockCommandNamespace)
                 .WithSuccessEvent(MockSuccessEvent.MockSuccessEventNamespace);
-
-            var response = await commandDispatcher.DispatchAsync(5000);
             
+            var response = await commandDispatcher.DispatchAsync(5000);
+                
             // Assert
             Assert.NotNull(response);
             Assert.NotNull(response.Data);
@@ -57,7 +58,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             var grainId = Guid.NewGuid();
 
             // Act
-            using var commandDispatcher = ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
+            await using var commandDispatcher = ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
                 .Create(grainId, Constants.StreamProviderName)
                 .WithCommand(new MockCommand(false), MockCommand.MockCommandNamespace)
                 .WithFailureEvent(MockFailureEvent.MockFailureEventNamespace);
@@ -77,7 +78,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             var grainId = Guid.NewGuid();
 
             // Act
-            using var commandDispatcher = ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
+            await using var commandDispatcher = ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
                 .Create(grainId, Constants.StreamProviderName)
                 .WithCommand(new MockCommand(true), MockCommand.MockCommandNamespace)
                 .WithSuccessEvent(MockSuccessEvent.MockSuccessEventNamespace)
@@ -97,7 +98,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             var grainId = Guid.NewGuid();
 
             // Act
-            using var commandDispatcher =  ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
+            await using var commandDispatcher =  ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
                 .Create(grainId, Constants.StreamProviderName)
                 .WithCommand(new MockCommand(false), MockCommand.MockCommandNamespace)
                 .WithSuccessEvent(MockSuccessEvent.MockSuccessEventNamespace)
@@ -119,7 +120,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             var cts = new CancellationTokenSource();
     
             // Act
-            using var commandDispatcher = ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
+            await using var commandDispatcher = ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
                 .Create(grainId, Constants.StreamProviderName)
                 .WithCommand(new MockCommand(true), MockCommand.MockCommandNamespace)
                 .WithSuccessEvent(MockSuccessEvent.MockSuccessEventNamespace)
