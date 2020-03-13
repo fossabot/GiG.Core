@@ -32,6 +32,7 @@ namespace GiG.Core.Orleans.Streams
 
         private bool _isDisposing;
         private const string TimeoutError = "timeout";
+        private const string SubscribeAsyncNotCalledError= "Not Subscribed to Success or Failure Event";
 
         /// <summary>
         /// Constructor.
@@ -68,11 +69,7 @@ namespace GiG.Core.Orleans.Streams
         public ICommandDispatcher<TCommand, TSuccess, TFailure> WithSuccessEvent(string successEventNamespace)
         {
             _successStream = _streamProvider.GetStream<TSuccess>(_streamId, successEventNamespace);
-            if (_successStream != null)
-            {
-                _successStreamHandle = _successStream?.SubscribeAsync(SuccessHandler).Result;
-            }
-            
+
             return this;
         }
 
@@ -80,12 +77,22 @@ namespace GiG.Core.Orleans.Streams
         public ICommandDispatcher<TCommand, TSuccess, TFailure> WithFailureEvent(string failureEventNamespace)
         {
             _failureStream = _streamProvider.GetStream<TFailure>(_streamId, failureEventNamespace);
-            if (_failureStream != null)
+
+            return this;
+        }
+
+        /// <inheritdoc />
+        public async Task SubscribeAsync()
+        {
+            if (_successStream != null)
             {
-                _failureStreamHandle = _failureStream?.SubscribeAsync(FailureHandler).Result;
+                _successStreamHandle = await _successStream.SubscribeAsync(SuccessHandler);
             }
             
-            return this;
+            if (_failureStream != null)
+            {
+                _failureStreamHandle = await _failureStream.SubscribeAsync(FailureHandler);
+            }
         }
 
         /// <inheritdoc />
@@ -93,6 +100,11 @@ namespace GiG.Core.Orleans.Streams
         {
             try
             {
+                if (_successStreamHandle == null || _failureStreamHandle == null)
+                {
+                    throw new InvalidOperationException(SubscribeAsyncNotCalledError);
+                }
+                
                 await _commandStream.OnNextAsync(_command);
 
                 await _semaphore.WaitAsync(timeoutInMilliseconds, cancellationToken);
@@ -145,8 +157,8 @@ namespace GiG.Core.Orleans.Streams
 
             _isDisposing = true;
          
-            if (_successStreamHandle != null) await _successStreamHandle?.UnsubscribeAsync();
-            if (_failureStreamHandle != null) await _failureStreamHandle?.UnsubscribeAsync();
+            if (_successStreamHandle != null) await _successStreamHandle.UnsubscribeAsync();
+            if (_failureStreamHandle != null) await _failureStreamHandle.UnsubscribeAsync();
             
             _semaphore?.Dispose();
         }

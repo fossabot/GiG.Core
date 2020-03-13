@@ -45,5 +45,11 @@ namespace GiG.Core.Orleans.Streams.Abstractions
         /// <param name="cancellationToken">The Cancellation Token.</param>
         /// <returns>The <see cref="CommandDispatcherResponse{TSuccess}" />.</returns>
         Task<CommandDispatcherResponse<TSuccess>> DispatchAsync(int timeoutInMilliseconds, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Subscribes to success and failure handlers.
+        /// </summary>
+        /// <returns></returns>
+        Task SubscribeAsync();
     }
 }

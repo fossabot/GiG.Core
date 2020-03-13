@@ -76,6 +76,7 @@ The `Create()` creates a new instance of `ICommandDispatcher`.
 The `WithCommand()` appends a command to the instance of `ICommandDispatcher` given a command namespace. 
 The `WithSuccessEvent()` appends a success event to the instance of `ICommandDispatcher` given a success event namespace and subscribes to the success stream.
 The `WithFailureEvent()` appends a failure event to the instance of `ICommandDispatcher` given a failure event namespace and subscribes to the failure stream.
+The `SubscribeAsync()` subscribes to Success and Failure Events.
 The `DispatchAsync()` dispatches the command and handle the respective responses.
 
 ```csharp
@@ -85,6 +86,7 @@ await using (var commandDispatcher = _commandDispatcherFactory.Create(grainId, "
                 		 .WithSuccessEvent(TestSuccessEvent.TestSuccessEventNamespace)
                      	 .WithFailureEvent(TestFailureEvent.TestFailureEventNamespace))
 {
+    await commandDispatcher.SubscribeAsync(); 
     var response = await commandDispatcher.DispatchAsync(5000);             
 }
 ```
