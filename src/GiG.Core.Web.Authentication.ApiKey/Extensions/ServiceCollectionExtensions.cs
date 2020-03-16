@@ -26,7 +26,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Extensions
             services
                 .AddAuthentication(ApiKeyAuthenticationOptions.DefaultScheme)
                 .AddScheme<ApiKeyAuthenticationOptions, ApiKeyAuthenticationHandler>(ApiKeyAuthenticationOptions.DefaultScheme, x => new ApiKeyAuthenticationOptions());
-
+            
             services
                 .TryAddSingleton<IAuthorizedApiKeysProvider, DefaultAuthorizedApiKeysProvider>();
 
@@ -42,7 +42,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Extensions
         public static IServiceCollection ConfigureDefaultApiKeyOptions([NotNull]this IServiceCollection services, [NotNull]IConfigurationSection configurationSection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection?.Path}' is incorrect.");
+            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection?.Path}' does not exist.");
 
             services.Configure<ApiKeyOptions>(configurationSection);
 

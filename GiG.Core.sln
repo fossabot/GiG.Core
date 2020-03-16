@@ -445,11 +445,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.ApplicationMetrics
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Reminders.Npgsql", "src\GiG.Core.Orleans.Reminders.Npgsql\GiG.Core.Orleans.Reminders.Npgsql.csproj", "{7FAC76EB-3345-4DA2-8BA3-E0E9BCD083D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Web.Authentication.ApiKey", "src\GiG.Core.Web.Authentication.ApiKey\GiG.Core.Web.Authentication.ApiKey.csproj", "{177C23D4-20CE-460B-B803-6C708ECC7AED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Authentication.ApiKey", "src\GiG.Core.Web.Authentication.ApiKey\GiG.Core.Web.Authentication.ApiKey.csproj", "{177C23D4-20CE-460B-B803-6C708ECC7AED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Authentication.ApiKey.Abstractions", "src\GiG.Core.Authentication.ApiKey.Abstractions\GiG.Core.Authentication.ApiKey.Abstractions.csproj", "{D230B84B-8D0F-4784-9E65-1CB5A87E6313}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Authentication.ApiKey.Abstractions", "src\GiG.Core.Authentication.ApiKey.Abstractions\GiG.Core.Authentication.ApiKey.Abstractions.csproj", "{D230B84B-8D0F-4784-9E65-1CB5A87E6313}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Web.Authentication.ApiKey.Abstractions", "src\GiG.Core.Web.Authentication.ApiKey.Abstractions\GiG.Core.Web.Authentication.ApiKey.Abstractions.csproj", "{F6648894-8F87-40DC-B44E-AE06B9C6A3B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Authentication.ApiKey.Abstractions", "src\GiG.Core.Web.Authentication.ApiKey.Abstractions\GiG.Core.Web.Authentication.ApiKey.Abstractions.csproj", "{F6648894-8F87-40DC-B44E-AE06B9C6A3B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Web.Authentication.ApiKey.Tests.Unit", "tests\unit\GiG.Core.Web.Authentication.ApiKey.Tests.Unit\GiG.Core.Web.Authentication.ApiKey.Tests.Unit.csproj", "{3CD0D67E-A138-495C-AEED-E331ADEAE2A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1017,6 +1019,10 @@ Global
 		{F6648894-8F87-40DC-B44E-AE06B9C6A3B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6648894-8F87-40DC-B44E-AE06B9C6A3B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6648894-8F87-40DC-B44E-AE06B9C6A3B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CD0D67E-A138-495C-AEED-E331ADEAE2A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CD0D67E-A138-495C-AEED-E331ADEAE2A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CD0D67E-A138-495C-AEED-E331ADEAE2A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CD0D67E-A138-495C-AEED-E331ADEAE2A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1201,6 +1207,7 @@ Global
 		{177C23D4-20CE-460B-B803-6C708ECC7AED} = {D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF}
 		{D230B84B-8D0F-4784-9E65-1CB5A87E6313} = {F286F8FD-A3C9-4D52-B06A-27EB3A29B06C}
 		{F6648894-8F87-40DC-B44E-AE06B9C6A3B6} = {D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF}
+		{3CD0D67E-A138-495C-AEED-E331ADEAE2A9} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}

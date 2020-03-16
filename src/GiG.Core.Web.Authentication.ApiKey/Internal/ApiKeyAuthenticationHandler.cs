@@ -2,10 +2,14 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
+[assembly: InternalsVisibleTo("GiG.Core.Web.Authentication.ApiKey.Tests.Unit")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 namespace GiG.Core.Web.Authentication.ApiKey.Internal
 {
     /// <summary>
@@ -14,6 +18,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Internal
     internal class ApiKeyAuthenticationHandler : AuthenticationHandler<ApiKeyAuthenticationOptions>
     {
         private readonly IAuthorizedApiKeysProvider _apiKeysProvider;
+        private readonly ILogger<ApiKeyAuthenticationHandler> _logger;
 
         /// <summary>
         /// <see cref="AuthenticationHandler{TOptions}"/> using <see cref="Headers.ApiKey"/> header.
@@ -21,11 +26,12 @@ namespace GiG.Core.Web.Authentication.ApiKey.Internal
         public ApiKeyAuthenticationHandler(
             IOptionsMonitor<ApiKeyAuthenticationOptions> authenticationOptions,
             IAuthorizedApiKeysProvider apiKeysProvider,
-            ILoggerFactory logger,
+            ILoggerFactory loggerFactory,
             UrlEncoder encoder,
             ISystemClock clock) 
-            : base(authenticationOptions, logger, encoder, clock)
+            : base(authenticationOptions, loggerFactory, encoder, clock)
         {
+            _logger = loggerFactory.CreateLogger<ApiKeyAuthenticationHandler>();
             _apiKeysProvider = apiKeysProvider;
         }
 
@@ -38,22 +44,40 @@ namespace GiG.Core.Web.Authentication.ApiKey.Internal
                 return AuthenticateResult.NoResult();
             }
 
-            var authorizedTenantKeys = await _apiKeysProvider.GetAuthorizedApiKeysAsync();
-
-            // If the Api Key in the header is not in the list of authorized keys, fail the authentication
-            if (!authorizedTenantKeys.TryGetValue(apiKeyHeaderValue, out var tentantId))
+            // Check that the Api Key in the header has a value
+            if (string.IsNullOrWhiteSpace(apiKeyHeaderValue))
             {
                 return AuthenticateResult.Fail("Invalid API key.");
             }
 
-            // If successful, create an authentication with the tenant id 
+            var authorizedApiKeys = await _apiKeysProvider.GetAuthorizedApiKeysAsync();
 
-            var claims = new[] { new Claim("tenant_id", tentantId) };
+            // Validate the provided Authorized Api Keys
+            if (authorizedApiKeys == null ||
+                !authorizedApiKeys.Any())
+            {
+                // log me
+                _logger.LogError("ApiKey Authentication was enabled but the provided list of Authorized Api Keys was empty.");
+                return AuthenticateResult.Fail("Invalid API key.");
+            }
+
+            // If the value of the Api Key in the header is not in the list of authorized keys, fail the authentication
+            if (!authorizedApiKeys.TryGetValue(apiKeyHeaderValue, out var tenantId) ||
+                string.IsNullOrWhiteSpace(tenantId))
+            {
+                return AuthenticateResult.Fail("Invalid API key.");
+            }
+
+            // If it is in the list, create an authentication ticket with the tenant id and succeeed
+
+            var claims = new[] { new Claim("tenant_id", tenantId) };
             var identity = new ClaimsIdentity(claims, Scheme.Name);
             var principal = new ClaimsPrincipal(identity);
             var ticket = new AuthenticationTicket(principal, Scheme.Name);
 
             return AuthenticateResult.Success(ticket);
         }
+
+
     }
 }
