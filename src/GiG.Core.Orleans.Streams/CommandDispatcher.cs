@@ -17,9 +17,9 @@ namespace GiG.Core.Orleans.Streams
     {
         private readonly ILogger<CommandDispatcher<TCommand, TSuccess, TFailure>> _logger;
         private readonly IStreamProvider _streamProvider;
-        private readonly SemaphoreSlim _semaphore;
         private readonly Guid _streamId;
-
+        
+        private SemaphoreSlim _semaphore;
         private IAsyncStream<TCommand> _commandStream;
         private IAsyncStream<TSuccess> _successStream;
         private IAsyncStream<TFailure> _failureStream;
@@ -31,7 +31,9 @@ namespace GiG.Core.Orleans.Streams
         private TFailure _failure;
 
         private bool _isDisposing;
+        private bool _isReleased;
         private const string TimeoutError = "timeout";
+        private const string SubscribeAsyncNotCalledError= "Not Subscribed to Success or Failure Event";
 
         /// <summary>
         /// Constructor.
@@ -48,10 +50,7 @@ namespace GiG.Core.Orleans.Streams
             ILogger<CommandDispatcher<TCommand, TSuccess, TFailure>> logger, Guid streamId, string streamProviderName)
         {
             _logger = logger;
-            _streamProvider = clusterClient.GetStreamProvider(streamProviderName);
-
-            _semaphore = new SemaphoreSlim(0, 1);
-
+            _streamProvider = clusterClient.GetStreamProvider(streamProviderName);    
             _streamId = streamId;
         }
 
@@ -68,7 +67,7 @@ namespace GiG.Core.Orleans.Streams
         public ICommandDispatcher<TCommand, TSuccess, TFailure> WithSuccessEvent(string successEventNamespace)
         {
             _successStream = _streamProvider.GetStream<TSuccess>(_streamId, successEventNamespace);
-            
+
             return this;
         }
 
@@ -81,13 +80,31 @@ namespace GiG.Core.Orleans.Streams
         }
 
         /// <inheritdoc />
+        public async Task SubscribeAsync()
+        {
+            if (_successStream != null)
+            {
+                _successStreamHandle = await _successStream.SubscribeAsync(SuccessHandler);
+            }
+            
+            if (_failureStream != null)
+            {
+                _failureStreamHandle = await _failureStream.SubscribeAsync(FailureHandler);
+            }
+        }
+
+        /// <inheritdoc />
         public async Task<CommandDispatcherResponse<TSuccess>> DispatchAsync(int timeoutInMilliseconds, CancellationToken cancellationToken = default)
         {
-            if (_successStream != null) _successStreamHandle = await _successStream?.SubscribeAsync(SuccessHandler);
-            if (_failureStream != null) _failureStreamHandle = await _failureStream?.SubscribeAsync(FailureHandler);
-
             try
             {
+                if (_successStreamHandle == null || _failureStreamHandle == null)
+                {
+                    throw new InvalidOperationException(SubscribeAsyncNotCalledError);
+                }
+                
+                _semaphore = new SemaphoreSlim(0, 1);
+                
                 await _commandStream.OnNextAsync(_command);
 
                 await _semaphore.WaitAsync(timeoutInMilliseconds, cancellationToken);
@@ -117,33 +134,42 @@ namespace GiG.Core.Orleans.Streams
                 _logger.LogWarning(e, e.Message);
                 throw;
             }
-            finally
-            {
-                if (_successStreamHandle != null) await _successStreamHandle?.UnsubscribeAsync();
-                if (_failureStreamHandle != null) await _failureStreamHandle?.UnsubscribeAsync();
-            }
         }
 
         private Task SuccessHandler(TSuccess data, StreamSequenceToken token = null)
         {
-            _success = data;
-            _semaphore.Release();
+            if (!_isReleased)
+            {
+                _success = data;
+                _semaphore.Release();
+                _isReleased = true;
+            }
+            
             return Task.CompletedTask;
         }
 
         private Task FailureHandler(TFailure data, StreamSequenceToken token = null)
         {
-            _failure = data;
-            _semaphore.Release();
+            if (!_isReleased)
+            {
+                _failure = data;
+                _semaphore.Release();
+                _isReleased = true;
+            }
+            
             return Task.CompletedTask;
         }
 
         /// <inheritdoc />
-        public void Dispose()
+        public async ValueTask DisposeAsync()
         {
             if (_isDisposing) return;
 
             _isDisposing = true;
+         
+            if (_successStreamHandle != null) await _successStreamHandle.UnsubscribeAsync();
+            if (_failureStreamHandle != null) await _failureStreamHandle.UnsubscribeAsync();
+            
             _semaphore?.Dispose();
         }
     }
