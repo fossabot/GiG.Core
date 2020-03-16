@@ -11,7 +11,7 @@ namespace GiG.Core.Orleans.Streams.Abstractions
     /// <typeparam name="TCommand">The Command.</typeparam>
     /// <typeparam name="TSuccess">The Success Event.</typeparam>
     /// <typeparam name="TFailure">The Failure Event.</typeparam>
-    public interface ICommandDispatcher<in TCommand, TSuccess, TFailure> : IAsyncDisposable
+    public interface ICommandDispatcher<TCommand, TSuccess, TFailure> : IAsyncDisposable
         where TCommand : class
         where TSuccess : class
         where TFailure : class
