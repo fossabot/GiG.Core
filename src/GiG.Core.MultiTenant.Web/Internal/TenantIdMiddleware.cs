@@ -22,11 +22,9 @@ namespace GiG.Core.MultiTenant.Web.Internal
                 ? new List<string>()
                 : value.Where(x => !string.IsNullOrWhiteSpace(x));
             
-            foreach (var tenant in tenantIds.Where(x => !string.IsNullOrWhiteSpace(x)))
-            {
+            foreach (var tenant in tenantIds)
                 Activity.Current.AddBaggage(Constants.TenantIdBaggageKey, tenant);
-            }
-
+            
             await _next(context);
         }
     }
