@@ -452,6 +452,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "System", "System", "{E56709
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.System", "src\GiG.Core.System\GiG.Core.System.csproj", "{23B8EDAB-A61D-44F1-A0BA-3D705D8FC588}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Data.KVStores.Etcd.Tests.Performance", "tests\performance\GiG.Core.Data.KVStores.Etcd.Tests.Performance\GiG.Core.Data.KVStores.Etcd.Tests.Performance.csproj", "{200F54BE-EBAA-40D9-ACAB-69C04A979092}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1014,6 +1016,10 @@ Global
 		{23B8EDAB-A61D-44F1-A0BA-3D705D8FC588}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23B8EDAB-A61D-44F1-A0BA-3D705D8FC588}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23B8EDAB-A61D-44F1-A0BA-3D705D8FC588}.Release|Any CPU.Build.0 = Release|Any CPU
+		{200F54BE-EBAA-40D9-ACAB-69C04A979092}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{200F54BE-EBAA-40D9-ACAB-69C04A979092}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{200F54BE-EBAA-40D9-ACAB-69C04A979092}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{200F54BE-EBAA-40D9-ACAB-69C04A979092}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1198,6 +1204,7 @@ Global
 		{4EADC1CC-7873-450A-A9E5-6061996BE1F6} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
 		{E5670900-9A7D-41AA-8E1C-A7299C3BBD72} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
 		{23B8EDAB-A61D-44F1-A0BA-3D705D8FC588} = {E5670900-9A7D-41AA-8E1C-A7299C3BBD72}
+		{200F54BE-EBAA-40D9-ACAB-69C04A979092} = {66468249-0BE3-4E03-A5B8-DE350CA051EE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}
