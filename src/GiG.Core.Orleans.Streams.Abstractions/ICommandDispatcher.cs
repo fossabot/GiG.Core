@@ -11,7 +11,7 @@ namespace GiG.Core.Orleans.Streams.Abstractions
     /// <typeparam name="TCommand">The Command.</typeparam>
     /// <typeparam name="TSuccess">The Success Event.</typeparam>
     /// <typeparam name="TFailure">The Failure Event.</typeparam>
-    public interface ICommandDispatcher<in TCommand, TSuccess, TFailure> : IDisposable
+    public interface ICommandDispatcher<TCommand, TSuccess, TFailure> : IAsyncDisposable
         where TCommand : class
         where TSuccess : class
         where TFailure : class
@@ -25,25 +25,31 @@ namespace GiG.Core.Orleans.Streams.Abstractions
         ICommandDispatcher<TCommand, TSuccess, TFailure> WithCommand(TCommand command, string commandNamespace);
 
         /// <summary>
-        /// Appends a success event to the instance of <see cref="ICommandDispatcher{TCommand, TSuccess, TFailure}" /> given a success event namespace.
+        /// Appends a success event to the instance of <see cref="ICommandDispatcher{TCommand, TSuccess, TFailure}" /> given a success event namespace and subscribes to the success stream.
         /// </summary>
         /// <param name="successEventNamespace">The Success Event Namespace.</param>
         /// <returns>The <see cref="ICommandDispatcher{TCommand, TSuccess, TFailure}" />.</returns>
         ICommandDispatcher<TCommand, TSuccess, TFailure> WithSuccessEvent(string successEventNamespace);
 
         /// <summary>
-        /// Appends a failure event to the instance of <see cref="ICommandDispatcher{TCommand, TSuccess, TFailure}" /> given a failure event namespace.
+        /// Appends a failure event to the instance of <see cref="ICommandDispatcher{TCommand, TSuccess, TFailure}" /> given a failure event namespace and subscribes to the failure stream.
         /// </summary>
         /// <param name="failureEventNamespace">The Failure Event Namespace.</param>
         /// <returns>The <see cref="ICommandDispatcher{TCommand, TSuccess, TFailure}" />.</returns>
         ICommandDispatcher<TCommand, TSuccess, TFailure> WithFailureEvent(string failureEventNamespace);
 
         /// <summary>
-        /// Subscribes to the Success and Failure streams, dispatches the command and handles the respective responses.
+        /// Dispatches the command and handles the respective responses.
         /// </summary>
         /// <param name="timeoutInMilliseconds">The Timeout in Milliseconds.</param>
         /// <param name="cancellationToken">The Cancellation Token.</param>
         /// <returns>The <see cref="CommandDispatcherResponse{TSuccess}" />.</returns>
         Task<CommandDispatcherResponse<TSuccess>> DispatchAsync(int timeoutInMilliseconds, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Subscribes to success and failure handlers.
+        /// </summary>
+        /// <returns></returns>
+        Task SubscribeAsync();
     }
 }

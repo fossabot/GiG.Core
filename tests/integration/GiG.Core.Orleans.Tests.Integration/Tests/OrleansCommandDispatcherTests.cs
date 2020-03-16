@@ -13,61 +13,63 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
     public class OrleansCommandDispatcherTests : BasicClusterLifeTime
     {
         [Fact]
-        public async Task DispatchAsync_NoEvents_ReturnsTimeout()
+        public async Task DispatchAsync_NoEvents_ThrowsInvalidOperationException()
         {
             // Arrange
             var grainId = Guid.NewGuid();
 
             // Act
-            using var commandDispatcher = ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
+            await using var commandDispatcher = ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
                 .Create(grainId, Constants.StreamProviderName)
                 .WithCommand(new MockCommand(true), MockCommand.MockCommandNamespace);
 
-            var response = await commandDispatcher.DispatchAsync(5000);
+            await commandDispatcher.SubscribeAsync();
             
+            var exception = Assert.ThrowsAsync<InvalidOperationException>(() => commandDispatcher.DispatchAsync(5000));
+
             // Assert
-            Assert.NotNull(response);
-            Assert.Equal("timeout", response.ErrorCode);
+            Assert.Equal("Not Subscribed to Success or Failure Event", exception.Result.Message);
         }
         
         [Fact]
-        public async Task DispatchAsync_SetupSuccessEventOnly_ReturnsSuccessEvent()
+        public async Task DispatchAsync_SetupSuccessEventOnly_ThrowsInvalidOperationException()
         {
             // Arrange
             var grainId = Guid.NewGuid();
 
             // Act
-            using var commandDispatcher = ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
+            await using var commandDispatcher = ClientServiceProvider
+                .GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
                 .Create(grainId, Constants.StreamProviderName)
                 .WithCommand(new MockCommand(true), MockCommand.MockCommandNamespace)
                 .WithSuccessEvent(MockSuccessEvent.MockSuccessEventNamespace);
-
-            var response = await commandDispatcher.DispatchAsync(5000);
+          
+            await commandDispatcher.SubscribeAsync();
             
+            var exception = Assert.ThrowsAsync<InvalidOperationException>(() => commandDispatcher.DispatchAsync(5000));
+
             // Assert
-            Assert.NotNull(response);
-            Assert.NotNull(response.Data);
-            Assert.Equal(response.Data.GrainId, grainId);
+            Assert.Equal("Not Subscribed to Success or Failure Event", exception.Result.Message);
         }
         
         [Fact]
-        public async Task DispatchAsync_SetupFailureEventOnly_ReturnsFailureEvent()
+        public async Task DispatchAsync_SetupFailureEventOnly_ThrowsInvalidOperationException()
         {
             // Arrange
             var grainId = Guid.NewGuid();
 
             // Act
-            using var commandDispatcher = ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
+            await using var commandDispatcher = ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
                 .Create(grainId, Constants.StreamProviderName)
                 .WithCommand(new MockCommand(false), MockCommand.MockCommandNamespace)
                 .WithFailureEvent(MockFailureEvent.MockFailureEventNamespace);
 
-            var response = await commandDispatcher.DispatchAsync(5000);
+            await commandDispatcher.SubscribeAsync();
             
+            var exception = Assert.ThrowsAsync<InvalidOperationException>(() => commandDispatcher.DispatchAsync(5000));
+
             // Assert
-            Assert.NotNull(response);
-            Assert.Equal(MockFailureEvent.MockErrorCode, response.ErrorCode);
-            Assert.Equal(MockFailureEvent.MockErrorMessage, response.ErrorMessage);
+            Assert.Equal("Not Subscribed to Success or Failure Event", exception.Result.Message);
         }
         
         [Fact]
@@ -77,11 +79,14 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             var grainId = Guid.NewGuid();
 
             // Act
-            using var commandDispatcher = ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
+            await using var commandDispatcher = ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
                 .Create(grainId, Constants.StreamProviderName)
                 .WithCommand(new MockCommand(true), MockCommand.MockCommandNamespace)
                 .WithSuccessEvent(MockSuccessEvent.MockSuccessEventNamespace)
                 .WithFailureEvent(MockFailureEvent.MockFailureEventNamespace);
+
+            await commandDispatcher.SubscribeAsync();
+            
             var response = await commandDispatcher.DispatchAsync(5000);
 
             // Assert
@@ -97,11 +102,13 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             var grainId = Guid.NewGuid();
 
             // Act
-            using var commandDispatcher =  ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
+            await using var commandDispatcher =  ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
                 .Create(grainId, Constants.StreamProviderName)
                 .WithCommand(new MockCommand(false), MockCommand.MockCommandNamespace)
                 .WithSuccessEvent(MockSuccessEvent.MockSuccessEventNamespace)
                 .WithFailureEvent(MockFailureEvent.MockFailureEventNamespace);
+            
+            await commandDispatcher.SubscribeAsync();
 
             var response = await commandDispatcher.DispatchAsync(5000);
             
@@ -119,16 +126,37 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             var cts = new CancellationTokenSource();
     
             // Act
-            using var commandDispatcher = ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
+            await using var commandDispatcher = ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
                 .Create(grainId, Constants.StreamProviderName)
                 .WithCommand(new MockCommand(true), MockCommand.MockCommandNamespace)
                 .WithSuccessEvent(MockSuccessEvent.MockSuccessEventNamespace)
                 .WithFailureEvent(MockFailureEvent.MockFailureEventNamespace);
+            
+            await commandDispatcher.SubscribeAsync();
 
             cts.Cancel();
 
             // Assert
             await Assert.ThrowsAsync<TaskCanceledException>(() => commandDispatcher.DispatchAsync(5000, cts.Token));
+        }
+        
+        [Fact]
+        public async Task DispatchAsync_WithSuccessAndFailureEvents_ThrowsInvalidOperationException()
+        {
+            // Arrange
+            var grainId = Guid.NewGuid();
+
+            // Act
+            await using var commandDispatcher = ClientServiceProvider.GetRequiredService<ICommandDispatcherFactory<MockCommand, MockSuccessEvent, MockFailureEvent>>()
+                .Create(grainId, Constants.StreamProviderName)
+                .WithCommand(new MockCommand(true), MockCommand.MockCommandNamespace)
+                .WithSuccessEvent(MockSuccessEvent.MockSuccessEventNamespace)
+                .WithFailureEvent(MockFailureEvent.MockFailureEventNamespace);
+            
+            var exception = Assert.ThrowsAsync<InvalidOperationException>(() => commandDispatcher.DispatchAsync(5000));
+
+            // Assert
+            Assert.Equal("Not Subscribed to Success or Failure Event", exception.Result.Message);
         }
     }
 }
