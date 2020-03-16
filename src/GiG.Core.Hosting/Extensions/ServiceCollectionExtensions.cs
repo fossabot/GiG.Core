@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
-using System.Configuration;
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("GiG.Core.Hosting.Tests.Unit")]

@@ -2,8 +2,8 @@ using GiG.Core.Data.KVStores.Abstractions;
 using GiG.Core.Data.KVStores.Etcd.Sample.Models;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,41 +12,41 @@ namespace GiG.Core.Data.KVStores.Etcd.Sample.Services
     public class CurrencyService : IHostedService
     {
         private readonly IDataRetriever<IEnumerable<Currency>> _dataRetriever;
+        private readonly IDataWriter<IEnumerable<Currency>> _dataWriter;
         private readonly ILogger<CurrencyService> _logger;
-        private Timer _timer;
 
-        public CurrencyService(IDataRetriever<IEnumerable<Currency>> dataRetriever, ILogger<CurrencyService> logger)
+        public CurrencyService(
+            IDataRetriever<IEnumerable<Currency>> dataRetriever, 
+            IDataWriter<IEnumerable<Currency>> dataWriter, 
+            ILogger<CurrencyService> logger)
         {
             _dataRetriever = dataRetriever;
+            _dataWriter = dataWriter;
             _logger = logger;
         }
 
-        public void Dispose()
+        public async Task StartAsync(CancellationToken cancellationToken)
         {
-            _timer.Dispose();
-        }
+            _logger.LogInformation("Writing Currencies...");
 
-        public Task StartAsync(CancellationToken cancellationToken)
-        {
-            _logger.LogInformation("Retrieving Currencies...");
+            var currencies = new Currency[]
+            {
+                new Currency { Name = "Euro" },
+                new Currency { Name = "Dollar"}
+            }.AsEnumerable();
 
-            _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromSeconds(2));
+            await _dataWriter.WriteAsync(currencies);
 
-            return Task.CompletedTask;
+            _logger.LogInformation("Reading Currencies...");
+
+            currencies = await _dataRetriever.GetAsync();
+
+            _logger.LogInformation("Currencies: {@currencies}", currencies);
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            _timer?.Change(Timeout.Infinite, 0);
-
             return Task.CompletedTask;
-        }
-
-        private void DoWork(object state)
-        {
-            var data = _dataRetriever.Get();
-
-            _logger.LogInformation("Currencies: {@currencies}", data);
         }
     }
 }
