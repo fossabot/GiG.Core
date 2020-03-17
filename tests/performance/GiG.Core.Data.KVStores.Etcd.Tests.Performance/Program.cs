@@ -1,9 +1,11 @@
-using GiG.Core.Configuration.Extensions;
-using GiG.Core.DistributedTracing.Activity.Extensions;
-using GiG.Core.Hosting.Extensions;
-using GiG.Core.Logging.All.Extensions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace GiG.Core.Data.KVStores.Etcd.Tests.Performance
 {
@@ -16,10 +18,6 @@ namespace GiG.Core.Data.KVStores.Etcd.Tests.Performance
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .UseApplicationMetadata()
-                .ConfigureServices(x => x.AddActivityAccessor())
-                .ConfigureExternalConfiguration()
-                .ConfigureLogging()
-                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
+                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
     }
 }
