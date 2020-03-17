@@ -25,7 +25,7 @@ namespace GiG.Core.DistributedTracing.Orleans
         /// <returns>A <see cref="Task"/>.</returns>
         public async Task Invoke(IOutgoingGrainCallContext context)
         {
-            RequestContext.Set(Constants.ActivityHeader, _activityContextAccessor.CorrelationId);
+            RequestContext.Set(Constants.ActivityHeader, _activityContextAccessor.ActivityId);
             await context.Invoke();
         }
     }
