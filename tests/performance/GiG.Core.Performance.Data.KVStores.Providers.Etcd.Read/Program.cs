@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace GiG.Core.Data.KVStores.Etcd.Tests.Performance
+namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read
 {
     public class Program
     {

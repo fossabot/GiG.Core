@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace GiG.Core.Data.KVStores.Etcd.Tests.Performance
+namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read
 {
     public class Startup
     {

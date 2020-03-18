@@ -452,7 +452,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "System", "System", "{E56709
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.System", "src\GiG.Core.System\GiG.Core.System.csproj", "{23B8EDAB-A61D-44F1-A0BA-3D705D8FC588}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Data.KVStores.Etcd.Tests.Performance", "tests\performance\GiG.Core.Data.KVStores.Etcd.Tests.Performance\GiG.Core.Data.KVStores.Etcd.Tests.Performance.csproj", "{AA90334C-2D74-4FE4-995E-2F64157649DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read", "tests\performance\GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read\GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read.csproj", "{AA90334C-2D74-4FE4-995E-2F64157649DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -15,6 +15,5 @@
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       </Content>
     </ItemGroup>
-
-
+    
 </Project>

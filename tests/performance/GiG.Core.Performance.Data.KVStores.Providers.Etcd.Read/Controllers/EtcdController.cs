@@ -1,7 +1,7 @@
 ﻿using dotnet_etcd;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GiG.Core.Data.KVStores.Etcd.Tests.Performance.Controllers
+namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read.Controllers
 {
     [ApiController]
     [Route("[controller]")]
