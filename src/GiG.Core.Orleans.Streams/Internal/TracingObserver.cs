@@ -2,6 +2,7 @@
 using OpenTelemetry.Trace;
 using Orleans.Streams;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace GiG.Core.Orleans.Streams.Internal
@@ -31,11 +32,18 @@ namespace GiG.Core.Orleans.Streams.Internal
 
         public async Task OnNextAsync(T item, StreamSequenceToken token = null)
         {
-            var span = _tracer?.StartSpanFromActivity($"Consuming-{item.GetType().Name}", _activityContextAccessor.CurrentActivity, SpanKind.Consumer);
+            var itemTypeName = item.GetType().Name;
+            var consumerActivity = new Activity("TracingObserver-Consuming-Item");
+            consumerActivity.Start();
 
+            var span = _tracer?.StartSpanFromActivity($"Consuming-{itemTypeName}", _activityContextAccessor.CurrentActivity, SpanKind.Consumer);
+
+            span?.AddEvent($"Calling {_observer.GetType().Name} OnNextAsync");
+            
             await _observer.OnNextAsync(item, token);
 
             span?.End();
+            consumerActivity.Stop();
         }
     }
 }

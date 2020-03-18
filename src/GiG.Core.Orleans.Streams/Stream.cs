@@ -48,16 +48,15 @@ namespace GiG.Core.Orleans.Streams
         {
             var span = _tracer?.StartSpanFromActivity($"{SpanOperationNamePrefix}-{message.GetType().Name}", Activity.Current, SpanKind.Producer);
 
-            var activityId = _activityContextAccessor?.ActivityId;
-            // This is to ensure that the correlation id provided by the accessor is propagated in the orleans request context.
-            if (!string.IsNullOrWhiteSpace(activityId))
-            {
-                RequestContext.Set(Constants.ActivityHeader, activityId);
-            }
+            var publishingActivity = new Activity("Stream Publish");
+            publishingActivity.Start();
+             
+            RequestContext.Set(Constants.ActivityHeader, publishingActivity.Id);
 
             await _asyncStream.OnNextAsync(message, token);
 
             span?.End();
+            publishingActivity.Stop();
         }
 
         /// <summary>
