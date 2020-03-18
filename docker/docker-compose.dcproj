@@ -9,6 +9,7 @@
     <DockerServiceName>gig.core.web.sample</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="docker-compose-etcd-watch-performance-test.yml" />
     <None Include="docker-compose-sample-dbmigrations.yml" />
     <None Include="docker-compose-performance-orleans.yml" />
     <None Include="docker-compose-sample-kafka.yml" />
