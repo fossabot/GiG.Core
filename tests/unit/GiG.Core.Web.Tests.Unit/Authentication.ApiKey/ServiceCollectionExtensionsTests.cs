@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Configuration;
 using Xunit;
 
 
@@ -48,7 +47,7 @@ namespace GiG.Core.Web.Tests.Unit.Authentication.ApiKey
 
             // Act / Assert
             Action unitUnderTest = () => serviceCollection.ConfigureDefaultApiKeyOptions(configurationSection);
-            var exception = Assert.Throws<ConfigurationErrorsException>(unitUnderTest);
+            var exception = Assert.Throws<ArgumentNullException>(unitUnderTest);
         }
 
         [Fact]
