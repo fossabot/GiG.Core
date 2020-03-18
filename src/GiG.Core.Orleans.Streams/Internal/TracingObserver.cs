@@ -36,7 +36,7 @@ namespace GiG.Core.Orleans.Streams.Internal
             var consumerActivity = new Activity("TracingObserver-Consuming-Item");
             consumerActivity.Start();
 
-            var span = _tracer?.StartSpanFromActivity($"Consuming-{itemTypeName}", _activityContextAccessor.CurrentActivity, SpanKind.Consumer);
+            var span = _tracer?.StartSpanFromActivity($"Consuming-{itemTypeName}", consumerActivity, SpanKind.Consumer);
 
             span?.AddEvent($"Calling {_observer.GetType().Name} OnNextAsync");
             

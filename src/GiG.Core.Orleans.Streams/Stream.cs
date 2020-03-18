@@ -46,11 +46,11 @@ namespace GiG.Core.Orleans.Streams
         /// <returns></returns>
         public async Task PublishAsync(TMessage message, StreamSequenceToken token = null)
         {
-            var span = _tracer?.StartSpanFromActivity($"{SpanOperationNamePrefix}-{message.GetType().Name}", Activity.Current, SpanKind.Producer);
-
             var publishingActivity = new Activity("Stream Publish");
             publishingActivity.Start();
-             
+
+            var span = _tracer?.StartSpanFromActivity($"{SpanOperationNamePrefix}-{message.GetType().Name}", Activity.Current, SpanKind.Producer);
+
             RequestContext.Set(Constants.ActivityHeader, publishingActivity.Id);
 
             await _asyncStream.OnNextAsync(message, token);
