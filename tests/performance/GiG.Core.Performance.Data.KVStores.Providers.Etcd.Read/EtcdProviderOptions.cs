@@ -1,6 +1,6 @@
 ﻿namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read
 {
-    public class EtcdConfiguration
+    public class EtcdProviderOptions
     {
         public string ConnectionString { get; set; } = "http://etcd:2379";
         public int Port { get; set; } = 2379;

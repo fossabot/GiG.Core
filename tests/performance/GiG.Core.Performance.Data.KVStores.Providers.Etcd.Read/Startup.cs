@@ -21,7 +21,7 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read
         {
             services.AddControllers();
             
-            var etcdConfig = Configuration.GetSection("Etcd").Get<EtcdConfiguration>();
+            var etcdConfig = Configuration.GetSection("EtcdRead").Get<EtcdProviderOptions>();
             services.AddSingleton(new EtcdClient(etcdConfig.ConnectionString, 
                                                  etcdConfig.Port,
                                                  etcdConfig.Username, 
@@ -35,11 +35,6 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
             app.UseHttpsRedirection();
 
             app.UseRouting();

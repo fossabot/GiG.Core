@@ -13,7 +13,7 @@
     <None Include="docker-compose-performance-orleans.yml" />
     <None Include="docker-compose-sample-kafka.yml" />
     <None Include="docker-compose-sample-kvstores-etcd.yml" />
-    <Content Include="docker-compose-performance-etcd-read.yml" />
+    <None Include="docker-compose-performance-etcd-read.yml" />
     <None Include="docker-compose.yml" />
     <None Include="../.dockerignore" />
   </ItemGroup>
