@@ -11,5 +11,11 @@ namespace GiG.Core.Data.KVStores.Serializers
         {
             return JsonSerializer.Deserialize<T>(value);
         }
+
+        /// <inheritdoc />
+        public string ConvertToString(T model)
+        {
+            return JsonSerializer.Serialize(model);
+        }
     }
 }

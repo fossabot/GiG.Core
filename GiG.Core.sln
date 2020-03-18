@@ -54,6 +54,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Orleans.Client.md = docs\GiG.Core.Orleans.Client.md
 		docs\GiG.Core.Orleans.Clustering.Consul.md = docs\GiG.Core.Orleans.Clustering.Consul.md
 		docs\GiG.Core.Orleans.Clustering.Kubernetes.md = docs\GiG.Core.Orleans.Clustering.Kubernetes.md
+		docs\GiG.Core.Orleans.Clustering.Localhost.md = docs\GiG.Core.Orleans.Clustering.Localhost.md
 		docs\GiG.Core.Orleans.Clustering.md = docs\GiG.Core.Orleans.Clustering.md
 		docs\GiG.Core.Orleans.Reminders.Npgsql.md = docs\GiG.Core.Orleans.Reminders.Npgsql.md
 		docs\GiG.Core.Orleans.Silo.Dashboard.md = docs\GiG.Core.Orleans.Silo.Dashboard.md
@@ -454,6 +455,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Authentication.ApiKey.Tests.Unit", "tests\unit\GiG.Core.Web.Authentication.ApiKey.Tests.Unit\GiG.Core.Web.Authentication.ApiKey.Tests.Unit.csproj", "{3CD0D67E-A138-495C-AEED-E331ADEAE2A9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Web.Authentication.ApiKey.Tests.Integration", "tests\integration\GiG.Core.Web.Authentication.ApiKey.Tests.Integration\GiG.Core.Web.Authentication.ApiKey.Tests.Integration.csproj", "{B2735E67-FA94-4899-80B1-3BEACB8B921E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Clustering.Localhost", "src\GiG.Core.Orleans.Clustering.Localhost\GiG.Core.Orleans.Clustering.Localhost.csproj", "{4EADC1CC-7873-450A-A9E5-6061996BE1F6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "System", "System", "{E5670900-9A7D-41AA-8E1C-A7299C3BBD72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.System", "src\GiG.Core.System\GiG.Core.System.csproj", "{23B8EDAB-A61D-44F1-A0BA-3D705D8FC588}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Performance.Data.KVStores.Providers.Etcd.Watch", "tests\performance\GiG.Core.Performance.Data.KVStores.Providers.Etcd.Watch\GiG.Core.Performance.Data.KVStores.Providers.Etcd.Watch.csproj", "{D6D1E2D2-42FE-495A-8ECD-582AA909AFF6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1029,6 +1038,18 @@ Global
 		{B2735E67-FA94-4899-80B1-3BEACB8B921E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2735E67-FA94-4899-80B1-3BEACB8B921E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2735E67-FA94-4899-80B1-3BEACB8B921E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6D1E2D2-42FE-495A-8ECD-582AA909AFF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6D1E2D2-42FE-495A-8ECD-582AA909AFF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6D1E2D2-42FE-495A-8ECD-582AA909AFF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6D1E2D2-42FE-495A-8ECD-582AA909AFF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EADC1CC-7873-450A-A9E5-6061996BE1F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EADC1CC-7873-450A-A9E5-6061996BE1F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EADC1CC-7873-450A-A9E5-6061996BE1F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EADC1CC-7873-450A-A9E5-6061996BE1F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23B8EDAB-A61D-44F1-A0BA-3D705D8FC588}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23B8EDAB-A61D-44F1-A0BA-3D705D8FC588}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23B8EDAB-A61D-44F1-A0BA-3D705D8FC588}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23B8EDAB-A61D-44F1-A0BA-3D705D8FC588}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1215,6 +1236,10 @@ Global
 		{F6648894-8F87-40DC-B44E-AE06B9C6A3B6} = {D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF}
 		{3CD0D67E-A138-495C-AEED-E331ADEAE2A9} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
 		{B2735E67-FA94-4899-80B1-3BEACB8B921E} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
+		{D6D1E2D2-42FE-495A-8ECD-582AA909AFF6} = {66468249-0BE3-4E03-A5B8-DE350CA051EE}
+		{4EADC1CC-7873-450A-A9E5-6061996BE1F6} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
+		{E5670900-9A7D-41AA-8E1C-A7299C3BBD72} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
+		{23B8EDAB-A61D-44F1-A0BA-3D705D8FC588} = {E5670900-9A7D-41AA-8E1C-A7299C3BBD72}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}
