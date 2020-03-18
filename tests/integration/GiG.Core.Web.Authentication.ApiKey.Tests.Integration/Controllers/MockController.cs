@@ -1,5 +1,4 @@
-﻿using GiG.Core.Web.Authentication.ApiKey.Tests.Integration.Models;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GiG.Core.Web.Authentication.ApiKey.Tests.Integration.Controllers
@@ -12,8 +11,5 @@ namespace GiG.Core.Web.Authentication.ApiKey.Tests.Integration.Controllers
 
         [HttpGet]
         public ActionResult Get() => Ok();
-
-        [HttpPost]
-        public ActionResult<string> Post(RequestModel model) => Ok(model.Text);
     }
 }

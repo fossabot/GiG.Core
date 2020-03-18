@@ -22,7 +22,9 @@ namespace GiG.Core.Web.Authentication.ApiKey.Extensions
         /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection AddApiKeyAuthentication([NotNull]this IServiceCollection services)
         {
+            // Guards
             if (services == null) throw new ArgumentNullException(nameof(services));
+
             services
                 .AddAuthentication(ApiKeyAuthenticationOptions.DefaultScheme)
                 .AddScheme<ApiKeyAuthenticationOptions, ApiKeyAuthenticationHandler>(ApiKeyAuthenticationOptions.DefaultScheme, x => new ApiKeyAuthenticationOptions());
@@ -41,8 +43,12 @@ namespace GiG.Core.Web.Authentication.ApiKey.Extensions
         /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection ConfigureDefaultApiKeyOptions([NotNull]this IServiceCollection services, [NotNull]IConfigurationSection configurationSection)
         {
+            // Guards
             if (services == null) throw new ArgumentNullException(nameof(services));
-            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection?.Path}' does not exist.");
+            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
+
+            // Configuration validation
+            if (configurationSection.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection?.Path}' does not exist.");
 
             services.Configure<ApiKeyOptions>(configurationSection);
 
@@ -56,6 +62,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Extensions
         /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection ConfigureDefaultApiKeyOptions([NotNull]this IServiceCollection services, [NotNull]IConfiguration configuration)
         {
+            // Guards
             if (services == null) throw new ArgumentNullException(nameof(services));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 

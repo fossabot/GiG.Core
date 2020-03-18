@@ -31,7 +31,7 @@ The below table outlines the valid Configurations used to set the authorized Api
 
 At least 1 Api Key - Tenant Id pair must be available for the configuration to be valid.
 
-## Sample Configuration
+### Sample Configuration
 
 ```chsarp
 {

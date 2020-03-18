@@ -1,7 +1,6 @@
 ﻿using GiG.Core.Web.Authentication.ApiKey.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Moq;
 using System;
 using System.Configuration;
 using Xunit;
