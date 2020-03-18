@@ -2,7 +2,6 @@
 EXPOSE 8080
 WORKDIR /app
 
-
 # Copy csproj and restore as distinct layers
 COPY ["tests/performance/GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read/GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read.csproj", "tests/performance/GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read/"]
 RUN dotnet restore "tests/performance/GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read/GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read.csproj"
