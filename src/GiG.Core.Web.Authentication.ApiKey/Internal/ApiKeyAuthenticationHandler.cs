@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace GiG.Core.Web.Authentication.ApiKey.Internal
 {
     /// <summary>
-    /// <see cref="AuthenticationHandler{T}"/> for header>
+    /// <see cref="AuthenticationHandler{T}"/> for header.
     /// </summary>
     internal class ApiKeyAuthenticationHandler : AuthenticationHandler<ApiKeyAuthenticationOptions>
     {
@@ -38,37 +38,36 @@ namespace GiG.Core.Web.Authentication.ApiKey.Internal
         /// <inheritdoc/>
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            // If the X-Api-Key header is not present, let other handlers authenticate the request
+            // If the X-Api-Key header is not present, let other handlers authenticate the request.
             if (!Request.Headers.TryGetValue(Headers.ApiKey, out var apiKeyHeaderValue))
             {
                 return AuthenticateResult.NoResult();
             }
 
-            // Check that the Api Key in the header has a value
+            // Check that the Api Key in the header has a value.
             if (string.IsNullOrWhiteSpace(apiKeyHeaderValue))
             {
-                return AuthenticateResult.Fail("Invalid API key.");
+                return FailedApiKeyAuthentication();
             }
 
             var authorizedApiKeys = await _apiKeysProvider.GetAuthorizedApiKeysAsync();
 
-            // Validate the provided Authorized Api Keys
+            // Validate the provided Authorized Api Keys.
             if (authorizedApiKeys == null ||
                 !authorizedApiKeys.Any())
             {
-                // log me
                 _logger.LogError("ApiKey Authentication was enabled but the provided list of Authorized Api Keys was empty.");
-                return AuthenticateResult.Fail("Invalid API key.");
+                return FailedApiKeyAuthentication();
             }
 
-            // If the value of the Api Key in the header is not in the list of authorized keys, fail the authentication
+            // If the value of the Api Key in the header is not in the list of authorized keys, fail the authentication.
             if (!authorizedApiKeys.TryGetValue(apiKeyHeaderValue, out var tenantId) ||
                 string.IsNullOrWhiteSpace(tenantId))
             {
-                return AuthenticateResult.Fail("Invalid API key.");
+                return FailedApiKeyAuthentication();
             }
 
-            // If it is in the list, create an authentication ticket with the tenant id and succeeed
+            // If it is in the list, create an authentication ticket with the tenant id and succeeed.
 
             var claims = new[] { new Claim("tenant_id", tenantId) };
             var identity = new ClaimsIdentity(claims, Scheme.Name);
@@ -78,6 +77,10 @@ namespace GiG.Core.Web.Authentication.ApiKey.Internal
             return AuthenticateResult.Success(ticket);
         }
 
+        private AuthenticateResult FailedApiKeyAuthentication()
+        {
+            return AuthenticateResult.Fail("Invalid API key.");
+        }
 
     }
 }
