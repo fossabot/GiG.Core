@@ -16,11 +16,5 @@
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
-
-    <ItemGroup>
-      <None Update="NuGet.Config">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-    </ItemGroup>
     
 </Project>
