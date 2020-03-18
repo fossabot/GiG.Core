@@ -14,6 +14,8 @@ using Xunit;
 
 namespace GiG.Core.Web.Authentication.ApiKey.Tests.Unit
 {
+    [Trait("Category", "Unit")]
+    [Trait("Feature", "ApiKeyAuthentication")]
     public class ApiKeyAuthenticationHandlerTests
     {
         private readonly IOptionsMonitor<ApiKeyAuthenticationOptions> _apiKeyAuthenticationOptions;
@@ -120,7 +122,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Tests.Unit
 
             // Act
             var authenticateResult = await apiKeyAuthenticationHandler.AuthenticateAsync();
-            var claim = authenticateResult?.Ticket?.Principal?.Claims?.FirstOrDefault();
+            var claim = authenticateResult?.Ticket?.Principal?.Claims?.SingleOrDefault();
 
             // Assert
             Assert.True(authenticateResult.Succeeded);

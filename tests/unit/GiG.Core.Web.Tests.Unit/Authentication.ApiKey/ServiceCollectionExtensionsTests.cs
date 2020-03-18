@@ -10,6 +10,7 @@ using Xunit;
 namespace GiG.Core.Web.Tests.Unit.Authentication.ApiKey
 {
     [Trait("Category", "Unit")]
+    [Trait("Feature", "ApiKeyAuthentication")]
     public class ServiceCollectionExtensionsTests
     {
         [Fact]
