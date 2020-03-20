@@ -71,15 +71,22 @@ var grainId = Guid.NewGuid();
 _commandDispatcherFactory.Create(grainId, "SMSProvider")
 ```
 
-The below code shows how to setup and dispatch the command, and wait for Success or Failure response
+The below code shows how to setup and dispatch the command, and wait for Success or Failure response. 
+The `Create()` creates a new instance of `ICommandDispatcher`.
+The `WithCommand()` appends a command to the instance of `ICommandDispatcher` given a command namespace. 
+The `WithSuccessEvent()` appends a success event to the instance of `ICommandDispatcher` given a success event namespace and subscribes to the success stream.
+The `WithFailureEvent()` appends a failure event to the instance of `ICommandDispatcher` given a failure event namespace and subscribes to the failure stream.
+The `SubscribeAsync()` subscribes to Success and Failure Events.
+The `DispatchAsync()` dispatches the command and handle the respective responses.
 
 ```csharp
 var grainId = Guid.NewGuid();
-using (var commandDispatcher = _commandDispatcherFactory.Create(grainId, "SMSProvider")
+await using (var commandDispatcher = _commandDispatcherFactory.Create(grainId, "SMSProvider")
 						 .WithCommand(new TestCommand(), TestCommand.TestCommandNamespace)
                 		 .WithSuccessEvent(TestSuccessEvent.TestSuccessEventNamespace)
                      	 .WithFailureEvent(TestFailureEvent.TestFailureEventNamespace))
 {
+    await commandDispatcher.SubscribeAsync(); 
     var response = await commandDispatcher.DispatchAsync(5000);             
 }
 ```
