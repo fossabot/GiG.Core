@@ -11,7 +11,7 @@ services:
       - "2380:2380"
   
   webapp:
-    image: 'giG.core.performance.data.kvstores.providers.etcd.read'
+    image: 'gig.core.performance.data.kvstores.providers.etcd.read'
     build:
       context: ..
       dockerfile: tests/performance/GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read/Dockerfile
