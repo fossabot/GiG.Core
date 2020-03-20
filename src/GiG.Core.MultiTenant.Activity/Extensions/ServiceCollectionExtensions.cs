@@ -20,10 +20,10 @@ namespace GiG.Core.MultiTenant.Activity.Extensions
         public static IServiceCollection AddActivityTenantAccessor([NotNull] this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            
+
             services
-            .AddActivityAccessor()
-            .TryAddSingleton<ITenantAccessor, ActivityTenantAccessor>();
+                .AddActivityAccessor()
+                .TryAddSingleton<ITenantAccessor, ActivityTenantAccessor>();
 
             return services;
         }

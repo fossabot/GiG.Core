@@ -7,7 +7,7 @@ using Constants = GiG.Core.MultiTenant.Abstractions.Constants;
 namespace GiG.Core.MultiTenant.Activity
 {
     /// <summary>
-    /// Tenant Accessor using the Activity Context
+    /// Tenant Accessor using the Activity Context.
     /// </summary>
     internal class ActivityTenantAccessor : ITenantAccessor
     {

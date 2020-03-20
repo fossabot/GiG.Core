@@ -42,6 +42,7 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Messaging.Avro.Schema.Generator.MSBuild](docs/GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.md) - This Library provides a Code Generator that generates the Avro schema for Public Events objects.
 - [GiG.Core.Messaging.Kafka](docs/GiG.Core.Messaging.Kafka.md) - This Library provides an API to register Kafka Producers, Consumers and their dependencies for an application.
 - [GiG.Core.Messaging.MassTransit](docs/GiG.Core.Messaging.MassTransit.md) - Provides an API to register MassTransit related functionality to an application.
+- [GiG.Core.MultiTenant.Activity](docs/GiG.Core.MultiTenant.Activity.md) - Provides an API to register Multi Tenancy for an application through key-value pair items in the Activity Baggage.
 - [GiG.Core.MultiTenant.Web](docs/GiG.Core.MultiTenant.Web.md) - Provides an API to register Multi Tenancy for an application.
 - [GiG.Core.ObjectMapping.AutoMapper](docs/GiG.Core.ObjectMapping.AutoMapper.md) - Provides an API to register an Object Mapper using AutoMapper.
 - [GiG.Core.Orleans.Client](docs/GiG.Core.Orleans.Client.md) - Provides an API to register an Orleans Client in an application.
