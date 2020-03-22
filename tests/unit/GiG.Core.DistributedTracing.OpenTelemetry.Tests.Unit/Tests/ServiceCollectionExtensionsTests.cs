@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using Xunit;
 // ReSharper disable AssignNullToNotNullAttribute
@@ -20,6 +21,15 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry.Tests.Unit.Tests
         {
             var exception = Assert.Throws<ArgumentNullException>(() => new ServiceCollection().AddTracing(null, null));
             Assert.Equal("configuration", exception.ParamName);
+        }
+        
+        [Theory]
+        [InlineData("")]
+        [InlineData(null)]
+        public void AddTracing_SectionNameIsInvalid_ThrowsArgumentException(string sectionName)
+        {
+            var exception = Assert.Throws<ArgumentException>(() => new ServiceCollection().AddTracing(null, new ConfigurationBuilder().Build(), sectionName));
+            Assert.Equal("sectionName", exception.ParamName);
         }
     }
 }
