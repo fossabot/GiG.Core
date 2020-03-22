@@ -23,6 +23,7 @@ namespace GiG.Core.Orleans.Streams.Extensions
 
             services.AddActivityAccessor();
             services.TryAddSingleton<IStreamFactory, StreamFactory>();
+
             return services;
         }
         
@@ -36,6 +37,7 @@ namespace GiG.Core.Orleans.Streams.Extensions
             if (services == null) throw new ArgumentNullException(nameof(services));
 
             services.TryAddSingleton(typeof(ICommandDispatcherFactory<,,>), typeof(CommandDispatcherFactory<,,>));
+
             return services;
         }
     }

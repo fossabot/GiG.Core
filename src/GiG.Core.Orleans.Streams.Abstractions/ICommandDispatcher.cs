@@ -11,7 +11,7 @@ namespace GiG.Core.Orleans.Streams.Abstractions
     /// <typeparam name="TCommand">The Command.</typeparam>
     /// <typeparam name="TSuccess">The Success Event.</typeparam>
     /// <typeparam name="TFailure">The Failure Event.</typeparam>
-    public interface ICommandDispatcher<TCommand, TSuccess, TFailure> : IAsyncDisposable
+    public interface ICommandDispatcher<in TCommand, TSuccess, TFailure> : IAsyncDisposable
         where TCommand : class
         where TSuccess : class
         where TFailure : class
@@ -41,10 +41,10 @@ namespace GiG.Core.Orleans.Streams.Abstractions
         /// <summary>
         /// Dispatches the command and handles the respective responses.
         /// </summary>
-        /// <param name="timeoutInMilliseconds">The Timeout in Milliseconds.</param>
+        /// <param name="millisecondsTimeout">The Timeout in Milliseconds.</param>
         /// <param name="cancellationToken">The Cancellation Token.</param>
         /// <returns>The <see cref="CommandDispatcherResponse{TSuccess}" />.</returns>
-        Task<CommandDispatcherResponse<TSuccess>> DispatchAsync(int timeoutInMilliseconds, CancellationToken cancellationToken = default);
+        Task<CommandDispatcherResponse<TSuccess>> DispatchAsync(int millisecondsTimeout, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Subscribes to success and failure handlers.
