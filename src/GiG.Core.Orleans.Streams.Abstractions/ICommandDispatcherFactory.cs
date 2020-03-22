@@ -5,7 +5,7 @@ namespace GiG.Core.Orleans.Streams.Abstractions
     /// <summary>
     /// Command Dispatcher Factory.
     /// </summary>
-    public interface ICommandDispatcherFactory<TCommand, TSuccess, TFailure>
+    public interface ICommandDispatcherFactory<in TCommand, TSuccess, TFailure>
         where TCommand : class
         where TSuccess : class
         where TFailure : class
