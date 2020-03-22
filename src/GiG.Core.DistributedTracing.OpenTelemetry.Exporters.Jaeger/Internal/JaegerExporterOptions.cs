@@ -21,7 +21,7 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.Internal
 
         /// <summary>
         /// Gets or sets the Jaeger agent "compact thrift protocol" port.
-        /// </summary
+        /// </summary>
         public int AgentPort { get; set; } = 6831;
 
         /// <summary>
