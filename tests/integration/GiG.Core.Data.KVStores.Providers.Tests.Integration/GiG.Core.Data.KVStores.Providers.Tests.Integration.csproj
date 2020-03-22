@@ -1,35 +1,35 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
-        <IsPackable>false</IsPackable>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="Bogus" Version="28.4.4" />
-        <PackageReference Include="dotnet-etcd" Version="3.0.0" />
-        <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.0.0" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
-        <PackageReference Include="Polly" Version="7.2.0" />
-        <PackageReference Include="xunit" Version="2.4.1" />
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-    </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="dotnet-etcd" Version="3.1.1"/>
+    <PackageReference Include="Bogus" Version="28.4.4"/>
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.0.0"/>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0"/>
+    <PackageReference Include="Polly" Version="7.2.0"/>
+    <PackageReference Include="xunit" Version="2.4.1"/>
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\..\..\src\GiG.Core.Data.KVStores.Providers.Etcd\GiG.Core.Data.KVStores.Providers.Etcd.csproj" />
-        <ProjectReference Include="..\..\..\src\GiG.Core.Data.KVStores.Providers.FileProviders.Abstractions\GiG.Core.Data.KVStores.Providers.FileProviders.Abstractions.csproj" />
-        <ProjectReference Include="..\..\..\src\GiG.Core.Data.KVStores.Providers.FileProviders\GiG.Core.Data.KVStores.Providers.FileProviders.csproj" />
-        <ProjectReference Include="..\..\..\src\GiG.Core.Data.KVStores.Providers.Hosting\GiG.Core.Data.KVStores.Providers.Hosting.csproj" />
-        <ProjectReference Include="..\..\..\src\GiG.Core.Data.KVStores\GiG.Core.Data.KVStores.csproj" />     
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\GiG.Core.Data.KVStores.Providers.Etcd\GiG.Core.Data.KVStores.Providers.Etcd.csproj"/>
+    <ProjectReference Include="..\..\..\src\GiG.Core.Data.KVStores.Providers.FileProviders.Abstractions\GiG.Core.Data.KVStores.Providers.FileProviders.Abstractions.csproj"/>
+    <ProjectReference Include="..\..\..\src\GiG.Core.Data.KVStores.Providers.FileProviders\GiG.Core.Data.KVStores.Providers.FileProviders.csproj"/>
+    <ProjectReference Include="..\..\..\src\GiG.Core.Data.KVStores.Providers.Hosting\GiG.Core.Data.KVStores.Providers.Hosting.csproj"/>
+    <ProjectReference Include="..\..\..\src\GiG.Core.Data.KVStores\GiG.Core.Data.KVStores.csproj"/>
+  </ItemGroup>
 
-    <ItemGroup>
-      <None Update="*.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-    </ItemGroup>
+  <ItemGroup>
+    <None Update="*.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
 </Project>
