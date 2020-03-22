@@ -2,6 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
+        <RootNamespace>GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
