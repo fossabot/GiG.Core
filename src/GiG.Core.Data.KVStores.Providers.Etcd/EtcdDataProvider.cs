@@ -114,10 +114,10 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
 
                 var value = response.Events[0].Kv.Value.ToStringUtf8();
                 _dataStore.Set(SerializeValue(value));
-            }, null, WatchExceptionHandlerAsync);
+            }, null, WatchExceptionHandler);
         }
 
-        private void WatchExceptionHandlerAsync(Exception ex)
+        private void WatchExceptionHandler(Exception ex)
         {
             // Exponential back-off plus some jitter
             var jitter = new Random();
