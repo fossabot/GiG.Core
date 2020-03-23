@@ -1,7 +1,6 @@
 version: "3.4"
 
 services:
-
   consul:
     image: consul:latest
     command: "agent -server -bootstrap -ui -client 0.0.0.0"  

@@ -1,0 +1,22 @@
+version: "3.4"
+
+services:
+  etcd:
+    image: 'bitnami/etcd:latest'
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
+    ports:
+      - "2379:2379"
+      - "2380:2380"
+  
+  webapp:
+    image: 'gig.core.performance.data.kvstores.providers.etcd.read'
+    build:
+      context: ..
+      dockerfile: tests/performance/GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+      - EtcdProviderOptions__ConnectionString="http://localhost:2379"
+    ports:
+      - "7000:8080"

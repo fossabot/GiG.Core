@@ -1,6 +1,6 @@
 using OpenTelemetry.Trace.Configuration;
 
-namespace GiG.Core.DistributedTracing.Telemetry.Abstractions
+namespace GiG.Core.DistributedTracing.OpenTelemetry
 {
     /// <summary>
     /// Tracing Exporter.

@@ -1,6 +1,18 @@
 version: "3.4"
 
 services:
+  app:
+    image: ${DOCKER_REGISTRY-}gig.core.data.kvstores.etcd.sample
+    build:
+      context: ..
+      dockerfile: samples/Data/src/GiG.Core.Data.KVStores.Etcd.Sample/Dockerfile
+    environment:
+      - Languages__ConnectionString=http://etcd:2379
+      - Currencies__ConnectionString=http://etcd:2379
+    depends_on:
+      - etcd
+    restart: on-failure
+    
   etcd:
     image: 'bitnami/etcd:latest'
     environment:

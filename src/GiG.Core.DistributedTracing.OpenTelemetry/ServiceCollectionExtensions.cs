@@ -25,16 +25,16 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-            if (sectionName == null) throw new ArgumentNullException(nameof(sectionName));
+            if (string.IsNullOrEmpty(sectionName)) throw new ArgumentException($"'{nameof(sectionName)}' must not be null, empty or whitespace.", nameof(sectionName));
 
             services.AddOpenTelemetry(builder =>
             {
                 builder
-                    // configure tracing exporters
+                    // Configure tracing exporters
                     .ConfigureTracing(tracingConfigurationBuilder, configuration, sectionName)
-                    // configure tracing to collect incoming HTTP requests
+                    // Configure tracing to collect incoming HTTP requests
                     .AddRequestCollector()
-                    // configure tracing to collect outgoing HTTP requests
+                    // Configure tracing to collect outgoing HTTP requests
                     .AddDependencyCollector();
             });
 
