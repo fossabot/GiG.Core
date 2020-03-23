@@ -24,20 +24,11 @@ namespace GiG.Core.Web.Docs.Extensions
         public static IServiceCollection ConfigureApiDocs([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection, Action<SwaggerGenOptions> configureOptions = null)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            
             if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
 
-            var apiDocsOptions = configurationSection?.Get<ApiDocsOptions>() ?? new ApiDocsOptions();
-            services.Configure<ApiDocsOptions>(options =>
-            {
-                options.Description = apiDocsOptions.Description;
-                options.IsEnabled = apiDocsOptions.IsEnabled;
-                options.IsForwardedForEnabled = apiDocsOptions.IsForwardedForEnabled;
-                options.Title = apiDocsOptions.Title;
-                options.Url = apiDocsOptions.Url;
-                options.XTenantIdEnabled = apiDocsOptions.XTenantIdEnabled;
-            });
+            services.Configure<ApiDocsOptions>(configurationSection);
 
+            var apiDocsOptions = configurationSection?.Get<ApiDocsOptions>() ?? new ApiDocsOptions();
             if (!apiDocsOptions.IsEnabled)
             {
                 return services;
@@ -62,7 +53,7 @@ namespace GiG.Core.Web.Docs.Extensions
                 .AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>()
                 .AddSwaggerGen(c =>
                 {
-                    c.IncludeXmlComments();
+                    c.IncludeXmlComments(apiDocsOptions.IsXmlDocumentationEnabled);
                     c.IncludeFullNameCustomSchemaId();
                     c.IncludeForwardedForFilter(apiDocsOptions.IsForwardedForEnabled);
                     c.IncludeXTenantIdFilter(apiDocsOptions.XTenantIdEnabled);
