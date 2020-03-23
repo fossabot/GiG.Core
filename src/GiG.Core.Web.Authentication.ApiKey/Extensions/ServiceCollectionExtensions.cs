@@ -1,5 +1,4 @@
 ﻿using GiG.Core.Authentication.ApiKey.Abstractions;
-using GiG.Core.Web.Authentication.ApiKey.Abstractions;
 using GiG.Core.Web.Authentication.ApiKey.Internal;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;

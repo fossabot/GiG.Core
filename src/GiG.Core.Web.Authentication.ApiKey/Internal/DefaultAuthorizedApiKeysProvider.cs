@@ -1,5 +1,4 @@
 ﻿using GiG.Core.Authentication.ApiKey.Abstractions;
-using GiG.Core.Web.Authentication.ApiKey.Abstractions;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Threading.Tasks;

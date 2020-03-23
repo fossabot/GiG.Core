@@ -18,7 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\GiG.Core.Web.Authentication.ApiKey.Abstractions\GiG.Core.Web.Authentication.ApiKey.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Web.Authentication.ApiKey\GiG.Core.Web.Authentication.ApiKey.csproj" />
   </ItemGroup>
 

@@ -18,11 +18,9 @@ namespace GiG.Core.Web.Authentication.ApiKey.Tests.Integration
 
         public ApiKeyAuthenticationHandlerTests()
         {
-            {
-                _server = new TestServer(new WebHostBuilder()
-                    .UseStartup<MockStartup>()
-                    .ConfigureAppConfiguration(appConfig => appConfig.AddJsonFile("appsettings.json")));
-            }
+            _server = new TestServer(new WebHostBuilder()
+                .UseStartup<MockStartup>()
+                .ConfigureAppConfiguration(appConfig => appConfig.AddJsonFile("appsettings.json")));            
         }
 
         [Fact]
