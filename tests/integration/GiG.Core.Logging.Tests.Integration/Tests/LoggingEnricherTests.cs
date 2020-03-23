@@ -18,6 +18,8 @@ using Microsoft.Extensions.Logging;
 using Serilog.Events;
 using System;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace GiG.Core.Logging.Tests.Integration.Tests
@@ -76,7 +78,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
             logger.LogInformation(_logMessageTest);
             
             // Assert
-            Assert.NotNull(_logEvent);
+            AssertLogEvent();
             var traceId = _logEvent.Properties[TracingFields.TraceId].LiteralValue().ToString();
             var spanId = _logEvent.Properties[TracingFields.SpanId].LiteralValue().ToString();
             var parentSpanId = _logEvent.Properties[TracingFields.ParentId].LiteralValue().ToString();
@@ -105,7 +107,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
             logger.LogInformation(_logMessageTest);
 
             // Assert
-            Assert.NotNull(_logEvent);
+            AssertLogEvent();
             var applicationName = (string) _logEvent.Properties["ApplicationName"].LiteralValue();
             var applicationVersion = (string) _logEvent.Properties["ApplicationVersion"].LiteralValue();
             var correlationId = (string) _logEvent.Properties["CorrelationId"].LiteralValue();
@@ -133,6 +135,19 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
             {
                 _logEvent = log;
             }
+        }
+
+        private void AssertLogEvent()
+        {
+            var count = 0;
+            while (_logEvent == null && count < 5)
+            {
+                // Delay for Log Event since it is handled in a different callback
+                Thread.Sleep(200);
+                count++;
+            }
+
+            Assert.NotNull(_logEvent);
         }
 
         public void Dispose()

@@ -12,15 +12,8 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry
     /// </summary>
     public class TracingConfigurationBuilder
     {
-        /// <summary>
-        /// The Exporters.
-        /// </summary>
-        public IDictionary<string, BasicExporterOptions> Exporters { get; }
-
-        /// <summary>
-        /// The Trace Builder.
-        /// </summary>
-        public TracerBuilder TracerBuilder { get; }
+        private readonly IDictionary<string, BasicExporterOptions> _exporters;
+        private readonly TracerBuilder _tracerBuilder;
 
         /// <summary>
         /// At least one Tracing Exporter Configured.
@@ -36,14 +29,14 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry
         /// Tracing Configuration builder.
         /// </summary>
         /// <param name="tracerBuilder">The <see cref="TracerBuilder"/>.</param>
-        /// <param name="exporters"> A <see><cref>IDictionary{string, BasicExporterOptions}</cref></see> /> of exporters.</param>
-        /// <param name="configurationSection">The <see cref="IConfiguration"/>.</param>
+        /// <param name="exporters"> A <see cref="IDictionary{String, BasicExporterOptions}" /> of exporters.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/>.</param>
         public TracingConfigurationBuilder([NotNull] TracerBuilder tracerBuilder, [NotNull] IDictionary<string, BasicExporterOptions> exporters,
-            [NotNull] IConfiguration configurationSection)
+            [NotNull] IConfiguration configuration)
         {
-            Exporters = exporters ?? throw new ArgumentNullException(nameof(exporters));
-            TracingConfiguration = configurationSection ?? throw new ArgumentNullException(nameof(configurationSection));
-            TracerBuilder = tracerBuilder ?? throw new ArgumentNullException(nameof(tracerBuilder));
+            _exporters = exporters ?? throw new ArgumentNullException(nameof(exporters));
+            _tracerBuilder = tracerBuilder ?? throw new ArgumentNullException(nameof(tracerBuilder));
+            TracingConfiguration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
         /// <summary>
@@ -56,7 +49,7 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry
             if (string.IsNullOrEmpty(name)) throw new ArgumentException($"'{nameof(name)}' must not be null, empty or whitespace.", nameof(name));
             if (tracingExporter == null) throw new ArgumentNullException(nameof(tracingExporter));
 
-            if (!Exporters.TryGetValue(name, out var exporterOptions))
+            if (!_exporters.TryGetValue(name, out var exporterOptions))
             {
                 return this;
             }
@@ -66,7 +59,7 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry
                 return this;
             }
 
-            tracingExporter.RegisterExporter(TracerBuilder);
+            tracingExporter.RegisterExporter(_tracerBuilder);
             IsConfigured = true;
 
             return this;
