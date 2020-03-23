@@ -8,6 +8,8 @@ using Orleans.Streams;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using DistributedTracingConstants = GiG.Core.DistributedTracing.Abstractions.Constants;
+using Constants = GiG.Core.Orleans.Streams.Internal.Constants;
 
 namespace GiG.Core.Orleans.Streams
 {
@@ -21,9 +23,6 @@ namespace GiG.Core.Orleans.Streams
         private readonly IActivityContextAccessor _activityContextAccessor;
         private readonly Tracer _tracer;
 
-        private const string TracerName = "StreamTracer";
-        private const string SpanOperationNamePrefix = "StreamPublisher";
-
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -35,7 +34,7 @@ namespace GiG.Core.Orleans.Streams
         {
             _asyncStream = asyncStream ?? throw new ArgumentNullException(nameof(asyncStream));
             _activityContextAccessor = activityContextAccessor;
-            _tracer = tracerFactory?.GetTracer(TracerName);
+            _tracer = tracerFactory?.GetTracer(Constants.TracerName); 
         }
 
         /// <summary>
@@ -46,17 +45,16 @@ namespace GiG.Core.Orleans.Streams
         /// <returns></returns>
         public async Task PublishAsync(TMessage message, StreamSequenceToken token = null)
         {
-            var publishingActivity = new Activity("Stream Publish");
+            var publishingActivity = new Activity(Constants.PublishActivityName);
             publishingActivity.Start();
 
-            var span = _tracer?.StartSpanFromActivity($"{SpanOperationNamePrefix}-{message.GetType().Name}", Activity.Current, SpanKind.Producer);
-
-            RequestContext.Set(Constants.ActivityHeader, publishingActivity.Id);
-
+            var span = _tracer?.StartSpanFromActivity($"{Constants.SpanPublishOperationNamePrefix}-{message.GetType().Name}", publishingActivity, SpanKind.Producer);
+            
+            RequestContext.Set(DistributedTracingConstants.ActivityHeader, publishingActivity.Id);
             await _asyncStream.OnNextAsync(message, token);
-
-            span?.End();
+         
             publishingActivity.Stop();
+            span?.End();
         }
 
         /// <summary>
@@ -68,7 +66,7 @@ namespace GiG.Core.Orleans.Streams
         ///     consumer may unsubscribe by using this handle. The subscription remains active
         ///     for as long as it is not explicitly unsubscribed.
         ///</returns>
-        public async Task<StreamSubscriptionHandle<TMessage>> SubscribeAsync(IAsyncObserver<TMessage> observer, StreamSequenceToken token)
+        public async Task<StreamSubscriptionHandle<TMessage>> SubscribeAsync(IAsyncObserver<TMessage> observer, StreamSequenceToken token = null)
         {
             var tracingObserver = new TracingObserver<TMessage>(observer, _activityContextAccessor, _tracer);
             return await _asyncStream.SubscribeAsync(tracingObserver, token);

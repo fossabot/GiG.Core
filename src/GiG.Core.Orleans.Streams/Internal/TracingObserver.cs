@@ -3,8 +3,10 @@ using OpenTelemetry.Trace;
 using Orleans.Streams;
 using System;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
+[assembly: InternalsVisibleTo("GiG.Core.Orleans.Tests.Unit")]
 namespace GiG.Core.Orleans.Streams.Internal
 {
     internal class TracingObserver<T> : IAsyncObserver<T>
@@ -32,18 +34,17 @@ namespace GiG.Core.Orleans.Streams.Internal
 
         public async Task OnNextAsync(T item, StreamSequenceToken token = null)
         {
-            var itemTypeName = item.GetType().Name;
-            var consumerActivity = new Activity("TracingObserver-Consuming-Item");
+            var consumerActivity = new Activity(Constants.ConsumeActivityName);
+            consumerActivity.SetParentId(_activityContextAccessor.ParentId);
             consumerActivity.Start();
 
-            var span = _tracer?.StartSpanFromActivity($"Consuming-{itemTypeName}", consumerActivity, SpanKind.Consumer);
+            var span = _tracer?.StartSpanFromActivity($"{Constants.SpanConsumeOperationNamePrefix}-{item.GetType().Name}", 
+                consumerActivity, SpanKind.Consumer);
 
-            span?.AddEvent($"Calling {_observer.GetType().Name} OnNextAsync");
-            
             await _observer.OnNextAsync(item, token);
 
-            span?.End();
             consumerActivity.Stop();
+            span?.End();
         }
     }
 }

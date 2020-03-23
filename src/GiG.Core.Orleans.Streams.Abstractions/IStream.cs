@@ -26,6 +26,6 @@ namespace GiG.Core.Orleans.Streams.Abstractions
         ///     consumer may unsubscribe by using this handle. The subscription remains active
         ///     for as long as it is not explicitly unsubscribed.
         ///</returns>
-        Task<StreamSubscriptionHandle<TMessage>> SubscribeAsync(IAsyncObserver<TMessage> observer, StreamSequenceToken token);
+        Task<StreamSubscriptionHandle<TMessage>> SubscribeAsync(IAsyncObserver<TMessage> observer, StreamSequenceToken token = null);
     }
 }

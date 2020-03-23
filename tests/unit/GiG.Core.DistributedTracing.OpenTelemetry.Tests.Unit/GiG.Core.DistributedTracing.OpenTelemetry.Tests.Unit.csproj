@@ -10,7 +10,7 @@
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.0.0" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0" />
-        <PackageReference Include="OpenTelemetry" Version="0.2.0-alpha.212" />
+        <PackageReference Include="OpenTelemetry" Version="0.2.0-alpha.215" />
         <PackageReference Include="xunit" Version="2.4.1" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
     </ItemGroup>
