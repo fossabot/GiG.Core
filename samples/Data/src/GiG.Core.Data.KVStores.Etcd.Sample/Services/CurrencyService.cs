@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GiG.Core.Data.KVStores.Etcd.Sample.Services
 {
-    public class CurrencyService : IHostedService
+    public class CurrencyService : BackgroundService
     {
         private readonly IDataRetriever<IEnumerable<Currency>> _dataRetriever;
         private readonly IDataWriter<IEnumerable<Currency>> _dataWriter;
@@ -25,11 +25,11 @@ namespace GiG.Core.Data.KVStores.Etcd.Sample.Services
             _logger = logger;
         }
 
-        public async Task StartAsync(CancellationToken cancellationToken)
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             _logger.LogInformation("Writing Currencies...");
 
-            var currencies = new Currency[]
+            var currencies = new []
             {
                 new Currency { Name = "Euro" },
                 new Currency { Name = "Dollar"}
@@ -42,11 +42,6 @@ namespace GiG.Core.Data.KVStores.Etcd.Sample.Services
             currencies = await _dataRetriever.GetAsync();
 
             _logger.LogInformation("Currencies: {@currencies}", currencies);
-        }
-
-        public Task StopAsync(CancellationToken cancellationToken)
-        {
-            return Task.CompletedTask;
         }
     }
 }

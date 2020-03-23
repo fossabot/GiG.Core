@@ -21,11 +21,6 @@ namespace GiG.Core.Data.KVStores.Etcd.Sample.Services
             _logger = logger;
         }
 
-        public void Dispose()
-        {
-            _timer.Dispose();
-        }
-
         public Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Retrieving Languages...");
@@ -38,15 +33,16 @@ namespace GiG.Core.Data.KVStores.Etcd.Sample.Services
         public Task StopAsync(CancellationToken cancellationToken)
         {
             _timer?.Change(Timeout.Infinite, 0);
+            _timer?.Dispose();
 
             return Task.CompletedTask;
         }
 
         private void DoWork(object state)
         {
-            var data = _dataRetriever.Get();
+            var languages = _dataRetriever.Get();
 
-            _logger.LogInformation("Languages: {@languages}", data);
+            _logger.LogInformation("Languages: {@languages}", languages);
         }
     }
 }
