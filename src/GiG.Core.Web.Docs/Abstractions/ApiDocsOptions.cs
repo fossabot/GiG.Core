@@ -34,6 +34,11 @@
         /// A value to indicate if the IsForwardedFor is enabled or not.
         /// </summary>
         public bool IsForwardedForEnabled { get; set; } = true;
+        
+        /// <summary>
+        /// A value to indicate if the XML inline documentation is enabled or not.
+        /// </summary>
+        public bool IsXmlDocumentationEnabled { get; set; } = true;
 
         /// <summary>
         /// A value to indicate if X-Tenant-ID is enabled or not.
