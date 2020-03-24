@@ -1,5 +1,6 @@
 ﻿using GreenPipes;
 using MassTransit;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GiG.Core.Messaging.MassTransit.Internal
@@ -23,10 +24,10 @@ namespace GiG.Core.Messaging.MassTransit.Internal
         {
             // add the current Activity Id to the headers
             var publishContext = context.GetPayload<PublishContext>();
-
+         
             var currentActivity = System.Diagnostics.Activity.Current ?? new System.Diagnostics.Activity("PublishMessage").Start();
 
-            publishContext.Headers.Set(Constants.ActivityIdHeader, currentActivity.RootId);
+            publishContext.Headers.Set(Constants.ActivityIdHeader, currentActivity.Id);
 
             // call the next filter in the pipe
             await next.Send(context);

@@ -90,3 +90,35 @@ await using (var commandDispatcher = _commandDispatcherFactory.Create(grainId, "
     var response = await commandDispatcher.DispatchAsync(5000);             
 }
 ```
+
+## Telemetry
+
+The custom [Stream](../src/GiG.Core.Orleans.Streams/Stream.cs) implementation includes Telemetry on Publishing and Consuming from a Stream. 
+
+N.B. In order to have Telemetry information from Streams a Telemetry provider needs to be enabled. For more details refer to [GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger](GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.md)
+
+### Publishing to a Stream
+The below code shows how to Publish to a Stream via the custom [Stream](../src/GiG.Core.Orleans.Streams/Stream.cs) implementation.  
+
+```csharp
+var streamProvider = GetStreamProvider("SMSProvider");
+_stream = _streamFactory.GetStream<WalletTransaction>(streamProvider, this.GetPrimaryKey(), "WalletTransactions");
+var walletTransactionModel = new WalletTransaction
+{
+    Amount = context.Message.Amount,
+};
+
+await _stream.PublishAsync(transactionModel);
+```
+
+### Consuming from a Stream
+
+The below code shows how to Subscribe to a Stream via the custom [Stream](../src/GiG.Core.Orleans.Streams/Stream.cs) implementation.  
+
+N.B. The parameter to the SubscribeAsync method must be of the type IAsyncObserver<T>, so for the example below ```IAsyncObserver<WalletTransaction>```. 
+
+```csharp
+var streamProvider = GetStreamProvider("SMSProvider");
+_stream = _streamFactory.GetStream<WalletTransaction>(streamProvider, this.GetPrimaryKey(), "WalletTransactions");
+await _stream.SubscribeAsync(this);
+```

@@ -1,6 +1,7 @@
 ﻿using Bogus;
 using GiG.Core.DistributedTracing.Abstractions;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace GiG.Core.Web.Mock
 {
@@ -14,15 +15,20 @@ namespace GiG.Core.Web.Mock
         {
             var random = new Faker().Random;
 
+            ActivityId = random.String2(16);
             CorrelationId = random.Guid().ToString();
             TraceId = random.String2(16);
             SpanId = random.String2(8);
             ParentId = random.String2(8);
             ParentSpanId = random.String2(8);
             OperationName = random.String2(10);
+            CurrentActivity = new System.Diagnostics.Activity(random.String2(16));
 
             Baggage = new List<KeyValuePair<string, string>> {new KeyValuePair<string, string>("TenantId", "1234")};
         }
+
+        /// <inheritdoc />
+        public string ActivityId { get; }
 
         /// <inheritdoc />
         public string CorrelationId { get; }
@@ -44,5 +50,8 @@ namespace GiG.Core.Web.Mock
 
         /// <inheritdoc />
         public string OperationName { get; }
+
+        /// <inheritdoc />
+        public Activity CurrentActivity { get; }
     }
 }

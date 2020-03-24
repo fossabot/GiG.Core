@@ -7,7 +7,10 @@ namespace GiG.Core.DistributedTracing.Activity
     internal class ActivityContextAccessor : IActivityContextAccessor
     {
         private const string ActivityName = "GiG.Core.DistributedTracing.Activity";
-       
+
+        /// <inheritdoc />
+        public string ActivityId => Current.Id ?? string.Empty;
+
         /// <inheritdoc />
         public string CorrelationId => Current.RootId ?? string.Empty;
 
@@ -28,7 +31,10 @@ namespace GiG.Core.DistributedTracing.Activity
 
         /// <inheritdoc />
         public string OperationName => Current.OperationName ?? ActivityName;
-        
+
+        /// <inheritdoc />
+        public System.Diagnostics.Activity CurrentActivity => Current;
+
         private static System.Diagnostics.Activity Current
         {
             get
