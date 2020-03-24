@@ -8,7 +8,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Internal
     /// <summary>
     /// Default <see cref="ApiKeyOptions"/> provider for <see cref="ApiKeyAuthenticationHandler"/>.
     /// </summary>
-    internal class DefaultAuthorizedApiKeysProvider : IAuthorizedApiKeysProvider
+    internal class AuthorizedApiKeysProvider : IAuthorizedApiKeysProvider
     {
         private readonly IOptionsMonitor<ApiKeyOptions> _apiKeyOptions;
 
@@ -16,7 +16,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Internal
         /// Default <see cref="ApiKeyOptions"/> provider for <see cref="ApiKeyAuthenticationHandler"/>.
         /// </summary>
         /// <param name="apiKeyOptions"><see cref="IOptionsMonitor{ApiKeyOptions}"/> used to retrieve the list of authorized keys from configuration.</param>
-        public DefaultAuthorizedApiKeysProvider(IOptionsMonitor<ApiKeyOptions> apiKeyOptions) {
+        public AuthorizedApiKeysProvider(IOptionsMonitor<ApiKeyOptions> apiKeyOptions) {
             _apiKeyOptions = apiKeyOptions;
         }
 

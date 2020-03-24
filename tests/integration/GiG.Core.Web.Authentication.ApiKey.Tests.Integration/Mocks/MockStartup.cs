@@ -18,7 +18,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Tests.Integration.Mocks
         {
             services.AddControllers();
             services.AddApiKeyAuthentication();
-            services.ConfigureDefaultApiKeyOptions(_configuration);
+            services.ConfigureApiKeyOptions(_configuration);
         }
 
         public void Configure(IApplicationBuilder app)

@@ -29,7 +29,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Extensions
                 .AddScheme<ApiKeyAuthenticationOptions, ApiKeyAuthenticationHandler>(ApiKeyAuthenticationOptions.DefaultScheme, x => new ApiKeyAuthenticationOptions());
             
             services
-                .TryAddSingleton<IAuthorizedApiKeysProvider, DefaultAuthorizedApiKeysProvider>();
+                .TryAddSingleton<IAuthorizedApiKeysProvider, AuthorizedApiKeysProvider>();
 
             return services;
         }
@@ -40,7 +40,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Extensions
         /// <param name="services">The <see cref="IServiceCollection" />.</param>        
         /// <param name="configurationSection">The <see cref="IConfigurationSection" />Configuration section for api key settings.</param>        
         /// <returns>The <see cref="IServiceCollection" />.</returns>
-        public static IServiceCollection ConfigureDefaultApiKeyOptions([NotNull]this IServiceCollection services, [NotNull]IConfigurationSection configurationSection)
+        public static IServiceCollection ConfigureApiKeyOptions([NotNull]this IServiceCollection services, [NotNull]IConfigurationSection configurationSection)
         {
             // Guards
             if (services == null) throw new ArgumentNullException(nameof(services));
@@ -59,13 +59,13 @@ namespace GiG.Core.Web.Authentication.ApiKey.Extensions
         /// <param name="services">The <see cref="IServiceCollection" />.</param>        
         /// <param name="configuration">The <see cref="IConfiguration" />Configuration for api key settings.</param>        
         /// <returns>The <see cref="IServiceCollection" />.</returns>
-        public static IServiceCollection ConfigureDefaultApiKeyOptions([NotNull]this IServiceCollection services, [NotNull]IConfiguration configuration)
+        public static IServiceCollection ConfigureApiKeyOptions([NotNull]this IServiceCollection services, [NotNull]IConfiguration configuration)
         {
             // Guards
             if (services == null) throw new ArgumentNullException(nameof(services));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            ConfigureDefaultApiKeyOptions(services, configuration.GetSection(ApiKeyOptions.DefaultSectionName));
+            services.ConfigureApiKeyOptions(configuration.GetSection(ApiKeyOptions.DefaultSectionName));
 
             return services;
         }

@@ -33,7 +33,7 @@ namespace GiG.Core.Web.Tests.Unit.Authentication.ApiKey
             IConfigurationSection configurationSection = null;
 
             // Act / Assert
-            Action unitUnderTest = () => ServiceCollectionExtensions.ConfigureDefaultApiKeyOptions(serviceCollection, configurationSection);
+            Action unitUnderTest = () => ServiceCollectionExtensions.ConfigureApiKeyOptions(serviceCollection, configurationSection);
             var exception = Assert.Throws<ArgumentNullException>(unitUnderTest);
             Assert.Equal("services", exception.ParamName);
         }
@@ -46,7 +46,7 @@ namespace GiG.Core.Web.Tests.Unit.Authentication.ApiKey
             ServiceCollection serviceCollection = new ServiceCollection();
 
             // Act / Assert
-            Action unitUnderTest = () => serviceCollection.ConfigureDefaultApiKeyOptions(configurationSection);
+            Action unitUnderTest = () => serviceCollection.ConfigureApiKeyOptions(configurationSection);
             var exception = Assert.Throws<ArgumentNullException>(unitUnderTest);
         }
 
@@ -58,7 +58,7 @@ namespace GiG.Core.Web.Tests.Unit.Authentication.ApiKey
             ServiceCollection serviceCollection = new ServiceCollection();
 
             // Act / Assert
-            Action unitUnderTest = () => serviceCollection.ConfigureDefaultApiKeyOptions(configuration);
+            Action unitUnderTest = () => serviceCollection.ConfigureApiKeyOptions(configuration);
             var exception = Assert.Throws<ArgumentNullException>(unitUnderTest);
         }
     }
