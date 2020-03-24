@@ -4,5 +4,6 @@
     {
         public string TraceId { get; set; }
         public string ParentId { get; set; }
+        public string RootId { get; set; }
     }
 }

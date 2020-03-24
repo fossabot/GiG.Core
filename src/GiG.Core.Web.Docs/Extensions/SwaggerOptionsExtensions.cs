@@ -9,14 +9,20 @@ namespace GiG.Core.Web.Docs.Extensions
 {
     internal static class SwaggerOptionsExtensions
     {
-        internal static void IncludeXmlComments(this SwaggerGenOptions options)
+        internal static void IncludeXmlComments(this SwaggerGenOptions options, bool isEnabled = true)
         {
+            if (!isEnabled)
+            {
+                return;
+            }
+
             var xmlFile = $"{Assembly.GetEntryAssembly()?.GetName().Name}.xml";
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
 
-            if (string.IsNullOrEmpty(xmlPath))
+            if (!File.Exists(xmlPath))
             {
-                throw new ApplicationException("The following property is missing from your project; <GenerateDocumentationFile>true</GenerateDocumentationFile>.");
+                throw new ApplicationException(
+                    "The following property is missing from your project; <GenerateDocumentationFile>true</GenerateDocumentationFile>.");
             }
 
             options.IncludeXmlComments(xmlPath);
