@@ -1,4 +1,5 @@
 ﻿using GreenPipes;
+using OpenTelemetry.Trace;
 using OpenTelemetry.Trace.Configuration;
 using System.Collections.Generic;
 using System.Linq;
