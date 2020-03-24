@@ -183,8 +183,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Tests.Unit
         {
             var authHandler = new ApiKeyAuthenticationHandler(_apiKeyAuthenticationOptions, _authorizedKeysProviderMock.Object, _loggerFactory, _urlEncoder, _systemClock);
 
-            var authSchemeOptions = new ApiKeyAuthenticationOptions();
-            var authScheme = new AuthenticationScheme(authSchemeOptions.Scheme, authSchemeOptions.Scheme, typeof(ApiKeyAuthenticationHandler));
+            var authScheme = new AuthenticationScheme(ApiKeyAuthenticationOptions.DefaultScheme, ApiKeyAuthenticationOptions.DefaultScheme, typeof(ApiKeyAuthenticationHandler));
             await authHandler.InitializeAsync(authScheme, httpContext);
             
             return authHandler;
