@@ -23,6 +23,12 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read.Controllers
         {
             return Ok(_etcdClient.GetVal(key));
         }
+        
+        [HttpGet("{key}/length")]
+        public ActionResult<string> GetLength([FromRoute, Required] string key)
+        {
+            return Ok(_etcdClient.GetVal(key).Length);
+        }
 
         [HttpPost("{key}")]
         public ActionResult Post([FromRoute, Required] string key, [FromBody, Required] ValueModel model)
