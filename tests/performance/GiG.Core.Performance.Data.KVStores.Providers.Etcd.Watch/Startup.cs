@@ -12,7 +12,10 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Watch
         {
             var configuration = hostContext.Configuration;
 
-            var etcdProviderOptions = configuration.GetSection("EtcdWatch").Get<EtcdProviderOptions>();
+            var configurationSection = configuration.GetSection("EtcdWatch");
+            var etcdProviderOptions = configurationSection.Get<EtcdProviderOptions>();
+            services.Configure<EtcdProviderOptions>(configurationSection);
+
             services.AddSingleton(new EtcdClient(etcdProviderOptions.ConnectionString,
                 etcdProviderOptions.Port,
                 etcdProviderOptions.Username,
