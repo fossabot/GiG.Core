@@ -1,9 +1,9 @@
 using dotnet_etcd;
+using GiG.Core.Data.KVStores.Providers.Etcd.Abstractions;
+using GiG.Core.Web.Docs.Extensions;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read
 {
@@ -14,30 +14,32 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureApiDocs(Configuration);
+            
             services.AddControllers();
             
-            var etcdConfig = Configuration.GetSection("EtcdRead").Get<EtcdProviderOptions>();
-            services.AddSingleton(new EtcdClient(etcdConfig.ConnectionString, 
-                                                 etcdConfig.Port,
-                                                 etcdConfig.Username, 
-                                                 etcdConfig.Password, 
-                                           etcdConfig.CaCertificate,
-                                         etcdConfig.ClientCertificate, 
-                                                 etcdConfig.ClientKey,
-                                                 etcdConfig.IsPublicRootCa));
+            var etcdProviderOptions = Configuration.GetSection("EtcdRead").Get<EtcdProviderOptions>();
+            services.AddSingleton(new EtcdClient(etcdProviderOptions.ConnectionString, 
+                                                 etcdProviderOptions.Port,
+                                                 etcdProviderOptions.Username, 
+                                                 etcdProviderOptions.Password, 
+                                           etcdProviderOptions.CaCertificate,
+                                         etcdProviderOptions.ClientCertificate, 
+                                                 etcdProviderOptions.ClientKey,
+                                                 etcdProviderOptions.IsPublicRootCa));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
             app.UseRouting();
-
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseApiDocs();
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
     }
 }
