@@ -58,6 +58,7 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Orleans.Streams.Kafka](docs/GiG.Core.Orleans.Streams.Kafka.md) - Provides an API to register an Orleans Stream using Kafka.
 - [GiG.Core.Providers.DateTime](docs/GiG.Core.Providers.DateTime.md) - This Library provides an API to register required DateTime providers.
 - [GiG.Core.TokenManager](docs/GiG.Core.TokenManager.md) - This Library provides an API to register required services for the Token Manager.
+- [GiG.Core.Web.Authentication.ApiKey](docs/GiG.Core.Web.Authentication.ApiKey.md) - Provides an API to configure `ApiKeyAuthenticationHandler`
 - [GiG.Core.Web.Authentication.Hmac](docs/GiG.Core.Web.Authentication.Hmac.md) - Provides an API to configure `HmacAuthenticationHandler`
 - [GiG.Core.Web.Authentication.Hmac.MultiTenant](docs/GiG.Core.Web.Authentication.Hmac.MultiTenant.md) - Provides an API to configure `HmacAuthenticationHandler` for multitenancy.
 - [GiG.Core.Web.Authentication.OAuth](docs/GiG.Core.Web.Authentication.OAuth.md) - Provides an API to configure OAuth2.0 as a protocol for Authentication.
