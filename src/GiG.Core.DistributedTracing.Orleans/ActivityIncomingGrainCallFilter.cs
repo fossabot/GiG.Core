@@ -28,6 +28,8 @@ namespace GiG.Core.DistributedTracing.Orleans
             activity.Start();
 
             await context.Invoke();
+
+            activity.Stop();
         }
     }
 }

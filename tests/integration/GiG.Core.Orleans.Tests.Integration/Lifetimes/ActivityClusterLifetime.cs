@@ -40,6 +40,12 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
 
             _siloHost = new HostBuilder()
                 .ConfigureAppConfiguration(a => a.AddJsonFile("appsettings.json"))
+                .ConfigureServices(x =>
+                 {
+                     x.AddActivityAccessor();
+                     x.AddRequestContextAccessor();
+                     x.AddStream();
+                 })
                 .UseOrleans((ctx, x) =>
                 {
                     var siloOptions = ctx.Configuration.GetSection(SiloSectionName).Get<SiloOptions>() ?? new SiloOptions();
@@ -53,12 +59,6 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                     x.AddSimpleMessageStreamProvider(Constants.StreamProviderName);
                     x.AddMemoryGrainStorage(Constants.StreamsMemoryStorageName);
                     x.AddMemoryGrainStorage(Constants.StorageProviderName);
-                })
-                .ConfigureServices(x =>
-                {
-                    x.AddActivityAccessor();
-                    x.AddRequestContextAccessor();
-                    x.AddStream();
                 })
                 .Build();
             await _siloHost.StartAsync();
