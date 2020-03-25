@@ -4,6 +4,8 @@ using GiG.Core.Web.Docs.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.IO;
 
 namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read
 {
@@ -25,13 +27,13 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read
             
             var etcdProviderOptions = Configuration.GetSection("EtcdRead").Get<EtcdProviderOptions>();
             services.AddSingleton(new EtcdClient(etcdProviderOptions.ConnectionString, 
-                                                 etcdProviderOptions.Port,
-                                                 etcdProviderOptions.Username, 
-                                                 etcdProviderOptions.Password, 
-                                           etcdProviderOptions.CaCertificate,
-                                         etcdProviderOptions.ClientCertificate, 
-                                                 etcdProviderOptions.ClientKey,
-                                                 etcdProviderOptions.IsPublicRootCa));
+                etcdProviderOptions.Port,
+                etcdProviderOptions.Username, 
+                etcdProviderOptions.Password,
+                File.ReadAllText("etcd-client-ca.crt"),
+                File.ReadAllText("etcd-client.crt"),
+                File.ReadAllText("etcd-client.key"),
+                etcdProviderOptions.IsPublicRootCa));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
