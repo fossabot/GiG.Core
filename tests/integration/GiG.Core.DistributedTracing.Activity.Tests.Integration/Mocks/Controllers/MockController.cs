@@ -1,5 +1,8 @@
 ﻿using GiG.Core.DistributedTracing.Abstractions;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
+using Constants = GiG.Core.MultiTenant.Abstractions.Constants;
 
 namespace GiG.Core.DistributedTracing.Activity.Tests.Integration.Mocks.Controllers
 {
@@ -24,6 +27,15 @@ namespace GiG.Core.DistributedTracing.Activity.Tests.Integration.Mocks.Controlle
                 SpanId = _activityContextAccessor.SpanId,
                 TraceId = _activityContextAccessor.TraceId
             };
+        }
+
+        [HttpGet("tenants")]
+        public ActionResult<IEnumerable<string>> GetTenantIds()
+        {
+            var tenantIds = 
+                _activityContextAccessor.Baggage.Where(x => x.Key == Constants.TenantIdBaggageKey);
+
+            return tenantIds.Select(x => x.Value).ToList();
         }
     }
 }

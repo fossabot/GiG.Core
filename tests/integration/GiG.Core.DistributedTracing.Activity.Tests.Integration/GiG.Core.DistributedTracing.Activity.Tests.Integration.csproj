@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Bogus" Version="28.4.4" />
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
@@ -19,6 +20,8 @@
     <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Abstractions\GiG.Core.DistributedTracing.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Activity\GiG.Core.DistributedTracing.Activity.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Http\GiG.Core.Http.csproj" />
+    <ProjectReference Include="..\..\..\src\GiG.Core.MultiTenant.Activity\GiG.Core.MultiTenant.Activity.csproj" />
+    <ProjectReference Include="..\..\..\src\GiG.Core.MultiTenant.Web\GiG.Core.MultiTenant.Web.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Web.Mock\GiG.Core.Web.Mock.csproj" />
   </ItemGroup>
 
