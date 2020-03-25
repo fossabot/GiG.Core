@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read.Controllers
 {
@@ -19,16 +20,26 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read.Controllers
         }
 
         [HttpGet("{key}")]
-        public ActionResult<string> Get([FromRoute, Required] string key)
+        public async Task<ActionResult<string>> Get([FromRoute, Required] string key)
         {
-            return Ok(_etcdClient.GetVal(key));
+            var value = await _etcdClient.GetValAsync(key);
+
+            return Ok(value);
+        }
+        
+        [HttpGet("{key}/length")]
+        public async Task<ActionResult<string>> GetLength([FromRoute, Required] string key)
+        {
+            var value = await _etcdClient.GetValAsync(key);
+
+            return Ok(value.Length);
         }
 
         [HttpPost("{key}")]
-        public ActionResult Post([FromRoute, Required] string key, [FromBody, Required] ValueModel model)
+        public async Task<ActionResult> Post([FromRoute, Required] string key, [FromBody, Required] ValueModel model)
         {
             var value = Convert.FromBase64String(model.DataBase64);
-            _etcdClient.Put(key, Encoding.UTF8.GetString(value));
+            await _etcdClient.PutAsync(key, Encoding.UTF8.GetString(value));
                 
             return NoContent();
         }
