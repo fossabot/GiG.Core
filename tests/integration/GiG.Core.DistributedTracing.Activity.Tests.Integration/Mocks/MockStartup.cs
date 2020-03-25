@@ -1,5 +1,7 @@
-﻿using GiG.Core.DistributedTracing.Activity.Extensions;
+using GiG.Core.DistributedTracing.Activity.Extensions;
+using GiG.Core.MultiTenant.Web.Extensions;
 using GiG.Core.Web.Mock;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GiG.Core.DistributedTracing.Activity.Tests.Integration.Mocks
@@ -11,6 +13,13 @@ namespace GiG.Core.DistributedTracing.Activity.Tests.Integration.Mocks
             services.AddActivityAccessor();
             services.AddHttpClient();
             base.ConfigureServices(services);
+        }
+
+        public override void Configure(IApplicationBuilder app)
+        {
+            app.UseTenantIdMiddleware();
+            
+            base.Configure(app);
         }
     }
 }

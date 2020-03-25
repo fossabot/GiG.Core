@@ -9,5 +9,10 @@
         /// The Header for Tenant ID.
         /// </summary>
         public const string Header = "X-Tenant-ID";
+
+        /// <summary>
+        /// Baggage Key for Tenant ID.
+        /// </summary>
+        public const string TenantIdBaggageKey = "TenantId";
     }
 }

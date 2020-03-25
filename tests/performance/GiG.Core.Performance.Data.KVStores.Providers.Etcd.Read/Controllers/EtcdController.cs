@@ -1,10 +1,12 @@
 ﻿using dotnet_etcd;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("v{version:apiVersion}/etcd")]
+    [ApiVersion("1")]
     public class EtcdController : ControllerBase
     {
         private readonly EtcdClient _etcdClient;
@@ -14,18 +16,18 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read.Controllers
             _etcdClient = etcdClient;
         }
 
-        [HttpGet]
-        public ActionResult<string> Get([FromQuery] string key)
+        [HttpGet("{key}")]
+        public ActionResult<string> Get([FromRoute, Required] string key)
         {
             return _etcdClient.GetVal(key);
         }
 
-        [HttpPost]
-        public ActionResult<string> Post([FromQuery] string key, [FromQuery] string value)
+        [HttpPost("{key}")]
+        public ActionResult Post([FromRoute, Required] string key, [FromQuery, Required] string value)
         {
             _etcdClient.Put(key, value);
                 
-            return Ok();
+            return NoContent();
         }
     }
 }
