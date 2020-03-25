@@ -3,6 +3,7 @@ using GiG.Core.Data.KVStores.Providers.Etcd.Abstractions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.IO;
 
 namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Watch
 {
@@ -20,9 +21,9 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Watch
                 etcdProviderOptions.Port,
                 etcdProviderOptions.Username,
                 etcdProviderOptions.Password,
-                etcdProviderOptions.CaCertificate,
-                etcdProviderOptions.ClientCertificate,
-                etcdProviderOptions.ClientKey,
+                File.ReadAllText("etcd-client-ca.crt"),
+                File.ReadAllText("etcd-client.crt"),
+                File.ReadAllText("etcd-client.key"),
                 etcdProviderOptions.IsPublicRootCa));
 
             services.AddHostedService<HostedService>();
