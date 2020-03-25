@@ -9,15 +9,20 @@ The below code needs to be added to the `Startup.cs` class. This will register t
 ```chsarp
 public void ConfigureServices(IServiceCollection services)
 {
-    // Configure Api Behavior Options
-    services.AddApiKeyAuthentication();
-    services.ConfigureDefaultApiKeyOptions(_configuration);
+	// Configure Api Behavior Options
+	services.AddApiKeyAuthentication();
+	services.ConfigureApiKeyOptions(_configuration);
 }
 
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 {
-    app.UseAuthentication();
-    app.UseAuthorization();
+	app.UseRouting();
+	app.UseAuthentication();
+	app.UseAuthorization();
+	app.UseEndpoints(endpoints =>
+	{
+		endpoints.MapControllers();
+	});
 }
 ```
 
@@ -36,13 +41,13 @@ At least 1 Api Key - Tenant Id pair must be available for the configuration to b
 ```chsarp
 {
   "Authentication": {
-    "ApiKey": {
-      "AuthorizedTenantKeys": {
-        "abc": "1",
-	    	"def": "1",
-		    "ghi": "2"
-      }
-    }
+	"ApiKey": {
+	  "AuthorizedTenantKeys": {
+		"abc": "1",
+			"def": "1",
+			"ghi": "2"
+	  }
+	}
   }
 }
 ```
