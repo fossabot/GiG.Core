@@ -1,6 +1,8 @@
 ﻿using dotnet_etcd;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read.Controllers
 {
@@ -19,13 +21,14 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read.Controllers
         [HttpGet("{key}")]
         public ActionResult<string> Get([FromRoute, Required] string key)
         {
-            return _etcdClient.GetVal(key);
+            return Ok(_etcdClient.GetVal(key));
         }
 
         [HttpPost("{key}")]
-        public ActionResult Post([FromRoute, Required] string key, [FromQuery, Required] string value)
+        public ActionResult Post([FromRoute, Required] string key, [FromBody, Required] ValueModel model)
         {
-            _etcdClient.Put(key, value);
+            var value = Convert.FromBase64String(model.DataBase64);
+            _etcdClient.Put(key, Encoding.UTF8.GetString(value));
                 
             return NoContent();
         }
