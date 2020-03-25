@@ -2,8 +2,10 @@
 using OpenTelemetry.Trace;
 using OpenTelemetry.Trace.Configuration;
 using System;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
+[assembly: InternalsVisibleTo("GiG.Core.Messaging.MassTransit.Tests.Unit")]
 namespace GiG.Core.Messaging.MassTransit.Internal
 {
     /// <inheritdoc />
@@ -42,7 +44,7 @@ namespace GiG.Core.Messaging.MassTransit.Internal
         /// <returns></returns>
         public Task PreConsume<T>(ConsumeContext<T> context) where T : class
         {
-            var parentActivityId = context.Headers.Get(Constants.ActivityIdHeader, string.Empty);
+            var parentActivityId = context.Headers?.Get(Constants.ActivityIdHeader, string.Empty);
             var activity = new System.Diagnostics.Activity(Constants.ConsumeActivityName);
             if (!string.IsNullOrEmpty(parentActivityId))
             {

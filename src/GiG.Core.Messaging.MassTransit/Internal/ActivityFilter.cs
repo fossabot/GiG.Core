@@ -3,11 +3,8 @@ using MassTransit;
 using OpenTelemetry.Trace;
 using OpenTelemetry.Trace.Configuration;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Threading.Tasks;
 
-[assembly: InternalsVisibleTo("GiG.Core.Messaging.MassTransit.Tests.Unit")]
 namespace GiG.Core.Messaging.MassTransit.Internal
 {
     /// <summary>
@@ -42,7 +39,7 @@ namespace GiG.Core.Messaging.MassTransit.Internal
             publishingActivity.Start();
 
             var span = _tracer?.StartSpanFromActivity(Constants.SpanPublishOperationNamePrefix, publishingActivity, SpanKind.Producer);
-            
+
             // add the current Activity Id to the headers
             var publishContext = context.GetPayload<PublishContext>();
             publishContext.Headers.Set(Constants.ActivityIdHeader, publishingActivity.Id);
