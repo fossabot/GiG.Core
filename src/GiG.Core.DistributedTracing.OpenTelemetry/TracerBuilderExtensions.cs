@@ -38,7 +38,7 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry
                 return tracerBuilder;
             }
 
-            if (tracingOptions?.Exporters?.Any() != true)
+            if (tracingOptions.Exporters?.Any() != true)
             {
                 throw new ConfigurationErrorsException("No tracing exporters were configured.  Please add at least one tracing exporter");
             }

@@ -4,7 +4,7 @@ This Library provides an API to configure API Documentation.
 
 ## Basic Usage
 
-The below code needs to be added to the Web project file.
+The below code needs to be added to the Web project file if `IsXmlDocumentationEnabled` is enabled.
 
 ```
 <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -30,14 +30,15 @@ public void Configure(IApplicationBuilder app)
 
 The below table outlines the valid Configurations used to override the [ApiDocsOptions](../src/GiG.Core.Web.Docs/Abstractions/ApiDocsOptions.cs).
 
-| Configuration Name    | Type    | Required | Default Value |
-|:----------------------|:--------|:---------|:--------------|
-| IsEnabled             | Boolean | No       | `true`        |
-| Url                   | String  | No       | `api-docs`    |
-| Title                 | String  | No       | <null>        |
-| Description           | String  | No       | <null>        |
-| IsForwardedForEnabled | Boolean | No       | `true`        |
-| XTenantIdEnabled      | Boolean | No       | `true`        |
+| Configuration Name        | Type    | Required | Default Value |
+|:--------------------------|:--------|:---------|:--------------|
+| IsEnabled                 | Boolean | No       | `true`        |
+| Url                       | String  | No       | `api-docs`    |
+| Title                     | String  | No       | <null>        |
+| Description               | String  | No       | <null>        |
+| IsForwardedForEnabled     | Boolean | No       | `true`        |
+| IsXmlDocumentationEnabled | Boolean | No       | `true`        |
+| XTenantIdEnabled          | Boolean | No       | `true`        |
 
 #### Sample Configuration
 

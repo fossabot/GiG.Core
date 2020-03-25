@@ -22,6 +22,7 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.Internal
                 o.AgentHost = _options.AgentHost;
                 o.AgentPort = _options.AgentPort;
                 o.MaxPacketSize = _options.MaxPacketSize;
+                o.MaxFlushInterval = _options.MaxFlushInterval;
             });
         }
     }

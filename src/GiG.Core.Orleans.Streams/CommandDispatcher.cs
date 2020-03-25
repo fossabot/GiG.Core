@@ -15,6 +15,9 @@ namespace GiG.Core.Orleans.Streams
         where TSuccess : class
         where TFailure : FailedEventBase
     {
+        private const string TimeoutError = "timeout";
+        private const string SubscribeAsyncNotCalledError = "Not Subscribed to Success or Failure Event";
+
         private readonly ILogger<CommandDispatcher<TCommand, TSuccess, TFailure>> _logger;
         private readonly IStreamProvider _streamProvider;
         private readonly Guid _streamId;
@@ -32,8 +35,6 @@ namespace GiG.Core.Orleans.Streams
 
         private bool _isDisposing;
         private bool _isReleased;
-        private const string TimeoutError = "timeout";
-        private const string SubscribeAsyncNotCalledError= "Not Subscribed to Success or Failure Event";
 
         /// <summary>
         /// Constructor.
@@ -94,7 +95,7 @@ namespace GiG.Core.Orleans.Streams
         }
 
         /// <inheritdoc />
-        public async Task<CommandDispatcherResponse<TSuccess>> DispatchAsync(int timeoutInMilliseconds, CancellationToken cancellationToken = default)
+        public async Task<CommandDispatcherResponse<TSuccess>> DispatchAsync(int millisecondsTimeout, CancellationToken cancellationToken = default)
         {
             try
             {
@@ -106,32 +107,19 @@ namespace GiG.Core.Orleans.Streams
                 _semaphore = new SemaphoreSlim(0, 1);
                 
                 await _commandStream.OnNextAsync(_command);
+                await _semaphore.WaitAsync(millisecondsTimeout, cancellationToken);
 
-                await _semaphore.WaitAsync(timeoutInMilliseconds, cancellationToken);
-
-                switch (_success)
+                return _success switch
                 {
-                    case null when _failure == default(TFailure):
-                        return new CommandDispatcherResponse<TSuccess>()
-                        {
-                            ErrorCode = TimeoutError
-                        };
-                    case null:
-                        return new CommandDispatcherResponse<TSuccess>()
-                        {
-                            ErrorCode = _failure.ErrorCode,
-                            ErrorMessage = _failure.ErrorMessage
-                        };
-                    default:
-                        return new CommandDispatcherResponse<TSuccess>()
-                        {
-                            Data = _success
-                        };
-                }
+                    null when _failure == default(TFailure) => new CommandDispatcherResponse<TSuccess>(TimeoutError),
+                    null => new CommandDispatcherResponse<TSuccess>(_failure.ErrorCode, _failure.ErrorMessage),
+                    _ => new CommandDispatcherResponse<TSuccess>(_success)
+                };
             }
             catch (Exception e)
             {
                 _logger.LogWarning(e, e.Message);
+
                 throw;
             }
         }

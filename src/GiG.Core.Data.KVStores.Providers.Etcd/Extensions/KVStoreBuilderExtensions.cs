@@ -51,7 +51,6 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd.Extensions
             }
 
             builder.Services.TryAddSingleton<IDataProviderOptions<T, EtcdProviderOptions>>(new DataProviderOptions<T, EtcdProviderOptions>(etcdProviderOptions));
-
             builder.Services.TryAddSingleton<IDataProvider<T>, EtcdDataProvider<T>>();
 
             return builder;

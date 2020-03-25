@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace GiG.Core.DistributedTracing.Abstractions
 {
@@ -7,6 +8,11 @@ namespace GiG.Core.DistributedTracing.Abstractions
     /// </summary>
     public interface IActivityContextAccessor
     {
+        /// <summary>
+        /// The current Activty's Id.
+        /// </summary>
+        string ActivityId { get; }
+
         /// <summary>
         /// The current context's Correlation ID.
         /// </summary>
@@ -43,5 +49,10 @@ namespace GiG.Core.DistributedTracing.Abstractions
         /// The name of the Operation.
         /// </summary>
         string OperationName { get; }
+
+        /// <summary>
+        /// Gets the current <see cref="System.Diagnostics.Activity"/>.
+        /// </summary>
+        Activity CurrentActivity { get; }
     }
 }

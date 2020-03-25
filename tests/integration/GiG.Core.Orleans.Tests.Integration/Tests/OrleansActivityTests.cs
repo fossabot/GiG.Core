@@ -8,7 +8,7 @@ using Xunit;
 
 namespace GiG.Core.Orleans.Tests.Integration.Tests
 {
-    [Trait("Category", "IntegrationWithDependency")]
+    [Trait("Category", "Integration")]
     public class OrleansActivityTests : ActivityClusterLifetime
     {
         [Fact]
@@ -24,6 +24,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             // Assert
             Assert.NotNull(activityResponse);
             Assert.NotNull(activityResponse.TraceId);
+            Assert.NotNull(activityResponse.RootId);
             Assert.False(string.IsNullOrEmpty(activityResponse.ParentId));
         }
 
@@ -43,6 +44,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             Assert.NotNull(activityResponse);
             Assert.NotNull(activityResponse.TraceId);
             Assert.Equal(activity.Id, activityResponse.ParentId);
+            Assert.Equal(activity.RootId, activityResponse.RootId);
         }
 
         [Fact]
@@ -59,11 +61,12 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             await stream.PublishAsync(new MockMessage());
             var grain = ClusterClient.GetGrain<IActivityTestGrain>(grainId);
             var activityResponse = await grain.GetStreamActivityAsync();
-
+            
             // Assert
             Assert.NotNull(activityResponse);
             Assert.NotNull(activityResponse.TraceId);
-            Assert.Equal(activity.Id, activityResponse.ParentId);
+            Assert.NotNull(activityResponse.ParentId);
+            Assert.Equal(activity.RootId, activityResponse.RootId);
         }
     }
 }

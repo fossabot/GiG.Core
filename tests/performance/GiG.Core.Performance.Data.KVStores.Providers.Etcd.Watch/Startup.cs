@@ -17,7 +17,7 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Watch
             var configurationSection =  configuration.GetSection("EtcdWatch");
             var etcdProviderOptions = configurationSection.Get<EtcdProviderOptions>();
 
-            EtcdClient etcdClient = new EtcdClient(etcdProviderOptions.ConnectionString, etcdProviderOptions.Port,
+            var etcdClient = new EtcdClient(etcdProviderOptions.ConnectionString, etcdProviderOptions.Port,
                 etcdProviderOptions.Username, etcdProviderOptions.Password, etcdProviderOptions.CaCertificate,
                 etcdProviderOptions.ClientCertificate, etcdProviderOptions.ClientKey,
                 etcdProviderOptions.IsPublicRootCa);
