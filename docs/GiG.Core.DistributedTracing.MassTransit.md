@@ -17,7 +17,7 @@ public void ConfigureServices(IServiceCollection services)
         x.AddConsumer<MyConsumer>();
         x.AddBus(provider => Bus.Factory.CreateUsingInMemory(cfg =>
         {
-            cfg.Host.AddDefaultConsumerObserver(x.Collection.BuildServiceProvider());
+            cfg.Host.AddDefaultConsumerObserver(provider);
 
             cfg.ReceiveEndpoint(typeof(MyConsumer).FullName, e =>
             {
@@ -57,6 +57,50 @@ public void ConfigureServices(IServiceCollection services)
         x.AddBus(provider => Bus.Factory.CreateUsingInMemory(cfg =>
         {
             cfg.Host.AddActivityConsumerObserver();
+
+            cfg.ReceiveEndpoint(typeof(MyConsumer).FullName, e =>
+            {
+                e.Consumer<MyConsumer>(provider);
+            });
+
+        }));
+    });
+}
+```
+
+## Telemetry
+
+N.B. In order to have Telemetry information for RabbitMQ a Telemetry provider needs to be enabled. For more details refer to [GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger](GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.md)
+
+### Producer
+The below code needs to be added to the `Startup.cs` of the MassTransit Producer in order to have Telemetry information.
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddMassTransit(x =>
+    {
+        x.AddBus(provider=> Bus.Factory.CreateUsingInMemory(cfg =>
+        {
+            cfg.ConfigurePublish(x => x.UseActivityFilterWithTracing(provider));
+        }));
+    });
+}
+```
+
+### Consumer
+
+The below code needs to be added to the `Startup.cs` of the Consumer in order to have Telemetry information.
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddMassTransit(x =>
+    {
+        x.AddConsumer<MyConsumer>();
+        x.AddBus(provider => Bus.Factory.CreateUsingInMemory(cfg =>
+        {
+            cfg.Host.AddActivityConsumerObserverWithTracing(provider);
 
             cfg.ReceiveEndpoint(typeof(MyConsumer).FullName, e =>
             {
