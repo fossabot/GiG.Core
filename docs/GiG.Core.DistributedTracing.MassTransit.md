@@ -17,7 +17,7 @@ public void ConfigureServices(IServiceCollection services)
         x.AddConsumer<MyConsumer>();
         x.AddBus(provider => Bus.Factory.CreateUsingInMemory(cfg =>
         {
-            cfg.Host.AddDefaultConsumerObserver(x.Collection.BuildServiceProvider());
+            cfg.Host.AddDefaultConsumerObserver(provider);
 
             cfg.ReceiveEndpoint(typeof(MyConsumer).FullName, e =>
             {
@@ -82,7 +82,7 @@ public void ConfigureServices(IServiceCollection services)
     {
         x.AddBus(provider=> Bus.Factory.CreateUsingInMemory(cfg =>
         {
-            cfg.ConfigurePublish(x => x.UseActivityFilterWithTracing(x.Collection.BuildServiceProvider()));
+            cfg.ConfigurePublish(x => x.UseActivityFilterWithTracing(provider));
         }));
     });
 }
@@ -100,7 +100,7 @@ public void ConfigureServices(IServiceCollection services)
         x.AddConsumer<MyConsumer>();
         x.AddBus(provider => Bus.Factory.CreateUsingInMemory(cfg =>
         {
-            cfg.Host.AddActivityConsumerObserverWithTracing(x.Collection.BuildServiceProvider());
+            cfg.Host.AddActivityConsumerObserverWithTracing(provider);
 
             cfg.ReceiveEndpoint(typeof(MyConsumer).FullName, e =>
             {
