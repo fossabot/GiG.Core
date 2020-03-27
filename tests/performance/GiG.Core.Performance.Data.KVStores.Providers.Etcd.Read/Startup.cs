@@ -26,13 +26,12 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read
             services.AddControllers();
 
             var etcdProviderOptions = Configuration.GetSection("EtcdRead").Get<EtcdProviderOptions>();
-            var tlsEnabled = Configuration.GetSection("EtcdRead:TlsEnabled").Get<bool>();
+            var isSslEnabled = Configuration.GetSection("EtcdRead:IsSslEnabled").Get<bool>();
 
-            var caCert = (tlsEnabled) ? File.ReadAllText("etcd-client-ca.crt") : "";
-            var clientCert = (tlsEnabled) ? File.ReadAllText("etcd-client.crt") : "";
-            var clientKey = (tlsEnabled) ? File.ReadAllText("etcd-client.key") : "";
-            var isPublicRootCa = (tlsEnabled) && etcdProviderOptions.IsPublicRootCa;
-         
+            var caCert = (isSslEnabled) ? File.ReadAllText("etcd-client-ca.crt") : "";
+            var clientCert = (isSslEnabled) ? File.ReadAllText("etcd-client.crt") : "";
+            var clientKey = (isSslEnabled) ? File.ReadAllText("etcd-client.key") : "";
+
             services.AddSingleton(new EtcdClient(etcdProviderOptions.ConnectionString, 
                 etcdProviderOptions.Port,
                 etcdProviderOptions.Username,
@@ -40,7 +39,7 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read
                 caCert,
                 clientCert,
                 clientKey,
-                isPublicRootCa
+                etcdProviderOptions.IsPublicRootCa
             ));
         }
 
