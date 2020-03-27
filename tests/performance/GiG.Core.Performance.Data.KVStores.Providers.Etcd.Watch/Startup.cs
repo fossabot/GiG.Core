@@ -15,17 +15,23 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Watch
 
             var configurationSection = configuration.GetSection("EtcdWatch");
             var etcdProviderOptions = configurationSection.Get<EtcdProviderOptions>();
-            services.Configure<EtcdProviderOptions>(configurationSection);
+            var tlsEnabled = configuration.GetSection("EtcdRead:TlsEnabled").Get<bool>();
 
-            services.AddSingleton(new EtcdClient(etcdProviderOptions.ConnectionString,
+            var caCert = (tlsEnabled) ? File.ReadAllText("etcd-client-ca.crt") : "";
+            var clientCert = (tlsEnabled) ? File.ReadAllText("etcd-client.crt") : "";
+            var clientKey = (tlsEnabled) ? File.ReadAllText("etcd-client.key") : "";
+            var isPublicRootCa = (tlsEnabled) && etcdProviderOptions.IsPublicRootCa;
+         
+            services.AddSingleton(new EtcdClient(etcdProviderOptions.ConnectionString, 
                 etcdProviderOptions.Port,
                 etcdProviderOptions.Username,
                 etcdProviderOptions.Password,
-                File.ReadAllText("etcd-client-ca.crt"),
-                File.ReadAllText("etcd-client.crt"),
-                File.ReadAllText("etcd-client.key"),
-                etcdProviderOptions.IsPublicRootCa));
-
+                caCert,
+                clientCert,
+                clientKey,
+                isPublicRootCa
+            ));
+            
             services.AddHostedService<HostedService>();
         }
     }

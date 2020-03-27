@@ -24,16 +24,24 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read
             services.ConfigureApiDocs(Configuration);
             
             services.AddControllers();
-            
+
             var etcdProviderOptions = Configuration.GetSection("EtcdRead").Get<EtcdProviderOptions>();
+            var tlsEnabled = Configuration.GetSection("EtcdRead:TlsEnabled").Get<bool>();
+
+            var caCert = (tlsEnabled) ? File.ReadAllText("etcd-client-ca.crt") : "";
+            var clientCert = (tlsEnabled) ? File.ReadAllText("etcd-client.crt") : "";
+            var clientKey = (tlsEnabled) ? File.ReadAllText("etcd-client.key") : "";
+            var isPublicRootCa = (tlsEnabled) && etcdProviderOptions.IsPublicRootCa;
+         
             services.AddSingleton(new EtcdClient(etcdProviderOptions.ConnectionString, 
                 etcdProviderOptions.Port,
-                etcdProviderOptions.Username, 
+                etcdProviderOptions.Username,
                 etcdProviderOptions.Password,
-                File.ReadAllText("etcd-client-ca.crt"),
-                File.ReadAllText("etcd-client.crt"),
-                File.ReadAllText("etcd-client.key"),
-                etcdProviderOptions.IsPublicRootCa));
+                caCert,
+                clientCert,
+                clientKey,
+                isPublicRootCa
+            ));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
