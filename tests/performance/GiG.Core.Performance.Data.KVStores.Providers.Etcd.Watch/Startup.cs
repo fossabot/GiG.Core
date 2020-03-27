@@ -15,7 +15,7 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Watch
 
             var configurationSection = configuration.GetSection("EtcdWatch");
             var etcdProviderOptions = configurationSection.Get<EtcdProviderOptions>();
-            var tlsEnabled = configuration.GetSection("EtcdRead:TlsEnabled").Get<bool>();
+            var tlsEnabled = configuration.GetSection("EtcdWatch:TlsEnabled").Get<bool>();
 
             var caCert = (tlsEnabled) ? File.ReadAllText("etcd-client-ca.crt") : "";
             var clientCert = (tlsEnabled) ? File.ReadAllText("etcd-client.crt") : "";
