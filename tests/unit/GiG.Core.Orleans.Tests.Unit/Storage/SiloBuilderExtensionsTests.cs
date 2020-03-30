@@ -69,7 +69,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Storage
                 {
                     x.AddNpgsqlGrainStorage("testDB2", ctx.Configuration, "");
                 }).Build());
-            Assert.Equal("'sectionName' must not be null, empty or whitespace. (Parameter 'sectionName')", exception.Message);
+            Assert.Equal("'storageSectionName' must not be null, empty or whitespace. (Parameter 'storageSectionName')", exception.Message);
         }
     }
 }
