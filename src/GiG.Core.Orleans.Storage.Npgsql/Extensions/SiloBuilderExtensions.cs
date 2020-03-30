@@ -2,6 +2,7 @@
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Orleans.Hosting;
+using Orleans.Providers;
 using System;
 using System.Configuration;
 
@@ -24,7 +25,7 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Extensions
         {
             if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
             
-            return siloBuilder.AddNpgsqlGrainStorage("Default", configuration);
+            return siloBuilder.AddNpgsqlGrainStorage(ProviderConstants.DEFAULT_STORAGE_PROVIDER_NAME, configuration);
         }
         
         /// <summary>
