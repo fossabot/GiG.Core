@@ -1,5 +1,6 @@
 ﻿using GiG.Core.DistributedTracing.Activity.Extensions;
 using GiG.Core.MultiTenant.Abstractions;
+using GiG.Core.MultiTenant.Activity.Internal;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;

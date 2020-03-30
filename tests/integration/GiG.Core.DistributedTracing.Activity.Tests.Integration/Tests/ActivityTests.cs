@@ -1,4 +1,4 @@
-using GiG.Core.DistributedTracing.Activity.Tests.Integration.Lifetimes;
+using GiG.Core.DistributedTracing.Activity.Tests.Integration.Fixtures;
 using System.Linq;
 using System.Net;
 using System.Net.Http;

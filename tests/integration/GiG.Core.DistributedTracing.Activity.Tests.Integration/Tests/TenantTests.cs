@@ -1,5 +1,5 @@
 ﻿using Bogus;
-using GiG.Core.DistributedTracing.Activity.Tests.Integration.Lifetimes;
+using GiG.Core.DistributedTracing.Activity.Tests.Integration.Fixtures;
 using GiG.Core.MultiTenant.Abstractions;
 using System.Collections.Generic;
 using System.Linq;
