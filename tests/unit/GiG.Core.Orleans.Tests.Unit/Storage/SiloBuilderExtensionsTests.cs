@@ -21,6 +21,9 @@ namespace GiG.Core.Orleans.Tests.Unit.Storage
 
             exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.AddNpgsqlGrainStorage(null, null, null, null));
             Assert.Equal("siloBuilder", exception.ParamName);
+            
+            exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.AddNpgsqlGrainStorageAsDefault(null, null));
+            Assert.Equal("siloBuilder", exception.ParamName);
         }
 
         [Fact]
@@ -31,7 +34,11 @@ namespace GiG.Core.Orleans.Tests.Unit.Storage
             Assert.Equal("configuration", exception.ParamName);
 
             exception = Assert.Throws<ArgumentNullException>(() =>
-                            Host.CreateDefaultBuilder().UseOrleans(sb => sb.AddNpgsqlGrainStorage(storageName: null, null, null)).Build());
+                Host.CreateDefaultBuilder().UseOrleans(sb => sb.AddNpgsqlGrainStorage(storageName: null, null, null)).Build());
+            Assert.Equal("configuration", exception.ParamName);
+
+            exception = Assert.Throws<ArgumentNullException>(() =>
+                Host.CreateDefaultBuilder().UseOrleans(sb => sb.AddNpgsqlGrainStorageAsDefault(null)).Build());
             Assert.Equal("configuration", exception.ParamName);
         }
 
@@ -62,7 +69,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Storage
                 {
                     x.AddNpgsqlGrainStorage("testDB2", ctx.Configuration, "");
                 }).Build());
-            Assert.Equal("'sectionName' must not be null, empty or whitespace. (Parameter 'sectionName')", exception.Message);
+            Assert.Equal("'storageSectionName' must not be null, empty or whitespace. (Parameter 'storageSectionName')", exception.Message);
         }
     }
 }

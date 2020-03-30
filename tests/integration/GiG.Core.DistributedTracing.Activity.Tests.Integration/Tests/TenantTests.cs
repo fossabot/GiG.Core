@@ -1,39 +1,29 @@
 ﻿using Bogus;
-using GiG.Core.DistributedTracing.Activity.Tests.Integration.Lifetimes;
+using GiG.Core.DistributedTracing.Activity.Tests.Integration.Fixtures;
 using GiG.Core.MultiTenant.Abstractions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace GiG.Core.DistributedTracing.Activity.Tests.Integration.Tests
 {
-    public class TenantTests : IAsyncLifetime
+    [Trait("Category", "Integration")]
+    public class TenantTests : IClassFixture<MockWebFixture>
     {
-        private readonly ActivityLifetime _activityLifetime;
+        private readonly MockWebFixture _fixture;
    
-        public TenantTests()
+        public TenantTests(MockWebFixture fixture)
         {
-            _activityLifetime = new ActivityLifetime();
+            _fixture = fixture;
         }
-
-        public async Task InitializeAsync()
-        {
-            await _activityLifetime.InitializeAsync();
-        } 
-
-        public async Task DisposeAsync()
-        {
-            await _activityLifetime.DisposeAsync();
-        }
-
+        
         [Fact]
         public async void ActivityAccessor_NoTenantIdHeaderSet_ShouldReturn()
         {
             //Arrange
-            var testEndpointUrl = $@"{ActivityLifetime.BaseUrl}/api/mock/tenants";
-            using var client = _activityLifetime.HttpClientFactory.CreateClient("tenants");
+            var testEndpointUrl = $@"{WebFixture.BaseUrl}/api/mock/tenants";
+            using var client = _fixture.HttpClient;
             
             //Act
             var response = await client.GetAsync(testEndpointUrl);
@@ -51,8 +41,8 @@ namespace GiG.Core.DistributedTracing.Activity.Tests.Integration.Tests
             //Arrange
             var expectedTenant = new Faker().Random.String2(10);
             
-            var testEndpointUrl = $@"{ActivityLifetime.BaseUrl}/api/mock/tenants";
-            using var client = _activityLifetime.HttpClientFactory.CreateClient("tenants");
+            var testEndpointUrl = $@"{WebFixture.BaseUrl}/api/mock/tenants";
+            using var client = _fixture.HttpClient;
             client.DefaultRequestHeaders.Add(Constants.Header, expectedTenant);
             
             //Act
@@ -73,8 +63,8 @@ namespace GiG.Core.DistributedTracing.Activity.Tests.Integration.Tests
             var expectedTenant1 = new Faker().Random.String2(10);
             var expectedTenant2 = new Faker().Random.String2(10);
             
-            var testEndpointUrl = $@"{ActivityLifetime.BaseUrl}/api/mock/tenants";
-            using var client = _activityLifetime.HttpClientFactory.CreateClient("tenants");
+            var testEndpointUrl = $@"{WebFixture.BaseUrl}/api/mock/tenants";
+            using var client = _fixture.HttpClient;
             client.DefaultRequestHeaders.Add(Constants.Header, expectedTenant1);
             client.DefaultRequestHeaders.Add(Constants.Header, expectedTenant2);
             

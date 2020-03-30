@@ -8,7 +8,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace GiG.Core.Web.Authentication.ApiKey.Tests.Integration
+namespace GiG.Core.Web.Authentication.ApiKey.Tests.Integration.Tests
 {
     [Trait("Category", "Integration")]
     [Trait("Feature", "ApiKeyAuthentication")]

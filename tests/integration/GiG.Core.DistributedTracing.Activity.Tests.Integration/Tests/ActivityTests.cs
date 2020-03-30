@@ -1,4 +1,4 @@
-using GiG.Core.DistributedTracing.Activity.Tests.Integration.Lifetimes;
+using GiG.Core.DistributedTracing.Activity.Tests.Integration.Fixtures;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -10,30 +10,20 @@ using Xunit;
 namespace GiG.Core.DistributedTracing.Activity.Tests.Integration.Tests
 {
     [Trait("Category", "Integration")]
-    public class ActivityTests : IAsyncLifetime
+    public class ActivityTests : IClassFixture<WebFixture>
     {
-        private readonly ActivityLifetime _activityLifetime;
+        private readonly WebFixture _fixture;
    
-        public ActivityTests()
+        public ActivityTests(WebFixture fixture)
         {
-            _activityLifetime = new ActivityLifetime();
+            _fixture = fixture;
         }
-
-        public async Task InitializeAsync()
-        {
-            await _activityLifetime.InitializeAsync();
-        }
-
-        public async Task DisposeAsync()
-        {
-            await _activityLifetime.DisposeAsync();
-        }
-
+        
         [Fact]
         public void ActivityAccessor_ActivityNotSet_ShouldStillReturnNewActivity()
         {
             // Act
-            var correlationId = _activityLifetime.ActivityContextAccessor.CorrelationId;
+            var correlationId = _fixture.ActivityContextAccessor.CorrelationId;
 
             // Assert 
             Assert.NotEmpty(correlationId);
@@ -48,7 +38,7 @@ namespace GiG.Core.DistributedTracing.Activity.Tests.Integration.Tests
             activity.Stop();
             
             // Act
-            var correlationId = _activityLifetime.ActivityContextAccessor.CorrelationId;
+            var correlationId = _fixture.ActivityContextAccessor.CorrelationId;
 
             // Assert 
             Assert.NotEmpty(correlationId);
@@ -65,7 +55,7 @@ namespace GiG.Core.DistributedTracing.Activity.Tests.Integration.Tests
             var expectedCorrelationId = activity.RootId;
 
             // Act
-            var actualCorrelationId = _activityLifetime.ActivityContextAccessor.CorrelationId;
+            var actualCorrelationId = _fixture.ActivityContextAccessor.CorrelationId;
             activity.Stop();
 
             // Assert
@@ -83,8 +73,8 @@ namespace GiG.Core.DistributedTracing.Activity.Tests.Integration.Tests
             var expectedCorrelationId = activity.RootId;
 
             // Act
-            var firstActualCorrelationId = _activityLifetime.ActivityContextAccessor.CorrelationId;
-            var secondActualCorrelationId = _activityLifetime.ActivityContextAccessor.CorrelationId;
+            var firstActualCorrelationId = _fixture.ActivityContextAccessor.CorrelationId;
+            var secondActualCorrelationId = _fixture.ActivityContextAccessor.CorrelationId;
             
             activity.Stop();
 
@@ -97,8 +87,8 @@ namespace GiG.Core.DistributedTracing.Activity.Tests.Integration.Tests
         public async Task ActivityAccessor_HttpCall_ReturnsActivity()
         {
             // Arrange
-            var testEndpointUrl = @$"{ActivityLifetime.BaseUrl}/api/mock";
-            using var client = _activityLifetime.HttpClientFactory.CreateClient();
+            var testEndpointUrl = @$"{WebFixture.BaseUrl}/api/mock";
+            using var client = _fixture.HttpClientFactory.CreateClient();
 
             //Act 
             var response = await client.GetAsync(testEndpointUrl);
@@ -125,8 +115,8 @@ namespace GiG.Core.DistributedTracing.Activity.Tests.Integration.Tests
             activity.Start();
             var expectedCorrelationId = activity.RootId;
 
-            var testEndpointUrl = @$"{ActivityLifetime.BaseUrl}/api/mock";
-            using var client = _activityLifetime.HttpClientFactory.CreateClient();
+            var testEndpointUrl = @$"{WebFixture.BaseUrl}/api/mock";
+            using var client = _fixture.HttpClientFactory.CreateClient();
             
             //Act 
             var response = await client.GetAsync(testEndpointUrl);

@@ -114,20 +114,9 @@ dotnet test --filter "Category=Unit|Category=Integration" GiG.Core.sln
 
 You can run the samples using the following commands:
 
-### Web
-
 ```sh
-docker-compose -f docker-compose.yml -f docker-compose-sample-web.yml up --build
+cd docker
+docker-compose -f docker-compose.yml -f docker-compose-<Sample Name>.yml up --build
 ```
 
-### Orleans
-
-```sh
-docker-compose -f docker-compose.yml -f docker-compose-sample-orleans.yml up --build
-```
-
-### Kafka Messaging
-
-```sh
-docker-compose -f docker-compose.yml -f docker-compose-sample-kafka.yml up --build
-```
+You can also find more samples [here](https://bitbucket.org/gaminginnovationgroup/gig.core.samples/src/master/).

@@ -7,26 +7,27 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace GiG.Core.DistributedTracing.Activity.Tests.Integration.Lifetimes
+namespace GiG.Core.DistributedTracing.Activity.Tests.Integration.Fixtures
 {
-    public class ActivityLifetime : IAsyncLifetime
+    public class WebFixture : IAsyncLifetime
     {
         internal IHttpClientFactory HttpClientFactory;
         internal IActivityContextAccessor ActivityContextAccessor;
-        internal const string BaseUrl = "http://localhost:56561";
+        internal const string BaseUrl = "http://localhost:56123";
         private IHost _host;
-       
+
         public async Task InitializeAsync()
         {
             _host = Host
-                    .CreateDefaultBuilder()
-                    .ConfigureWebHostDefaults(webBuilder =>
-                    {
-                        webBuilder.UseKestrel().UseUrls(BaseUrl);
-                        webBuilder.UseStartup<MockStartup>();
-                    }).Build();
+                .CreateDefaultBuilder()
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseKestrel().UseUrls(BaseUrl);
+                    webBuilder.UseStartup<MockStartup>();
+                }).Build();
 
             await _host.StartAsync();
+
             HttpClientFactory = _host.Services.GetService<IHttpClientFactory>();
             ActivityContextAccessor = _host.Services.GetService<IActivityContextAccessor>();
         }

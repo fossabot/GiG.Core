@@ -4,7 +4,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using Constants = GiG.Core.MultiTenant.Abstractions.Constants;
 
-namespace GiG.Core.MultiTenant.Activity
+namespace GiG.Core.MultiTenant.Activity.Internal
 {
     /// <summary>
     /// Tenant Accessor using the Activity Context.
