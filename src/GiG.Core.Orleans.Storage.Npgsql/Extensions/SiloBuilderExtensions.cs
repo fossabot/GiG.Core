@@ -47,16 +47,16 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Extensions
         /// <param name="siloBuilder">The <see cref="ISiloBuilder"/>.</param>
         /// <param name="storageName">The Grain Storage name.</param>
         /// <param name="configuration">The <see cref="IConfiguration"/>.</param>
-        /// <param name="sectionName">The Storage Provider section name.</param>
+        /// <param name="storageSectionName">The Storage Provider section name.</param>
         /// <returns>The <see cref="ISiloBuilder"/>.</returns>
-        public static ISiloBuilder AddNpgsqlGrainStorage([NotNull] this ISiloBuilder siloBuilder, [NotNull] string storageName, [NotNull] IConfiguration configuration, [NotNull] string sectionName)
+        public static ISiloBuilder AddNpgsqlGrainStorage([NotNull] this ISiloBuilder siloBuilder, [NotNull] string storageName, [NotNull] IConfiguration configuration, [NotNull] string storageSectionName)
         {
             if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
             if (string.IsNullOrWhiteSpace(storageName)) throw new ArgumentException($"'{nameof(storageName)}' must not be null, empty or whitespace.", nameof(storageName));
-            if (string.IsNullOrWhiteSpace(sectionName)) throw new ArgumentException($"'{nameof(sectionName)}' must not be null, empty or whitespace.", nameof(sectionName));
+            if (string.IsNullOrWhiteSpace(storageSectionName)) throw new ArgumentException($"'{nameof(storageSectionName)}' must not be null, empty or whitespace.", nameof(storageSectionName));
 
-            var namedStorageSectionName = $"{NpgsqlOptions.DefaultSectionName}:{sectionName}";
+            var namedStorageSectionName = $"{NpgsqlOptions.DefaultSectionName}:{storageSectionName}";
             var storageConfigSection = configuration.GetSection(namedStorageSectionName);
 
             return siloBuilder.AddNpgsqlGrainStorage(storageName, storageConfigSection);
