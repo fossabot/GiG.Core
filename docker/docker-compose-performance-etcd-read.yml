@@ -17,6 +17,6 @@ services:
       dockerfile: tests/performance/GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read/Dockerfile
     environment:
       - ASPNETCORE_URLS=http://+:8080
-      - EtcdProviderOptions__ConnectionString="http://localhost:2379"
+      - EtcdRead__ConnectionString=http://etcd:2379
     ports:
       - "7000:8080"
