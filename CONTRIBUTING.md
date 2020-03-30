@@ -16,7 +16,7 @@ If you would like to contribute to one of our repositories, first identify the s
 
 ### Before Submitting a pull request
 
-Make sure the respository can build and all tests pass. Familiarize yourself with the project workflow and our coding conventions. The coding standards, style, and general pull-request guidelines are published in our [Confluence](https://gaminginnovationgroup.atlassian.net/wiki/spaces/GC/pages/340787474/Standards+and+Guidelines) page.
+Make sure the respository can build and all tests pass. Familiarize yourself with the project workflow and our coding conventions. The coding standards, style, and general pull-request guidelines are published in our [Confluence](https://gaminginnovationgroup.atlassian.net/wiki/spaces/ARCH/pages/371589328/Standards+and+Guidelines) page.
 
 
 ### Tests

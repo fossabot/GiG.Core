@@ -9,6 +9,7 @@ using Xunit;
 
 namespace GiG.Core.DistributedTracing.Activity.Tests.Integration.Tests
 {
+    [Trait("Category", "Integration")]
     public class TenantTests : IAsyncLifetime
     {
         private readonly ActivityLifetime _activityLifetime;

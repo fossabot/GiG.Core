@@ -22,9 +22,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Tests.Unit
         private readonly ILoggerFactory _loggerFactory;
         private readonly UrlEncoder _urlEncoder;
         private readonly ISystemClock _systemClock;
-
         private readonly Mock<IAuthorizedApiKeysProvider> _authorizedKeysProviderMock;
-
         private readonly Dictionary<string, string> _defaultAuthorizedApiKeys;
 
         public ApiKeyAuthenticationHandlerTests()
