@@ -1,6 +1,7 @@
 using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.DistributedTracing.Activity.Tests.Integration.Mocks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Net.Http;
@@ -9,26 +10,21 @@ using Xunit;
 
 namespace GiG.Core.DistributedTracing.Activity.Tests.Integration.Lifetimes
 {
-    public class ActivityLifetime : IAsyncLifetime
+    public class MockWebFixture : IAsyncLifetime
     {
-        internal IHttpClientFactory HttpClientFactory;
-        internal IActivityContextAccessor ActivityContextAccessor;
-        internal const string BaseUrl = "http://localhost:56561";
         private IHost _host;
-       
+
         public async Task InitializeAsync()
         {
             _host = Host
-                    .CreateDefaultBuilder()
-                    .ConfigureWebHostDefaults(webBuilder =>
-                    {
-                        webBuilder.UseKestrel().UseUrls(BaseUrl);
-                        webBuilder.UseStartup<MockStartup>();
-                    }).Build();
+                .CreateDefaultBuilder()
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseTestServer();
+                    webBuilder.UseStartup<MockStartup>();
+                }).Build();
 
             await _host.StartAsync();
-            HttpClientFactory = _host.Services.GetService<IHttpClientFactory>();
-            ActivityContextAccessor = _host.Services.GetService<IActivityContextAccessor>();
         }
 
         public async Task DisposeAsync()
@@ -40,5 +36,7 @@ namespace GiG.Core.DistributedTracing.Activity.Tests.Integration.Lifetimes
                 _host.Dispose();
             }
         }
+
+        internal HttpClient HttpClient => _host.GetTestClient();
     }
 }
