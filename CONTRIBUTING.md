@@ -3,7 +3,7 @@
 Pull requests are always welcome.
 
 ## Reporting security issues and bugs
-Security issues and bugs should be reported via Jira on the GiG-Core-Phoenix project. 
+Security issues and bugs should be reported via Jira on the GiG-Core project. 
 If for some reason you do not receive feedback within a week, please follow up via slack.
 
 
