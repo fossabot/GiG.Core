@@ -92,6 +92,8 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             // Assert
             Assert.NotNull(response);
             Assert.NotNull(response.Data);
+            Assert.True(response.IsSuccess);
+            Assert.False(response.IsError);
             Assert.Equal(response.Data.GrainId, grainId);
         }
         
@@ -114,6 +116,8 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             
             // Assert
             Assert.NotNull(response);
+            Assert.False(response.IsSuccess);
+            Assert.True(response.IsError);
             Assert.Equal(MockFailureEvent.MockErrorCode, response.ErrorCode);
             Assert.Equal(MockFailureEvent.MockErrorMessage, response.ErrorMessage);
         }
