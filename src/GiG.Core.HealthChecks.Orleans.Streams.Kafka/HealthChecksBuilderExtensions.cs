@@ -30,6 +30,8 @@ namespace GiG.Core.HealthChecks.Orleans.Streams.Kafka
         public static IHealthChecksBuilder AddKafkaStreams([NotNull] this IHealthChecksBuilder builder, string topic = "OrleansStreamsHealthCheck",
             string name = "OrleansStreamsKafka", HealthStatus? failureStatus = default, IEnumerable<string> tags = default)
         {
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+
             return builder.AddCachedCheck(name, serviceProvider =>
             {
                 var streamsOptions = serviceProvider.GetService<IOptions<KafkaOptions>>()?.Value ?? new KafkaOptions();
