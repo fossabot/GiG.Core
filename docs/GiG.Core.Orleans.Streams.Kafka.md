@@ -21,7 +21,7 @@ private static void ConfigureServices(HostBuilderContext ctx, IServiceCollection
             kafkaBuilder.WithOptions(options =>
             {
                 options.FromConfiguration(ctx.Configuration);
-                options.AddTopic("MyTopic");                                
+                options.AddTopicStream("MyTopic", ctx.Configuration);                                
             })
             .AddJson();
         });
@@ -41,7 +41,7 @@ private static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builde
         kafkaBuilder.WithOptions(kafkaOptions =>
         {
             kafkaOptions.FromConfiguration(ctx.Configuration);
-            kafkaOptions.AddTopic("MyTopic");
+            options.AddTopicStream("MyTopic", ctx.Configuration);
         })
         .AddJson();
     });
@@ -52,18 +52,28 @@ private static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builde
 
 You can change the default value for the Kafka configuration by overriding the [KafkaOptions](../src/GiG.Core.Orleans.Streams.Kafka/Configurations/KafkaOptions.cs) by adding the following configuration settings under section `Orleans:Streams:Kafka`. The Brokers option is an array which is delimited with ';'.
 
-| Configuration Name   | Type     | Optional | Default Value    |
-|:---------------------|:---------|:---------|:-----------------|
-| Brokers              | String[] | No       | `localhost:9092` |
-| ConsumerGroupId      | String   | No       | `null`           |
-| Ssl:IsEnabled        | String   | Yes      | `false`          |
-| Ssl:SaslUsername     | String   | No       | `null`           |
-| Ssl:SaslPassword     | String   | No       | `null`           |
-| Ssl:SecurityProtocol | String   | Yes      | `Plaintext`      |
-| Ssl:SaslMechanism    | String   | Yes      | `Plain`          |
+| Configuration Name           | Type     | Optional | Default Value    |
+|-:----------------------------|-:--------|-:--------|-:----------------|
+| Brokers                      | String[] | No       | `localhost:9092` |
+| ConsumerGroupId              | String   | No       | `null`           |
+| Ssl:IsEnabled                | String   | Yes      | `false`          |
+| Ssl:SaslUsername             | String   | No       | `null`           |
+| Ssl:SaslPassword             | String   | No       | `null`           |
+| Ssl:SecurityProtocol         | String   | Yes      | `Plaintext`      |
+| Ssl:SaslMechanism            | String   | Yes      | `Plain`          |
+| Topic:IsTopicCreationEnabled | Boolean  | Yes      | `false`          |
+| Topic:Partitions             | Integer  | Yes      | 3                |
+| Topic:ReplicationFactor      | Short    | Yes      | 2                |
+| Topic:RetentionPeriodInMs    | Ulong    | Yes      | `null`           |
 
 When the Ssl section is enabled, both username and password are validated so they cannot be left empty.
 
+When the Topic section is enabled through the 'IsTopicCreationEnabled' flag,  new topic streams will be set up with the configurations under the `Orleans:Streams:Kafka:Topic` section.
+In case you require different settings for different Topics, you can add another section (for example 'Orleans:Streams:Kafka:Topic2') in the configuration file and include the configuration section name when calling 'AddTopicStream':
+
+```csharp
+   options.AddTopicStream("MyTopic2", "Orleans:Streams:Kafka:Topic2");             
+```
 #### Sample Configuration
 
 ```json
@@ -77,7 +87,12 @@ When the Ssl section is enabled, both username and password are validated so the
           "IsEnabled": true,
           "SaslUsername": "user",
           "SaslPassword": "password"
-        }
+        }, 
+        "Topic": {
+          "IsTopicCreationEnabled": true,
+          "Partitions": "3",
+          "ReplicationFactor": "2"
+        },
       }
     }
   }
