@@ -18,20 +18,11 @@
         /// <summary>
         /// The Url for the Live HealthCheck.
         /// </summary>
-        public string LiveUrl { get; set; }
+        public string LiveUrl { get; set; } = $"{Constants.CombinedHealthCheckUrl}/{Constants.LiveTag}";
 
         /// <summary>
         /// The Url for the Ready HealthCheck.
         /// </summary>
-        public string ReadyUrl { get; set; }
-
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        public HealthChecksOptions()
-        {
-            LiveUrl = $"{Constants.CombinedHealthCheckUrl}/{Constants.LiveTag}";
-            ReadyUrl = $"{Constants.CombinedHealthCheckUrl}/{Constants.ReadyTag}";
-        }
+        public string ReadyUrl { get; set; } = $"{Constants.CombinedHealthCheckUrl}/{Constants.ReadyTag}";
     }
 }
