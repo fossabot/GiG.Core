@@ -16,6 +16,12 @@ namespace GiG.Core.Performance.Logging.Controllers
              _logger = logger;
          }
          
+         [HttpGet]
+         public void Get()
+         {
+            _logger.LogInformation(LogText);
+         }
+         
          [HttpPost]
          public void Post()
          {
