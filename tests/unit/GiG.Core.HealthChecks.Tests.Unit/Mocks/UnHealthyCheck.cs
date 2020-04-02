@@ -10,6 +10,5 @@ namespace GiG.Core.HealthChecks.Tests.Unit.Mocks
         {
             return Task.FromResult(HealthCheckResult.Unhealthy());
         }
-
     }
 }
