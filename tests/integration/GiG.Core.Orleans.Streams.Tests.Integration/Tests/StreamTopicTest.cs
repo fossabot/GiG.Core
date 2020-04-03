@@ -9,7 +9,8 @@ using Xunit;
 namespace GiG.Core.Orleans.Streams.Tests.Integration.Tests
 {
     [Trait("Category", "IntegrationWithDependency")]
-    public class StreamTopicTest : IClassFixture<ClusterFixture>
+    [Collection(ClusterCollection.Collection)]
+    public class StreamTopicTest
     {
         private readonly ClusterFixture _fixture;
         private IAsyncStream<MockMessage> _stream;
@@ -28,6 +29,7 @@ namespace GiG.Core.Orleans.Streams.Tests.Integration.Tests
         {
             // Arrange
             var guid = Guid.NewGuid();
+
             var streamProvider = _fixture.ClusterClient.GetStreamProvider(StreamProviderName);
 
             _stream = streamProvider.GetStream<MockMessage>(guid, StreamNamespace);
@@ -37,8 +39,8 @@ namespace GiG.Core.Orleans.Streams.Tests.Integration.Tests
 
             // Act
             await _stream.OnNextAsync(message);
-            
-            Thread.Sleep(2000);
+
+            await _fixture._lock.WaitAsync(2000);
 
             // Assert
             Assert.True(_streamReceived);
@@ -47,6 +49,9 @@ namespace GiG.Core.Orleans.Streams.Tests.Integration.Tests
         private Task Handler(MockMessage message, StreamSequenceToken token = null)
         {
             _streamReceived = true;
+            
+            _fixture._lock.Release();
+            
             return Task.CompletedTask;
         }
     }
