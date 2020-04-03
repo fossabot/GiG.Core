@@ -18,25 +18,25 @@ using Microsoft.Extensions.Logging;
 using Serilog.Events;
 using System;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace GiG.Core.Logging.Tests.Integration.Tests
 {
     [Trait("Category", "Integration")]
-    public sealed class LoggingEnricherTests : IDisposable
+    public sealed class LoggingEnricherTests : IAsyncLifetime
     {
         private readonly string _logMessageTest = Guid.NewGuid().ToString();
-        private readonly IHost _host;
-        private readonly IApplicationMetadataAccessor _applicationMetadataAccessor;
-        private readonly IRequestContextAccessor _requestContextAccessor;
-        private readonly ICorrelationContextAccessor _correlationContextAccessor;
-        private readonly IActivityContextAccessor _activityContextAccessor;
+
+        private IHost _host;
+        private IApplicationMetadataAccessor _applicationMetadataAccessor;
+        private IRequestContextAccessor _requestContextAccessor;
+        private ICorrelationContextAccessor _correlationContextAccessor;
+        private IActivityContextAccessor _activityContextAccessor;
 
         private LogEvent _logEvent;
 
-        public LoggingEnricherTests()
+        public async Task InitializeAsync()
         {
             _host = Host.CreateDefaultBuilder()
                 .ConfigureServices(x =>
@@ -59,16 +59,16 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
                 )
                 .Build();
 
-            _host.Start();
+            await _host.StartAsync();
 
             _applicationMetadataAccessor = _host.Services.GetRequiredService<IApplicationMetadataAccessor>();
             _requestContextAccessor = _host.Services.GetRequiredService<IRequestContextAccessor>();
             _correlationContextAccessor = _host.Services.GetRequiredService<ICorrelationContextAccessor>();
-            _activityContextAccessor = _host.Services.GetRequiredService<IActivityContextAccessor>();
+            _activityContextAccessor = _host.Services.GetRequiredService<IActivityContextAccessor>();        
         }
 
         [Fact]
-        public void LogInformation_WriteLogWithActivityContext_VerifyContents()
+        public async Task LogInformation_WriteLogWithActivityContext_VerifyContents()
         {
             // Arrange
             var logger = _host.Services.GetRequiredService<ILogger<LoggingEnricherTests>>();
@@ -78,7 +78,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
             logger.LogInformation(_logMessageTest);
             
             // Assert
-            AssertLogEvent();
+            await AssertLogEventAsync();
             var traceId = _logEvent.Properties[TracingFields.TraceId].LiteralValue().ToString();
             var spanId = _logEvent.Properties[TracingFields.SpanId].LiteralValue().ToString();
             var parentSpanId = _logEvent.Properties[TracingFields.ParentId].LiteralValue().ToString();
@@ -98,7 +98,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
         }
         
         [Fact]
-        public void LogInformation_WriteLogWithEnrichers_VerifyContents()
+        public async Task LogInformation_WriteLogWithEnrichers_VerifyContents()
         {
             // Arrange
             var logger = _host.Services.GetRequiredService<ILogger<LoggingEnricherTests>>();
@@ -107,7 +107,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
             logger.LogInformation(_logMessageTest);
 
             // Assert
-            AssertLogEvent();
+            await AssertLogEventAsync();
             var applicationName = (string) _logEvent.Properties["ApplicationName"].LiteralValue();
             var applicationVersion = (string) _logEvent.Properties["ApplicationVersion"].LiteralValue();
             var correlationId = (string) _logEvent.Properties["CorrelationId"].LiteralValue();
@@ -137,22 +137,22 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
             }
         }
 
-        private void AssertLogEvent()
+        private async Task AssertLogEventAsync()
         {
             var count = 0;
-            while (_logEvent == null && count < 5)
+            while (_logEvent == null && count < 10)
             {
                 // Delay for Log Event since it is handled in a different callback
-                Thread.Sleep(200);
+                await Task.Delay(150);
                 count++;
             }
 
             Assert.NotNull(_logEvent);
         }
 
-        public void Dispose()
+        public async Task DisposeAsync()
         {
-            _host.StopAsync().Wait();
+            await _host.StopAsync();
             _host.Dispose();
         }
     }
