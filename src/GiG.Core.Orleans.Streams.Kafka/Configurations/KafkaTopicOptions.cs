@@ -28,6 +28,6 @@
         /// <summary>
         /// Retention Period in Milliseconds.
         /// </summary>
-        public ulong? RetentionPeriodInMs { get; set; } = null;
+        public ulong? RetentionPeriodInMs { get; set; }
     }
 }

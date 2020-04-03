@@ -141,10 +141,10 @@ namespace GiG.Core.Orleans.Tests.Unit.Streams.Kafka
         }
         
         [Fact]
-        public void AddTopicStream_KafkaStreamsConfigurationSectionIsNull_ConfigurationErrorsException()
+        public void AddTopicStream_KafkaStreamsConfigurationSectionIsNull_ShouldSetDefaultValuesOnKafkaStreamOptions()
         { 
-            var exception = Assert.Throws<ConfigurationErrorsException>(() => new KafkaStreamOptions().AddTopicStream("Test", null));
-            Assert.Equal("Configuration section '' is incorrect.", exception.Message);
+            var kafkaStreamOptions = new KafkaStreamOptions().AddTopicStream("Test", null);
+            Assert.NotNull(kafkaStreamOptions);
         }
         
         [Fact]

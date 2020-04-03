@@ -92,7 +92,6 @@ namespace GiG.Core.Orleans.Streams.Kafka.Extensions
         {
             if (options == null) throw new ArgumentNullException(nameof(options));
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException($"'{nameof(name)}' must not be null, empty or whitespace.", nameof(name));
-            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection?.Path}' is incorrect.");
 
             var kafkaTopicOptions = configurationSection?.Get<KafkaTopicOptions>() ?? new KafkaTopicOptions();
 
