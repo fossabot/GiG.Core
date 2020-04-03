@@ -14,7 +14,7 @@ namespace GiG.Core.HealthChecks.Tests.Unit
         [Fact]
         public void AddReadyCheck_HealthChecksBuilderIsNull_ThrowsArgumentNullException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => HealthChecksBuilderExtensions.AddReadyCheck<CachedUnHealthyCheck>(null, ""));
+            var exception = Assert.Throws<ArgumentNullException>(() => HealthChecksBuilderExtensions.AddReadyCheck<UnHealthyCheck>(null, ""));
             Assert.Equal("builder", exception.ParamName);
 
             exception = Assert.Throws<ArgumentNullException>(() => HealthChecksBuilderExtensions.AddReadyCheck(null, "", null));
@@ -26,7 +26,7 @@ namespace GiG.Core.HealthChecks.Tests.Unit
         {
             var exception = Assert.Throws<ArgumentException>(() => new ServiceCollection()
                 .AddCachedHealthChecks()
-                .AddReadyCheck<CachedUnHealthyCheck>(null));
+                .AddReadyCheck<UnHealthyCheck>(null));
             Assert.Equal("'name' must not be null, empty or whitespace. (Parameter 'name')", exception.Message);
 
             exception = Assert.Throws<ArgumentException>(() => new ServiceCollection()
@@ -40,14 +40,14 @@ namespace GiG.Core.HealthChecks.Tests.Unit
         {
             var exception = Assert.Throws<ArgumentNullException>(() => new ServiceCollection()
                         .AddCachedHealthChecks()
-                        .AddReadyCheck(nameof(CachedUnHealthyCheck), null, HealthStatus.Unhealthy));
+                        .AddReadyCheck(nameof(UnHealthyCheck), null, HealthStatus.Unhealthy));
             Assert.Equal("instance", exception.ParamName);
         }
 
         [Fact]
         public void AddLiveCheck_HealthChecksBuilderIsNull_ThrowsArgumentNullException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => HealthChecksBuilderExtensions.AddLiveCheck<CachedUnHealthyCheck>(null, ""));
+            var exception = Assert.Throws<ArgumentNullException>(() => HealthChecksBuilderExtensions.AddLiveCheck<UnHealthyCheck>(null, ""));
             Assert.Equal("builder", exception.ParamName);
 
             exception = Assert.Throws<ArgumentNullException>(() => HealthChecksBuilderExtensions.AddLiveCheck(null, "", null));
@@ -59,7 +59,7 @@ namespace GiG.Core.HealthChecks.Tests.Unit
         {
             var exception = Assert.Throws<ArgumentException>(() => new ServiceCollection()
                         .AddCachedHealthChecks()
-                        .AddLiveCheck<CachedUnHealthyCheck>(null));
+                        .AddLiveCheck<UnHealthyCheck>(null));
             Assert.Equal("'name' must not be null, empty or whitespace. (Parameter 'name')", exception.Message);
 
             exception = Assert.Throws<ArgumentException>(() => new ServiceCollection()
@@ -72,9 +72,33 @@ namespace GiG.Core.HealthChecks.Tests.Unit
         public void AddLiveCheck_InstanceIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => new ServiceCollection()
-                        .AddCachedHealthChecks()
-                        .AddLiveCheck(nameof(CachedUnHealthyCheck), null, HealthStatus.Unhealthy));
+                .AddCachedHealthChecks()
+                .AddLiveCheck(nameof(UnHealthyCheck), null, HealthStatus.Unhealthy));
             Assert.Equal("instance", exception.ParamName);
+        }
+        
+        [Fact]
+        public void AddCachedCheck_HealthChecksBuilderIsNull_ThrowsArgumentNullException()
+        {
+            var exception = Assert.Throws<ArgumentNullException>(() => HealthChecksBuilderExtensions.AddCachedCheck<UnHealthyCheck>(null, ""));
+            Assert.Equal("builder", exception.ParamName);
+
+            exception = Assert.Throws<ArgumentNullException>(() => HealthChecksBuilderExtensions.AddCachedCheck(null, "", _ => null));
+            Assert.Equal("builder", exception.ParamName);
+        }
+
+        [Fact]
+        public void AddCachedCheck_HealthCheckNameIsNull_ThrowsArgumentNullException()
+        {
+            var exception = Assert.Throws<ArgumentException>(() => new ServiceCollection()
+                .AddCachedHealthChecks()
+                .AddCachedCheck<UnHealthyCheck>(null));
+            Assert.Equal("'name' must not be null, empty or whitespace. (Parameter 'name')", exception.Message);
+
+            exception = Assert.Throws<ArgumentException>(() => new ServiceCollection()
+                .AddCachedHealthChecks()
+                .AddCachedCheck(null, _ => null));
+            Assert.Equal("'name' must not be null, empty or whitespace. (Parameter 'name')", exception.Message);
         }
     }
 }

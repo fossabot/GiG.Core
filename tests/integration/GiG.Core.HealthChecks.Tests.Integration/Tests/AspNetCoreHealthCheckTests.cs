@@ -14,11 +14,11 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
     public class AspNetCoreHealthCheckTests
     {
         private readonly HttpClient _httpClient;
-        private readonly HealthChecksOptions _healthChecksOptions;
+        private readonly HealthCheckOptions _healthCheckOptions;
 
         public AspNetCoreHealthCheckTests()
         {
-            _healthChecksOptions = new HealthChecksOptions();
+            _healthCheckOptions = new HealthCheckOptions();
 
             _httpClient = new TestServer(new WebHostBuilder()
                     .UseStartup<AspNetCoreMockStartup>()
@@ -30,7 +30,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
         public async Task HealthChecks_CombinedUrlEndpoint_ReturnsOkStatusCode()
         {
             // Arrange
-            using var request = new HttpRequestMessage(HttpMethod.Get, _healthChecksOptions.CombinedUrl);
+            using var request = new HttpRequestMessage(HttpMethod.Get, _healthCheckOptions.CombinedUrl);
             
             // Act
             using var response = await _httpClient.SendAsync(request);
@@ -44,7 +44,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
         public async Task HealthChecks_ReadyUrlEndpoint_ReturnsOkStatusCode()
         {
             // Arrange
-            using var request = new HttpRequestMessage(HttpMethod.Get, _healthChecksOptions.ReadyUrl);
+            using var request = new HttpRequestMessage(HttpMethod.Get, _healthCheckOptions.ReadyUrl);
             
             // Act
             using var response = await _httpClient.SendAsync(request);
@@ -58,7 +58,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
         public async Task HealthChecks_LiveUrlEndpoint_ReturnsOkStatusCode()
         {
             // Arrange
-            using var request = new HttpRequestMessage(HttpMethod.Get, _healthChecksOptions.LiveUrl);
+            using var request = new HttpRequestMessage(HttpMethod.Get, _healthCheckOptions.LiveUrl);
 
             // Act
             using var response = await _httpClient.SendAsync(request);

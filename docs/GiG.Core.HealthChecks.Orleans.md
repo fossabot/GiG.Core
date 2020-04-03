@@ -24,7 +24,7 @@ The HealthChecks can be reached via the configured endpoints as per [GiG.Core.He
 
 ### Configuration
 
-The below table outlines the valid Configurations used to override the [HealthChecksOptions](../src/GiG.Core.HealthChecks.Orleans/Abstractions/HealthChecksOptions.cs) under the Config section `Orleans:HealthChecks`.
+The below table outlines the valid Configurations used to override the [HealthCheckOptions](../src/GiG.Core.HealthChecks.Orleans/Abstractions/HealthCheckOptions.cs) under the Config section `Orleans:HealthChecks`.
 
 | Configuration Name | Type    | Optional | Default Value |
 |:-------------------|:--------|:---------|:--------------|

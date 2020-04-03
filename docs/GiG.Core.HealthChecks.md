@@ -20,7 +20,7 @@ public void Configure(IApplicationBuilder app)
 
 ## Health Endpoints
 
-The following are the exposed Health endpoints.  You can change the default values by overriding the [HealthChecksOptions](../src/GiG.Core.HealthChecks.Abstractions/HealthChecksOptions.cs) configuration options using the properties below.
+The following are the exposed Health endpoints.  You can change the default values by overriding the [HealthCheckOptions](../src/GiG.Core.HealthChecks.Abstractions/HealthCheckOptions.cs) configuration options using the properties below.
 
 | Type  | Default Endpoint       | Property Name |
 |-------|------------------------|---------------|
@@ -52,7 +52,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ### Ready Health Checks
 
-These Health Checks are used to temporary disable traffic to the application until the health check returns 200. Add the below to your Startup class and this will register the Ready Health Check Endpoints.
+These Health Checks are used to temporary disable traffic to the application until the health check returns 200. Add the below to your Startup class and this will register the Ready Health Check Endpoints. You can also use the regular Health Check methods and add the tag `Constants.ReadyTag` instead.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -70,7 +70,7 @@ public void Configure(IApplicationBuilder app)
 
 ### Live Health Checks
 
-These Health Checks are used to kill the application if health check fails.  Usually used to prevent deadlocks.  Add the below to your Startup class and this will register the Ready Live Check Endpoints.
+These Health Checks are used to kill the application if health check fails.  Usually used to prevent deadlocks.  Add the below to your Startup class and this will register the Ready Live Check Endpoints. You can also use the regular Health Check methods and add the tag `Constants.LiveTag` instead.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -88,14 +88,14 @@ public void Configure(IApplicationBuilder app)
 
 ## Cached Health Check
 
-You can implement a Cached Health Check by inheriting the [CachedHealthCheck](../src/GiG.Core.HealthChecks.Abstractions/CachedHealthCheck.cs) class.  Registration in Startup class is very similar to the above.
+You can implement a Cached Health Check by using following registration in the Startup class.  The default cache expiry is 500ms.  This can also be changed by setting the `cacheExpirationMs` parameter.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
     services
 	    .AddCachedHealthChecks()
-	    .AddReadyCheck<DummyCachedReadyHealthCheck>(nameof(DummyCachedReadyHealthCheck))
-	    .AddLiveCheck<DummyCachedLiveHealthCheck>(nameof(DummyCachedLiveHealthCheck));
+	    .AddCachedCheck<DummyReadyHealthCheck>(nameof(DummyReadyHealthCheck), tags: new [] { Constants.ReadyTag })
+	    .AddCachedCheck<DummyLiveHealthCheck>(nameof(DummyLiveHealthCheck), tags: new [] { Constants.LiveTag });
 }
 ```

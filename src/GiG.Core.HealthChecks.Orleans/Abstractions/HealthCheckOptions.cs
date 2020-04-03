@@ -3,7 +3,7 @@
     /// <summary>
     /// Orleans HealthChecks Options.
     /// </summary>
-    public class HealthChecksOptions
+    public class HealthCheckOptions
     {
         /// <summary>
         /// The configuration default section name.
