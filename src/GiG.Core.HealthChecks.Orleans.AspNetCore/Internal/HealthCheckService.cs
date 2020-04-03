@@ -76,11 +76,14 @@ namespace GiG.Core.HealthChecks.Orleans.AspNetCore.Internal
             await base.StopAsync(cancellationToken);
             try
             {
-                _host?.StopAsync(cancellationToken);
-                _host?.WaitForShutdown();
-                _host?.Dispose();
+                if (_host != null)
+                {
+                    await _host.StopAsync(cancellationToken);
+                    await _host.WaitForShutdownAsync(token: cancellationToken);
+                    _host.Dispose();
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError("Orleans HealthCheck Dispose failed.", ex);
             }

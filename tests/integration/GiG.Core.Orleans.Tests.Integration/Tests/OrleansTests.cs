@@ -1,6 +1,7 @@
 using Bogus;
 using GiG.Core.Context.Abstractions;
 using GiG.Core.Orleans.Tests.Integration.Contracts;
+using GiG.Core.Orleans.Tests.Integration.Fixtures;
 using GiG.Core.Orleans.Tests.Integration.Lifetimes;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -10,13 +11,20 @@ using Xunit;
 namespace GiG.Core.Orleans.Tests.Integration.Tests
 {
     [Trait("Category", "Integration")]
-    public class OrleansTests : DefaultClusterLifetime
+    public class OrleansTests : IClassFixture<DefaultClusterFixture>
     {
+        private readonly DefaultClusterFixture _fixture;
+
+        public OrleansTests(DefaultClusterFixture fixture)
+        {
+            _fixture = fixture;
+        }
+        
         [Fact]
         public async Task GetValueAsync_CallGrain_ReturnsExpectedInteger()
         {
             //Arrange
-            var grain = ClusterClient.GetGrain<IEchoTestGrain>(Guid.NewGuid().ToString());
+            var grain = _fixture.ClusterClient.GetGrain<IEchoTestGrain>(Guid.NewGuid().ToString());
             var expectedValue = new Randomizer().Int();
             await grain.SetValueAsync(expectedValue);
 
@@ -31,8 +39,8 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
         public async Task GetIPAddressAsync_CallGrain_ReturnsExpectedIPAddress()
         {
             //Arrange
-            var grain = ClusterClient.GetGrain<IRequestContextTestGrain>(Guid.NewGuid().ToString());
-            var requestContextAccessor = ClientServiceProvider.GetRequiredService<IRequestContextAccessor>();
+            var grain = _fixture.ClusterClient.GetGrain<IRequestContextTestGrain>(Guid.NewGuid().ToString());
+            var requestContextAccessor = _fixture.ClientServiceProvider.GetRequiredService<IRequestContextAccessor>();
             var expectedValue = requestContextAccessor.IPAddress;
 
             //Act 

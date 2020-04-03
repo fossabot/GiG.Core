@@ -1,6 +1,7 @@
 ﻿using GiG.Core.DistributedTracing.Abstractions;
 using Orleans;
 using Orleans.Runtime;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using OrleansDistributedTracingConstants = GiG.Core.DistributedTracing.Orleans.Internal.Constants;
 
@@ -18,13 +19,21 @@ namespace GiG.Core.DistributedTracing.Orleans
         /// <returns>A <see cref="Task"/>.</returns>
         public async Task Invoke(IIncomingGrainCallContext context)
         {
-            var traceId = RequestContext.Get(Constants.ActivityHeader) as string;
-
             var activity = new System.Diagnostics.Activity(OrleansDistributedTracingConstants.IncomingGrainFilterActivityName);
-            if (!string.IsNullOrWhiteSpace(traceId))
+
+            if (RequestContext.Get(Constants.ActivityHeader) is string traceId)
             {
                 activity.SetParentId(traceId);
             }
+
+            if (RequestContext.Get(Constants.BaggageHeader) is IEnumerable<KeyValuePair<string, string>> baggage)
+            {
+                foreach (var item in baggage)
+                {
+                    activity.AddBaggage(item.Key, item.Value);
+                }
+            }
+
             activity.Start();
 
             await context.Invoke();
