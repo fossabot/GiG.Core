@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
+using HealthCheckOptions = GiG.Core.HealthChecks.Abstractions.HealthCheckOptions;
 
 namespace GiG.Core.HealthChecks.Extensions
 {
@@ -23,20 +24,20 @@ namespace GiG.Core.HealthChecks.Extensions
             if (builder == null) throw new ArgumentNullException(nameof(builder));
 
             var options = builder.ApplicationServices
-                              .GetService<IOptions<HealthChecksOptions>>()?.Value ?? new HealthChecksOptions();
+                              .GetService<IOptions<HealthCheckOptions>>()?.Value ?? new HealthCheckOptions();
 
             return builder
-                .UseHealthChecks(options.ReadyUrl, new HealthCheckOptions
+                .UseHealthChecks(options.ReadyUrl, new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
                 {
                     Predicate = check => check.Tags.Contains(Constants.ReadyTag),
                     ResponseWriter = HealthCheckEndpointWriter.WriteJsonResponseWriter
                 })
-                .UseHealthChecks(options.LiveUrl, new HealthCheckOptions
+                .UseHealthChecks(options.LiveUrl, new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
                 {
                     Predicate = check => check.Tags.Contains(Constants.LiveTag),
                     ResponseWriter = HealthCheckEndpointWriter.WriteJsonResponseWriter
                 })
-                .UseHealthChecks(options.CombinedUrl, new HealthCheckOptions
+                .UseHealthChecks(options.CombinedUrl, new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
                 {
                     ResponseWriter = HealthCheckEndpointWriter.WriteJsonResponseWriter
                 });

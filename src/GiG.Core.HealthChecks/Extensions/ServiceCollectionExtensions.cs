@@ -13,7 +13,7 @@ namespace GiG.Core.HealthChecks.Extensions
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Registers a configuration instance which <see cref="HealthChecksOptions" /> will bind against.
+        /// Registers a configuration instance which <see cref="HealthCheckOptions" /> will bind against.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
         /// <param name="configuration">The <see cref="IConfiguration" />.</param>
@@ -23,11 +23,11 @@ namespace GiG.Core.HealthChecks.Extensions
             if (services == null) throw new ArgumentNullException(nameof(services));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            return services.ConfigureHealthChecks(configuration.GetSection(HealthChecksOptions.DefaultSectionName));
+            return services.ConfigureHealthChecks(configuration.GetSection(HealthCheckOptions.DefaultSectionName));
         }
 
         /// <summary>
-        /// Registers a configuration instance which <see cref="HealthChecksOptions" /> will bind against.
+        /// Registers a configuration instance which <see cref="HealthCheckOptions" /> will bind against.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
         /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
@@ -37,7 +37,7 @@ namespace GiG.Core.HealthChecks.Extensions
             if (services == null) throw new ArgumentNullException(nameof(services));
             if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
 
-            return services.Configure<HealthChecksOptions>(configurationSection);
+            return services.Configure<HealthCheckOptions>(configurationSection);
         }
 
         /// <summary>

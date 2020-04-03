@@ -24,7 +24,7 @@
         /// <summary>
         /// Command was processed successfully.
         /// </summary>
-        public bool IsSuccess => ErrorCode == null;
+        public bool IsSuccess { get; }
 
         /// <summary>
         /// There was an error while processing the command.
@@ -37,6 +37,7 @@
         /// <param name="data">The data.</param>
         public CommandDispatcherResponse(T data)
         {
+            IsSuccess = true;
             Data = data;
         }
         

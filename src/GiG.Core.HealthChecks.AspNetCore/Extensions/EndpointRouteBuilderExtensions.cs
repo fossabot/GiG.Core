@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
+using HealthCheckOptions = GiG.Core.HealthChecks.Abstractions.HealthCheckOptions;
 
 namespace GiG.Core.HealthChecks.AspNetCore.Extensions
 {
@@ -23,21 +24,21 @@ namespace GiG.Core.HealthChecks.AspNetCore.Extensions
         {
             if (endpointRouteBuilder == null) throw new ArgumentNullException(nameof(endpointRouteBuilder));
 
-            var healthCheckOptions = endpointRouteBuilder.ServiceProvider.GetService<IOptions<HealthChecksOptions>>()?.Value ?? new HealthChecksOptions();
+            var healthCheckOptions = endpointRouteBuilder.ServiceProvider.GetService<IOptions<HealthCheckOptions>>()?.Value ?? new HealthCheckOptions();
 
             return new HealthCheckEndpoints
             {
-                Ready = endpointRouteBuilder.MapHealthChecks(healthCheckOptions.ReadyUrl, new HealthCheckOptions
+                Ready = endpointRouteBuilder.MapHealthChecks(healthCheckOptions.ReadyUrl, new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
                 {
                     Predicate = check => check.Tags.Contains(Constants.ReadyTag),
                     ResponseWriter = HealthCheckEndpointWriter.WriteJsonResponseWriter
                 }),
-                Live = endpointRouteBuilder.MapHealthChecks(healthCheckOptions.LiveUrl, new HealthCheckOptions
+                Live = endpointRouteBuilder.MapHealthChecks(healthCheckOptions.LiveUrl, new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
                 {
                     Predicate = check => check.Tags.Contains(Constants.LiveTag),
                     ResponseWriter = HealthCheckEndpointWriter.WriteJsonResponseWriter
                 }),
-                Combined = endpointRouteBuilder.MapHealthChecks(healthCheckOptions.CombinedUrl, new HealthCheckOptions
+                Combined = endpointRouteBuilder.MapHealthChecks(healthCheckOptions.CombinedUrl, new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
                 {
                     ResponseWriter = HealthCheckEndpointWriter.WriteJsonResponseWriter
                 })

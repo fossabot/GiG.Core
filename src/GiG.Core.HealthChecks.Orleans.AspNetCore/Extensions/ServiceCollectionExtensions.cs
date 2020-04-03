@@ -45,7 +45,7 @@ namespace GiG.Core.HealthChecks.Orleans.AspNetCore.Extensions
         }
 
         /// <summary>
-        /// Registers a configuration instance which <see cref="HealthChecksOptions" /> will bind against.
+        /// Registers a configuration instance which <see cref="HealthCheckOptions" /> will bind against.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
         /// <param name="configuration">The <see cref="IConfiguration" />.</param>
@@ -55,11 +55,11 @@ namespace GiG.Core.HealthChecks.Orleans.AspNetCore.Extensions
             if (services == null) throw new ArgumentNullException(nameof(services));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            return services.ConfigureOrleansHealthChecks(configuration.GetSection(HealthChecksOptions.DefaultSectionName));
+            return services.ConfigureOrleansHealthChecks(configuration.GetSection(HealthCheckOptions.DefaultSectionName));
         }
 
         /// <summary>
-        /// Registers a configuration instance which <see cref="HealthChecksOptions" /> will bind against.
+        /// Registers a configuration instance which <see cref="HealthCheckOptions" /> will bind against.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
         /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
@@ -68,9 +68,9 @@ namespace GiG.Core.HealthChecks.Orleans.AspNetCore.Extensions
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            var healthCheckOptions = configurationSection?.Get<HealthChecksOptions>() ?? new HealthChecksOptions();
+            var healthCheckOptions = configurationSection?.Get<HealthCheckOptions>() ?? new HealthCheckOptions();
 
-            return services.Configure<HealthChecksOptions>(h =>
+            return services.Configure<HealthCheckOptions>(h =>
             {
                 h.DomainFilter = healthCheckOptions.DomainFilter;
                 h.Port = healthCheckOptions.Port;
