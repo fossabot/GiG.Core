@@ -11,6 +11,7 @@
   <ItemGroup>
     <None Include="docker-compose-performance-etcd-read.yml" />
     <None Include="docker-compose-performance-etcd-watch.yml" />
+    <None Include="docker-compose-performance-logging.yml" />
     <None Include="docker-compose-performance-orleans.yml" />
     <None Include="docker-compose-sample-dbmigrations.yml" />
     <None Include="docker-compose-sample-kafka.yml" />
