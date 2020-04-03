@@ -9,7 +9,7 @@ namespace GiG.Core.Performance.Logging.Controllers
      public class LogController : ControllerBase
      {
          private readonly ILogger<LogController> _logger;
-         private static string LogText = "This is a test log";
+         private const string LogText = "This is a test log";
          
          public LogController(ILogger<LogController> logger)
          {
