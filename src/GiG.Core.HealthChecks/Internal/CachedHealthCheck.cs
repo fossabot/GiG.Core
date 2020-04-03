@@ -4,7 +4,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GiG.Core.HealthChecks
+namespace GiG.Core.HealthChecks.Internal
 {
     /// <summary>
     /// Base Abstract Class for Cached Health Checks.

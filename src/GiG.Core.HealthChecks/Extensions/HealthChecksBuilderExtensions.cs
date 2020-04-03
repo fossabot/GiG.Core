@@ -1,4 +1,5 @@
 ﻿using GiG.Core.HealthChecks.Abstractions;
+using GiG.Core.HealthChecks.Internal;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,12 +37,10 @@ namespace GiG.Core.HealthChecks.Extensions
 
             return builder.Add(new HealthCheckRegistration(name, serviceProvider =>
             {
-                var instance = factory(serviceProvider) ?? throw new ArgumentNullException(nameof(factory));
-                
                 var memoryCache = serviceProvider.GetService<IMemoryCache>();
                 if (memoryCache == null) throw new ApplicationException("The following service is missing; Add services.AddCachedHealthChecks()");
 
-                return new CachedHealthCheck(instance, memoryCache, cacheExpirationMs);
+                return new CachedHealthCheck(factory(serviceProvider), memoryCache, cacheExpirationMs);
             }, failureStatus, tags));
         }
         
@@ -59,11 +58,12 @@ namespace GiG.Core.HealthChecks.Extensions
         /// <param name="cacheExpirationMs">The Expiration of the Cache in milliseconds.</param>
         ///  <returns>The <see cref="IHealthChecksBuilder"/>.</returns>
         public static IHealthChecksBuilder AddCachedCheck([NotNull] this IHealthChecksBuilder builder,
-            [NotNull] string name, IHealthCheck instance, HealthStatus? failureStatus = null,
+            [NotNull] string name, [NotNull] IHealthCheck instance, HealthStatus? failureStatus = null,
             IEnumerable<string> tags = null, ulong cacheExpirationMs = CachedHealthCheck.DefaultCacheExpirationMs)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException($"'{nameof(name)}' must not be null, empty or whitespace.", nameof(name));
+            if (instance == null) throw new ArgumentNullException(nameof(instance));
 
             return AddCachedCheck(builder, name, _ => instance, failureStatus, tags, cacheExpirationMs);
         }

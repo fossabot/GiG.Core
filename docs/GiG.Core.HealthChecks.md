@@ -20,7 +20,7 @@ public void Configure(IApplicationBuilder app)
 
 ## Health Endpoints
 
-The following are the exposed Health endpoints.  You can change the default values by overriding the [HealthChecksOptions](../src/GiG.Core.HealthChecks.Abstractions/HealthChecksOptions.cs) configuration options using the properties below.
+The following are the exposed Health endpoints.  You can change the default values by overriding the [HealthCheckOptions](../src/GiG.Core.HealthChecks.Abstractions/HealthCheckOptions.cs) configuration options using the properties below.
 
 | Type  | Default Endpoint       | Property Name |
 |-------|------------------------|---------------|

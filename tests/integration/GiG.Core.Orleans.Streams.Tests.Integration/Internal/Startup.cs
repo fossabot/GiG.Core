@@ -19,7 +19,7 @@ namespace GiG.Core.Orleans.Streams.Tests.Integration.Internal
             services.ConfigureHealthChecks(Configuration);
 
             services.AddCachedHealthChecks()
-                .AddKafkaStreams(tags: new [] { Constants.ReadyTag });
+                .AddKafkaOrleansStreams(tags: new [] { Constants.ReadyTag });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

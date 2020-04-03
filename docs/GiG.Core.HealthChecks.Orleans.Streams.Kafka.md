@@ -11,7 +11,7 @@ public void ConfigureServices(IServiceCollection services)
 {
     services
       .AddCachedHealthChecks()
-      .AddKafkaStreams(tags: new [] { Constants.ReadyTag });
+      .AddKafkaOrleansStreams(tags: new [] { Constants.ReadyTag });
 }
 
 public void Configure(IApplicationBuilder app)

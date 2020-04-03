@@ -24,7 +24,7 @@ namespace GiG.Core.Orleans.Streams.Tests.Integration.Tests
             // Arrange
             var client = _fixture.Host.GetTestClient();
 
-            using var request = new HttpRequestMessage(HttpMethod.Get, new HealthChecksOptions().CombinedUrl);
+            using var request = new HttpRequestMessage(HttpMethod.Get, new HealthCheckOptions().CombinedUrl);
 
             // Act
             using var response = await client.SendAsync(request);

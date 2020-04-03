@@ -28,7 +28,7 @@ namespace GiG.Core.HealthChecks.Orleans.Streams.Kafka
         /// </param>
         /// <param name="tags">A list of tags that can be used to filter sets of health checks. Optional.</param>
         /// <returns>The <see cref="IHealthChecksBuilder"/>.</returns>
-        public static IHealthChecksBuilder AddKafkaStreams([NotNull] this IHealthChecksBuilder builder, string topic = "OrleansStreamsHealthCheck",
+        public static IHealthChecksBuilder AddKafkaOrleansStreams([NotNull] this IHealthChecksBuilder builder, string topic = "OrleansStreamsHealthCheck",
             string name = "OrleansStreamsKafka", HealthStatus? failureStatus = default, IEnumerable<string> tags = default)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));

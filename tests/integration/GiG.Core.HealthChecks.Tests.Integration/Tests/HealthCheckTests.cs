@@ -350,7 +350,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
                     _ => new UnHealthyCheck(), tags: new[] {Constants.ReadyTag}))
                 .Configure(x => x.UseHealthChecks()));
 
-            using var request = new HttpRequestMessage(HttpMethod.Get, new HealthChecksOptions().CombinedUrl);
+            using var request = new HttpRequestMessage(HttpMethod.Get, new HealthCheckOptions().CombinedUrl);
 
             // Act & Assert
             await Assert.ThrowsAsync<ApplicationException>(() => server.CreateClient().SendAsync(request));
