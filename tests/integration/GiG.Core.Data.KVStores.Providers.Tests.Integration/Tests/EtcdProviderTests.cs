@@ -144,6 +144,46 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
             Assert.Equal(languages.Select(l => l.Alpha2Code), actualData.Select(l => l.Alpha2Code));
         }
 
+        [Fact]
+        public async Task EtcdProviderData_LanguagesUpdated_Success()
+        {
+            // Arrange.
+            await Task.Delay(1000);
+            var key = "languages";
+            await _etcdClient.DeleteAsync(key);
+
+            var dataRetriever = _serviceProvider.GetRequiredService<IDataRetriever<IEnumerable<MockLanguage>>>();
+            var dataWriter = _serviceProvider.GetRequiredService<IDataWriter<IEnumerable<MockLanguage>>>();
+            var dataProvider = _serviceProvider.GetRequiredService<IDataProvider<IEnumerable<MockLanguage>>>();
+
+            var languages = new Faker<MockLanguage>()
+                .RuleFor(x => x.Alpha2Code, new Randomizer().String(2, 'a', 'z'))
+                .RuleFor(x => x.Name, new Randomizer().String(100, 'a', 'z'))
+                .Generate(5)
+                .AsEnumerable();
+
+            var languagesUpdated = new List<MockLanguage>(languages);
+            languagesUpdated.AddRange(new Faker<MockLanguage>()
+                .RuleFor(x => x.Alpha2Code, new Randomizer().String(2, 'a', 'z'))
+                .RuleFor(x => x.Name, new Randomizer().String(100, 'a', 'z'))
+                .Generate(2));
+
+            await dataWriter.WriteAsync(languages, key);
+
+            // Act.
+            IEnumerable<MockLanguage> actualData = await dataRetriever.GetAsync(key);
+
+            await dataWriter.WriteAsync(languagesUpdated, key);
+
+            IEnumerable<MockLanguage> actualDataUpdated = await dataRetriever.GetAsync(key);
+
+            // Assert.
+            Assert.NotNull(actualData);
+            Assert.Equal(languages.Select(l => l.Alpha2Code), actualData.Select(l => l.Alpha2Code));
+            Assert.NotNull(actualDataUpdated);
+            Assert.Equal(languagesUpdated.Select(l => l.Alpha2Code), actualDataUpdated.Select(l => l.Alpha2Code));
+        }
+
         private async Task WriteToEtcdAsync(string filePath, string key)
         {
             var fileInfo = new FileInfo(filePath);
