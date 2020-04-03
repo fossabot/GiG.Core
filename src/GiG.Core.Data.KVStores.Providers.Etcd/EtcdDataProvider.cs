@@ -66,8 +66,12 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
 
             _logger.LogDebug("Returning {key}", key);
 
-            var value = await _etcdClient.GetValAsync(key);
+            if (key.Equals(_etcdProviderOptions.Key, StringComparison.InvariantCultureIgnoreCase))
+            {
+                return _dataStore.Get();
+            }
 
+            var value = await _etcdClient.GetValAsync(key);
             return SerializeValue(value);
         }
 
