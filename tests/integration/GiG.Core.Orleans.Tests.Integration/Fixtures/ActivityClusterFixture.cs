@@ -1,6 +1,9 @@
-using System;
-using System.Threading.Tasks;
 using Bogus;
+using GiG.Core.Context.Abstractions;
+using GiG.Core.Context.Orleans.Extensions;
+using GiG.Core.DistributedTracing.Activity.Extensions;
+using GiG.Core.DistributedTracing.Orleans.Extensions;
+using GiG.Core.MultiTenant.Activity.Extensions;
 using GiG.Core.Orleans.Client.Extensions;
 using GiG.Core.Orleans.Clustering.Extensions;
 using GiG.Core.Orleans.Clustering.Localhost.Extensions;
@@ -9,25 +12,28 @@ using GiG.Core.Orleans.Silo.Extensions;
 using GiG.Core.Orleans.Streams.Extensions;
 using GiG.Core.Orleans.Tests.Integration.Contracts;
 using GiG.Core.Orleans.Tests.Integration.Grains;
+using GiG.Core.Orleans.Tests.Integration.Mocks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Orleans;
 using Orleans.Hosting;
+using System;
+using System.Threading.Tasks;
 using Xunit;
 
-namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
+namespace GiG.Core.Orleans.Tests.Integration.Fixtures
 {
-    public class BasicClusterLifeTime : IAsyncLifetime
+    public class ActivityClusterFixture : IAsyncLifetime
     {
-        private const string SiloSectionName = "Orleans:BasicClusterSilo";
+        private const string SiloSectionName = "Orleans:ActivitySilo";
 
         internal IClusterClient ClusterClient;
 
         internal IServiceProvider ClientServiceProvider;
 
         private IHost _siloHost;
-        
+
         public async Task InitializeAsync()
         {
             var serviceId = new Randomizer().String2(8);
@@ -35,21 +41,26 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
 
             _siloHost = new HostBuilder()
                 .ConfigureAppConfiguration(a => a.AddJsonFile("appsettings.json"))
+                .ConfigureServices(x =>
+                 {
+                     x.AddActivityTenantAccessor();
+                     x.AddActivityAccessor();
+                     x.AddRequestContextAccessor();
+                     x.AddStream();
+                 })
                 .UseOrleans((ctx, x) =>
                 {
                     var siloOptions = ctx.Configuration.GetSection(SiloSectionName).Get<SiloOptions>() ?? new SiloOptions();
+                    x.AddActivityIncomingFilter();
                     x.ConfigureEndpoints(ctx.Configuration.GetSection(SiloSectionName));
                     x.UseMembershipProvider(ctx.Configuration, y =>
                     {
                         y.ConfigureLocalhostClustering(siloOptions.SiloPort, siloOptions.GatewayPort, null, serviceId, clusterId);
                     });
-                    x.AddAssemblies(typeof(CommandTestGrain));
+                    x.AddAssemblies(typeof(EchoTestGrain));
                     x.AddSimpleMessageStreamProvider(Constants.StreamProviderName);
                     x.AddMemoryGrainStorage(Constants.StreamsMemoryStorageName);
-                })
-                .ConfigureServices(x =>
-                {
-                    x.AddStream();
+                    x.AddMemoryGrainStorage(Constants.StorageProviderName);
                 })
                 .Build();
             await _siloHost.StartAsync();
@@ -60,12 +71,15 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
             var clientHost = new HostBuilder()
                 .ConfigureServices(services =>
                 {
+                    services.AddActivityAccessor();
                     services.AddStream();
-                    services.AddCommandDispatcher();
+                    services.AddSingleton<IRequestContextAccessor, MockRequestContextAccessor>();
                     services.AddDefaultClusterClient((x, sp) =>
                     {
+                        x.AddActivityOutgoingFilter(sp);
+                        x.AddRequestContextOutgoingFilter(sp);
                         x.UseMembershipProvider(config, y => { y.ConfigureLocalhostClustering(options.GatewayPort, serviceId, clusterId); });
-                        x.AddAssemblies(typeof(ICommandTestGrain));
+                        x.AddAssemblies(typeof(IEchoTestGrain));
                         x.AddSimpleMessageStreamProvider(Constants.StreamProviderName);
                     });
                 })

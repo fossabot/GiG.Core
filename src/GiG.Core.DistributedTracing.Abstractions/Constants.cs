@@ -14,5 +14,10 @@
         /// The Header for Activity Trace Parent.
         /// </summary>
         public const string ActivityHeader = "Trace-Parent";
+        
+        /// <summary>
+        /// The Header for the Baggage.
+        /// </summary>
+        public const string BaggageHeader = "Correlation-Context";
     }
 }

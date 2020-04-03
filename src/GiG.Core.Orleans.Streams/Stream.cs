@@ -51,6 +51,8 @@ namespace GiG.Core.Orleans.Streams
             var span = _tracer?.StartSpanFromActivity($"{Constants.SpanPublishOperationNamePrefix}-{message.GetType().Name}", publishingActivity, SpanKind.Producer);
             
             RequestContext.Set(DistributedTracingConstants.ActivityHeader, publishingActivity.Id);
+            RequestContext.Set(DistributedTracingConstants.BaggageHeader, _activityContextAccessor.Baggage);
+
             await _asyncStream.OnNextAsync(message, token);
          
             publishingActivity.Stop();
@@ -69,6 +71,7 @@ namespace GiG.Core.Orleans.Streams
         public async Task<StreamSubscriptionHandle<TMessage>> SubscribeAsync(IAsyncObserver<TMessage> observer, StreamSequenceToken token = null)
         {
             var tracingObserver = new TracingObserver<TMessage>(observer, _activityContextAccessor, _tracer);
+
             return await _asyncStream.SubscribeAsync(tracingObserver, token);
         }
     }

@@ -40,6 +40,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Streams
 
             // Assert
             _activityContextAccessorMock.Verify(x => x.ParentId, Times.Once);
+            _activityContextAccessorMock.Verify(x => x.Baggage, Times.Once);
             _observerMock.Verify(x => x.OnNextAsync(It.IsAny<MockMessage>(), It.IsAny<StreamSequenceToken>()), Times.Once);
             VerifyNotOtherCalls();
         }
@@ -58,6 +59,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Streams
 
             // Assert
             _activityContextAccessorMock.Verify(x => x.ParentId, Times.Once);
+            _activityContextAccessorMock.Verify(x => x.Baggage, Times.Once);
             _tracerMock.Verify(x => x.StartSpanFromActivity(It.IsAny<string>(), It.IsAny<Activity>(), SpanKind.Consumer, null), Times.Once);
             _observerMock.Verify(x => x.OnNextAsync(It.IsAny<MockMessage>(), It.IsAny<StreamSequenceToken>()), Times.Once);
             spanMock.Verify(x => x.End(), Times.Once);
