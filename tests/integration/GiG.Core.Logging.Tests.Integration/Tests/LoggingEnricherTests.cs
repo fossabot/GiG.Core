@@ -18,6 +18,7 @@ using Microsoft.Extensions.Logging;
 using Serilog.Events;
 using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -33,6 +34,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
         private IRequestContextAccessor _requestContextAccessor;
         private ICorrelationContextAccessor _correlationContextAccessor;
         private IActivityContextAccessor _activityContextAccessor;
+        private SemaphoreSlim _semaphore = new SemaphoreSlim(0, 1);
 
         private LogEvent _logEvent;
 
@@ -131,21 +133,18 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
 
         private void WriteLog(LogEvent log)
         {
-            if (log.MessageTemplate.Text == _logMessageTest)
+            if (log.MessageTemplate.Text != _logMessageTest)
             {
-                _logEvent = log;
+                return;
             }
+
+            _logEvent = log;
+            _semaphore.Release();
         }
 
         private async Task AssertLogEventAsync()
         {
-            var count = 0;
-            while (_logEvent == null && count < 10)
-            {
-                // Delay for Log Event since it is handled in a different callback
-                await Task.Delay(150);
-                count++;
-            }
+            await _semaphore.WaitAsync(5_000);
 
             Assert.NotNull(_logEvent);
         }
