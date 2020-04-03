@@ -23,23 +23,23 @@ namespace GiG.Core.HealthChecks.Orleans.AspNetCore.Internal
         private readonly IConfiguration _configuration;
         private readonly IClusterClient _clusterClient; 
         private readonly ILogger<HealthCheckService> _logger;
-        private readonly HealthChecksOptions _healthChecksOptions;
+        private readonly HealthCheckOptions _healthCheckOptions;
 
         public HealthCheckService(
             IConfiguration configuration,
             IClusterClient clusterClient,
             ILogger<HealthCheckService> logger,
-            IOptions<HealthChecksOptions> healthChecksOptionsAccessor)
+            IOptions<HealthCheckOptions> healthChecksOptionsAccessor)
         {
             _configuration = configuration;
             _clusterClient = clusterClient;
             _logger = logger;
-            _healthChecksOptions = healthChecksOptionsAccessor.Value;
+            _healthCheckOptions = healthChecksOptionsAccessor.Value;
         }
 
         protected override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
-            if (_healthChecksOptions.HostSelf)
+            if (_healthCheckOptions.HostSelf)
             {
                 try
                 {
@@ -56,7 +56,7 @@ namespace GiG.Core.HealthChecks.Orleans.AspNetCore.Internal
                                     app.UseHealthChecks();
                                 })
                                 .UseKestrel()
-                                .UseUrls($"http://{_healthChecksOptions.DomainFilter}:{_healthChecksOptions.Port}")
+                                .UseUrls($"http://{_healthCheckOptions.DomainFilter}:{_healthCheckOptions.Port}")
                             )
                             .Build();
 
@@ -67,7 +67,7 @@ namespace GiG.Core.HealthChecks.Orleans.AspNetCore.Internal
                     _logger.LogError(ex, ex.Message);
                 }
 
-                _logger.LogInformation($"HealthCheck listening on {_healthChecksOptions.Port}");
+                _logger.LogInformation($"HealthCheck listening on {_healthCheckOptions.Port}");
             }
         }
 

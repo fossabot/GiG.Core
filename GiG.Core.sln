@@ -74,6 +74,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Web.Hosting.md = docs\GiG.Core.Web.Hosting.md
 		docs\GiG.Core.Web.Mock.md = docs\GiG.Core.Web.Mock.md
 		README.md = README.md
+		docs\GiG.Core.HealthChecks.Orleans.Streams.Kafka.md = docs\GiG.Core.HealthChecks.Orleans.Streams.Kafka.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AC01CBF6-BF4A-4F67-BCD6-CB0AC61D52A4}"
@@ -468,6 +469,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Performance.Data.KVStores.Providers.Etcd.Watch", "tests\performance\GiG.Core.Performance.Data.KVStores.Providers.Etcd.Watch\GiG.Core.Performance.Data.KVStores.Providers.Etcd.Watch.csproj", "{D6D1E2D2-42FE-495A-8ECD-582AA909AFF6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.MassTransit.Tests.Unit", "tests\unit\GiG.Core.Messaging.MassTransit.Tests.Unit\GiG.Core.Messaging.MassTransit.Tests.Unit.csproj", "{A695E4FF-7AD7-4E2E-B963-389159F38464}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.HealthChecks.Orleans.Streams.Kafka", "src\GiG.Core.HealthChecks.Orleans.Streams.Kafka\GiG.Core.HealthChecks.Orleans.Streams.Kafka.csproj", "{01FFDF3E-C399-405F-8FED-35C7B3A9CC2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Orleans.Streams.Tests.Integration", "tests\integration\GiG.Core.Orleans.Streams.Tests.Integration\GiG.Core.Orleans.Streams.Tests.Integration.csproj", "{2B7A4ADB-2158-4A1A-921E-DDE2BEFA4F9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1063,6 +1068,14 @@ Global
 		{A695E4FF-7AD7-4E2E-B963-389159F38464}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A695E4FF-7AD7-4E2E-B963-389159F38464}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A695E4FF-7AD7-4E2E-B963-389159F38464}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01FFDF3E-C399-405F-8FED-35C7B3A9CC2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01FFDF3E-C399-405F-8FED-35C7B3A9CC2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01FFDF3E-C399-405F-8FED-35C7B3A9CC2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01FFDF3E-C399-405F-8FED-35C7B3A9CC2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B7A4ADB-2158-4A1A-921E-DDE2BEFA4F9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B7A4ADB-2158-4A1A-921E-DDE2BEFA4F9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B7A4ADB-2158-4A1A-921E-DDE2BEFA4F9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B7A4ADB-2158-4A1A-921E-DDE2BEFA4F9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1254,6 +1267,8 @@ Global
 		{AA90334C-2D74-4FE4-995E-2F64157649DB} = {66468249-0BE3-4E03-A5B8-DE350CA051EE}
 		{A695E4FF-7AD7-4E2E-B963-389159F38464} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
 		{D6D1E2D2-42FE-495A-8ECD-582AA909AFF6} = {66468249-0BE3-4E03-A5B8-DE350CA051EE}
+		{01FFDF3E-C399-405F-8FED-35C7B3A9CC2D} = {64FBDA2C-D499-4EE1-AAA9-DFF1BCF8C465}
+		{2B7A4ADB-2158-4A1A-921E-DDE2BEFA4F9A} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}

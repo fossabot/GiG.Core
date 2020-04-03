@@ -21,7 +21,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             await _healthCheckLifetime.InitializeAsync();
 
             HttpClientFactory = _healthCheckLifetime.HttpClientFactory;
-            HealthChecksOptions = new HealthChecksOptions();
+            HealthCheckOptions = new HealthCheckOptions();
             Port = HealthCheckCoHostedLifetime.Port;
         }
 
