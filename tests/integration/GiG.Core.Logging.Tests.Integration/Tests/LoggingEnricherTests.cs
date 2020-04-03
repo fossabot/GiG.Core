@@ -64,7 +64,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
             _applicationMetadataAccessor = _host.Services.GetRequiredService<IApplicationMetadataAccessor>();
             _requestContextAccessor = _host.Services.GetRequiredService<IRequestContextAccessor>();
             _correlationContextAccessor = _host.Services.GetRequiredService<ICorrelationContextAccessor>();
-            _activityContextAccessor = _host.Services.GetRequiredService<IActivityContextAccessor>();        
+            _activityContextAccessor = _host.Services.GetRequiredService<IActivityContextAccessor>();
         }
 
         [Fact]
