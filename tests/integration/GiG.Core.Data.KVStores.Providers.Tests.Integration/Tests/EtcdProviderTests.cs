@@ -174,7 +174,6 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
             IEnumerable<MockLanguage> actualData = await dataRetriever.GetAsync(key);
 
             await dataWriter.WriteAsync(languagesUpdated, key);
-            await Task.Delay(300);
 
             IEnumerable<MockLanguage> actualDataUpdated = await dataRetriever.GetAsync(key);
 

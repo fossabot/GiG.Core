@@ -52,7 +52,7 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
 
             Watch(_etcdProviderOptions.Key);
 
-            _dataStore.Set(await GetAsync());
+            _dataStore.Set(await GetAsync(_etcdProviderOptions.Key));
         }
 
         /// <summary>
@@ -71,8 +71,7 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
                 return _dataStore.Get();
             }
 
-            var value = await _etcdClient.GetValAsync(key);
-            return SerializeValue(value);
+            return await GetAsync(key);
         }
 
         /// <inheritdoc/>
@@ -95,6 +94,12 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
             _etcdClient.Dispose();
 
             return Task.CompletedTask;
+        }
+
+        private async Task<T> GetAsync(string key)
+        {
+            var value = await _etcdClient.GetValAsync(key);
+            return SerializeValue(value);
         }
 
         private void Watch(string key)
