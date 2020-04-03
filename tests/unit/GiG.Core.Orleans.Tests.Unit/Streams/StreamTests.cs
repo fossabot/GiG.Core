@@ -1,14 +1,9 @@
 ﻿using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.Orleans.Streams;
 using Moq;
-using OpenTelemetry.Trace;
 using OpenTelemetry.Trace.Configuration;
 using Orleans.Streams;
 using Orleans.TestKit;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 

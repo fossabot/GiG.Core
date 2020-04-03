@@ -1,3 +1,4 @@
+using GiG.Core.Orleans.Streams.Extensions;
 using GiG.Core.Orleans.Streams.Kafka.Extensions;
 using GiG.Core.Orleans.Streams.Tests.Integration.Internal;
 using Microsoft.AspNetCore.Hosting;
@@ -15,7 +16,8 @@ namespace GiG.Core.Orleans.Streams.Tests.Integration.Fixtures
     public class ClusterFixture : IAsyncLifetime
     {
         private const string StreamStorageName = "PubSubStore";
-        private const string StreamProviderName = "StreamProviderName";
+        private const string StreamProviderName = "KafkaStreamProvider";
+        private const string StreamNamespace = "TestStream";
 
         internal IHost Host;
         internal IServiceProvider ServiceProvider;
@@ -32,13 +34,17 @@ namespace GiG.Core.Orleans.Streams.Tests.Integration.Fixtures
                     x.AddKafkaStreamProvider(StreamProviderName, x =>
                     {
                         x.FromConfiguration(ctx.Configuration);
-                        x.AddTopic("HelloWorld");
+                        x.AddTopicStream(StreamNamespace, ctx.Configuration);
                     });
                 })
                 .ConfigureWebHostDefaults(x =>
                 {
                     x.UseTestServer();
                     x.UseStartup<Startup>();
+                })
+                .ConfigureServices(x =>
+                {
+                    x.AddStream();
                 })
                 .Build();
 
