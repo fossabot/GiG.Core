@@ -6,7 +6,7 @@
     public class KafkaTopicOptions
     {
         /// <summary>
-        /// The Default config section name.  
+        /// The Default section name.  
         /// </summary>
         public const string DefaultSectionName = "Orleans:Streams:Kafka:Topic";
         
