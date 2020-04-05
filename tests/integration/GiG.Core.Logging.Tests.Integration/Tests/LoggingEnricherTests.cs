@@ -34,7 +34,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
         private IRequestContextAccessor _requestContextAccessor;
         private ICorrelationContextAccessor _correlationContextAccessor;
         private IActivityContextAccessor _activityContextAccessor;
-        private SemaphoreSlim _semaphore = new SemaphoreSlim(0, 1);
+        private SemaphoreSlim _semaphore;
 
         private LogEvent _logEvent;
 
@@ -47,7 +47,6 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
                     x.AddMockTenantAccessor();
                     x.AddMockRequestContextAccessor();
                     x.AddMockActivityContextAccessor();
-
                 })
                 .UseApplicationMetadata()
                 .ConfigureLogging(x => x
@@ -62,6 +61,8 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
                 .Build();
 
             await _host.StartAsync();
+            
+            _semaphore = new SemaphoreSlim(0, 1);
 
             _applicationMetadataAccessor = _host.Services.GetRequiredService<IApplicationMetadataAccessor>();
             _requestContextAccessor = _host.Services.GetRequiredService<IRequestContextAccessor>();
@@ -144,7 +145,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
 
         private async Task AssertLogEventAsync()
         {
-            await _semaphore.WaitAsync(5_000);
+            await _semaphore.WaitAsync(10_000);
 
             Assert.NotNull(_logEvent);
         }
@@ -153,6 +154,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
         {
             await _host.StopAsync();
             _host.Dispose();
+            _semaphore.Dispose();
         }
     }
 }
