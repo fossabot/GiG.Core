@@ -20,7 +20,7 @@ namespace GiG.Core.Data.KVStores.Providers.File
         private readonly FileInfo _fileInfo;
 
         /// <summary>
-        /// Constructor
+        /// Constructor.
         /// </summary>
         /// <param name="dataSerializer">The <see cref="IDataProvider{T}"/> which will be used to deserialize data from file.</param>
         /// <param name="fileOptionsAccessor">The <see cref="IDataProviderOptions{T,TOptions}"/> which will be used to access options for the instance of the provider.</param>

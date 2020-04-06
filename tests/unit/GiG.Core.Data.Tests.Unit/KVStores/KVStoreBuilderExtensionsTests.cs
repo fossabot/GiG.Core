@@ -30,7 +30,7 @@ namespace GiG.Core.Data.Tests.Unit.KVStores
         }
 
         [Fact]
-        public void FromFileWithConfigurationSection_KVStoreBuilderIsNull_ThrowsArgumentNullException()
+        public void FromFile_WithConfigurationSection_KVStoreBuilderIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => FileProviderKVStoreBuilderExtensions.FromFile<object>(null, null));
             Assert.Equal("builder", exception.ParamName);
@@ -77,7 +77,7 @@ namespace GiG.Core.Data.Tests.Unit.KVStores
         }
 
         [Fact]
-        public void FromJsonFileWithConfigurationSection_KVStoreBuilderIsNull_ThrowsArgumentNullException()
+        public void FromEtcd_WithConfigurationSection_KVStoreBuilderIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => EtcdProviderKVStoreBuilderExtensions.FromEtcd<object>(null, null));
             Assert.Equal("builder", exception.ParamName);

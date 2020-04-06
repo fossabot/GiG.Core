@@ -11,7 +11,7 @@ namespace GiG.Core.Data.KVStores.Providers.Hosting
     public static class KVStoreBuilderExtensions
     {
         /// <summary>
-        /// Adds required services to Memory Data Store functionality.
+        /// Adds Eager loading functionality for Root Key.
         /// </summary>
         /// <param name="builder">The <see cref="IKVStoreBuilder{T}" /> to add the services to.</param>        
         /// <returns>The <see cref="IKVStoreBuilder{T}" /> so that additional calls can be chained.</returns>

@@ -42,25 +42,31 @@ namespace GiG.Core.Data.KVStores
                     return value;
                 }
 
-                value = await GetFromProvider(keys);
+                value = await GetFromProviderAsync(keys);
                 await _dataProvider.WatchAsync(data => _dataStore.Set(data, keys), keys);
 
                 return value;
             }
             finally
             {
-                _readLock.Release(1);
+                _readLock.Release();
             }
         }
 
-        private async Task<T> GetFromProvider(string[] keys)
+        private async Task<T> GetFromProviderAsync(string[] keys)
         {
             var value = await _dataProvider.GetAsync(keys);
 
             // Fallback to default
             if (value == null && keys.Any())
             {
-                return await GetAsync();
+                value = _dataStore.Get();
+                if (value != null)
+                {
+                    return value;
+                }
+                
+                return await _dataProvider.GetAsync();
             }
 
             _dataStore.Set(value, keys);
