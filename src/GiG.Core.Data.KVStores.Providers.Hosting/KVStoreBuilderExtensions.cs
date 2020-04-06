@@ -19,7 +19,7 @@ namespace GiG.Core.Data.KVStores.Providers.Hosting
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
 
-            builder.Services.AddHostedService<ProviderHostedService<T>>();
+            builder.Services.AddHostedService<DataHostedService<T>>();
 
             return builder;
         }

@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 namespace GiG.Core.Data.KVStores.Providers.Hosting
 {
     /// <summary>
-    /// Provider Hosted Service.
+    /// Data Hosted Service.
     /// </summary>
     /// <typeparam name="T">Generic to define type of hosted service.</typeparam>
-    public class ProviderHostedService<T> : BackgroundService
+    internal class DataHostedService<T> : BackgroundService
     {
         private readonly IDataRetriever<T> _dataRetriever;
 
         /// <summary>
-        /// Provider Hosted Service Constructor.
+        /// Data Hosted Service Constructor.
         /// </summary>
         /// <param name="dataRetriever">The <see cref="IDataRetriever{T}" /> used to fetch data from source.</param>
-        public ProviderHostedService(IDataRetriever<T> dataRetriever)
+        public DataHostedService(IDataRetriever<T> dataRetriever)
         {
             _dataRetriever = dataRetriever;
         }
