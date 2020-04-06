@@ -23,6 +23,6 @@
         /// <summary>
         /// SSL Options for Kafka Provider.
         /// </summary>
-        public KafkaSslOptions Ssl { get; set; } = new KafkaSslOptions();
+        public KafkaSecurityOptions Security { get; set; } = new KafkaSecurityOptions();
     }
 }

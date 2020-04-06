@@ -1,3 +1,4 @@
+using GiG.Core.Orleans.Clustering.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Orleans;
@@ -14,8 +15,6 @@ namespace GiG.Core.Orleans.Client.Extensions
     /// </summary>
     public static class ClientBuilderExtensions
     {
-        private const string ClusterDefaultSectionName = "Orleans:Cluster";
-
         /// <summary>
         /// Builds and connects the client.
         /// </summary>
@@ -61,10 +60,10 @@ namespace GiG.Core.Orleans.Client.Extensions
             if (clientBuilder == null) throw new ArgumentNullException(nameof(clientBuilder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
             
-            var configurationSection = configuration.GetSection(ClusterDefaultSectionName);
+            var configurationSection = configuration.GetSection(Constants.ClusterDefaultSectionName);
             if (configurationSection?.Exists() != true)
             {
-                throw new ConfigurationErrorsException($"Configuration section '{ClusterDefaultSectionName}' is incorrect.");
+                throw new ConfigurationErrorsException($"Configuration section '{Constants.ClusterDefaultSectionName}' is incorrect.");
             }
 
             clientBuilder.Configure<ClusterOptions>(configurationSection);
@@ -86,10 +85,10 @@ namespace GiG.Core.Orleans.Client.Extensions
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
             if (string.IsNullOrWhiteSpace(clusterName)) throw new ArgumentException($"'{nameof(clusterName)}' must not be null, empty or whitespace.", nameof(clusterName));
 
-            var configurationSection = configuration.GetSection($"{ClusterDefaultSectionName}:{clusterName}");
+            var configurationSection = configuration.GetSection($"{Constants.ClusterDefaultSectionName}:{clusterName}");
             if (configurationSection?.Exists() != true)
             {
-                throw new ConfigurationErrorsException($"Configuration section '{ClusterDefaultSectionName}' is incorrect.");
+                throw new ConfigurationErrorsException($"Configuration section '{Constants.ClusterDefaultSectionName}' is incorrect.");
             }
 
             clientBuilder.Configure<ClusterOptions>(configurationSection);

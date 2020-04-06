@@ -3,9 +3,9 @@
 namespace GiG.Core.Orleans.Streams.Kafka.Configurations
 {
     /// <summary>
-    /// Kafka Stream Provider Ssl Options
+    /// Kafka Stream Provider Security Options
     /// </summary>
-    public class KafkaSslOptions
+    public class KafkaSecurityOptions
     {
         /// <summary>
         /// Enable or Disable SSL Options.
@@ -25,7 +25,7 @@ namespace GiG.Core.Orleans.Streams.Kafka.Configurations
         /// <summary>
         /// SecurityProtocol enum value.
         /// </summary>
-        public SecurityProtocol SecurityProtocol { get; set; } = SecurityProtocol.Plaintext;
+        public SecurityProtocol SecurityProtocol { get; set; } = SecurityProtocol.SaslPlaintext;
 
         /// <summary>
         /// The SaslMechanism to use.

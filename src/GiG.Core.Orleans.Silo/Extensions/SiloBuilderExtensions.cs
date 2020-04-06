@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using GiG.Core.Orleans.Clustering.Abstractions;
+using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Orleans;
 using Orleans.Configuration;
@@ -9,7 +10,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
-using SiloOptions = GiG.Core.Orleans.Silo.Abstractions.SiloOptions;
 
 namespace GiG.Core.Orleans.Silo.Extensions
 {
@@ -18,8 +18,6 @@ namespace GiG.Core.Orleans.Silo.Extensions
     /// </summary>
     public static class SiloBuilderExtensions
     {
-        private const string ClusterOptionsDefaultSection = "Orleans:Cluster";
-
         /// <summary>
         /// Adds Assemblies to Silo Builder with references.
         /// </summary>
@@ -91,7 +89,7 @@ namespace GiG.Core.Orleans.Silo.Extensions
             if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            return ConfigureCluster(siloBuilder, configuration.GetSection(ClusterOptionsDefaultSection));
+            return ConfigureCluster(siloBuilder, configuration.GetSection(Constants.ClusterDefaultSectionName));
         }
 
         /// <summary>
@@ -105,7 +103,7 @@ namespace GiG.Core.Orleans.Silo.Extensions
             if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            return siloBuilder.ConfigureEndpoints(configuration.GetSection(SiloOptions.DefaultSectionName));
+            return siloBuilder.ConfigureEndpoints(configuration.GetSection(Constants.EndpointDefaultSectionName));
         }
         
         /// <summary>
@@ -118,7 +116,7 @@ namespace GiG.Core.Orleans.Silo.Extensions
         {
             if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
          
-            var siloOptions = configurationSection?.Get<SiloOptions>() ?? new SiloOptions();
+            var endpointOptions = configurationSection?.Get<EndpointOptions>() ?? new EndpointOptions();
           
             var siloAddress = Dns.GetHostEntry(Dns.GetHostName()).AddressList
                 .First(a => a.AddressFamily == AddressFamily.InterNetwork);
@@ -126,8 +124,8 @@ namespace GiG.Core.Orleans.Silo.Extensions
             return siloBuilder.Configure((EndpointOptions options) =>
             {
                 options.AdvertisedIPAddress = siloAddress;
-                options.SiloPort = siloOptions.SiloPort;
-                options.GatewayPort = siloOptions.GatewayPort;
+                options.SiloPort = endpointOptions.SiloPort;
+                options.GatewayPort = endpointOptions.GatewayPort;
             });
         }
 

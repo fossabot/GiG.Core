@@ -10,4 +10,8 @@
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" PrivateAssets="compile" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GiG.Core.Orleans.Clustering.Abstractions\GiG.Core.Orleans.Clustering.Abstractions.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -2,6 +2,7 @@ using Bogus;
 using GiG.Core.Context.Abstractions;
 using GiG.Core.Context.Orleans.Extensions;
 using GiG.Core.Orleans.Client.Extensions;
+using GiG.Core.Orleans.Clustering.Abstractions;
 using GiG.Core.Orleans.Clustering.Extensions;
 using GiG.Core.Orleans.Clustering.Localhost.Extensions;
 using GiG.Core.Orleans.Silo.Abstractions;
@@ -14,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Orleans;
+using Orleans.Configuration;
 using Orleans.Hosting;
 using System;
 using System.Threading.Tasks;
@@ -42,11 +44,11 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                 .ConfigureAppConfiguration(a => a.AddJsonFile("appsettings.json"))
                 .UseOrleans((ctx, x) =>
                 {
-                    var siloOptions = ctx.Configuration.GetSection(_siloSectionName).Get<SiloOptions>() ?? new SiloOptions();
+                    var endpointOptions = ctx.Configuration.GetSection(_siloSectionName).Get<EndpointOptions>() ?? new EndpointOptions();
 
                     x.ConfigureEndpoints(ctx.Configuration.GetSection(_siloSectionName));
                     x.UseMembershipProvider(ctx.Configuration,
-                        y => { y.ConfigureLocalhostClustering(siloOptions.SiloPort, siloOptions.GatewayPort, null, serviceId, clusterId); });
+                        y => { y.ConfigureLocalhostClustering(endpointOptions.SiloPort, endpointOptions.GatewayPort, null, serviceId, clusterId); });
                     x.AddAssemblies(typeof(EchoTestGrain));
                     x.AddSimpleMessageStreamProvider("SMSProvider");
                     x.AddMemoryGrainStorage("PubSubStore");
@@ -60,7 +62,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
             await _siloHost.StartAsync();
 
             var config = _siloHost.Services.GetService<IConfiguration>();
-            var options = config.GetSection(_siloSectionName).Get<SiloOptions>() ?? new SiloOptions();
+            var options = config.GetSection(_siloSectionName).Get<EndpointOptions>() ?? new EndpointOptions();
 
             var clientHost = new HostBuilder()
                 .ConfigureServices(services =>
