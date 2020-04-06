@@ -52,11 +52,11 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd.Extensions
 
             if (string.IsNullOrEmpty(etcdProviderOptions.Key))
             {
-                throw new ConfigurationErrorsException($"'{etcdProviderOptions.Key}' in '{configurationSection.Path}' is missing.");
+                throw new ConfigurationErrorsException($"Root key '{etcdProviderOptions.Key}' in '{configurationSection.Path}' is missing.");
             }
 
             builder.Services.TryAddSingleton<IDataProviderOptions<T, EtcdProviderOptions>>(new DataProviderOptions<T, EtcdProviderOptions>(etcdProviderOptions));
-            builder.Services.TryAddSingleton<IDataProvider<T>, EtcdDataProvider<T>>();
+            builder.RegisterDataProvider<EtcdDataProvider<T>>();
 
             return builder;
         }

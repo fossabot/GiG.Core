@@ -51,7 +51,7 @@ namespace GiG.Core.Data.KVStores.Providers.File.Extensions
             }
 
             builder.Services.TryAddSingleton<IDataProviderOptions<T, FileProviderOptions>>(new DataProviderOptions<T, FileProviderOptions>(fileProviderOptions));
-            builder.Services.TryAddSingleton<IDataProvider<T>, FileDataProvider<T>>();
+            builder.RegisterDataProvider<FileDataProvider<T>>();
 
             return builder;
         }

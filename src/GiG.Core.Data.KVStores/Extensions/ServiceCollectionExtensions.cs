@@ -28,6 +28,11 @@ namespace GiG.Core.Data.KVStores.Extensions
             var builder = new KVStoreBuilder<T>(services);
             configureKVStore(builder);
 
+            if (!builder.IsProviderRegistered)
+            {
+                throw new ApplicationException($"No data providers were registered for {typeof(T).FullName}.");
+            }
+
             // Add Default Services if not set by user
             builder.AddMemoryDataStore();
             builder.AddJson();
