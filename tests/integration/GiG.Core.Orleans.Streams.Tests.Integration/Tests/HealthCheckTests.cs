@@ -9,7 +9,8 @@ using Xunit;
 namespace GiG.Core.Orleans.Streams.Tests.Integration.Tests
 {
     [Trait("Category", "IntegrationWithDependency")]
-    public class HealthCheckTests : IClassFixture<ClusterFixture>
+    [Collection(ClusterCollection.Collection)]
+    public class HealthCheckTests
     {
         private readonly ClusterFixture _fixture;
 

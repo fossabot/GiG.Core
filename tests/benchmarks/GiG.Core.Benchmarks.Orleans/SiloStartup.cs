@@ -52,7 +52,7 @@ namespace GiG.Core.Benchmarks.Orleans
                     options.FromConfiguration(ctx.Configuration);
                     options.ConsumeMode = ConsumeMode.StreamEnd;
 
-                    options.AddTopic(Constants.MessageNamespace);
+                    options.AddTopicStream(Constants.MessageNamespace, ctx.Configuration);
                 })
                 .AddJson()
                 .Build()

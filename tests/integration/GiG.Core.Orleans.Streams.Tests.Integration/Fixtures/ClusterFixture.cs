@@ -1,3 +1,4 @@
+using GiG.Core.Orleans.Streams.Extensions;
 using GiG.Core.Orleans.Streams.Kafka.Extensions;
 using GiG.Core.Orleans.Streams.Tests.Integration.Internal;
 using Microsoft.AspNetCore.Hosting;
@@ -7,19 +8,28 @@ using Microsoft.Extensions.Hosting;
 using Orleans;
 using Orleans.Hosting;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
 namespace GiG.Core.Orleans.Streams.Tests.Integration.Fixtures
 {
+    [CollectionDefinition(Collection)]
+    public class ClusterCollection : ICollectionFixture<ClusterFixture>
+    {
+        public const string Collection = "InMemory Cluster collection";
+    }
+    
     public class ClusterFixture : IAsyncLifetime
     {
         private const string StreamStorageName = "PubSubStore";
-        private const string StreamProviderName = "StreamProviderName";
-
+        private const string StreamProviderName = "KafkaStreamProvider";
+        private const string StreamNamespace = "TestStream";
+        
         internal IHost Host;
-        internal IServiceProvider ServiceProvider;
+        private IServiceProvider ServiceProvider;
         internal IClusterClient ClusterClient;
+        internal SemaphoreSlim _lock;
 
         public async Task InitializeAsync()
         {
@@ -32,13 +42,17 @@ namespace GiG.Core.Orleans.Streams.Tests.Integration.Fixtures
                     x.AddKafkaStreamProvider(StreamProviderName, x =>
                     {
                         x.FromConfiguration(ctx.Configuration);
-                        x.AddTopic("HelloWorld");
+                        x.AddTopicStream(StreamNamespace, ctx.Configuration);
                     });
                 })
                 .ConfigureWebHostDefaults(x =>
                 {
                     x.UseTestServer();
                     x.UseStartup<Startup>();
+                })
+                .ConfigureServices(x =>
+                {
+                    x.AddStream();
                 })
                 .Build();
 
@@ -47,6 +61,8 @@ namespace GiG.Core.Orleans.Streams.Tests.Integration.Fixtures
             ServiceProvider = Host.Services;
 
             ClusterClient = ServiceProvider.GetRequiredService<IClusterClient>();
+            
+            InitializeWait();
         }
 
         public async Task DisposeAsync()
@@ -55,6 +71,11 @@ namespace GiG.Core.Orleans.Streams.Tests.Integration.Fixtures
 
             await Host.StopAsync();
             Host.Dispose();
+        }
+
+        private void InitializeWait()
+        {
+           _lock = new SemaphoreSlim(0, 1);
         }
     }
 }
