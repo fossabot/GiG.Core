@@ -4,7 +4,6 @@ using GiG.Core.Hosting.Abstractions;
 using GiG.Core.Hosting.Extensions;
 using GiG.Core.Logging.Enrichers.ApplicationMetadata.Extensions;
 using GiG.Core.Logging.Enrichers.Context.Extensions;
-using GiG.Core.Logging.Enrichers.DistributedTracing;
 using GiG.Core.Logging.Enrichers.DistributedTracing.Extensions;
 using GiG.Core.Logging.Enrichers.MultiTenant.Extensions;
 using GiG.Core.Logging.Extensions;
@@ -12,12 +11,12 @@ using GiG.Core.Logging.Sinks.File.Extensions;
 using GiG.Core.Logging.Tests.Integration.Extensions;
 using GiG.Core.Logging.Tests.Integration.Helpers;
 using GiG.Core.Web.Mock.Extensions;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Serilog.Events;
 using System;
-using System.Linq;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
@@ -25,11 +24,12 @@ using Xunit;
 namespace GiG.Core.Logging.Tests.Integration.Tests
 {
     [Trait("Category", "Integration")]
-    public sealed class LoggingEnricherTests : IAsyncLifetime
+    public partial class LoggingTests : IAsyncLifetime
     {
         private readonly string _logMessageTest = Guid.NewGuid().ToString();
 
         private IHost _host;
+        private string _filePath;
         private IApplicationMetadataAccessor _applicationMetadataAccessor;
         private IRequestContextAccessor _requestContextAccessor;
         private ICorrelationContextAccessor _correlationContextAccessor;
@@ -60,6 +60,14 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
                 )
                 .Build();
 
+            var configuration = _host.Services.GetRequiredService<IConfiguration>();
+            _filePath = configuration["Logging:Sinks:File:FilePath"];
+
+            if (File.Exists(_filePath))
+            {
+                File.Delete(_filePath);
+            }
+            
             await _host.StartAsync();
             
             _semaphore = new SemaphoreSlim(0, 1);
@@ -70,69 +78,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
             _activityContextAccessor = _host.Services.GetRequiredService<IActivityContextAccessor>();
         }
 
-        [Fact]
-        public async Task LogInformation_WriteLogWithActivityContext_VerifyContents()
-        {
-            // Arrange
-            var logger = _host.Services.GetRequiredService<ILogger<LoggingEnricherTests>>();
-            const string tenantIdKey = "TenantId";
-
-            // Act
-            logger.LogInformation(_logMessageTest);
-            
-            // Assert
-            await AssertLogEventAsync();
-            var traceId = _logEvent.Properties[TracingFields.TraceId].LiteralValue().ToString();
-            var spanId = _logEvent.Properties[TracingFields.SpanId].LiteralValue().ToString();
-            var parentSpanId = _logEvent.Properties[TracingFields.ParentId].LiteralValue().ToString();
-            var baggageTenantId = _logEvent.Properties[$"{TracingFields.BaggagePrefix}{tenantIdKey}"].LiteralValue().ToString();
-            
-            Assert.NotNull(traceId);
-            Assert.NotNull(spanId);
-            Assert.NotNull(parentSpanId);
-            Assert.NotNull(baggageTenantId);
-            
-            Assert.Equal(_activityContextAccessor.TraceId, traceId);
-            Assert.Equal(_activityContextAccessor.SpanId, spanId);
-            Assert.Equal(_activityContextAccessor.ParentSpanId, parentSpanId);
-            Assert.Equal(
-                _activityContextAccessor.Baggage.First(x => x.Key == tenantIdKey).Value, 
-                baggageTenantId);
-        }
-        
-        [Fact]
-        public async Task LogInformation_WriteLogWithEnrichers_VerifyContents()
-        {
-            // Arrange
-            var logger = _host.Services.GetRequiredService<ILogger<LoggingEnricherTests>>();
-
-            // Act
-            logger.LogInformation(_logMessageTest);
-
-            // Assert
-            await AssertLogEventAsync();
-            var applicationName = (string) _logEvent.Properties["ApplicationName"].LiteralValue();
-            var applicationVersion = (string) _logEvent.Properties["ApplicationVersion"].LiteralValue();
-            var correlationId = (string) _logEvent.Properties["CorrelationId"].LiteralValue();
-            var ipAddress = (string) _logEvent.Properties["IPAddress"].LiteralValue();
-            var tenantIds = _logEvent.Properties["TenantId"].SequenceValues();
-
-            Assert.NotNull(applicationName);
-            Assert.NotNull(applicationVersion);
-            Assert.NotNull(correlationId);
-            Assert.NotNull(ipAddress);
-            Assert.NotNull(tenantIds);
-
-            Assert.Equal(_applicationMetadataAccessor.Name, applicationName);
-            Assert.Equal(_applicationMetadataAccessor.Version, applicationVersion);
-            Assert.Equal(_correlationContextAccessor.Value.ToString(), correlationId);
-            Assert.Equal(_requestContextAccessor.IPAddress.ToString(), ipAddress);
-            Assert.Equal(2, tenantIds.Length);
-            Assert.Contains("1", tenantIds);
-            Assert.Contains("2", tenantIds);
-        }
-
-        private void WriteLog(LogEvent log)
+       private void WriteLog(LogEvent log)
         {
             if (log.MessageTemplate.Text != _logMessageTest)
             {
@@ -155,6 +101,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
             await _host.StopAsync();
             _host.Dispose();
             _semaphore.Dispose();
+            File.Delete(_filePath);
         }
     }
 }
