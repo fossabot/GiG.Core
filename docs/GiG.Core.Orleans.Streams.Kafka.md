@@ -38,7 +38,7 @@ private static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builde
     .AddMemoryGrainStorage("PubSubStore")    
     .AddKafkaStreamProvider("KafkaProvider", kafkaBuilder =>
     {
-        kafkaBuilder.WithOptions(kafkaOptions =>
+        kafkaBuilder.WithOptions(options =>
         {
             options.FromConfiguration(ctx.Configuration);
             options.AddTopicStream("MyTopic", ctx.Configuration);
