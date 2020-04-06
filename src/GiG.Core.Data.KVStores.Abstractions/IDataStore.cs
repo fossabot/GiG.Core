@@ -9,13 +9,15 @@ namespace GiG.Core.Data.KVStores.Abstractions
         /// <summary>
         /// Gets the current model.
         /// </summary>
+        /// <param name="keys">The keys.</param>
         /// <returns></returns>
-        T Get();
-        
+        T Get(params string[] keys);
+
         /// <summary>
         /// Sets the model.
         /// </summary>
-        /// <param name="model"></param>
-        void Set(T model);
+        /// <param name="value">The model value.</param>
+        /// <param name="keys">The keys.</param>
+        void Set(T value, params string[] keys);
     }
 }

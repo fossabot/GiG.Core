@@ -46,7 +46,7 @@
         public bool IsPublicRootCa { get; set; } = false;
 
         /// <summary>
-        /// The Key.
+        /// The Root Key.
         /// </summary>
         public string Key { get; set; }
     }

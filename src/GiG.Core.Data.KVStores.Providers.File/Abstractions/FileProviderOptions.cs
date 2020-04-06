@@ -1,4 +1,4 @@
-﻿namespace GiG.Core.Data.KVStores.Providers.FileProviders.Abstractions
+﻿namespace GiG.Core.Data.KVStores.Providers.File.Abstractions
 {
     /// <summary>
     /// File Provider Options.

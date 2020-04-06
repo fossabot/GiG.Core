@@ -38,13 +38,13 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
                 })
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddKVStores<IEnumerable<MockLanguage>>()
-                        .FromEtcd(hostContext.Configuration, "Languages")
-                        .WithJsonSerialization();
+                    services.AddKVStores<IEnumerable<MockLanguage>>(x => 
+                        x.FromEtcd(hostContext.Configuration, "Languages")
+                         .AddJson());
                     
-                    services.AddKVStores<IEnumerable<MockCurrency>>()
-                        .FromEtcd(hostContext.Configuration, "Currencies")
-                        .WithJsonSerialization();
+                    services.AddKVStores<IEnumerable<MockCurrency>>(x =>
+                        x.FromEtcd(hostContext.Configuration, "Currencies")
+                         .AddJson());
                     
                     services.AddSingleton<IRetryPolicy<bool>>(GetPolicy());
                 })
@@ -53,13 +53,10 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
             _serviceProvider = host.Services;
 
             var configuration = _serviceProvider.GetRequiredService<IConfiguration>();
-
             var configurationSection = configuration.GetSection("Languages");
-
             var etcdProviderOptions = configurationSection.Get<EtcdProviderOptions>();
 
             _etcdClient = new EtcdClient(etcdProviderOptions.ConnectionString);
-            
             _polly = (AsyncRetryPolicy<bool>) _serviceProvider.GetService<IRetryPolicy<bool>>();
 
             host.Start();
@@ -68,19 +65,18 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
         [Fact]
         public async Task GetEtcdProviderData_Languages_ReturnsMockLanguages()
         {
-            // Arrange.
-            await Task.Delay(1000);
-            var key = "languages";
+            // Arrange
+            const string key = "languages";
             await _etcdClient.DeleteAsync(key);
             await WriteToEtcdAsync("languages.json", key);
             var languages = await ReadLanguageFromEtcdAsync(key);
 
             var dataRetriever = _serviceProvider.GetRequiredService<IDataRetriever<IEnumerable<MockLanguage>>>();
             
-            // Act.
-            IEnumerable<MockLanguage> actualData = dataRetriever.Get();
+            // Act
+            var actualData = await dataRetriever.GetAsync();
 
-            // Assert.
+            // Assert
             Assert.NotNull(actualData);
             Assert.Equal(languages.Select(l => l.Alpha2Code), actualData.Select(l => l.Alpha2Code));
         }   
@@ -88,14 +84,14 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
         [Fact]
         public async Task PutEtcdProviderData_Currencies_ReturnsMockCurrencies()
         {
-            // Arrange.
-            await Task.Delay(1000);
-            var key = "currencies";
-            await _polly.ExecuteAsync( () =>
+            // Arrange
+            const string key = "currencies";
+            await _polly.ExecuteAsync(async () =>
             {
-                _etcdClient.DeleteAsync(key).GetAwaiter().GetResult();
-                string aa = _etcdClient.GetValAsync(key).GetAwaiter().GetResult();
-                return Task.FromResult(string.IsNullOrEmpty(aa));
+                await _etcdClient.DeleteAsync(key);
+                var value = await _etcdClient.GetValAsync(key);
+
+                return string.IsNullOrEmpty(value);
             });
             
             await WriteToEtcdAsync("currencies.json", key);
@@ -105,24 +101,24 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
             var expectedData = currencies.ToList();
             expectedData.First().Code = Guid.NewGuid().ToString();
             
-            // Act.
-            _etcdClient.Put(key, JsonSerializer.Serialize(expectedData));
+            // Act
+            await _etcdClient.PutAsync(key, JsonSerializer.Serialize(expectedData));
             
-            // Arrange.
-            await _polly.ExecuteAsync( () =>
+            // Arrange
+            await _polly.ExecuteAsync(async () =>
             {
-                IEnumerable<MockCurrency> actualData = dataRetriever.Get();
+                var actualData = await dataRetriever.GetAsync();
                 Assert.Equal(actualData.Select(l => l.Code), expectedData.Select(l => l.Code));
-                return Task.FromResult(true);
+
+                return true;
             });
         }
 
         [Fact]
         public async Task EtcdProviderDataWriteAsync_Languages_Success()
         {
-            // Arrange.
-            await Task.Delay(1000);
-            var key = "languages";
+            // Arrange
+            const string key = "languages";
             await _etcdClient.DeleteAsync(key);
 
             var dataRetriever = _serviceProvider.GetRequiredService<IDataRetriever<IEnumerable<MockLanguage>>>();
@@ -136,10 +132,10 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
 
             await dataWriter.WriteAsync(languages, key);
 
-            // Act.
-            IEnumerable<MockLanguage> actualData = await dataRetriever.GetAsync(key);
+            // Act
+            var actualData = await dataRetriever.GetAsync(key);
 
-            // Assert.
+            // Assert
             Assert.NotNull(actualData);
             Assert.Equal(languages.Select(l => l.Alpha2Code), actualData.Select(l => l.Alpha2Code));
         }
@@ -147,14 +143,12 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
         [Fact]
         public async Task EtcdProviderData_LanguagesUpdated_Success()
         {
-            // Arrange.
-            await Task.Delay(1000);
-            var key = "languages";
+            // Arrange
+            const string key = "languages";
             await _etcdClient.DeleteAsync(key);
 
             var dataRetriever = _serviceProvider.GetRequiredService<IDataRetriever<IEnumerable<MockLanguage>>>();
             var dataWriter = _serviceProvider.GetRequiredService<IDataWriter<IEnumerable<MockLanguage>>>();
-            var dataProvider = _serviceProvider.GetRequiredService<IDataProvider<IEnumerable<MockLanguage>>>();
 
             var languages = new Faker<MockLanguage>()
                 .RuleFor(x => x.Alpha2Code, new Randomizer().String(2, 'a', 'z'))
@@ -170,14 +164,12 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
 
             await dataWriter.WriteAsync(languages, key);
 
-            // Act.
-            IEnumerable<MockLanguage> actualData = await dataRetriever.GetAsync(key);
-
+            // Act
+            var actualData = await dataRetriever.GetAsync(key);
             await dataWriter.WriteAsync(languagesUpdated, key);
+            var actualDataUpdated = await dataRetriever.GetAsync(key);
 
-            IEnumerable<MockLanguage> actualDataUpdated = await dataRetriever.GetAsync(key);
-
-            // Assert.
+            // Assert
             Assert.NotNull(actualData);
             Assert.Equal(languages.Select(l => l.Alpha2Code), actualData.Select(l => l.Alpha2Code));
             Assert.NotNull(actualDataUpdated);
@@ -189,9 +181,11 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
             var fileInfo = new FileInfo(filePath);
 
             if (!fileInfo.Exists)
+            {
                 throw new InvalidOperationException($"File '{fileInfo.FullName}' does not exist");
+            }
 
-            await _etcdClient.PutAsync(key, fileInfo.OpenText().ReadToEnd());
+            await _etcdClient.PutAsync(key, await fileInfo.OpenText().ReadToEndAsync());
         }
 
         private async Task<IEnumerable<MockLanguage>> ReadLanguageFromEtcdAsync(string key)

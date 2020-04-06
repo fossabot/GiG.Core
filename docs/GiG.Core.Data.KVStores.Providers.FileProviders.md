@@ -20,7 +20,7 @@ public static void ConfigureServices(HostBuilderContext hostContext, IServiceCol
 
 ### Configuration
 
-The below table outlines the valid Configurations used to configure the [FileProviderOptions](../src/GiG.Core.Data.KVStores.Providers.FileProviders.Abstractions/FileProviderOptions.cs). The options do not define a default configuration section, that needs to be provided when registering a file provider.
+The below table outlines the valid Configurations used to configure the [FileProviderOptions](../src/GiG.Core.Data.KVStores.Providers.FileProviders/Abstractions/FileProviderOptions.cs). The options do not define a default configuration section, that needs to be provided when registering a file provider.
 
 | Configuration Name | Type   | Optional | Default Value            |
 |:-------------------|:-------|:---------|:-------------------------|

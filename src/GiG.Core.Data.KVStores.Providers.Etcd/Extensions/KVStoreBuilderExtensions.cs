@@ -9,7 +9,7 @@ using System.Configuration;
 namespace GiG.Core.Data.KVStores.Providers.Etcd.Extensions
 {
     /// <summary>
-    /// KVStoreBuilder Extensions.
+    /// The <see cref="IKVStoreBuilder{T}" /> extensions.
     /// </summary>
     public static class KVStoreBuilderExtensions
     {
@@ -48,6 +48,11 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd.Extensions
             if (etcdProviderOptions == null)
             {
                 throw new ConfigurationErrorsException($"Configuration section '{configurationSection.Path}' is not valid.");
+            }
+
+            if (string.IsNullOrEmpty(etcdProviderOptions.Key))
+            {
+                throw new ConfigurationErrorsException($"'{etcdProviderOptions.Key}' in '{configurationSection.Path}' is missing.");
             }
 
             builder.Services.TryAddSingleton<IDataProviderOptions<T, EtcdProviderOptions>>(new DataProviderOptions<T, EtcdProviderOptions>(etcdProviderOptions));

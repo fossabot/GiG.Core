@@ -40,7 +40,7 @@ namespace GiG.Core.Data.KVStores.Etcd.Sample.Services
 
         private void DoWork(object state)
         {
-            var languages = _dataRetriever.Get();
+            var languages = _dataRetriever.GetAsync();
 
             _logger.LogInformation("Languages: {@languages}", languages);
         }

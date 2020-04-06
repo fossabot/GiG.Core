@@ -9,29 +9,23 @@ namespace GiG.Core.Data.KVStores.Providers.Hosting
     /// Provider Hosted Service.
     /// </summary>
     /// <typeparam name="T">Generic to define type of hosted service.</typeparam>
-    public class ProviderHostedService<T> : IHostedService
+    public class ProviderHostedService<T> : BackgroundService
     {
-        private readonly IDataProvider<T> _dataProvider;
+        private readonly IDataRetriever<T> _dataRetriever;
 
         /// <summary>
         /// Provider Hosted Service Constructor.
         /// </summary>
-        /// <param name="dataProvider">The <see cref="IDataProvider{T}" /> used to fetch data from source.</param>
-        public ProviderHostedService(IDataProvider<T> dataProvider)
+        /// <param name="dataRetriever">The <see cref="IDataRetriever{T}" /> used to fetch data from source.</param>
+        public ProviderHostedService(IDataRetriever<T> dataRetriever)
         {
-            _dataProvider = dataProvider;
+            _dataRetriever = dataRetriever;
         }
 
         /// <inheritdoc/>
-        public async Task StartAsync(CancellationToken cancellationToken)
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            await _dataProvider.StartAsync();
-        }
-
-        /// <inheritdoc/>
-        public async Task StopAsync(CancellationToken cancellationToken)
-        {
-            await _dataProvider.StopAsync();
+            await _dataRetriever.GetAsync();
         }
     }
 }

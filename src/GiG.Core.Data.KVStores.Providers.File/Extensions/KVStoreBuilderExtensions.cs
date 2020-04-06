@@ -1,19 +1,15 @@
 using GiG.Core.Data.KVStores.Abstractions;
-using GiG.Core.Data.KVStores.Providers.FileProviders.Abstractions;
+using GiG.Core.Data.KVStores.Providers.File.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.FileProviders;
 using System;
 using System.Configuration;
-using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("GiG.Core.Data.Tests.Unit")]
-namespace GiG.Core.Data.KVStores.Providers.FileProviders.Extensions
+namespace GiG.Core.Data.KVStores.Providers.File.Extensions
 {
     /// <summary>
-    /// KVStoreBuilder Extensions.
+    /// The <see cref="IKVStoreBuilder{T}" /> extensions.
     /// </summary>
     public static class KVStoreBuilderExtensions
     {
@@ -48,8 +44,6 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders.Extensions
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection?.Path}' is incorrect.");
             
-            builder.Services.AddFileDataProvider();
-
             var fileProviderOptions = configurationSection.Get<FileProviderOptions>();
             if (fileProviderOptions == null)
             {
@@ -57,20 +51,9 @@ namespace GiG.Core.Data.KVStores.Providers.FileProviders.Extensions
             }
 
             builder.Services.TryAddSingleton<IDataProviderOptions<T, FileProviderOptions>>(new DataProviderOptions<T, FileProviderOptions>(fileProviderOptions));
-
             builder.Services.TryAddSingleton<IDataProvider<T>, FileDataProvider<T>>();
 
             return builder;
-        }
-        
-        internal static IServiceCollection AddFileDataProvider([NotNull] this IServiceCollection services)
-        {
-            if (services == null) throw new ArgumentNullException(nameof(services));
-            
-            var physicalFileProvider = new PhysicalFileProvider(AppContext.BaseDirectory);
-            services.TryAddSingleton<IFileProvider>(physicalFileProvider);
-
-            return services;
         }
     }
 }
