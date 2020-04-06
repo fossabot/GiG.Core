@@ -40,7 +40,7 @@ private static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builde
     {
         kafkaBuilder.WithOptions(kafkaOptions =>
         {
-            kafkaOptions.FromConfiguration(ctx.Configuration);
+            options.FromConfiguration(ctx.Configuration);
             options.AddTopicStream("MyTopic", ctx.Configuration);
         })
         .AddJson();
