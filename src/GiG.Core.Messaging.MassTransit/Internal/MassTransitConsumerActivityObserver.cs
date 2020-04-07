@@ -2,6 +2,8 @@
 using OpenTelemetry.Trace;
 using OpenTelemetry.Trace.Configuration;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -49,6 +51,15 @@ namespace GiG.Core.Messaging.MassTransit.Internal
             if (!string.IsNullOrEmpty(parentActivityId))
             {
                 activity.SetParentId(parentActivityId);
+            }
+
+            var baggage = context.Headers?.Get<IEnumerable<KeyValuePair<string, string>>>(Constants.BaggageHeader);
+            if (baggage?.Any() ?? false)
+            {
+                foreach (var item in baggage)
+                {
+                    activity.AddBaggage(item.Key, item.Value);
+                }
             }
 
             activity.Start();

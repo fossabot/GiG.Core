@@ -35,7 +35,7 @@ namespace GiG.Core.DistributedTracing.MassTransit.Tests.Integration.Tests
 
             // Assert
             Assert.Contains(messageId, State.Messages.Keys);
-            Assert.Equal(correlationId.ToString(), State.Messages[messageId]);
+            Assert.Equal(correlationId.ToString(), State.Messages[messageId].CorrelationId);
         }
 
         [Fact]
@@ -53,7 +53,7 @@ namespace GiG.Core.DistributedTracing.MassTransit.Tests.Integration.Tests
 
             // Assert
             Assert.Contains(messageId, State.Messages.Keys);
-            Assert.NotEqual(Guid.Empty.ToString(), State.Messages[messageId]);
+            Assert.NotEqual(Guid.Empty.ToString(), State.Messages[messageId].CorrelationId);
         }
 
         private void SetupServices()

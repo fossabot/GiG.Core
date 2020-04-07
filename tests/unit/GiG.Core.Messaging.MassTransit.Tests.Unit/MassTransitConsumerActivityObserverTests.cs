@@ -41,7 +41,7 @@ namespace GiG.Core.Messaging.MassTransit.Tests.Unit
             await sut.PreConsume<MockMessage>(_consumeContextMock.Object);
 
             // Assert
-            _consumeContextMock.Verify(x => x.Headers, Times.Once);
+            _consumeContextMock.Verify(x => x.Headers, Times.Exactly(2));
             _consumeContextMock.VerifyNoOtherCalls();
         }
 

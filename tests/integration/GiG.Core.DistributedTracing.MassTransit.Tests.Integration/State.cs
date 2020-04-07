@@ -4,9 +4,9 @@ using System.Threading;
 
 namespace GiG.Core.DistributedTracing.MassTransit.Tests.Integration
 {
-    public static class State
+    static class State
     {
-        public static ConcurrentDictionary<Guid, string> Messages;
+        public static ConcurrentDictionary<Guid, MessageContext> Messages;
 
         private static readonly Semaphore InitSemaphore = new Semaphore(1, 1);
 
@@ -15,7 +15,7 @@ namespace GiG.Core.DistributedTracing.MassTransit.Tests.Integration
             InitSemaphore.WaitOne();
             if (Messages == null)
             {
-                Messages = new ConcurrentDictionary<Guid, string>();
+                Messages = new ConcurrentDictionary<Guid, MessageContext>();
             }
             InitSemaphore.Release();
         }
