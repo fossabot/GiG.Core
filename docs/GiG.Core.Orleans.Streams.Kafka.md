@@ -61,7 +61,7 @@ You can change the default value for the Kafka configuration by overriding the [
 | Security:SaslPassword        | String   | No       | `null`                           |
 | Security:SecurityProtocol    | String   | Yes      | `SecurityProtocol.SaslPlaintext` |
 | Security:SaslMechanism       | String   | Yes      | `SaslMechanism.Plain`            |
-| Topic:IsTopicCreationEnabled | Boolean  | Yes      | `false`                          |
+| Topic:IsTopicCreationEnabled | Boolean  | Yes      | `true`          				 |
 | Topic:Partitions             | Integer  | Yes      | 3                                |
 | Topic:ReplicationFactor      | Short    | Yes      | 2                                |
 | Topic:RetentionPeriodInMs    | Ulong    | Yes      | `null`                           |
@@ -72,7 +72,7 @@ When the Topic section is enabled through the 'IsTopicCreationEnabled' flag,  ne
 In case you require different settings for different Topics, you can add another section (for example 'Orleans:Streams:Kafka:Topic2') in the configuration file and include the configuration section name when calling 'AddTopicStream':
 
 ```csharp
-   options.AddTopicStream("MyTopic2", "Orleans:Streams:Kafka:Topic2");             
+   options.AddTopicStream("MyTopic2", configuration.GetSection("Orleans:Streams:Kafka:Topic2"));          
 ```
 #### Sample Configuration
 
