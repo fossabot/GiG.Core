@@ -42,15 +42,15 @@ namespace GiG.Core.Orleans.Streams.Extensions
         }
 
         /// <summary>
-        /// Creates and registers the <see cref="IStreamProvider"/>.
+        /// Creates and registers the <see cref="IStreamIdProvider"/>.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection"/>.</param>
         /// <returns>The <see cref="IServiceCollection"/>.</returns>
-        public static IServiceCollection AddStreamProvider([NotNull] this IServiceCollection services)
+        public static IServiceCollection AddStreamIdProvider([NotNull] this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services.TryAddSingleton<IStreamProvider, StreamProvider>();
+            services.TryAddSingleton<IStreamIdProvider, StreamIdProvider>();
 
             return services;
         }

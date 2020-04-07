@@ -5,7 +5,7 @@ namespace GiG.Core.Orleans.Streams.Abstractions
     /// <summary>
     /// Stream Provider.
     /// </summary>
-    public interface IStreamProvider
+    public interface IStreamIdProvider
     {
         /// <summary>
         /// Generates Stream Id using a Namespace and a key.
@@ -13,7 +13,7 @@ namespace GiG.Core.Orleans.Streams.Abstractions
         /// <param name="namespace">The namespace.</param>
         /// <param name="key">The key.</param>
         /// <returns>The Stream Id.</returns>
-        Guid GenerateId(Guid @namespace, string key);
+        Guid NewStreamId(Guid @namespace, string key);
 
         /// <summary>
         /// Generates Stream Id.
@@ -21,6 +21,6 @@ namespace GiG.Core.Orleans.Streams.Abstractions
         /// <param name="namespace">The namespace.</param>
         /// <param name="keys">A list of keys.</param>
         /// <returns>The Stream Id.</returns>
-        Guid GenerateId(Guid @namespace, string[] keys);
+        Guid NewStreamId(Guid @namespace, string[] keys);
     }
 }

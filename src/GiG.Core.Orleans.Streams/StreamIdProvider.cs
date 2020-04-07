@@ -5,16 +5,16 @@ using System;
 namespace GiG.Core.Orleans.Streams
 {
     /// <inheritDoc />
-    public class StreamProvider : IStreamProvider
+    public class StreamIdProvider : IStreamIdProvider
     {
         /// <inheritDoc />
-        public Guid GenerateId(Guid @namespace, string key)
+        public Guid NewStreamId(Guid @namespace, string key)
         {
             return GuidUtility.Create(@namespace, key);
         }
 
         /// <inheritDoc />
-        public Guid GenerateId(Guid @namespace, params string[] keys)
+        public Guid NewStreamId(Guid @namespace, params string[] keys)
         {
             return GuidUtility.Create(@namespace, string.Join(string.Empty, keys));
         }
