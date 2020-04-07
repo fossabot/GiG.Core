@@ -26,7 +26,7 @@ namespace GiG.Core.Validation.FluentValidation.MediatR
         }
 
         /// <summary>
-        /// 
+        /// Handles a Request, checks for Errors and throws a ValidationException if any Errors are found.
         /// </summary>
         /// <param name="request">The Request.</param>
         /// <param name="cancellationToken">The Cancellation token.</param>
