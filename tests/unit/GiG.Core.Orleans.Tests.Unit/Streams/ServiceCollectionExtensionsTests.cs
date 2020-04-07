@@ -21,5 +21,12 @@ namespace GiG.Core.Orleans.Tests.Unit.Streams
             var exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddCommandDispatcher(null));
             Assert.Equal("services", exception.ParamName);
         }
+
+        [Fact]
+        public void AddStreamProvider_ServiceCollectionIsNull_ThrowsArgumentNullException()
+        {
+            var exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddStreamProvider(null));
+            Assert.Equal("services", exception.ParamName);
+        }
     }
 }

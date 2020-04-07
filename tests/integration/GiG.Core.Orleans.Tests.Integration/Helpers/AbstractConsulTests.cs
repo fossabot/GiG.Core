@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Xunit;
+using Text = System.Text;
+
 
 namespace GiG.Core.Orleans.Tests.Integration.Helpers
 {
@@ -62,7 +64,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Helpers
             return results
                 .Where(x => x.Key.EndsWith("iamalive") == false && x.Key.EndsWith("version") == false)
                 .Select(value => Convert.FromBase64String(value.Value))
-                .Select(base64EncodedBytes => System.Text.Encoding.UTF8.GetString(base64EncodedBytes))
+                .Select(base64EncodedBytes => Text.Encoding.UTF8.GetString(base64EncodedBytes))
                 .Select(decodedTxt => JsonSerializer.Deserialize<Silo>(decodedTxt))
                 .ToList();
         }

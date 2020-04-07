@@ -1,10 +1,10 @@
-﻿using GiG.Core.Web.FluentValidation.Internal;
+﻿using GiG.Core.Validation.FluentValidation.Web.Internal;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace GiG.Core.Web.FluentValidation.Extensions
+namespace GiG.Core.Validation.FluentValidation.Web.Extensions
 {
     /// <summary>
     /// Service Collection Extensions.

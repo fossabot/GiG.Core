@@ -19,7 +19,7 @@ namespace GiG.Core.Orleans.Streams
         private const string SubscribeAsyncNotCalledError = "Not Subscribed to Success or Failure Event";
 
         private readonly ILogger<CommandDispatcher<TCommand, TSuccess, TFailure>> _logger;
-        private readonly IStreamProvider _streamProvider;
+        private readonly global::Orleans.Streams.IStreamProvider _streamProvider;
         private readonly Guid _streamId;
         
         private SemaphoreSlim _semaphore;

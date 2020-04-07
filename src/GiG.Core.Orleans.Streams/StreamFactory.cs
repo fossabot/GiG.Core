@@ -30,12 +30,12 @@ namespace GiG.Core.Orleans.Streams
         /// <summary>
         /// Returns an instance of <see cref="IStream{TMessage}"/>.
         /// </summary>
-        /// <param name="streamProvider">The <see cref="IStreamProvider"/>.</param>
+        /// <param name="streamProvider">The <see cref="global::Orleans.Streams.IStreamProvider"/>.</param>
         /// <param name="streamId">The stream identifier.</param>
         /// <param name="streamNameSpace">The stream namespace.</param>
         /// <typeparam name="TMessage">Stream Message.</typeparam>
         /// <returns>The <see cref="IStream{TMessage}"/> stream. </returns>
-        public IStream<TMessage> GetStream<TMessage>(IStreamProvider streamProvider, Guid streamId, string streamNameSpace)
+        public IStream<TMessage> GetStream<TMessage>(global::Orleans.Streams.IStreamProvider streamProvider, Guid streamId, string streamNameSpace)
         {
             var stream = streamProvider.GetStream<TMessage>(streamId, streamNameSpace);
           

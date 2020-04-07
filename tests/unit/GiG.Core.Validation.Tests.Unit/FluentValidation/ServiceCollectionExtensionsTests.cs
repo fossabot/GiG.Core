@@ -1,4 +1,4 @@
-﻿using GiG.Core.Web.FluentValidation.Extensions;
+﻿using GiG.Core.Validation.FluentValidation.Web.Extensions;
 using System;
 using Xunit;
 // ReSharper disable AssignNullToNotNullAttribute

@@ -1,4 +1,4 @@
-﻿# GiG.Core.Web.FluentValidation
+﻿# GiG.Core.Validation.FluentValidation.Web
 
 This Library provides an API to register the Fluent Validation Exception Middleware in an application.
 

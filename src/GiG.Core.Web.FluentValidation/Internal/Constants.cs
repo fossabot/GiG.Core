@@ -1,4 +1,4 @@
-﻿namespace GiG.Core.Web.FluentValidation.Internal
+﻿namespace GiG.Core.Validation.FluentValidation.Web.Internal
 {
     /// <summary>
     /// Constants.

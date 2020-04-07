@@ -8,6 +8,14 @@ namespace GiG.Core.Orleans.Streams.Abstractions.Models
     public abstract class FailedEventBase
     {
         /// <summary>
+        /// Constructor.
+        /// </summary>
+        public FailedEventBase(string errorCode)
+        {
+            ErrorCode = errorCode;
+        }
+
+        /// <summary>
         /// The Failed Event Id.
         /// </summary>
         public Guid Id { get; set; }
