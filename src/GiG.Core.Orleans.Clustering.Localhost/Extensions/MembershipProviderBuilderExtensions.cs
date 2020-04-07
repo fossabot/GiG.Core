@@ -14,7 +14,6 @@ namespace GiG.Core.Orleans.Clustering.Localhost.Extensions
     public static class MembershipProviderBuilderExtensions
     {
         private const string ProviderName = "Localhost";
-        private const string ClusterDefaultSectionName = "Orleans:Cluster";
 
         /// <summary>
         /// Configures Localhost as a Membership Provider for an Orleans Client.
