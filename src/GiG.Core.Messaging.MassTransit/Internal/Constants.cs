@@ -34,5 +34,10 @@
         /// The Name of the Activity started when consuming RabbitMQ.
         /// </summary>
         public const string ConsumeActivityName = "RabbitMQConsume";
+
+        /// <summary>
+        /// The Header name for the Baggage.
+        /// </summary>
+        public const string BaggageHeader = "Correlation-Context";
     }
 }
