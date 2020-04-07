@@ -11,7 +11,7 @@
         public const string DefaultSectionName = "Orleans:Streams:Kafka:Topic";
         
         /// <summary>
-        /// If enabled topics will be created by another process.
+        /// If enabled, topics will be created on application startup.
         /// </summary>
         public bool IsTopicCreationEnabled  { get; set; } = true;
 

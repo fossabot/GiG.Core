@@ -72,7 +72,7 @@ When the Topic section is enabled through the 'IsTopicCreationEnabled' flag,  ne
 In case you require different settings for different Topics, you can add another section (for example 'Orleans:Streams:Kafka:Topic2') in the configuration file and include the configuration section name when calling 'AddTopicStream':
 
 ```csharp
-   options.AddTopicStream("MyTopic2", "Orleans:Streams:Kafka:Topic2");             
+   options.AddTopicStream("MyTopic2", configuration.GetSection("Orleans:Streams:Kafka:Topic2"));          
 ```
 #### Sample Configuration
 
