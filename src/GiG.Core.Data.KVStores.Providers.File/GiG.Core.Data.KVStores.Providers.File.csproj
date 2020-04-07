@@ -6,19 +6,14 @@
 
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" PrivateAssets="compile" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.0.0" PrivateAssets="compile" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.0.0" PrivateAssets="compile" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" Version="3.0.0" PrivateAssets="compile" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="3.0.0" PrivateAssets="compile" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.0.0" PrivateAssets="compile" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.0.0" PrivateAssets="compile" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" PrivateAssets="compile" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" PrivateAssets="compile" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\GiG.Core.Data.KVStores.Abstractions\GiG.Core.Data.KVStores.Abstractions.csproj" />
-    <ProjectReference Include="..\GiG.Core.Data.KVStores.Providers.FileProviders.Abstractions\GiG.Core.Data.KVStores.Providers.FileProviders.Abstractions.csproj" />
-    <ProjectReference Include="..\GiG.Core.Data.KVStores\GiG.Core.Data.KVStores.csproj" />
   </ItemGroup>
 
 </Project>

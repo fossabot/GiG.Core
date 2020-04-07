@@ -3,6 +3,8 @@ using Orleans;
 using Xunit;
 using ClientBuilderExtensions = GiG.Core.Orleans.Streams.Kafka.Extensions.ClientBuilderExtensions;
 
+// ReSharper disable AssignNullToNotNullAttribute
+
 namespace GiG.Core.Orleans.Tests.Unit.Streams.Kafka
 {
     [Trait("Category", "Unit")]

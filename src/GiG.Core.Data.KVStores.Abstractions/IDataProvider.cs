@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 
 namespace GiG.Core.Data.KVStores.Abstractions
@@ -5,17 +6,13 @@ namespace GiG.Core.Data.KVStores.Abstractions
     /// <summary>
     /// The Data Provider used to fetch data from source.
     /// </summary>
-    public interface IDataProvider<T>
+    public interface IDataProvider<T> : IDisposable
     {
         /// <summary>
         /// Retrieves a model from storage and stores in the registered <see cref="IDataStore{T}" />.
         /// </summary>
-        Task StartAsync();
+        Task WatchAsync(Action<T> callback, params string[] keys);
 
-        /// <summary>
-        /// Performs any required stop/shutdown procedure.
-        /// </summary>
-        Task StopAsync();
 
         /// <summary>
         /// Retrieves a model from storage using a key.
@@ -31,5 +28,19 @@ namespace GiG.Core.Data.KVStores.Abstractions
         /// <param name="keys">The key.</param>
         /// <returns></returns>
         Task WriteAsync(T model, params string[] keys);
+
+        /// <summary>
+        /// Lock mechanism to Save model without concurrency issues.
+        /// </summary>
+        /// <param name="keys">The key.</param>
+        /// <returns>A lock handle.</returns>
+        Task<object> LockAsync(params string[] keys);
+
+        /// <summary>
+        /// Unlock by using the handle provided by the LockAsync method.
+        /// </summary>
+        /// <param name="handle">The lock handle.</param>
+        /// <returns></returns>
+        Task UnlockAsync(object handle);
     }
 }

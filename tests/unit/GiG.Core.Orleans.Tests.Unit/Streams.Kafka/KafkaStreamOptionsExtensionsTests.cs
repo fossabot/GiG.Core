@@ -5,7 +5,6 @@ using Orleans.Streams.Kafka.Config;
 using System;
 using System.Configuration;
 using Xunit;
-using ConfigurationSection = System.Configuration.ConfigurationSection;
 
 // ReSharper disable AssignNullToNotNullAttribute
 
@@ -53,7 +52,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Streams.Kafka
         {
             //Arrange
             var config = new ConfigurationBuilder()
-                .AddJsonFile("appsettingsSsl.json")
+                .AddJsonFile("appsettingsSecurity.json")
                 .Build();
 
             //Act - Assert
@@ -65,7 +64,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Streams.Kafka
         {
             //Arrange
             var config = new ConfigurationBuilder()
-                .AddJsonFile("appsettingsSsl.json")
+                .AddJsonFile("appsettingsSecurity.json")
                 .Build();
 
             //Act  - Assert
@@ -87,10 +86,10 @@ namespace GiG.Core.Orleans.Tests.Unit.Streams.Kafka
 
             //Assert
             Assert.NotNull(kafkaStreamOptions);
-            Assert.Equal(expectedConfig.Ssl.SaslUsername, kafkaStreamOptions.SaslUserName);
-            Assert.Equal(expectedConfig.Ssl.SaslPassword, kafkaStreamOptions.SaslPassword);
-            Assert.Equal(expectedConfig.Ssl.SaslMechanism, kafkaStreamOptions.SaslMechanism);
-            Assert.Equal(expectedConfig.Ssl.SecurityProtocol, kafkaStreamOptions.SecurityProtocol);
+            Assert.Equal(expectedConfig.Security.SaslUsername, kafkaStreamOptions.SaslUserName);
+            Assert.Equal(expectedConfig.Security.SaslPassword, kafkaStreamOptions.SaslPassword);
+            Assert.Equal(expectedConfig.Security.SaslMechanism, kafkaStreamOptions.SaslMechanism);
+            Assert.Equal(expectedConfig.Security.SecurityProtocol, kafkaStreamOptions.SecurityProtocol);
         }
 
         [Fact]

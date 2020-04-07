@@ -9,7 +9,7 @@ namespace GiG.Core.Data.KVStores.Serializers
         /// <inheritdoc />
         public T GetFromString(string value)
         {
-            return JsonSerializer.Deserialize<T>(value);
+            return string.IsNullOrEmpty(value) ? default : JsonSerializer.Deserialize<T>(value);
         }
 
         /// <inheritdoc />

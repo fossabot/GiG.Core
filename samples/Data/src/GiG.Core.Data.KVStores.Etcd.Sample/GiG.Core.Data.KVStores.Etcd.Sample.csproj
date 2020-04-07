@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Data.KVStores.Providers.Etcd\GiG.Core.Data.KVStores.Providers.Etcd.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Data.KVStores.Providers.Hosting\GiG.Core.Data.KVStores.Providers.Hosting.csproj" />
+    <ProjectReference Include="..\..\..\..\src\GiG.Core.Data.KVStores\GiG.Core.Data.KVStores.csproj" />
     <ProjectReference Include="..\..\..\..\src\GiG.Core.Logging.All\GiG.Core.Logging.All.csproj" />
   </ItemGroup>
 

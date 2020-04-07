@@ -2,8 +2,8 @@ using GiG.Core.Data.KVStores.Abstractions;
 using GiG.Core.Data.KVStores.File.Sample.Models;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,6 +13,7 @@ namespace GiG.Core.Data.KVStores.File.Sample.Services
     {
         private readonly IDataRetriever<IEnumerable<Language>> _dataRetriever;
         private readonly ILogger<LanguageService> _logger;
+        private Timer _timer;
 
         public LanguageService(IDataRetriever<IEnumerable<Language>> dataRetriever, ILogger<LanguageService> logger)
         {
@@ -23,16 +24,25 @@ namespace GiG.Core.Data.KVStores.File.Sample.Services
         public Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Retrieving Languages...");
-            
-            var data = _dataRetriever.Get();
-            _logger.LogInformation(string.Join(", ", data.Select(x=>$"Name: {x.Name}, Alpha2Code: {x.Alpha2Code}").ToArray()));
+
+            _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromSeconds(2));
 
             return Task.CompletedTask;
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
+            _timer?.Change(Timeout.Infinite, 0);
+            _timer?.Dispose();
+
             return Task.CompletedTask;
+        }
+
+        private async void DoWork(object state)
+        {
+            var languages = await _dataRetriever.GetAsync();
+
+            _logger.LogInformation("Languages: {@languages}", languages);
         }
     }
 }

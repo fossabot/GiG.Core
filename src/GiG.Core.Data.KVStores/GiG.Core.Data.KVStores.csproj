@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GiG.Core.Data.KVStores.Abstractions\GiG.Core.Data.KVStores.Abstractions.csproj" />
-    <ProjectReference Include="..\GiG.Core.Data.KVStores.Providers.Hosting\GiG.Core.Data.KVStores.Providers.Hosting.csproj" />
   </ItemGroup>
 
 </Project>

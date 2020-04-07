@@ -38,9 +38,9 @@ namespace GiG.Core.Data.KVStores.Etcd.Sample.Services
             return Task.CompletedTask;
         }
 
-        private void DoWork(object state)
+        private async void DoWork(object state)
         {
-            var languages = _dataRetriever.Get();
+            var languages = await _dataRetriever.GetAsync();
 
             _logger.LogInformation("Languages: {@languages}", languages);
         }

@@ -7,7 +7,7 @@ using System;
 namespace GiG.Core.Data.KVStores.Extensions
 {
     /// <summary>
-    /// KVStoreBuilder extensions.
+    /// The <see cref="IKVStoreBuilder{T}" /> extensions.
     /// </summary>
     public static class KVStoreBuilderExtensions
     {
@@ -29,11 +29,14 @@ namespace GiG.Core.Data.KVStores.Extensions
         /// Adds required services for Json data serialization.
         /// </summary>
         /// <param name="builder">The <see cref="IKVStoreBuilder{T}" /> to add the services to.</param>  
-        public static void WithJsonSerialization<T>([NotNull] this IKVStoreBuilder<T> builder)
+        /// <returns>The <see cref="IKVStoreBuilder{T}" /> so that additional calls can be chained.</returns>
+        public static IKVStoreBuilder<T> AddJson<T>([NotNull] this IKVStoreBuilder<T> builder)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
 
             builder.Services.TryAddSingleton<IDataSerializer<T>, JsonDataSerializer<T>>();
+
+            return builder;
         }
     }
 }

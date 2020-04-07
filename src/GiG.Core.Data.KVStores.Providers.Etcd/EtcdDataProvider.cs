@@ -15,7 +15,6 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         private const byte MaxBackOffAmount = 5;
         
         private readonly ILogger<EtcdDataProvider<T>> _logger;
-        private readonly IDataStore<T> _dataStore;
         private readonly IDataSerializer<T> _dataSerializer;
         private readonly EtcdProviderOptions _etcdProviderOptions;
         private readonly EtcdClient _etcdClient;
@@ -26,16 +25,13 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         /// Constructor.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger{EtcdDataProvider}"/> which will be used to log events by the provider.</param>
-        /// <param name="dataStore">The <see cref="IDataStore{T}" /> which will be used to store the data retrieved by the provider.</param>
         /// <param name="dataSerializer">The <see cref="IDataProvider{T}"/> which will be used to deserialize data from Etcd.</param>
         /// <param name="etcdProviderOptionsAccessor">The <see cref="IDataProviderOptions{T,TOptions}"/> which will be used to access options for the instance of the provider.</param>
         public EtcdDataProvider(ILogger<EtcdDataProvider<T>> logger,
-            IDataStore<T> dataStore,
             IDataSerializer<T> dataSerializer,
             IDataProviderOptions<T, EtcdProviderOptions> etcdProviderOptionsAccessor)
         {
             _logger = logger;
-            _dataStore = dataStore;
             _dataSerializer = dataSerializer;
             _etcdProviderOptions = etcdProviderOptionsAccessor.Value;
 
@@ -46,13 +42,32 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         }
 
         /// <inheritdoc/>
-        public async Task StartAsync()
+        public Task WatchAsync(Action<T> callback, params string[] keys)
         {
-            _logger.LogDebug("Started Watch for {key}", _etcdProviderOptions.Key);
+            var key = GetKey(keys);
 
-            Watch(_etcdProviderOptions.Key);
+            _etcdClient.Watch(key, async response =>
+            {
+                if (_retryBackOffAmount != 0)
+                {
+                    _logger.LogInformation("Watch Recovered from exception for {key}", key);
 
-            _dataStore.Set(await GetAsync(_etcdProviderOptions.Key));
+                    callback(await GetAsync());
+                    _retryBackOffAmount = 0;
+                }
+
+                _logger.LogDebug("Watch Triggered for {key}", key);
+
+                if (!response.Events.Any())
+                {
+                    return;
+                }
+
+                var value = response.Events[0].Kv.Value.ToStringUtf8();
+                callback(_dataSerializer.GetFromString(value));
+            }, null, WatchExceptionHandler);
+
+            return Task.CompletedTask;
         }
 
         /// <summary>
@@ -62,68 +77,41 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         /// <returns></returns>
         public async Task<T> GetAsync(params string[] keys)
         {
-            var key = GetKey();
+            var key = GetKey(keys);
+           
+            var value = await _etcdClient.GetValAsync(key);
 
-            _logger.LogDebug("Returning {key}", key);
-
-            if (key.Equals(_etcdProviderOptions.Key, StringComparison.InvariantCultureIgnoreCase))
-            {
-                return _dataStore.Get();
-            }
-
-            return await GetAsync(key);
+            return _dataSerializer.GetFromString(value);
         }
 
         /// <inheritdoc/>
         public async Task WriteAsync(T model, params string[] keys)
         {
-            var key = GetKey();
+            var key = GetKey(keys);
 
-            _logger.LogDebug("Writing {key}", key);
+            await _etcdClient.PutAsync(key, _dataSerializer.ConvertToString(model));
+        }
+
+        /// <inheritdoc />
+        public async Task<object> LockAsync(params string[] keys)
+        {
+            var key = GetKey(keys);
 
             var lockResponse = await _etcdClient.LockAsync(key);
-            await _etcdClient.PutAsync(key, _dataSerializer.ConvertToString(model));
-            await _etcdClient.UnlockAsync(lockResponse.Key.ToStringUtf8());
+
+            return lockResponse.Key.ToStringUtf8();
+        }
+
+        /// <inheritdoc />
+        public async Task UnlockAsync(object handle)
+        {
+            await _etcdClient.UnlockAsync(handle as string);
         }
 
         /// <inheritdoc/>
-        public Task StopAsync()
+        public void Dispose()
         {
-            _logger.LogDebug("Stop Executed for {key}", _etcdProviderOptions.Key);
-
             _etcdClient.Dispose();
-
-            return Task.CompletedTask;
-        }
-
-        private async Task<T> GetAsync(string key)
-        {
-            var value = await _etcdClient.GetValAsync(key);
-            return SerializeValue(value);
-        }
-
-        private void Watch(string key)
-        {
-            _etcdClient.Watch(key, async response =>
-            {
-                if (_retryBackOffAmount != 0)
-                {
-                    _logger.LogInformation("Watch Recovered from exception for {key}", _etcdProviderOptions.Key);
-
-                    _dataStore.Set(await GetAsync());
-                    _retryBackOffAmount = 0;
-                }
-
-                _logger.LogDebug("Watch Triggered for {key}", _etcdProviderOptions.Key);
-
-                if (!response.Events.Any())
-                {
-                    return;
-                }
-
-                var value = response.Events[0].Kv.Value.ToStringUtf8();
-                _dataStore.Set(SerializeValue(value));
-            }, null, WatchExceptionHandler);
         }
 
         private void WatchExceptionHandler(Exception ex)
@@ -140,13 +128,6 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
             }
 
             Thread.Sleep(delay);
-        }
-
-        private T SerializeValue(string value)
-        {
-            return !string.IsNullOrWhiteSpace(value)
-                ? _dataSerializer.GetFromString(value)
-                : default;
         }
 
         private string GetKey(params string[] keys)

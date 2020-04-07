@@ -43,6 +43,7 @@ namespace GiG.Core.Messaging.MassTransit.Internal
             // add the current Activity Id to the headers
             var publishContext = context.GetPayload<PublishContext>();
             publishContext.Headers.Set(Constants.ActivityIdHeader, publishingActivity.Id);
+            publishContext.Headers.Set(Constants.BaggageHeader, publishingActivity.Baggage);
 
             // call the next filter in the pipe
             await next.Send(context);

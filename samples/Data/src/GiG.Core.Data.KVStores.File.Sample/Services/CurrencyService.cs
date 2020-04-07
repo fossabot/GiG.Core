@@ -20,14 +20,12 @@ namespace GiG.Core.Data.KVStores.File.Sample.Services
             _logger = logger;
         }
         
-        public Task StartAsync(CancellationToken cancellationToken)
+        public async Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Retrieving Currencies...");
            
-            var data = _dataRetriever.Get();
+            var data = await _dataRetriever.GetAsync();
             _logger.LogInformation(string.Join(", ", data.Select(x => $"Name: {x.Name}").ToArray()));
-
-            return Task.CompletedTask;
         }
 
         public Task StopAsync(CancellationToken cancellationToken)

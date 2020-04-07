@@ -25,7 +25,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 #### Silo
 
-The below table outlines the valid Configurations used to override the [SiloOptions](../src/GiG.Core.Orleans.Silo/Abstractions/SiloOptions.cs) under the Config section `Orleans:Silo`.
+The below table outlines the valid Configurations used to override the [EndpointOptions](https://github.com/dotnet/orleans/blob/master/src/Orleans.Runtime/Hosting/EndpointOptions.cs) under the Config section `Orleans:Silo`.
 
 | Configuration Name | Type | Required | Default Value |
 |:-------------------|:-----|:---------|:--------------|
