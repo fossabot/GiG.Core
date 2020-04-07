@@ -61,7 +61,7 @@ namespace GiG.Core.Messaging.Kafka.Abstractions
         /// <summary>
         /// SecurityProtocol enum value.
         /// </summary>
-        public SecurityProtocol SecurityProtocol { get; set; } = SecurityProtocol.Plaintext;
+        public SecurityProtocol SecurityProtocol { get; set; } = SecurityProtocol.SaslPlaintext;
 
         /// <summary>
         /// The SaslMechanism to use.
