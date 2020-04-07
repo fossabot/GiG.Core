@@ -23,10 +23,10 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseKestrel(options => options.ListenAnyIP(Port));
-                    webBuilder.UseStartup<MockStartUp>();
+                    webBuilder.UseStartup<MockStartup>();
                 })
-               .UseOrleans(MockStartUp.ConfigureOrleans)
-               .ConfigureServices(MockStartUp.ConfigureOrleansServices)
+               .UseOrleans(MockStartup.ConfigureOrleans)
+               .ConfigureServices(MockStartup.ConfigureOrleansServices)
                .Build();
 
             await _host.StartAsync();

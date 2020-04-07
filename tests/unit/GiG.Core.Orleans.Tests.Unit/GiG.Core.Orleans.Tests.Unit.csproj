@@ -28,6 +28,7 @@
         <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Client\GiG.Core.Orleans.Client.csproj" />
         <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering.Consul\GiG.Core.Orleans.Clustering.Consul.csproj" />
         <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering.Kubernetes\GiG.Core.Orleans.Clustering.Kubernetes.csproj" />
+        <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering.Localhost\GiG.Core.Orleans.Clustering.Localhost.csproj" />
         <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering\GiG.Core.Orleans.Clustering.csproj" />
         <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Reminders.Npgsql\GiG.Core.Orleans.Reminders.Npgsql.csproj" />
         <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Silo.Dashboard\GiG.Core.Orleans.Silo.Dashboard.csproj" />
@@ -43,7 +44,7 @@
             <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
             <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
         </Content>
-        <Content Include="appsettingsSsl.json">
+        <Content Include="appsettingsSecurity.json">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
           <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
           <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>

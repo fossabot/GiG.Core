@@ -1,6 +1,8 @@
 ﻿using GiG.Core.Orleans.Clustering.Abstractions;
 using JetBrains.Annotations;
+using Microsoft.Extensions.Configuration;
 using Orleans;
+using Orleans.Configuration;
 using Orleans.Hosting;
 using System;
 
@@ -31,6 +33,26 @@ namespace GiG.Core.Orleans.Clustering.Localhost.Extensions
         }
 
         /// <summary>
+        /// Configures Localhost as a Membership Provider for an Orleans Client.
+        /// </summary>
+        /// <param name="clientBuilder">The <see cref="IClientBuilder" />.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/>.</param>
+        /// <returns>The<see cref="IClientBuilder" />.</returns>
+        public static MembershipProviderBuilder<IClientBuilder> ConfigureLocalhostClustering([NotNull] this MembershipProviderBuilder<IClientBuilder> clientBuilder, [NotNull] IConfiguration configuration)
+        {
+            if (clientBuilder == null) throw new ArgumentNullException(nameof(clientBuilder));
+            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+
+            var clusterConfigurationSection = configuration.GetSection(Constants.ClusterOptionsDefaultSectionName);
+            var clusterOptions = clusterConfigurationSection.Get<ClusterOptions>() ?? new ClusterOptions();
+
+            var endpointConfigurationSection = configuration.GetSection(Constants.EndpointOptionsDefaultSectionName);
+            var endpointOptions = endpointConfigurationSection?.Get<EndpointOptions>() ?? new EndpointOptions();
+
+            return clientBuilder.ConfigureLocalhostClustering(endpointOptions.GatewayPort, clusterOptions.ServiceId, clusterOptions.ClusterId);
+        }
+
+        /// <summary>
         /// Configures Localhost as a Membership Provider for an Orleans Silo.
         /// </summary>
         /// <param name="siloBuilder">The <see cref="ISiloBuilder" />.</param>
@@ -49,6 +71,26 @@ namespace GiG.Core.Orleans.Clustering.Localhost.Extensions
             siloBuilder.RegisterProvider(ProviderName, x => x.UseLocalhostClustering(siloPort, gatewayPort, primarySiloEndpoint, serviceId, clusterId));
 
             return siloBuilder;
+        }
+
+        /// <summary>
+        /// Configures Localhost as a Membership Provider for an Orleans Silo.
+        /// </summary>
+        /// <param name="siloBuilder">The <see cref="ISiloBuilder" />.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/>.</param>
+        /// <returns>The <see cref="ISiloBuilder" />.</returns>
+        public static MembershipProviderBuilder<ISiloBuilder> ConfigureLocalhostClustering([NotNull] this MembershipProviderBuilder<ISiloBuilder> siloBuilder, IConfiguration configuration)
+        {
+            if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
+            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+
+            var clusterConfigurationSection = configuration.GetSection(Constants.ClusterOptionsDefaultSectionName);
+            var clusterOptions = clusterConfigurationSection.Get<ClusterOptions>() ?? new ClusterOptions();
+
+            var endpointConfigurationSection = configuration.GetSection(Constants.EndpointOptionsDefaultSectionName);
+            var endpointOptions = endpointConfigurationSection?.Get<EndpointOptions>() ?? new EndpointOptions();
+
+            return siloBuilder.ConfigureLocalhostClustering(endpointOptions.SiloPort, endpointOptions.GatewayPort, null, clusterOptions.ServiceId, clusterOptions.ClusterId);
         }
     }
 }
