@@ -62,8 +62,8 @@ You can change the default value for the Kafka configuration by overriding the [
 | Security:SecurityProtocol    | String   | Yes      | `SecurityProtocol.SaslPlaintext` |
 | Security:SaslMechanism       | String   | Yes      | `SaslMechanism.Plain`            |
 | Topic:IsTopicCreationEnabled | Boolean  | Yes      | `true`          				 |
-| Topic:Partitions             | Integer  | Yes      | 3                                |
-| Topic:ReplicationFactor      | Short    | Yes      | 2                                |
+| Topic:Partitions             | Integer  | Yes      | 1                                |
+| Topic:ReplicationFactor      | Short    | Yes      | 1                                |
 | Topic:RetentionPeriodInMs    | Ulong    | Yes      | `null`                           |
 
 When the Security section is enabled, both username and password are validated so they cannot be left empty.

@@ -18,12 +18,12 @@
         /// <summary>
         /// Number of Partitions.
         /// </summary>
-        public int Partitions  { get; set; } = 3;
+        public int Partitions  { get; set; } = 1;
 
         /// <summary>
         /// Number of replicas of a topic in a Kafka cluster.
         /// </summary>
-        public short ReplicationFactor  { get; set; } = 2;
+        public short ReplicationFactor  { get; set; } = 1;
 
         /// <summary>
         /// Retention Period in Milliseconds.
