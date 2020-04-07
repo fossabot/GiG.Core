@@ -61,7 +61,7 @@ You can change the default value for the Kafka configuration by overriding the [
 | Ssl:SaslPassword             | String   | No       | `null`           |
 | Ssl:SecurityProtocol         | String   | Yes      | `Plaintext`      |
 | Ssl:SaslMechanism            | String   | Yes      | `Plain`          |
-| Topic:IsTopicCreationEnabled | Boolean  | Yes      | `false`          |
+| Topic:IsTopicCreationEnabled | Boolean  | Yes      | `true`          |
 | Topic:Partitions             | Integer  | Yes      | 3                |
 | Topic:ReplicationFactor      | Short    | Yes      | 2                |
 | Topic:RetentionPeriodInMs    | Ulong    | Yes      | `null`           |
