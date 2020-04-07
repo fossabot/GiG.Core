@@ -18,7 +18,7 @@ public void ConfigureServices(IServiceCollection services)
         x.ConfigureCluster(_configuration);
         x.UseMembershipProvider(_configuration, y => 
         {
-            y.ConfigureLocalhostClustering(); 
+            y.ConfigureLocalhostClustering(_configuration); 
         });
         x.AddAssemblies(typeof(ITransactionGrain));
     });
@@ -52,7 +52,7 @@ static class Program
             .ConfigureEndpoints(ctx.Configuration)
             .UseMembershipProvider(ctx.Configuration, y =>
             {
-                y.ConfigureLocalhostClustering();
+                y.ConfigureLocalhostClustering(ctx.Configuration);
             });
             .AddAssemblies(typeof(Grain));
     }
@@ -63,7 +63,7 @@ static class Program
 
 #### Silo
 
-The ConfigureLocalhostClustering extension accepts the following parameters:
+The `ConfigureLocalhostClustering` extension accepts the following parameters. You can also use the `IConfiguration` overload to load the following configuration from `appsettings.json` under the Config section `Orleans:Cluster` and `Orleans:Silo`. 
 
 | Configuration Name | Type       | Required | Default Value |
 |:-------------------|:-----------|:---------|:--------------|
@@ -75,7 +75,7 @@ The ConfigureLocalhostClustering extension accepts the following parameters:
 
 #### Client
 
-The ConfigureLocalhostClustering extension accepts the following parameters:
+The `ConfigureLocalhostClustering` extension accepts the following parameters. You can also use the `IConfiguration` overload to load the following configuration from `appsettings.json` under the Config section `Orleans:Cluster` and `Orleans:Silo`.
 
 | Configuration Name | Type   | Required | Default Value |
 |:-------------------|:-------|:---------|:--------------|
@@ -86,4 +86,4 @@ The ConfigureLocalhostClustering extension accepts the following parameters:
 **Note**:
 The above configurations can be mapped from:
 [ClusterOptions](https://github.com/dotnet/orleans/blob/master/src/Orleans.Core/Configuration/Options/ClusterOptions.cs)
-and [SiloOptions](../src/GiG.Core.Orleans.Silo/Abstractions/SiloOptions.cs)
+and [EndpointOptions](https://github.com/dotnet/orleans/blob/master/src/Orleans.Runtime/Hosting/EndpointOptions.cs)
