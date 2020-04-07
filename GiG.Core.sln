@@ -20,7 +20,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Context.Web.md = docs\GiG.Core.Context.Web.md
 		docs\GiG.Core.Data.KVStores.md = docs\GiG.Core.Data.KVStores.md
 		docs\GiG.Core.Data.KVStores.Providers.Etcd.md = docs\GiG.Core.Data.KVStores.Providers.Etcd.md
-		docs\GiG.Core.Data.KVStores.Providers.FileProviders.md = docs\GiG.Core.Data.KVStores.Providers.FileProviders.md
 		docs\GiG.Core.Data.Migration.Evolve.md = docs\GiG.Core.Data.Migration.Evolve.md
 		docs\GiG.Core.DistributedTracing.Activity.md = docs\GiG.Core.DistributedTracing.Activity.md
 		docs\GiG.Core.DistributedTracing.MassTransit.md = docs\GiG.Core.DistributedTracing.MassTransit.md
@@ -75,6 +74,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Web.Mock.md = docs\GiG.Core.Web.Mock.md
 		README.md = README.md
 		docs\GiG.Core.HealthChecks.Orleans.Streams.Kafka.md = docs\GiG.Core.HealthChecks.Orleans.Streams.Kafka.md
+		docs\GiG.Core.Data.KVStores.Providers.File.md = docs\GiG.Core.Data.KVStores.Providers.File.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AC01CBF6-BF4A-4F67-BCD6-CB0AC61D52A4}"
@@ -270,11 +270,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Logging.Tests.Inte
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Data.KVStores.Abstractions", "src\GiG.Core.Data.KVStores.Abstractions\GiG.Core.Data.KVStores.Abstractions.csproj", "{8A14C9DA-47A3-4C02-B8CF-81CD57C9AF9C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Data.KVStores.Providers.FileProviders", "src\GiG.Core.Data.KVStores.Providers.FileProviders\GiG.Core.Data.KVStores.Providers.FileProviders.csproj", "{A49C4BAE-71AA-4E79-89D8-DBB08C990AEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Data.KVStores.Providers.File", "src\GiG.Core.Data.KVStores.Providers.File\GiG.Core.Data.KVStores.Providers.File.csproj", "{A49C4BAE-71AA-4E79-89D8-DBB08C990AEA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Data.KVStores", "src\GiG.Core.Data.KVStores\GiG.Core.Data.KVStores.csproj", "{4B194F9D-2CA7-46C5-8CBF-31B5DE812D7A}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Data.KVStores.Providers.FileProviders.Abstractions", "src\GiG.Core.Data.KVStores.Providers.FileProviders.Abstractions\GiG.Core.Data.KVStores.Providers.FileProviders.Abstractions.csproj", "{78FBEB08-E65B-4201-BD51-8EEE4B0C0A1C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Data.KVStores.File.Sample", "samples\Data\src\GiG.Core.Data.KVStores.File.Sample\GiG.Core.Data.KVStores.File.Sample.csproj", "{6C887E3F-86EF-44DD-BDA9-4D1C191CE09F}"
 EndProject
@@ -734,10 +732,6 @@ Global
 		{4B194F9D-2CA7-46C5-8CBF-31B5DE812D7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B194F9D-2CA7-46C5-8CBF-31B5DE812D7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B194F9D-2CA7-46C5-8CBF-31B5DE812D7A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{78FBEB08-E65B-4201-BD51-8EEE4B0C0A1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78FBEB08-E65B-4201-BD51-8EEE4B0C0A1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78FBEB08-E65B-4201-BD51-8EEE4B0C0A1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78FBEB08-E65B-4201-BD51-8EEE4B0C0A1C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6C887E3F-86EF-44DD-BDA9-4D1C191CE09F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6C887E3F-86EF-44DD-BDA9-4D1C191CE09F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C887E3F-86EF-44DD-BDA9-4D1C191CE09F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -1175,7 +1169,6 @@ Global
 		{8A14C9DA-47A3-4C02-B8CF-81CD57C9AF9C} = {412AB606-A56E-4B9E-A9C1-E2C7E02D0CF5}
 		{A49C4BAE-71AA-4E79-89D8-DBB08C990AEA} = {412AB606-A56E-4B9E-A9C1-E2C7E02D0CF5}
 		{4B194F9D-2CA7-46C5-8CBF-31B5DE812D7A} = {412AB606-A56E-4B9E-A9C1-E2C7E02D0CF5}
-		{78FBEB08-E65B-4201-BD51-8EEE4B0C0A1C} = {412AB606-A56E-4B9E-A9C1-E2C7E02D0CF5}
 		{6C887E3F-86EF-44DD-BDA9-4D1C191CE09F} = {088A9253-942E-4C4E-9A2A-1C5B51BEAC83}
 		{E8F39612-5DB7-410F-BF1D-1DFA8DEF9DE1} = {412AB606-A56E-4B9E-A9C1-E2C7E02D0CF5}
 		{7164EEB5-5B40-4E50-BB3A-3B9D7D524480} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}

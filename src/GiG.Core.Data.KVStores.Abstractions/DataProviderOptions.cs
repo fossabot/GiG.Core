@@ -1,6 +1,4 @@
-﻿using GiG.Core.Data.KVStores.Abstractions;
-
-namespace GiG.Core.Data.KVStores
+﻿namespace GiG.Core.Data.KVStores.Abstractions
 {
     /// <inheritdoc />
     public class DataProviderOptions<T, TOptions> : IDataProviderOptions<T, TOptions>

@@ -1,22 +1,32 @@
 using GiG.Core.Data.KVStores.Abstractions;
+using System.Collections.Concurrent;
 
 namespace GiG.Core.Data.KVStores
 {
     /// <inheritdoc />
     public class MemoryDataStore<T> : IDataStore<T>
     {
-        private T Data { get; set; }
-       
+        private readonly ConcurrentDictionary<string, T> _data = new ConcurrentDictionary<string,T>();
+
         /// <inheritdoc />
-        public T Get()
+        public T Get(params string[] keys)
         {
-            return Data;
+            var key = GetKey(keys);
+
+            return _data.TryGetValue(key, out var value) ? value : default;
         }
-        
+
         /// <inheritdoc />
-        public void Set(T model)
+        public void Set(T value, params string[] keys)
         {
-            Data = model;
+            var key = GetKey(keys);
+            
+            _data.AddOrUpdate(key, value, (_, __) => value);
+        }
+
+        private static string GetKey(params string[] keys)
+        {
+            return string.Join(":", keys);
         }
     }
 }

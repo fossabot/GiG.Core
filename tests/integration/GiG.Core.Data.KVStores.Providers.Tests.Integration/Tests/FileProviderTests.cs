@@ -1,8 +1,9 @@
 ﻿using Bogus;
 using GiG.Core.Data.KVStores.Abstractions;
 using GiG.Core.Data.KVStores.Extensions;
-using GiG.Core.Data.KVStores.Providers.FileProviders.Abstractions;
-using GiG.Core.Data.KVStores.Providers.FileProviders.Extensions;
+using GiG.Core.Data.KVStores.Providers.File.Abstractions;
+using GiG.Core.Data.KVStores.Providers.File.Extensions;
+using GiG.Core.Data.KVStores.Providers.Hosting;
 using GiG.Core.Data.KVStores.Providers.Tests.Integration.Mocks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,23 +24,18 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
         private IHost _host;
         private IServiceProvider _serviceProvider;
 
-        public FileProviderTests()
-        {
-            
-        }
-
         [Fact]
-        public void GetData_JsonFileProviderUsingRootKey_ReturnsMockLanguages()
+        public async Task GetData_JsonFileProviderUsingRootKey_ReturnsMockLanguages()
         {
             // Arrange.
             InitForRead();
             var languages = ReadFromJson(_serviceProvider);
-            
+
             var dataRetriever = _serviceProvider.GetRequiredService<IDataRetriever<IEnumerable<MockLanguage>>>();
-            
+
             // Act.
-            var data = dataRetriever.Get();
-            
+            var data = await dataRetriever.GetAsync();
+
             // Assert.
             Assert.NotNull(data);
             Assert.Equal(languages.Select(l => l.Alpha2Code), data.Select(l => l.Alpha2Code));
@@ -62,7 +58,7 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
             Assert.Equal(languages.Select(l => l.Alpha2Code), data.Select(l => l.Alpha2Code));
         }
 
-        [Fact] 
+        [Fact]
         public async Task GetData_JsonFileProviderUsingInvalidKey_ReturnsMockLanguages()
         {
             // Arrange.
@@ -96,7 +92,7 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
             await dataWriter.WriteAsync(languages);
 
             // Act.
-            IEnumerable<MockLanguage> actualData = await dataRetriever.GetAsync();
+            var actualData = await dataRetriever.GetAsync();
 
             // Assert.
             Assert.NotNull(actualData);
@@ -120,7 +116,7 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
             await dataWriter.WriteAsync(languages, "temp");
 
             // Act.
-            IEnumerable<MockLanguage> actualData = await dataRetriever.GetAsync("temp");
+            var actualData = await dataRetriever.GetAsync("temp");
 
             // Assert.
             Assert.NotNull(actualData);
@@ -162,10 +158,9 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
                 {
                     var configuration = hostContext.Configuration;
 
-                    services.AddKVStores<IEnumerable<MockLanguage>>()
-                        .AddMemoryDataStore()
-                        .FromFile(configuration, "Languages")
-                        .WithJsonSerialization();
+                    services.AddKVStores<IEnumerable<MockLanguage>>(x =>
+                        x.FromFile(configuration, "Languages")
+                            .WithEagerLoading());
                 })
                 .Build();
 
@@ -185,10 +180,8 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
                 {
                     var configuration = hostContext.Configuration;
 
-                    services.AddKVStores<IEnumerable<MockLanguage>>()
-                        .AddMemoryDataStore()
-                        .FromFile(configuration, "Languages")
-                        .WithJsonSerialization();
+                    services.AddKVStores<IEnumerable<MockLanguage>>(x =>
+                        x.FromFile(configuration, "Languages"));
                 })
                 .Build();
 
@@ -197,14 +190,12 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
             _host.Start();
         }
 
-        private IEnumerable<MockLanguage> ReadFromJson(IServiceProvider serviceProvider)
+        private static IEnumerable<MockLanguage> ReadFromJson(IServiceProvider serviceProvider)
         {
-            var optionsAccessor = serviceProvider.GetRequiredService<IDataProviderOptions<IEnumerable<MockLanguage>,FileProviderOptions>>();
-            var fileProvider = serviceProvider.GetRequiredService<IFileProvider>();
-            
-            var file = fileProvider.GetFileInfo(optionsAccessor.Value.Path);
-            if (file == null || !file.Exists)
-                throw new InvalidOperationException($"File '{optionsAccessor.Value.Path}' does not exist");
+            var optionsAccessor = serviceProvider
+                .GetRequiredService<IDataProviderOptions<IEnumerable<MockLanguage>, FileProviderOptions>>();
+
+            var file = new PhysicalFileProvider(AppContext.BaseDirectory).GetFileInfo(optionsAccessor.Value.Path);
 
             return JsonSerializer.DeserializeAsync<IEnumerable<MockLanguage>>(file.CreateReadStream()).Result;
         }
