@@ -148,7 +148,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.HealthChecks.Tests
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Validation.FluentValidation.Web", "src\GiG.Core.Web.FluentValidation\GiG.Core.Validation.FluentValidation.Web.csproj", "{5BD0BBDE-DFF8-4B85-8AF3-49240856FC8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Validation.FluentValidation.Web", "src\GiG.Core.Validation.FluentValidation.Web\GiG.Core.Validation.FluentValidation.Web.csproj", "{5BD0BBDE-DFF8-4B85-8AF3-49240856FC8F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.FluentValidation.Tests.Integration", "tests\integration\GiG.Core.Web.FluentValidation.Tests.Integration\GiG.Core.Web.FluentValidation.Tests.Integration.csproj", "{38967D6D-E40C-479D-A83B-F391D239DA1E}"
 EndProject
