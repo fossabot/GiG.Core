@@ -1,6 +1,7 @@
 using Bogus;
 using GiG.Core.HealthChecks.Orleans.AspNetCore.Extensions;
 using GiG.Core.HealthChecks.Orleans.Extensions;
+using GiG.Core.Orleans.Clustering.Abstractions;
 using GiG.Core.Orleans.Clustering.Extensions;
 using GiG.Core.Orleans.Clustering.Localhost.Extensions;
 using GiG.Core.Orleans.Silo.Abstractions;
@@ -8,6 +9,7 @@ using GiG.Core.Orleans.Silo.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Orleans.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
@@ -29,7 +31,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
               .ConfigureAppConfiguration(a => a.AddJsonFile("appsettings.json"))
               .UseOrleans((ctx, x) =>
               {
-                  var options = ctx.Configuration.GetSection("Orleans:HealthChecksSelfHostedSilo").Get<SiloOptions>() ?? new SiloOptions();
+                  var options = ctx.Configuration.GetSection("Orleans:HealthChecksSelfHostedSilo").Get<EndpointOptions>() ?? new EndpointOptions();
                   x.ConfigureEndpoints(ctx.Configuration.GetSection("Orleans:HealthChecksSelfHostedSilo"));
                   x.UseMembershipProvider(ctx.Configuration,
                       y => { y.ConfigureLocalhostClustering(options.SiloPort, options.GatewayPort, null, serviceId, clusterId); });

@@ -35,7 +35,14 @@ namespace GiG.Core.Orleans.Streams.Internal
         public async Task OnNextAsync(T item, StreamSequenceToken token = null)
         {
             var consumerActivity = new Activity(Constants.ConsumeActivityName);
+
             consumerActivity.SetParentId(_activityContextAccessor.ParentId);
+            
+            foreach (var baggage in _activityContextAccessor.Baggage)
+            {
+                consumerActivity.AddBaggage(baggage.Key, baggage.Value);
+            }
+            
             consumerActivity.Start();
 
             var span = _tracer?.StartSpanFromActivity($"{Constants.SpanConsumeOperationNamePrefix}-{item.GetType().Name}", 

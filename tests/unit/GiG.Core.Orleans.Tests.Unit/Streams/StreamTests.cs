@@ -33,6 +33,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Streams
             await sut.PublishAsync(new MockMessage());
 
             // Assert
+            _activityContextAccessorMock.Verify(x => x.Baggage, Times.Once);
             _streamMock.Verify(x => x.OnNextAsync(It.IsAny<MockMessage>(), It.IsAny<StreamSequenceToken>()), Times.Once);
             VerifyNotOtherCalls();
         }

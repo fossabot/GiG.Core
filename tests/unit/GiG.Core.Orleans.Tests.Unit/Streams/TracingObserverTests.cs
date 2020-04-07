@@ -1,15 +1,10 @@
 ﻿using GiG.Core.DistributedTracing.Abstractions;
-using GiG.Core.Orleans.Streams;
 using GiG.Core.Orleans.Streams.Internal;
 using Moq;
 using OpenTelemetry.Trace;
-using OpenTelemetry.Trace.Configuration;
 using Orleans.Streams;
 using Orleans.TestKit;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -40,6 +35,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Streams
 
             // Assert
             _activityContextAccessorMock.Verify(x => x.ParentId, Times.Once);
+            _activityContextAccessorMock.Verify(x => x.Baggage, Times.Once);
             _observerMock.Verify(x => x.OnNextAsync(It.IsAny<MockMessage>(), It.IsAny<StreamSequenceToken>()), Times.Once);
             VerifyNotOtherCalls();
         }
@@ -58,6 +54,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Streams
 
             // Assert
             _activityContextAccessorMock.Verify(x => x.ParentId, Times.Once);
+            _activityContextAccessorMock.Verify(x => x.Baggage, Times.Once);
             _tracerMock.Verify(x => x.StartSpanFromActivity(It.IsAny<string>(), It.IsAny<Activity>(), SpanKind.Consumer, null), Times.Once);
             _observerMock.Verify(x => x.OnNextAsync(It.IsAny<MockMessage>(), It.IsAny<StreamSequenceToken>()), Times.Once);
             spanMock.Verify(x => x.End(), Times.Once);

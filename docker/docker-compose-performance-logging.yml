@@ -1,0 +1,17 @@
+version: "3.4"
+
+services:   
+  webapp:
+    image: 'gig.core.performance.logging'
+    build:
+      context: ..
+      dockerfile: tests/performance/GiG.Core.Performance.Logging/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+      - Logging_Sinks_Console_IsEnabled=true
+      - Logging__Sinks__Console__UseStructuredLogging=true
+      - Logging__Sinks__Fluentd__IsEnabled=false
+      - Logging__Sinks__Fluentd__Hostname=fluentd
+      - Logging__Sinks__Fluentd__Port=24224
+    ports:
+      - "7000:8080"

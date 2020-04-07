@@ -38,12 +38,12 @@ namespace GiG.Core.HealthChecks.Orleans.Streams.Kafka
                 var streamsOptions = serviceProvider.GetService<IOptions<KafkaOptions>>()?.Value ?? new KafkaOptions();
 
                 var producerOptions = new ProducerConfig {BootstrapServers = streamsOptions.Brokers,};
-                if (streamsOptions.Ssl.IsEnabled)
+                if (streamsOptions.Security.IsEnabled)
                 {
-                    producerOptions.SaslUsername = streamsOptions.Ssl.SaslUsername;
-                    producerOptions.SaslPassword = streamsOptions.Ssl.SaslPassword;
-                    producerOptions.SecurityProtocol = (SecurityProtocol) (int) streamsOptions.Ssl.SecurityProtocol;
-                    producerOptions.SaslMechanism = (SaslMechanism) (int) streamsOptions.Ssl.SaslMechanism;
+                    producerOptions.SaslUsername = streamsOptions.Security.SaslUsername;
+                    producerOptions.SaslPassword = streamsOptions.Security.SaslPassword;
+                    producerOptions.SecurityProtocol = (SecurityProtocol) (int) streamsOptions.Security.SecurityProtocol;
+                    producerOptions.SaslMechanism = (SaslMechanism) (int) streamsOptions.Security.SaslMechanism;
                 }
 
                 return new KafkaHealthCheck(producerOptions, topic);

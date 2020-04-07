@@ -26,6 +26,8 @@ namespace GiG.Core.DistributedTracing.Orleans
         public async Task Invoke(IOutgoingGrainCallContext context)
         {
             RequestContext.Set(Constants.ActivityHeader, _activityContextAccessor.ActivityId);
+            RequestContext.Set(Constants.BaggageHeader, _activityContextAccessor.Baggage);
+
             await context.Invoke();
         }
     }

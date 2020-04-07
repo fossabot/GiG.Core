@@ -12,8 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\..\src\GiG.Core.Data.KVStores.Providers.FileProviders.Abstractions\GiG.Core.Data.KVStores.Providers.FileProviders.Abstractions.csproj" />
-        <ProjectReference Include="..\..\..\..\src\GiG.Core.Data.KVStores.Providers.FileProviders\GiG.Core.Data.KVStores.Providers.FileProviders.csproj" />
+        <ProjectReference Include="..\..\..\..\src\GiG.Core.Data.KVStores.Providers.File\GiG.Core.Data.KVStores.Providers.File.csproj" />
         <ProjectReference Include="..\..\..\..\src\GiG.Core.Data.KVStores.Providers.Hosting\GiG.Core.Data.KVStores.Providers.Hosting.csproj" />
         <ProjectReference Include="..\..\..\..\src\GiG.Core.Data.KVStores\GiG.Core.Data.KVStores.csproj" />
         <ProjectReference Include="..\..\..\..\src\GiG.Core.Logging.All\GiG.Core.Logging.All.csproj" />

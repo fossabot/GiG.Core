@@ -1,4 +1,5 @@
 using GiG.Core.DistributedTracing.Abstractions;
+using GiG.Core.MultiTenant.Abstractions;
 using GiG.Core.Orleans.Streams;
 using GiG.Core.Orleans.Streams.Abstractions;
 using GiG.Core.Orleans.Tests.Integration.Contracts;
@@ -7,23 +8,26 @@ using Orleans;
 using Orleans.Runtime;
 using Orleans.Streams;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GiG.Core.Orleans.Tests.Integration.Grains
 {
     [ImplicitStreamSubscription(Constants.ActivityStreamNamespace)]
-    public class AcitvityTestGrain : Grain, IActivityTestGrain, IAsyncObserver<MockMessage>
+    public class ActivityTestGrain : Grain, IActivityTestGrain, IAsyncObserver<MockMessage>
     {
         private readonly IActivityContextAccessor _activityContextAccessor;
+        private readonly ITenantAccessor _tenantAccessor;
         private readonly IStreamFactory _streamFactory;
         private readonly IPersistentState<ActivityState> _state;
 
         private IStream<MockMessage> _incomingStream;
 
-        public AcitvityTestGrain([PersistentState(Constants.StorageProviderName, Constants.StorageProviderName)] IPersistentState<ActivityState> state,
-            IActivityContextAccessor activityContextAccessor, IStreamFactory streamFactory =null)
+        public ActivityTestGrain([PersistentState(Constants.StorageProviderName, Constants.StorageProviderName)] IPersistentState<ActivityState> state,
+            IActivityContextAccessor activityContextAccessor, ITenantAccessor tenantAccessor, IStreamFactory streamFactory =null)
         {
             _activityContextAccessor = activityContextAccessor;
+            _tenantAccessor = tenantAccessor;
             _streamFactory = streamFactory;
             _state = state;
         }
@@ -46,7 +50,9 @@ namespace GiG.Core.Orleans.Tests.Integration.Grains
                 {
                     TraceId = _activityContextAccessor.TraceId,
                     ParentId = _activityContextAccessor.ParentId,
-                    RootId = _activityContextAccessor.CorrelationId
+                    RootId = _activityContextAccessor.CorrelationId,
+                    Baggage = GetBaggage(),
+                    TenantId = GetTenant()
                 }
             };
                
@@ -59,7 +65,9 @@ namespace GiG.Core.Orleans.Tests.Integration.Grains
             {
                 TraceId = _activityContextAccessor.TraceId,
                 ParentId = _activityContextAccessor.ParentId,
-                RootId = _activityContextAccessor.CorrelationId
+                RootId = _activityContextAccessor.CorrelationId,
+                Baggage = GetBaggage(),
+                TenantId = GetTenant()
             };
             return Task.FromResult(activity);
         }
@@ -77,6 +85,16 @@ namespace GiG.Core.Orleans.Tests.Integration.Grains
         public Task OnErrorAsync(Exception ex)
         {
             return Task.CompletedTask;
+        }
+
+        private string GetBaggage()
+        {
+            return _activityContextAccessor.Baggage.FirstOrDefault(x => x.Key == "BaggageTest").Value;
+        }
+        
+        private string GetTenant()
+        {
+            return string.Join(';', _tenantAccessor.Values);
         }
     }
 }

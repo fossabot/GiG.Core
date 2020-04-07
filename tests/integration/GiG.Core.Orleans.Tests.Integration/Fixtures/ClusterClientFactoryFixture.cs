@@ -13,9 +13,9 @@ using System;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
+namespace GiG.Core.Orleans.Tests.Integration.Fixtures
 {
-    public abstract class ClusterClientFactoryLifetime :  IAsyncLifetime
+    public class ClusterClientFactoryFixture :  IAsyncLifetime
     {
         internal IClusterClientFactory OrleansClusterClientFactory;
 
