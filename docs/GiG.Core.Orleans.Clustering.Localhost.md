@@ -63,7 +63,7 @@ static class Program
 
 #### Silo
 
-The `ConfigureLocalhostClustering` extension accepts the following parameters. You can also use the `IConfiguration` overload to load the following configuration from `appsettings.json` under the Config section `Orleans:Cluster` and `Orleans:Silo`. 
+The `ConfigureLocalhostClustering` extension accepts the following parameters. You can also use the `IConfiguration` overload to load the following configuration from `appsettings.json` under the Config sections `Orleans:Cluster` and `Orleans:Silo` as instructed [here](GiG.Core.Orleans.Silo.md#Configuration). 
 
 | Configuration Name | Type       | Required | Default Value |
 |:-------------------|:-----------|:---------|:--------------|
@@ -75,7 +75,7 @@ The `ConfigureLocalhostClustering` extension accepts the following parameters. Y
 
 #### Client
 
-The `ConfigureLocalhostClustering` extension accepts the following parameters. You can also use the `IConfiguration` overload to load the following configuration from `appsettings.json` under the Config section `Orleans:Cluster` and `Orleans:Silo`.
+The `ConfigureLocalhostClustering` extension accepts the following parameters. You can also use the `IConfiguration` overload to load the following configuration from `appsettings.json` under the Config sections `Orleans:Cluster` and `Orleans:Silo` as instructed [here](GiG.Core.Orleans.Silo.md#Configuration).
 
 | Configuration Name | Type   | Required | Default Value |
 |:-------------------|:-------|:---------|:--------------|

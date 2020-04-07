@@ -53,14 +53,14 @@ private static void ConfigureOrleans(HostBuilderContext ctx, ISiloBuilder builde
 You can change the default value for the Kafka configuration by overriding the [KafkaOptions](../src/GiG.Core.Orleans.Streams.Kafka/Configurations/KafkaOptions.cs) by adding the following configuration settings under section `Orleans:Streams:Kafka`. The Brokers option is an array which is delimited with ';'.
 
 | Configuration Name           | Type     | Optional | Default Value    |
-|-:----------------------------|-:--------|-:--------|-:----------------|
+|------------------------------|----------|----------|------------------|
 | Brokers                      | String[] | No       | `localhost:9092` |
 | ConsumerGroupId              | String   | No       | `null`           |
-| Security:IsEnabled                | String   | Yes      | `false`          |
-| Security:SaslUsername             | String   | No       | `null`           |
-| Security:SaslPassword             | String   | No       | `null`           |
-| Security:SecurityProtocol         | String   | Yes      | `Plaintext`      |
-| Security:SaslMechanism            | String   | Yes      | `Plain`          |
+| Security:IsEnabled           | String   | Yes      | `false`          |
+| Security:SaslUsername        | String   | No       | `null`           |
+| Security:SaslPassword        | String   | No       | `null`           |
+| Security:SecurityProtocol    | String   | Yes      | `Plaintext`      |
+| Security:SaslMechanism       | String   | Yes      | `Plain`          |
 | Topic:IsTopicCreationEnabled | Boolean  | Yes      | `false`          |
 | Topic:Partitions             | Integer  | Yes      | 3                |
 | Topic:ReplicationFactor      | Short    | Yes      | 2                |
