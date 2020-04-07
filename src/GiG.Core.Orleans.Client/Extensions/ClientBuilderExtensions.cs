@@ -60,10 +60,10 @@ namespace GiG.Core.Orleans.Client.Extensions
             if (clientBuilder == null) throw new ArgumentNullException(nameof(clientBuilder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
             
-            var configurationSection = configuration.GetSection(Constants.ClusterDefaultSectionName);
+            var configurationSection = configuration.GetSection(Constants.ClusterOptionsDefaultSectionName);
             if (configurationSection?.Exists() != true)
             {
-                throw new ConfigurationErrorsException($"Configuration section '{Constants.ClusterDefaultSectionName}' is incorrect.");
+                throw new ConfigurationErrorsException($"Configuration section '{Constants.ClusterOptionsDefaultSectionName}' is incorrect.");
             }
 
             clientBuilder.Configure<ClusterOptions>(configurationSection);
@@ -85,10 +85,10 @@ namespace GiG.Core.Orleans.Client.Extensions
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
             if (string.IsNullOrWhiteSpace(clusterName)) throw new ArgumentException($"'{nameof(clusterName)}' must not be null, empty or whitespace.", nameof(clusterName));
 
-            var configurationSection = configuration.GetSection($"{Constants.ClusterDefaultSectionName}:{clusterName}");
+            var configurationSection = configuration.GetSection($"{Constants.ClusterOptionsDefaultSectionName}:{clusterName}");
             if (configurationSection?.Exists() != true)
             {
-                throw new ConfigurationErrorsException($"Configuration section '{Constants.ClusterDefaultSectionName}' is incorrect.");
+                throw new ConfigurationErrorsException($"Configuration section '{Constants.ClusterOptionsDefaultSectionName}' is incorrect.");
             }
 
             clientBuilder.Configure<ClusterOptions>(configurationSection);

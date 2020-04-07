@@ -4,6 +4,6 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
 {
     public class DefaultClusterFixture : ClusterLifetime
     {
-        public DefaultClusterFixture() : base(Clustering.Abstractions.Constants.EndpointDefaultSectionName) { }
+        public DefaultClusterFixture() : base(Clustering.Abstractions.Constants.EndpointOptionsDefaultSectionName) { }
     }
 }

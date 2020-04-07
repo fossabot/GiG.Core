@@ -89,7 +89,7 @@ namespace GiG.Core.Orleans.Silo.Extensions
             if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            return ConfigureCluster(siloBuilder, configuration.GetSection(Constants.ClusterDefaultSectionName));
+            return ConfigureCluster(siloBuilder, configuration.GetSection(Constants.ClusterOptionsDefaultSectionName));
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace GiG.Core.Orleans.Silo.Extensions
             if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            return siloBuilder.ConfigureEndpoints(configuration.GetSection(Constants.EndpointDefaultSectionName));
+            return siloBuilder.ConfigureEndpoints(configuration.GetSection(Constants.EndpointOptionsDefaultSectionName));
         }
         
         /// <summary>

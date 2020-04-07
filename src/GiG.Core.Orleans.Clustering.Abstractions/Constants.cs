@@ -8,11 +8,11 @@ namespace GiG.Core.Orleans.Clustering.Abstractions
         /// <summary>
         /// The default section name for ClusterOptions.
         /// </summary>
-        public const string ClusterDefaultSectionName = "Orleans:Cluster";
+        public const string ClusterOptionsDefaultSectionName = "Orleans:Cluster";
         
         /// <summary>
         /// The default section name for EndpointOptions.
         /// </summary>
-        public const string EndpointDefaultSectionName = "Orleans:Silo";
+        public const string EndpointOptionsDefaultSectionName = "Orleans:Silo";
     }
 }

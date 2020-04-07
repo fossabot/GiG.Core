@@ -44,10 +44,10 @@ namespace GiG.Core.Orleans.Clustering.Localhost.Extensions
             if (clientBuilder == null) throw new ArgumentNullException(nameof(clientBuilder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            var clusterConfigurationSection = configuration.GetSection(Constants.ClusterDefaultSectionName);
+            var clusterConfigurationSection = configuration.GetSection(Constants.ClusterOptionsDefaultSectionName);
             var clusterOptions = clusterConfigurationSection.Get<ClusterOptions>() ?? new ClusterOptions();
 
-            var endpointConfigurationSection = configuration.GetSection(Constants.EndpointDefaultSectionName);
+            var endpointConfigurationSection = configuration.GetSection(Constants.EndpointOptionsDefaultSectionName);
             var endpointOptions = endpointConfigurationSection?.Get<EndpointOptions>() ?? new EndpointOptions();
 
             return clientBuilder.ConfigureLocalhostClustering(endpointOptions.GatewayPort, clusterOptions.ServiceId, clusterOptions.ClusterId);
@@ -85,10 +85,10 @@ namespace GiG.Core.Orleans.Clustering.Localhost.Extensions
             if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            var clusterConfigurationSection = configuration.GetSection(Constants.ClusterDefaultSectionName);
+            var clusterConfigurationSection = configuration.GetSection(Constants.ClusterOptionsDefaultSectionName);
             var clusterOptions = clusterConfigurationSection.Get<ClusterOptions>() ?? new ClusterOptions();
 
-            var endpointConfigurationSection = configuration.GetSection(Constants.EndpointDefaultSectionName);
+            var endpointConfigurationSection = configuration.GetSection(Constants.EndpointOptionsDefaultSectionName);
             var endpointOptions = endpointConfigurationSection?.Get<EndpointOptions>() ?? new EndpointOptions();
 
             return siloBuilder.ConfigureLocalhostClustering(endpointOptions.SiloPort, endpointOptions.GatewayPort, null, clusterOptions.ServiceId, clusterOptions.ClusterId);
