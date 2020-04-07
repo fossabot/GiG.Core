@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using System;
 
 namespace GiG.Core.Validation.FluentValidation.MediatR.Extensions
 {
@@ -14,9 +15,13 @@ namespace GiG.Core.Validation.FluentValidation.MediatR.Extensions
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
-        public static void AddValidationPipelineBehavior(this IServiceCollection services)
+        public static IServiceCollection AddValidationPipelineBehavior(this IServiceCollection services)
         {
+            if (services == null) throw new ArgumentNullException(nameof(services));
+
             services.TryAddSingleton(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
+            
+            return services;
         }
     }
 }

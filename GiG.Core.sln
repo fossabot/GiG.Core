@@ -150,7 +150,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{D4C1B3D4-A75
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Validation.FluentValidation.Web", "src\GiG.Core.Validation.FluentValidation.Web\GiG.Core.Validation.FluentValidation.Web.csproj", "{5BD0BBDE-DFF8-4B85-8AF3-49240856FC8F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.FluentValidation.Tests.Integration", "tests\integration\GiG.Core.Web.FluentValidation.Tests.Integration\GiG.Core.Web.FluentValidation.Tests.Integration.csproj", "{38967D6D-E40C-479D-A83B-F391D239DA1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Validation.FluentValidation.Web.Tests.Integration", "tests\integration\GiG.Core.Validation.FluentValidation.Web.Tests.Integration\GiG.Core.Validation.FluentValidation.Web.Tests.Integration.csproj", "{38967D6D-E40C-479D-A83B-F391D239DA1E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosting", "Hosting", "{436A5A62-C050-463F-B691-F56B9A76366E}"
 EndProject
@@ -486,7 +486,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Validation", "Validation", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Validation.FluentValidation.MediatR", "src\GiG.Core.Validation.FluentValidation.MediatR\GiG.Core.Validation.FluentValidation.MediatR.csproj", "{4998607B-5947-42F3-922C-2B0839401117}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Validation.Tests.Unit", "tests\unit\GiG.Core.Validation.Tests.Unit\GiG.Core.Validation.Tests.Unit.csproj", "{7CEEE708-1177-485F-9F12-4FF676691C22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Validation.Tests.Unit", "tests\unit\GiG.Core.Validation.Tests.Unit\GiG.Core.Validation.Tests.Unit.csproj", "{7CEEE708-1177-485F-9F12-4FF676691C22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

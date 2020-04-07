@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\GiG.Core.Validation.FluentValidation.MediatR\GiG.Core.Validation.FluentValidation.MediatR.csproj" />
-    <ProjectReference Include="..\..\..\src\GiG.Core.Web.FluentValidation\GiG.Core.Validation.FluentValidation.Web.csproj" />
+    <ProjectReference Include="..\..\..\src\GiG.Core.Validation.FluentValidation.Web\GiG.Core.Validation.FluentValidation.Web.csproj" />
   </ItemGroup>
 
 
