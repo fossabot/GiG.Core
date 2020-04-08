@@ -60,7 +60,7 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Orleans.Streams.Kafka](docs/GiG.Core.Orleans.Streams.Kafka.md) - Provides an API to register an Orleans Stream using Kafka.
 - [GiG.Core.Providers.DateTime](docs/GiG.Core.Providers.DateTime.md) - This Library provides an API to register required DateTime providers.
 - [GiG.Core.TokenManager](docs/GiG.Core.TokenManager.md) - This Library provides an API to register required services for the Token Manager.
-- [GiG.Core.Validation.FluentValidation.Web](docs/GiG.Core.Validation.FluentValidation.MediatR.md) - Provides an API to register the MediatR Pipeline Behaviour which uses Fluent Validation..
+- [GiG.Core.Validation.FluentValidation.MediatR](docs/GiG.Core.Validation.FluentValidation.MediatR.md) - Provides an API to register the MediatR Pipeline Behaviour which uses Fluent Validation..
 - [GiG.Core.Validation.FluentValidation.Web](docs/GiG.Core.Validation.FluentValidation.Web.md) - Provides an API to register the Fluent Validation Exception Middleware in an application.
 - [GiG.Core.Web.Authentication.ApiKey](docs/GiG.Core.Web.Authentication.ApiKey.md) - Provides an API to configure `ApiKeyAuthenticationHandler`
 - [GiG.Core.Web.Authentication.Hmac](docs/GiG.Core.Web.Authentication.Hmac.md) - Provides an API to configure `HmacAuthenticationHandler`
