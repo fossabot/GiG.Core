@@ -6,6 +6,16 @@
     /// <typeparam name="T"></typeparam>
     public class Response<T> where T : class
     {
+        private Response()
+        {
+
+        }
+
+        /// <summary>
+        /// A value to indicate whether the Reponse is successful.
+        /// </summary>
+        public bool IsSuccess { get; private set; }
+
         /// <summary>
         /// The Data.
         /// </summary>
@@ -17,24 +27,19 @@
         public bool IsError => !IsSuccess;
 
         /// <summary>
-        /// A value to indicate whether the Reponse is successful.
-        /// </summary>
-        public bool IsSuccess { get; private set; }
-
-        /// <summary>
         /// The Error Code.
         /// </summary>
         public string ErrorCode { get; set; }
 
         /// <summary>
-        /// Success method.
+        /// Success opreation.
         /// </summary>
         /// <param name="data">The Data.</param>
         /// <returns></returns>
         public static Response<T> Success(T data) => new Response<T>() { IsSuccess = true, Data = data };
 
         /// <summary>
-        /// Fail method.
+        /// Fail operation.
         /// </summary>
         /// <param name="errorCode">The Error Code.</param>
         /// <returns></returns>
