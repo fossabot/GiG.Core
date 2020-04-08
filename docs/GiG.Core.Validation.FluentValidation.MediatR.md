@@ -1,4 +1,4 @@
-﻿# GiG.Core.Validation.FluentValidation.Web
+﻿# GiG.Core.Validation.FluentValidation.MediatR
 
 This Library provides an API to register the MediatR Pipeline Behaviour which uses Fluent Validation.
 
