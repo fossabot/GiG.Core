@@ -4,7 +4,7 @@
     /// A generic Response Model.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class Response<T> where T : class
+    public class Response<T>
     {
         private Response()
         {
