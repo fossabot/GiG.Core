@@ -37,8 +37,7 @@ namespace GiG.Core.Web.FluentValidation.Tests.Integration.Tests
 
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-            Assert.NotEmpty(GetPropertyValue(body?.Result, "title"));
-            Assert.NotEmpty(GetPropertyValue(body?.Result, "status"));
+            Assert.NotEmpty(GetPropertyValue(body?.Result, "errorSummary"));
         }
 
         private static string GetPropertyValue(string json, string propertyName)

@@ -29,6 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.HealthChecks.AspNetCore.md = docs\GiG.Core.HealthChecks.AspNetCore.md
 		docs\GiG.Core.HealthChecks.md = docs\GiG.Core.HealthChecks.md
 		docs\GiG.Core.HealthChecks.Orleans.md = docs\GiG.Core.HealthChecks.Orleans.md
+		docs\GiG.Core.HealthChecks.Orleans.Streams.Kafka.md = docs\GiG.Core.HealthChecks.Orleans.Streams.Kafka.md
 		docs\GiG.Core.Hosting.AspNetCore.md = docs\GiG.Core.Hosting.AspNetCore.md
 		docs\GiG.Core.Hosting.md = docs\GiG.Core.Hosting.md
 		docs\GiG.Core.Http.Authentication.Hmac.md = docs\GiG.Core.Http.Authentication.Hmac.md
@@ -47,6 +48,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.md = docs\GiG.Core.Messaging.Avro.Schema.Generator.MSBuild.md
 		docs\GiG.Core.Messaging.Kafka.md = docs\GiG.Core.Messaging.Kafka.md
 		docs\GiG.Core.Messaging.MassTransit.md = docs\GiG.Core.Messaging.MassTransit.md
+		docs\GiG.Core.Models.md = docs\GiG.Core.Models.md
 		docs\GiG.Core.MultiTenant.Activity.md = docs\GiG.Core.MultiTenant.Activity.md
 		docs\GiG.Core.MultiTenant.Web.md = docs\GiG.Core.MultiTenant.Web.md
 		docs\GiG.Core.ObjectMapping.AutoMapper.md = docs\GiG.Core.ObjectMapping.AutoMapper.md
@@ -63,13 +65,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Orleans.Streams.md = docs\GiG.Core.Orleans.Streams.md
 		docs\GiG.Core.Providers.DateTime.md = docs\GiG.Core.Providers.DateTime.md
 		docs\GiG.Core.TokenManager.md = docs\GiG.Core.TokenManager.md
+		docs\GiG.Core.Validation.FluentValidation.MediatR.md = docs\GiG.Core.Validation.FluentValidation.MediatR.md
+		docs\GiG.Core.Validation.FluentValidation.Web.md = docs\GiG.Core.Validation.FluentValidation.Web.md
 		docs\GiG.Core.Web.Authentication.ApiKey.md = docs\GiG.Core.Web.Authentication.ApiKey.md
 		docs\GiG.Core.Web.Authentication.Hmac.md = docs\GiG.Core.Web.Authentication.Hmac.md
 		docs\GiG.Core.Web.Authentication.Hmac.MultiTenant.md = docs\GiG.Core.Web.Authentication.Hmac.MultiTenant.md
 		docs\GiG.Core.Web.Authentication.OAuth.md = docs\GiG.Core.Web.Authentication.OAuth.md
 		docs\GiG.Core.Web.Docs.Authentication.OAuth.md = docs\GiG.Core.Web.Docs.Authentication.OAuth.md
 		docs\GiG.Core.Web.Docs.md = docs\GiG.Core.Web.Docs.md
-		docs\GiG.Core.Web.FluentValidation.md = docs\GiG.Core.Web.FluentValidation.md
 		docs\GiG.Core.Web.Hosting.md = docs\GiG.Core.Web.Hosting.md
 		docs\GiG.Core.Web.Mock.md = docs\GiG.Core.Web.Mock.md
 		README.md = README.md
@@ -146,9 +149,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.HealthChecks.Tests
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.FluentValidation", "src\GiG.Core.Web.FluentValidation\GiG.Core.Web.FluentValidation.csproj", "{5BD0BBDE-DFF8-4B85-8AF3-49240856FC8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Validation.FluentValidation.Web", "src\GiG.Core.Validation.FluentValidation.Web\GiG.Core.Validation.FluentValidation.Web.csproj", "{5BD0BBDE-DFF8-4B85-8AF3-49240856FC8F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.FluentValidation.Tests.Integration", "tests\integration\GiG.Core.Web.FluentValidation.Tests.Integration\GiG.Core.Web.FluentValidation.Tests.Integration.csproj", "{38967D6D-E40C-479D-A83B-F391D239DA1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Validation.FluentValidation.Web.Tests.Integration", "tests\integration\GiG.Core.Validation.FluentValidation.Web.Tests.Integration\GiG.Core.Validation.FluentValidation.Web.Tests.Integration.csproj", "{38967D6D-E40C-479D-A83B-F391D239DA1E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosting", "Hosting", "{436A5A62-C050-463F-B691-F56B9A76366E}"
 EndProject
@@ -468,11 +471,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Performance.Data.K
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.MassTransit.Tests.Unit", "tests\unit\GiG.Core.Messaging.MassTransit.Tests.Unit\GiG.Core.Messaging.MassTransit.Tests.Unit.csproj", "{A695E4FF-7AD7-4E2E-B963-389159F38464}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.HealthChecks.Orleans.Streams.Kafka", "src\GiG.Core.HealthChecks.Orleans.Streams.Kafka\GiG.Core.HealthChecks.Orleans.Streams.Kafka.csproj", "{01FFDF3E-C399-405F-8FED-35C7B3A9CC2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.HealthChecks.Orleans.Streams.Kafka", "src\GiG.Core.HealthChecks.Orleans.Streams.Kafka\GiG.Core.HealthChecks.Orleans.Streams.Kafka.csproj", "{01FFDF3E-C399-405F-8FED-35C7B3A9CC2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Orleans.Streams.Tests.Integration", "tests\integration\GiG.Core.Orleans.Streams.Tests.Integration\GiG.Core.Orleans.Streams.Tests.Integration.csproj", "{2B7A4ADB-2158-4A1A-921E-DDE2BEFA4F9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Streams.Tests.Integration", "tests\integration\GiG.Core.Orleans.Streams.Tests.Integration\GiG.Core.Orleans.Streams.Tests.Integration.csproj", "{2B7A4ADB-2158-4A1A-921E-DDE2BEFA4F9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Performance.Logging", "tests\performance\GiG.Core.Performance.Logging\GiG.Core.Performance.Logging.csproj", "{D03DE6C2-61D2-4634-9FC8-E3AAB14A44F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Performance.Logging", "tests\performance\GiG.Core.Performance.Logging\GiG.Core.Performance.Logging.csproj", "{D03DE6C2-61D2-4634-9FC8-E3AAB14A44F0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{0025B548-B11F-4AE2-BED7-92F0541D1C3C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Models", "src\GiG.Core.Models\GiG.Core.Models.csproj", "{FF9D6051-6C10-4E1C-B8E4-33BCAA0D27A8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Validation", "Validation", "{B71D9B6A-DA49-44B9-9C2D-AB3E57AE850B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Validation.FluentValidation.MediatR", "src\GiG.Core.Validation.FluentValidation.MediatR\GiG.Core.Validation.FluentValidation.MediatR.csproj", "{4998607B-5947-42F3-922C-2B0839401117}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Validation.Tests.Unit", "tests\unit\GiG.Core.Validation.Tests.Unit\GiG.Core.Validation.Tests.Unit.csproj", "{7CEEE708-1177-485F-9F12-4FF676691C22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1076,6 +1089,18 @@ Global
 		{D03DE6C2-61D2-4634-9FC8-E3AAB14A44F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D03DE6C2-61D2-4634-9FC8-E3AAB14A44F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D03DE6C2-61D2-4634-9FC8-E3AAB14A44F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF9D6051-6C10-4E1C-B8E4-33BCAA0D27A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF9D6051-6C10-4E1C-B8E4-33BCAA0D27A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF9D6051-6C10-4E1C-B8E4-33BCAA0D27A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF9D6051-6C10-4E1C-B8E4-33BCAA0D27A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4998607B-5947-42F3-922C-2B0839401117}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4998607B-5947-42F3-922C-2B0839401117}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4998607B-5947-42F3-922C-2B0839401117}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4998607B-5947-42F3-922C-2B0839401117}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CEEE708-1177-485F-9F12-4FF676691C22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CEEE708-1177-485F-9F12-4FF676691C22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CEEE708-1177-485F-9F12-4FF676691C22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CEEE708-1177-485F-9F12-4FF676691C22}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1106,7 +1131,7 @@ Global
 		{93E66CCE-628A-4307-93EC-56B6A770DE07} = {64FBDA2C-D499-4EE1-AAA9-DFF1BCF8C465}
 		{54B0628A-D303-4AB9-9DB8-047B91CCE4F4} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 		{D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
-		{5BD0BBDE-DFF8-4B85-8AF3-49240856FC8F} = {D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF}
+		{5BD0BBDE-DFF8-4B85-8AF3-49240856FC8F} = {B71D9B6A-DA49-44B9-9C2D-AB3E57AE850B}
 		{38967D6D-E40C-479D-A83B-F391D239DA1E} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 		{436A5A62-C050-463F-B691-F56B9A76366E} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
 		{274DA110-6BE4-4595-9450-5D42E442A0A0} = {436A5A62-C050-463F-B691-F56B9A76366E}
@@ -1264,11 +1289,16 @@ Global
 		{23B8EDAB-A61D-44F1-A0BA-3D705D8FC588} = {E5670900-9A7D-41AA-8E1C-A7299C3BBD72}
 		{5EF24107-F218-4816-A343-7E566707A881} = {04D48832-835B-406A-86AA-8A7232ECA58C}
 		{AA90334C-2D74-4FE4-995E-2F64157649DB} = {66468249-0BE3-4E03-A5B8-DE350CA051EE}
-		{A695E4FF-7AD7-4E2E-B963-389159F38464} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
 		{D6D1E2D2-42FE-495A-8ECD-582AA909AFF6} = {66468249-0BE3-4E03-A5B8-DE350CA051EE}
+		{A695E4FF-7AD7-4E2E-B963-389159F38464} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
 		{01FFDF3E-C399-405F-8FED-35C7B3A9CC2D} = {64FBDA2C-D499-4EE1-AAA9-DFF1BCF8C465}
 		{2B7A4ADB-2158-4A1A-921E-DDE2BEFA4F9A} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 		{D03DE6C2-61D2-4634-9FC8-E3AAB14A44F0} = {66468249-0BE3-4E03-A5B8-DE350CA051EE}
+		{0025B548-B11F-4AE2-BED7-92F0541D1C3C} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
+		{FF9D6051-6C10-4E1C-B8E4-33BCAA0D27A8} = {0025B548-B11F-4AE2-BED7-92F0541D1C3C}
+		{B71D9B6A-DA49-44B9-9C2D-AB3E57AE850B} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
+		{4998607B-5947-42F3-922C-2B0839401117} = {B71D9B6A-DA49-44B9-9C2D-AB3E57AE850B}
+		{7CEEE708-1177-485F-9F12-4FF676691C22} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}

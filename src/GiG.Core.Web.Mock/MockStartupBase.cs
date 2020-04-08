@@ -1,4 +1,4 @@
-﻿using GiG.Core.Web.FluentValidation.Extensions;
+﻿using GiG.Core.Validation.FluentValidation.Web.Extensions;
 using GiG.Core.Web.Hosting.Extensions;
 using GiG.Core.Web.Mock.Extensions;
 using Microsoft.AspNetCore.Builder;

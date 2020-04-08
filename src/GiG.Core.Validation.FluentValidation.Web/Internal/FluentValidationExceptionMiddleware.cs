@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
-using GiG.Core.Web.FluentValidation.Extensions;
+using GiG.Core.Models;
+using GiG.Core.Validation.FluentValidation.Web.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -9,7 +10,7 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace GiG.Core.Web.FluentValidation.Internal
+namespace GiG.Core.Validation.FluentValidation.Web.Internal
 {
     internal class FluentValidationExceptionMiddleware
     {
@@ -44,16 +45,15 @@ namespace GiG.Core.Web.FluentValidation.Internal
             context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
             context.Response.ContentType = Constants.ProblemJsonMimeType;
 
-            var validationResponse = BuildValidationResponse(ex.Errors);
-            validationResponse.Status = context.Response.StatusCode;
+            var errorResponse = BuildValidationResponse(ex.Errors);
 
             _logger.LogInformation(Constants.GenericValidationErrorMessage, ex);
-            var json = validationResponse.Serialize(_jsonOptionsAccessor?.Value?.Encoder);
+            var json = errorResponse.Serialize(_jsonOptionsAccessor?.Value?.Encoder);
 
             await context.Response.WriteAsync(json);
         }
 
-        private static ValidationResponse BuildValidationResponse(IEnumerable<ValidationFailure> errors)
+        private static ErrorResponse BuildValidationResponse(IEnumerable<ValidationFailure> errors)
         {
             var errorMessageDictionary = new Dictionary<string, List<string>>();
 
@@ -69,12 +69,12 @@ namespace GiG.Core.Web.FluentValidation.Internal
                 }
             }
 
-            var validationResponse = new ValidationResponse
+            var errorResponse = new ErrorResponse
             {
                 Errors = errorMessageDictionary
             };
 
-            return validationResponse;
+            return errorResponse;
         }
     }
 }

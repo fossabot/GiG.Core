@@ -1,18 +1,18 @@
 ﻿using BenchmarkDotNet.Attributes;
-using GiG.Core.Web.FluentValidation.Extensions;
-using GiG.Core.Web.FluentValidation.Internal;
+using GiG.Core.Models;
+using GiG.Core.Validation.FluentValidation.Web.Extensions;
 using System.Collections.Generic;
 
 namespace GiG.Core.Benchmarks.Web
 {
     public class FluentValidationSerializeBenchmarks
     {
-        private readonly ValidationResponse _smallValidationResponse;
-        private readonly ValidationResponse _largeValidationResponse;
+        private readonly ErrorResponse _smallErrorResponse;
+        private readonly ErrorResponse _largeErrorResponse;
 
         public FluentValidationSerializeBenchmarks()
         {
-            _smallValidationResponse = new ValidationResponse
+            _smallErrorResponse = new ErrorResponse
             {
                 Errors = new Dictionary<string, List<string>>
                 {
@@ -20,7 +20,7 @@ namespace GiG.Core.Benchmarks.Web
                 }
             };
 
-            _largeValidationResponse = new ValidationResponse
+            _largeErrorResponse = new ErrorResponse
             {
                 Errors = new Dictionary<string, List<string>>
                 {
@@ -34,13 +34,13 @@ namespace GiG.Core.Benchmarks.Web
         [Benchmark]
         public void Serialize_SmallResponse()
         {
-            _smallValidationResponse.Serialize(null);
+            _smallErrorResponse.Serialize(null);
         }
 
         [Benchmark]
         public void Serialize_LargeResponse()
         {
-            _largeValidationResponse.Serialize(null);
+            _largeErrorResponse.Serialize(null);
         }
     }
 }
