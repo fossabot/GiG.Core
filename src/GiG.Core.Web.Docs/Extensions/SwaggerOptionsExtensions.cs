@@ -48,5 +48,13 @@ namespace GiG.Core.Web.Docs.Extensions
                 options.OperationFilter<XTenantIdOperationFilter>();
             }
         }
+        
+        internal static void IncludeXApiKeyFilter(this SwaggerGenOptions options, bool isEnabled)
+        {
+            if (isEnabled)
+            {
+                options.OperationFilter<XApiKeyOperationFilter>();
+            }
+        }
     }
 }
