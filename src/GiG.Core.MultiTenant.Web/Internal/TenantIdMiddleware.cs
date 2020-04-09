@@ -19,7 +19,7 @@ namespace GiG.Core.MultiTenant.Web.Internal
 
         public async Task InvokeAsync(HttpContext context)
         {
-            // If Activity is not populates, skip
+            // If Activity is not populated, skip
             var current = Activity.Current;
             if (current == null)
             {
