@@ -6,7 +6,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 namespace GiG.Core.Web.Docs.Filters
 {
     /// <summary>
-    /// TenantIdOperationFilter to add X-Tenant-ID In Api Docs.
+    /// ApiKeyOperationFilter to add X-Api-Key In Api Docs.
     /// </summary>
     internal class XApiKeyOperationFilter : IOperationFilter
     {
