@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="JetBrains.Annotations" Version="2019.1.3"/>
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.0.0" PrivateAssets="compile"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\GiG.Core.Authentication.ApiKey.Abstractions\GiG.Core.Authentication.ApiKey.Abstractions.csproj" />
+        <ProjectReference Include="..\GiG.Core.Web.Authentication.ApiKey\GiG.Core.Web.Authentication.ApiKey.csproj" />
+    </ItemGroup>
+
+</Project>

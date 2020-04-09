@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Configuration;
+using GiG.Core.Web.Authentication.ApiKey.Abstractions;
 
 namespace GiG.Core.Web.Authentication.ApiKey.Extensions
 {
@@ -27,7 +28,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Extensions
             services
                 .AddAuthentication(ApiKeyAuthenticationOptions.DefaultScheme)
                 .AddScheme<ApiKeyAuthenticationOptions, ApiKeyAuthenticationHandler>(ApiKeyAuthenticationOptions.DefaultScheme, x => new ApiKeyAuthenticationOptions());
-            
+                
             services
                 .TryAddSingleton<IAuthorizedApiKeysProvider, AuthorizedApiKeysProvider>();
 

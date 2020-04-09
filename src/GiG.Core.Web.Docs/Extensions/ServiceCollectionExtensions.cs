@@ -57,7 +57,6 @@ namespace GiG.Core.Web.Docs.Extensions
                     c.IncludeFullNameCustomSchemaId();
                     c.IncludeForwardedForFilter(apiDocsOptions.IsForwardedForEnabled);
                     c.IncludeXTenantIdFilter(apiDocsOptions.XTenantIdEnabled);
-                    c.IncludeXApiKeyFilter(apiDocsOptions.XApiKeyEnabled);
                     c.OperationFilter<DeprecatedOperationFilter>();
                     configureOptions?.Invoke(c);
                 });
