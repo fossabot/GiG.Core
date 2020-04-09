@@ -3,19 +3,17 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    </PropertyGroup>
-
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="Properties\launchSettings.json" />
-    </ItemGroup>
+      <NoWarn>CS1591</NoWarn>
+    </PropertyGroup>  
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\..\src\GiG.Core.DistributedTracing.Activity\GiG.Core.DistributedTracing.Activity.csproj" />
       <ProjectReference Include="..\..\..\..\src\GiG.Core.MultiTenant.Activity\GiG.Core.MultiTenant.Activity.csproj" />
       <ProjectReference Include="..\..\..\..\src\GiG.Core.MultiTenant.Web\GiG.Core.MultiTenant.Web.csproj" />
+      <ProjectReference Include="..\..\..\..\src\GiG.Core.Web.Authentication.OAuth.Abstractions\GiG.Core.Web.Authentication.OAuth.Abstractions.csproj" />
+      <ProjectReference Include="..\..\..\..\src\GiG.Core.Web.Authentication.OAuth\GiG.Core.Web.Authentication.OAuth.csproj" />
       <ProjectReference Include="..\..\..\..\src\GiG.Core.Web.Docs.Authentication.ApiKey\GiG.Core.Web.Docs.Authentication.ApiKey.csproj" />
       <ProjectReference Include="..\..\..\..\src\GiG.Core.Web.Docs\GiG.Core.Web.Docs.csproj" />
     </ItemGroup>
-
 
 </Project>

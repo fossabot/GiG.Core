@@ -50,7 +50,7 @@ namespace GiG.Core.Web.Docs.Extensions
             });
 
             return services
-                .AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>()
+                .AddSingleton<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>()
                 .AddSwaggerGen(c =>
                 {
                     c.IncludeXmlComments(apiDocsOptions.IsXmlDocumentationEnabled);

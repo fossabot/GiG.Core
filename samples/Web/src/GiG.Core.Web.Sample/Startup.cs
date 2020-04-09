@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 using GiG.Core.DistributedTracing.Activity.Extensions;
 using GiG.Core.MultiTenant.Activity.Extensions;
 using GiG.Core.MultiTenant.Web.Extensions;
@@ -10,13 +6,8 @@ using GiG.Core.Web.Authentication.ApiKey.Extensions;
 using GiG.Core.Web.Docs.Authentication.ApiKey.Extensions;
 using GiG.Core.Web.Docs.Extensions;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace GiG.Core.Web.Sample
 {
