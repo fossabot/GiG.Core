@@ -1,7 +1,9 @@
 ﻿using GiG.Core.Authentication.ApiKey.Abstractions;
+using GiG.Core.MultiTenant.Abstractions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Claims;
@@ -67,9 +69,10 @@ namespace GiG.Core.Web.Authentication.ApiKey.Internal
                 return FailedApiKeyAuthentication();
             }
 
-            // If it is in the list, create an authentication ticket with the tenant id and succeeed.
+            // If it is in the list, create an authentication ticket with the tenant id and succeed.
+            Activity.Current?.AddBaggage(Constants.TenantIdBaggageKey, tenantId);
 
-            var claims = new[] { new Claim("tenant_id", tenantId) };
+            var claims = new[] { new Claim(Constants.ClaimType, tenantId) };
             var identity = new ClaimsIdentity(claims, Scheme.Name);
             var principal = new ClaimsPrincipal(identity);
             var ticket = new AuthenticationTicket(principal, Scheme.Name);
@@ -81,6 +84,5 @@ namespace GiG.Core.Web.Authentication.ApiKey.Internal
         {
             return AuthenticateResult.Fail("Invalid API key.");
         }
-
     }
 }

@@ -10,14 +10,15 @@ namespace GiG.Core.Web.Authentication.ApiKey.Internal
     /// </summary>
     internal class AuthorizedApiKeysProvider : IAuthorizedApiKeysProvider
     {
-        private readonly IOptionsMonitor<ApiKeyOptions> _apiKeyOptions;
+        private readonly IOptionsMonitor<ApiKeyOptions> _apiKeyOptionsAccessor;
 
         /// <summary>
         /// Default <see cref="ApiKeyOptions"/> provider for <see cref="ApiKeyAuthenticationHandler"/>.
         /// </summary>
-        /// <param name="apiKeyOptions"><see cref="IOptionsMonitor{ApiKeyOptions}"/> used to retrieve the list of authorized keys from configuration.</param>
-        public AuthorizedApiKeysProvider(IOptionsMonitor<ApiKeyOptions> apiKeyOptions) {
-            _apiKeyOptions = apiKeyOptions;
+        /// <param name="apiKeyOptionsAccessor"><see cref="IOptionsMonitor{ApiKeyOptions}"/> used to retrieve the list of authorized keys from configuration.</param>
+        public AuthorizedApiKeysProvider(IOptionsMonitor<ApiKeyOptions> apiKeyOptionsAccessor)
+        {
+            _apiKeyOptionsAccessor = apiKeyOptionsAccessor;
         }
 
         /// <summary>
@@ -26,7 +27,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Internal
         /// <returns>Mapping between Api Key and Tenant Id.</returns>
         public Task<Dictionary<string,string>> GetAuthorizedApiKeysAsync()
         {
-            return Task.FromResult(_apiKeyOptions.CurrentValue.AuthorizedTenantKeys);
+            return Task.FromResult(_apiKeyOptionsAccessor.CurrentValue.AuthorizedTenantKeys);
         }
     }
 }
