@@ -44,5 +44,10 @@
         /// A value to indicate if X-Tenant-ID is enabled or not.
         /// </summary>
         public bool XTenantIdEnabled { get; set; } = true;
+        
+        /// <summary>
+        /// A value to indicate if X-Api-Key is enabled or not.
+        /// </summary>
+        public bool XApiKeyEnabled { get; set; } = false;
     }
 }

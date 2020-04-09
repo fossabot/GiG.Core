@@ -39,6 +39,7 @@ The below table outlines the valid Configurations used to override the [ApiDocsO
 | IsForwardedForEnabled     | Boolean | No       | `true`        |
 | IsXmlDocumentationEnabled | Boolean | No       | `true`        |
 | XTenantIdEnabled          | Boolean | No       | `true`        |
+| XApiKeyEnabled            | Boolean | No       | `false`       |
 
 #### Sample Configuration
 

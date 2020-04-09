@@ -18,7 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\GiG.Core.Web.Authentication.ApiKey\GiG.Core.Web.Authentication.ApiKey.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Web.Docs\GiG.Core.Web.Docs.csproj" />
-    <ProjectReference Include="..\..\..\src\GiG.Core.Web.FluentValidation\GiG.Core.Validation.FluentValidation.Web.csproj" />
+    <ProjectReference Include="..\..\..\src\GiG.Core.Validation.FluentValidation.Web\GiG.Core.Validation.FluentValidation.Web.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Web.Hosting\GiG.Core.Web.Hosting.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Web.Mock\GiG.Core.Web.Mock.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Web.Authentication.Hmac.MultiTenant\GiG.Core.Web.Authentication.Hmac.MultiTenant.csproj" />
