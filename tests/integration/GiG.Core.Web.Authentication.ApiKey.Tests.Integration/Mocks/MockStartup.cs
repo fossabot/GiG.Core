@@ -1,4 +1,6 @@
-﻿using GiG.Core.Web.Authentication.ApiKey.Extensions;
+﻿using GiG.Core.MultiTenant.Activity.Extensions;
+using GiG.Core.MultiTenant.Web.Extensions;
+using GiG.Core.Web.Authentication.ApiKey.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +19,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Tests.Integration.Mocks
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddActivityTenantAccessor();
             services.AddApiKeyAuthentication();
             services.ConfigureApiKeyOptions(_configuration);
         }
@@ -25,6 +28,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Tests.Integration.Mocks
         {
             app.UseForwardedHeaders();
             app.UseRouting();
+            app.UseTenantIdMiddleware();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>

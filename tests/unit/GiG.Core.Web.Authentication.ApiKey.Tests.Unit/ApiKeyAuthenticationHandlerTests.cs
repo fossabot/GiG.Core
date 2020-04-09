@@ -1,4 +1,5 @@
 using GiG.Core.Authentication.ApiKey.Abstractions;
+using GiG.Core.MultiTenant.Abstractions;
 using GiG.Core.Web.Authentication.ApiKey.Internal;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
@@ -47,7 +48,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Tests.Unit
 
             _authorizedKeysProviderMock = new Mock<IAuthorizedApiKeysProvider>();
             
-            _authorizedKeysProviderMock.Setup(x => x.GetAuthorizedApiKeysAsync()).Returns(Task.FromResult(_defaultAuthorizedApiKeys));
+            _authorizedKeysProviderMock.Setup(x => x.GetAuthorizedApiKeysAsync()).ReturnsAsync(_defaultAuthorizedApiKeys);
         }
 
         [Fact]
@@ -126,7 +127,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Tests.Unit
             Assert.True(authenticateResult.Succeeded);
             
             Assert.NotNull(claim);
-            Assert.Equal("tenant_id", claim.Type);
+            Assert.Equal(Constants.ClaimType, claim.Type);
             Assert.Equal(_defaultAuthorizedApiKeys.Values.First(), claim.Value);
 
             _authorizedKeysProviderMock.Verify(provider => provider.GetAuthorizedApiKeysAsync(), Times.Once);
@@ -141,7 +142,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Tests.Unit
             var httpContext = BuildHttpContext("abc");
             var apiKeyAuthenticationHandler = await BuildHandlerAsync(httpContext);
 
-            _authorizedKeysProviderMock.Setup(x => x.GetAuthorizedApiKeysAsync()).Returns(Task.FromResult(authorizedApiKeys));
+            _authorizedKeysProviderMock.Setup(x => x.GetAuthorizedApiKeysAsync()).ReturnsAsync(authorizedApiKeys);
 
             // Act
             var authenticateResult = await apiKeyAuthenticationHandler.AuthenticateAsync();
@@ -186,6 +187,5 @@ namespace GiG.Core.Web.Authentication.ApiKey.Tests.Unit
             
             return authHandler;
         }
-
     }
 }

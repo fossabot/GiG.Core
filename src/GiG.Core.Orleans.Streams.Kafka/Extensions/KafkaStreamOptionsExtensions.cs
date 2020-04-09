@@ -99,13 +99,12 @@ namespace GiG.Core.Orleans.Streams.Kafka.Extensions
             if (kafkaTopicOptions.ReplicationFactor < 1) throw new ConfigurationErrorsException("Number of topic replicas cannot be less than 1.");
          
             options.AddTopic(name, new TopicCreationConfig
-                {
-                    Partitions = kafkaTopicOptions.Partitions,
-                    AutoCreate = kafkaTopicOptions.IsTopicCreationEnabled,
-                    ReplicationFactor = kafkaTopicOptions.ReplicationFactor,
-                    RetentionPeriodInMs = kafkaTopicOptions.RetentionPeriodInMs
-                }
-            );
+            {
+                Partitions = kafkaTopicOptions.Partitions,
+                AutoCreate = kafkaTopicOptions.IsTopicCreationEnabled,
+                ReplicationFactor = kafkaTopicOptions.ReplicationFactor,
+                RetentionPeriodInMs = kafkaTopicOptions.RetentionPeriodInMs
+            });
 
             return options;
         }

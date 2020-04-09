@@ -19,22 +19,27 @@ namespace GiG.Core.MultiTenant.Web.Internal
 
         public async Task InvokeAsync(HttpContext context)
         {
-            var tenantExistsInBaggage = Activity.Current?.Baggage.Any(x => x.Key == "TenantId");
-
-            if (tenantExistsInBaggage.HasValue && tenantExistsInBaggage.Value)
-                await _next(context);
-
-            context.Request?.Headers?.TryGetValue(Constants.Header, out var values);
-
-            var tenantIds = values.ToString()
-                .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(m => m.Trim())
-                .ToList();
-
-            if (tenantIds.Any())
+            // If Activity is not populates, skip
+            var current = Activity.Current;
+            if (current == null)
             {
-                foreach (var tenant in tenantIds)
-                    Activity.Current.AddBaggage(Constants.TenantIdBaggageKey, tenant);
+                await _next(context);
+                return;
+            }
+
+            // If Tenant already exists in Baggage, skip
+            var tenantExistsInBaggage = current.Baggage.Any(x => x.Key == Constants.TenantIdBaggageKey);
+            if (tenantExistsInBaggage)
+            {
+                await _next(context);
+                return;
+            }
+
+            // If Tenant exists in Header add it to Baggage
+            context.Request?.Headers?.TryGetValue(Constants.Header, out var values);
+            foreach (var tenant in values)
+            {
+                current.AddBaggage(Constants.TenantIdBaggageKey, tenant);
             }
 
             await _next(context);

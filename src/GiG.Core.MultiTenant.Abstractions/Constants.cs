@@ -14,5 +14,10 @@
         /// Baggage Key for Tenant ID.
         /// </summary>
         public const string TenantIdBaggageKey = "TenantId";
+        
+        /// <summary>
+        /// Claim Type for Tenant ID.
+        /// </summary>
+        public const string ClaimType = "http://schemas.microsoft.com/identity/claims/tenantid";
     }
 }
