@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using GiG.Core.Web.Authentication.ApiKey.Abstractions;
 
 namespace GiG.Core.Web.Authentication.ApiKey.Internal
 {

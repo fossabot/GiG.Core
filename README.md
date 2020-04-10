@@ -67,6 +67,7 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Web.Authentication.Hmac.MultiTenant](docs/GiG.Core.Web.Authentication.Hmac.MultiTenant.md) - Provides an API to configure `HmacAuthenticationHandler` for multitenancy.
 - [GiG.Core.Web.Authentication.OAuth](docs/GiG.Core.Web.Authentication.OAuth.md) - Provides an API to configure OAuth2.0 as a protocol for Authentication.
 - [GiG.Core.Web.Docs](docs/GiG.Core.Web.Docs.md) - Provides an API to configure API Documentation.
+- [GiG.Core.Web.Docs.Authentication.ApiKey](docs/GiG.Core.Web.Docs.Authentication.ApiKey.md) - Provides an API to add ApiKey for Authentication when accessing API Documentation.
 - [GiG.Core.Web.Docs.Authentication.OAuth](docs/GiG.Core.Web.Docs.Authentication.OAuth.md) - Provides an API to configure OAuth2.0 as a protocol for Authentication when accessing API Documentation.
 - [GiG.Core.Web.Hosting](docs/GiG.Core.Web.Hosting.md) - Provides an API to configure `BASE_PATH` and Forwarded Headers.
 - [GiG.Core.Web.Mock](docs/GiG.Core.Web.Mock.md) - Provides a MockStartupBase class to be used for Testing.

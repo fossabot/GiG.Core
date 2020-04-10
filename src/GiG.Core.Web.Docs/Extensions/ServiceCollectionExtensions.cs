@@ -50,14 +50,13 @@ namespace GiG.Core.Web.Docs.Extensions
             });
 
             return services
-                .AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>()
+                .AddSingleton<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>()
                 .AddSwaggerGen(c =>
                 {
                     c.IncludeXmlComments(apiDocsOptions.IsXmlDocumentationEnabled);
                     c.IncludeFullNameCustomSchemaId();
                     c.IncludeForwardedForFilter(apiDocsOptions.IsForwardedForEnabled);
                     c.IncludeXTenantIdFilter(apiDocsOptions.XTenantIdEnabled);
-                    c.IncludeXApiKeyFilter(apiDocsOptions.XApiKeyEnabled);
                     c.OperationFilter<DeprecatedOperationFilter>();
                     configureOptions?.Invoke(c);
                 });
