@@ -4,7 +4,6 @@ using GiG.Core.Web.Docs.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.IO;
 
 namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read

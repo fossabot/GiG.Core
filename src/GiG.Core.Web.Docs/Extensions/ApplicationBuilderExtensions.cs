@@ -22,7 +22,8 @@ namespace GiG.Core.Web.Docs.Extensions
         /// <param name="app">The <see cref="IApplicationBuilder" />.</param>
         /// <param name="configureOptions">A delegate that is used to configure the <see cref="SwaggerUIOptions" />.</param>
         /// <returns>The <see cref="IApplicationBuilder" />.</returns>
-        public static IApplicationBuilder UseApiDocs([NotNull] this IApplicationBuilder app, Action<SwaggerUIOptions> configureOptions = null)
+        public static IApplicationBuilder UseApiDocs([NotNull] this IApplicationBuilder app,
+            Action<SwaggerUIOptions> configureOptions = null)
         {
             if (app == null) throw new ArgumentNullException(nameof(app));
 
@@ -55,21 +56,35 @@ namespace GiG.Core.Web.Docs.Extensions
                 .UseSwagger()
                 .UseSwaggerUI(c =>
                 {
-                    var provider = app.ApplicationServices.GetService<IApiVersionDescriptionProvider>();
-                    if (provider != null)
-                    {
-                        foreach (var description in provider.ApiVersionDescriptions)
-                        {
-                            // build a swagger endpoint for each discovered API version
-                            c.SwaggerEndpoint( $"{endpointPrefix}swagger/{description.GroupName}/swagger.json", $"{description.GroupName.ToUpperInvariant()} Docs" );
-                        }
-                    }
-                    
+                    c.AddSwaggerEndpoint(endpointPrefix.ToString(),
+                        app.ApplicationServices.GetService<IApiVersionDescriptionProvider>());
                     c.ShowExtensions();
                     c.RoutePrefix = options.Url;
                     c.DisplayRequestDuration();
                     configureOptions?.Invoke(c);
                 });
+        }
+
+        private static void AddSwaggerEndpoint(this SwaggerUIOptions options, string prefix, IApiVersionDescriptionProvider provider = null)
+        {
+            if (provider == null)
+            {
+                options.AddSwaggerEndpoint(prefix, "v1");
+                
+                return;
+            }
+
+            foreach (var description in provider.ApiVersionDescriptions)
+            {
+                // build a swagger endpoint for each discovered API version
+                options.AddSwaggerEndpoint(prefix, description.GroupName);
+            }
+        }
+
+        private static void AddSwaggerEndpoint(this SwaggerUIOptions options, string prefix, string groupName)
+        {
+            options.SwaggerEndpoint($"{prefix}swagger/{groupName}/swagger.json",
+                $"{groupName.ToUpperInvariant()} Docs");
         }
     }
 }

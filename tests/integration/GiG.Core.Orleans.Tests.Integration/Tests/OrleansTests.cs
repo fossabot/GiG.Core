@@ -2,7 +2,6 @@ using Bogus;
 using GiG.Core.Context.Abstractions;
 using GiG.Core.Orleans.Tests.Integration.Contracts;
 using GiG.Core.Orleans.Tests.Integration.Fixtures;
-using GiG.Core.Orleans.Tests.Integration.Lifetimes;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;

@@ -46,20 +46,18 @@ namespace GiG.Core.Web.Authentication.Hmac.Internal
         /// <inheritdoc />
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            var hmacOptions = _hmacOptionsProvider.GetHmacOptions();
-
+            var hmacOptions = _hmacOptionsProvider.GetHmacOptions(Scheme.Name);
             if (hmacOptions == null)
             {
                 return AuthenticateResult.Fail("Hmac configuration not set.");
             }
 
-            if (!Request.Headers.TryGetValue(Headers.Nonce,out var nonceValue))
+            if (!Request.Headers.TryGetValue(Constants.Nonce,out var nonceValue))
             {
-                return AuthenticateResult.Fail($"{Headers.Nonce} not set.");
+                return AuthenticateResult.Fail($"{Constants.Nonce} not set.");
             }
 
-            Request.Headers.TryGetValue(Headers.Authorization, out var headerSignature);
-
+            Request.Headers.TryGetValue(Constants.Header, out var headerSignature);
             if (string.IsNullOrEmpty(headerSignature))
             {
                 return AuthenticateResult.Fail("Hmac header is empty.");

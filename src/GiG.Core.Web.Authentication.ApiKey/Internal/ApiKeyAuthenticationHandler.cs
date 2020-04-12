@@ -1,5 +1,4 @@
 ﻿using GiG.Core.Authentication.ApiKey.Abstractions;
-using GiG.Core.MultiTenant.Abstractions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -15,7 +14,7 @@ using System.Threading.Tasks;
 namespace GiG.Core.Web.Authentication.ApiKey.Internal
 {
     /// <summary>
-    /// <see cref="AuthenticationHandler{T}"/> for header.
+    /// <see cref="AuthenticationHandler{TOptions}"/> for header.
     /// </summary>
     internal class ApiKeyAuthenticationHandler : AuthenticationHandler<ApiKeyAuthenticationOptions>
     {
@@ -23,7 +22,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Internal
         private readonly ILogger<ApiKeyAuthenticationHandler> _logger;
 
         /// <summary>
-        /// <see cref="AuthenticationHandler{TOptions}"/> using <see cref="Headers.ApiKey"/> header.
+        /// <see cref="AuthenticationHandler{TOptions}"/> using <see cref="Core.Authentication.ApiKey.Abstractions.Constants.ApiKeyHeader"/> header.
         /// </summary>
         public ApiKeyAuthenticationHandler(
             IOptionsMonitor<ApiKeyAuthenticationOptions> authenticationOptions,
@@ -41,7 +40,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Internal
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
             // If the X-Api-Key header is not present, let other handlers authenticate the request.
-            if (!Request.Headers.TryGetValue(Headers.ApiKey, out var apiKeyHeaderValue))
+            if (!Request.Headers.TryGetValue(Constants.ApiKeyHeader, out var apiKeyHeaderValue))
             {
                 return AuthenticateResult.NoResult();
             }
@@ -52,7 +51,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Internal
                 return FailedApiKeyAuthentication();
             }
 
-            var authorizedApiKeys = await _apiKeysProvider.GetAuthorizedApiKeysAsync();
+            var authorizedApiKeys = await _apiKeysProvider.GetAuthorizedApiKeysAsync(Scheme.Name);
 
             // Validate the provided Authorized Api Keys.
             if (authorizedApiKeys == null ||
@@ -70,9 +69,9 @@ namespace GiG.Core.Web.Authentication.ApiKey.Internal
             }
 
             // If it is in the list, create an authentication ticket with the tenant id and succeed.
-            Activity.Current?.AddBaggage(Constants.TenantIdBaggageKey, tenantId);
+            Activity.Current?.AddBaggage(MultiTenant.Abstractions.Constants.TenantIdBaggageKey, tenantId);
 
-            var claims = new[] { new Claim(Constants.ClaimType, tenantId) };
+            var claims = new[] { new Claim(MultiTenant.Abstractions.Constants.ClaimType, tenantId) };
             var identity = new ClaimsIdentity(claims, Scheme.Name);
             var principal = new ClaimsPrincipal(identity);
             var ticket = new AuthenticationTicket(principal, Scheme.Name);

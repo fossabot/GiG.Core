@@ -14,7 +14,7 @@ namespace GiG.Core.HealthChecks.Tests.Unit.Orleans
             var exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddOrleansHealthChecksSelfHosted(null, (Microsoft.Extensions.Configuration.IConfiguration)null));
             Assert.Equal("services", exception.ParamName);
 
-            exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddOrleansHealthChecksSelfHosted(null, (Microsoft.Extensions.Configuration.IConfigurationSection)null));
+            exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddOrleansHealthChecksSelfHosted(null, null));
             Assert.Equal("services", exception.ParamName);
         }
     }

@@ -44,8 +44,7 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry
             }
 
             var builder = new TracingConfigurationBuilder(tracerBuilder, tracingOptions.Exporters, configurationSection);
-
-            tracingConfigurationBuilder?.Invoke(builder);
+            tracingConfigurationBuilder(builder);
 
             if (!builder.IsConfigured)
             {

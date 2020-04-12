@@ -2,6 +2,7 @@
 using GiG.Core.Web.Docs.Authentication.OAuth.Extensions;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System;
 
 namespace GiG.Core.Web.Docs.Authentication.OAuth
 {
@@ -11,7 +12,12 @@ namespace GiG.Core.Web.Docs.Authentication.OAuth
 
         public ConfigureSwaggerOptions(IOptions<OAuthAuthenticationOptions> oAuthAuthenticationOptionsAccessor)
         {
-            _oAuthAuthenticationOptions = oAuthAuthenticationOptionsAccessor?.Value;
+            if (oAuthAuthenticationOptionsAccessor.Value?.Authority == null)
+            {
+                throw new ApplicationException("The following service is missing; Add services.ConfigureOAuthAuthentication(...)");
+            }
+            
+            _oAuthAuthenticationOptions = oAuthAuthenticationOptionsAccessor.Value;
         }
 
         public void Configure(SwaggerGenOptions options)

@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
+using System.Net.Http.Headers;
 
 namespace GiG.Core.Http.Authentication.Hmac
 {
@@ -29,8 +30,7 @@ namespace GiG.Core.Http.Authentication.Hmac
         public HmacDelegatingHandler(
             IOptions<HmacOptions> options,
             IHashProviderFactory hashProviderFactory,
-            IHmacSignatureProvider signatureProvider
-            )
+            IHmacSignatureProvider signatureProvider)
         {
             _options = options;
             _hashProviderFactory = hashProviderFactory;
@@ -46,16 +46,16 @@ namespace GiG.Core.Http.Authentication.Hmac
                 throw new ConfigurationErrorsException("Options not set for HMAC.");
             }
 
-            if(!request.Headers.TryGetValues(Headers.Nonce, out var nonceValue) || !nonceValue.Any())
+            if (!request.Headers.TryGetValues(Constants.Nonce, out var nonceValue) || !nonceValue.Any())
             {
-                throw new ArgumentException($"'{Headers.Nonce}' must not be null or empty.", Headers.Nonce);
+                throw new ArgumentException($"'{Constants.Nonce}' must not be null or empty.", Constants.Nonce);
             }
 
             var hashProvider = _hashProviderFactory.GetHashProvider(options.HashAlgorithm);
             var hmacHeaderClear = _signatureProvider.GetSignature(request.Method.ToString().ToUpper(), request.RequestUri.LocalPath, await request.GetBodyAsync(), nonceValue.First(), options.Secret);
 
             var hashedHmacHeader = hashProvider.Hash(hmacHeaderClear);
-            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("hmac", hashedHmacHeader);
+            request.Headers.Authorization = new AuthenticationHeaderValue("hmac", hashedHmacHeader);
             
             return await base.SendAsync(request, cancellationToken);
         }

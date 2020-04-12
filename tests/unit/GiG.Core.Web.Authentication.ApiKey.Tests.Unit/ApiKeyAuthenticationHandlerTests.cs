@@ -1,5 +1,4 @@
 using GiG.Core.Authentication.ApiKey.Abstractions;
-using GiG.Core.MultiTenant.Abstractions;
 using GiG.Core.Web.Authentication.ApiKey.Internal;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
@@ -12,6 +11,8 @@ using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Xunit;
+using Constants = GiG.Core.MultiTenant.Abstractions.Constants;
+using ApiKeyConstants = GiG.Core.Authentication.ApiKey.Abstractions.Constants;
 
 namespace GiG.Core.Web.Authentication.ApiKey.Tests.Unit
 {
@@ -42,13 +43,14 @@ namespace GiG.Core.Web.Authentication.ApiKey.Tests.Unit
             // Set up a default mock for the AuthorizedApiKeysProvider with fixed keys
             _defaultAuthorizedApiKeys = new Dictionary<string, string>
             {
-                {"a9f051a6-ba2f-412b-b335-41534cc1c1cf","App1"},
-                {"06f5d50c-89de-4e0d-9653-559029003b07","App2"}
+                {"a9f051a6-ba2f-412b-b335-41534cc1c1cf", "App1"},
+                {"06f5d50c-89de-4e0d-9653-559029003b07", "App2"}
             };
 
             _authorizedKeysProviderMock = new Mock<IAuthorizedApiKeysProvider>();
-            
-            _authorizedKeysProviderMock.Setup(x => x.GetAuthorizedApiKeysAsync()).ReturnsAsync(_defaultAuthorizedApiKeys);
+            _authorizedKeysProviderMock
+                .Setup(x => x.GetAuthorizedApiKeysAsync(ApiKeyConstants.SecurityScheme))
+                .ReturnsAsync(_defaultAuthorizedApiKeys);
         }
 
         [Fact]
@@ -62,7 +64,8 @@ namespace GiG.Core.Web.Authentication.ApiKey.Tests.Unit
             var authenticateResult = await apiKeyAuthenticationHandler.AuthenticateAsync();
 
             // Assert
-            _authorizedKeysProviderMock.Verify(provider => provider.GetAuthorizedApiKeysAsync(), Times.Never);
+            _authorizedKeysProviderMock.Verify(
+                provider => provider.GetAuthorizedApiKeysAsync(ApiKeyConstants.SecurityScheme), Times.Never);
             _authorizedKeysProviderMock.VerifyNoOtherCalls();
 
             Assert.False(authenticateResult.Succeeded);
@@ -80,8 +83,9 @@ namespace GiG.Core.Web.Authentication.ApiKey.Tests.Unit
             var authenticateResult = await apiKeyAuthenticationHandler.AuthenticateAsync();
 
             // Assert
-            _authorizedKeysProviderMock.Verify(provider => provider.GetAuthorizedApiKeysAsync(), Times.Never);
-            
+            _authorizedKeysProviderMock.Verify(
+                provider => provider.GetAuthorizedApiKeysAsync(ApiKeyConstants.SecurityScheme), Times.Never);
+
             Assert.False(authenticateResult.Succeeded);
             Assert.False(authenticateResult.None);
             Assert.NotNull(authenticateResult.Failure);
@@ -104,7 +108,8 @@ namespace GiG.Core.Web.Authentication.ApiKey.Tests.Unit
             var authenticateResult = await apiKeyAuthenticationHandler.AuthenticateAsync();
 
             // Assert
-            _authorizedKeysProviderMock.Verify(provider => provider.GetAuthorizedApiKeysAsync(), Times.Once);
+            _authorizedKeysProviderMock.Verify(
+                provider => provider.GetAuthorizedApiKeysAsync(ApiKeyConstants.SecurityScheme), Times.Once);
             _authorizedKeysProviderMock.VerifyNoOtherCalls();
 
             Assert.False(authenticateResult.Succeeded);
@@ -124,31 +129,36 @@ namespace GiG.Core.Web.Authentication.ApiKey.Tests.Unit
             var claim = authenticateResult?.Ticket?.Principal?.Claims?.SingleOrDefault();
 
             // Assert
+            Assert.NotNull(authenticateResult);
             Assert.True(authenticateResult.Succeeded);
-            
+
             Assert.NotNull(claim);
             Assert.Equal(Constants.ClaimType, claim.Type);
             Assert.Equal(_defaultAuthorizedApiKeys.Values.First(), claim.Value);
 
-            _authorizedKeysProviderMock.Verify(provider => provider.GetAuthorizedApiKeysAsync(), Times.Once);
+            _authorizedKeysProviderMock.Verify(
+                provider => provider.GetAuthorizedApiKeysAsync(ApiKeyConstants.SecurityScheme), Times.Once);
             _authorizedKeysProviderMock.VerifyNoOtherCalls();
         }
 
         [Theory]
         [MemberData(nameof(NoAuthorizedApiKeys))]
-        public async Task ApiKeyAuthenticationHandler_NoAuthorizedApiKeys_ReturnsFailure(Dictionary<string,string> authorizedApiKeys)
+        public async Task ApiKeyAuthenticationHandler_NoAuthorizedApiKeys_ReturnsFailure(
+            Dictionary<string, string> authorizedApiKeys)
         {
             // Arrange
             var httpContext = BuildHttpContext("abc");
             var apiKeyAuthenticationHandler = await BuildHandlerAsync(httpContext);
 
-            _authorizedKeysProviderMock.Setup(x => x.GetAuthorizedApiKeysAsync()).ReturnsAsync(authorizedApiKeys);
+            _authorizedKeysProviderMock.Setup(x => x.GetAuthorizedApiKeysAsync(ApiKeyConstants.SecurityScheme))
+                .ReturnsAsync(authorizedApiKeys);
 
             // Act
             var authenticateResult = await apiKeyAuthenticationHandler.AuthenticateAsync();
 
             // Assert
-            _authorizedKeysProviderMock.Verify(provider => provider.GetAuthorizedApiKeysAsync(), Times.Once);
+            _authorizedKeysProviderMock.Verify(
+                provider => provider.GetAuthorizedApiKeysAsync(ApiKeyConstants.SecurityScheme), Times.Once);
             _authorizedKeysProviderMock.VerifyNoOtherCalls();
 
             Assert.False(authenticateResult.Succeeded);
@@ -157,34 +167,37 @@ namespace GiG.Core.Web.Authentication.ApiKey.Tests.Unit
         }
 
         public static IEnumerable<object[]> NoAuthorizedApiKeys =>
-           new List<object[]>
-           {
-               new object[] { null },
-               new object[] { new Dictionary<string,string>(){ } },
-               new object[] {new Dictionary<string,string>(){ {string.Empty, "1" } } },
-               new object[] {new Dictionary<string,string>(){ {string.Empty, null} } }
-           };
+            new List<object[]>
+            {
+                new object[] {null},
+                new object[] {new Dictionary<string, string>()},
+                new object[] {new Dictionary<string, string> {{string.Empty, "1"}}},
+                new object[] {new Dictionary<string, string> {{string.Empty, null}}}
+            };
 
         private DefaultHttpContext BuildHttpContext(string apiKeyHeaderValue = null)
         {
-            var httpContext = new DefaultHttpContext(); 
+            var httpContext = new DefaultHttpContext();
             var httpRequest = new DefaultHttpRequest(httpContext);
-            
+
             if (apiKeyHeaderValue != null)
             {
-                httpRequest.Headers.Add(Headers.ApiKey, apiKeyHeaderValue);
+                httpRequest.Headers.Add(Core.Authentication.ApiKey.Abstractions.Constants.ApiKeyHeader,
+                    apiKeyHeaderValue);
             }
 
             return httpContext;
         }
 
-        private async Task<ApiKeyAuthenticationHandler> BuildHandlerAsync(DefaultHttpContext httpContext)
+        private async Task<ApiKeyAuthenticationHandler> BuildHandlerAsync(HttpContext httpContext)
         {
-            var authHandler = new ApiKeyAuthenticationHandler(_apiKeyAuthenticationOptions, _authorizedKeysProviderMock.Object, _loggerFactory, _urlEncoder, _systemClock);
+            var authHandler = new ApiKeyAuthenticationHandler(_apiKeyAuthenticationOptions,
+                _authorizedKeysProviderMock.Object, _loggerFactory, _urlEncoder, _systemClock);
 
-            var authScheme = new AuthenticationScheme(ApiKeyAuthenticationOptions.DefaultScheme, ApiKeyAuthenticationOptions.DefaultScheme, typeof(ApiKeyAuthenticationHandler));
+            var authScheme = new AuthenticationScheme(ApiKeyConstants.SecurityScheme, ApiKeyConstants.SecurityScheme,
+                typeof(ApiKeyAuthenticationHandler));
             await authHandler.InitializeAsync(authScheme, httpContext);
-            
+
             return authHandler;
         }
     }

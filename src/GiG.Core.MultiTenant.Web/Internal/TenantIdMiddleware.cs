@@ -1,7 +1,5 @@
 ﻿using GiG.Core.MultiTenant.Abstractions;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;

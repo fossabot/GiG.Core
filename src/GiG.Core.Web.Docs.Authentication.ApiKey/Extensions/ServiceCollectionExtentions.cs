@@ -21,6 +21,7 @@ namespace GiG.Core.Web.Docs.Authentication.ApiKey.Extensions
             if (services == null) throw new ArgumentNullException(nameof(services));
 
             services.AddSingleton<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+
             return services;
         }
     }

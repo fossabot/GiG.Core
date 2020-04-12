@@ -34,20 +34,23 @@ namespace GiG.Core.Web.Docs.Extensions
                 return services;
             }
 
-            services.AddApiVersioning(options =>
+            if (apiDocsOptions.IsApiVersioningEnabled)
             {
-                // reporting api versions will return the headers "api-supported-versions" and "api-deprecated-versions"
-                options.ReportApiVersions = true;
-            });
-
-            services.AddVersionedApiExplorer(options =>
-            {
-                //The format of the version added to the route URL: "'v'major"
-                options.GroupNameFormat = "'v'V";
-
-                //Tells swagger to replace the version in the controller route  
-                options.SubstituteApiVersionInUrl = true;
-            });
+                services.AddApiVersioning(options =>
+                {
+                    // reporting api versions will return the headers "api-supported-versions" and "api-deprecated-versions"
+                    options.ReportApiVersions = true;
+                });
+            
+                services.AddVersionedApiExplorer(options =>
+                {
+                    //The format of the version added to the route URL: "'v'major"
+                    options.GroupNameFormat = "'v'V";
+            
+                    //Tells swagger to replace the version in the controller route  
+                    options.SubstituteApiVersionInUrl = true;
+                });
+            }
 
             return services
                 .AddSingleton<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>()
@@ -56,7 +59,7 @@ namespace GiG.Core.Web.Docs.Extensions
                     c.IncludeXmlComments(apiDocsOptions.IsXmlDocumentationEnabled);
                     c.IncludeFullNameCustomSchemaId();
                     c.IncludeForwardedForFilter(apiDocsOptions.IsForwardedForEnabled);
-                    c.IncludeXTenantIdFilter(apiDocsOptions.XTenantIdEnabled);
+                    c.IncludeTenantIdFilter(apiDocsOptions.IsTenantIdEnabled);
                     c.OperationFilter<DeprecatedOperationFilter>();
                     configureOptions?.Invoke(c);
                 });

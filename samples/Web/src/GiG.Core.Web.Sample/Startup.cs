@@ -1,9 +1,9 @@
 using System.Text.Json.Serialization;
-using GiG.Core.DistributedTracing.Activity.Extensions;
-using GiG.Core.MultiTenant.Activity.Extensions;
 using GiG.Core.MultiTenant.Web.Extensions;
 using GiG.Core.Web.Authentication.ApiKey.Extensions;
+using GiG.Core.Web.Authentication.OAuth.Extensions;
 using GiG.Core.Web.Docs.Authentication.ApiKey.Extensions;
+using GiG.Core.Web.Docs.Authentication.OAuth.Extensions;
 using GiG.Core.Web.Docs.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -18,21 +18,22 @@ namespace GiG.Core.Web.Sample
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddActivityAccessor();
-            services.AddActivityTenantAccessor();
-            
+            services.AddControllers()
+                .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+
             services.ConfigureApiDocs(Configuration)
                 .AddApiDocsApiKeyAuthentication()
-                .AddControllers()
-                .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+                .AddApiDocsOAuthAuthentication();
             
-            services.AddApiKeyAuthentication();
-            services.ConfigureApiKeyOptions(Configuration);
+            services.ConfigureApiKeyOptions(Configuration)
+                .AddApiKeyAuthentication();
+
+            services.ConfigureOAuthAuthentication(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,8 +44,7 @@ namespace GiG.Core.Web.Sample
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseApiDocs();
-
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
     }
 }

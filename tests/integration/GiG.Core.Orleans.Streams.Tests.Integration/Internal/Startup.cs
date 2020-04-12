@@ -1,7 +1,6 @@
 using GiG.Core.HealthChecks.Abstractions;
 using GiG.Core.HealthChecks.Extensions;
 using GiG.Core.HealthChecks.Orleans.Streams.Kafka;
-using GiG.Core.Orleans.Streams.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

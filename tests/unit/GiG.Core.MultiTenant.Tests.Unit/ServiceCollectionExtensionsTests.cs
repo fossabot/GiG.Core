@@ -1,7 +1,6 @@
 ﻿using GiG.Core.MultiTenant.Web.Extensions;
 using System;
 using Xunit;
-using Xunit.Sdk;
 
 // ReSharper disable AssignNullToNotNullAttribute
 

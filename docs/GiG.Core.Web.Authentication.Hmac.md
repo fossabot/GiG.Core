@@ -16,7 +16,12 @@ public void ConfigureServices(IServiceCollection services)
 
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 {
+	app.UseRouting();
     app.UseAuthentication();
     app.UseAuthorization();
+	app.UseEndpoints(endpoints =>
+	{
+		endpoints.MapControllers();
+	});
 }
 ```

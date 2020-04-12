@@ -1,4 +1,3 @@
-using GiG.Core.DistributedTracing.Telemetry.Abstractions;
 using JetBrains.Annotations;
 using OpenTelemetry.Trace.Configuration;
 using System;
