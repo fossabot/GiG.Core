@@ -34,8 +34,11 @@ namespace GiG.Core.Data.KVStores.Etcd.Sample.Services
                 new Currency { Name = "Euro" },
                 new Currency { Name = "Dollar"}
             }.AsEnumerable();
-
-            await _dataWriter.WriteAsync(currencies);
+            
+            await _dataWriter.LockAsync(async () =>
+            {
+                await _dataWriter.WriteAsync(currencies);
+            });
 
             _logger.LogInformation("Reading Currencies...");
 

@@ -95,7 +95,7 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         /// <inheritdoc />
         public async Task<object> LockAsync(params string[] keys)
         {
-            var key = GetKey(keys);
+            var key = $"locks/{GetKey(keys)}";
 
             var lockResponse = await _etcdClient.LockAsync(key);
 
@@ -105,7 +105,10 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         /// <inheritdoc />
         public async Task UnlockAsync(object handle)
         {
-            await _etcdClient.UnlockAsync(handle as string);
+            if (handle is string handleString)
+            {
+                await _etcdClient.UnlockAsync(handleString);
+            }
         }
 
         /// <inheritdoc/>
