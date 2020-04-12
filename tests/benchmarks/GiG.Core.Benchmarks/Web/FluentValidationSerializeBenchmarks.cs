@@ -1,46 +1,64 @@
 ﻿using BenchmarkDotNet.Attributes;
-using GiG.Core.Models;
 using GiG.Core.Validation.FluentValidation.Web.Extensions;
-using System.Collections.Generic;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace GiG.Core.Benchmarks.Web
 {
+    [BenchmarkCategory("Validations")]
     public class FluentValidationSerializeBenchmarks
     {
-        private readonly ErrorResponse _smallErrorResponse;
-        private readonly ErrorResponse _largeErrorResponse;
+        private HttpClient _client;
+        private IHost _host;
 
-        public FluentValidationSerializeBenchmarks()
+        [GlobalSetup]
+        public async Task Setup()
         {
-            _smallErrorResponse = new ErrorResponse
-            {
-                Errors = new Dictionary<string, List<string>>
+            _host = Host.CreateDefaultBuilder()
+                .ConfigureLogging(x => x.SetMinimumLevel(LogLevel.Warning))
+                .ConfigureServices(x =>
+                    x.AddControllers().AddApplicationPart(typeof(ValidationController).Assembly))
+                .ConfigureWebHostDefaults(x =>
                 {
-                    {"Address", new List<string> {"Address field is required."}}
-                }
-            };
+                    x.UseTestServer();
+                    x.Configure(app =>
+                    {
+                        app.UseRouting();
+                        app.UseFluentValidationMiddleware();
+                        app.UseEndpoints(builder => builder.MapControllers());
+                    });
+                })
+                .Build();
 
-            _largeErrorResponse = new ErrorResponse
-            {
-                Errors = new Dictionary<string, List<string>>
-                {
-                    {"Name", new List<string> {"Name field should contain at least 2 characters.", "Name field cannot contain only numbers."}},
-                    {"Surname", new List<string> {"Surname field is required."}},
-                    {"Address", new List<string> {"Address field is required."}}
-                }
-            };
+            await _host.StartAsync();
+
+            _client = _host.GetTestClient();
+        } 
+
+        [Benchmark]
+        public async Task Serialize_SmallResponse()
+        {
+            await _client.GetAsync("validation/small");
         }
 
         [Benchmark]
-        public void Serialize_SmallResponse()
+        public async Task Serialize_LargeResponse()
         {
-            _smallErrorResponse.Serialize(null);
+            await _client.GetAsync("validation/large");
         }
 
-        [Benchmark]
-        public void Serialize_LargeResponse()
+        [GlobalCleanup]
+        public async Task Cleanup()
         {
-            _largeErrorResponse.Serialize(null);
-        }
+            _client.Dispose();
+            await _host.StopAsync();
+            _host.Dispose();
+        } 
     }
 }

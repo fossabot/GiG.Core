@@ -14,7 +14,7 @@ namespace GiG.Core.Web.FluentValidation.Tests.Integration.Tests
     public class FluentValidationMiddlewareTests
     {
         private readonly TestServer _server;
-        
+
         public FluentValidationMiddlewareTests()
         {
             _server = new TestServer(new WebHostBuilder()
@@ -34,18 +34,23 @@ namespace GiG.Core.Web.FluentValidation.Tests.Integration.Tests
 
             // Assert
             var body = response?.Content?.ReadAsStringAsync();
+            using var document = JsonDocument.Parse(body?.Result);
+            var properties = document.RootElement.EnumerateObject();
 
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-            Assert.NotEmpty(GetPropertyValue(body?.Result, "errorSummary"));
+            Assert.Equal("One or more validation errors occurred.",
+                GetPropertyValue(properties, "errorSummary").GetString());
+
+            var errors = GetPropertyValue(properties, "errors");
+            Assert.Equal("error1.1", errors.GetProperty("test1")[0].GetString());
+            Assert.Equal("error1.2", errors.GetProperty("test1")[1].GetString());
+            Assert.Equal("error2.1", errors.GetProperty("test2")[0].GetString());
         }
 
-        private static string GetPropertyValue(string json, string propertyName)
+        private static JsonElement GetPropertyValue(JsonElement.ObjectEnumerator properties, string propertyName)
         {
-            using var document = JsonDocument.Parse(json);
-            var properties = document.RootElement.EnumerateObject();
-
-            return properties.FirstOrDefault(x => x.Name.Equals(propertyName)).Value.ToString();
+            return properties.FirstOrDefault(x => x.Name.Equals(propertyName)).Value;
         }
     }
 }
