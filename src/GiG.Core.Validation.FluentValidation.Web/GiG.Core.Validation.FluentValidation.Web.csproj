@@ -13,8 +13,4 @@
     <PackageReference Include="System.Text.Json" Version="4.7.0" PrivateAssets="compile" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\GiG.Core.Models\GiG.Core.Models.csproj" />
-  </ItemGroup>
-  
 </Project>
