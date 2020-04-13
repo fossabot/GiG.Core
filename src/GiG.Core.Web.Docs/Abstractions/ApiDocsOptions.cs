@@ -41,8 +41,13 @@
         public bool IsXmlDocumentationEnabled { get; set; } = true;
 
         /// <summary>
-        /// A value to indicate if X-Tenant-ID is enabled or not.
+        /// A value to indicate if Tenant ID header is enabled or not.
         /// </summary>
-        public bool XTenantIdEnabled { get; set; } = true;
+        public bool IsTenantIdEnabled { get; set; } = true;
+        
+        /// <summary>
+        /// A value to indicate if Api Versioning is enabled or not.
+        /// </summary>
+        public bool IsApiVersioningEnabled { get; set; } = true;
     }
 }

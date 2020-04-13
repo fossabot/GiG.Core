@@ -52,7 +52,7 @@ namespace GiG.Core.Web.Authentication.Hmac.MultiTenant.Tests.Integration.Tests
             //Arrange
             var client = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient(DefaultClientName);
             using var request = new HttpRequestMessage(HttpMethod.Get, "api/mock");
-            request.Headers.Add(Headers.Nonce, "123");
+            request.Headers.Add(Constants.Nonce, "123");
 
             //Act
             using var response = await client.SendAsync(request);
@@ -67,7 +67,7 @@ namespace GiG.Core.Web.Authentication.Hmac.MultiTenant.Tests.Integration.Tests
             //Arrange
             var client = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient("NonHmacClient");
             using var request = new HttpRequestMessage(HttpMethod.Get, "api/mock");
-            request.Headers.Add(Headers.Nonce, "123");
+            request.Headers.Add(Constants.Nonce, "123");
 
             //Act
             using var response = await client.SendAsync(request);
@@ -83,10 +83,10 @@ namespace GiG.Core.Web.Authentication.Hmac.MultiTenant.Tests.Integration.Tests
             var clientDefault = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient(DefaultClientName);
             var clientDefault2 = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient(DefaultClient2Name);
             using var request = new HttpRequestMessage(HttpMethod.Get, "api/mock");
-            request.Headers.Add(Headers.Nonce, "123");
+            request.Headers.Add(Constants.Nonce, "123");
 
             using var request2 = new HttpRequestMessage(HttpMethod.Get, "api/mock");
-            request2.Headers.Add(Headers.Nonce, "123");
+            request2.Headers.Add(Constants.Nonce, "123");
 
             //Act
             using var response = await clientDefault.SendAsync(request);

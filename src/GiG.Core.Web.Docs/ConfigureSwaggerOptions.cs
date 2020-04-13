@@ -10,28 +10,40 @@ namespace GiG.Core.Web.Docs
 {
     internal class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
     {
-        private readonly IApiVersionDescriptionProvider _provider;
         private readonly ApiDocsOptions _apiDocsOptions;
+        private readonly IApiVersionDescriptionProvider _provider;
 
-        public ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider, IOptionsMonitor<ApiDocsOptions> apiDocsOptions)
+        public ConfigureSwaggerOptions(IOptionsMonitor<ApiDocsOptions> apiDocsOptions, IApiVersionDescriptionProvider provider = null)
         {
-            _provider = provider;
             _apiDocsOptions = apiDocsOptions.CurrentValue;
+            _provider = provider;
         }
 
         public void Configure(SwaggerGenOptions options)
         {
+            if (_provider == null)
+            {
+                AddSwaggerDoc(options);
+
+                return;
+            }
+
             foreach (var description in _provider.ApiVersionDescriptions)
             {
-                options.SwaggerDoc(
-                    description.GroupName,
-                    new OpenApiInfo
-                    {
-                        Title = ApplicationMetadata.Name,
-                        Description = $"{_apiDocsOptions.Description}{(description.IsDeprecated ? " [DEPRECATED]." : string.Empty)}",
-                        Version = description.ApiVersion.ToString()
-                    });
+                AddSwaggerDoc(options, description.GroupName, description.ApiVersion.ToString(), description.IsDeprecated);
             }
+        }
+
+        private void AddSwaggerDoc(SwaggerGenOptions options, string groupName = "v1", string apiVersion = null, bool isDeprecated = false)
+        {
+            options.SwaggerDoc(
+                groupName,
+                new OpenApiInfo
+                {
+                    Title = _apiDocsOptions.Title ?? ApplicationMetadata.Name,
+                    Description = $"{_apiDocsOptions.Description}{(isDeprecated ? " [DEPRECATED]." : string.Empty)}",
+                    Version = apiVersion
+                });
         }
     }
 }

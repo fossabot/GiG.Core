@@ -22,9 +22,9 @@ namespace GiG.Core.Web.Authentication.Hmac.Internal
         /// Gets the configured hmac settings.
         /// </summary>
         /// <returns><see cref="HmacOptions"/></returns>
-        public HmacOptions GetHmacOptions()
+        public HmacOptions GetHmacOptions(string name)
         {
-            return _optionsAccessor.Value;
+            return _optionsAccessor.Get(name);
         }
     }
 }

@@ -43,9 +43,9 @@ namespace GiG.Core.Web.Authentication.Hmac.Tests.Unit
 
             _signatureProvider.Setup(x => x.GetSignature(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>())).Returns("abc");
             _request = new DefaultHttpRequest(_httpContext);
-            _request.Headers.Add(Headers.Nonce, "test");
+            _request.Headers.Add(Constants.Nonce, "test");
             _loggerFactory.Setup(x => x.CreateLogger(It.IsAny<string>())).Returns(logger.Object);
-            _optionsProvider.Setup(x => x.GetHmacOptions()).Returns(new HmacOptions());
+            _optionsProvider.Setup(x => x.GetHmacOptions(Constants.SecurityScheme)).Returns(new HmacOptions());
             _hashProviderFactory.Setup(x => x.GetHashProvider(It.IsAny<string>())).Returns(_hashProvider.Object);
         }
 
@@ -53,7 +53,7 @@ namespace GiG.Core.Web.Authentication.Hmac.Tests.Unit
         public async Task HmacAuthenticationHandler_MatchHmacHeader_ReturnsSuccess()
         {
             //Arrange
-            _request.Headers.Add(Headers.Authorization, "hmac abc");
+            _request.Headers.Add(Constants.Header, "hmac abc");
             _hashProvider.Setup(x => x.Hash(It.IsAny<string>())).Returns("abc");
             var hmacAuthHandler = await BuildHandlerAsync();
 
@@ -69,8 +69,8 @@ namespace GiG.Core.Web.Authentication.Hmac.Tests.Unit
         public async Task HmacAuthenticationHandler_NonceHeaderMissing_ReturnsFail()
         {
             //Arrange
-            _request.Headers.Remove(Headers.Nonce);
-            _request.Headers.Add(Headers.Authorization, "hmac abc");
+            _request.Headers.Remove(Constants.Nonce);
+            _request.Headers.Add(Constants.Header, "hmac abc");
             _hashProvider.Setup(x => x.Hash(It.IsAny<string>())).Returns("abc");
             var hmacAuthHandler = await BuildHandlerAsync();
 
@@ -88,7 +88,7 @@ namespace GiG.Core.Web.Authentication.Hmac.Tests.Unit
         public async Task HmacAuthenticationHandler_MatchHmacHeader_ReturnsFail()
         {
             //Arrange
-            _request.Headers.Add(Headers.Authorization, "hmac abc");
+            _request.Headers.Add(Constants.Header, "hmac abc");
             _hashProvider.Setup(x => x.Hash(It.IsAny<string>())).Returns("abcd");
             var hmacAuthHandler = await BuildHandlerAsync();
 
@@ -120,13 +120,13 @@ namespace GiG.Core.Web.Authentication.Hmac.Tests.Unit
         private async Task<HmacAuthenticationHandler> BuildHandlerAsync()
         {
             var authHandler = new HmacAuthenticationHandler(_hmacRequirement.Object, _loggerFactory.Object, _urlEncoder.Object, _systemClock.Object, _optionsProvider.Object, _hashProviderFactory.Object, _signatureProvider.Object);
-            await authHandler.InitializeAsync(new AuthenticationScheme("hmac", "HMAC", typeof(HmacAuthenticationHandler)), _httpContext);
+            await authHandler.InitializeAsync(new AuthenticationScheme(Constants.SecurityScheme, "HMAC", typeof(HmacAuthenticationHandler)), _httpContext);
             return authHandler;
         }
 
         private void VerifyCallsNoHeader()
         {
-            _optionsProvider.Verify(x => x.GetHmacOptions(), Times.Once);
+            _optionsProvider.Verify(x => x.GetHmacOptions(Constants.SecurityScheme), Times.Once);
             _optionsProvider.VerifyNoOtherCalls();
         }
 
@@ -136,7 +136,7 @@ namespace GiG.Core.Web.Authentication.Hmac.Tests.Unit
             _hashProvider.VerifyNoOtherCalls();
             _hashProviderFactory.Verify(x => x.GetHashProvider(It.IsAny<string>()), Times.Once);
             _hashProviderFactory.VerifyNoOtherCalls();
-            _optionsProvider.Verify(x => x.GetHmacOptions(), Times.Once);
+            _optionsProvider.Verify(x => x.GetHmacOptions(Constants.SecurityScheme), Times.Once);
             _optionsProvider.VerifyNoOtherCalls();
         }
     }

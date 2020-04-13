@@ -15,6 +15,6 @@ namespace GiG.Core.Web.Authentication.ApiKey.Abstractions
         /// <summary>
         /// Mapping between Api Keys and the associated Tenant Id.
         /// </summary>
-        public Dictionary<string,string> AuthorizedTenantKeys { get; set; }
+        public IDictionary<string, string> AuthorizedTenantKeys { get; set; }
     }
 }

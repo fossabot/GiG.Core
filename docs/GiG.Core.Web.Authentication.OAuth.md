@@ -15,8 +15,13 @@ public void ConfigureServices(IServiceCollection services)
 
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 {
+	app.UseRouting();
     app.UseAuthentication();
     app.UseAuthorization();
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapControllers();
+    });
 }
 ```
 
@@ -26,7 +31,6 @@ The below table outlines the valid Configurations used to configure the [OAuthAu
 
 | Configuration Name        | Type    | Optional | Default Value    |
 |:--------------------------|:--------|:---------|:-----------------|
-| IsEnabled                 | Boolean | Yes      | true             |
 | Authority                 | String  | No       |                  |
 | ApiName                   | String  | Yes      |                  |
 | ApiSecret                 | String  | Yes      |                  |
@@ -41,7 +45,6 @@ The below table outlines the valid Configurations used to configure the [OAuthAu
 {
   "Authentication": {
     "OAuth": {
-      "IsEnabled": true,
       "Authority": "http://localhost:7070",
       "ApiName": "sample-web",
       "RequireHttpsMetadata": false,

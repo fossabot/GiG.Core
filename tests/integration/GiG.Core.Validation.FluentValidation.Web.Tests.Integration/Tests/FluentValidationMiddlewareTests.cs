@@ -1,4 +1,4 @@
-using GiG.Core.Web.FluentValidation.Tests.Integration.Mocks;
+using GiG.Core.Validation.FluentValidation.Web.Tests.Integration.Mocks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace GiG.Core.Web.FluentValidation.Tests.Integration.Tests
+namespace GiG.Core.Validation.FluentValidation.Web.Tests.Integration.Tests
 {
     [Trait("Category", "Integration")]
     public class FluentValidationMiddlewareTests

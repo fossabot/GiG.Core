@@ -1,7 +1,6 @@
 using GiG.Core.Authentication.ApiKey.Abstractions;
 using GiG.Core.Web.Authentication.ApiKey.Tests.Integration.Fixtures;
 using Microsoft.AspNetCore.TestHost;
-using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -44,7 +43,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Tests.Integration.Tests
             //Arrange
             var client = _fixture.Host.GetTestClient();
             using var request = new HttpRequestMessage(HttpMethod.Get, "api/mock");
-            request.Headers.Add(Headers.ApiKey, apiKeyHeaderValue);
+            request.Headers.Add(Constants.ApiKeyHeader, apiKeyHeaderValue);
 
             //Act
             using var response = await client.SendAsync(request);
@@ -59,10 +58,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Tests.Integration.Tests
             //Arrange
             var client = _fixture.Host.GetTestClient();
             using var request = new HttpRequestMessage(HttpMethod.Get, "api/mock");
-            request.Headers.Add(Headers.ApiKey, "abc");
-
-            var activity = new Activity("test");
-            activity.Start();
+            request.Headers.Add(Constants.ApiKeyHeader, "abc");
 
             //Act
             using var response = await client.SendAsync(request);

@@ -4,9 +4,6 @@ using GiG.Core.Web.Authentication.ApiKey.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GiG.Core.Web.Authentication.ApiKey.Tests.Integration.Mocks
 {

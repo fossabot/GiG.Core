@@ -1,11 +1,8 @@
 ﻿using GiG.Core.Messaging.MassTransit.Extensions;
 using MassTransit;
 using MassTransit.Context;
-using MassTransit.PipeConfigurators;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace GiG.Core.Messaging.MassTransit.Tests.Unit
@@ -40,11 +37,10 @@ namespace GiG.Core.Messaging.MassTransit.Tests.Unit
                         cfg.ConfigurePublish(y => y.UseActivityFilterWithTracing(null));
                     }));
                 });
-                var busControl = services.BuildServiceProvider().GetRequiredService<IBusControl>();
+                services.BuildServiceProvider().GetRequiredService<IBusControl>();
             });
 
             Assert.Equal("serviceProvider", exception.ParamName);
         }
-
     }
 }
