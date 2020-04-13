@@ -22,16 +22,19 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
             
             // Assert
             await AssertLogEventAsync();
+            var correlationId = _logEvent.Properties[TracingFields.CorrelationId].LiteralValue().ToString();
             var traceId = _logEvent.Properties[TracingFields.TraceId].LiteralValue().ToString();
             var spanId = _logEvent.Properties[TracingFields.SpanId].LiteralValue().ToString();
             var parentSpanId = _logEvent.Properties[TracingFields.ParentId].LiteralValue().ToString();
             var baggageTenantId = _logEvent.Properties[$"{TracingFields.BaggagePrefix}{tenantIdKey}"].LiteralValue().ToString();
             
+            Assert.NotNull(correlationId);
             Assert.NotNull(traceId);
             Assert.NotNull(spanId);
             Assert.NotNull(parentSpanId);
             Assert.NotNull(baggageTenantId);
             
+            Assert.Equal(_activityContextAccessor.CorrelationId, correlationId);
             Assert.Equal(_activityContextAccessor.TraceId, traceId);
             Assert.Equal(_activityContextAccessor.SpanId, spanId);
             Assert.Equal(_activityContextAccessor.ParentSpanId, parentSpanId);
@@ -55,21 +58,16 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
             var applicationVersion = (string) _logEvent.Properties["ApplicationVersion"].LiteralValue();
             var correlationId = (string) _logEvent.Properties["CorrelationId"].LiteralValue();
             var ipAddress = (string) _logEvent.Properties["IPAddress"].LiteralValue();
-            var tenantIds = _logEvent.Properties["TenantId"].SequenceValues();
 
             Assert.NotNull(applicationName);
             Assert.NotNull(applicationVersion);
             Assert.NotNull(correlationId);
             Assert.NotNull(ipAddress);
-            Assert.NotNull(tenantIds);
 
             Assert.Equal(_applicationMetadataAccessor.Name, applicationName);
             Assert.Equal(_applicationMetadataAccessor.Version, applicationVersion);
             Assert.Equal(_activityContextAccessor.CorrelationId, correlationId);
             Assert.Equal(_requestContextAccessor.IPAddress.ToString(), ipAddress);
-            Assert.Equal(2, tenantIds.Length);
-            Assert.Contains("1", tenantIds);
-            Assert.Contains("2", tenantIds);
         }
     }
 }
