@@ -22,7 +22,6 @@
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Enrichers.ApplicationMetadata\GiG.Core.Logging.Enrichers.ApplicationMetadata.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Enrichers.Context\GiG.Core.Logging.Enrichers.Context.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Enrichers.DistributedTracing\GiG.Core.Logging.Enrichers.DistributedTracing.csproj" />
-    <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Enrichers.MultiTenant\GiG.Core.Logging.Enrichers.MultiTenant.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Sinks.Console\GiG.Core.Logging.Sinks.Console.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Sinks.File\GiG.Core.Logging.Sinks.File.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.Sinks.Fluentd\GiG.Core.Logging.Sinks.Fluentd.csproj" />

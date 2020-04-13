@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Web\GiG.Core.DistributedTracing.Web.csproj" />
+    <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Activity\GiG.Core.DistributedTracing.Activity.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.All\GiG.Core.Logging.All.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Messaging.Kafka\GiG.Core.Messaging.Kafka.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Messaging.MassTransit\GiG.Core.Messaging.MassTransit.csproj" />

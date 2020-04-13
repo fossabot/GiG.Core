@@ -1,4 +1,5 @@
-﻿using GiG.Core.Web.Authentication.Hmac.Extensions;
+﻿using GiG.Core.MultiTenant.Activity.Extensions;
+using GiG.Core.Web.Authentication.Hmac.Extensions;
 using GiG.Core.Web.Authentication.Hmac.MultiTenant.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +27,7 @@ namespace GiG.Core.Web.Authentication.Hmac.MultiTenant.Tests.Integration.Mocks
             app.UseForwardedHeaders();
             app.UseRouting();
 
+            app.UseTenantIdMiddleware();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>

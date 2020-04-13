@@ -30,8 +30,7 @@ namespace GiG.Core.ApplicationMetrics.Prometheus.Tests.Integration.Mocks
             services.ConfigureApplicationMetrics(_configuration);
 
             services.AddMockRequestContextAccessor();
-            services.AddMockCorrelationAccessor();
-            services.AddMockTenantAccessor();
+            services.AddMockActivityContextAccessor();
         }
 
         /// <summary>

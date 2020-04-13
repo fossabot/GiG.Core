@@ -9,7 +9,7 @@ namespace GiG.Core.MultiTenant.Activity.Internal
     /// <summary>
     /// Tenant Accessor using the Activity Context.
     /// </summary>
-    internal class ActivityTenantAccessor : ITenantAccessor
+    internal class ActivityTenantAccessor : IActivityTenantAccessor
     {
         private readonly IActivityContextAccessor _activityContextAccessor;
 

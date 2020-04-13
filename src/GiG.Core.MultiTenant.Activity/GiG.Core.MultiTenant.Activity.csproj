@@ -1,19 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" PrivateAssets="compile" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" PrivateAssets="compile" />
-        <PackageReference Include="System.Collections.Immutable" Version="1.7.0" PrivateAssets="compile" />
-    </ItemGroup>
-    
-    <ItemGroup>
-      <ProjectReference Include="..\GiG.Core.DistributedTracing.Abstractions\GiG.Core.DistributedTracing.Abstractions.csproj" />
-      <ProjectReference Include="..\GiG.Core.DistributedTracing.Activity\GiG.Core.DistributedTracing.Activity.csproj" />
-      <ProjectReference Include="..\GiG.Core.MultiTenant.Abstractions\GiG.Core.MultiTenant.Abstractions.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+
+
+    <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" PrivateAssets="compile" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" PrivateAssets="compile" />
+    <PackageReference Include="System.Collections.Immutable" Version="1.7.0" PrivateAssets="compile" />
+    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="4.7.0" PrivateAssets="compile" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GiG.Core.DistributedTracing.Abstractions\GiG.Core.DistributedTracing.Abstractions.csproj" />
+    <ProjectReference Include="..\GiG.Core.DistributedTracing.Activity\GiG.Core.DistributedTracing.Activity.csproj" />
+    <ProjectReference Include="..\GiG.Core.MultiTenant.Abstractions\GiG.Core.MultiTenant.Abstractions.csproj" />
+  </ItemGroup>
 
 </Project>

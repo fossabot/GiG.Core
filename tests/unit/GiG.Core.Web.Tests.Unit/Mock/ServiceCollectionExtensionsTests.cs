@@ -11,13 +11,10 @@ namespace GiG.Core.Web.Tests.Unit.Mock
         [Fact]
         public void ConfigureForwardedHeaders_ServiceCollectionIsNull_ThrowsArgumentNullException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddMockCorrelationAccessor(null));
+            var exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddMockActivityContextAccessor(null));
             Assert.Equal("services", exception.ParamName);
 
             exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddMockRequestContextAccessor(null));
-            Assert.Equal("services", exception.ParamName);
-
-            exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddMockTenantAccessor(null));
             Assert.Equal("services", exception.ParamName);
         }
     }

@@ -11,7 +11,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GiG.Core.Logging.Enrichers.Context\GiG.Core.Logging.Enrichers.Context.csproj" />
-    <ProjectReference Include="..\GiG.Core.Logging.Enrichers.MultiTenant\GiG.Core.Logging.Enrichers.MultiTenant.csproj" />
     <ProjectReference Include="..\GiG.Core.Logging.Sinks.Console\GiG.Core.Logging.Sinks.Console.csproj" />
     <ProjectReference Include="..\GiG.Core.Logging.Sinks.File\GiG.Core.Logging.Sinks.File.csproj" />
     <ProjectReference Include="..\GiG.Core.Logging.Sinks.Fluentd\GiG.Core.Logging.Sinks.Fluentd.csproj" />

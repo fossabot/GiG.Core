@@ -3,9 +3,9 @@ using System.Collections.Immutable;
 namespace GiG.Core.MultiTenant.Abstractions
 {
     /// <summary>
-    /// Tenants Accessor.
+    /// Activity Tenants Accessor.
     /// </summary>
-    public interface ITenantAccessor
+    public interface IActivityTenantAccessor
     {
         /// <summary>
         /// Contains the current context's Tenants.

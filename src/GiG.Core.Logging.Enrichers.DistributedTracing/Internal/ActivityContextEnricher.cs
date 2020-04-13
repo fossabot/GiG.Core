@@ -23,10 +23,16 @@ namespace GiG.Core.Logging.Enrichers.DistributedTracing.Internal
         /// <inheritdoc />
         public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
         {
+            AddCorrelationId(logEvent);
             AddTraceId(logEvent);
             AddSpanId(logEvent);
             AddParentId(logEvent);
             AddBaggage(logEvent);
+        }
+
+        private void AddCorrelationId(LogEvent logEvent)
+        {
+            logEvent.AddPropertyIfAbsent(new LogEventProperty(TracingFields.CorrelationId, new ScalarValue(_activityContextAccessor.CorrelationId)));
         }
 
         private void AddTraceId(LogEvent logEvent)

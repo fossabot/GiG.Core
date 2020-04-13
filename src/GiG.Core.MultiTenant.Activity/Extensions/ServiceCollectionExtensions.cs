@@ -23,8 +23,8 @@ namespace GiG.Core.MultiTenant.Activity.Extensions
             if (services == null) throw new ArgumentNullException(nameof(services));
 
             services
-                .AddActivityAccessor()
-                .TryAddSingleton<ITenantAccessor, ActivityTenantAccessor>();
+                .AddActivityContextAccessor()
+                .TryAddSingleton<IActivityTenantAccessor, ActivityTenantAccessor>();
 
             return services;
         }

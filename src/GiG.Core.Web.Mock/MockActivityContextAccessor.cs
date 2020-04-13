@@ -22,7 +22,7 @@ namespace GiG.Core.Web.Mock
             ParentId = random.String2(8);
             ParentSpanId = random.String2(8);
             OperationName = random.String2(10);
-            CurrentActivity = new System.Diagnostics.Activity(random.String2(16));
+            CurrentActivity = new Activity(random.String2(16));
 
             Baggage = new List<KeyValuePair<string, string>> {new KeyValuePair<string, string>("TenantId", "1234")};
         }

@@ -1,5 +1,5 @@
-using GiG.Core.DistributedTracing.Web.Extensions;
-using GiG.Core.MultiTenant.Web.Extensions;
+using GiG.Core.DistributedTracing.Activity.Extensions;
+using GiG.Core.MultiTenant.Activity.Extensions;
 using GiG.Core.Web.Mock;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,14 +10,17 @@ namespace GiG.Core.Http.Tests.Integration.Mocks
     {
         public override void ConfigureServices(IServiceCollection services)
         {
-            services.AddCorrelationAccessor();
-            services.AddTenantAccessor();
+            services.AddActivityContextAccessor();
+            services.AddActivityTenantAccessor();
+            services.AddHttpClient();
+
             base.ConfigureServices(services);
         }
 
         public override void Configure(IApplicationBuilder app)
         {
-            app.UseCorrelation();
+            app.UseTenantIdMiddleware();
+            
             base.Configure(app);
         }
     }

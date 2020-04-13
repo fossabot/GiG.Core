@@ -19,12 +19,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Abstractions\GiG.Core.DistributedTracing.Abstractions.csproj" />
-    <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Web\GiG.Core.DistributedTracing.Web.csproj" />
+    <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Activity\GiG.Core.DistributedTracing.Activity.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Http.DistributedTracing\GiG.Core.Http.DistributedTracing.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Http.Extensions\GiG.Core.Http.Extensions.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Http.MultiTenant\GiG.Core.Http.MultiTenant.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Http\GiG.Core.Http.csproj" />
-    <ProjectReference Include="..\..\..\src\GiG.Core.MultiTenant.Web\GiG.Core.MultiTenant.Web.csproj" />
+    <ProjectReference Include="..\..\..\src\GiG.Core.MultiTenant.Activity\GiG.Core.MultiTenant.Activity.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Web.Mock\GiG.Core.Web.Mock.csproj" />
   </ItemGroup>
 

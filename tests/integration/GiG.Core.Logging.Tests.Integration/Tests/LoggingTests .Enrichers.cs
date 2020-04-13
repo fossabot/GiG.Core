@@ -65,7 +65,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
 
             Assert.Equal(_applicationMetadataAccessor.Name, applicationName);
             Assert.Equal(_applicationMetadataAccessor.Version, applicationVersion);
-            Assert.Equal(_correlationContextAccessor.Value.ToString(), correlationId);
+            Assert.Equal(_activityContextAccessor.CorrelationId, correlationId);
             Assert.Equal(_requestContextAccessor.IPAddress.ToString(), ipAddress);
             Assert.Equal(2, tenantIds.Length);
             Assert.Contains("1", tenantIds);

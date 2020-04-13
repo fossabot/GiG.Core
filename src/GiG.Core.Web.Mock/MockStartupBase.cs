@@ -23,8 +23,8 @@ namespace GiG.Core.Web.Mock
             services.AddRouting();
 
             services.AddMockRequestContextAccessor();
-            services.AddMockCorrelationAccessor();
-            services.AddMockTenantAccessor();
+            //services.AddMockActivityTenantAccessor();
+            //services.AddMockActivityContextAccessor();
         }
 
         /// <summary>
