@@ -1,7 +1,6 @@
 ﻿using GiG.Core.Http.DistributedTracing;
 using GiG.Core.Http.MultiTenant;
 using GiG.Core.Http.Tests.Integration.Mocks;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Refit;
 using System.Linq;
@@ -27,9 +26,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
         public async Task GetAsync_Create_ReturnsHttpResponseMessage()
         {
             // Arrange
-            var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
-            var activity = new System.Diagnostics.Activity("Tests");
-            var a = activity.Start();
+            var testServer = _fixture.Host.GetTestServer();
 
             var client = HttpClientFactory.Create(x =>
             {
@@ -37,9 +34,9 @@ namespace GiG.Core.Http.Tests.Integration.Tests
                 x.AddDelegatingHandler(new TenantDelegatingHandler(_fixture.ActivityTenantAccessor));
                 x.AddDelegatingHandler(new LoggingDelegatingHandler());
                 x.WithMessageHandler(testServer.CreateHandler());
-                x.Options.WithBaseAddress(testServer.BaseAddress);
+                x.Options.WithBaseAddress(TestFixture.BaseUrl);
             });
-
+            
             var service = RestService.For<IMockRestClient>(client);
 
             // Act
@@ -57,7 +54,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
         public async Task GetAsync_Create_UseBaseAddressAsString_ReturnsHttpResponseMessage()
         {
             // Arrange
-            var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
+            var testServer = _fixture.Host.GetTestServer();
 
             var client = HttpClientFactory.Create(x =>
             {
@@ -65,7 +62,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
                 x.AddDelegatingHandler(new TenantDelegatingHandler(_fixture.ActivityTenantAccessor));
                 x.AddDelegatingHandler(new LoggingDelegatingHandler());
                 x.WithMessageHandler(testServer.CreateHandler());
-                x.Options.WithBaseAddress(testServer.BaseAddress.ToString());
+                x.Options.WithBaseAddress(TestFixture.BaseUrl);
             });
 
             var service = RestService.For<IMockRestClient>(client);
@@ -85,7 +82,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
         public async Task GetAsync_Create_UseBaseAddressWithRelativePath_ReturnsHttpNotFound()
         {
             // Arrange
-            var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
+            var testServer = _fixture.Host.GetTestServer();
 
             var client = HttpClientFactory.Create(x =>
             {
@@ -93,7 +90,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
                 x.AddDelegatingHandler(new TenantDelegatingHandler(_fixture.ActivityTenantAccessor));
                 x.AddDelegatingHandler(new LoggingDelegatingHandler());
                 x.WithMessageHandler(testServer.CreateHandler());
-                x.Options.WithBaseAddress(testServer.BaseAddress.ToString(), "/relative");
+                x.Options.WithBaseAddress(TestFixture.BaseUrl, "/relative");
             });
 
             var service = RestService.For<IMockRestClient>(client);
@@ -105,7 +102,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
 
             // Assert
             Assert.Equal(HttpStatusCode.NotFound, actual.StatusCode);
-            Assert.Equal(_fixture.ActivityContextAccessor.CorrelationId, correlation.First());
+            Assert.Null(correlation);
             Assert.NotEqual(_fixture.ActivityTenantAccessor.Values, tenants);
         }
 
@@ -113,7 +110,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
         public async Task GetAsync_GetOrAddWithType_ReturnsHttpResponseMessage()
         {
             // Arrange
-            var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
+            var testServer = _fixture.Host.GetTestServer();
             var client = CreateClientWithType(testServer);
             var service = RestService.For<IMockRestClient>(client);
             
@@ -132,7 +129,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
         public async Task GetAsync_GetOrAddWithName_ReturnsHttpResponseMessage()
         {
             // Arrange
-            var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
+            var testServer = _fixture.Host.GetTestServer();
             var client = CreateClientWithName(testServer);
             var service = RestService.For<IMockRestClient>(client);
 
@@ -151,7 +148,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
         public void GetAsync_GetOrAddWithType_ReturnsSameInstance()
         {
             // Arrange
-            var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
+            var testServer = _fixture.Host.GetTestServer();
 
             // Act
             var clientInstance1 = CreateClientWithType(testServer);
@@ -167,7 +164,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
         public void GetAsync_GetOrAddWithName_ReturnsSameInstance()
         {
             // Arrange
-            var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
+            var testServer = _fixture.Host.GetTestServer();
 
             // Act
             var clientInstance1 = CreateClientWithName(testServer);
@@ -186,7 +183,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
                 x.AddDelegatingHandler(new TenantDelegatingHandler(_fixture.ActivityTenantAccessor));
                 x.AddDelegatingHandler(new LoggingDelegatingHandler());
                 x.WithMessageHandler(testServer.CreateHandler());
-                x.Options.WithBaseAddress(testServer.BaseAddress);
+                x.Options.WithBaseAddress(TestFixture.BaseUrl);
             });
 
         private HttpClient CreateClientWithType(TestServer testServer) =>
@@ -196,7 +193,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
                 x.AddDelegatingHandler(new TenantDelegatingHandler(_fixture.ActivityTenantAccessor));
                 x.AddDelegatingHandler(new LoggingDelegatingHandler());
                 x.WithMessageHandler(testServer.CreateHandler());
-                x.Options.WithBaseAddress(testServer.BaseAddress);
+                x.Options.WithBaseAddress(TestFixture.BaseUrl);
             });
     }
 }

@@ -1,6 +1,7 @@
 using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.MultiTenant.Abstractions;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Threading.Tasks;
@@ -13,31 +14,31 @@ namespace GiG.Core.Http.Tests.Integration.Mocks
         internal IActivityContextAccessor ActivityContextAccessor;
         internal IActivityTenantAccessor ActivityTenantAccessor;
         internal const string BaseUrl = "http://localhost:56125";
-        private IHost _host;
+        internal IHost Host;
         
         public async Task InitializeAsync()
         {
-            _host = Host
+            Host = Microsoft.Extensions.Hosting.Host
                 .CreateDefaultBuilder()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseKestrel().UseUrls(BaseUrl);
+                    webBuilder.UseTestServer();
                     webBuilder.UseStartup<MockStartup>();
                 }).Build();
 
-            await _host.StartAsync();
+            await Host.StartAsync();
 
-            ActivityContextAccessor = _host.Services.GetService<IActivityContextAccessor>();
-            ActivityTenantAccessor = _host.Services.GetService<IActivityTenantAccessor>();
+            ActivityContextAccessor = Host.Services.GetService<IActivityContextAccessor>();
+            ActivityTenantAccessor = Host.Services.GetService<IActivityTenantAccessor>();
         }
 
         public async Task DisposeAsync()
         {
-            if (_host != null)
+            if (Host != null)
             {
-                await _host?.StopAsync();
-                await _host?.WaitForShutdownAsync();
-                _host.Dispose();
+                await Host?.StopAsync();
+                await Host?.WaitForShutdownAsync();
+                Host.Dispose();
             }
         }
     }

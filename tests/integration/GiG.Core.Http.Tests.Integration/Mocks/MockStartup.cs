@@ -1,6 +1,7 @@
 using GiG.Core.DistributedTracing.Activity.Extensions;
 using GiG.Core.MultiTenant.Activity.Extensions;
 using GiG.Core.Web.Mock;
+using GiG.Core.Web.Mock.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,7 +11,7 @@ namespace GiG.Core.Http.Tests.Integration.Mocks
     {
         public override void ConfigureServices(IServiceCollection services)
         {
-            services.AddActivityContextAccessor();
+            services.AddMockActivityContextAccessor();
             services.AddActivityTenantAccessor();
             services.AddHttpClient();
 
