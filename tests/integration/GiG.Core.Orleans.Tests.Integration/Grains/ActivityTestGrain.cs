@@ -1,6 +1,5 @@
 using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.MultiTenant.Abstractions;
-using GiG.Core.Orleans.Streams;
 using GiG.Core.Orleans.Streams.Abstractions;
 using GiG.Core.Orleans.Tests.Integration.Contracts;
 using GiG.Core.Orleans.Tests.Integration.Mocks;

@@ -47,7 +47,7 @@ namespace GiG.Core.Web.Tests.Unit.Authentication.ApiKey
 
             // Act / Assert
             Action unitUnderTest = () => serviceCollection.ConfigureApiKeyOptions(configurationSection);
-            var exception = Assert.Throws<ArgumentNullException>(unitUnderTest);
+            Assert.Throws<ArgumentNullException>(unitUnderTest);
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace GiG.Core.Web.Tests.Unit.Authentication.ApiKey
 
             // Act / Assert
             Action unitUnderTest = () => serviceCollection.ConfigureApiKeyOptions(configuration);
-            var exception = Assert.Throws<ArgumentNullException>(unitUnderTest);
+            Assert.Throws<ArgumentNullException>(unitUnderTest);
         }
     }
 }

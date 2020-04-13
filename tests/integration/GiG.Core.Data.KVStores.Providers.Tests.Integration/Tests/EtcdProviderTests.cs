@@ -13,6 +13,7 @@ using Polly.Registry;
 using Polly.Retry;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -32,20 +33,17 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
         public EtcdProviderTests()
         {
             var host = Host.CreateDefaultBuilder()
-                .ConfigureAppConfiguration((hostingContext, config) =>
-                {
-                    config.AddJsonFile("appsettingsEtcd.json");
-                })
+                .ConfigureAppConfiguration((hostingContext, config) => { config.AddJsonFile("appsettingsEtcd.json"); })
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddKVStores<IEnumerable<MockLanguage>>(x => 
+                    services.AddKVStores<IEnumerable<MockLanguage>>(x =>
                         x.FromEtcd(hostContext.Configuration, "Languages")
-                         .AddJson());
-                    
+                            .AddJson());
+
                     services.AddKVStores<IEnumerable<MockCurrency>>(x =>
                         x.FromEtcd(hostContext.Configuration, "Currencies")
-                         .AddJson());
-                    
+                            .AddJson());
+
                     services.AddSingleton<IRetryPolicy<bool>>(GetPolicy());
                 })
                 .Build();
@@ -72,15 +70,15 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
             var languages = await ReadLanguageFromEtcdAsync(key);
 
             var dataRetriever = _serviceProvider.GetRequiredService<IDataRetriever<IEnumerable<MockLanguage>>>();
-            
+
             // Act
             var actualData = await dataRetriever.GetAsync();
 
             // Assert
             Assert.NotNull(actualData);
             Assert.Equal(languages.Select(l => l.Alpha2Code), actualData.Select(l => l.Alpha2Code));
-        }   
-        
+        }
+
         [Fact]
         public async Task PutEtcdProviderData_Currencies_ReturnsMockCurrencies()
         {
@@ -93,17 +91,17 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
 
                 return string.IsNullOrEmpty(value);
             });
-            
+
             await WriteToEtcdAsync("currencies.json", key);
             var currencies = await ReadCurrencyFromEtcdAsync(key);
 
             var dataRetriever = _serviceProvider.GetRequiredService<IDataRetriever<IEnumerable<MockCurrency>>>();
             var expectedData = currencies.ToList();
             expectedData.First().Code = Guid.NewGuid().ToString();
-            
+
             // Act
             await _etcdClient.PutAsync(key, JsonSerializer.Serialize(expectedData));
-            
+
             // Arrange
             await _polly.ExecuteAsync(async () =>
             {
@@ -130,10 +128,13 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
                 .Generate(5)
                 .AsEnumerable();
 
-            await dataWriter.WriteAsync(languages, key);
-
             // Act
-            var actualData = await dataRetriever.GetAsync(key);
+            IEnumerable<MockLanguage> actualData = null;
+            await dataWriter.LockAsync(async () =>
+            {
+                await dataWriter.WriteAsync(languages, key);
+                actualData = await dataRetriever.GetAsync(key);
+            }, key);
 
             // Assert
             Assert.NotNull(actualData);
@@ -157,17 +158,26 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
                 .AsEnumerable();
 
             var languagesUpdated = new List<MockLanguage>(languages);
-            languagesUpdated.AddRange(new Faker<MockLanguage>()
+            languagesUpdated.ToImmutableArray().AddRange(new Faker<MockLanguage>()
                 .RuleFor(x => x.Alpha2Code, new Randomizer().String(2, 'a', 'z'))
                 .RuleFor(x => x.Name, new Randomizer().String(100, 'a', 'z'))
                 .Generate(2));
 
-            await dataWriter.WriteAsync(languages, key);
-
             // Act
-            var actualData = await dataRetriever.GetAsync(key);
-            await dataWriter.WriteAsync(languagesUpdated, key);
-            var actualDataUpdated = await dataRetriever.GetAsync(key);
+            IEnumerable<MockLanguage> actualData = null;
+            await dataWriter.LockAsync(async () =>
+            {
+                await dataWriter.WriteAsync(languages, key);
+                actualData = await dataRetriever.GetAsync(key);
+            }, key);
+
+            IEnumerable<MockLanguage> actualDataUpdated = null;
+            await dataWriter.LockAsync(async () =>
+            {
+                actualData = await dataRetriever.GetAsync(key);
+                await dataWriter.WriteAsync(languagesUpdated, key);
+                actualDataUpdated = await dataRetriever.GetAsync(key);
+            }, key);
 
             // Assert
             Assert.NotNull(actualData);
@@ -205,10 +215,10 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
                 ? new List<MockCurrency>()
                 : JsonSerializer.Deserialize<IEnumerable<MockCurrency>>(value);
         }
-        
+
         private static AsyncRetryPolicy<bool> GetPolicy()
         {
-            var registry =  new PolicyRegistry
+            var registry = new PolicyRegistry
             {
                 {
                     PolicyRegistryName, Policy.HandleResult<bool>(x => !x)

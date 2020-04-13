@@ -12,6 +12,6 @@ namespace GiG.Core.Authentication.ApiKey.Abstractions
         /// Returns the authorized valid api keys.
         /// </summary>
         /// <returns>Mapping between Api Key and Tenant Id.</returns>
-        Task<Dictionary<string, string>> GetAuthorizedApiKeysAsync();
+        Task<IDictionary<string, string>> GetAuthorizedApiKeysAsync(string name);
     }
 }

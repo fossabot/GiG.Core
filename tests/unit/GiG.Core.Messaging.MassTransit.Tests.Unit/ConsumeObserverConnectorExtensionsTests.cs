@@ -2,8 +2,6 @@
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace GiG.Core.Messaging.MassTransit.Tests.Unit
@@ -31,7 +29,7 @@ namespace GiG.Core.Messaging.MassTransit.Tests.Unit
                         cfg.Host.AddDefaultConsumerObserver(null);
                     }));
                 });
-                var busControl = services.BuildServiceProvider().GetRequiredService<IBusControl>();
+                services.BuildServiceProvider().GetRequiredService<IBusControl>();
             });
 
             Assert.Equal("serviceProvider", exception.ParamName);
@@ -64,7 +62,7 @@ namespace GiG.Core.Messaging.MassTransit.Tests.Unit
                         cfg.Host.AddActivityConsumerObserverWithTracing(null);
                     }));
                 });
-                var busControl = services.BuildServiceProvider().GetRequiredService<IBusControl>();
+                services.BuildServiceProvider().GetRequiredService<IBusControl>();
             });
 
             Assert.Equal("serviceProvider", exception.ParamName);

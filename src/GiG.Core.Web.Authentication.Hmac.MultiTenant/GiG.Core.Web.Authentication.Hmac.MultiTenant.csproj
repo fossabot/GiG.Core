@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GiG.Core.Authentication.Hmac.Abstractions\GiG.Core.Authentication.Hmac.Abstractions.csproj" />
     <ProjectReference Include="..\GiG.Core.MultiTenant.Activity\GiG.Core.MultiTenant.Activity.csproj" />
     <ProjectReference Include="..\GiG.Core.Web.Authentication.Hmac.Abstractions\GiG.Core.Web.Authentication.Hmac.Abstractions.csproj" />
   </ItemGroup>

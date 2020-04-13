@@ -9,6 +9,7 @@
         /// <see cref="HmacOptions"/> default section name.
         /// </summary>
         public const string DefaultSectionName = "Authentication:Hmac";
+       
         /// <summary>
         /// Hash Algorithm for Hmac Authentication. Default is sha256.
         /// </summary>

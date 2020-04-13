@@ -38,8 +38,8 @@ The below table outlines the valid Configurations used to override the [ApiDocsO
 | Description               | String  | No       | <null>        |
 | IsForwardedForEnabled     | Boolean | No       | `true`        |
 | IsXmlDocumentationEnabled | Boolean | No       | `true`        |
-| XTenantIdEnabled          | Boolean | No       | `true`        |
-| XApiKeyEnabled            | Boolean | No       | `false`       |
+| IsApiVersioningEnabled    | Boolean | No       | `true`        |
+| IsTenantIdEnabled         | Boolean | No       | `true`        |
 
 #### Sample Configuration
 

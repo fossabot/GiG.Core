@@ -17,7 +17,7 @@ namespace GiG.Core.Web.Authentication.Hmac.Tests.Unit
         
         public HttpRequestExtensionsTests()
         {
-            _nonceHeader = Headers.Nonce;
+            _nonceHeader = Constants.Nonce;
             _nonceValue = "abc";
         }
 

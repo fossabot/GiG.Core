@@ -1,12 +1,10 @@
 ﻿using GiG.Core.HealthChecks.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
-using HealthCheckOptions = GiG.Core.HealthChecks.Abstractions.HealthCheckOptions;
 
 namespace GiG.Core.HealthChecks.AspNetCore.Extensions
 {

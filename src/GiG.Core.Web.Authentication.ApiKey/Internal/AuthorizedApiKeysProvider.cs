@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using GiG.Core.Web.Authentication.ApiKey.Abstractions;
 
 namespace GiG.Core.Web.Authentication.ApiKey.Internal
 {
@@ -25,9 +26,9 @@ namespace GiG.Core.Web.Authentication.ApiKey.Internal
         /// Returns the authorized valid api keys from configuration.
         /// </summary>
         /// <returns>Mapping between Api Key and Tenant Id.</returns>
-        public Task<Dictionary<string,string>> GetAuthorizedApiKeysAsync()
+        public Task<IDictionary<string,string>> GetAuthorizedApiKeysAsync(string name)
         {
-            return Task.FromResult(_apiKeyOptionsAccessor.CurrentValue.AuthorizedTenantKeys);
+            return Task.FromResult(_apiKeyOptionsAccessor.Get(name).AuthorizedTenantKeys);
         }
     }
 }

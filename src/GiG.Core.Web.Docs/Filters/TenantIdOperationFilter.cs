@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
-using GiG.Core.Authentication.ApiKey.Abstractions;
+﻿using GiG.Core.MultiTenant.Abstractions;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Collections.Generic;
 
 namespace GiG.Core.Web.Docs.Filters
 {
     /// <summary>
-    /// ApiKeyOperationFilter to add X-Api-Key In Api Docs.
+    /// TenantIdOperationFilter to add Tenant ID header In Api Docs.
     /// </summary>
-    internal class XApiKeyOperationFilter : IOperationFilter
+    internal class TenantIdOperationFilter : IOperationFilter
     {
         /// <inheritdoc />
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
@@ -20,8 +20,8 @@ namespace GiG.Core.Web.Docs.Filters
 
             operation.Parameters.Add(new OpenApiParameter
             {
-                Name = Headers.ApiKey,
-                Description = "Api Key",
+                Name = Constants.Header,
+                Description = "Tenant Id",
                 In = ParameterLocation.Header,
                 Required = false,
                 Schema = new OpenApiSchema

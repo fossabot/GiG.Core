@@ -41,19 +41,11 @@ namespace GiG.Core.Web.Docs.Extensions
             }
         }
 
-        internal static void IncludeXTenantIdFilter(this SwaggerGenOptions options, bool isEnabled)
+        internal static void IncludeTenantIdFilter(this SwaggerGenOptions options, bool isEnabled)
         {
             if (isEnabled)
             {
-                options.OperationFilter<XTenantIdOperationFilter>();
-            }
-        }
-        
-        internal static void IncludeXApiKeyFilter(this SwaggerGenOptions options, bool isEnabled)
-        {
-            if (isEnabled)
-            {
-                options.OperationFilter<XApiKeyOperationFilter>();
+                options.OperationFilter<TenantIdOperationFilter>();
             }
         }
     }

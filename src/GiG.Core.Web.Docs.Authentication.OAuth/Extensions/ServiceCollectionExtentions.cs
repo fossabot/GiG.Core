@@ -20,7 +20,8 @@ namespace GiG.Core.Web.Docs.Authentication.OAuth.Extensions
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+            services.AddSingleton<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+
             return services;
         }
     }

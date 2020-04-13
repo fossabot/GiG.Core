@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GiG.Core.Authentication.ApiKey.Abstractions
+namespace GiG.Core.Web.Authentication.ApiKey.Abstractions
 {
     /// <summary>
     /// Options for ApiKeyAuthentication.
@@ -15,6 +15,6 @@ namespace GiG.Core.Authentication.ApiKey.Abstractions
         /// <summary>
         /// Mapping between Api Keys and the associated Tenant Id.
         /// </summary>
-        public Dictionary<string,string> AuthorizedTenantKeys { get; set; }
+        public IDictionary<string, string> AuthorizedTenantKeys { get; set; }
     }
 }
