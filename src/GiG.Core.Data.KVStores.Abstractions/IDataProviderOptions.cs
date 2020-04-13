@@ -1,3 +1,5 @@
+// ReSharper disable UnusedTypeParameter
+
 namespace GiG.Core.Data.KVStores.Abstractions
 {
     /// <summary>

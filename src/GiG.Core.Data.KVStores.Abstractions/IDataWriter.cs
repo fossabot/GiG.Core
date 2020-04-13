@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace GiG.Core.Data.KVStores.Abstractions
 {
@@ -15,5 +16,13 @@ namespace GiG.Core.Data.KVStores.Abstractions
         /// <param name="keys">The key.</param>
         /// <returns></returns>
         Task WriteAsync(T value, params string[] keys);
+        
+        /// <summary>
+        /// Locks using a key.
+        /// </summary>
+        /// <param name="action">Func when lock is acquired.</param>
+        /// <param name="keys">The key.</param>
+        /// <returns></returns>
+        Task LockAsync(Func<Task> action, params string[] keys);
     }
 }

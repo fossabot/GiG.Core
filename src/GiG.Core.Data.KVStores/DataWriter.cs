@@ -1,4 +1,6 @@
 ﻿using GiG.Core.Data.KVStores.Abstractions;
+using GiG.Core.Data.KVStores.Abstractions.Exceptions;
+using System;
 using System.Threading.Tasks;
 
 namespace GiG.Core.Data.KVStores
@@ -20,11 +22,30 @@ namespace GiG.Core.Data.KVStores
         /// <inheritdoc />
         public async Task WriteAsync(T value, params string[] keys)
         {
+            try
+            {
+                await _dataProvider.WriteAsync(value, keys);
+            }
+            catch (Exception ex)
+            {
+                throw new WriterException($"Cannot write value for {typeof(T).FullName} with keys {string.Join(", ", keys)}", ex);
+            }
+        }
+
+        /// <inheritdoc />
+        public async Task LockAsync(Func<Task> action, params string[] keys)
+        {
+            if (action == null) throw new ArgumentNullException(nameof(action));
+
             var handle = await _dataProvider.LockAsync(keys);
-
-            await _dataProvider.WriteAsync(value, keys);
-
-            await _dataProvider.UnlockAsync(handle);
+            try
+            {
+                await action();
+            }
+            finally
+            {
+                await _dataProvider.UnlockAsync(handle);
+            }
         }
     }
 }

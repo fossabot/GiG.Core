@@ -2,7 +2,7 @@
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GiG.Core.Web.FluentValidation.Tests.Integration.Mocks.Controllers
+namespace GiG.Core.Validation.FluentValidation.Web.Tests.Integration.Mocks.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

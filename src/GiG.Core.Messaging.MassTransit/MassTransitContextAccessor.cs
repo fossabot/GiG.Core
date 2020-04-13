@@ -5,13 +5,13 @@ namespace GiG.Core.Messaging.MassTransit
     /// <inheritdoc />
     public class MassTransitContextAccessor : IMassTransitContextAccessor
     {
-        private static readonly AsyncLocal<MassTransitContext> _massTransitContext = new AsyncLocal<MassTransitContext>();
+        private static readonly AsyncLocal<MassTransitContext> MassTransitContextAsyncLocal = new AsyncLocal<MassTransitContext>();
 
         /// <inheritdoc />
         public MassTransitContext MassTransitContext
         {
-            get => _massTransitContext.Value;
-            set => _massTransitContext.Value = value;
+            get => MassTransitContextAsyncLocal.Value;
+            set => MassTransitContextAsyncLocal.Value = value;
         }
     }
 }

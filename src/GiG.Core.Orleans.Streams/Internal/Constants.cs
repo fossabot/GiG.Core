@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GiG.Core.Orleans.Streams.Internal
+﻿namespace GiG.Core.Orleans.Streams.Internal
 {
     /// <summary>
     /// Constants.

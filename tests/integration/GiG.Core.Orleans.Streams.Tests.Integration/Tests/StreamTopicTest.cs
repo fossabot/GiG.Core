@@ -2,7 +2,6 @@ using GiG.Core.Orleans.Streams.Tests.Integration.Fixtures;
 using GiG.Core.Orleans.Streams.Tests.Integration.Mocks;
 using Orleans.Streams;
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -40,7 +39,7 @@ namespace GiG.Core.Orleans.Streams.Tests.Integration.Tests
             // Act
             await _stream.OnNextAsync(message);
 
-            await _fixture._lock.WaitAsync(2000);
+            await _fixture.Lock.WaitAsync(2000);
 
             // Assert
             Assert.True(_streamReceived);
@@ -50,7 +49,7 @@ namespace GiG.Core.Orleans.Streams.Tests.Integration.Tests
         {
             _streamReceived = true;
             
-            _fixture._lock.Release();
+            _fixture.Lock.Release();
             
             return Task.CompletedTask;
         }

@@ -1,6 +1,5 @@
 using GiG.Core.Orleans.Tests.Integration.Contracts;
 using GiG.Core.Orleans.Tests.Integration.Fixtures;
-using GiG.Core.Orleans.Tests.Integration.Lifetimes;
 using System;
 using System.Threading.Tasks;
 using Xunit;

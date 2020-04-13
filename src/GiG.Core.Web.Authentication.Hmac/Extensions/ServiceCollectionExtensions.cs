@@ -10,6 +10,8 @@ using System;
 using System.Configuration;
 using System.Linq;
 
+// ReSharper disable ObjectCreationAsStatement
+
 namespace GiG.Core.Web.Authentication.Hmac.Extensions
 {
     /// <summary>
@@ -20,15 +22,19 @@ namespace GiG.Core.Web.Authentication.Hmac.Extensions
         /// <summary>
         /// Adds required services to support the <see cref="HmacAuthenticationHandler" /> functionality.
         /// </summary>
-        /// <param name="services">The <see cref="IServiceCollection" />.</param>        
+        /// <param name="services">The <see cref="IServiceCollection" />.</param>
+        /// <param name="schemeName">The scheme name.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
-        public static IServiceCollection AddHmacAuthentication([NotNull]this IServiceCollection services)
+        public static IServiceCollection AddHmacAuthentication([NotNull] this IServiceCollection services, string schemeName = Constants.SecurityScheme)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            services.AddAuthentication(SecuritySchemes.Hmac).AddScheme<HmacRequirement, HmacAuthenticationHandler>("hmac", x => new HmacOptions());
+            if (string.IsNullOrWhiteSpace(schemeName)) throw new ArgumentException($"'{nameof(schemeName)}' must not be null, empty or whitespace.", nameof(schemeName));
 
             services
-                .TryAddSingleton<IHashProvider, SHA256HashProvider>();
+                .AddAuthentication(schemeName)
+                .AddScheme<HmacRequirement, HmacAuthenticationHandler>(schemeName, x => new HmacOptions());
+
+            services.TryAddSingleton<IHashProvider, SHA256HashProvider>();
             services.TryAddSingleton<IHmacSignatureProvider, HmacSignatureProvider>();
             services.TryAddSingleton<IHashProviderFactory, HashProviderFactory>();
             services.TryAddSingleton<Func<string, IHashProvider>>(x =>
@@ -36,34 +42,40 @@ namespace GiG.Core.Web.Authentication.Hmac.Extensions
 
             return services;
         }
+
         /// <summary>
         /// Adds option provider for <see cref="HmacAuthenticationHandler" /> functionality.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>        
-        /// <param name="configurationSection">The <see cref="IConfigurationSection" />Configuration section for hmac settings.</param>        
+        /// <param name="configurationSection">The <see cref="IConfigurationSection" />Configuration section for hmac settings.</param>
+        /// <param name="schemeName">The scheme name.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
-        public static IServiceCollection ConfigureDefaultHmacOptionProvider([NotNull]this IServiceCollection services, [NotNull]IConfigurationSection configurationSection)
+        public static IServiceCollection ConfigureDefaultHmacOptionProvider([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection, string schemeName = Constants.SecurityScheme)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
             if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection?.Path}' is incorrect.");
+            if (string.IsNullOrWhiteSpace(schemeName)) throw new ArgumentException($"'{nameof(schemeName)}' must not be null, empty or whitespace.", nameof(schemeName));
 
             services.TryAddScoped<IHmacOptionsProvider, DefaultOptionsProvider>();
-            services.Configure<HmacOptions>(configurationSection);
+            services.Configure<HmacOptions>(schemeName, configurationSection);
 
             return services;
         }
+
         /// <summary>
         /// Adds option provider for <see cref="HmacAuthenticationHandler" /> functionality.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>        
-        /// <param name="configuration">The <see cref="IConfiguration" />Configuration for hmac settings.</param>        
+        /// <param name="configuration">The <see cref="IConfiguration" />Configuration for hmac settings.</param>
+        /// <param name="schemeName">The scheme name.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
-        public static IServiceCollection ConfigureDefaultHmacOptionProvider([NotNull]this IServiceCollection services, [NotNull]IConfiguration configuration)
+        public static IServiceCollection ConfigureDefaultHmacOptionProvider([NotNull] this IServiceCollection services, [NotNull] IConfiguration configuration, string schemeName = Constants.SecurityScheme)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+            if (string.IsNullOrWhiteSpace(schemeName)) throw new ArgumentException($"'{nameof(schemeName)}' must not be null, empty or whitespace.", nameof(schemeName));
 
-            ConfigureDefaultHmacOptionProvider(services, configuration.GetSection(HmacOptions.DefaultSectionName));
+            services.ConfigureDefaultHmacOptionProvider(configuration.GetSection(HmacOptions.DefaultSectionName), schemeName);
 
             return services;
         }

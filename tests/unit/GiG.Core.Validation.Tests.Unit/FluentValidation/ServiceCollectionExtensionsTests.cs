@@ -1,9 +1,10 @@
 ﻿using GiG.Core.Validation.FluentValidation.Web.Extensions;
 using System;
 using Xunit;
+
 // ReSharper disable AssignNullToNotNullAttribute
 
-namespace GiG.Core.Web.Tests.Unit.FluentValidation
+namespace GiG.Core.Validation.Tests.Unit.FluentValidation
 {
     [Trait("Category", "Unit")]
     public class ServiceCollectionExtensionsTests

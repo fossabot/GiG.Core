@@ -26,10 +26,11 @@ namespace GiG.Core.Orleans.Streams.Tests.Integration.Fixtures
         private const string StreamProviderName = "KafkaStreamProvider";
         private const string StreamNamespace = "TestStream";
         
+        private IServiceProvider _serviceProvider;
+
         internal IHost Host;
-        private IServiceProvider ServiceProvider;
         internal IClusterClient ClusterClient;
-        internal SemaphoreSlim _lock;
+        internal SemaphoreSlim Lock;
 
         public async Task InitializeAsync()
         {
@@ -39,10 +40,10 @@ namespace GiG.Core.Orleans.Streams.Tests.Integration.Fixtures
                     x.UseLocalhostClustering();
                     x.AddMemoryGrainStorageAsDefault();
                     x.AddMemoryGrainStorage(StreamStorageName);
-                    x.AddKafkaStreamProvider(StreamProviderName, x =>
+                    x.AddKafkaStreamProvider(StreamProviderName, k =>
                     {
-                        x.FromConfiguration(ctx.Configuration);
-                        x.AddTopicStream(StreamNamespace, ctx.Configuration);
+                        k.FromConfiguration(ctx.Configuration);
+                        k.AddTopicStream(StreamNamespace, ctx.Configuration);
                     });
                 })
                 .ConfigureWebHostDefaults(x =>
@@ -58,9 +59,9 @@ namespace GiG.Core.Orleans.Streams.Tests.Integration.Fixtures
 
             await Host.StartAsync();
 
-            ServiceProvider = Host.Services;
+            _serviceProvider = Host.Services;
 
-            ClusterClient = ServiceProvider.GetRequiredService<IClusterClient>();
+            ClusterClient = _serviceProvider.GetRequiredService<IClusterClient>();
             
             InitializeWait();
         }
@@ -75,7 +76,7 @@ namespace GiG.Core.Orleans.Streams.Tests.Integration.Fixtures
 
         private void InitializeWait()
         {
-           _lock = new SemaphoreSlim(0, 1);
+           Lock = new SemaphoreSlim(0, 1);
         }
     }
 }

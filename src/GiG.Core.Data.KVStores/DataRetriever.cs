@@ -1,4 +1,6 @@
 using GiG.Core.Data.KVStores.Abstractions;
+using GiG.Core.Data.KVStores.Abstractions.Exceptions;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -42,10 +44,17 @@ namespace GiG.Core.Data.KVStores
                     return value;
                 }
 
-                value = await GetFromProviderAsync(keys);
-                await _dataProvider.WatchAsync(data => _dataStore.Set(data, keys), keys);
+                try
+                {
+                    value = await GetFromProviderAsync(keys);
+                    await _dataProvider.WatchAsync(data => _dataStore.Set(data, keys), keys);
 
-                return value;
+                    return value;
+                }
+                catch (Exception ex)
+                {
+                    throw new RetrieveException($"Cannot retrieve value for {typeof(T).FullName} with keys {string.Join(", ", keys)}", ex);
+                }
             }
             finally
             {

@@ -56,7 +56,7 @@ namespace GiG.Core.Data.KVStores.Providers.File
             {
                 var file = System.IO.File.ReadAllText(args.FullPath);
                 callback(_dataSerializer.GetFromString(file));
-            };
+            }
 
             fileSystemWatcher.Created += Callback;
             fileSystemWatcher.Changed += Callback;

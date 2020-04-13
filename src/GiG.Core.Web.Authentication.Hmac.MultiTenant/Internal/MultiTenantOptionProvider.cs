@@ -13,7 +13,7 @@ namespace GiG.Core.Web.Authentication.Hmac.MultiTenant.Internal
     internal class MultiTenantOptionProvider : IHmacOptionsProvider
     {
         private readonly ITenantAccessor _tenantAccessor;
-        private readonly IOptions<Dictionary<string, HmacOptions>> _optionAccessor;
+        private readonly IOptionsMonitor<Dictionary<string, HmacOptions>> _optionAccessor;
         private readonly ILogger<MultiTenantOptionProvider> _logger;
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace GiG.Core.Web.Authentication.Hmac.MultiTenant.Internal
         /// </summary>
         public MultiTenantOptionProvider(
             ITenantAccessor tenantAccessor,
-            IOptionsSnapshot<Dictionary<string, HmacOptions>> optionsAccessor,
+            IOptionsMonitor<Dictionary<string, HmacOptions>> optionsAccessor,
             ILogger<MultiTenantOptionProvider> logger)
         {
             _tenantAccessor = tenantAccessor;
@@ -33,7 +33,7 @@ namespace GiG.Core.Web.Authentication.Hmac.MultiTenant.Internal
         /// Get <see cref="HmacOptions"/> for multi-tenancy. This has a limitation that it only accepts the first tenant in the HttpHeaders.
         /// </summary>
         /// <returns>Options for the current tenant.</returns>
-        public HmacOptions GetHmacOptions()
+        public HmacOptions GetHmacOptions(string name)
         {
             var tenantId = _tenantAccessor.Values.FirstOrDefault();
 
@@ -42,7 +42,7 @@ namespace GiG.Core.Web.Authentication.Hmac.MultiTenant.Internal
                 _logger.LogWarning("No tenantId found.");
                 return null;
             }
-            var options = _optionAccessor.Value;
+            var options = _optionAccessor.Get(name);
             if (!options.TryGetValue(tenantId, out var tenantOptions))
             {
                 _logger.LogWarning("No config found for {@tenantId}.", tenantId);

@@ -11,11 +11,6 @@
         public const string DefaultSectionName = "Authentication:OAuth";
 
         /// <summary>
-        /// A value to indicate if OAuth Authentication is enabled or not.
-        /// </summary>
-        public bool IsEnabled { get; set; } = true;
-
-        /// <summary>
         /// The Authority.
         /// </summary>
         public string Authority { get; set; }

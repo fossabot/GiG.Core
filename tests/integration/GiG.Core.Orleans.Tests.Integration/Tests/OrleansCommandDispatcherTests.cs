@@ -1,11 +1,10 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using GiG.Core.Orleans.Streams.Abstractions;
+﻿using GiG.Core.Orleans.Streams.Abstractions;
 using GiG.Core.Orleans.Tests.Integration.Fixtures;
-using GiG.Core.Orleans.Tests.Integration.Lifetimes;
 using GiG.Core.Orleans.Tests.Integration.Mocks;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace GiG.Core.Orleans.Tests.Integration.Tests

@@ -9,6 +9,6 @@
         /// Gets the current Hmac settings.
         /// </summary>
         /// <returns><see cref="HmacOptions"/>.</returns>
-        HmacOptions GetHmacOptions();
+        HmacOptions GetHmacOptions(string name);
     }
 }

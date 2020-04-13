@@ -10,9 +10,6 @@ The below code needs to be added to the `Startup.cs` class.
 public void ConfigureServices(IServiceCollection services)
 {
     // Configure Api Behavior Options
-   services.ConfigureApiKeyOptions(_configuration)
-        .AddApiDocsApiKeyAuthentication()
-		.AddApiKeyAuthentication();
-
+   services.AddApiDocsApiKeyAuthentication();
 }
 ```
