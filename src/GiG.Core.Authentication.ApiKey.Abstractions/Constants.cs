@@ -1,7 +1,7 @@
 ﻿namespace GiG.Core.Authentication.ApiKey.Abstractions
 {
     /// <summary>
-    /// The Security Schemes Constants for API Keys.
+    /// The Constants for API Keys.
     /// </summary>
     public static class Constants
     {
