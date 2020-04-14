@@ -1,4 +1,6 @@
-﻿namespace GiG.Core.Validation.FluentValidation.Web.Internal
+﻿using System.Net;
+
+namespace GiG.Core.Validation.FluentValidation.Web.Internal
 {
     /// <summary>
     /// Constants.
@@ -6,12 +8,12 @@
     internal static class Constants
     {
         /// <summary>
-        /// Generic Error Message for Validation Exception
+        /// The Status Code.
         /// </summary>
-        public const string GenericValidationErrorMessage = "Fluent Validation Exception";
+        public const int StatusCode = (int) HttpStatusCode.BadRequest;
         
         /// <summary>
-        /// Problem And Json Mime Type
+        /// Problem And Json Mime Type.
         /// </summary>
         public const string ProblemJsonMimeType = "application/problem+json";
     }
