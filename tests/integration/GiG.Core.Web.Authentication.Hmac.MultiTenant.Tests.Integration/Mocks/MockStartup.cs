@@ -15,10 +15,12 @@ namespace GiG.Core.Web.Authentication.Hmac.MultiTenant.Tests.Integration.Mocks
         {
             _configuration = configuration;
         }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
             services.AddHmacAuthentication();
+            
             services.ConfigureMultiTenantHmacOptionProvider(_configuration.GetSection("Hmac"));
         }
 

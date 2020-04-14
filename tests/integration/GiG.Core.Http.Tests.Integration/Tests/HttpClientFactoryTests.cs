@@ -34,7 +34,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
                 x.AddDelegatingHandler(new TenantDelegatingHandler(_fixture.ActivityTenantAccessor));
                 x.AddDelegatingHandler(new LoggingDelegatingHandler());
                 x.WithMessageHandler(testServer.CreateHandler());
-                x.Options.WithBaseAddress(TestFixture.BaseUrl);
+                x.Options.WithBaseAddress(testServer.BaseAddress);
             });
             
             var service = RestService.For<IMockRestClient>(client);
@@ -62,7 +62,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
                 x.AddDelegatingHandler(new TenantDelegatingHandler(_fixture.ActivityTenantAccessor));
                 x.AddDelegatingHandler(new LoggingDelegatingHandler());
                 x.WithMessageHandler(testServer.CreateHandler());
-                x.Options.WithBaseAddress(TestFixture.BaseUrl);
+                x.Options.WithBaseAddress(testServer.BaseAddress);
             });
 
             var service = RestService.For<IMockRestClient>(client);
@@ -90,7 +90,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
                 x.AddDelegatingHandler(new TenantDelegatingHandler(_fixture.ActivityTenantAccessor));
                 x.AddDelegatingHandler(new LoggingDelegatingHandler());
                 x.WithMessageHandler(testServer.CreateHandler());
-                x.Options.WithBaseAddress(TestFixture.BaseUrl, "/relative");
+                x.Options.WithBaseAddress(testServer.BaseAddress.ToString(), "/relative");
             });
 
             var service = RestService.For<IMockRestClient>(client);
@@ -183,7 +183,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
                 x.AddDelegatingHandler(new TenantDelegatingHandler(_fixture.ActivityTenantAccessor));
                 x.AddDelegatingHandler(new LoggingDelegatingHandler());
                 x.WithMessageHandler(testServer.CreateHandler());
-                x.Options.WithBaseAddress(TestFixture.BaseUrl);
+                x.Options.WithBaseAddress(testServer.BaseAddress);
             });
 
         private HttpClient CreateClientWithType(TestServer testServer) =>
@@ -193,7 +193,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
                 x.AddDelegatingHandler(new TenantDelegatingHandler(_fixture.ActivityTenantAccessor));
                 x.AddDelegatingHandler(new LoggingDelegatingHandler());
                 x.WithMessageHandler(testServer.CreateHandler());
-                x.Options.WithBaseAddress(TestFixture.BaseUrl);
+                x.Options.WithBaseAddress(testServer.BaseAddress);
             });
     }
 }
