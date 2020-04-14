@@ -1,10 +1,11 @@
-using dotnet_etcd;
+using GiG.Core.Data.KVStores.Abstractions;
+using GiG.Core.Data.KVStores.Providers.Etcd;
 using GiG.Core.Data.KVStores.Providers.Etcd.Abstractions;
+using GiG.Core.Data.KVStores.Serializers;
 using GiG.Core.Web.Docs.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.IO;
 
 namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read
 {
@@ -21,25 +22,12 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read
         public void ConfigureServices(IServiceCollection services)
         {
             services.ConfigureApiDocs(Configuration);
-            
             services.AddControllers();
 
             var etcdProviderOptions = Configuration.GetSection("EtcdRead").Get<EtcdProviderOptions>();
-            var isSslEnabled = Configuration.GetSection("EtcdRead:IsSslEnabled").Get<bool>();
-
-            var caCert = (isSslEnabled) ? File.ReadAllText("etcd-client-ca.crt") : "";
-            var clientCert = (isSslEnabled) ? File.ReadAllText("etcd-client.crt") : "";
-            var clientKey = (isSslEnabled) ? File.ReadAllText("etcd-client.key") : "";
-
-            services.AddSingleton(new EtcdClient(etcdProviderOptions.ConnectionString, 
-                etcdProviderOptions.Port,
-                etcdProviderOptions.Username,
-                etcdProviderOptions.Password,
-                caCert,
-                clientCert,
-                clientKey,
-                etcdProviderOptions.IsPublicRootCa
-            ));
+            services.AddSingleton<IDataProviderOptions<string, EtcdProviderOptions>>(new DataProviderOptions<string, EtcdProviderOptions>(etcdProviderOptions));
+            services.AddSingleton<IDataSerializer<string>, JsonDataSerializer<string>>();
+            services.AddSingleton<IDataProvider<string>, EtcdDataProvider<string>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

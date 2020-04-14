@@ -1,11 +1,14 @@
 ﻿using dotnet_etcd;
+using Etcdserverpb;
 using GiG.Core.Data.KVStores.Abstractions;
 using GiG.Core.Data.KVStores.Providers.Etcd.Abstractions;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Metadata = Grpc.Core.Metadata;
 
 namespace GiG.Core.Data.KVStores.Providers.Etcd
 {
@@ -13,11 +16,12 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
     public class EtcdDataProvider<T> : IDataProvider<T>
     {
         private const byte MaxBackOffAmount = 5;
-        
+
         private readonly ILogger<EtcdDataProvider<T>> _logger;
         private readonly IDataSerializer<T> _dataSerializer;
         private readonly EtcdProviderOptions _etcdProviderOptions;
         private readonly EtcdClient _etcdClient;
+        private readonly Metadata _metadata;
 
         private byte _retryBackOffAmount;
 
@@ -39,6 +43,18 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
                 _etcdProviderOptions.Username, _etcdProviderOptions.Password, _etcdProviderOptions.CaCertificate,
                 _etcdProviderOptions.ClientCertificate, _etcdProviderOptions.ClientKey,
                 _etcdProviderOptions.IsPublicRootCa);
+
+            // Temporary fix until bug is fixed - https://github.com/shubhamranjan/dotnet-etcd/issues/48
+            if (!string.IsNullOrEmpty(_etcdProviderOptions.Username) &&
+                !string.IsNullOrEmpty(_etcdProviderOptions.Password))
+            {
+                var authenticateResponse = _etcdClient.Authenticate(new AuthenticateRequest
+                    {Name = _etcdProviderOptions.Username, Password = _etcdProviderOptions.Password});
+                _metadata = new Metadata
+                {
+                    {"Authorization", authenticateResponse.Token}
+                };
+            }
         }
 
         /// <inheritdoc/>
@@ -65,7 +81,7 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
 
                 var value = response.Events[0].Kv.Value.ToStringUtf8();
                 callback(_dataSerializer.GetFromString(value));
-            }, null, WatchExceptionHandler);
+            }, _metadata, WatchExceptionHandler);
 
             return Task.CompletedTask;
         }
@@ -78,8 +94,8 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         public async Task<T> GetAsync(params string[] keys)
         {
             var key = GetKey(keys);
-           
-            var value = await _etcdClient.GetValAsync(key);
+
+            var value = await _etcdClient.GetValAsync(key, _metadata);
 
             return _dataSerializer.GetFromString(value);
         }
@@ -89,7 +105,7 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         {
             var key = GetKey(keys);
 
-            await _etcdClient.PutAsync(key, _dataSerializer.ConvertToString(model));
+            await _etcdClient.PutAsync(key, _dataSerializer.ConvertToString(model), _metadata);
         }
 
         /// <inheritdoc />
@@ -97,7 +113,7 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         {
             var key = $"locks/{GetKey(keys)}";
 
-            var lockResponse = await _etcdClient.LockAsync(key);
+            var lockResponse = await _etcdClient.LockAsync(key, _metadata);
 
             return lockResponse.Key.ToStringUtf8();
         }
@@ -107,7 +123,7 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         {
             if (handle is string handleString)
             {
-                await _etcdClient.UnlockAsync(handleString);
+                await _etcdClient.UnlockAsync(handleString, _metadata);
             }
         }
 
@@ -121,9 +137,11 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         {
             // Exponential back-off plus some jitter
             var jitter = new Random();
-            var delay = TimeSpan.FromSeconds(Math.Pow(2, _retryBackOffAmount)) + TimeSpan.FromMilliseconds(jitter.Next(0, 250));
+            var delay = TimeSpan.FromSeconds(Math.Pow(2, _retryBackOffAmount)) +
+                        TimeSpan.FromMilliseconds(jitter.Next(0, 250));
 
-            _logger.LogError(ex, "Watch failed due to an exception {message} for {key}. Trying again in {delay}", ex.Message, _etcdProviderOptions.Key, delay);
+            _logger.LogError(ex, "Watch failed due to an exception {message} for {key}. Trying again in {delay}",
+                ex.Message, _etcdProviderOptions.Key, delay);
 
             if (_retryBackOffAmount < MaxBackOffAmount)
             {

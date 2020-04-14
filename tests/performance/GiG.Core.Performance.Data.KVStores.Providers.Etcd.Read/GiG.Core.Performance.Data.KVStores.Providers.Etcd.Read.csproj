@@ -7,11 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="dotnet-etcd" Version="3.2.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\src\GiG.Core.Data.KVStores.Providers.Etcd\GiG.Core.Data.KVStores.Providers.Etcd.csproj" />
+    <ProjectReference Include="..\..\..\src\GiG.Core.Data.KVStores\GiG.Core.Data.KVStores.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Logging.All\GiG.Core.Logging.All.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Web.Docs\GiG.Core.Web.Docs.csproj" />
   </ItemGroup>
