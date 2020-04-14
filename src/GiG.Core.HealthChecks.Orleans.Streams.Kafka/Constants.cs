@@ -3,7 +3,7 @@ namespace GiG.Core.HealthChecks.Orleans.Streams.Kafka
     /// <summary>
     /// Constants.
     /// </summary>
-    public static class Constants
+    internal static class Constants
     {
         /// <summary>
         /// The Default Health Check Name.
