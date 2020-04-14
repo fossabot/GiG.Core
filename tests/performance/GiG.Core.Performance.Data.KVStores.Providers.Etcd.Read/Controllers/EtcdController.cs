@@ -66,7 +66,7 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read.Controllers
         public async Task<ActionResult> Post([FromRoute, Required] string key, [FromBody, Required] ValueModel model)
         {
             var value = Convert.FromBase64String(model.DataBase64);
-            await _dataProvider.WriteAsync(key, Encoding.UTF8.GetString(value));
+            await _dataProvider.WriteAsync(Encoding.UTF8.GetString(value), key);
                 
             return NoContent();
         }
@@ -77,7 +77,7 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read.Controllers
             var value = Convert.FromBase64String(model.DataBase64);
             Stopwatch timer = new Stopwatch();
             timer.Start();
-            await _dataProvider.WriteAsync(key, Encoding.UTF8.GetString(value));
+            await _dataProvider.WriteAsync(Encoding.UTF8.GetString(value), key);
             timer.Stop();
             
             Response.Headers.Add("call-duration-ms", timer.Elapsed.Milliseconds.ToString());

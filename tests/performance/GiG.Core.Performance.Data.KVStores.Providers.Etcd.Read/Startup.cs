@@ -26,7 +26,7 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read
 
             var etcdProviderOptions = Configuration.GetSection("EtcdRead").Get<EtcdProviderOptions>();
             services.AddSingleton<IDataProviderOptions<string, EtcdProviderOptions>>(new DataProviderOptions<string, EtcdProviderOptions>(etcdProviderOptions));
-            services.AddSingleton<IDataSerializer<string>, JsonDataSerializer<string>>();
+            services.AddSingleton<IDataSerializer<string>, StringSerializer>();
             services.AddSingleton<IDataProvider<string>, EtcdDataProvider<string>>();
         }
 
