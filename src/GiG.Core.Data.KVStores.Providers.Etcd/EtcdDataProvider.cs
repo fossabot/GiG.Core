@@ -5,7 +5,6 @@ using GiG.Core.Data.KVStores.Providers.Etcd.Abstractions;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Metadata = Grpc.Core.Metadata;
@@ -21,9 +20,10 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         private readonly IDataSerializer<T> _dataSerializer;
         private readonly EtcdProviderOptions _etcdProviderOptions;
         private readonly EtcdClient _etcdClient;
-        private readonly Metadata _metadata;
+        private readonly bool _isBasicAuthRequired;
 
         private byte _retryBackOffAmount;
+        private Metadata _metadata;
 
         /// <summary>
         /// Constructor.
@@ -44,21 +44,12 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
                 _etcdProviderOptions.ClientCertificate, _etcdProviderOptions.ClientKey,
                 _etcdProviderOptions.IsPublicRootCa);
 
-            // Temporary fix until bug is fixed - https://github.com/shubhamranjan/dotnet-etcd/issues/48
-            if (!string.IsNullOrEmpty(_etcdProviderOptions.Username) &&
-                !string.IsNullOrEmpty(_etcdProviderOptions.Password))
-            {
-                var authenticateResponse = _etcdClient.Authenticate(new AuthenticateRequest
-                    {Name = _etcdProviderOptions.Username, Password = _etcdProviderOptions.Password});
-                _metadata = new Metadata
-                {
-                    {"Authorization", authenticateResponse.Token}
-                };
-            }
+            _isBasicAuthRequired = !string.IsNullOrEmpty(_etcdProviderOptions.Username) &&
+                                   !string.IsNullOrEmpty(_etcdProviderOptions.Password);
         }
 
         /// <inheritdoc/>
-        public Task WatchAsync(Action<T> callback, params string[] keys)
+        public async Task WatchAsync(Action<T> callback, params string[] keys)
         {
             var key = GetKey(keys);
 
@@ -81,9 +72,7 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
 
                 var value = response.Events[0].Kv.Value.ToStringUtf8();
                 callback(_dataSerializer.GetFromString(value));
-            }, _metadata, WatchExceptionHandler);
-
-            return Task.CompletedTask;
+            }, await GetMetadataAsync(), WatchExceptionHandler);
         }
 
         /// <summary>
@@ -95,7 +84,7 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         {
             var key = GetKey(keys);
 
-            var value = await _etcdClient.GetValAsync(key, _metadata);
+            var value = await _etcdClient.GetValAsync(key, await GetMetadataAsync());
 
             return _dataSerializer.GetFromString(value);
         }
@@ -105,7 +94,7 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         {
             var key = GetKey(keys);
 
-            await _etcdClient.PutAsync(key, _dataSerializer.ConvertToString(model), _metadata);
+            await _etcdClient.PutAsync(key, _dataSerializer.ConvertToString(model), await GetMetadataAsync());
         }
 
         /// <inheritdoc />
@@ -113,7 +102,7 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         {
             var key = $"locks/{GetKey(keys)}";
 
-            var lockResponse = await _etcdClient.LockAsync(key, _metadata);
+            var lockResponse = await _etcdClient.LockAsync(key, await GetMetadataAsync());
 
             return lockResponse.Key.ToStringUtf8();
         }
@@ -123,7 +112,7 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         {
             if (handle is string handleString)
             {
-                await _etcdClient.UnlockAsync(handleString, _metadata);
+                await _etcdClient.UnlockAsync(handleString, await GetMetadataAsync());
             }
         }
 
@@ -131,6 +120,26 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         public void Dispose()
         {
             _etcdClient.Dispose();
+        }
+        
+        private async Task<Metadata> GetMetadataAsync()
+        {
+            if (!_isBasicAuthRequired)
+            {
+                return null;
+            }
+
+            if (_metadata != null)
+            {
+                return _metadata;
+            }
+
+            // Temporary fix until bug is fixed - https://github.com/shubhamranjan/dotnet-etcd/issues/48
+            var authenticateResponse = await _etcdClient.AuthenticateAsync(new AuthenticateRequest
+                {Name = _etcdProviderOptions.Username, Password = _etcdProviderOptions.Password});
+            _metadata = new Metadata {{"Authorization", authenticateResponse.Token}};
+
+            return _metadata;
         }
 
         private void WatchExceptionHandler(Exception ex)
