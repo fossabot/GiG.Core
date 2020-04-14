@@ -1,4 +1,4 @@
-﻿using dotnet_etcd;
+﻿using GiG.Core.Data.KVStores.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -13,17 +13,17 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read.Controllers
     [ApiVersion("1")]
     public class EtcdController : ControllerBase
     {
-        private readonly EtcdClient _etcdClient;
+        private readonly IDataProvider<string> _dataProvider;
         
-        public EtcdController(EtcdClient etcdClient)
+        public EtcdController(IDataProvider<string> dataProvider)
         {
-            _etcdClient = etcdClient;
+            _dataProvider = dataProvider;
         }
 
         [HttpGet("{key}")]
         public async Task<ActionResult<string>> Get([FromRoute, Required] string key)
         {
-            var value = await _etcdClient.GetValAsync(key);
+            var value = await _dataProvider.GetAsync(key);
 
             return Ok(value);
         }
@@ -33,7 +33,7 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read.Controllers
         {
             Stopwatch timer = new Stopwatch();
             timer.Start();
-            var value = await _etcdClient.GetValAsync(key);
+            var value = await _dataProvider.GetAsync(key);
             timer.Stop();
             
             Response.Headers.Add("call-duration-ms", timer.Elapsed.Milliseconds.ToString());
@@ -44,7 +44,7 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read.Controllers
         [HttpGet("{key}/length")]
         public async Task<ActionResult<string>> GetLength([FromRoute, Required] string key)
         {
-            var value = await _etcdClient.GetValAsync(key);
+            var value = await _dataProvider.GetAsync(key);
             
             return Ok(value.Length);
         }
@@ -54,7 +54,7 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read.Controllers
         {
             Stopwatch timer = new Stopwatch();
             timer.Start();
-            var value = await _etcdClient.GetValAsync(key);
+            var value = await _dataProvider.GetAsync(key);
             timer.Stop();
             
             Response.Headers.Add("call-duration-ms", timer.Elapsed.Milliseconds.ToString());
@@ -66,7 +66,7 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read.Controllers
         public async Task<ActionResult> Post([FromRoute, Required] string key, [FromBody, Required] ValueModel model)
         {
             var value = Convert.FromBase64String(model.DataBase64);
-            await _etcdClient.PutAsync(key, Encoding.UTF8.GetString(value));
+            await _dataProvider.WriteAsync(Encoding.UTF8.GetString(value), key);
                 
             return NoContent();
         }
@@ -77,7 +77,7 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read.Controllers
             var value = Convert.FromBase64String(model.DataBase64);
             Stopwatch timer = new Stopwatch();
             timer.Start();
-            await _etcdClient.PutAsync(key, Encoding.UTF8.GetString(value));
+            await _dataProvider.WriteAsync(Encoding.UTF8.GetString(value), key);
             timer.Stop();
             
             Response.Headers.Add("call-duration-ms", timer.Elapsed.Milliseconds.ToString());

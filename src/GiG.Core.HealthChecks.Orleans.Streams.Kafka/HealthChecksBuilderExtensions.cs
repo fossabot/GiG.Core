@@ -66,7 +66,7 @@ namespace GiG.Core.HealthChecks.Orleans.Streams.Kafka
             {
                 var streamsOptions = configurationSection.Get<KafkaOptions>();
 
-                var producerOptions = new ProducerConfig {BootstrapServers = streamsOptions.Brokers};
+                var producerOptions = new ProducerConfig {BootstrapServers = streamsOptions.Brokers.Replace(';', ',')};
                 if (streamsOptions.Security.IsEnabled)
                 {
                     producerOptions.SaslUsername = streamsOptions.Security.SaslUsername;

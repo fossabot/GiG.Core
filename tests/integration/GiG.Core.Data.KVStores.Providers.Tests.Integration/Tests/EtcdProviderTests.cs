@@ -28,6 +28,7 @@ namespace GiG.Core.Data.KVStores.Providers.Tests.Integration.Tests
         private readonly IServiceProvider _serviceProvider;
         private readonly EtcdClient _etcdClient;
         private readonly AsyncRetryPolicy<bool> _polly;
+
         private const string PolicyRegistryName = "ETCDRegistry";
 
         public EtcdProviderTests()
