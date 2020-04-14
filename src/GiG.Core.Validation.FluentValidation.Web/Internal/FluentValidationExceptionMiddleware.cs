@@ -1,12 +1,11 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
-using GiG.Core.Models;
-using GiG.Core.Validation.FluentValidation.Web.Extensions;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
-using System.Net;
+using System.IO;
+using System.Text;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -15,16 +14,13 @@ namespace GiG.Core.Validation.FluentValidation.Web.Internal
     internal class FluentValidationExceptionMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ILogger _logger;
         private readonly IOptions<JsonSerializerOptions> _jsonOptionsAccessor;
 
         public FluentValidationExceptionMiddleware(
             RequestDelegate next,
-            ILogger<FluentValidationExceptionMiddleware> logger,
             IOptions<JsonSerializerOptions> jsonOptionsAccessor)
         {
             _next = next;
-            _logger = logger;
             _jsonOptionsAccessor = jsonOptionsAccessor;
         }
 
@@ -36,45 +32,66 @@ namespace GiG.Core.Validation.FluentValidation.Web.Internal
             }
             catch (ValidationException ex)
             {
-                await HandleValidationExceptionAsync(context, ex);
+                await HandleValidationExceptionAsync(context, _jsonOptionsAccessor?.Value?.Encoder, ex);
             }
         }
 
-        private async Task HandleValidationExceptionAsync(HttpContext context, ValidationException ex)
+        private static async ValueTask HandleValidationExceptionAsync(HttpContext context, JavaScriptEncoder javaScriptEncoder, ValidationException ex)
         {
-            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            context.Response.StatusCode = Constants.StatusCode;
             context.Response.ContentType = Constants.ProblemJsonMimeType;
 
-            var errorResponse = BuildValidationResponse(ex.Errors);
-
-            _logger.LogInformation(Constants.GenericValidationErrorMessage, ex);
-            var json = errorResponse.Serialize(_jsonOptionsAccessor?.Value?.Encoder);
-
-            await context.Response.WriteAsync(json);
+            var errors = ConvertToDictionary(ex.Errors);
+            await SerialiseErrorResponseAsync(context.Response, javaScriptEncoder, errors);
         }
 
-        private static ErrorResponse BuildValidationResponse(IEnumerable<ValidationFailure> errors)
+        private static async ValueTask SerialiseErrorResponseAsync(HttpResponse response, JavaScriptEncoder javaScriptEncoder, Dictionary<string, List<string>> errors)
         {
-            var errorMessageDictionary = new Dictionary<string, List<string>>();
+            var writerOptions = new JsonWriterOptions {Encoder = javaScriptEncoder ?? JavaScriptEncoder.UnsafeRelaxedJsonEscaping};
+            using (var writer = new Utf8JsonWriter(response.Body, writerOptions))
+            {
+                writer.WriteStartObject();
+                writer.WriteString("errorSummary", "One or more validation errors occurred.");
+                writer.WriteStartObject("errors");
+                WriteErrorsArray(writer, errors);
+                writer.WriteEndObject();
+                writer.WriteEndObject();
+                
+                await writer.FlushAsync();
+            }
+        }
 
+        private static void WriteErrorsArray(Utf8JsonWriter writer, Dictionary<string, List<string>> errors)
+        {
             foreach (var error in errors)
             {
-                if (errorMessageDictionary.ContainsKey(error.PropertyName))
+                writer.WriteStartArray(error.Key);
+
+                foreach (var errorMessage in error.Value)
                 {
-                    errorMessageDictionary[error.PropertyName].Add(error.ErrorMessage);
+                    writer.WriteStringValue(errorMessage);
+                }
+
+                writer.WriteEndArray();
+            }
+        }
+
+        private static Dictionary<string, List<string>> ConvertToDictionary(IEnumerable<ValidationFailure> validationFailures)
+        {
+            var dictionary = new Dictionary<string, List<string>>();
+            foreach (var errors in validationFailures)
+            {
+                if (dictionary.ContainsKey(errors.PropertyName))
+                {
+                    dictionary[errors.PropertyName].Add(errors.ErrorMessage);
                 }
                 else
                 {
-                    errorMessageDictionary.Add(error.PropertyName, new List<string> { error.ErrorMessage });
+                    dictionary.Add(errors.PropertyName, new List<string> {errors.ErrorMessage});
                 }
             }
 
-            var errorResponse = new ErrorResponse
-            {
-                Errors = errorMessageDictionary
-            };
-
-            return errorResponse;
+            return dictionary;
         }
     }
 }
