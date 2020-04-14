@@ -12,9 +12,9 @@ namespace GiG.Core.Web.Sample.Controllers
     [Authorize(AuthenticationSchemes = Constants.SecurityScheme)]
     public class HelloWorldController : ControllerBase
     {
-        private readonly IActivityTenantAccessor _tenantAccessor;
+        private readonly ITenantAccessor _tenantAccessor;
     
-        public HelloWorldController(IActivityTenantAccessor tenantAccessor)
+        public HelloWorldController(ITenantAccessor tenantAccessor)
         {
             _tenantAccessor = tenantAccessor;
         }

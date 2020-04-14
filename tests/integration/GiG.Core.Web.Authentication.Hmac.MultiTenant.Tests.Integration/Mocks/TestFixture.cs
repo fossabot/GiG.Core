@@ -13,7 +13,7 @@ namespace GiG.Core.Web.Authentication.Hmac.MultiTenant.Tests.Integration.Mocks
     public class TestFixture : IAsyncLifetime
     {
         internal IActivityContextAccessor ActivityContextAccessor;
-        internal IActivityTenantAccessor ActivityTenantAccessor;
+        internal ITenantAccessor ActivityTenantAccessor;
         internal IHost Host;
         internal IServiceCollection ServiceCollection;
 
@@ -27,13 +27,12 @@ namespace GiG.Core.Web.Authentication.Hmac.MultiTenant.Tests.Integration.Mocks
                     webBuilder.UseStartup<MockStartup>();
                 })
                 .ConfigureServices((x) => ServiceCollection = x)
-                .ConfigureAppConfiguration(appConfig => appConfig.AddJsonFile("appsettings.json"))
                 .Build();
                 
             await Host.StartAsync();
 
             ActivityContextAccessor = Host.Services.GetService<IActivityContextAccessor>();
-            ActivityTenantAccessor = Host.Services.GetService<IActivityTenantAccessor>();
+            ActivityTenantAccessor = Host.Services.GetService<ITenantAccessor>();
         }
 
         public async Task DisposeAsync()

@@ -9,9 +9,9 @@ namespace GiG.Core.Web.Authentication.ApiKey.Tests.Integration.Controllers
     [Authorize]
     public class MockController : ControllerBase
     {
-        private readonly IActivityTenantAccessor _tenantAccessor;
+        private readonly ITenantAccessor _tenantAccessor;
 
-        public MockController(IActivityTenantAccessor tenantAccessor)
+        public MockController(ITenantAccessor tenantAccessor)
         {
             _tenantAccessor = tenantAccessor;
         }

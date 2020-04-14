@@ -22,7 +22,7 @@ namespace GiG.Core.Web.Mock.Extensions
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services.TryAddSingleton<IActivityTenantAccessor>(new MockActivityTenantAccessor());
+            services.TryAddSingleton<ITenantAccessor>(new MockActivityTenantAccessor());
 
             return services;
         }

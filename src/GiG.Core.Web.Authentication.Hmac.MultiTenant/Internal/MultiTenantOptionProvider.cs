@@ -12,7 +12,7 @@ namespace GiG.Core.Web.Authentication.Hmac.MultiTenant.Internal
     /// </summary>
     internal class MultiTenantOptionProvider : IHmacOptionsProvider
     {
-        private readonly IActivityTenantAccessor _tenantAccessor;
+        private readonly ITenantAccessor _tenantAccessor;
         private readonly IOptionsMonitor<Dictionary<string, HmacOptions>> _optionAccessor;
         private readonly ILogger<MultiTenantOptionProvider> _logger;
 
@@ -20,7 +20,7 @@ namespace GiG.Core.Web.Authentication.Hmac.MultiTenant.Internal
         /// <see cref="IHmacOptionsProvider"/> which handles multi-tenancy for HmacAuthenticationHandler.
         /// </summary>
         public MultiTenantOptionProvider(
-            IActivityTenantAccessor tenantAccessor,
+            ITenantAccessor tenantAccessor,
             IOptionsMonitor<Dictionary<string, HmacOptions>> optionsAccessor,
             ILogger<MultiTenantOptionProvider> logger)
         {

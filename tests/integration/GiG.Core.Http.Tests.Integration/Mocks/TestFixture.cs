@@ -12,7 +12,7 @@ namespace GiG.Core.Http.Tests.Integration.Mocks
     public class TestFixture : IAsyncLifetime
     {
         internal IActivityContextAccessor ActivityContextAccessor;
-        internal IActivityTenantAccessor ActivityTenantAccessor;
+        internal ITenantAccessor ActivityTenantAccessor;
         internal IHost Host;
         
         public async Task InitializeAsync()
@@ -28,7 +28,7 @@ namespace GiG.Core.Http.Tests.Integration.Mocks
             await Host.StartAsync();
 
             ActivityContextAccessor = Host.Services.GetService<IActivityContextAccessor>();
-            ActivityTenantAccessor = Host.Services.GetService<IActivityTenantAccessor>();
+            ActivityTenantAccessor = Host.Services.GetService<ITenantAccessor>();
         }
 
         public async Task DisposeAsync()

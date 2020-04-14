@@ -6,9 +6,9 @@ namespace GiG.Core.DistributedTracing.MassTransit.Tests.Integration.Mocks
 {
     internal class ActivityMockConsumer : IConsumer<MockMessage>
     {
-        private readonly IActivityTenantAccessor _tenantAccessor;
+        private readonly ITenantAccessor _tenantAccessor;
 
-        public ActivityMockConsumer(IActivityTenantAccessor tenantAccessor)
+        public ActivityMockConsumer(ITenantAccessor tenantAccessor)
         {
             _tenantAccessor = tenantAccessor;
         }

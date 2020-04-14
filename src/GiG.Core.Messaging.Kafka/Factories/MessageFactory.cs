@@ -15,10 +15,10 @@ namespace GiG.Core.Messaging.Kafka.Factories
     internal class MessageFactory : IMessageFactory
     {
         private readonly IDateTimeProvider _dateTimeProvider;
-        private readonly IActivityTenantAccessor _tenantAccessor;
+        private readonly ITenantAccessor _tenantAccessor;
         private readonly ICorrelationContextAccessor _correlationContextAccessor;
         
-        public MessageFactory([NotNull] IDateTimeProvider dateTimeProvider, IActivityTenantAccessor tenantAccessor = null, ICorrelationContextAccessor correlationContextAccessor = null)
+        public MessageFactory([NotNull] IDateTimeProvider dateTimeProvider, ITenantAccessor tenantAccessor = null, ICorrelationContextAccessor correlationContextAccessor = null)
         {
             _dateTimeProvider = dateTimeProvider;
             _tenantAccessor = tenantAccessor;

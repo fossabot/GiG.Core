@@ -11,13 +11,13 @@ namespace GiG.Core.Http.MultiTenant
     /// </summary>
     public class TenantDelegatingHandler : DelegatingHandler
     {
-        private readonly IActivityTenantAccessor _activityTenantAccessor;
+        private readonly ITenantAccessor _activityTenantAccessor;
 
         /// <summary>
         /// A <see cref="DelegatingHandler"/> that injects one or more X-Tenant-ID Headers into the request.
         /// </summary>
         /// <param name="activityTenantAccessor">The <see cref="T:GiG.Core.MultiTenant.Abstractions.IActivityTenantAccessor" /> to use.</param>
-        public TenantDelegatingHandler(IActivityTenantAccessor activityTenantAccessor)
+        public TenantDelegatingHandler(ITenantAccessor activityTenantAccessor)
         {
             _activityTenantAccessor = activityTenantAccessor;   
         }

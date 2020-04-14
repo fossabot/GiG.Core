@@ -11,7 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GiG.Core.DistributedTracing.Abstractions\GiG.Core.DistributedTracing.Abstractions.csproj" />
     <ProjectReference Include="..\GiG.Core.MultiTenant.Abstractions\GiG.Core.MultiTenant.Abstractions.csproj" />
   </ItemGroup>
 

@@ -24,7 +24,7 @@ namespace GiG.Core.MultiTenant.Activity.Extensions
 
             services
                 .AddActivityContextAccessor()
-                .TryAddSingleton<IActivityTenantAccessor, ActivityTenantAccessor>();
+                .TryAddSingleton<ITenantAccessor, ActivityTenantAccessor>();
 
             return services;
         }

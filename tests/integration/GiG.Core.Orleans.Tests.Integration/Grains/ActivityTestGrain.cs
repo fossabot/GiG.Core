@@ -16,14 +16,14 @@ namespace GiG.Core.Orleans.Tests.Integration.Grains
     public class ActivityTestGrain : Grain, IActivityTestGrain, IAsyncObserver<MockMessage>
     {
         private readonly IActivityContextAccessor _activityContextAccessor;
-        private readonly IActivityTenantAccessor _tenantAccessor;
+        private readonly ITenantAccessor _tenantAccessor;
         private readonly IStreamFactory _streamFactory;
         private readonly IPersistentState<ActivityState> _state;
 
         private IStream<MockMessage> _incomingStream;
 
         public ActivityTestGrain([PersistentState(Constants.StorageProviderName, Constants.StorageProviderName)] IPersistentState<ActivityState> state,
-            IActivityContextAccessor activityContextAccessor, IActivityTenantAccessor tenantAccessor, IStreamFactory streamFactory =null)
+            IActivityContextAccessor activityContextAccessor, ITenantAccessor tenantAccessor, IStreamFactory streamFactory =null)
         {
             _activityContextAccessor = activityContextAccessor;
             _tenantAccessor = tenantAccessor;
