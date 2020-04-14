@@ -1,5 +1,7 @@
+using GiG.Core.Orleans.Streams.Kafka.Configurations;
 using System;
 using JetBrains.Annotations;
+using Microsoft.Extensions.DependencyInjection;
 using Orleans;
 using Orleans.Hosting;
 using Orleans.Streams.Kafka.Config;
@@ -27,9 +29,8 @@ namespace GiG.Core.Orleans.Streams.Kafka.Extensions
             if (kafkaBuilderConfig == null) throw new ArgumentNullException(nameof(kafkaBuilderConfig));
             
             var kafkaBuilder = clientBuilder.AddKafka(providerName);
-
             kafkaBuilderConfig(kafkaBuilder);
-
+            
             return kafkaBuilder.Build();
         }
     }
