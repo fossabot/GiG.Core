@@ -78,7 +78,7 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
             _activityContextAccessor = _host.Services.GetRequiredService<IActivityContextAccessor>();
         }
 
-       private void WriteLog(LogEvent log)
+        private void WriteLog(LogEvent log)
         {
             if (log.MessageTemplate.Text != _logMessageTest)
             {
