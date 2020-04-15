@@ -20,15 +20,15 @@ namespace GiG.Core.HealthChecks.AspNetCore.Extensions
         /// <summary>
         /// Adds HealthCheck endpoints to the <see cref="IEndpointRouteBuilder "/>.
         /// </summary>
-        /// <param name="builder">The <see cref="IEndpointRouteBuilder"/>.</param>
+        /// <param name="endpointRouteBuilder">The <see cref="IEndpointRouteBuilder"/>.</param>
         /// <returns>A list of <see cref="IEndpointConventionBuilder"/> that can be used to enrich the endpoints.</returns>
-        public static HealthCheckEndpoints MapHealthChecks([NotNull] this IEndpointRouteBuilder builder)
+        public static HealthCheckEndpoints MapHealthChecks([NotNull] this IEndpointRouteBuilder endpointRouteBuilder)
         {
-            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (endpointRouteBuilder == null) throw new ArgumentNullException(nameof(endpointRouteBuilder));
 
-            var healthCheckOptions = builder.ServiceProvider.GetService<IOptions<HealthCheckOptions>>()?.Value ?? new HealthCheckOptions();
+            var healthCheckOptions = endpointRouteBuilder.ServiceProvider.GetService<IOptions<HealthCheckOptions>>()?.Value ?? new HealthCheckOptions();
 
-            var loggerFactory = builder.ServiceProvider.GetService<ILoggerFactory>();
+            var loggerFactory = endpointRouteBuilder.ServiceProvider.GetService<ILoggerFactory>();
             var logger = loggerFactory.CreateLogger("GiG.Core.HealthChecks");
             
             Task WriteLogAndJsonResponseWriter(HttpContext context, HealthReport report)
@@ -39,17 +39,17 @@ namespace GiG.Core.HealthChecks.AspNetCore.Extensions
 
             return new HealthCheckEndpoints
             {
-                Ready = builder.MapHealthChecks(healthCheckOptions.ReadyUrl, new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
+                Ready = endpointRouteBuilder.MapHealthChecks(healthCheckOptions.ReadyUrl, new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
                 {
                     Predicate = check => check.Tags.Contains(Constants.ReadyTag),
                     ResponseWriter = WriteLogAndJsonResponseWriter
                 }),
-                Live = builder.MapHealthChecks(healthCheckOptions.LiveUrl, new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
+                Live = endpointRouteBuilder.MapHealthChecks(healthCheckOptions.LiveUrl, new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
                 {
                     Predicate = check => check.Tags.Contains(Constants.LiveTag),
                     ResponseWriter = WriteLogAndJsonResponseWriter
                 }),
-                Combined = builder.MapHealthChecks(healthCheckOptions.CombinedUrl, new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
+                Combined = endpointRouteBuilder.MapHealthChecks(healthCheckOptions.CombinedUrl, new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
                 {
                     ResponseWriter = WriteLogAndJsonResponseWriter
                 })
