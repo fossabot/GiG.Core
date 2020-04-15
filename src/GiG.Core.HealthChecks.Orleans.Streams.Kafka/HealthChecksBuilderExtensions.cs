@@ -6,7 +6,6 @@ using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -32,8 +31,8 @@ namespace GiG.Core.HealthChecks.Orleans.Streams.Kafka
         /// <param name="tags">A list of tags that can be used to filter sets of health checks. Optional.</param>
         /// <returns>The <see cref="IHealthChecksBuilder"/>.</returns>
         public static IHealthChecksBuilder AddKafkaOrleansStreams([NotNull] this IHealthChecksBuilder builder, 
-            [NotNull] IConfiguration configuration, string topic = "OrleansStreamsHealthCheck",
-            string name = "OrleansStreamsKafka", HealthStatus? failureStatus = default, IEnumerable<string> tags = default)
+            [NotNull] IConfiguration configuration, string topic = Constants.DefaultTopicName, string name = Constants.DefaultHealthCheckName, 
+            HealthStatus? failureStatus = default, IEnumerable<string> tags = default)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
@@ -56,8 +55,8 @@ namespace GiG.Core.HealthChecks.Orleans.Streams.Kafka
         /// <param name="tags">A list of tags that can be used to filter sets of health checks. Optional.</param>
         /// <returns>The <see cref="IHealthChecksBuilder"/>.</returns>
         public static IHealthChecksBuilder AddKafkaOrleansStreams([NotNull] this IHealthChecksBuilder builder, 
-            [NotNull] IConfigurationSection configurationSection, string topic = "OrleansStreamsHealthCheck",
-            string name = "OrleansStreamsKafka", HealthStatus? failureStatus = default, IEnumerable<string> tags = default)
+            [NotNull] IConfigurationSection configurationSection, string topic = Constants.DefaultTopicName, string name = Constants.DefaultHealthCheckName, 
+            HealthStatus? failureStatus = default, IEnumerable<string> tags = default)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection?.Path}' is incorrect.");
