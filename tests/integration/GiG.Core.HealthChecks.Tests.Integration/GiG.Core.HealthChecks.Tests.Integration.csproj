@@ -9,6 +9,7 @@
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
     <PackageReference Include="Moq" Version="4.13.1" />
+    <PackageReference Include="Serilog" Version="2.9.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
       <PrivateAssets>all</PrivateAssets>
@@ -17,9 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\GiG.Core.ApplicationMetrics.Prometheus\GiG.Core.ApplicationMetrics.Prometheus.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.HealthChecks.AspNetCore\GiG.Core.HealthChecks.AspNetCore.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.HealthChecks\GiG.Core.HealthChecks.csproj" />
+    <ProjectReference Include="..\..\..\src\GiG.Core.Logging.All\GiG.Core.Logging.All.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Web.Mock\GiG.Core.Web.Mock.csproj" />
   </ItemGroup>
  

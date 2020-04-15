@@ -1,13 +1,18 @@
 ﻿using GiG.Core.HealthChecks.Abstractions;
 using GiG.Core.HealthChecks.Extensions;
+using GiG.Core.HealthChecks.Tests.Integration.Helpers;
 using GiG.Core.HealthChecks.Tests.Integration.Mocks;
+using GiG.Core.Logging.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Hosting;
+using Serilog.Events;
 using System;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -77,7 +82,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
         }
 
         [Fact]
-        public async Task CombinedHealthCheckWithCustomUrl_ReturnsHealthyStatus()
+        public async Task CombinedHealthCheck_WithCustomUrl_ReturnsHealthyStatus()
         {
             // Arrange
             var testServer = new TestServer(new WebHostBuilder()
@@ -97,7 +102,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
         }
 
         [Fact]
-        public async Task LiveHealthCheckWithCustomUrl_ReturnsHealthyStatus()
+        public async Task LiveHealthCheck_WithCustomUrl_ReturnsHealthyStatus()
         {
             // Arrange
             var testServer = new TestServer(new WebHostBuilder()
@@ -117,7 +122,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
         }
 
         [Fact]
-        public async Task ReadyHealthCheckWithCustomUrl_ReturnsHealthyStatus()
+        public async Task ReadyHealthCheck_WithCustomUrl_ReturnsHealthyStatus()
         {
             // Arrange
             var testServer = new TestServer(new WebHostBuilder()
@@ -179,6 +184,29 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
         }
 
         [Fact]
+        public async Task ReadyHealthCheck_WithLogging_ReturnsUnHealthyStatus()
+        {
+            // Act
+            var logEvent = await ReadyHealthCheckWithLoggingAsync<UnHealthyCheck>();
+
+            // Assert
+            Assert.NotNull(logEvent);
+            Assert.Equal("Health check \"UnHealthyCheck\" was Unhealthy threw an exception null", logEvent.MessageTemplate.Render(logEvent.Properties));
+        }
+        
+        [Fact]
+        public async Task ReadyHealthCheck_WithLoggingAndException_ReturnsUnHealthyStatus()
+        {
+            // Act
+            var logEvent = await ReadyHealthCheckWithLoggingAsync<UnHealthyCheckWithException>();
+
+            // Assert
+            Assert.NotNull(logEvent);
+            Assert.NotNull(logEvent.Exception);
+            Assert.Equal("Health check \"UnHealthyCheckWithException\" was Unhealthy threw an exception \"Test Exception\"", logEvent.MessageTemplate.Render(logEvent.Properties));
+        }
+
+        [Fact]
         public async Task LiveHealthCheckOfTypeT_ReturnsUnHealthyStatus()
         {
             // Arrange
@@ -227,7 +255,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartupWithDefaultConfiguration>()
                 .ConfigureServices(x => x
                     .AddHealthChecks()
-                    .AddLiveCheck<UnHealthyCheckWithName>(nameof(UnHealthyCheckWithName))));
+                    .AddLiveCheck<UnHealthyCheck>("UnHealthyCheckWithName")));
 
             var client = testServer.CreateClient();
 
@@ -354,6 +382,47 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
 
             // Act & Assert
             await Assert.ThrowsAsync<ApplicationException>(() => server.CreateClient().SendAsync(request));
+        }
+        
+        private static async Task<LogEvent> ReadyHealthCheckWithLoggingAsync<T>() where T : class, IHealthCheck
+        {
+            // Arrange
+            var semaphore = new SemaphoreSlim(0, 1);
+            LogEvent logEvent = null;
+
+            void WriteLog(LogEvent log)
+            {
+                logEvent = log;
+                semaphore.Release();
+            }
+
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureLogging(x =>
+                {
+                    x.LoggerConfiguration.Filter.ByIncludingOnly(i =>
+                        i.Properties["SourceContext"].ToString() == "\"GiG.Core.HealthChecks\"");
+                    x.LoggerConfiguration.WriteTo.Sink(new DelegatingSink(WriteLog));
+                })
+                .ConfigureWebHostDefaults(x => x.UseTestServer().UseStartup<MockStartupWithDefaultConfiguration>())
+                .ConfigureServices(x => x
+                    .AddHealthChecks()
+                    .AddReadyCheck<T>(typeof(T).Name, HealthStatus.Unhealthy))
+                .Build();
+
+            await host.StartAsync();
+            var client = host.GetTestClient();
+
+            using var request = new HttpRequestMessage(HttpMethod.Get, MockStartupWithDefaultConfiguration.ReadyUrl);
+
+            // Act
+            using var response = await client.SendAsync(request);
+            await semaphore.WaitAsync(5000);
+
+            // Assert
+            Assert.NotNull(response);
+            Assert.Equal(HttpStatusCode.ServiceUnavailable, response.StatusCode);
+
+            return logEvent;
         }
     }
 }
