@@ -52,6 +52,7 @@ namespace GiG.Core.HealthChecks
                 return;
             }
 
+            // Added missing logs when Health Check fails - https://github.com/dotnet/extensions/issues/2716
             foreach (var entry in healthReport.Entries.Where(x => x.Value.Status != HealthStatus.Healthy))
             {
                 logger.LogWarning(entry.Value.Exception, "Health check {HealthCheckName} was {HealthCheckStatus} threw an exception {HealthCheckException}",
