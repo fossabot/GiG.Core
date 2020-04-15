@@ -11,9 +11,9 @@ namespace GiG.Core.Http.Tests.Integration.Controllers
     public class MockController : ControllerBase
     {
         [HttpGet]
-        public IActionResult Get([FromServices] IActivityContextAccessor activityContextAccessor, [FromServices] ITenantAccessor activityTenantAccessor)
+        public IActionResult Get([FromServices] IActivityContextAccessor activityContextAccessor, [FromServices] ITenantAccessor tenantAccessor)
         {
-            Response.Headers.Add(Constants.Header, activityTenantAccessor.Values.ToArray());
+            Response.Headers.Add(Constants.Header, tenantAccessor.Values.ToArray());
             Response.Headers.Add(Core.DistributedTracing.Abstractions.Constants.Header, activityContextAccessor.CorrelationId);
  
             return NoContent();

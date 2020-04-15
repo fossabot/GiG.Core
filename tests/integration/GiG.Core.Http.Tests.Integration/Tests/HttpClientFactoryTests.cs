@@ -31,7 +31,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
             var client = HttpClientFactory.Create(x =>
             {
                 x.AddDelegatingHandler(new CorrelationContextDelegatingHandler(_fixture.ActivityContextAccessor));
-                x.AddDelegatingHandler(new TenantDelegatingHandler(_fixture.ActivityTenantAccessor));
+                x.AddDelegatingHandler(new TenantDelegatingHandler(_fixture.TenantAccessor));
                 x.AddDelegatingHandler(new LoggingDelegatingHandler());
                 x.WithMessageHandler(testServer.CreateHandler());
                 x.Options.WithBaseAddress(testServer.BaseAddress);
@@ -47,7 +47,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
             // Assert
             Assert.Equal(HttpStatusCode.NoContent, actual.StatusCode);
             Assert.Equal(_fixture.ActivityContextAccessor.CorrelationId, correlation.First());
-            Assert.Equal(_fixture.ActivityTenantAccessor.Values, tenants);
+            Assert.Equal(_fixture.TenantAccessor.Values, tenants);
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
             var client = HttpClientFactory.Create(x =>
             {
                 x.AddDelegatingHandler(new CorrelationContextDelegatingHandler(_fixture.ActivityContextAccessor));
-                x.AddDelegatingHandler(new TenantDelegatingHandler(_fixture.ActivityTenantAccessor));
+                x.AddDelegatingHandler(new TenantDelegatingHandler(_fixture.TenantAccessor));
                 x.AddDelegatingHandler(new LoggingDelegatingHandler());
                 x.WithMessageHandler(testServer.CreateHandler());
                 x.Options.WithBaseAddress(testServer.BaseAddress);
@@ -75,7 +75,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
             // Assert
             Assert.Equal(HttpStatusCode.NoContent, actual.StatusCode);
             Assert.Equal(_fixture.ActivityContextAccessor.CorrelationId, correlation.First());
-            Assert.Equal(_fixture.ActivityTenantAccessor.Values, tenants);
+            Assert.Equal(_fixture.TenantAccessor.Values, tenants);
         }
 
         [Fact]
@@ -87,7 +87,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
             var client = HttpClientFactory.Create(x =>
             {
                 x.AddDelegatingHandler(new CorrelationContextDelegatingHandler(_fixture.ActivityContextAccessor));
-                x.AddDelegatingHandler(new TenantDelegatingHandler(_fixture.ActivityTenantAccessor));
+                x.AddDelegatingHandler(new TenantDelegatingHandler(_fixture.TenantAccessor));
                 x.AddDelegatingHandler(new LoggingDelegatingHandler());
                 x.WithMessageHandler(testServer.CreateHandler());
                 x.Options.WithBaseAddress(testServer.BaseAddress.ToString(), "/relative");
@@ -103,7 +103,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
             // Assert
             Assert.Equal(HttpStatusCode.NotFound, actual.StatusCode);
             Assert.Null(correlation);
-            Assert.NotEqual(_fixture.ActivityTenantAccessor.Values, tenants);
+            Assert.NotEqual(_fixture.TenantAccessor.Values, tenants);
         }
 
         [Fact]
@@ -122,7 +122,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
             // Assert
             Assert.Equal(HttpStatusCode.NoContent, actual.StatusCode);
             Assert.Equal(_fixture.ActivityContextAccessor.CorrelationId, correlation.First());
-            Assert.Equal(_fixture.ActivityTenantAccessor.Values, tenants);
+            Assert.Equal(_fixture.TenantAccessor.Values, tenants);
         }
 
         [Fact]
@@ -141,7 +141,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
             // Assert
             Assert.Equal(HttpStatusCode.NoContent, actual.StatusCode);
             Assert.Equal(_fixture.ActivityContextAccessor.CorrelationId, correlation.First());
-            Assert.Equal(_fixture.ActivityTenantAccessor.Values, tenants);
+            Assert.Equal(_fixture.TenantAccessor.Values, tenants);
         }
 
         [Fact]
@@ -180,7 +180,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
             HttpClientFactory.GetOrAdd(nameof(IMockRestClient), x =>
             {
                 x.AddDelegatingHandler(new CorrelationContextDelegatingHandler(_fixture.ActivityContextAccessor));
-                x.AddDelegatingHandler(new TenantDelegatingHandler(_fixture.ActivityTenantAccessor));
+                x.AddDelegatingHandler(new TenantDelegatingHandler(_fixture.TenantAccessor));
                 x.AddDelegatingHandler(new LoggingDelegatingHandler());
                 x.WithMessageHandler(testServer.CreateHandler());
                 x.Options.WithBaseAddress(testServer.BaseAddress);
@@ -190,7 +190,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
             HttpClientFactory.GetOrAdd<IMockRestClient>(x =>
             {
                 x.AddDelegatingHandler(new CorrelationContextDelegatingHandler(_fixture.ActivityContextAccessor));
-                x.AddDelegatingHandler(new TenantDelegatingHandler(_fixture.ActivityTenantAccessor));
+                x.AddDelegatingHandler(new TenantDelegatingHandler(_fixture.TenantAccessor));
                 x.AddDelegatingHandler(new LoggingDelegatingHandler());
                 x.WithMessageHandler(testServer.CreateHandler());
                 x.Options.WithBaseAddress(testServer.BaseAddress);
