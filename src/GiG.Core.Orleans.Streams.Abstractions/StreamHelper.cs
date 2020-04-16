@@ -30,7 +30,7 @@ namespace GiG.Core.Orleans.Streams.Abstractions
         /// <param name="version">The version number of the model.</param>
         public static string GetNamespace(string domain, string streamType, uint version = 1)
         {
-            return GetNamespace($"{domain}.{streamType}.v{version}");
+            return GetNamespace($"orleans.{domain}.{streamType}.v{version}");
         }
     }
 }

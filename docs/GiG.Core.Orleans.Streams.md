@@ -167,10 +167,10 @@ A helper can be used to construct the namespace including the `NamespacePrefix`.
 // dev.message-type
 StreamHelper.GetNamespace("message-type");
 
-// dev.domain.message-type.v1
+// dev.orleans.domain.message-type.v1
 StreamHelper.GetNamespace("domain", "message-type");
 
-// dev.domain.message-type.v2
+// dev.orleans.domain.message-type.v2
 StreamHelper.GetNamespace("domain", "message-type", 2);
 ```
 
@@ -181,7 +181,7 @@ The `NamespaceImplicitStreamSubscription` is used for implicit subscriptions usi
 #### Sample Usage
 
 ```
-// Same as [ImplicitStreamSubscription("dev.domain.message-type.v1")]
+// Same as [ImplicitStreamSubscription("dev.orleans.domain.message-type.v1")]
 [NamespaceImplicitStreamSubscription("domain", "message-type")]
 public class MockStreamGrain : Grain, IMockStreamGrain, IAsyncObserver<MockRequest>
 {
