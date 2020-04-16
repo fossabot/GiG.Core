@@ -1,6 +1,5 @@
 ﻿using Confluent.Kafka;
 using GiG.Core.HealthChecks.Extensions;
-using GiG.Core.Orleans.Streams;
 using GiG.Core.Orleans.Streams.Abstractions;
 using GiG.Core.Orleans.Streams.Kafka.Abstractions;
 using HealthChecks.Kafka;
@@ -32,8 +31,8 @@ namespace GiG.Core.HealthChecks.Orleans.Streams.Kafka
         /// </param>
         /// <param name="tags">A list of tags that can be used to filter sets of health checks. Optional.</param>
         /// <returns>The <see cref="IHealthChecksBuilder"/>.</returns>
-        public static IHealthChecksBuilder AddKafkaOrleansStreams([NotNull] this IHealthChecksBuilder builder, 
-            [NotNull] IConfiguration configuration, string topic = null, string name = Constants.DefaultHealthCheckName, 
+        public static IHealthChecksBuilder AddKafkaOrleansStreams([NotNull] this IHealthChecksBuilder builder,
+            [NotNull] IConfiguration configuration, string topic = null, string name = Constants.DefaultHealthCheckName,
             HealthStatus? failureStatus = default, IEnumerable<string> tags = default)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
@@ -56,28 +55,30 @@ namespace GiG.Core.HealthChecks.Orleans.Streams.Kafka
         /// </param>
         /// <param name="tags">A list of tags that can be used to filter sets of health checks. Optional.</param>
         /// <returns>The <see cref="IHealthChecksBuilder"/>.</returns>
-        public static IHealthChecksBuilder AddKafkaOrleansStreams([NotNull] this IHealthChecksBuilder builder, 
-            [NotNull] IConfigurationSection configurationSection, string topic = null, string name = Constants.DefaultHealthCheckName, 
+        public static IHealthChecksBuilder AddKafkaOrleansStreams([NotNull] this IHealthChecksBuilder builder,
+            [NotNull] IConfigurationSection configurationSection, string topic = null,
+            string name = Constants.DefaultHealthCheckName,
             HealthStatus? failureStatus = default, IEnumerable<string> tags = default)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
-            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection?.Path}' is incorrect.");
+            if (configurationSection?.Exists() != true)
+                throw new ConfigurationErrorsException(
+                    $"Configuration section '{configurationSection?.Path}' is incorrect.");
 
-            return builder.AddCachedCheck(name, _ =>
+            var streamsOptions = configurationSection.Get<KafkaOptions>();
+
+            var producerOptions = new ProducerConfig {BootstrapServers = streamsOptions.Brokers.Replace(';', ',')};
+            if (streamsOptions.Security.IsEnabled)
             {
-                var streamsOptions = configurationSection.Get<KafkaOptions>();
+                producerOptions.SaslUsername = streamsOptions.Security.SaslUsername;
+                producerOptions.SaslPassword = streamsOptions.Security.SaslPassword;
+                producerOptions.SecurityProtocol = (SecurityProtocol) (int) streamsOptions.Security.SecurityProtocol;
+                producerOptions.SaslMechanism = (SaslMechanism) (int) streamsOptions.Security.SaslMechanism;
+            }
 
-                var producerOptions = new ProducerConfig {BootstrapServers = streamsOptions.Brokers.Replace(';', ',')};
-                if (streamsOptions.Security.IsEnabled)
-                {
-                    producerOptions.SaslUsername = streamsOptions.Security.SaslUsername;
-                    producerOptions.SaslPassword = streamsOptions.Security.SaslPassword;
-                    producerOptions.SecurityProtocol = (SecurityProtocol) (int) streamsOptions.Security.SecurityProtocol;
-                    producerOptions.SaslMechanism = (SaslMechanism) (int) streamsOptions.Security.SaslMechanism;
-                }
-
-                return new KafkaHealthCheck(producerOptions, topic ?? StreamHelper.GetNamespace("telemetry", "health-check"));
-            }, failureStatus, tags);
+            return builder.AddCachedCheck(name,
+                _ => new KafkaHealthCheck(producerOptions,
+                    topic ?? StreamHelper.GetNamespace("telemetry", "health-check")), failureStatus, tags);
         }
     }
 }

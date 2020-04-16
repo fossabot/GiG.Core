@@ -7,10 +7,6 @@ using System.Threading.Tasks;
 
 namespace GiG.Core.Orleans.Streams.Tests.Integration.Mocks
 {
-    public interface IMockStreamGrain : IGrainWithGuidKey
-    {
-    }
-
     [NamespaceImplicitStreamSubscription(nameof(MockRequest))]
     public class MockStreamGrain : Grain, IMockStreamGrain, IAsyncObserver<MockRequest>
     {

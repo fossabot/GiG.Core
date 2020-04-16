@@ -8,7 +8,6 @@ using Microsoft.Extensions.Hosting;
 using Orleans;
 using Orleans.Hosting;
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
