@@ -1,6 +1,7 @@
 ﻿using Confluent.Kafka;
 using GiG.Core.HealthChecks.Extensions;
-using GiG.Core.Orleans.Streams.Kafka.Configurations;
+using GiG.Core.Orleans.Streams;
+using GiG.Core.Orleans.Streams.Kafka.Abstractions;
 using HealthChecks.Kafka;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
@@ -31,7 +32,7 @@ namespace GiG.Core.HealthChecks.Orleans.Streams.Kafka
         /// <param name="tags">A list of tags that can be used to filter sets of health checks. Optional.</param>
         /// <returns>The <see cref="IHealthChecksBuilder"/>.</returns>
         public static IHealthChecksBuilder AddKafkaOrleansStreams([NotNull] this IHealthChecksBuilder builder, 
-            [NotNull] IConfiguration configuration, string topic = Constants.DefaultTopicName, string name = Constants.DefaultHealthCheckName, 
+            [NotNull] IConfiguration configuration, string topic = null, string name = Constants.DefaultHealthCheckName, 
             HealthStatus? failureStatus = default, IEnumerable<string> tags = default)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
@@ -55,7 +56,7 @@ namespace GiG.Core.HealthChecks.Orleans.Streams.Kafka
         /// <param name="tags">A list of tags that can be used to filter sets of health checks. Optional.</param>
         /// <returns>The <see cref="IHealthChecksBuilder"/>.</returns>
         public static IHealthChecksBuilder AddKafkaOrleansStreams([NotNull] this IHealthChecksBuilder builder, 
-            [NotNull] IConfigurationSection configurationSection, string topic = Constants.DefaultTopicName, string name = Constants.DefaultHealthCheckName, 
+            [NotNull] IConfigurationSection configurationSection, string topic = null, string name = Constants.DefaultHealthCheckName, 
             HealthStatus? failureStatus = default, IEnumerable<string> tags = default)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
@@ -74,7 +75,7 @@ namespace GiG.Core.HealthChecks.Orleans.Streams.Kafka
                     producerOptions.SaslMechanism = (SaslMechanism) (int) streamsOptions.Security.SaslMechanism;
                 }
 
-                return new KafkaHealthCheck(producerOptions, topic);
+                return new KafkaHealthCheck(producerOptions, topic ?? StreamHelper.GetNamespace("telemetry", "health-check"));
             }, failureStatus, tags);
         }
     }
