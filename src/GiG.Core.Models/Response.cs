@@ -6,15 +6,10 @@
     /// <typeparam name="T"></typeparam>
     public class Response<T>
     {
-        private Response()
-        {
-
-        }
-
         /// <summary>
         /// A value to indicate whether the Reponse is successful.
         /// </summary>
-        public bool IsSuccess { get; private set; }
+        public bool IsSuccess { get; set; }
 
         /// <summary>
         /// The Data.

@@ -9,6 +9,7 @@ namespace GiG.Core.Orleans.Streams.Abstractions.Models
     {
         /// <summary>
         /// Constructor.
+        /// <param name="errorCode">The Error Code.</param>
         /// </summary>
         public FailedEventBase(string errorCode)
         {

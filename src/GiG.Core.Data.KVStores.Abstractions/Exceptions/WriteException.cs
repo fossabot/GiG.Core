@@ -5,10 +5,10 @@ namespace GiG.Core.Data.KVStores.Abstractions.Exceptions
     /// <summary>
     /// Represents errors that occur during KV write execution.
     /// </summary>
-    public class WriterException : Exception
+    public class WriteException : Exception
     {
         /// <inheritdoc />
-        public WriterException(string message, Exception innerException) : base(message, innerException)
+        public WriteException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }

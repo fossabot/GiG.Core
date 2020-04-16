@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GiG.Core.Data.KVStores.Abstractions\GiG.Core.Data.KVStores.Abstractions.csproj" />
+    <ProjectReference Include="..\GiG.Core.Data.Serializers\GiG.Core.Data.Serializers.csproj" />
   </ItemGroup>
 
 </Project>

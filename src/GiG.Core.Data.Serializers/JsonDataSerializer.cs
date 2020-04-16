@@ -1,19 +1,22 @@
-﻿using GiG.Core.Data.KVStores.Abstractions;
+﻿using GiG.Core.Data.Serializers.Abstractions;
 using System.Text.Json;
 
-namespace GiG.Core.Data.KVStores.Serializers
+namespace GiG.Core.Data.Serializers
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Json Data Serializer.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class JsonDataSerializer<T> : IDataSerializer<T>
     {
         /// <inheritdoc />
-        public T GetFromString(string value)
+        public T Deserialize(string value)
         {
             return string.IsNullOrEmpty(value) ? default : JsonSerializer.Deserialize<T>(value);
         }
 
         /// <inheritdoc />
-        public string ConvertToString(T model)
+        public string Serialize(T model)
         {
             return JsonSerializer.Serialize(model);
         }

@@ -1,7 +1,7 @@
 using GiG.Core.Data.KVStores.Abstractions;
 using GiG.Core.Data.KVStores.Providers.Etcd;
 using GiG.Core.Data.KVStores.Providers.Etcd.Abstractions;
-using GiG.Core.Data.KVStores.Serializers;
+using GiG.Core.Data.Serializers.Abstractions;
 using GiG.Core.Web.Docs.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
