@@ -4,26 +4,6 @@ This Library provides an API to register Stream Helpers.
 
 ## Namespace Prefix
 
-### Configuration
-
-You can change the default value for the Kafka configuration by overriding the [StreamOptions](../src/GiG.Core.Orleans.Streams.Abstractions/StreamOptions.cs) by adding the following configuration settings under section `Orleans:Streams`.
-
-| Configuration Name | Type   | Optional | Default Value |
-|--------------------|--------|----------|---------------|
-| NamespacePrefix    | String | No       |               |
-
-#### Sample Configuration
-
-```
-{
-  "Orleans": {
-    "Streams": {
-      "NamespacePrefix": "dev"
-    }
-  }
-}
-```
-
 ### Stream Helper for Namespace
 
 A helper can be used to construct the namespace including the `NamespacePrefix`.
@@ -43,7 +23,7 @@ StreamHelper.GetNamespace("domain", "message-type", 2);
 
 ### Namespace Implicit Stream Subscription
 
-The `NamespaceImplicitStreamSubscription` is used for implcit subscriptions using the specified stream namespace including the `NamespacePrefix`.
+The `NamespaceImplicitStreamSubscription` is used for implicit subscriptions using the specified stream namespace including the `NamespacePrefix`.
 
 #### Sample Usage
 
