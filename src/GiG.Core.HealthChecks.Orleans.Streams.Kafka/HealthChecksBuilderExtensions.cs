@@ -75,10 +75,10 @@ namespace GiG.Core.HealthChecks.Orleans.Streams.Kafka
                 producerOptions.SecurityProtocol = (SecurityProtocol) (int) streamsOptions.Security.SecurityProtocol;
                 producerOptions.SaslMechanism = (SaslMechanism) (int) streamsOptions.Security.SaslMechanism;
             }
+            
+            var instance = new KafkaHealthCheck(producerOptions, topic ?? StreamHelper.GetNamespace("telemetry", "health-check"));
 
-            return builder.AddCachedCheck(name,
-                _ => new KafkaHealthCheck(producerOptions,
-                    topic ?? StreamHelper.GetNamespace("telemetry", "health-check")), failureStatus, tags);
+            return builder.AddCachedCheck(name, _ => instance, failureStatus, tags);
         }
     }
 }
