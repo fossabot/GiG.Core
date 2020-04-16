@@ -1,6 +1,6 @@
-using GiG.Core.Orleans.Silo.Extensions;
-using GiG.Core.Orleans.Streams.Tests.Integration.Internal;
-using GiG.Core.Orleans.Streams.Tests.Integration.Mocks;
+using GiG.Core.Orleans.Streams.Kafka.Extensions;
+using GiG.Core.Orleans.Streams.Kafka.Tests.Integration.Internal;
+using GiG.Core.Orleans.Streams.Kafka.Tests.Integration.Mocks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,10 +8,11 @@ using Microsoft.Extensions.Hosting;
 using Orleans;
 using Orleans.Hosting;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace GiG.Core.Orleans.Streams.Tests.Integration.Fixtures
+namespace GiG.Core.Orleans.Streams.Kafka.Tests.Integration.Fixtures
 {
     [CollectionDefinition(Collection)]
     public class ClusterCollection : ICollectionFixture<ClusterFixture>
@@ -34,9 +35,12 @@ namespace GiG.Core.Orleans.Streams.Tests.Integration.Fixtures
                 .UseOrleans((ctx, x) =>
                 {
                     x.UseLocalhostClustering();
-                    x.AddAssemblies(typeof(MockStreamGrain));
                     x.AddMemoryGrainStorage(StreamStorageName);
-                    x.AddSimpleMessageStreamProvider(Constants.StreamProviderName);
+                    x.AddKafkaStreamProvider(Constants.StreamProviderName, k =>
+                    {
+                        k.FromConfiguration(ctx.Configuration);
+                        k.AddTopicStream(nameof(MockRequest), ctx.Configuration);
+                    });
                 })
                 .ConfigureWebHostDefaults(x =>
                 {

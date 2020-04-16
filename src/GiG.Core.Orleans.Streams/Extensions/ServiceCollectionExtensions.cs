@@ -41,6 +41,11 @@ namespace GiG.Core.Orleans.Streams.Extensions
             if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
 
             StreamHelper.NamespacePrefix = configurationSection.Get<StreamOptions>()?.NamespacePrefix;
+            if (string.IsNullOrWhiteSpace(StreamHelper.NamespacePrefix))
+            {
+                StreamHelper.NamespacePrefix = null;
+            }
+
             services.Configure<StreamOptions>(configurationSection);
 
             return services;

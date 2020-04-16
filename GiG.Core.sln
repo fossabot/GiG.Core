@@ -459,7 +459,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.MassTran
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.HealthChecks.Orleans.Streams.Kafka", "src\GiG.Core.HealthChecks.Orleans.Streams.Kafka\GiG.Core.HealthChecks.Orleans.Streams.Kafka.csproj", "{01FFDF3E-C399-405F-8FED-35C7B3A9CC2D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Streams.Tests.Integration", "tests\integration\GiG.Core.Orleans.Streams.Tests.Integration\GiG.Core.Orleans.Streams.Tests.Integration.csproj", "{2B7A4ADB-2158-4A1A-921E-DDE2BEFA4F9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Streams.Kafka.Tests.Integration", "tests\integration\GiG.Core.Orleans.Streams.Kafka.Tests.Integration\GiG.Core.Orleans.Streams.Kafka.Tests.Integration.csproj", "{2B7A4ADB-2158-4A1A-921E-DDE2BEFA4F9A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Performance.Logging", "tests\performance\GiG.Core.Performance.Logging\GiG.Core.Performance.Logging.csproj", "{D03DE6C2-61D2-4634-9FC8-E3AAB14A44F0}"
 EndProject
@@ -480,6 +480,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7FCF707A-CE0E-4367-AB14-8A61E24BA48E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Web.Sample", "samples\Web\src\GiG.Core.Web.Sample\GiG.Core.Web.Sample.csproj", "{3E977FE2-2733-4828-AF02-4BB04A088BC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Orleans.Streams.Tests.Integration", "tests\integration\GiG.Core.Orleans.Streams.Tests.Integration\GiG.Core.Orleans.Streams.Tests.Integration.csproj", "{FD4F7332-A89D-4FA8-9D45-767BEFBC912F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1083,6 +1085,10 @@ Global
 		{3E977FE2-2733-4828-AF02-4BB04A088BC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E977FE2-2733-4828-AF02-4BB04A088BC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E977FE2-2733-4828-AF02-4BB04A088BC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD4F7332-A89D-4FA8-9D45-767BEFBC912F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD4F7332-A89D-4FA8-9D45-767BEFBC912F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD4F7332-A89D-4FA8-9D45-767BEFBC912F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD4F7332-A89D-4FA8-9D45-767BEFBC912F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1278,6 +1284,7 @@ Global
 		{ED82B227-ABC6-46FB-942F-EB5E9EE6A22E} = {99337274-FAB8-4358-81BB-3736EE2CCDE6}
 		{7FCF707A-CE0E-4367-AB14-8A61E24BA48E} = {ED82B227-ABC6-46FB-942F-EB5E9EE6A22E}
 		{3E977FE2-2733-4828-AF02-4BB04A088BC0} = {7FCF707A-CE0E-4367-AB14-8A61E24BA48E}
+		{FD4F7332-A89D-4FA8-9D45-767BEFBC912F} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}

@@ -19,7 +19,7 @@ namespace GiG.Core.Orleans.Streams.Abstractions
         /// <param name="namespace">The stream namespace.</param>
         public static string GetNamespace(string @namespace)
         {
-            return $"{NamespacePrefix}.{@namespace}";
+            return NamespacePrefix == null ? @namespace : $"{NamespacePrefix}.{@namespace}";
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace GiG.Core.Orleans.Streams.Abstractions
         /// <param name="version">The version number of the model.</param>
         public static string GetNamespace(string domain, string streamType, uint version = 1)
         {
-            return $"{NamespacePrefix}.{domain}.{streamType}.v{version}";
+            return GetNamespace($"{domain}.{streamType}.v{version}");
         }
     }
 }
