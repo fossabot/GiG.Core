@@ -16,7 +16,7 @@ namespace GiG.Core.DistributedTracing.Activity.Extensions
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection"/>.</param>
         /// <returns>The <see cref="IServiceCollection"/>.</returns>
-        public static IServiceCollection AddActivityAccessor([NotNull] this IServiceCollection services)
+        public static IServiceCollection AddActivityContextAccessor([NotNull] this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 

@@ -20,6 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Context.Web.md = docs\GiG.Core.Context.Web.md
 		docs\GiG.Core.Data.KVStores.md = docs\GiG.Core.Data.KVStores.md
 		docs\GiG.Core.Data.KVStores.Providers.Etcd.md = docs\GiG.Core.Data.KVStores.Providers.Etcd.md
+		docs\GiG.Core.Data.KVStores.Providers.File.md = docs\GiG.Core.Data.KVStores.Providers.File.md
 		docs\GiG.Core.Data.Migration.Evolve.md = docs\GiG.Core.Data.Migration.Evolve.md
 		docs\GiG.Core.DistributedTracing.Activity.md = docs\GiG.Core.DistributedTracing.Activity.md
 		docs\GiG.Core.DistributedTracing.MassTransit.md = docs\GiG.Core.DistributedTracing.MassTransit.md
@@ -76,8 +77,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Web.Hosting.md = docs\GiG.Core.Web.Hosting.md
 		docs\GiG.Core.Web.Mock.md = docs\GiG.Core.Web.Mock.md
 		README.md = README.md
-		docs\GiG.Core.HealthChecks.Orleans.Streams.Kafka.md = docs\GiG.Core.HealthChecks.Orleans.Streams.Kafka.md
-		docs\GiG.Core.Data.KVStores.Providers.File.md = docs\GiG.Core.Data.KVStores.Providers.File.md
 		docs\GiG.Core.Web.Docs.Authentication.ApiKey.md = docs\GiG.Core.Web.Docs.Authentication.ApiKey.md
 	EndProjectSection
 EndProject
@@ -117,10 +116,6 @@ EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker\docker-compose.dcproj", "{3F673C64-3C05-45DB-9256-C085025BA286}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing.Abstractions", "src\GiG.Core.DistributedTracing.Abstractions\GiG.Core.DistributedTracing.Abstractions.csproj", "{BE594F54-E2A3-4B26-9D1F-54758CB7F2C0}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing.Web", "src\GiG.Core.DistributedTracing.Web\GiG.Core.DistributedTracing.Web.csproj", "{CBF3F986-453A-47B2-8AC9-173A7933D7C5}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing.Web.Tests.Integration", "tests\integration\GiG.Core.DistributedTracing.Web.Tests.Integration\GiG.Core.DistributedTracing.Web.Tests.Integration.csproj", "{BFD7DBD0-E549-4652-AEBD-F33F6279C059}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Logging.Enrichers.ApplicationMetadata", "src\GiG.Core.Logging.Enrichers.ApplicationMetadata\GiG.Core.Logging.Enrichers.ApplicationMetadata.csproj", "{3097BFFD-7910-4953-B506-7DBB606DA22A}"
 EndProject
@@ -176,10 +171,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Client", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Hosting.Tests.Integration", "tests\integration\GiG.Core.Web.Hosting.Tests.Integration\GiG.Core.Web.Hosting.Tests.Integration.csproj", "{C165BA59-A14C-479C-A02D-B2C7FB4FD974}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.MultiTenant.Web", "src\GiG.Core.MultiTenant.Web\GiG.Core.MultiTenant.Web.csproj", "{DE3308C0-BFC3-4C7F-A461-190A4F2C87C3}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.MultiTenant.Web.Tests.Integration", "tests\integration\GiG.Core.MultiTenant.Tests.Integration\GiG.Core.MultiTenant.Web.Tests.Integration.csproj", "{415BBEEB-7DFE-48A3-8F93-97933C2D4A2B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Docs", "src\GiG.Core.Web.Docs\GiG.Core.Web.Docs.csproj", "{29F99B37-6245-4155-A034-88F14ED95222}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logging", "Logging", "{E3EB22BA-0E13-4508-B5C5-45601B83C2FC}"
@@ -225,8 +216,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Context.Orleans", "src\GiG.Core.Context.Orleans\GiG.Core.Context.Orleans.csproj", "{A5699BCD-9096-4FC9-8C25-5D01A408E482}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Context.Web.Tests.Integration", "tests\integration\GiG.Core.Context.Web.Tests.Integration\GiG.Core.Context.Web.Tests.Integration.csproj", "{839C397E-CAAB-44B3-8D99-B48130224403}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Logging.Enrichers.MultiTenant", "src\GiG.Core.Logging.Enrichers.MultiTenant\GiG.Core.Logging.Enrichers.MultiTenant.csproj", "{1FA4249C-7CAF-4844-9E29-B1D81E91860A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "performance", "performance", "{66468249-0BE3-4E03-A5B8-DE350CA051EE}"
 EndProject
@@ -522,14 +511,6 @@ Global
 		{BE594F54-E2A3-4B26-9D1F-54758CB7F2C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE594F54-E2A3-4B26-9D1F-54758CB7F2C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE594F54-E2A3-4B26-9D1F-54758CB7F2C0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CBF3F986-453A-47B2-8AC9-173A7933D7C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CBF3F986-453A-47B2-8AC9-173A7933D7C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CBF3F986-453A-47B2-8AC9-173A7933D7C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CBF3F986-453A-47B2-8AC9-173A7933D7C5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BFD7DBD0-E549-4652-AEBD-F33F6279C059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BFD7DBD0-E549-4652-AEBD-F33F6279C059}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BFD7DBD0-E549-4652-AEBD-F33F6279C059}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BFD7DBD0-E549-4652-AEBD-F33F6279C059}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3097BFFD-7910-4953-B506-7DBB606DA22A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3097BFFD-7910-4953-B506-7DBB606DA22A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3097BFFD-7910-4953-B506-7DBB606DA22A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -606,14 +587,6 @@ Global
 		{C165BA59-A14C-479C-A02D-B2C7FB4FD974}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C165BA59-A14C-479C-A02D-B2C7FB4FD974}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C165BA59-A14C-479C-A02D-B2C7FB4FD974}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DE3308C0-BFC3-4C7F-A461-190A4F2C87C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DE3308C0-BFC3-4C7F-A461-190A4F2C87C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DE3308C0-BFC3-4C7F-A461-190A4F2C87C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DE3308C0-BFC3-4C7F-A461-190A4F2C87C3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{415BBEEB-7DFE-48A3-8F93-97933C2D4A2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{415BBEEB-7DFE-48A3-8F93-97933C2D4A2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{415BBEEB-7DFE-48A3-8F93-97933C2D4A2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{415BBEEB-7DFE-48A3-8F93-97933C2D4A2B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{29F99B37-6245-4155-A034-88F14ED95222}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{29F99B37-6245-4155-A034-88F14ED95222}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29F99B37-6245-4155-A034-88F14ED95222}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -670,10 +643,6 @@ Global
 		{839C397E-CAAB-44B3-8D99-B48130224403}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{839C397E-CAAB-44B3-8D99-B48130224403}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{839C397E-CAAB-44B3-8D99-B48130224403}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1FA4249C-7CAF-4844-9E29-B1D81E91860A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1FA4249C-7CAF-4844-9E29-B1D81E91860A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1FA4249C-7CAF-4844-9E29-B1D81E91860A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1FA4249C-7CAF-4844-9E29-B1D81E91860A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{43EBE64C-94E1-4C17-A015-399A957331AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{43EBE64C-94E1-4C17-A015-399A957331AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43EBE64C-94E1-4C17-A015-399A957331AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -1128,8 +1097,6 @@ Global
 		{036F11C4-D05B-4E08-8B93-2B60C02E5837} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 		{3F673C64-3C05-45DB-9256-C085025BA286} = {212B73B8-7EE1-4550-8D14-F62D9DFB87C6}
 		{BE594F54-E2A3-4B26-9D1F-54758CB7F2C0} = {F3E4EB54-9129-4327-9A32-89ABD4ADA6C5}
-		{CBF3F986-453A-47B2-8AC9-173A7933D7C5} = {F3E4EB54-9129-4327-9A32-89ABD4ADA6C5}
-		{BFD7DBD0-E549-4652-AEBD-F33F6279C059} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 		{3097BFFD-7910-4953-B506-7DBB606DA22A} = {52AEF79F-C056-404A-9AC9-155CE8A17721}
 		{CD7B94AE-8519-4080-8B92-094B6E7562E3} = {52AEF79F-C056-404A-9AC9-155CE8A17721}
 		{10A41C72-335A-41CF-93F1-197C9031E9FF} = {52AEF79F-C056-404A-9AC9-155CE8A17721}
@@ -1157,8 +1124,6 @@ Global
 		{EAF75BF4-7854-46BC-87A7-89D793079002} = {D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF}
 		{1A662BC0-8C36-4C5A-8D64-DC3116604680} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
 		{C165BA59-A14C-479C-A02D-B2C7FB4FD974} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
-		{DE3308C0-BFC3-4C7F-A461-190A4F2C87C3} = {04D48832-835B-406A-86AA-8A7232ECA58C}
-		{415BBEEB-7DFE-48A3-8F93-97933C2D4A2B} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 		{29F99B37-6245-4155-A034-88F14ED95222} = {D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF}
 		{E3EB22BA-0E13-4508-B5C5-45601B83C2FC} = {99337274-FAB8-4358-81BB-3736EE2CCDE6}
 		{412AB606-A56E-4B9E-A9C1-E2C7E02D0CF5} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
@@ -1181,7 +1146,6 @@ Global
 		{6FDCCBF7-A517-41B4-9CD2-E8075F9C35B3} = {52AEF79F-C056-404A-9AC9-155CE8A17721}
 		{A5699BCD-9096-4FC9-8C25-5D01A408E482} = {F61B8500-FA18-43A7-B637-379735C0B141}
 		{839C397E-CAAB-44B3-8D99-B48130224403} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
-		{1FA4249C-7CAF-4844-9E29-B1D81E91860A} = {52AEF79F-C056-404A-9AC9-155CE8A17721}
 		{66468249-0BE3-4E03-A5B8-DE350CA051EE} = {5915362C-8F1B-4574-92D4-BEF2B1968A17}
 		{43EBE64C-94E1-4C17-A015-399A957331AC} = {8A64AE64-5734-41A3-9D3A-B6F2B0248ECE}
 		{8A64AE64-5734-41A3-9D3A-B6F2B0248ECE} = {5915362C-8F1B-4574-92D4-BEF2B1968A17}

@@ -1,7 +1,5 @@
-using GiG.Core.Authentication.Hmac.Abstractions;
 using GiG.Core.Http.Authentication.Hmac.Extensions;
 using GiG.Core.Web.Authentication.Hmac.MultiTenant.Tests.Integration.Mocks;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,48 +7,50 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
+using Constants = GiG.Core.Authentication.Hmac.Abstractions.Constants;
 
 namespace GiG.Core.Web.Authentication.Hmac.MultiTenant.Tests.Integration.Tests
 {
     [Trait("Category", "Integration")]
-    public class HmacAuthenticationHandlerTests
+    public class HmacAuthenticationHandlerTests : IClassFixture<TestFixture>
     {
-        private readonly TestServer _server;
         private const string DefaultClientName = "Default";
         private const string DefaultClient2Name = "Default2";
+        private readonly ServiceProvider _services;
 
-        public HmacAuthenticationHandlerTests()
+        public HmacAuthenticationHandlerTests(TestFixture fixture)
         {
-            _server = new TestServer(new WebHostBuilder()
-                .UseStartup<MockStartup>()
-                .ConfigureServices((ctx, services) =>
-                {
-                    services.AddHttpClient(DefaultClientName)
-                    .ConfigurePrimaryHttpMessageHandler(x => _server.CreateHandler())
-                    .ConfigureHttpClient(x => x.BaseAddress = _server.BaseAddress)
-                    .AddHmacDelegatingHandler()
-                    .ConfigureDefaultHmacDelegatingHandlerOptionProvider(ctx.Configuration.GetSection("HmacClientDefault"))
-                    .ConfigureHttpClient(x=>x.DefaultRequestHeaders.Add(Core.MultiTenant.Abstractions.Constants.Header,"1"));
+            var testServer = fixture.Host.GetTestServer();
 
-                    services.AddHttpClient(DefaultClient2Name)
-                    .ConfigurePrimaryHttpMessageHandler(x => _server.CreateHandler())
-                    .ConfigureHttpClient(x => x.BaseAddress = _server.BaseAddress)
-                    .AddHmacDelegatingHandler()
-                    .ConfigureDefaultHmacDelegatingHandlerOptionProvider(ctx.Configuration.GetSection("HmacClientDefault2"))
-                    .ConfigureHttpClient(x=>x.DefaultRequestHeaders.Add(Core.MultiTenant.Abstractions.Constants.Header,"2"));
+            var configuration = testServer.Services.GetRequiredService<IConfiguration>();
+            var serviceCollection = fixture.ServiceCollection;
 
-                    services.AddHttpClient("NonHmacClient")
-                        .ConfigurePrimaryHttpMessageHandler(x => _server.CreateHandler())
-                        .ConfigureHttpClient(x => x.BaseAddress = _server.BaseAddress);
-                })
-                .ConfigureAppConfiguration(appConfig => appConfig.AddJsonFile("appsettings.json")));
+            serviceCollection.AddHttpClient(DefaultClientName)
+                .ConfigurePrimaryHttpMessageHandler(x => testServer.CreateHandler())
+                .ConfigureHttpClient(x => x.BaseAddress = testServer.BaseAddress)
+                .AddHmacDelegatingHandler()
+                .ConfigureDefaultHmacDelegatingHandlerOptionProvider(configuration.GetSection("HmacClientDefault"))
+                .ConfigureHttpClient(x=>x.DefaultRequestHeaders.Add(Core.MultiTenant.Abstractions.Constants.Header,"1"));
+
+            serviceCollection.AddHttpClient(DefaultClient2Name)
+                .ConfigurePrimaryHttpMessageHandler(x => testServer.CreateHandler())
+                .ConfigureHttpClient(x => x.BaseAddress = testServer.BaseAddress)
+                .AddHmacDelegatingHandler()
+                .ConfigureDefaultHmacDelegatingHandlerOptionProvider(configuration.GetSection("HmacClientDefault2"))
+                .ConfigureHttpClient(x=>x.DefaultRequestHeaders.Add(Core.MultiTenant.Abstractions.Constants.Header,"2"));
+
+            serviceCollection.AddHttpClient("NonHmacClient")
+                .ConfigurePrimaryHttpMessageHandler(x => testServer.CreateHandler())
+                .ConfigureHttpClient(x => x.BaseAddress = testServer.BaseAddress);
+
+            _services = serviceCollection.BuildServiceProvider();
         }
 
         [Fact]
         public async Task AuthenticateAsync_WithRespectiveHmac_ReturnsNoContent()
         {
             //Arrange
-            var client = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient(DefaultClientName);
+           var client = _services.GetRequiredService<IHttpClientFactory>().CreateClient(DefaultClientName);
             using var request = new HttpRequestMessage(HttpMethod.Get, "api/mock");
             request.Headers.Add(Constants.Nonce, "123");
 
@@ -65,7 +65,7 @@ namespace GiG.Core.Web.Authentication.Hmac.MultiTenant.Tests.Integration.Tests
         public async Task AuthenticateAsync_WithInvalidHmac_ReturnsUnauthorized()
         {
             //Arrange
-            var client = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient("NonHmacClient");
+            var client = _services.GetRequiredService<IHttpClientFactory>().CreateClient("NonHmacClient");
             using var request = new HttpRequestMessage(HttpMethod.Get, "api/mock");
             request.Headers.Add(Constants.Nonce, "123");
 
@@ -80,8 +80,8 @@ namespace GiG.Core.Web.Authentication.Hmac.MultiTenant.Tests.Integration.Tests
         public async Task AuthenticateAsync_TwoClientsDifferentSecret_ReturnsNoContent()
         {
             //Arrange
-            var clientDefault = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient(DefaultClientName);
-            var clientDefault2 = _server.Services.GetRequiredService<IHttpClientFactory>().CreateClient(DefaultClient2Name);
+            var clientDefault = _services.GetRequiredService<IHttpClientFactory>().CreateClient(DefaultClientName);
+            var clientDefault2 = _services.GetRequiredService<IHttpClientFactory>().CreateClient(DefaultClient2Name);
             using var request = new HttpRequestMessage(HttpMethod.Get, "api/mock");
             request.Headers.Add(Constants.Nonce, "123");
 

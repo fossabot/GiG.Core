@@ -6,6 +6,11 @@
     public static class TracingFields
     {
         /// <summary>
+        /// The CorrelationId.
+        /// </summary>
+        public const string CorrelationId = "CorrelationId";
+
+        /// <summary>
         /// The TraceId part of the Id.
         /// </summary>
         public const string TraceId = "TraceId";

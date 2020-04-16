@@ -1,9 +1,6 @@
-﻿using GiG.Core.DistributedTracing.Abstractions;
-using GiG.Core.Http.DistributedTracing;
+﻿using GiG.Core.Http.DistributedTracing;
 using GiG.Core.Http.MultiTenant;
 using GiG.Core.Http.Tests.Integration.Mocks;
-using GiG.Core.MultiTenant.Abstractions;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Refit;
 using System.Linq;
@@ -18,25 +15,51 @@ namespace GiG.Core.Http.Tests.Integration.Tests
     [Trait("Category", "Integration")]
     public class HttpClientFactoryTests : IClassFixture<TestFixture>
     {
-        private readonly ICorrelationContextAccessor _correlationContextAccessor;
-        private readonly ITenantAccessor _tenantAccessor;
-
+        private readonly TestFixture _fixture;
+   
         public HttpClientFactoryTests(TestFixture fixture)
         {
-            _correlationContextAccessor = fixture.CorrelationContextAccessor;
-            _tenantAccessor = fixture.TenantAccessor;
+            _fixture = fixture;
         }
 
         [Fact]
         public async Task GetAsync_Create_ReturnsHttpResponseMessage()
         {
             // Arrange
-            var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
-            
+            var testServer = _fixture.Host.GetTestServer();
+
             var client = HttpClientFactory.Create(x =>
             {
-                x.AddDelegatingHandler(new CorrelationContextDelegatingHandler(_correlationContextAccessor));
-                x.AddDelegatingHandler(new TenantDelegatingHandler(_tenantAccessor));
+                x.AddDelegatingHandler(new CorrelationContextDelegatingHandler(_fixture.ActivityContextAccessor));
+                x.AddDelegatingHandler(new TenantDelegatingHandler(_fixture.TenantAccessor));
+                x.AddDelegatingHandler(new LoggingDelegatingHandler());
+                x.WithMessageHandler(testServer.CreateHandler());
+                x.Options.WithBaseAddress(testServer.BaseAddress);
+            });
+            
+            var service = RestService.For<IMockRestClient>(client);
+
+            // Act
+            var actual = await service.GetAsync();
+            actual.Headers.TryGetValues(Constants.Header, out var correlation);
+            actual.Headers.TryGetValues(Core.MultiTenant.Abstractions.Constants.Header, out var tenants);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.NoContent, actual.StatusCode);
+            Assert.Equal(_fixture.ActivityContextAccessor.CorrelationId, correlation.First());
+            Assert.Equal(_fixture.TenantAccessor.Values, tenants);
+        }
+
+        [Fact]
+        public async Task GetAsync_Create_UseBaseAddressAsString_ReturnsHttpResponseMessage()
+        {
+            // Arrange
+            var testServer = _fixture.Host.GetTestServer();
+
+            var client = HttpClientFactory.Create(x =>
+            {
+                x.AddDelegatingHandler(new CorrelationContextDelegatingHandler(_fixture.ActivityContextAccessor));
+                x.AddDelegatingHandler(new TenantDelegatingHandler(_fixture.TenantAccessor));
                 x.AddDelegatingHandler(new LoggingDelegatingHandler());
                 x.WithMessageHandler(testServer.CreateHandler());
                 x.Options.WithBaseAddress(testServer.BaseAddress);
@@ -51,48 +74,20 @@ namespace GiG.Core.Http.Tests.Integration.Tests
 
             // Assert
             Assert.Equal(HttpStatusCode.NoContent, actual.StatusCode);
-            Assert.Equal(_correlationContextAccessor.Value.ToString(), correlation.First());
-            Assert.Equal(_tenantAccessor.Values, tenants);
-        }
-
-        [Fact]
-        public async Task GetAsync_Create_UseBaseAddressAsString_ReturnsHttpResponseMessage()
-        {
-            // Arrange
-            var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
-
-            var client = HttpClientFactory.Create(x =>
-            {
-                x.AddDelegatingHandler(new CorrelationContextDelegatingHandler(_correlationContextAccessor));
-                x.AddDelegatingHandler(new TenantDelegatingHandler(_tenantAccessor));
-                x.AddDelegatingHandler(new LoggingDelegatingHandler());
-                x.WithMessageHandler(testServer.CreateHandler());
-                x.Options.WithBaseAddress(testServer.BaseAddress.ToString());
-            });
-
-            var service = RestService.For<IMockRestClient>(client);
-
-            // Act
-            var actual = await service.GetAsync();
-            actual.Headers.TryGetValues(Constants.Header, out var correlation);
-            actual.Headers.TryGetValues(Core.MultiTenant.Abstractions.Constants.Header, out var tenants);
-
-            // Assert
-            Assert.Equal(HttpStatusCode.NoContent, actual.StatusCode);
-            Assert.Equal(_correlationContextAccessor.Value.ToString(), correlation.First());
-            Assert.Equal(_tenantAccessor.Values, tenants);
+            Assert.Equal(_fixture.ActivityContextAccessor.CorrelationId, correlation.First());
+            Assert.Equal(_fixture.TenantAccessor.Values, tenants);
         }
 
         [Fact]
         public async Task GetAsync_Create_UseBaseAddressWithRelativePath_ReturnsHttpNotFound()
         {
             // Arrange
-            var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
+            var testServer = _fixture.Host.GetTestServer();
 
             var client = HttpClientFactory.Create(x =>
             {
-                x.AddDelegatingHandler(new CorrelationContextDelegatingHandler(_correlationContextAccessor));
-                x.AddDelegatingHandler(new TenantDelegatingHandler(_tenantAccessor));
+                x.AddDelegatingHandler(new CorrelationContextDelegatingHandler(_fixture.ActivityContextAccessor));
+                x.AddDelegatingHandler(new TenantDelegatingHandler(_fixture.TenantAccessor));
                 x.AddDelegatingHandler(new LoggingDelegatingHandler());
                 x.WithMessageHandler(testServer.CreateHandler());
                 x.Options.WithBaseAddress(testServer.BaseAddress.ToString(), "/relative");
@@ -107,15 +102,15 @@ namespace GiG.Core.Http.Tests.Integration.Tests
 
             // Assert
             Assert.Equal(HttpStatusCode.NotFound, actual.StatusCode);
-            Assert.Equal(_correlationContextAccessor.Value.ToString(), correlation.First());
-            Assert.NotEqual(_tenantAccessor.Values, tenants);
+            Assert.Null(correlation);
+            Assert.NotEqual(_fixture.TenantAccessor.Values, tenants);
         }
 
         [Fact]
         public async Task GetAsync_GetOrAddWithType_ReturnsHttpResponseMessage()
         {
             // Arrange
-            var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
+            var testServer = _fixture.Host.GetTestServer();
             var client = CreateClientWithType(testServer);
             var service = RestService.For<IMockRestClient>(client);
             
@@ -126,15 +121,15 @@ namespace GiG.Core.Http.Tests.Integration.Tests
 
             // Assert
             Assert.Equal(HttpStatusCode.NoContent, actual.StatusCode);
-            Assert.Equal(_correlationContextAccessor.Value.ToString(), correlation.First());
-            Assert.Equal(_tenantAccessor.Values, tenants);
+            Assert.Equal(_fixture.ActivityContextAccessor.CorrelationId, correlation.First());
+            Assert.Equal(_fixture.TenantAccessor.Values, tenants);
         }
 
         [Fact]
         public async Task GetAsync_GetOrAddWithName_ReturnsHttpResponseMessage()
         {
             // Arrange
-            var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
+            var testServer = _fixture.Host.GetTestServer();
             var client = CreateClientWithName(testServer);
             var service = RestService.For<IMockRestClient>(client);
 
@@ -145,15 +140,15 @@ namespace GiG.Core.Http.Tests.Integration.Tests
 
             // Assert
             Assert.Equal(HttpStatusCode.NoContent, actual.StatusCode);
-            Assert.Equal(_correlationContextAccessor.Value.ToString(), correlation.First());
-            Assert.Equal(_tenantAccessor.Values, tenants);
+            Assert.Equal(_fixture.ActivityContextAccessor.CorrelationId, correlation.First());
+            Assert.Equal(_fixture.TenantAccessor.Values, tenants);
         }
 
         [Fact]
         public void GetAsync_GetOrAddWithType_ReturnsSameInstance()
         {
             // Arrange
-            var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
+            var testServer = _fixture.Host.GetTestServer();
 
             // Act
             var clientInstance1 = CreateClientWithType(testServer);
@@ -169,7 +164,7 @@ namespace GiG.Core.Http.Tests.Integration.Tests
         public void GetAsync_GetOrAddWithName_ReturnsSameInstance()
         {
             // Arrange
-            var testServer = new TestServer(new WebHostBuilder().UseStartup<MockStartup>());
+            var testServer = _fixture.Host.GetTestServer();
 
             // Act
             var clientInstance1 = CreateClientWithName(testServer);
@@ -184,8 +179,8 @@ namespace GiG.Core.Http.Tests.Integration.Tests
         private HttpClient CreateClientWithName(TestServer testServer) =>
             HttpClientFactory.GetOrAdd(nameof(IMockRestClient), x =>
             {
-                x.AddDelegatingHandler(new CorrelationContextDelegatingHandler(_correlationContextAccessor));
-                x.AddDelegatingHandler(new TenantDelegatingHandler(_tenantAccessor));
+                x.AddDelegatingHandler(new CorrelationContextDelegatingHandler(_fixture.ActivityContextAccessor));
+                x.AddDelegatingHandler(new TenantDelegatingHandler(_fixture.TenantAccessor));
                 x.AddDelegatingHandler(new LoggingDelegatingHandler());
                 x.WithMessageHandler(testServer.CreateHandler());
                 x.Options.WithBaseAddress(testServer.BaseAddress);
@@ -194,8 +189,8 @@ namespace GiG.Core.Http.Tests.Integration.Tests
         private HttpClient CreateClientWithType(TestServer testServer) =>
             HttpClientFactory.GetOrAdd<IMockRestClient>(x =>
             {
-                x.AddDelegatingHandler(new CorrelationContextDelegatingHandler(_correlationContextAccessor));
-                x.AddDelegatingHandler(new TenantDelegatingHandler(_tenantAccessor));
+                x.AddDelegatingHandler(new CorrelationContextDelegatingHandler(_fixture.ActivityContextAccessor));
+                x.AddDelegatingHandler(new TenantDelegatingHandler(_fixture.TenantAccessor));
                 x.AddDelegatingHandler(new LoggingDelegatingHandler());
                 x.WithMessageHandler(testServer.CreateHandler());
                 x.Options.WithBaseAddress(testServer.BaseAddress);

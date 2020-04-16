@@ -1,4 +1,4 @@
-﻿using GiG.Core.MultiTenant.Web.Extensions;
+﻿using GiG.Core.MultiTenant.Activity.Extensions;
 using System;
 using Xunit;
 

@@ -5,7 +5,6 @@ using GiG.Core.Hosting.Extensions;
 using GiG.Core.Logging.Enrichers.ApplicationMetadata.Extensions;
 using GiG.Core.Logging.Enrichers.Context.Extensions;
 using GiG.Core.Logging.Enrichers.DistributedTracing.Extensions;
-using GiG.Core.Logging.Enrichers.MultiTenant.Extensions;
 using GiG.Core.Logging.Extensions;
 using GiG.Core.Logging.Sinks.File.Extensions;
 using GiG.Core.Logging.Tests.Integration.Extensions;
@@ -32,7 +31,6 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
         private string _filePath;
         private IApplicationMetadataAccessor _applicationMetadataAccessor;
         private IRequestContextAccessor _requestContextAccessor;
-        private ICorrelationContextAccessor _correlationContextAccessor;
         private IActivityContextAccessor _activityContextAccessor;
         private SemaphoreSlim _semaphore;
 
@@ -43,8 +41,6 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
             _host = Host.CreateDefaultBuilder()
                 .ConfigureServices(x =>
                 {
-                    x.AddMockCorrelationAccessor();
-                    x.AddMockTenantAccessor();
                     x.AddMockRequestContextAccessor();
                     x.AddMockActivityContextAccessor();
                 })
@@ -54,8 +50,6 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
                     .WriteToSink(new DelegatingSink(WriteLog))
                     .EnrichWithApplicationMetadata()
                     .EnrichWithActivityContext()
-                    .EnrichWithCorrelation()
-                    .EnrichWithTenant()
                     .EnrichWithRequestContext()
                 )
                 .Build();
@@ -74,7 +68,6 @@ namespace GiG.Core.Logging.Tests.Integration.Tests
 
             _applicationMetadataAccessor = _host.Services.GetRequiredService<IApplicationMetadataAccessor>();
             _requestContextAccessor = _host.Services.GetRequiredService<IRequestContextAccessor>();
-            _correlationContextAccessor = _host.Services.GetRequiredService<ICorrelationContextAccessor>();
             _activityContextAccessor = _host.Services.GetRequiredService<IActivityContextAccessor>();
         }
 

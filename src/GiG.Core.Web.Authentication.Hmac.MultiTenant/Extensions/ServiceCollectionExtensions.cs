@@ -1,5 +1,5 @@
-﻿using GiG.Core.Authentication.Hmac.Abstractions;
-using GiG.Core.MultiTenant.Web.Extensions;
+﻿using GiG.Core.MultiTenant.Activity.Extensions;
+using GiG.Core.Authentication.Hmac.Abstractions;
 using GiG.Core.Web.Authentication.Hmac.Abstractions;
 using GiG.Core.Web.Authentication.Hmac.MultiTenant.Internal;
 using JetBrains.Annotations;
@@ -30,7 +30,7 @@ namespace GiG.Core.Web.Authentication.Hmac.MultiTenant.Extensions
             if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection?.Path}' is incorrect.");
             if (string.IsNullOrWhiteSpace(schemeName)) throw new ArgumentException($"'{nameof(schemeName)}' must not be null, empty or whitespace.", nameof(schemeName));
 
-            services.AddTenantAccessor();
+            services.AddActivityTenantAccessor();
             services.TryAddScoped<IHmacOptionsProvider, MultiTenantOptionProvider>();
             services.Configure<Dictionary<string,HmacOptions>>(schemeName, configurationSection);
 

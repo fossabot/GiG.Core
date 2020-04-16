@@ -1,4 +1,4 @@
-﻿using GiG.Core.DistributedTracing.Web.Extensions;
+﻿using GiG.Core.DistributedTracing.Activity.Extensions;
 using GiG.Core.Logging.All.Extensions;
 using GiG.Core.Messaging.Kafka.Abstractions;
 using GiG.Core.Messaging.Kafka.Abstractions.Interfaces;
@@ -37,7 +37,7 @@ namespace GiG.Core.Messaging.Tests.Unit.Kafka
                 .ConfigureLogging()
                 .ConfigureServices((h, s) =>
                 {
-                    s.AddCorrelationAccessor();
+                    s.AddActivityContextAccessor();
                     s.AddKafkaProducer<string, object>(options => options
                         .WithJson()
                         .FromConfiguration(h.Configuration)
@@ -61,7 +61,7 @@ namespace GiG.Core.Messaging.Tests.Unit.Kafka
                 .ConfigureLogging()
                 .ConfigureServices((h, s) =>
                 {
-                    s.AddCorrelationAccessor();
+                    s.AddActivityContextAccessor();
                     s.AddKafkaProducer<string, object>(options => options
                         .WithJson()
                         .FromConfiguration(h.Configuration.GetSection(KafkaProviderOptions.DefaultSectionName))
