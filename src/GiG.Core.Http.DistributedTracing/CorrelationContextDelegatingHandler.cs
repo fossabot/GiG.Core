@@ -10,15 +10,15 @@ namespace GiG.Core.Http.DistributedTracing
     /// </summary>
     public class CorrelationContextDelegatingHandler : DelegatingHandler
     {
-        private readonly ICorrelationContextAccessor _correlationContextAccessor;
+        private readonly IActivityContextAccessor _activityContextAccessor;
 
         /// <summary>
         /// A <see cref="DelegatingHandler"/> that injects an X-Correlation-ID Header into the request.
         /// </summary>
-        /// <param name="correlationContextAccessor">The <see cref="T:GiG.Core.DistributedTracing.Abstractions.ICorrelationContextAccessor" /> to use.</param>
-        public CorrelationContextDelegatingHandler(ICorrelationContextAccessor correlationContextAccessor)
+        /// <param name="activityContextAccessor">The <see cref="T:GiG.Core.DistributedTracing.Abstractions.IActivityContextAccessor" /> to use.</param>
+        public CorrelationContextDelegatingHandler(IActivityContextAccessor activityContextAccessor)
         {
-            _correlationContextAccessor = correlationContextAccessor;
+            _activityContextAccessor = activityContextAccessor;
         }
 
         /// <inheritdoc />
@@ -27,7 +27,7 @@ namespace GiG.Core.Http.DistributedTracing
         {
             if (!request.Headers.Contains(Constants.Header))
             {
-                request.Headers.Add(Constants.Header, _correlationContextAccessor.Value.ToString());
+                request.Headers.Add(Constants.Header, _activityContextAccessor.CorrelationId);
             }
 
             return base.SendAsync(request, cancellationToken);

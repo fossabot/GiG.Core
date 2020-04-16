@@ -2,7 +2,6 @@
 using GiG.Core.Logging.Enrichers.ApplicationMetadata.Extensions;
 using GiG.Core.Logging.Enrichers.Context.Extensions;
 using GiG.Core.Logging.Enrichers.DistributedTracing.Extensions;
-using GiG.Core.Logging.Enrichers.MultiTenant.Extensions;
 using GiG.Core.Logging.Extensions;
 using GiG.Core.Logging.Sinks.Console.Extensions;
 using GiG.Core.Logging.Sinks.File.Extensions;
@@ -37,9 +36,7 @@ namespace GiG.Core.Logging.All.Extensions
                 .WriteToRabbitMQ()
                 .WriteToFile()
                 .EnrichWithApplicationMetadata()
-                .EnrichWithCorrelation()
                 .EnrichWithActivityContext()
-                .EnrichWithTenant()
                 .EnrichWithRequestContext()
                 , sectionName);
         }

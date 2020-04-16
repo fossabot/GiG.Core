@@ -1,9 +1,9 @@
-﻿using GiG.Core.MultiTenant.Web.Internal;
+﻿using GiG.Core.MultiTenant.Activity.Internal;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using System;
 
-namespace GiG.Core.MultiTenant.Web.Extensions
+namespace GiG.Core.MultiTenant.Activity.Extensions
 {
     /// <summary>
     /// Application Builder Extensions.

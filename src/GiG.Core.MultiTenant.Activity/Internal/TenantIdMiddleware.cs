@@ -1,10 +1,9 @@
 ﻿using GiG.Core.MultiTenant.Abstractions;
 using Microsoft.AspNetCore.Http;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GiG.Core.MultiTenant.Web.Internal
+namespace GiG.Core.MultiTenant.Activity.Internal
 {
     internal class TenantIdMiddleware
     {
@@ -18,7 +17,7 @@ namespace GiG.Core.MultiTenant.Web.Internal
         public async Task InvokeAsync(HttpContext context)
         {
             // If Activity is not populated, skip
-            var current = Activity.Current;
+            var current = System.Diagnostics.Activity.Current;
             if (current == null)
             {
                 await _next(context);

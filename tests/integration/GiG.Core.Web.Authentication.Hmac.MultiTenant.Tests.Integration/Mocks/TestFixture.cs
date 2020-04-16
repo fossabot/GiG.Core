@@ -7,14 +7,15 @@ using Microsoft.Extensions.Hosting;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace GiG.Core.Http.Tests.Integration.Mocks
+namespace GiG.Core.Web.Authentication.Hmac.MultiTenant.Tests.Integration.Mocks
 {
     public class TestFixture : IAsyncLifetime
     {
         internal IActivityContextAccessor ActivityContextAccessor;
         internal ITenantAccessor TenantAccessor;
         internal IHost Host;
-        
+        internal IServiceCollection ServiceCollection;
+
         public async Task InitializeAsync()
         {
             Host = Microsoft.Extensions.Hosting.Host
@@ -23,8 +24,10 @@ namespace GiG.Core.Http.Tests.Integration.Mocks
                 {
                     webBuilder.UseTestServer();
                     webBuilder.UseStartup<MockStartup>();
-                }).Build();
-
+                })
+                .ConfigureServices((x) => ServiceCollection = x)
+                .Build();
+                
             await Host.StartAsync();
 
             ActivityContextAccessor = Host.Services.GetService<IActivityContextAccessor>();

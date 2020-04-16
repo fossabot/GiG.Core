@@ -1,4 +1,4 @@
-﻿using GiG.Core.DistributedTracing.Web.Extensions;
+﻿using GiG.Core.DistributedTracing.Activity.Extensions;
 using GiG.Core.Messaging.Kafka.Abstractions;
 using GiG.Core.Messaging.Kafka.Extensions;
 using GiG.Core.Messaging.Kafka.Sample.Models;
@@ -7,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace GiG.Core.Messaging.Kafka.Sample
 {
-    public class Startup
+    internal static class Startup
     {
         public static void ConfigureServices(HostBuilderContext hostContext, IServiceCollection services)
         {
@@ -15,7 +15,7 @@ namespace GiG.Core.Messaging.Kafka.Sample
             
             services.Configure<KafkaProviderOptions>(configuration.GetSection(KafkaProviderOptions.DefaultSectionName));
 
-            services.AddCorrelationAccessor();
+            services.AddActivityContextAccessor();
 
             services.AddKafkaProducer<string, Person>(options => options
                 .WithJson()

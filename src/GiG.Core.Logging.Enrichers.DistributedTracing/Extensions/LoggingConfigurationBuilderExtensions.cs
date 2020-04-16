@@ -13,28 +13,6 @@ namespace GiG.Core.Logging.Enrichers.DistributedTracing.Extensions
     public static class LoggingConfigurationBuilderExtensions
     {
         /// <summary>
-        /// Enrich Log Events with a Correlation ID.
-        /// </summary>
-        /// <param name="builder">The <see cref="LoggingConfigurationBuilder" />.</param>
-        /// <returns>The <see cref="LoggingConfigurationBuilder" />.</returns>
-        public static LoggingConfigurationBuilder EnrichWithCorrelation([NotNull] this LoggingConfigurationBuilder builder)
-        {
-            if (builder == null) throw new ArgumentNullException(nameof(builder));
-
-            var correlationContextAccessor = builder
-                .Services
-                .BuildServiceProvider()
-                .GetService<ICorrelationContextAccessor>();
-
-            if (correlationContextAccessor != null)
-            {
-                builder.LoggerConfiguration.Enrich.With(new CorrelationIdEnricher(correlationContextAccessor));
-            }
-
-            return builder;
-        }
-
-        /// <summary>
         /// Enrich Log Events with Activity Context.
         /// </summary>
         /// <param name="builder">The <see cref="LoggingConfigurationBuilder" /> on which to add the enricher.</param>

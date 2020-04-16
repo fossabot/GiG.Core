@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Logging;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -34,6 +36,27 @@ namespace GiG.Core.HealthChecks
                 var json = Encoding.UTF8.GetString(stream.ToArray());
 
                 return httpContext.Response.WriteAsync(json);
+            }
+        }
+
+        /// <summary>
+        /// Writes a log when Health Check status is not Healthy.
+        /// </summary>
+        /// <param name="logger">The <see cref="ILogger"/>.</param>
+        /// <param name="healthReport">The <see cref="HealthReport"/>.</param>
+        /// <returns></returns>
+        public static void WriteUnHealthyLog(ILogger logger, HealthReport healthReport)
+        {
+            if (healthReport.Status == HealthStatus.Healthy || !logger.IsEnabled(LogLevel.Warning))
+            {
+                return;
+            }
+
+            // Added missing logs when Health Check fails - https://github.com/dotnet/extensions/issues/2716
+            foreach (var entry in healthReport.Entries.Where(x => x.Value.Status != HealthStatus.Healthy))
+            {
+                logger.LogWarning(entry.Value.Exception, "Health check {HealthCheckName} was {HealthCheckStatus} threw an exception {HealthCheckException}",
+                    entry.Key, entry.Value.Status,  entry.Value.Exception?.Message);
             }
         }
     }
