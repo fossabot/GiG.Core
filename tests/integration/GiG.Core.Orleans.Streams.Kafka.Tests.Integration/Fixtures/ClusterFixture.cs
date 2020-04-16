@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Orleans;
 using Orleans.Hosting;
+using Orleans.Streams.Kafka.Config;
 using System;
 using System.Threading.Tasks;
 using Xunit;
@@ -38,6 +39,7 @@ namespace GiG.Core.Orleans.Streams.Kafka.Tests.Integration.Fixtures
                     x.AddKafkaStreamProvider(Constants.StreamProviderName, k =>
                     {
                         k.FromConfiguration(ctx.Configuration);
+                        k.ConsumeMode = ConsumeMode.StreamStart;
                         k.AddTopicStream(nameof(MockRequest), ctx.Configuration);
                     });
                 })
