@@ -6,26 +6,30 @@ namespace GiG.Core.Performance.Logging.Controllers
     [ApiController]
     [Route("v{version:apiVersion}/log")]
     [ApiVersion("1")]
-     public class LogController : ControllerBase
-     {
-         private readonly ILogger<LogController> _logger;
-         private const string LogText = "This is a test log";
-         
-         public LogController(ILogger<LogController> logger)
-         {
-             _logger = logger;
-         }
-         
-         [HttpGet]
-         public void Get()
-         {
+    public class LogController : ControllerBase
+    {
+        private const string LogText = "This is a test log!!!!!!!!!!!!!!!!!!!!11";
+
+        private readonly ILogger<LogController> _logger;
+
+        public LogController(ILogger<LogController> logger)
+        {
+            _logger = logger;
+        }
+
+        [HttpGet]
+        public void EmitSingleLog()
+        {
             _logger.LogInformation(LogText);
-         }
-         
-         [HttpPost]
-         public void Post()
-         {
-             _logger.LogInformation(LogText);
-         }
-     }
+        }
+
+        [HttpGet("{amount}")]
+        public void EmitMultipleLogs([FromRoute] int amount)
+        {
+            for (var i = 0; i < amount; i++)
+            {
+                _logger.LogInformation(LogText);
+            }
+        }
+    }
 }
