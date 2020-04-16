@@ -1,6 +1,6 @@
 using Orleans.Streams;
 
-namespace GiG.Core.Orleans.Streams
+namespace GiG.Core.Orleans.Streams.Abstractions
 {
     /// <summary>
     /// <see cref="IStreamNamespacePredicate"/> implementation allowing to filter stream namespaces using prefix.

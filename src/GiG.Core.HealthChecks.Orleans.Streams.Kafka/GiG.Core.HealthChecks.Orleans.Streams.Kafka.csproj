@@ -12,8 +12,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GiG.Core.HealthChecks\GiG.Core.HealthChecks.csproj" />
+    <ProjectReference Include="..\GiG.Core.Orleans.Streams.Abstractions\GiG.Core.Orleans.Streams.Abstractions.csproj" />
     <ProjectReference Include="..\GiG.Core.Orleans.Streams.Kafka\GiG.Core.Orleans.Streams.Kafka.csproj" />
-    <ProjectReference Include="..\GiG.Core.Orleans.Streams\GiG.Core.Orleans.Streams.csproj" />
   </ItemGroup>
 
 </Project>

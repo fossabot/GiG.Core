@@ -1,4 +1,7 @@
-namespace GiG.Core.Orleans.Streams
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("GiG.Core.Orleans.Streams")]
+namespace GiG.Core.Orleans.Streams.Abstractions
 {
     /// <summary>
     /// The Orleans Stream Helper.

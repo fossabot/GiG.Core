@@ -1,6 +1,7 @@
 ﻿using Confluent.Kafka;
 using GiG.Core.HealthChecks.Extensions;
 using GiG.Core.Orleans.Streams;
+using GiG.Core.Orleans.Streams.Abstractions;
 using GiG.Core.Orleans.Streams.Kafka.Abstractions;
 using HealthChecks.Kafka;
 using JetBrains.Annotations;
