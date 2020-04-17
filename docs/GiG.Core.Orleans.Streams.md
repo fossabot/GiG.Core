@@ -39,7 +39,12 @@ The below code shows how to get an instance of the `Stream` class from the `Stre
 public override async Task OnActivateAsync()
 {
     var streamProvider = GetStreamProvider("SMSProvider");
+    
+    //Get stream by namespace.
     _stream = _streamFactory.GetStream<WalletTransaction>(streamProvider, this.GetPrimaryKey(), "WalletTransactions");
+
+    //Get stream by domain, type and version.
+    _stream = _streamFactory.GetStream<WalletTransaction>(streamProvider, this.GetPrimaryKey(), "Wallets", "WalletTransactions", 1);
 }
 ```
  

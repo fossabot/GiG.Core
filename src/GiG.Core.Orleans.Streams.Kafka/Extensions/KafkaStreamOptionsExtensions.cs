@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Orleans.Streams.Kafka.Config;
 using System;
 using System.Configuration;
+using GiG.Core.Orleans.Streams.Abstractions;
 
 namespace GiG.Core.Orleans.Streams.Kafka.Extensions
 {
@@ -106,6 +107,27 @@ namespace GiG.Core.Orleans.Streams.Kafka.Extensions
             });
 
             return options;
+        }
+
+        /// <summary>
+        /// Add Kafka Topic Stream from configuration section.
+        /// </summary>
+        /// <param name="options">The <see cref="KafkaStreamOptions" /> used to configure Kafka streams.</param>
+        /// <param name="domain">The domain of the stream.</param>
+        /// <param name="streamType">The stream type.</param>
+        /// <param name="version">The version of the stream.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection" /> which contains Kafka Topic configuration options.</param>
+        /// <returns>The <see cref="KafkaStreamOptions"/>. </returns>
+        public static KafkaStreamOptions AddTopicStream([NotNull] this KafkaStreamOptions options,
+            [NotNull] string domain, [NotNull] string streamType, uint version, [NotNull] IConfigurationSection configurationSection)
+        {
+            if (options == null) throw new ArgumentNullException(nameof(options));
+            if (string.IsNullOrWhiteSpace(domain)) throw new ArgumentException($"'{nameof(domain)}' must not be null, empty or whitespace.", nameof(domain));
+            if (string.IsNullOrWhiteSpace(streamType)) throw new ArgumentException($"'{nameof(streamType)}' must not be null, empty or whitespace.", nameof(streamType));
+            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
+
+            return AddTopicStream(options, StreamHelper.GetNamespace(domain, streamType, version),
+                configurationSection);
         }
     }
 }
