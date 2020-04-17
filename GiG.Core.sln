@@ -27,7 +27,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.DistributedTracing.MassTransit.md = docs\GiG.Core.DistributedTracing.MassTransit.md
 		docs\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.md = docs\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.md
 		docs\GiG.Core.DistributedTracing.Orleans.md = docs\GiG.Core.DistributedTracing.Orleans.md
-		docs\GiG.Core.DistributedTracing.Web.md = docs\GiG.Core.DistributedTracing.Web.md
 		docs\GiG.Core.HealthChecks.AspNetCore.md = docs\GiG.Core.HealthChecks.AspNetCore.md
 		docs\GiG.Core.HealthChecks.md = docs\GiG.Core.HealthChecks.md
 		docs\GiG.Core.HealthChecks.Orleans.md = docs\GiG.Core.HealthChecks.Orleans.md
@@ -43,7 +42,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Logging.Enrichers.ApplicationMetadata.md = docs\GiG.Core.Logging.Enrichers.ApplicationMetadata.md
 		docs\GiG.Core.Logging.Enrichers.Context.md = docs\GiG.Core.Logging.Enrichers.Context.md
 		docs\GiG.Core.Logging.Enrichers.DistributedTracing.md = docs\GiG.Core.Logging.Enrichers.DistributedTracing.md
-		docs\GiG.Core.Logging.Enrichers.MultiTenant.md = docs\GiG.Core.Logging.Enrichers.MultiTenant.md
 		docs\GiG.Core.Logging.Sinks.Console.md = docs\GiG.Core.Logging.Sinks.Console.md
 		docs\GiG.Core.Logging.Sinks.File.md = docs\GiG.Core.Logging.Sinks.File.md
 		docs\GiG.Core.Logging.Sinks.Fluentd.md = docs\GiG.Core.Logging.Sinks.Fluentd.md
@@ -53,7 +51,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Messaging.MassTransit.md = docs\GiG.Core.Messaging.MassTransit.md
 		docs\GiG.Core.Models.md = docs\GiG.Core.Models.md
 		docs\GiG.Core.MultiTenant.Activity.md = docs\GiG.Core.MultiTenant.Activity.md
-		docs\GiG.Core.MultiTenant.Web.md = docs\GiG.Core.MultiTenant.Web.md
 		docs\GiG.Core.ObjectMapping.AutoMapper.md = docs\GiG.Core.ObjectMapping.AutoMapper.md
 		docs\GiG.Core.Orleans.Client.md = docs\GiG.Core.Orleans.Client.md
 		docs\GiG.Core.Orleans.Clustering.Consul.md = docs\GiG.Core.Orleans.Clustering.Consul.md
@@ -483,9 +480,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7FCF707A-CE0
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Sample", "samples\Web\src\GiG.Core.Web.Sample\GiG.Core.Web.Sample.csproj", "{3E977FE2-2733-4828-AF02-4BB04A088BC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Logging.AspNetCore", "src\GiG.Core.Logging.AspNetCore\GiG.Core.Logging.AspNetCore.csproj", "{541A6EFD-4B13-4627-86EE-40F0C64D7139}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Logging.AspNetCore", "src\GiG.Core.Logging.AspNetCore\GiG.Core.Logging.AspNetCore.csproj", "{541A6EFD-4B13-4627-86EE-40F0C64D7139}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Orleans.Streams.Tests.Integration", "tests\integration\GiG.Core.Orleans.Streams.Tests.Integration\GiG.Core.Orleans.Streams.Tests.Integration.csproj", "{FD4F7332-A89D-4FA8-9D45-767BEFBC912F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Streams.Tests.Integration", "tests\integration\GiG.Core.Orleans.Streams.Tests.Integration\GiG.Core.Orleans.Streams.Tests.Integration.csproj", "{FD4F7332-A89D-4FA8-9D45-767BEFBC912F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
