@@ -1,4 +1,5 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -38,6 +39,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Http.md = docs\GiG.Core.Http.md
 		docs\GiG.Core.Http.MultiTenant.md = docs\GiG.Core.Http.MultiTenant.md
 		docs\GiG.Core.Logging.All.md = docs\GiG.Core.Logging.All.md
+		docs\GiG.Core.Logging.AspNetCore.md = docs\GiG.Core.Logging.AspNetCore.md
 		docs\GiG.Core.Logging.Enrichers.ApplicationMetadata.md = docs\GiG.Core.Logging.Enrichers.ApplicationMetadata.md
 		docs\GiG.Core.Logging.Enrichers.Context.md = docs\GiG.Core.Logging.Enrichers.Context.md
 		docs\GiG.Core.Logging.Enrichers.DistributedTracing.md = docs\GiG.Core.Logging.Enrichers.DistributedTracing.md
@@ -72,12 +74,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Web.Authentication.Hmac.md = docs\GiG.Core.Web.Authentication.Hmac.md
 		docs\GiG.Core.Web.Authentication.Hmac.MultiTenant.md = docs\GiG.Core.Web.Authentication.Hmac.MultiTenant.md
 		docs\GiG.Core.Web.Authentication.OAuth.md = docs\GiG.Core.Web.Authentication.OAuth.md
+		docs\GiG.Core.Web.Docs.Authentication.ApiKey.md = docs\GiG.Core.Web.Docs.Authentication.ApiKey.md
 		docs\GiG.Core.Web.Docs.Authentication.OAuth.md = docs\GiG.Core.Web.Docs.Authentication.OAuth.md
 		docs\GiG.Core.Web.Docs.md = docs\GiG.Core.Web.Docs.md
 		docs\GiG.Core.Web.Hosting.md = docs\GiG.Core.Web.Hosting.md
 		docs\GiG.Core.Web.Mock.md = docs\GiG.Core.Web.Mock.md
 		README.md = README.md
-		docs\GiG.Core.Web.Docs.Authentication.ApiKey.md = docs\GiG.Core.Web.Docs.Authentication.ApiKey.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AC01CBF6-BF4A-4F67-BCD6-CB0AC61D52A4}"
@@ -473,13 +475,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Validation.FluentV
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Validation.Tests.Unit", "tests\unit\GiG.Core.Validation.Tests.Unit\GiG.Core.Validation.Tests.Unit.csproj", "{7CEEE708-1177-485F-9F12-4FF676691C22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Web.Docs.Authentication.ApiKey", "src\GiG.Core.Web.Docs.Authentication.ApiKey\GiG.Core.Web.Docs.Authentication.ApiKey.csproj", "{B5094242-5EE5-4634-B36C-72CF070F23E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Docs.Authentication.ApiKey", "src\GiG.Core.Web.Docs.Authentication.ApiKey\GiG.Core.Web.Docs.Authentication.ApiKey.csproj", "{B5094242-5EE5-4634-B36C-72CF070F23E3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{ED82B227-ABC6-46FB-942F-EB5E9EE6A22E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7FCF707A-CE0E-4367-AB14-8A61E24BA48E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Web.Sample", "samples\Web\src\GiG.Core.Web.Sample\GiG.Core.Web.Sample.csproj", "{3E977FE2-2733-4828-AF02-4BB04A088BC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Sample", "samples\Web\src\GiG.Core.Web.Sample\GiG.Core.Web.Sample.csproj", "{3E977FE2-2733-4828-AF02-4BB04A088BC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Logging.AspNetCore", "src\GiG.Core.Logging.AspNetCore\GiG.Core.Logging.AspNetCore.csproj", "{541A6EFD-4B13-4627-86EE-40F0C64D7139}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Orleans.Streams.Tests.Integration", "tests\integration\GiG.Core.Orleans.Streams.Tests.Integration\GiG.Core.Orleans.Streams.Tests.Integration.csproj", "{FD4F7332-A89D-4FA8-9D45-767BEFBC912F}"
 EndProject
@@ -1085,6 +1089,10 @@ Global
 		{3E977FE2-2733-4828-AF02-4BB04A088BC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E977FE2-2733-4828-AF02-4BB04A088BC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E977FE2-2733-4828-AF02-4BB04A088BC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{541A6EFD-4B13-4627-86EE-40F0C64D7139}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{541A6EFD-4B13-4627-86EE-40F0C64D7139}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{541A6EFD-4B13-4627-86EE-40F0C64D7139}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{541A6EFD-4B13-4627-86EE-40F0C64D7139}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FD4F7332-A89D-4FA8-9D45-767BEFBC912F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FD4F7332-A89D-4FA8-9D45-767BEFBC912F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD4F7332-A89D-4FA8-9D45-767BEFBC912F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -1284,6 +1292,7 @@ Global
 		{ED82B227-ABC6-46FB-942F-EB5E9EE6A22E} = {99337274-FAB8-4358-81BB-3736EE2CCDE6}
 		{7FCF707A-CE0E-4367-AB14-8A61E24BA48E} = {ED82B227-ABC6-46FB-942F-EB5E9EE6A22E}
 		{3E977FE2-2733-4828-AF02-4BB04A088BC0} = {7FCF707A-CE0E-4367-AB14-8A61E24BA48E}
+		{541A6EFD-4B13-4627-86EE-40F0C64D7139} = {52AEF79F-C056-404A-9AC9-155CE8A17721}
 		{FD4F7332-A89D-4FA8-9D45-767BEFBC912F} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
