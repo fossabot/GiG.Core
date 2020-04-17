@@ -4,7 +4,7 @@ using Microsoft.IO;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace GiG.Core.Logging.AspNetCore.Http
+namespace GiG.Core.Logging.AspNetCore
 {
     /// <summary>
     /// The Http Request Response Logging Middleware.

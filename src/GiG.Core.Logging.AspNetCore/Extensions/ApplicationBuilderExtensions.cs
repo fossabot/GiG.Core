@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using System;
 
-namespace GiG.Core.Logging.AspNetCore.Http.Extensions
+namespace GiG.Core.Logging.AspNetCore.Extensions
 {
     /// <summary>
     /// The <see cref="IApplicationBuilder" /> Extensions.

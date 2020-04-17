@@ -483,7 +483,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7FCF707A-CE0
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Sample", "samples\Web\src\GiG.Core.Web.Sample\GiG.Core.Web.Sample.csproj", "{3E977FE2-2733-4828-AF02-4BB04A088BC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Logging.AspNetCore.Http", "src\GiG.Core.Logging.AspNetCore.Http\GiG.Core.Logging.AspNetCore.Http.csproj", "{541A6EFD-4B13-4627-86EE-40F0C64D7139}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Logging.AspNetCore", "src\GiG.Core.Logging.AspNetCore\GiG.Core.Logging.AspNetCore.csproj", "{541A6EFD-4B13-4627-86EE-40F0C64D7139}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
