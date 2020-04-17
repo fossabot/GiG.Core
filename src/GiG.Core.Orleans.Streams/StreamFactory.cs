@@ -4,6 +4,7 @@ using OpenTelemetry.Trace;
 using OpenTelemetry.Trace.Configuration;
 using Orleans.Streams;
 using System;
+using System.IO;
 
 namespace GiG.Core.Orleans.Streams
 {
@@ -27,17 +28,19 @@ namespace GiG.Core.Orleans.Streams
             _tracerFactory = tracerFactory;
         }
 
-        /// <summary>
-        /// Returns an instance of <see cref="IStream{TMessage}"/>.
-        /// </summary>
-        /// <param name="streamProvider">The <see cref="IStreamProvider"/>.</param>
-        /// <param name="streamId">The stream identifier.</param>
-        /// <param name="streamNameSpace">The stream namespace.</param>
-        /// <typeparam name="TMessage">Stream Message.</typeparam>
-        /// <returns>The <see cref="IStream{TMessage}"/> stream. </returns>
+        /// <inheritdoc />
         public IStream<TMessage> GetStream<TMessage>(IStreamProvider streamProvider, Guid streamId, string streamNameSpace)
         {
-            var stream = streamProvider.GetStream<TMessage>(streamId, streamNameSpace);
+            var stream = streamProvider.GetStream<TMessage>(streamId, StreamHelper.GetNamespace(streamNameSpace));
+          
+            return new Stream<TMessage>(stream, _activityContextAccessor, _tracerFactory);
+        }
+        
+        /// <inheritdoc />
+        public IStream<TMessage> GetStream<TMessage>(IStreamProvider streamProvider, Guid streamId, string domain, string streamType, uint? version)
+        {
+            var stream =
+                streamProvider.GetStream<TMessage>(streamId, StreamHelper.GetNamespace(domain, streamType, version));
           
             return new Stream<TMessage>(stream, _activityContextAccessor, _tracerFactory);
         }
