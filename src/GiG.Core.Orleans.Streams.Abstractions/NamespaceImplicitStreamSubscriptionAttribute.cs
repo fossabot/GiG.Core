@@ -18,5 +18,26 @@ namespace GiG.Core.Orleans.Streams.Abstractions
             : base(new NamespacePredicate(streamNamespace))
         {
         }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="domain">The domain of the stream.</param>
+        /// <param name="streamType">The stream type.</param>
+        /// <param name="version">The version number of the model.</param>
+        public NamespaceImplicitStreamSubscriptionAttribute(string domain, string streamType, uint version)
+            : base(new NamespacePredicate(domain, streamType, version))
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="domain">The domain of the stream.</param>
+        /// <param name="streamType">The stream type.</param>
+        public NamespaceImplicitStreamSubscriptionAttribute(string domain, string streamType)
+            : base(new NamespacePredicate(domain, streamType))
+        {
+        }
     }
 }
