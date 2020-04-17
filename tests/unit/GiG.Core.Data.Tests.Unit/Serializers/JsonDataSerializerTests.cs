@@ -3,6 +3,7 @@ using Xunit;
 
 namespace GiG.Core.Data.Serializers.Tests.Unit
 {
+    [Trait("Category", "Unit")]
     public class JsonDataSerializerTests
     {
         JsonDataSerializer<MockCountry> _sut;

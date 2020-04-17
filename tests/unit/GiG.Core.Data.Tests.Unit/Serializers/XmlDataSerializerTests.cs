@@ -5,6 +5,7 @@ using Xunit;
 
 namespace GiG.Core.Data.Tests.Unit
 {
+    [Trait("Category", "Unit")]
     public class XmlDataSerializerTests
     {
         XmlDataSerializer<MockCountry> _sut;
