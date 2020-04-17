@@ -1,7 +1,9 @@
-﻿using GiG.Core.HealthChecks.Extensions;
+﻿using GiG.Core.HealthChecks.AspNetCore.Extensions;
+using GiG.Core.HealthChecks.Extensions;
 using GiG.Core.HealthChecks.Orleans.Abstractions;
 using GiG.Core.HealthChecks.Orleans.AspNetCore.Extensions;
 using GiG.Core.HealthChecks.Orleans.Extensions;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

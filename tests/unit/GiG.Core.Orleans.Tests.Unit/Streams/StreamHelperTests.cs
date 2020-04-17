@@ -22,10 +22,11 @@ namespace GiG.Core.Orleans.Tests.Unit.Streams
             Assert.Equal("test-prefix.param1", StreamHelper.GetNamespace("param1"));
             Assert.Equal("test-prefix.orleans.param1.param2.v1", StreamHelper.GetNamespace("param1", "param2"));
             Assert.Equal("test-prefix.orleans.param1.param2.v4", StreamHelper.GetNamespace("param1", "param2", 4));
+            Assert.Equal("test-prefix.orleans.param1.param2", StreamHelper.GetNamespace("param1", "param2", null));
         }
         
         [Fact]
-        public void GetNamespace_ReturnsNamespace()
+        public void GetNamespace_WithNullNamespacePrefix_ReturnsNamespace()
         {
             // Act
             new ServiceCollection().ConfigureStream(new ConfigurationBuilder().Build());
@@ -35,6 +36,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Streams
             Assert.Equal("param1", StreamHelper.GetNamespace("param1"));
             Assert.Equal("orleans.param1.param2.v1", StreamHelper.GetNamespace("param1", "param2"));
             Assert.Equal("orleans.param1.param2.v4", StreamHelper.GetNamespace("param1", "param2", 4));
+            Assert.Equal("orleans.param1.param2", StreamHelper.GetNamespace("param1", "param2", null));
         }
     }
 }

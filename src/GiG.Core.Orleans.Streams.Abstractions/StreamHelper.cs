@@ -1,6 +1,7 @@
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("GiG.Core.Orleans.Streams")]
+
 namespace GiG.Core.Orleans.Streams.Abstractions
 {
     /// <summary>
@@ -12,7 +13,7 @@ namespace GiG.Core.Orleans.Streams.Abstractions
         /// The Namespace Prefix.
         /// </summary>
         public static string NamespacePrefix { get; internal set; }
-        
+
         /// <summary>
         /// Helper method to retrieve the namespace including prefix.
         /// </summary>
@@ -28,9 +29,11 @@ namespace GiG.Core.Orleans.Streams.Abstractions
         /// <param name="domain">The domain of the stream.</param>
         /// <param name="streamType">The stream type.</param>
         /// <param name="version">The version number of the model.</param>
-        public static string GetNamespace(string domain, string streamType, uint version = 1)
+        public static string GetNamespace(string domain, string streamType, uint? version = 1)
         {
-            return GetNamespace($"orleans.{domain}.{streamType}.v{version}");
+            var namespaceWithoutVersion = $"orleans.{domain}.{streamType}";
+
+            return GetNamespace(version == null ? namespaceWithoutVersion : $"{namespaceWithoutVersion}.v{version}");
         }
     }
 }

@@ -1,3 +1,4 @@
+using GiG.Core.HealthChecks.AspNetCore.Extensions;
 using GiG.Core.HealthChecks.Extensions;
 using GiG.Core.HealthChecks.Orleans.Streams.Kafka;
 using Microsoft.AspNetCore.Builder;

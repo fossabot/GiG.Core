@@ -1,4 +1,5 @@
 ﻿using GiG.Core.HealthChecks.Abstractions;
+using GiG.Core.HealthChecks.AspNetCore.Extensions;
 using GiG.Core.HealthChecks.Extensions;
 using GiG.Core.HealthChecks.Tests.Integration.Helpers;
 using GiG.Core.HealthChecks.Tests.Integration.Mocks;
