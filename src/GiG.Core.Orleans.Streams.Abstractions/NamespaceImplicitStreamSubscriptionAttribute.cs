@@ -20,7 +20,7 @@ namespace GiG.Core.Orleans.Streams.Abstractions
         }
         
         /// <summary>
-        /// 
+        /// The stream namespace to subscribe to.
         /// </summary>
         /// <param name="domain">The domain of the stream.</param>
         /// <param name="streamType">The stream type.</param>
@@ -31,7 +31,7 @@ namespace GiG.Core.Orleans.Streams.Abstractions
         }
 
         /// <summary>
-        /// 
+        /// The stream namespace to subscribe to. 
         /// </summary>
         /// <param name="domain">The domain of the stream.</param>
         /// <param name="streamType">The stream type.</param>
