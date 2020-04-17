@@ -20,6 +20,7 @@ namespace GiG.Core.Orleans.Streams.Abstractions
 
         /// <summary>
         /// Returns a stream publisher from the passed provider.
+        /// The stream namespace generated will follow the {environment}.orleans.{domain}.{message-type}.v{version}.
         /// </summary>
         /// <param name="streamProvider">The <see cref="IStreamProvider"/> from which to create the stream.</param>
         /// <param name="streamId">The stream to publish to.</param>

@@ -31,7 +31,7 @@ namespace GiG.Core.Orleans.Streams
         /// <inheritdoc />
         public IStream<TMessage> GetStream<TMessage>(IStreamProvider streamProvider, Guid streamId, string streamNameSpace)
         {
-            var stream = streamProvider.GetStream<TMessage>(streamId, StreamHelper.GetNamespace(streamNameSpace));
+            var stream = streamProvider.GetStream<TMessage>(streamId, streamNameSpace);
           
             return new Stream<TMessage>(stream, _activityContextAccessor, _tracerFactory);
         }
