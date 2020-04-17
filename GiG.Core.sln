@@ -40,6 +40,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Http.md = docs\GiG.Core.Http.md
 		docs\GiG.Core.Http.MultiTenant.md = docs\GiG.Core.Http.MultiTenant.md
 		docs\GiG.Core.Logging.All.md = docs\GiG.Core.Logging.All.md
+		docs\GiG.Core.Logging.AspNetCore.md = docs\GiG.Core.Logging.AspNetCore.md
 		docs\GiG.Core.Logging.Enrichers.ApplicationMetadata.md = docs\GiG.Core.Logging.Enrichers.ApplicationMetadata.md
 		docs\GiG.Core.Logging.Enrichers.Context.md = docs\GiG.Core.Logging.Enrichers.Context.md
 		docs\GiG.Core.Logging.Enrichers.DistributedTracing.md = docs\GiG.Core.Logging.Enrichers.DistributedTracing.md
@@ -461,7 +462,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.MassTran
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.HealthChecks.Orleans.Streams.Kafka", "src\GiG.Core.HealthChecks.Orleans.Streams.Kafka\GiG.Core.HealthChecks.Orleans.Streams.Kafka.csproj", "{01FFDF3E-C399-405F-8FED-35C7B3A9CC2D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Streams.Tests.Integration", "tests\integration\GiG.Core.Orleans.Streams.Tests.Integration\GiG.Core.Orleans.Streams.Tests.Integration.csproj", "{2B7A4ADB-2158-4A1A-921E-DDE2BEFA4F9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Streams.Kafka.Tests.Integration", "tests\integration\GiG.Core.Orleans.Streams.Kafka.Tests.Integration\GiG.Core.Orleans.Streams.Kafka.Tests.Integration.csproj", "{2B7A4ADB-2158-4A1A-921E-DDE2BEFA4F9A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Performance.Logging", "tests\performance\GiG.Core.Performance.Logging\GiG.Core.Performance.Logging.csproj", "{D03DE6C2-61D2-4634-9FC8-E3AAB14A44F0}"
 EndProject
@@ -481,6 +482,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{ED82B227-ABC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7FCF707A-CE0E-4367-AB14-8A61E24BA48E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Sample", "samples\Web\src\GiG.Core.Web.Sample\GiG.Core.Web.Sample.csproj", "{3E977FE2-2733-4828-AF02-4BB04A088BC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Logging.AspNetCore", "src\GiG.Core.Logging.AspNetCore\GiG.Core.Logging.AspNetCore.csproj", "{541A6EFD-4B13-4627-86EE-40F0C64D7139}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Orleans.Streams.Tests.Integration", "tests\integration\GiG.Core.Orleans.Streams.Tests.Integration\GiG.Core.Orleans.Streams.Tests.Integration.csproj", "{FD4F7332-A89D-4FA8-9D45-767BEFBC912F}"
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Sample", "samples\Web\src\GiG.Core.Web.Sample\GiG.Core.Web.Sample.csproj", "{3E977FE2-2733-4828-AF02-4BB04A088BC0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Data.Serializers", "src\GiG.Core.Data.Serializers\GiG.Core.Data.Serializers.csproj", "{8B66BD35-6843-4278-A061-64AFE5275CC8}"
@@ -1087,6 +1093,14 @@ Global
 		{3E977FE2-2733-4828-AF02-4BB04A088BC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E977FE2-2733-4828-AF02-4BB04A088BC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E977FE2-2733-4828-AF02-4BB04A088BC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{541A6EFD-4B13-4627-86EE-40F0C64D7139}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{541A6EFD-4B13-4627-86EE-40F0C64D7139}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{541A6EFD-4B13-4627-86EE-40F0C64D7139}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{541A6EFD-4B13-4627-86EE-40F0C64D7139}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD4F7332-A89D-4FA8-9D45-767BEFBC912F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD4F7332-A89D-4FA8-9D45-767BEFBC912F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD4F7332-A89D-4FA8-9D45-767BEFBC912F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD4F7332-A89D-4FA8-9D45-767BEFBC912F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8B66BD35-6843-4278-A061-64AFE5275CC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8B66BD35-6843-4278-A061-64AFE5275CC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B66BD35-6843-4278-A061-64AFE5275CC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -1286,6 +1300,8 @@ Global
 		{ED82B227-ABC6-46FB-942F-EB5E9EE6A22E} = {99337274-FAB8-4358-81BB-3736EE2CCDE6}
 		{7FCF707A-CE0E-4367-AB14-8A61E24BA48E} = {ED82B227-ABC6-46FB-942F-EB5E9EE6A22E}
 		{3E977FE2-2733-4828-AF02-4BB04A088BC0} = {7FCF707A-CE0E-4367-AB14-8A61E24BA48E}
+		{541A6EFD-4B13-4627-86EE-40F0C64D7139} = {52AEF79F-C056-404A-9AC9-155CE8A17721}
+		{FD4F7332-A89D-4FA8-9D45-767BEFBC912F} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 		{8B66BD35-6843-4278-A061-64AFE5275CC8} = {412AB606-A56E-4B9E-A9C1-E2C7E02D0CF5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

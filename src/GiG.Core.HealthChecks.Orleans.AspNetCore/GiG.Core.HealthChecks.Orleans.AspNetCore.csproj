@@ -8,15 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" PrivateAssets="compile" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.HealthChecks" Version="2.2.0" PrivateAssets="compile" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" PrivateAssets="compile" />
     <PackageReference Include="Microsoft.Orleans.Core" Version="3.0.2" PrivateAssets="compile" />
-    <PackageReference Include="Microsoft.Orleans.Core.Abstractions" Version="3.0.2" PrivateAssets="compile" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\GiG.Core.HealthChecks.Orleans\GiG.Core.HealthChecks.Orleans.csproj" />
-    <ProjectReference Include="..\GiG.Core.HealthChecks\GiG.Core.HealthChecks.csproj" />
+    <ProjectReference Include="..\GiG.Core.HealthChecks.AspNetCore\GiG.Core.HealthChecks.AspNetCore.csproj" />
   </ItemGroup>
 
 </Project>

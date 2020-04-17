@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using GiG.Core.HealthChecks.AspNetCore.Extensions;
 using GiG.Core.HealthChecks.Extensions;
 using GiG.Core.HealthChecks.Orleans.Extensions;
 using GiG.Core.Orleans.Silo.Extensions;

@@ -1,12 +1,12 @@
 using GiG.Core.HealthChecks.Abstractions;
-using GiG.Core.Orleans.Streams.Tests.Integration.Fixtures;
+using GiG.Core.Orleans.Streams.Kafka.Tests.Integration.Fixtures;
 using Microsoft.AspNetCore.TestHost;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace GiG.Core.Orleans.Streams.Tests.Integration.Tests
+namespace GiG.Core.Orleans.Streams.Kafka.Tests.Integration.Tests
 {
     [Trait("Category", "IntegrationWithDependency")]
     [Collection(ClusterCollection.Collection)]

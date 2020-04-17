@@ -1,6 +1,6 @@
 ﻿using Orleans.Streams.Kafka.Config;
 
-namespace GiG.Core.Orleans.Streams.Kafka.Configurations
+namespace GiG.Core.Orleans.Streams.Kafka.Abstractions
 {
     /// <summary>
     /// Kafka Stream Provider Security Options
