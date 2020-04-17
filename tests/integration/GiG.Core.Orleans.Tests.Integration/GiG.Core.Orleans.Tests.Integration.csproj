@@ -8,11 +8,13 @@
     <ItemGroup>
         <PackageReference Include="Bogus" Version="28.4.4" />
         <PackageReference Include="KubernetesClient" Version="1.6.10" />
+        <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.0.0" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.0" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0" />
         <PackageReference Include="Microsoft.Extensions.Http" Version="3.0.0" />
         <PackageReference Include="Microsoft.Orleans.Server" Version="3.0.2" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
+        <PackageReference Include="prometheus-net.AspNetCore" Version="3.4.0" />
         <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
         <PackageReference Include="System.Text.Json" Version="4.7.0" />
         <PackageReference Include="xunit" Version="2.4.1" />
@@ -33,6 +35,7 @@
       <ProjectReference Include="..\..\..\src\GiG.Core.MultiTenant.Abstractions\GiG.Core.MultiTenant.Abstractions.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.MultiTenant.Activity\GiG.Core.MultiTenant.Activity.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering.Localhost\GiG.Core.Orleans.Clustering.Localhost.csproj" />
+      <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Silo.Metrics.Prometheus\GiG.Core.Orleans.Silo.Metrics.Prometheus.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Streams\GiG.Core.Orleans.Streams.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Client\GiG.Core.Orleans.Client.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Clustering.Consul\GiG.Core.Orleans.Clustering.Consul.csproj" />
