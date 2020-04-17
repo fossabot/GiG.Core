@@ -1,4 +1,5 @@
 ﻿using GiG.Core.Data.Serializers.Abstractions;
+using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
@@ -15,7 +16,7 @@ namespace GiG.Core.Data.Serializers.Extensions
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" /> to add the services to.</param>
         /// <returns>The <see cref="IServiceCollection" /> so that additional calls can be chained.</returns>
-        public static IServiceCollection AddSystemTextJsonDataSerializer<T>(this IServiceCollection services)
+        public static IServiceCollection AddSystemTextJsonDataSerializer<T>([NotNull] this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
@@ -29,7 +30,7 @@ namespace GiG.Core.Data.Serializers.Extensions
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" /> to add the services to.</param>
         /// <returns>The <see cref="IServiceCollection" /> so that additional calls can be chained.</returns>
-        public static IServiceCollection AddXmlDataSerializer<T>(this IServiceCollection services)
+        public static IServiceCollection AddXmlDataSerializer<T>([NotNull] this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
