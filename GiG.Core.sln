@@ -63,6 +63,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Orleans.Reminders.Npgsql.md = docs\GiG.Core.Orleans.Reminders.Npgsql.md
 		docs\GiG.Core.Orleans.Silo.Dashboard.md = docs\GiG.Core.Orleans.Silo.Dashboard.md
 		docs\GiG.Core.Orleans.Silo.md = docs\GiG.Core.Orleans.Silo.md
+		docs\GiG.Core.Orleans.Silo.Metrics.Prometheus.md = docs\GiG.Core.Orleans.Silo.Metrics.Prometheus.md
 		docs\GiG.Core.Orleans.Storage.Npgsql.md = docs\GiG.Core.Orleans.Storage.Npgsql.md
 		docs\GiG.Core.Orleans.Streams.Kafka.md = docs\GiG.Core.Orleans.Streams.Kafka.md
 		docs\GiG.Core.Orleans.Streams.md = docs\GiG.Core.Orleans.Streams.md
@@ -80,7 +81,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Web.Hosting.md = docs\GiG.Core.Web.Hosting.md
 		docs\GiG.Core.Web.Mock.md = docs\GiG.Core.Web.Mock.md
 		README.md = README.md
-		docs\GiG.Core.Orleans.Silo.Metrics.Prometheus.md = docs\GiG.Core.Orleans.Silo.Metrics.Prometheus.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AC01CBF6-BF4A-4F67-BCD6-CB0AC61D52A4}"
