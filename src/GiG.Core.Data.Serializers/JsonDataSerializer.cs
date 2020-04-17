@@ -10,15 +10,15 @@ namespace GiG.Core.Data.Serializers
     public class JsonDataSerializer<T> : IDataSerializer<T>
     {
         /// <inheritdoc />
-        public T Deserialize(string value)
+        public T Deserialize(string data)
         {
-            return string.IsNullOrEmpty(value) ? default : JsonSerializer.Deserialize<T>(value);
+            return string.IsNullOrEmpty(data) ? default : JsonSerializer.Deserialize<T>(data);
         }
 
         /// <inheritdoc />
-        public string Serialize(T model)
+        public string Serialize(T data)
         {
-            return JsonSerializer.Serialize(model);
+            return JsonSerializer.Serialize(data);
         }
     }
 }

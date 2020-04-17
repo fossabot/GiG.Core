@@ -1,5 +1,4 @@
-﻿using System.Text;
-using System.Xml;
+﻿using System.Xml;
 
 namespace GiG.Core.Data.Serializers.Abstractions
 {
@@ -9,12 +8,11 @@ namespace GiG.Core.Data.Serializers.Abstractions
     public interface IXmlDataSerializer<T> : IDataSerializer<T>
     {
         /// <summary>
-        /// Converts a model to a string.
+        /// Converts data to a string.
         /// </summary>
-        /// <param name="model">The model.</param>
+        /// <param name="data">The data.</param>
         /// <param name="xmlNamespaceManager">The Xml Namespace Manager.</param>
-        /// <param name="encoding">The Encoding.</param>
-        /// <param name="setDefaultNamespace">Determines whether the default namespace should be used in serialization</param>
-        string Serialize(T model, XmlNamespaceManager xmlNamespaceManager, Encoding encoding, bool setDefaultNamespace = true);
+        /// <param name="setDefaultNamespace">Determines whether the default namespace should be used in serialization.</param>
+        string Serialize(T data, XmlNamespaceManager xmlNamespaceManager, bool setDefaultNamespace = true);
     }
 }
