@@ -1,6 +1,7 @@
 ﻿using GiG.Core.DistributedTracing.Activity.Extensions;
 using GiG.Core.Orleans.Streams.Abstractions;
 using JetBrains.Annotations;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
@@ -11,7 +12,45 @@ namespace GiG.Core.Orleans.Streams.Extensions
     /// Service Collection Extensions.
     /// </summary>
     public static class ServiceCollectionExtensions
-    {      
+    {
+        /// <summary>
+        /// Configure the Stream Options from configuration.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection"/>.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/>.</param>
+        /// <returns>The <see cref="IServiceCollection"/>.</returns>
+        public static IServiceCollection ConfigureStream([NotNull] this IServiceCollection services, [NotNull] IConfiguration configuration)
+        {
+            if (services == null) throw new ArgumentNullException(nameof(services));
+            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+
+            services.ConfigureStream(configuration.GetSection(StreamOptions.DefaultSectionName));
+
+            return services;
+        }
+        
+        /// <summary>
+        /// Configure the Stream Options from configuration.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection"/>.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/>.</param>
+        /// <returns>The <see cref="IServiceCollection"/>.</returns>
+        public static IServiceCollection ConfigureStream([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection)
+        {
+            if (services == null) throw new ArgumentNullException(nameof(services));
+            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
+
+            StreamHelper.NamespacePrefix = configurationSection.Get<StreamOptions>()?.NamespacePrefix;
+            if (string.IsNullOrWhiteSpace(StreamHelper.NamespacePrefix))
+            {
+                StreamHelper.NamespacePrefix = null;
+            }
+
+            services.Configure<StreamOptions>(configurationSection);
+
+            return services;
+        }
+        
         /// <summary>
         /// Creates and registers a new <see cref="IStreamFactory"/>.
         /// </summary>
@@ -20,7 +59,7 @@ namespace GiG.Core.Orleans.Streams.Extensions
         public static IServiceCollection AddStream([NotNull] this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-
+            
             services.AddActivityContextAccessor();
             services.TryAddSingleton<IStreamFactory, StreamFactory>();
 

@@ -9,7 +9,7 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Threading.Tasks;
 
-namespace GiG.Core.HealthChecks.Extensions
+namespace GiG.Core.HealthChecks.AspNetCore.Extensions
 {
     /// <summary>
     /// Application Builder Extensions.

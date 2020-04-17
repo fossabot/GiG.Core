@@ -1,17 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AspNetCore.HealthChecks.Kafka" Version="3.0.2" PrivateAssets="compile" />
+    <PackageReference Include="AspNetCore.HealthChecks.Kafka" Version="3.1.0" />
     <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" PrivateAssets="compile" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" PrivateAssets="compile" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\GiG.Core.HealthChecks\GiG.Core.HealthChecks.csproj" />
+    <ProjectReference Include="..\GiG.Core.Orleans.Streams.Abstractions\GiG.Core.Orleans.Streams.Abstractions.csproj" />
     <ProjectReference Include="..\GiG.Core.Orleans.Streams.Kafka\GiG.Core.Orleans.Streams.Kafka.csproj" />
   </ItemGroup>
 

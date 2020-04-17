@@ -85,6 +85,7 @@ namespace GiG.Core.Messaging.Kafka.Extensions
             if (string.IsNullOrWhiteSpace(topicName)) throw new ArgumentException($"'{nameof(topicName)}' must not be null, empty or whitespace.", nameof(topicName));
             
             builderOptions.KafkaProviderOptions.Topic = topicName;
+
             return builderOptions;
         }
     }

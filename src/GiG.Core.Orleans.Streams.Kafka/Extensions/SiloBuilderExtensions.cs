@@ -1,4 +1,3 @@
-using GiG.Core.Orleans.Streams.Kafka.Configurations;
 using System;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;

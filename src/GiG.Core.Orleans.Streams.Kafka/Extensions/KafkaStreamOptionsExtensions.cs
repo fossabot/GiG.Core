@@ -1,4 +1,4 @@
-﻿using GiG.Core.Orleans.Streams.Kafka.Configurations;
+﻿using GiG.Core.Orleans.Streams.Kafka.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Orleans.Streams.Kafka.Config;

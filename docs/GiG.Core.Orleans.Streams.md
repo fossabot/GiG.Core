@@ -98,6 +98,7 @@ The custom [Stream](../src/GiG.Core.Orleans.Streams/Stream.cs) implementation in
 N.B. In order to have Telemetry information from Streams a Telemetry provider needs to be enabled. For more details refer to [GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger](GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.md)
 
 ### Publishing to a Stream
+
 The below code shows how to Publish to a Stream via the custom [Stream](../src/GiG.Core.Orleans.Streams/Stream.cs) implementation.  
 
 ```csharp
@@ -121,4 +122,76 @@ N.B. The parameter to the SubscribeAsync method must be of the type IAsyncObserv
 var streamProvider = GetStreamProvider("SMSProvider");
 _stream = _streamFactory.GetStream<WalletTransaction>(streamProvider, this.GetPrimaryKey(), "WalletTransactions");
 await _stream.SubscribeAsync(this);
+```
+
+## Namespace Prefix
+
+### Configuration
+
+#### Startup
+
+The below code needs to be added to the `Startup.cs`. This will register the stream configuration.
+
+```csharp
+public static void ConfigureServices(IServiceCollection services)
+{
+    services.ConfigureStream(Configuration);
+}    
+```
+
+You can change the default value for the Kafka configuration by overriding the [StreamOptions](../src/GiG.Core.Orleans.Streams.Abstractions/StreamOptions.cs) by adding the following configuration settings under section `Orleans:Streams`.
+
+| Configuration Name | Type   | Optional | Default Value |
+|--------------------|--------|----------|---------------|
+| NamespacePrefix    | String | No       |               |
+
+#### Sample Configuration
+
+```
+{
+  "Orleans": {
+    "Streams": {
+      "NamespacePrefix": "dev"
+    }
+  }
+}
+```
+
+### Stream Helper for Namespace
+
+A helper can be used to construct the namespace including the `NamespacePrefix`.
+
+#### Sample Usage
+
+```
+// dev.message-type
+StreamHelper.GetNamespace("message-type");
+
+// dev.orleans.domain.message-type.v1
+StreamHelper.GetNamespace("domain", "message-type");
+
+// dev.orleans.domain.message-type.v2
+StreamHelper.GetNamespace("domain", "message-type", 2);
+```
+
+### Namespace Implicit Stream Subscription
+
+The `NamespaceImplicitStreamSubscription` is used for implicit subscriptions using the specified stream namespace including the `NamespacePrefix`.
+
+#### Sample Usage
+
+```
+// Same as [ImplicitStreamSubscription("dev.orleans.domain.message-type.v1")]
+[NamespaceImplicitStreamSubscription("domain", "message-type")]
+public class MockStreamGrain : Grain, IMockStreamGrain, IAsyncObserver<MockRequest>
+{
+    public override Task OnActivateAsync()
+    {
+        var streamProvider = GetStreamProvider(Constants.StreamProviderName);
+        var mockRequestStream = streamProvider.GetStream<MockRequest>(this.GetPrimaryKey(), StreamHelper.GetNamespace("domain", "message-type"));
+        mockRequestStream.SubscribeAsync(this);
+    }
+
+    ...
+}
 ```
