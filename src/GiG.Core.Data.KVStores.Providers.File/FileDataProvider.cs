@@ -1,5 +1,6 @@
 ﻿using GiG.Core.Data.KVStores.Abstractions;
 using GiG.Core.Data.KVStores.Providers.File.Abstractions;
+using GiG.Core.Data.Serializers.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,10 +23,11 @@ namespace GiG.Core.Data.KVStores.Providers.File
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="dataSerializer">The <see cref="IDataProvider{T}"/> which will be used to deserialize data from file.</param>
+        /// <param name="dataSerializer">The <see cref="IDataProvider{T}"/> which will be used to serialize data from file.</param>
         /// <param name="fileOptionsAccessor">The <see cref="IDataProviderOptions{T,TOptions}"/> which will be used to access options for the instance of the provider.</param>
 
-        public FileDataProvider(IDataSerializer<T> dataSerializer,
+        public FileDataProvider(
+            IDataSerializer<T> dataSerializer,
             IDataProviderOptions<T, FileProviderOptions> fileOptionsAccessor)
         {
             _dataSerializer = dataSerializer;
@@ -55,7 +57,7 @@ namespace GiG.Core.Data.KVStores.Providers.File
             void Callback(object sender, FileSystemEventArgs args)
             {
                 var file = System.IO.File.ReadAllText(args.FullPath);
-                callback(_dataSerializer.GetFromString(file));
+                callback(_dataSerializer.Deserialize(file));
             }
 
             fileSystemWatcher.Created += Callback;
@@ -71,6 +73,7 @@ namespace GiG.Core.Data.KVStores.Providers.File
         public async Task<T> GetAsync(params string[] keys)
         {
             var filePath = GetPath(keys);
+
             if (!System.IO.File.Exists(filePath))
             {
                 return default;
@@ -78,7 +81,7 @@ namespace GiG.Core.Data.KVStores.Providers.File
             
             var file = await System.IO.File.ReadAllTextAsync(filePath);
             
-            return _dataSerializer.GetFromString(file);
+            return _dataSerializer.Deserialize(file);
         }
 
         /// <inheritdoc/>
@@ -86,7 +89,7 @@ namespace GiG.Core.Data.KVStores.Providers.File
         {
             var fileName = GetPath(keys);
 
-            System.IO.File.WriteAllTextAsync(fileName, _dataSerializer.ConvertToString(model));
+            System.IO.File.WriteAllTextAsync(fileName, _dataSerializer.Serialize(model));
 
             return Task.CompletedTask;
         }
