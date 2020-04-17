@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Constants = GiG.Core.MultiTenant.Abstractions.Constants;
 
 namespace GiG.Core.Http.MultiTenant
 {
@@ -15,7 +16,7 @@ namespace GiG.Core.Http.MultiTenant
         /// <summary>
         /// A <see cref="DelegatingHandler"/> that injects one or more X-Tenant-ID Headers into the request.
         /// </summary>
-        /// <param name="tenantAccessor">The <see cref="T:GiG.Core.MultiTenant.Abstractions.ITenantAccessor" /> to use.</param>
+        /// <param name="tenantAccessor">The <see cref="T:GiG.Core.MultiTenant.Abstractions.IActivityTenantAccessor" /> to use.</param>
         public TenantDelegatingHandler(ITenantAccessor tenantAccessor)
         {
             _tenantAccessor = tenantAccessor;   

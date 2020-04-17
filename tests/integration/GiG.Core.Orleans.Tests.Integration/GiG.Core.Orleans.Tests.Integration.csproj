@@ -29,7 +29,6 @@
       <ProjectReference Include="..\..\..\src\GiG.Core.Context.Web\GiG.Core.Context.Web.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Activity\GiG.Core.DistributedTracing.Activity.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Orleans\GiG.Core.DistributedTracing.Orleans.csproj" />
-      <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Web\GiG.Core.DistributedTracing.Web.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.HealthChecks.Orleans.AspNetCore\GiG.Core.HealthChecks.Orleans.AspNetCore.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.HealthChecks.Orleans\GiG.Core.HealthChecks.Orleans.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.MultiTenant.Abstractions\GiG.Core.MultiTenant.Abstractions.csproj" />

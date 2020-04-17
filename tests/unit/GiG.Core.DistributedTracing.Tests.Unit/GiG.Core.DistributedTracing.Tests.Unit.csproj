@@ -21,7 +21,6 @@
     <ItemGroup>
         <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.MassTransit\GiG.Core.DistributedTracing.MassTransit.csproj" />
         <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Orleans\GiG.Core.DistributedTracing.Orleans.csproj" />
-        <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Web\GiG.Core.DistributedTracing.Web.csproj" />
         <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.OpenTelemetry\GiG.Core.DistributedTracing.OpenTelemetry.csproj" />
     </ItemGroup>
 

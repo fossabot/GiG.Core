@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\GiG.Core.MultiTenant.Activity\GiG.Core.MultiTenant.Activity.csproj" />
-    <ProjectReference Include="..\..\..\src\GiG.Core.MultiTenant.Web\GiG.Core.MultiTenant.Web.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Web.Authentication.ApiKey\GiG.Core.Web.Authentication.ApiKey.csproj" />
   </ItemGroup>
 

@@ -44,7 +44,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                 .ConfigureServices(x =>
                  {
                      x.AddActivityTenantAccessor();
-                     x.AddActivityAccessor();
+                     x.AddActivityContextAccessor();
                      x.AddRequestContextAccessor();
                      x.AddStream();
                  })
@@ -71,7 +71,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
             var clientHost = new HostBuilder()
                 .ConfigureServices(services =>
                 {
-                    services.AddActivityAccessor();
+                    services.AddActivityContextAccessor();
                     services.AddStream();
                     services.AddSingleton<IRequestContextAccessor, MockRequestContextAccessor>();
                     services.AddDefaultClusterClient((x, sp) =>

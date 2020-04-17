@@ -8,7 +8,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
-    <PackageReference Include="Microsoft.Orleans.Core" Version="3.0.2" />
+    <PackageReference Include="Microsoft.Orleans.Server" Version="3.0.2" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
     <PackageReference Include="xunit" Version="2.4.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
@@ -18,10 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\GiG.Core.HealthChecks.Orleans.Streams.Kafka\GiG.Core.HealthChecks.Orleans.Streams.Kafka.csproj" />
-    <ProjectReference Include="..\..\..\src\GiG.Core.HealthChecks\GiG.Core.HealthChecks.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Client\GiG.Core.Orleans.Client.csproj" />
-    <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Streams.Kafka\GiG.Core.Orleans.Streams.Kafka.csproj" />
+    <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Silo\GiG.Core.Orleans.Silo.csproj" />
+    <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Streams.Abstractions\GiG.Core.Orleans.Streams.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\src\GiG.Core.Orleans.Streams\GiG.Core.Orleans.Streams.csproj" />
   </ItemGroup>
 

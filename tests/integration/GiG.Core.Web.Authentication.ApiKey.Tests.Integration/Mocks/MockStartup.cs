@@ -1,5 +1,4 @@
 ﻿using GiG.Core.MultiTenant.Activity.Extensions;
-using GiG.Core.MultiTenant.Web.Extensions;
 using GiG.Core.Web.Authentication.ApiKey.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;

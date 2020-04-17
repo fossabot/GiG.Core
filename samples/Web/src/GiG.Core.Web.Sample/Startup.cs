@@ -1,5 +1,4 @@
-using System.Text.Json.Serialization;
-using GiG.Core.MultiTenant.Web.Extensions;
+using GiG.Core.MultiTenant.Activity.Extensions;
 using GiG.Core.Web.Authentication.ApiKey.Extensions;
 using GiG.Core.Web.Authentication.OAuth.Extensions;
 using GiG.Core.Web.Docs.Authentication.ApiKey.Extensions;
@@ -8,6 +7,7 @@ using GiG.Core.Web.Docs.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Text.Json.Serialization;
 
 namespace GiG.Core.Web.Sample
 {

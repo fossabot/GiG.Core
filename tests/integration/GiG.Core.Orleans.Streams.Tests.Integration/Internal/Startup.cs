@@ -1,6 +1,4 @@
-using GiG.Core.HealthChecks.Abstractions;
-using GiG.Core.HealthChecks.Extensions;
-using GiG.Core.HealthChecks.Orleans.Streams.Kafka;
+using GiG.Core.Orleans.Streams.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,16 +14,12 @@ namespace GiG.Core.Orleans.Streams.Tests.Integration.Internal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.ConfigureHealthChecks(Configuration);
-
-            services.AddCachedHealthChecks()
-                .AddKafkaOrleansStreams(Configuration, tags: new [] { Constants.ReadyTag });
+            services.ConfigureStream(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
-            app.UseHealthChecks();
         }
     }
 }

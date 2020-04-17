@@ -1,4 +1,5 @@
-﻿using GiG.Core.HealthChecks.Extensions;
+﻿using GiG.Core.HealthChecks.AspNetCore.Extensions;
+using GiG.Core.HealthChecks.Extensions;
 using Microsoft.AspNetCore.Builder;
 
 namespace GiG.Core.HealthChecks.Tests.Integration.Mocks

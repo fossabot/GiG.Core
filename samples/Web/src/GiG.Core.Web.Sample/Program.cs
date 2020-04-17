@@ -16,7 +16,7 @@ namespace GiG.Core.Web.Sample
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices(x =>
                 {
-                    x.AddActivityAccessor();
+                    x.AddActivityContextAccessor();
                     x.AddActivityTenantAccessor();
                 })
                 .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
