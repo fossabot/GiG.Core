@@ -9,7 +9,7 @@ using System.Configuration;
 namespace GiG.Core.Web.Authentication.OAuth.Extensions
 {
     /// <summary>
-    /// Service Collection Extensions.
+    /// The <see cref="IServiceCollection" /> Extensions.
     /// </summary>
     public static class ServiceCollectionExtensions
     {

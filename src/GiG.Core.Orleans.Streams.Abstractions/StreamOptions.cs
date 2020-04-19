@@ -6,7 +6,7 @@ namespace GiG.Core.Orleans.Streams.Abstractions
     public class StreamOptions
     {
         /// <summary>
-        /// Default Section Name.
+        /// The configuration default section name.
         /// </summary>
         public const string DefaultSectionName = "Orleans:Streams";
 

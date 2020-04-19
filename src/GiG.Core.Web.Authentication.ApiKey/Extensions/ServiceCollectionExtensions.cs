@@ -13,7 +13,7 @@ using System.Configuration;
 namespace GiG.Core.Web.Authentication.ApiKey.Extensions
 {
     /// <summary>
-    /// <see cref="IServiceCollection"/> for <see cref="ApiKeyAuthenticationHandler"/>.
+    /// The <see cref="IServiceCollection" /> Extensions.
     /// </summary>
     public static class ServiceCollectionExtensions
     {

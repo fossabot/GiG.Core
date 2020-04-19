@@ -9,7 +9,7 @@ using IObjectMapper = GiG.Core.ObjectMapping.Abstractions.IObjectMapper;
 namespace GiG.Core.ObjectMapping.AutoMapper.Extensions
 {
     /// <summary>
-    /// Service Collection Extensions.
+    /// The <see cref="IServiceCollection" /> Extensions.
     /// </summary>
     public static class ServiceCollectionExtensions
     {

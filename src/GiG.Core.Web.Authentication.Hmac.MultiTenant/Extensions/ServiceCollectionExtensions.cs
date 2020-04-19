@@ -13,7 +13,7 @@ using System.Configuration;
 namespace GiG.Core.Web.Authentication.Hmac.MultiTenant.Extensions
 {
     /// <summary>
-    /// <see cref="IServiceCollection"></see> extensions for HmacAuthenticationHandler.
+    /// The <see cref="IServiceCollection" /> Extensions.
     /// </summary>
     public static class ServiceCollectionExtensions
     {

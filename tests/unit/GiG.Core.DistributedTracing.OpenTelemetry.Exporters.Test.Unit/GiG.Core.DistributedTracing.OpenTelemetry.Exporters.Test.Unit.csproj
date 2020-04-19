@@ -13,6 +13,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.csproj" />
+      <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Zipkin\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Zipkin.csproj" />
     </ItemGroup>
 
 </Project>

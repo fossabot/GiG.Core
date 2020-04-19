@@ -1,4 +1,4 @@
-﻿using GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.External;
+﻿using GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.Extensions;
 using System;
 using Xunit;
 

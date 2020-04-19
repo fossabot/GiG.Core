@@ -8,7 +8,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Abstractions
     public class ApiKeyOptions
     {
         /// <summary>
-        /// <see cref="ApiKeyOptions"/> default section name.
+        /// The configuration default section name.
         /// </summary>
         public const string DefaultSectionName = "Authentication:ApiKey";
 

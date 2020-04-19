@@ -47,8 +47,7 @@ namespace GiG.Core.Http.Extensions
         /// <param name="configuration">The <see cref="IConfiguration"/>.</param>
         /// <param name="sectionName">Section Name for HttpClient Provider.</param>
         /// <returns>An <see cref="HttpClient"/> configured with predefined actions.</returns>
-        public static HttpClient FromConfiguration([NotNull] this HttpClient client,
-            [NotNull] IConfiguration configuration, string sectionName)
+        public static HttpClient FromConfiguration([NotNull] this HttpClient client, [NotNull] IConfiguration configuration, string sectionName)
         {
             if (client == null) throw new ArgumentNullException(nameof(client));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));

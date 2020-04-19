@@ -8,7 +8,7 @@ using System;
 namespace GiG.Core.HealthChecks.Orleans.AspNetCore.Extensions
 {
     /// <summary>
-    /// Service Collection Extensions.
+    /// The <see cref="IServiceCollection" /> Extensions.
     /// </summary>
     public static class ServiceCollectionExtensions
     {

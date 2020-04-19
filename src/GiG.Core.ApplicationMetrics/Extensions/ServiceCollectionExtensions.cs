@@ -7,7 +7,7 @@ using System;
 namespace GiG.Core.ApplicationMetrics.Extensions
 {
     /// <summary>
-    /// Service Collection Extensions.
+    /// The <see cref="IServiceCollection" /> Extensions.
     /// </summary>
     public static class ServiceCollectionExtensions
     {

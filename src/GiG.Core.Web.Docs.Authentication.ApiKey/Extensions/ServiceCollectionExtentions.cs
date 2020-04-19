@@ -7,7 +7,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 namespace GiG.Core.Web.Docs.Authentication.ApiKey.Extensions
 {
     /// <summary>
-    /// Service Collection Extensions.
+    /// The <see cref="IServiceCollection" /> Extensions.
     /// </summary>
     public static class ServiceCollectionExtensions
     {
