@@ -1,4 +1,4 @@
-# GiG.Core.Orleans.Silo.Metrics.Prometheus
+# GiG.Core.Metrics.Prometheus.Orleans.Silo
 
 This Library provides an API to register a telemetry consumer to ship metrics to Prometheus.
 
@@ -22,7 +22,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 ### Configuration
 
-The below table outlines the valid Configurations used to override the [OrleansMetricsOptions](../src/GiG.Core.Orleans.Silo.Metrics.Abstractions/OrleansMetricsOptions.cs) under the Config section `Orleans:Metrics`.
+The below table outlines the valid Configurations used to override the [OrleansMetricsOptions](../src/GiG.Core.Metrics.Prometheus.Orleans.Silo/Abstractions/OrleansMetricsOptions.cs) under the Config section `Orleans:Metrics`.
 
 | Configuration Name      | Type    | Required                  | Default Value |
 |:------------------------|:--------|:--------------------------|:--------------|

@@ -1,4 +1,4 @@
-﻿using GiG.Core.Orleans.Silo.Metrics.Prometheus.Extensions;
+﻿using GiG.Core.Metrics.Prometheus.Orleans.Silo.Extensions;
 using Microsoft.Extensions.Hosting;
 using System;
 using Xunit;
@@ -13,7 +13,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Metrics.Prometheus
         [Fact]
         public void AddPrometheusTelemetry_SiloBuilderIsNull_ThrowsArgumentNullException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.AddPrometheusTelemetry(null, null));
+            var exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.AddPrometheusTelemetry(null, configuration: null));
             Assert.Equal("siloBuilder", exception.ParamName);
         }
         
@@ -24,5 +24,13 @@ namespace GiG.Core.Orleans.Tests.Unit.Metrics.Prometheus
                 Host.CreateDefaultBuilder().UseOrleans(sb => sb.AddPrometheusTelemetry(null)).Build());
             Assert.Equal("configuration", exception.ParamName);
         }
+        
+        [Fact]
+        public void AddPrometheusTelemetryFromConfigurationSection_SiloBuilderIsNull_ThrowsArgumentNullException()
+        {
+            var exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.AddPrometheusTelemetry(null, null));
+            Assert.Equal("siloBuilder", exception.ParamName);
+        }
+
     }
 }

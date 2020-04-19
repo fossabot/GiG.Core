@@ -1,5 +1,5 @@
-﻿using GiG.Core.ApplicationMetrics.Abstractions;
-using GiG.Core.ApplicationMetrics.Prometheus.Tests.Integration.Mocks;
+﻿using GiG.Core.Metrics.Abstractions;
+using GiG.Core.Metrics.Prometheus.Tests.Integration.Mocks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
@@ -9,7 +9,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace GiG.Core.ApplicationMetrics.Prometheus.Tests.Integration.Tests
+namespace GiG.Core.Metrics.Prometheus.Tests.Integration.Tests
 {
     [Trait("Category", "Integration")]
     public class ApplicationMetricsTests

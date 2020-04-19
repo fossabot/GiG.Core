@@ -1,6 +1,6 @@
 ﻿using Bogus;
 using GiG.Core.Orleans.Silo.Extensions;
-using GiG.Core.Orleans.Silo.Metrics.Prometheus.Extensions;
+using GiG.Core.Metrics.Prometheus.Orleans.Silo.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +14,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Mocks
 {
     public class MockMetricsStartup
     {
+        private const string MetricsSilo = "Orleans:MetricsSilo";
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -31,10 +32,10 @@ namespace GiG.Core.Orleans.Tests.Integration.Mocks
         {
             var serviceId = new Randomizer().String2(8);
             var clusterId = new Randomizer().String2(8);
-            var options = ctx.Configuration.GetSection("Orleans:MetricsSilo").Get<EndpointOptions>() ?? new EndpointOptions();
+            var options = ctx.Configuration.GetSection(MetricsSilo).Get<EndpointOptions>() ?? new EndpointOptions();
 
             builder.ConfigureCluster(ctx.Configuration)
-                .ConfigureEndpoints(ctx.Configuration.GetSection("Orleans:MetricsSilo"))
+                .ConfigureEndpoints(ctx.Configuration.GetSection(MetricsSilo))
                 .UseLocalhostClustering(options.SiloPort, options.GatewayPort, null, serviceId, clusterId)
                 .AddPrometheusTelemetry(ctx.Configuration);
         }

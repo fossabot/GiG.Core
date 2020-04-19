@@ -17,8 +17,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\src\GiG.Core.ApplicationMetrics.Prometheus\GiG.Core.ApplicationMetrics.Prometheus.csproj" />
-      <ProjectReference Include="..\..\..\src\GiG.Core.ApplicationMetrics\GiG.Core.ApplicationMetrics.csproj" />
+      <ProjectReference Include="..\..\..\src\GiG.Core.Metrics.Prometheus\GiG.Core.Metrics.Prometheus.csproj" />
+      <ProjectReference Include="..\..\..\src\GiG.Core.Metrics\GiG.Core.Metrics.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.Validation.FluentValidation.Web\GiG.Core.Validation.FluentValidation.Web.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.Web.Hosting\GiG.Core.Web.Hosting.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.Web.Mock\GiG.Core.Web.Mock.csproj" />

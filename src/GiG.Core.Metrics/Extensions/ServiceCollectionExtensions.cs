@@ -1,10 +1,10 @@
-﻿using GiG.Core.ApplicationMetrics.Abstractions;
+﻿using GiG.Core.Metrics.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace GiG.Core.ApplicationMetrics.Extensions
+namespace GiG.Core.Metrics.Extensions
 {
     /// <summary>
     /// Service Collection Extensions.

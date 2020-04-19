@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GiG.Core.ApplicationMetrics.Abstractions\GiG.Core.ApplicationMetrics.Abstractions.csproj" />
+    <ProjectReference Include="..\GiG.Core.Metrics.Abstractions\GiG.Core.Metrics.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

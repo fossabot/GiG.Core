@@ -1,4 +1,4 @@
-﻿namespace GiG.Core.Orleans.Silo.Metrics.Abstractions
+﻿namespace GiG.Core.Metrics.Prometheus.Orleans.Silo.Abstractions
 {
     /// <summary>
     /// The Orleans Metrics Options.
