@@ -23,11 +23,12 @@ namespace GiG.Core.Orleans.Streams
         private readonly Guid _streamId;
         
         private SemaphoreSlim _semaphore;
-        private IAsyncStream<TCommand> _commandStream;
+        private IStream<TCommand> _commandStream;
         private IAsyncStream<TSuccess> _successStream;
         private IAsyncStream<TFailure> _failureStream;
         private StreamSubscriptionHandle<TSuccess> _successStreamHandle;
         private StreamSubscriptionHandle<TFailure> _failureStreamHandle;
+        private readonly IStreamFactory _streamFactory;
 
         private TCommand _command;
         private TSuccess _success;
@@ -47,19 +48,21 @@ namespace GiG.Core.Orleans.Streams
         ///  </param>
         /// <param name="streamId">The stream identifier.</param>
         /// <param name="streamProviderName">The stream namespace.</param>
-        internal CommandDispatcher(IClusterClient clusterClient,
+        /// <param name="streamFactory">The stream factory.</param>
+        internal CommandDispatcher(IClusterClient clusterClient, IStreamFactory streamFactory,
             ILogger<CommandDispatcher<TCommand, TSuccess, TFailure>> logger, Guid streamId, string streamProviderName)
         {
             _logger = logger;
             _streamProvider = clusterClient.GetStreamProvider(streamProviderName);    
             _streamId = streamId;
+            _streamFactory = streamFactory;
         }
 
         /// <inheritdoc />
         public ICommandDispatcher<TCommand, TSuccess, TFailure> WithCommand(TCommand command, string commandNamespace)
         {
             _command = command;
-            _commandStream = _streamProvider.GetStream<TCommand>(_streamId, commandNamespace);
+            _commandStream = _streamFactory.GetStream<TCommand>(_streamProvider, _streamId, commandNamespace);
 
             return this;
         }
@@ -106,7 +109,7 @@ namespace GiG.Core.Orleans.Streams
                 
                 _semaphore = new SemaphoreSlim(0, 1);
                 
-                await _commandStream.OnNextAsync(_command);
+                await _commandStream.PublishAsync(_command);
                 await _semaphore.WaitAsync(millisecondsTimeout, cancellationToken);
 
                 return _success switch
@@ -126,25 +129,23 @@ namespace GiG.Core.Orleans.Streams
 
         private Task SuccessHandler(TSuccess data, StreamSequenceToken token = null)
         {
-            if (!_isReleased)
-            {
-                _success = data;
-                _semaphore.Release();
-                _isReleased = true;
-            }
+            if (_isReleased) return Task.CompletedTask;
             
+            _success = data;
+            _semaphore.Release();
+            _isReleased = true;
+
             return Task.CompletedTask;
         }
 
         private Task FailureHandler(TFailure data, StreamSequenceToken token = null)
         {
-            if (!_isReleased)
-            {
-                _failure = data;
-                _semaphore.Release();
-                _isReleased = true;
-            }
+            if (_isReleased) return Task.CompletedTask;
             
+            _failure = data;
+            _semaphore.Release();
+            _isReleased = true;
+
             return Task.CompletedTask;
         }
 
