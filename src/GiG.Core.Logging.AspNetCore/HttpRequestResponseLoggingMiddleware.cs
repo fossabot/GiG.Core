@@ -32,6 +32,12 @@ namespace GiG.Core.Logging.AspNetCore
         /// <inheritdoc />
         public async Task Invoke(HttpContext context)
         {
+            if (!_logger.IsEnabled(LogLevel.Information))
+            {
+                await _next(context);
+                return;
+            }
+
             await LogRequest(context);
             await LogResponse(context);
         }
@@ -46,11 +52,13 @@ namespace GiG.Core.Logging.AspNetCore
 
             _logger.LogInformation(@"Http Request Information... 
                                     Scheme: {scheme}
+                                    Headers: {headers}
                                     Host: {host}
                                     Path: {path}
                                     QueryString: {queryString}
                                     Request Body: {requestBody}",
                                     context.Request.Scheme,
+                                    context.Request.Headers,
                                     context.Request.Host,
                                     context.Request.Path,
                                     context.Request.QueryString,
@@ -77,11 +85,13 @@ namespace GiG.Core.Logging.AspNetCore
 
             _logger.LogInformation(@"Http Response Information...
                                    Scheme:{scheme}
+                                   Headers: {headers}
                                    Host: {host}
                                    Path: {path}
                                    QueryString: {queryString}
                                    Response Body: {text}",
                                    context.Request.Scheme,
+                                   context.Request.Headers,
                                    context.Request.Host,
                                    context.Request.Path,
                                    context.Request.QueryString,

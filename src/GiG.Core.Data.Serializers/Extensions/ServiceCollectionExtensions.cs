@@ -36,6 +36,7 @@ namespace GiG.Core.Data.Serializers.Extensions
 
             services.TryAddSingleton<IDataSerializer<T>, XmlDataSerializer<T>>();
             services.TryAddSingleton<IXmlDataSerializer<T>, XmlDataSerializer<T>>();
+            services.TryAddSingleton<IXmlDataSerializer, XmlDataSerializer>();
 
             return services;
         }
