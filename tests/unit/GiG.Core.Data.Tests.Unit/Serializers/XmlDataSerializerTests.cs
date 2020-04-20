@@ -1,14 +1,13 @@
-﻿using GiG.Core.Data.Serializers;
-using GiG.Core.Data.Tests.Unit.Helpers;
+﻿using GiG.Core.Data.Tests.Unit.Helpers;
 using GiG.Core.Data.Tests.Unit.Mocks;
 using Xunit;
 
-namespace GiG.Core.Data.Tests.Unit
+namespace GiG.Core.Data.Serializers.Tests.Unit
 {
     [Trait("Category", "Unit")]
     public class XmlDataSerializerTests
     {
-        XmlDataSerializer<MockCountry> _sut;
+        private readonly XmlDataSerializer<MockCountry> _sut;
 
         public XmlDataSerializerTests()
         {

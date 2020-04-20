@@ -1,4 +1,5 @@
 ﻿using GiG.Core.Data.Serializers.Abstractions;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
@@ -11,18 +12,14 @@ namespace GiG.Core.Data.Serializers
     /// <summary>
     /// Xml Data Serializer.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class XmlDataSerializer<T> : IXmlDataSerializer<T>
+    public class XmlDataSerializer : IXmlDataSerializer
     {
-        private readonly XmlSerializer _xmlSerializer;
         private readonly XmlWriterSettings _xmlWriterSettings;
         private readonly ConcurrentDictionary<string, XmlSerializer> _cache = new ConcurrentDictionary<string, XmlSerializer>();
 
         /// <inheritdoc/>
         public XmlDataSerializer()
         {
-            _xmlSerializer = new XmlSerializer(typeof(T));
-
             _xmlWriterSettings = new XmlWriterSettings
             {
                 Encoding = Encoding.UTF8,
@@ -34,7 +31,7 @@ namespace GiG.Core.Data.Serializers
         }
 
         /// <inheritdoc />
-        public string Serialize(T data, XmlNamespaceManager xmlNamespaceManager, bool setDefaultNamespace = true)
+        public string Serialize(Type type, object data, XmlNamespaceManager xmlNamespaceManager, bool setDefaultNamespace = true)
         {
             XmlSerializerNamespaces xmlSerializerNamespaces = new XmlSerializerNamespaces();
 
@@ -49,7 +46,7 @@ namespace GiG.Core.Data.Serializers
             {
                 using (var writer = XmlWriter.Create(stringWriter, _xmlWriterSettings))
                 {
-                    var serializer = GetSerializer(setDefaultNamespace ? xmlNamespaceManager?.DefaultNamespace : null);
+                    var serializer = GetSerializer(type, setDefaultNamespace ? xmlNamespaceManager?.DefaultNamespace : null);
                     serializer.Serialize(writer, data, xmlSerializerNamespaces);
 
                     return stringWriter.ToString();
@@ -58,13 +55,15 @@ namespace GiG.Core.Data.Serializers
         }
 
         /// <inheritdoc/>
-        public string Serialize(T data)
+        public string Serialize(Type type, object data)
         {
+            var xmlSerializer = GetSerializer(type);
+
             using (StringWriter stringWriter = new StringWriter())
             {
                 using (var writer = XmlWriter.Create(stringWriter, _xmlWriterSettings))
                 {
-                    _xmlSerializer.Serialize(writer, data);
+                    xmlSerializer.Serialize(writer, data);
 
                     return stringWriter.ToString();
                 }
@@ -72,21 +71,23 @@ namespace GiG.Core.Data.Serializers
         }
 
         /// <inheritdoc/>
-        public T Deserialize(string data)
+        public object Deserialize(Type type, string data)
         {
+            var xmlSerializer = GetSerializer(type);
+
             object o;
 
             using (TextReader textReader = new StringReader(data))
             {
-                o = _xmlSerializer.Deserialize(textReader);
+                o = xmlSerializer.Deserialize(textReader);
             }
 
-            return (T)o;
+            return o;
         }
 
-        private XmlSerializer GetSerializer(string defaultNamespace)
+        private XmlSerializer GetSerializer(Type type, string defaultNamespace = "")
         {
-            return _cache.GetOrAdd(defaultNamespace, keyString => new XmlSerializer(typeof(T), defaultNamespace));
+            return _cache.GetOrAdd(defaultNamespace + "|" + type.FullName, keyString => new XmlSerializer(type, defaultNamespace));
         }
     }
 }
