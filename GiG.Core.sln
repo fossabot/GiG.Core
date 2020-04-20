@@ -15,7 +15,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A417-4EEB-A216-4918AD56C9B5}"
 	ProjectSection(SolutionItems) = preProject
 		docs\GiG.Core.ApplicationMetrics.md = docs\GiG.Core.ApplicationMetrics.md
-		docs\GiG.Core.ApplicationMetrics.Prometheus.md = docs\GiG.Core.ApplicationMetrics.Prometheus.md
+		docs\GiG.Core.ApplicationMetrisc.Prometheus.md = docs\GiG.Core.ApplicationMetrics.Prometheus.md
+		docs\GiG.Core.ApplicationMetrics.Prometheus.Orleans.Silo.md = docs\GiG.Core.ApplicationMetrics.Prometheus.Orleans.Silo.md
 		docs\GiG.Core.Configuration.md = docs\GiG.Core.Configuration.md
 		docs\GiG.Core.Context.Orleans.md = docs\GiG.Core.Context.Orleans.md
 		docs\GiG.Core.Context.Web.md = docs\GiG.Core.Context.Web.md
@@ -60,7 +61,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Orleans.Clustering.md = docs\GiG.Core.Orleans.Clustering.md
 		docs\GiG.Core.Orleans.Reminders.Npgsql.md = docs\GiG.Core.Orleans.Reminders.Npgsql.md
 		docs\GiG.Core.Orleans.Silo.Dashboard.md = docs\GiG.Core.Orleans.Silo.Dashboard.md
-		docs\GiG.Core.Orleans.Silo.md = docs\GiG.Core.Orleans.Silo.md
+		docs\GiG.Core.Orleans.Silo.md = docs\GiG.Core.Orleans.Silo.md		
 		docs\GiG.Core.Orleans.Storage.Npgsql.md = docs\GiG.Core.Orleans.Storage.Npgsql.md
 		docs\GiG.Core.Orleans.Streams.Kafka.md = docs\GiG.Core.Orleans.Streams.Kafka.md
 		docs\GiG.Core.Orleans.Streams.md = docs\GiG.Core.Orleans.Streams.md
@@ -423,8 +424,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.Test.Unit", "tests\unit\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.Test.Unit\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.Test.Unit.csproj", "{E77571EA-718B-4BA2-A3E9-5F5BC12BE535}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApplicationMetrics", "ApplicationMetrics", "{E558BF2B-78BB-47A3-8040-BC3EC73CD823}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.ApplicationMetrics.Abstractions", "src\GiG.Core.ApplicationMetrics.Abstractions\GiG.Core.ApplicationMetrics.Abstractions.csproj", "{4C6E0D33-9D60-4C2F-8335-A548E62EBA6F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.ApplicationMetrics.Prometheus", "src\GiG.Core.ApplicationMetrics.Prometheus\GiG.Core.ApplicationMetrics.Prometheus.csproj", "{81E9835D-5F8C-497B-AA27-B3D257EC9258}"
@@ -486,6 +485,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Streams.Tests.Integration", "tests\integration\GiG.Core.Orleans.Streams.Tests.Integration\GiG.Core.Orleans.Streams.Tests.Integration.csproj", "{FD4F7332-A89D-4FA8-9D45-767BEFBC912F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Data.Serializers", "src\GiG.Core.Data.Serializers\GiG.Core.Data.Serializers.csproj", "{8B66BD35-6843-4278-A061-64AFE5275CC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.ApplicationMetrics.Prometheus.Orleans.Silo", "src\GiG.Core.ApplicationMetrics.Prometheus.Orleans.Silo\GiG.Core.ApplicationMetrics.Prometheus.Orleans.Silo.csproj", "{E84273C9-AAE3-42FB-A4A4-FFB5F824C1E6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApplicationMetrics", "ApplicationMetrics", "{337DF81B-E252-4CF3-92F7-3459582A6C44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1089,6 +1092,10 @@ Global
 		{3E977FE2-2733-4828-AF02-4BB04A088BC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E977FE2-2733-4828-AF02-4BB04A088BC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E977FE2-2733-4828-AF02-4BB04A088BC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E84273C9-AAE3-42FB-A4A4-FFB5F824C1E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E84273C9-AAE3-42FB-A4A4-FFB5F824C1E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E84273C9-AAE3-42FB-A4A4-FFB5F824C1E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E84273C9-AAE3-42FB-A4A4-FFB5F824C1E6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{541A6EFD-4B13-4627-86EE-40F0C64D7139}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{541A6EFD-4B13-4627-86EE-40F0C64D7139}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{541A6EFD-4B13-4627-86EE-40F0C64D7139}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -1267,11 +1274,7 @@ Global
 		{ED83CA2B-9A94-4697-BA2C-19BC6D2D60F9} = {F3E4EB54-9129-4327-9A32-89ABD4ADA6C5}
 		{665EB7E4-3F13-4019-B42B-97CE41D6D25B} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
 		{E77571EA-718B-4BA2-A3E9-5F5BC12BE535} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
-		{E558BF2B-78BB-47A3-8040-BC3EC73CD823} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
-		{4C6E0D33-9D60-4C2F-8335-A548E62EBA6F} = {E558BF2B-78BB-47A3-8040-BC3EC73CD823}
-		{81E9835D-5F8C-497B-AA27-B3D257EC9258} = {E558BF2B-78BB-47A3-8040-BC3EC73CD823}
 		{68A4E68A-FAF4-456B-B758-5E6EA9075943} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
-		{97B3BE53-1177-4C1D-A747-59A2666489DA} = {E558BF2B-78BB-47A3-8040-BC3EC73CD823}
 		{7FAC76EB-3345-4DA2-8BA3-E0E9BCD083D4} = {8047E8B5-4505-49E7-8C01-5C5FCB7B5681}
 		{177C23D4-20CE-460B-B803-6C708ECC7AED} = {D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF}
 		{D230B84B-8D0F-4784-9E65-1CB5A87E6313} = {F286F8FD-A3C9-4D52-B06A-27EB3A29B06C}
@@ -1298,7 +1301,12 @@ Global
 		{3E977FE2-2733-4828-AF02-4BB04A088BC0} = {7FCF707A-CE0E-4367-AB14-8A61E24BA48E}
 		{541A6EFD-4B13-4627-86EE-40F0C64D7139} = {52AEF79F-C056-404A-9AC9-155CE8A17721}
 		{FD4F7332-A89D-4FA8-9D45-767BEFBC912F} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
+		{337DF81B-E252-4CF3-92F7-3459582A6C44} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
 		{8B66BD35-6843-4278-A061-64AFE5275CC8} = {412AB606-A56E-4B9E-A9C1-E2C7E02D0CF5}
+		{E84273C9-AAE3-42FB-A4A4-FFB5F824C1E6} = {337DF81B-E252-4CF3-92F7-3459582A6C44}
+		{97B3BE53-1177-4C1D-A747-59A2666489DA} = {337DF81B-E252-4CF3-92F7-3459582A6C44}
+		{4C6E0D33-9D60-4C2F-8335-A548E62EBA6F} = {337DF81B-E252-4CF3-92F7-3459582A6C44}
+		{81E9835D-5F8C-497B-AA27-B3D257EC9258} = {337DF81B-E252-4CF3-92F7-3459582A6C44}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}

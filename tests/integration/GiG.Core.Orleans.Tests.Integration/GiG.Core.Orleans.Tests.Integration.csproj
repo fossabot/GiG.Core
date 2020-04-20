@@ -8,11 +8,13 @@
     <ItemGroup>
         <PackageReference Include="Bogus" Version="28.4.4" />
         <PackageReference Include="KubernetesClient" Version="1.6.10" />
+        <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.0.0" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.0" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0" />
         <PackageReference Include="Microsoft.Extensions.Http" Version="3.0.0" />
         <PackageReference Include="Microsoft.Orleans.Server" Version="3.0.2" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
+        <PackageReference Include="prometheus-net.AspNetCore" Version="3.4.0" />
         <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
         <PackageReference Include="System.Text.Json" Version="4.7.0" />
         <PackageReference Include="xunit" Version="2.4.1" />
@@ -23,6 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\src\GiG.Core.ApplicationMetrics.Prometheus.Orleans.Silo\GiG.Core.ApplicationMetrics.Prometheus.Orleans.Silo.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.Context.Orleans\GiG.Core.Context.Orleans.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.Context.Web\GiG.Core.Context.Web.csproj" />
       <ProjectReference Include="..\..\..\src\GiG.Core.DistributedTracing.Activity\GiG.Core.DistributedTracing.Activity.csproj" />
