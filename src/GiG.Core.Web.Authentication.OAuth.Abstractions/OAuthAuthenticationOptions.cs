@@ -6,7 +6,7 @@
     public class OAuthAuthenticationOptions
     {
         /// <summary>
-        /// The default configuration section name.
+        /// The configuration default section name.
         /// </summary>
         public const string DefaultSectionName = "Authentication:OAuth";
 

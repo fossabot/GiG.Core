@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GiG.Core.DistributedTracing.OpenTelemetry.Extensions;
+using System;
 using Xunit;
 // ReSharper disable AssignNullToNotNullAttribute
 

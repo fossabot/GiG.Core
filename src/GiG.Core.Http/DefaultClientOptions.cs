@@ -1,12 +1,12 @@
 ﻿namespace GiG.Core.Http
 {
     /// <summary>
-    /// Default Client Options.
+    /// Default Http Client Options.
     /// </summary>
     public class DefaultClientOptions
     {
         /// <summary>
-        /// Default Section Name.
+        /// The configuration default section name.
         /// </summary>
         public const string DefaultSectionName = "HttpClient";
         

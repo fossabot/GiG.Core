@@ -6,7 +6,7 @@ using System;
 namespace GiG.Core.Validation.FluentValidation.MediatR.Extensions
 {
     /// <summary>
-    /// Service Collection Extensions.
+    /// The <see cref="IServiceCollection" /> Extensions.
     /// </summary>
     public static class ServiceCollectionExtensions
     {

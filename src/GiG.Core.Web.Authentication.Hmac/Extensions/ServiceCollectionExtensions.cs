@@ -15,7 +15,7 @@ using System.Linq;
 namespace GiG.Core.Web.Authentication.Hmac.Extensions
 {
     /// <summary>
-    /// <see cref="IServiceCollection"/> for <see cref="HmacAuthenticationHandler"/>.
+    /// The <see cref="IServiceCollection" /> Extensions.
     /// </summary>
     public static class ServiceCollectionExtensions
     {

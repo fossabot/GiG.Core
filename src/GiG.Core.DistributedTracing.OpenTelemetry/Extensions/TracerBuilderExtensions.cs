@@ -6,7 +6,7 @@ using System;
 using System.Configuration;
 using System.Linq;
 
-namespace GiG.Core.DistributedTracing.OpenTelemetry
+namespace GiG.Core.DistributedTracing.OpenTelemetry.Extensions
 {
     /// <summary>
     /// Tracer Builder Extensions.
@@ -19,18 +19,18 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry
         /// <param name="tracerBuilder">The <see cref="TracerBuilder"/>.</param>
         /// <param name="tracingConfigurationBuilder">A delegate that is used to configure the <see cref="TracingConfigurationBuilder" />.</param>
         /// <param name="configuration">The <see cref="IConfiguration"/>.</param>
-        /// <param name="sectionName">The configuration section name.</param>
+        /// <param name="configurationSectionName">The Configuration section name.</param>
         /// <returns>The <see cref="TracerBuilder"/>.</returns>
         public static TracerBuilder ConfigureTracing([NotNull] this TracerBuilder tracerBuilder, Action<TracingConfigurationBuilder> tracingConfigurationBuilder, IConfiguration configuration,
-            string sectionName = TracingOptions.DefaultSectionName)
+            string configurationSectionName = TracingOptions.DefaultSectionName)
         {
             if (tracerBuilder == null) throw new ArgumentNullException(nameof(tracerBuilder));
             if (tracingConfigurationBuilder == null) throw new ArgumentNullException(nameof(tracingConfigurationBuilder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            if (string.IsNullOrWhiteSpace(sectionName)) throw new ArgumentException($"'{nameof(sectionName)}' must not be null, empty or whitespace.", nameof(sectionName));
+            if (string.IsNullOrWhiteSpace(configurationSectionName)) throw new ArgumentException($"'{nameof(configurationSectionName)}' must not be null, empty or whitespace.", nameof(configurationSectionName));
 
-            var configurationSection = configuration.GetSection(sectionName);
+            var configurationSection = configuration.GetSection(configurationSectionName);
 
             var tracingOptions = configurationSection.Get<TracingOptions>();
             if (tracingOptions?.IsEnabled != true)

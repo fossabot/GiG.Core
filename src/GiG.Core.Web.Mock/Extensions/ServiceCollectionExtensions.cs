@@ -9,7 +9,7 @@ using System;
 namespace GiG.Core.Web.Mock.Extensions
 {
     /// <summary>
-    /// Service Collection Extensions.
+    /// The <see cref="IServiceCollection" /> Extensions.
     /// </summary>
     public static class ServiceCollectionExtensions
     {

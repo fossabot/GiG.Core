@@ -9,7 +9,7 @@ namespace GiG.Core.Messaging.Kafka.Abstractions
     public class KafkaProviderOptions
     {
         /// <summary>
-        /// The Default config section name.  
+        /// The configuration default section name.
         /// </summary>
         public const string DefaultSectionName = "EventProvider";
 

@@ -14,7 +14,7 @@
     <PackageReference Include="Microsoft.Orleans.Runtime.Abstractions" Version="3.0.2" />
     <PackageReference Include="Microsoft.Orleans.Server" Version="3.0.2" />
     <PackageReference Include="Moq" Version="4.13.1" />
-    <PackageReference Include="OpenTelemetry" Version="0.2.0-alpha.222" />
+    <PackageReference Include="OpenTelemetry" Version="0.2.0-alpha.246" />
     <PackageReference Include="Orleans.Streams.Kafka" Version="4.0.0-dev-125" />
     <PackageReference Include="OrleansTestKit" Version="3.0.1" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />

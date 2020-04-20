@@ -6,7 +6,7 @@
     public class KafkaOptions
     {
         /// <summary>
-        /// Default Section Name.
+        /// The configuration default section name.
         /// </summary>
         public const string DefaultSectionName = "Orleans:Streams:Kafka";
 

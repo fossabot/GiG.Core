@@ -11,7 +11,7 @@ using System;
 namespace GiG.Core.Messaging.Kafka.Extensions
 {
     /// <summary>
-    /// Service Collection Extensions.
+    /// The <see cref="IServiceCollection" /> Extensions.
     /// </summary>
     public static class ServiceCollectionExtensions
     {

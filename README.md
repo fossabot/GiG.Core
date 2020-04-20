@@ -20,7 +20,8 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Data.Migration.Evolve](docs/GiG.Core.Data.Migration.Evolve.md) - Provides an API to perform Database Migrations using SQL Scripts.
 - [GiG.Core.DistributedTracing.Activity](docs/GiG.Core.DistributedTracing.Activity.md) - Provides an API to register Distributed Tracing using System.Diagnostics.Activity.
 - [GiG.Core.DistributedTracing.MassTransit](docs/GiG.Core.DistributedTracing.MassTransit.md) - Provides an API to register Distributed Tracing for a MassTransit Consumer.
-- [GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger](docs/GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.md) - Provides an API to register Distributed Tracing using OpenTelemetry.
+- [GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger](docs/GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.md) - Provides an API to register Distributed Tracing using OpenTelemetry to capture distributed traces from your application and export them to a Jaeger Exporter.
+- [GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Zipkin](docs/GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Zipkin.md) - Provides an API to register Distributed Tracing using OpenTelemetry to capture distributed traces from your application and export them to a Zipkin Exporter.
 - [GiG.Core.DistributedTracing.Orleans](docs/GiG.Core.DistributedTracing.Orleans.md) - Provides an API to register Distributed Tracing for an Orleans Client.
 - [GiG.Core.HealthChecks](docs/GiG.Core.HealthChecks.md) - Provides an API to register Health Checks for an application.
 - [GiG.Core.HealthChecks.Orleans](docs/GiG.Core.HealthChecks.Orleans.md) - Provides an API to register Health Checks for an Orleans Silo.

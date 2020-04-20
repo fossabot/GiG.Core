@@ -6,7 +6,7 @@
     public class HmacOptions
     {
         /// <summary>
-        /// <see cref="HmacOptions"/> default section name.
+        /// The configuration default section name.
         /// </summary>
         public const string DefaultSectionName = "Authentication:Hmac";
 

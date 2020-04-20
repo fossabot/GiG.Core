@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using GiG.Core.DistributedTracing.OpenTelemetry.Extensions;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using Xunit;
@@ -26,10 +27,10 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry.Tests.Unit.Tests
         [Theory]
         [InlineData("")]
         [InlineData(null)]
-        public void AddTracing_SectionNameIsInvalid_ThrowsArgumentException(string sectionName)
+        public void AddTracing_SectionNameIsInvalid_ThrowsArgumentException(string configurationSectionName)
         {
-            var exception = Assert.Throws<ArgumentException>(() => new ServiceCollection().AddTracing(null, new ConfigurationBuilder().Build(), sectionName));
-            Assert.Equal("sectionName", exception.ParamName);
+            var exception = Assert.Throws<ArgumentException>(() => new ServiceCollection().AddTracing(null, new ConfigurationBuilder().Build(), configurationSectionName));
+            Assert.Equal("configurationSectionName", exception.ParamName);
         }
     }
 }

@@ -6,7 +6,7 @@
     public class TokenManagerOptions
     {
         /// <summary>
-        /// The Default configuration section name. 
+        /// The configuration default section name.
         /// </summary>
         public const string DefaultSectionName = "TokenManager";
         

@@ -9,7 +9,7 @@ using System.Data;
 namespace GiG.Core.Data.Migration.Evolve.Extensions
 {
     /// <summary>
-    /// Service Collection Extensions.
+    /// The <see cref="IServiceCollection" /> Extensions.
     /// </summary>
     public static class ServiceCollectionExtensions
     {

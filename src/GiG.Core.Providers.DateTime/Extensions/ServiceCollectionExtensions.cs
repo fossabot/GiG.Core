@@ -7,7 +7,7 @@ using System;
 namespace GiG.Core.Providers.DateTime.Extensions
 {
     /// <summary>
-    /// Date Time Provider Extensions.
+    /// The <see cref="IServiceCollection" /> Extensions.
     /// </summary>
     public static class ServiceCollectionExtensions
     {
