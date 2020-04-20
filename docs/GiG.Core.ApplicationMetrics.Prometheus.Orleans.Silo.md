@@ -1,6 +1,6 @@
 # GiG.Core.ApplicationMetrics.Prometheus.Orleans.Silo
 
-This Library provides an API to register a telemetry consumer to ship metrics to Prometheus.
+This Library provides an API for Orleans to register a telemetry consumer to ship metrics to Prometheus.
 
 ## Basic Usage
 
