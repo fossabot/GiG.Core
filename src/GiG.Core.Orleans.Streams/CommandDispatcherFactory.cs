@@ -15,16 +15,19 @@ namespace GiG.Core.Orleans.Streams
     {
         private readonly IClusterClient _clusterClient;
         private readonly ILoggerFactory _loggerFactory;
+        private readonly IStreamFactory _streamFactory;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="clusterClient">The Cluster Client.</param>
         /// <param name="loggerFactory">The Logger Factory.</param>
-        public CommandDispatcherFactory(IClusterClient clusterClient, ILoggerFactory loggerFactory)
+        /// <param name="streamFactory">The Stream Factory.</param>
+        public CommandDispatcherFactory(IClusterClient clusterClient, ILoggerFactory loggerFactory, IStreamFactory streamFactory)
         {
             _clusterClient = clusterClient;
             _loggerFactory = loggerFactory;
+            _streamFactory = streamFactory;
         }
 
         /// <inheritdoc />
@@ -34,7 +37,7 @@ namespace GiG.Core.Orleans.Streams
             
             var logger = _loggerFactory.CreateLogger<CommandDispatcher<TCommand, TSuccess, TFailure>>();
 
-            return new CommandDispatcher<TCommand, TSuccess, TFailure>(_clusterClient, logger, streamId, streamProviderName);
+            return new CommandDispatcher<TCommand, TSuccess, TFailure>(_clusterClient, _streamFactory, logger, streamId, streamProviderName);
         }
     }
 }

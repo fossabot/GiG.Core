@@ -9,6 +9,7 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 
 - [GiG.Core.ApplicationMetrics](docs/GiG.Core.ApplicationMetrics.md) - Provides an API to register application metrics configuration options.
 - [GiG.Core.ApplicationMetrics.Prometheus](docs/GiG.Core.ApplicationMetrics.Prometheus.md) - Provides an API to add application metrics which can be consumed by Prometheus.
+- [GiG.Core.ApplicationMetrics.Prometheus.Orleans.Silo](docs/GiG.Core.ApplicationMetrics.Prometheus.Orleans.Silo) - Provides an API for Orleans to register a telemetry consumer to ship metrics to Prometheus.
 - [GiG.Core.Configuration](docs/GiG.Core.Configuration.md) - Provides an API to add external configuration via JSON file and Environment variables.
 - [GiG.Core.Context.Orleans](docs/GiG.Core.Context.Orleans.md) - Provides an API to register the Request Context Accessor functionality for Orleans.
 - [GiG.Core.Context.Web](docs/GiG.Core.Context.Web.md) - Provides an API to register the Request Context Accessor functionality for a web application.
@@ -22,7 +23,6 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger](docs/GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.md) - Provides an API to register Distributed Tracing using OpenTelemetry to capture distributed traces from your application and export them to a Jaeger Exporter.
 - [GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Zipkin](docs/GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Zipkin.md) - Provides an API to register Distributed Tracing using OpenTelemetry to capture distributed traces from your application and export them to a Zipkin Exporter.
 - [GiG.Core.DistributedTracing.Orleans](docs/GiG.Core.DistributedTracing.Orleans.md) - Provides an API to register Distributed Tracing for an Orleans Client.
-- [GiG.Core.DistributedTracing.Web](docs/GiG.Core.DistributedTracing.Web.md) - Provides an API to register Distributed Tracing for a web application.
 - [GiG.Core.HealthChecks](docs/GiG.Core.HealthChecks.md) - Provides an API to register Health Checks for an application.
 - [GiG.Core.HealthChecks.Orleans](docs/GiG.Core.HealthChecks.Orleans.md) - Provides an API to register Health Checks for an Orleans Silo.
 - [GiG.Core.HealthChecks.Orleans.Streams.Kafka](docs/GiG.Core.HealthChecks.Orleans.Streams.Kafka.md) - Provides an API to register Orleans Kafka Streams Health Check.
@@ -38,7 +38,6 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Logging.Enrichers.ApplicationMetadata](docs/GiG.Core.Logging.Enrichers.ApplicationMetadata.md) - Provides an API to register and ApplicationMetadata Enricher for Logging when using Serilog.
 - [GiG.Core.Logging.Enrichers.Context](docs/GiG.Core.Logging.Enrichers.Context.md) - Provides an API to register the Context Enricher for Logging when using Serilog.
 - [GiG.Core.Logging.Enrichers.DistributedTracing](docs/GiG.Core.Logging.Enrichers.DistributedTracing.md) - Provides an API to register the Correlation Id Enricher for Logging when using Serilog.
-- [GiG.Core.Logging.Enrichers.MultiTenant](docs/GiG.Core.Logging.Enrichers.MultiTenant.md) - Provides an API to register Tenant Id Enricher for Logging when using Serilog.
 - [GiG.Core.Logging.Sinks.Console](docs/GiG.Core.Logging.Sinks.Console.md) - Provides an API to register Logging to a Console using Serilog for an application.
 - [GiG.Core.Logging.Sinks.File](docs/GiG.Core.Logging.Sinks.File.md) - Provides an API to register Logging to a File using Serilog for an application.
 - [GiG.Core.Logging.Sinks.Fluentd](docs/GiG.Core.Logging.Sinks.Fluentd.md) - Provides an API to register Logging to Fluentd using Serilog for an application.
@@ -48,7 +47,6 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Messaging.MassTransit](docs/GiG.Core.Messaging.MassTransit.md) - Provides an API to register MassTransit related functionality to an application.
 - [GiG.Core.Models](docs/GiG.Core.Models.md) - Provides a Library for generic Models.
 - [GiG.Core.MultiTenant.Activity](docs/GiG.Core.MultiTenant.Activity.md) - Provides an API to register Multi Tenancy for an application through key-value pair items in the Activity Baggage.
-- [GiG.Core.MultiTenant.Web](docs/GiG.Core.MultiTenant.Web.md) - Provides an API to register Multi Tenancy for an application.
 - [GiG.Core.ObjectMapping.AutoMapper](docs/GiG.Core.ObjectMapping.AutoMapper.md) - Provides an API to register an Object Mapper using AutoMapper.
 - [GiG.Core.Orleans.Client](docs/GiG.Core.Orleans.Client.md) - Provides an API to register an Orleans Client in an application.
 - [GiG.Core.Orleans.Clustering](docs/GiG.Core.Orleans.Clustering.md) - Provides Extension Methods to register Orleans Silo Membership Providers.
