@@ -16,18 +16,15 @@ namespace GiG.Core.Logging.AspNetCore.Extensions
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
         /// <param name="configuration">The <see cref="IConfiguration" />.</param>
-        /// <param name="configurationSectionName">The Configuration section name.</param>
         /// <returns>The <see cref="IServiceCollection" /> so that additional calls can be chained.</returns>
         public static IServiceCollection ConfigureHttpRequestResponseLogging(
             [NotNull] this IServiceCollection services,
-            [NotNull] IConfiguration configuration,
-            [NotNull] string configurationSectionName = HttpRequestResponseLoggingOptions.DefaultSectionName)
+            [NotNull] IConfiguration configuration)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-            if (string.IsNullOrWhiteSpace(configurationSectionName)) throw new ArgumentException($"'{nameof(configurationSectionName)}' must not be null, empty or whitespace.", nameof(configurationSectionName));
 
-            return services.ConfigureHttpRequestResponseLogging(configuration.GetSection(configurationSectionName));
+            return services.ConfigureHttpRequestResponseLogging(configuration.GetSection(HttpRequestResponseLoggingOptions.DefaultSectionName));
         }
 
         /// <summary>
