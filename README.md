@@ -15,6 +15,7 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Data.KVStores](docs/GiG.Core.Data.KVStores.md) - Provides an API to register the required services needed by the KV Stores Data Providers.
 - [GiG.Core.Data.KVStores.Providers.Etcd](docs/GiG.Core.Data.KVStores.Providers.Etcd.md) - Provides an API to register data providers which will read data from etcd.
 - [GiG.Core.Data.KVStores.Providers.File](docs/GiG.Core.Data.KVStores.Providers.File.md) - Provides an API to register data providers which will read data from file.
+- [GiG.Core.Data.Serializers](docs/GiG.Core.Data.Serializers.md) - Provides an API to register the required services needed by the different Data Serializers.
 - [GiG.Core.Data.Migration.Evolve](docs/GiG.Core.Data.Migration.Evolve.md) - Provides an API to perform Database Migrations using SQL Scripts.
 - [GiG.Core.DistributedTracing.Activity](docs/GiG.Core.DistributedTracing.Activity.md) - Provides an API to register Distributed Tracing using System.Diagnostics.Activity.
 - [GiG.Core.DistributedTracing.MassTransit](docs/GiG.Core.DistributedTracing.MassTransit.md) - Provides an API to register Distributed Tracing for a MassTransit Consumer.
