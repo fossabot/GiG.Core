@@ -16,7 +16,7 @@ public void ConfigureServices(IServiceCollection services)
 {
     services
         .AddKVStores<IEnumerable<MyModel>>(x =>
-            x.FromFile(configuration, "MyConfigSection")
+            x.FromFile(_configuration, "MyConfigSection")
                 .WithEagerLoading());
 }
 ```

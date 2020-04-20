@@ -57,7 +57,7 @@ namespace GiG.Core.Logging.AspNetCore
         }
 
 
-        private StringBuilder CreateStringBuilder(string httpRequestOrHttpReponse)
+        private static StringBuilder CreateStringBuilder(string httpRequestOrHttpReponse)
         {
             return new StringBuilder()
                 .AppendLine(httpRequestOrHttpReponse)
@@ -67,7 +67,7 @@ namespace GiG.Core.Logging.AspNetCore
                 .AppendLine("QueryString: {queryString}");
         }
 
-        private List<object> CreateParams(HttpContext context)
+        private static List<object> CreateParams(HttpContext context)
         {
             return new List<object>()
             {
@@ -80,7 +80,8 @@ namespace GiG.Core.Logging.AspNetCore
 
         private async Task LogRequest(HttpRequestResponseLoggingOptions httpRequestResponseLoggingOptions, HttpContext context)
         {
-            if (!httpRequestResponseLoggingOptions.IsRequestLoggingEnabled)
+            var requestOptions = httpRequestResponseLoggingOptions.Request ?? new HttpRequestResponseOptions();
+            if (!requestOptions.IsEnabled)
             {
                 return;
             }
@@ -95,13 +96,13 @@ namespace GiG.Core.Logging.AspNetCore
 
             _params = CreateParams(context);
 
-            if (httpRequestResponseLoggingOptions.IncludeRequestHeaders)
+            if (requestOptions.IncludeHeaders)
             {
                 _stringBuilder.AppendLine("Headers: {headers}");
                 _params.Add(context.Request.Headers);
             }
 
-            if (httpRequestResponseLoggingOptions.IncludeRequestBody)
+            if (requestOptions.IncludeBody)
             {
                 _stringBuilder.AppendLine("Request Body: {requestBody}");
                 _params.Add(ReadStreamInChunks(requestStream));
@@ -114,7 +115,9 @@ namespace GiG.Core.Logging.AspNetCore
 
         private async Task LogResponse(HttpRequestResponseLoggingOptions httpRequestResponseLoggingOptions, HttpContext context)
         {
-            if (!httpRequestResponseLoggingOptions.IsResponseLoggingEnabled)
+            var responseOptions = httpRequestResponseLoggingOptions.Response ?? new HttpRequestResponseOptions();
+
+            if (!responseOptions.IsEnabled)
             {
                 await _next(context);
                 return;
@@ -138,13 +141,13 @@ namespace GiG.Core.Logging.AspNetCore
 
             _params = CreateParams(context);
 
-            if (httpRequestResponseLoggingOptions.IncludeRequestHeaders)
+            if (responseOptions.IncludeHeaders)
             {
                 _stringBuilder.AppendLine("Headers: {headers}");
                 _params.Add(context.Request.Headers);
             }
 
-            if (httpRequestResponseLoggingOptions.IncludeRequestBody)
+            if (responseOptions.IncludeBody)
             {
                 _stringBuilder.AppendLine("Response Body: {text}");
                 _params.Add(responseText);
