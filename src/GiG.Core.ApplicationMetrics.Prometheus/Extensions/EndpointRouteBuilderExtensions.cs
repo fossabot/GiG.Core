@@ -1,4 +1,4 @@
-﻿using GiG.Core.Metrics.Abstractions;
+﻿using GiG.Core.ApplicationMetrics.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 using Prometheus;
 using System;
 
-namespace GiG.Core.Metrics.Prometheus.Extensions
+namespace GiG.Core.ApplicationMetrics.Prometheus.Extensions
 {
     /// <summary>
     /// EndpointRouteBuilder Extensions.

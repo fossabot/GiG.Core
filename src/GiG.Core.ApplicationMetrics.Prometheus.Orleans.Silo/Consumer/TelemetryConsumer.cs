@@ -3,7 +3,7 @@ using Prometheus;
 using System;
 using System.Collections.Generic;
 
-namespace GiG.Core.Metrics.Prometheus.Orleans.Silo.Consumer
+namespace GiG.Core.ApplicationMetrics.Prometheus.Orleans.Silo.Consumer
 {
     /// <summary>
     /// Telemetry Consumer for Prometheus.

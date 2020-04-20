@@ -14,8 +14,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5915362C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A417-4EEB-A216-4918AD56C9B5}"
 	ProjectSection(SolutionItems) = preProject
-		docs\GiG.Core.Metrics.md = docs\GiG.Core.Metrics.md
-		docs\GiG.Core.Metrisc.Prometheus.md = docs\GiG.Core.Metrics.Prometheus.md
+		docs\GiG.Core.ApplicationMetrics.md = docs\GiG.Core.ApplicationMetrics.md
+		docs\GiG.Core.ApplicationMetrisc.Prometheus.md = docs\GiG.Core.ApplicationMetrics.Prometheus.md
+		docs\GiG.Core.ApplicationMetrics.Prometheus.Orleans.Silo.md = docs\GiG.Core.ApplicationMetrics.Prometheus.Orleans.Silo.md
 		docs\GiG.Core.Configuration.md = docs\GiG.Core.Configuration.md
 		docs\GiG.Core.Context.Orleans.md = docs\GiG.Core.Context.Orleans.md
 		docs\GiG.Core.Context.Web.md = docs\GiG.Core.Context.Web.md
@@ -63,8 +64,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Orleans.Clustering.md = docs\GiG.Core.Orleans.Clustering.md
 		docs\GiG.Core.Orleans.Reminders.Npgsql.md = docs\GiG.Core.Orleans.Reminders.Npgsql.md
 		docs\GiG.Core.Orleans.Silo.Dashboard.md = docs\GiG.Core.Orleans.Silo.Dashboard.md
-		docs\GiG.Core.Orleans.Silo.md = docs\GiG.Core.Orleans.Silo.md
-		docs\GiG.Core.Metrics.Prometheus.Orleans.Silo.md = docs\GiG.Core.Metrics.Prometheus.Orleans.Silo.md
+		docs\GiG.Core.Orleans.Silo.md = docs\GiG.Core.Orleans.Silo.md		
 		docs\GiG.Core.Orleans.Storage.Npgsql.md = docs\GiG.Core.Orleans.Storage.Npgsql.md
 		docs\GiG.Core.Orleans.Streams.Kafka.md = docs\GiG.Core.Orleans.Streams.Kafka.md
 		docs\GiG.Core.Orleans.Streams.md = docs\GiG.Core.Orleans.Streams.md
@@ -427,13 +427,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.Test.Unit", "tests\unit\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.Test.Unit\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.Test.Unit.csproj", "{E77571EA-718B-4BA2-A3E9-5F5BC12BE535}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Metrics.Abstractions", "src\GiG.Core.Metrics.Abstractions\GiG.Core.Metrics.Abstractions.csproj", "{4C6E0D33-9D60-4C2F-8335-A548E62EBA6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.ApplicationMetrics.Abstractions", "src\GiG.Core.ApplicationMetrics.Abstractions\GiG.Core.ApplicationMetrics.Abstractions.csproj", "{4C6E0D33-9D60-4C2F-8335-A548E62EBA6F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Metrics.Prometheus", "src\GiG.Core.Metrics.Prometheus\GiG.Core.Metrics.Prometheus.csproj", "{81E9835D-5F8C-497B-AA27-B3D257EC9258}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.ApplicationMetrics.Prometheus", "src\GiG.Core.ApplicationMetrics.Prometheus\GiG.Core.ApplicationMetrics.Prometheus.csproj", "{81E9835D-5F8C-497B-AA27-B3D257EC9258}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Metrics.Prometheus.Tests.Integration", "tests\integration\GiG.Core.Metrics.Prometheus.Tests.Integration\GiG.Core.Metrics.Prometheus.Tests.Integration.csproj", "{68A4E68A-FAF4-456B-B758-5E6EA9075943}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.ApplicationMetrics.Prometheus.Tests.Integration", "tests\integration\GiG.Core.ApplicationMetrics.Prometheus.Tests.Integration\GiG.Core.ApplicationMetrics.Prometheus.Tests.Integration.csproj", "{68A4E68A-FAF4-456B-B758-5E6EA9075943}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Metrics", "src\GiG.Core.Metrics\GiG.Core.Metrics.csproj", "{97B3BE53-1177-4C1D-A747-59A2666489DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.ApplicationMetrics", "src\GiG.Core.ApplicationMetrics\GiG.Core.ApplicationMetrics.csproj", "{97B3BE53-1177-4C1D-A747-59A2666489DA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Reminders.Npgsql", "src\GiG.Core.Orleans.Reminders.Npgsql\GiG.Core.Orleans.Reminders.Npgsql.csproj", "{7FAC76EB-3345-4DA2-8BA3-E0E9BCD083D4}"
 EndProject
@@ -489,9 +489,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Streams.Te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Data.Serializers", "src\GiG.Core.Data.Serializers\GiG.Core.Data.Serializers.csproj", "{8B66BD35-6843-4278-A061-64AFE5275CC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Metrics.Prometheus.Orleans.Silo", "src\GiG.Core.Metrics.Prometheus.Orleans.Silo\GiG.Core.Metrics.Prometheus.Orleans.Silo.csproj", "{E84273C9-AAE3-42FB-A4A4-FFB5F824C1E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.ApplicationMetrics.Prometheus.Orleans.Silo", "src\GiG.Core.ApplicationMetrics.Prometheus.Orleans.Silo\GiG.Core.ApplicationMetrics.Prometheus.Orleans.Silo.csproj", "{E84273C9-AAE3-42FB-A4A4-FFB5F824C1E6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Metrics", "Metrics", "{337DF81B-E252-4CF3-92F7-3459582A6C44}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApplicationMetrics", "ApplicationMetrics", "{337DF81B-E252-4CF3-92F7-3459582A6C44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

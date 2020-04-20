@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Prometheus;
 using System;
 
-namespace GiG.Core.Metrics.Prometheus.Extensions
+namespace GiG.Core.ApplicationMetrics.Prometheus.Extensions
 {
     /// <summary>
     /// Application Builder Extensions.

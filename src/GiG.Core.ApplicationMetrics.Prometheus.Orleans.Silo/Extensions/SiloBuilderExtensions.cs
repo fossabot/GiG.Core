@@ -1,5 +1,5 @@
-using GiG.Core.Metrics.Prometheus.Orleans.Silo.Abstractions;
-using GiG.Core.Metrics.Prometheus.Orleans.Silo.Consumer;
+using GiG.Core.ApplicationMetrics.Prometheus.Orleans.Silo.Abstractions;
+using GiG.Core.ApplicationMetrics.Prometheus.Orleans.Silo.Consumer;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>GiG.Core.ApplicationMetrics</RootNamespace>
+    <TargetFramework>netstandard2.0</TargetFramework>    
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GiG.Core.Metrics.Abstractions\GiG.Core.Metrics.Abstractions.csproj" />
+    <ProjectReference Include="..\GiG.Core.ApplicationMetrics.Abstractions\GiG.Core.ApplicationMetrics.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

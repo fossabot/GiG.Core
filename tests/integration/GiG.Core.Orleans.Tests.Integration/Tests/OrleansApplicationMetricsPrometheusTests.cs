@@ -7,30 +7,30 @@ using Xunit;
 
 namespace GiG.Core.Orleans.Tests.Integration.Tests
 {
-    [Trait("Category", "IntegrationWithDependency")]
-    public class OrleansMetricsPrometheusTests : IAsyncLifetime
+    [Trait("Category", "Integration")]
+    public class OrleansApplicationMetricsPrometheusTests : IAsyncLifetime
     {
-        private readonly MetricsPrometheusLifetime _metricsPrometheusLifetime;
+        private readonly ApplicationMetricsPrometheusLifetime _applicationMetricsPrometheusLifetime;
         protected HttpClient HttpClient;
 
-        public OrleansMetricsPrometheusTests()
+        public OrleansApplicationMetricsPrometheusTests()
         {
-            _metricsPrometheusLifetime = new MetricsPrometheusLifetime();
+            _applicationMetricsPrometheusLifetime = new ApplicationMetricsPrometheusLifetime();
         }
         public async Task InitializeAsync()
         {
-            await _metricsPrometheusLifetime.InitializeAsync();
+            await _applicationMetricsPrometheusLifetime.InitializeAsync();
             
-            HttpClient = _metricsPrometheusLifetime.HttpClient;
+            HttpClient = _applicationMetricsPrometheusLifetime.HttpClient;
         }
 
         public async Task DisposeAsync()
         {
-            await _metricsPrometheusLifetime.DisposeAsync();
+            await _applicationMetricsPrometheusLifetime.DisposeAsync();
         }
      
         [Fact]
-        public async Task MetricsPrometheus_MetricEndpoint_StatusCodeOK()
+        public async Task ApplicationMetricsPrometheus_MetricEndpoint_StatusCodeOK()
         {
             //Arrange
             var metricsEndpoint = "metrics";

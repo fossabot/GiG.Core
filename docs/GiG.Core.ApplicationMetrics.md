@@ -1,4 +1,4 @@
-# GiG.Core.Metrics
+# GiG.Core.ApplicationMetrics
 
 This Library provides an API to register application metrics configuration options.
 
@@ -18,7 +18,7 @@ public static void ConfigureServices(HostBuilderContext hostContext, IServiceCol
 
 ### Configuration
 
-The below table outlines the valid Configurations used to configure the [ApplicationMetricsOptions](../src/GiG.Core.Metrics.Abstractions/ApplicationMetricsOptions.cs).
+The below table outlines the valid Configurations used to configure the [ApplicationMetricsOptions](../src/GiG.Core.ApplicationMetrics.Abstractions/ApplicationMetricsOptions.cs).
 
 | Configuration Name | Type    | Optional | Default Value            |
 |:-------------------|:--------|:---------|:-------------------------|

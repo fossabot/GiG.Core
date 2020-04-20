@@ -1,4 +1,4 @@
-# GiG.Core.Metrics.Prometheus
+# GiG.Core.ApplicationMetrics.Prometheus
 
 This Library provides an API to register application metrics which can be consumed by Prometheus.
 
@@ -20,4 +20,4 @@ public void Configure(IApplicationBuilder app)
 
 ### Configuration
 
-For configuration details, see [GiG.Core.Metrics](GiG.Core.Metrics.md).
+For configuration details, see [GiG.Core.ApplicationMetrics](GiG.Core.ApplicationMetrics.md).

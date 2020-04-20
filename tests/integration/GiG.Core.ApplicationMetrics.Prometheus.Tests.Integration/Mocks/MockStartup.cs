@@ -1,5 +1,5 @@
-﻿using GiG.Core.Metrics.Extensions;
-using GiG.Core.Metrics.Prometheus.Extensions;
+﻿using GiG.Core.ApplicationMetrics.Extensions;
+using GiG.Core.ApplicationMetrics.Prometheus.Extensions;
 using GiG.Core.Validation.FluentValidation.Web.Extensions;
 using GiG.Core.Web.Hosting.Extensions;
 using GiG.Core.Web.Mock.Extensions;
@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace GiG.Core.Metrics.Prometheus.Tests.Integration.Mocks
+namespace GiG.Core.ApplicationMetrics.Prometheus.Tests.Integration.Mocks
 {
     public class MockStartup
     {

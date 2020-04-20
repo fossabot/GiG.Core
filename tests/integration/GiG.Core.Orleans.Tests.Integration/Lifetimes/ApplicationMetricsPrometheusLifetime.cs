@@ -9,7 +9,7 @@ using Xunit;
 
 namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
 {
-    public class MetricsPrometheusLifetime : IAsyncLifetime
+    public class ApplicationMetricsPrometheusLifetime : IAsyncLifetime
     {
         internal HttpClient HttpClient;
         private IHost _host;

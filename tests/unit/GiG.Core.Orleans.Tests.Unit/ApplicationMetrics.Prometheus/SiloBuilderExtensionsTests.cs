@@ -5,7 +5,7 @@ using Xunit;
 
 // ReSharper disable AssignNullToNotNullAttribute
 
-namespace GiG.Core.Orleans.Tests.Unit.Metrics.Prometheus
+namespace GiG.Core.Orleans.Tests.Unit.ApplicationMetrics.Prometheus
 {
     [Trait("Category", "Unit")]
     public class SiloBuilderExtensionsTests

@@ -1,4 +1,4 @@
-﻿namespace GiG.Core.Metrics.Abstractions
+﻿namespace GiG.Core.ApplicationMetrics.Abstractions
 {
     /// <summary>
     /// The Application Metrics Options.
