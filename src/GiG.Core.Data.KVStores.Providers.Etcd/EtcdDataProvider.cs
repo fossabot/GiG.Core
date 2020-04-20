@@ -1,6 +1,7 @@
 ﻿using dotnet_etcd;
 using GiG.Core.Data.KVStores.Abstractions;
 using GiG.Core.Data.KVStores.Providers.Etcd.Abstractions;
+using GiG.Core.Data.Serializers.Abstractions;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
 using System;
@@ -27,7 +28,7 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         /// Constructor.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger{EtcdDataProvider}"/> which will be used to log events by the provider.</param>
-        /// <param name="dataSerializer">The <see cref="IDataProvider{T}"/> which will be used to deserialize data from Etcd.</param>
+        /// <param name="dataSerializer">The <see cref="IDataProvider{T}"/> which will be used to serialize data from Etcd.</param>
         /// <param name="etcdProviderOptionsAccessor">The <see cref="IDataProviderOptions{T,TOptions}"/> which will be used to access options for the instance of the provider.</param>
         public EtcdDataProvider(ILogger<EtcdDataProvider<T>> logger,
             IDataSerializer<T> dataSerializer,
@@ -73,7 +74,7 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
                 }
 
                 var value = response.Events[0].Kv.Value.ToStringUtf8();
-                callback(_dataSerializer.GetFromString(value));
+                callback(_dataSerializer.Deserialize(value));
             }, _metadata, WatchExceptionHandler);
             
             return Task.CompletedTask;
@@ -86,7 +87,7 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
 
             var value = await _etcdClient.GetValAsync(key, _metadata);
 
-            return _dataSerializer.GetFromString(value);
+            return _dataSerializer.Deserialize(value);
         }
 
         /// <inheritdoc/>
@@ -94,7 +95,7 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd
         {
             var key = GetKey(keys);
 
-            await _etcdClient.PutAsync(key, _dataSerializer.ConvertToString(model), _metadata);
+            await _etcdClient.PutAsync(key, _dataSerializer.Serialize(model), _metadata);
         }
 
         /// <inheritdoc />

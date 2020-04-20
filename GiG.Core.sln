@@ -23,6 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{3206DBB4-A
 		docs\GiG.Core.Data.KVStores.Providers.Etcd.md = docs\GiG.Core.Data.KVStores.Providers.Etcd.md
 		docs\GiG.Core.Data.KVStores.Providers.File.md = docs\GiG.Core.Data.KVStores.Providers.File.md
 		docs\GiG.Core.Data.Migration.Evolve.md = docs\GiG.Core.Data.Migration.Evolve.md
+		docs\GiG.Core.Data.Serializers.md = docs\GiG.Core.Data.Serializers.md
 		docs\GiG.Core.DistributedTracing.Activity.md = docs\GiG.Core.DistributedTracing.Activity.md
 		docs\GiG.Core.DistributedTracing.MassTransit.md = docs\GiG.Core.DistributedTracing.MassTransit.md
 		docs\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.md = docs\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Jaeger.md
@@ -482,9 +483,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7FCF707A-CE0
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Sample", "samples\Web\src\GiG.Core.Web.Sample\GiG.Core.Web.Sample.csproj", "{3E977FE2-2733-4828-AF02-4BB04A088BC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Logging.AspNetCore", "src\GiG.Core.Logging.AspNetCore\GiG.Core.Logging.AspNetCore.csproj", "{541A6EFD-4B13-4627-86EE-40F0C64D7139}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Logging.AspNetCore", "src\GiG.Core.Logging.AspNetCore\GiG.Core.Logging.AspNetCore.csproj", "{541A6EFD-4B13-4627-86EE-40F0C64D7139}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Orleans.Streams.Tests.Integration", "tests\integration\GiG.Core.Orleans.Streams.Tests.Integration\GiG.Core.Orleans.Streams.Tests.Integration.csproj", "{FD4F7332-A89D-4FA8-9D45-767BEFBC912F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Orleans.Streams.Tests.Integration", "tests\integration\GiG.Core.Orleans.Streams.Tests.Integration\GiG.Core.Orleans.Streams.Tests.Integration.csproj", "{FD4F7332-A89D-4FA8-9D45-767BEFBC912F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Data.Serializers", "src\GiG.Core.Data.Serializers\GiG.Core.Data.Serializers.csproj", "{8B66BD35-6843-4278-A061-64AFE5275CC8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Metrics.Prometheus.Orleans.Silo", "src\GiG.Core.Metrics.Prometheus.Orleans.Silo\GiG.Core.Metrics.Prometheus.Orleans.Silo.csproj", "{E84273C9-AAE3-42FB-A4A4-FFB5F824C1E6}"
 EndProject
@@ -1104,6 +1107,10 @@ Global
 		{FD4F7332-A89D-4FA8-9D45-767BEFBC912F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD4F7332-A89D-4FA8-9D45-767BEFBC912F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD4F7332-A89D-4FA8-9D45-767BEFBC912F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B66BD35-6843-4278-A061-64AFE5275CC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B66BD35-6843-4278-A061-64AFE5275CC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B66BD35-6843-4278-A061-64AFE5275CC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B66BD35-6843-4278-A061-64AFE5275CC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1298,6 +1305,7 @@ Global
 		{541A6EFD-4B13-4627-86EE-40F0C64D7139} = {52AEF79F-C056-404A-9AC9-155CE8A17721}
 		{FD4F7332-A89D-4FA8-9D45-767BEFBC912F} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 		{337DF81B-E252-4CF3-92F7-3459582A6C44} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
+		{8B66BD35-6843-4278-A061-64AFE5275CC8} = {412AB606-A56E-4B9E-A9C1-E2C7E02D0CF5}
 		{E84273C9-AAE3-42FB-A4A4-FFB5F824C1E6} = {337DF81B-E252-4CF3-92F7-3459582A6C44}
 		{97B3BE53-1177-4C1D-A747-59A2666489DA} = {337DF81B-E252-4CF3-92F7-3459582A6C44}
 		{4C6E0D33-9D60-4C2F-8335-A548E62EBA6F} = {337DF81B-E252-4CF3-92F7-3459582A6C44}

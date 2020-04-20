@@ -7,7 +7,7 @@ using System;
 namespace GiG.Core.Data.KVStores.Extensions
 {
     /// <summary>
-    /// The <see cref="IServiceCollection" /> extensions.
+    /// The <see cref="IServiceCollection" /> Extensions.
     /// </summary>
     public static class ServiceCollectionExtensions
     {

@@ -1,5 +1,7 @@
 using GiG.Core.Data.KVStores.Abstractions;
-using GiG.Core.Data.KVStores.Serializers;
+using GiG.Core.Data.Serializers;
+using GiG.Core.Data.Serializers.Abstractions;
+using GiG.Core.Data.Serializers.Extensions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
@@ -7,7 +9,7 @@ using System;
 namespace GiG.Core.Data.KVStores.Extensions
 {
     /// <summary>
-    /// The <see cref="IKVStoreBuilder{T}" /> extensions.
+    /// The <see cref="IKVStoreBuilder{T}" /> Extensions.
     /// </summary>
     public static class KVStoreBuilderExtensions
     {
@@ -34,7 +36,7 @@ namespace GiG.Core.Data.KVStores.Extensions
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
 
-            builder.Services.TryAddSingleton<IDataSerializer<T>, JsonDataSerializer<T>>();
+            builder.Services.AddSystemTextJsonDataSerializer<T>();
 
             return builder;
         }

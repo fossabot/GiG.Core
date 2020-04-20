@@ -28,7 +28,7 @@ namespace GiG.Core.Data.KVStores
             }
             catch (Exception ex)
             {
-                throw new WriterException($"Cannot write value for {typeof(T).FullName} with keys {string.Join(", ", keys)}", ex);
+                throw new WriteException($"Cannot write value for {typeof(T).FullName} with keys {string.Join(", ", keys)}", ex);
             }
         }
 
