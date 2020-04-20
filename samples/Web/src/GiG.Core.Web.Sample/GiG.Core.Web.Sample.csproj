@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\..\src\GiG.Core.DistributedTracing.Activity\GiG.Core.DistributedTracing.Activity.csproj" />
+      <ProjectReference Include="..\..\..\..\src\GiG.Core.Logging.AspNetCore\GiG.Core.Logging.AspNetCore.csproj" />
       <ProjectReference Include="..\..\..\..\src\GiG.Core.MultiTenant.Activity\GiG.Core.MultiTenant.Activity.csproj" />
       <ProjectReference Include="..\..\..\..\src\GiG.Core.Web.Authentication.ApiKey\GiG.Core.Web.Authentication.ApiKey.csproj" />
       <ProjectReference Include="..\..\..\..\src\GiG.Core.Web.Authentication.OAuth.Abstractions\GiG.Core.Web.Authentication.OAuth.Abstractions.csproj" />

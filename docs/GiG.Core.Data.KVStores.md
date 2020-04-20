@@ -10,11 +10,13 @@ The `IDataRetriever<T>` can be used to get the data required from store.
 The `IDataWriter<T>` can be used to store the data using built-in locking mechanism.
  
 ```csharp
+private readonly IConfiguration _configuration;
+
 public void ConfigureServices(IServiceCollection services)
 {
     services
         .AddKVStores<IEnumerable<MyModel>>(x =>
-            x.FromFile(configuration, "MyConfigSection")
+            x.FromFile(_configuration, "MyConfigSection")
                 .WithEagerLoading());
 }
 ```
