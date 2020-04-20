@@ -1,7 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using GiG.Core.Logging.AspNetCore.Abstractions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.IO;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace GiG.Core.Logging.AspNetCore
@@ -12,20 +17,27 @@ namespace GiG.Core.Logging.AspNetCore
     public class HttpRequestResponseLoggingMiddleware
     {
         private readonly RequestDelegate _next;
-
+        private readonly IOptionsMonitor<HttpRequestResponseLoggingOptions> _httpRequestResponseLoggingOptionsMonitor;
         private readonly ILogger _logger;
-
         private readonly RecyclableMemoryStreamManager _recyclableMemoryStreamManager;
+
+        private StringBuilder _stringBuilder;
+        private IList<object> _params;
 
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="next">The <see cref="RequestDelegate" />.</param>
+        /// <param name="httpRequestResponseLoggingOptionsMonitor">The <see cref="IOptionsMonitor{HttpRequestResponseLoggingOptions}" />.</param>
         /// <param name="logger">The <see cref="ILogger" />.</param>
-        public HttpRequestResponseLoggingMiddleware(RequestDelegate next, ILogger<HttpRequestResponseLoggingMiddleware> logger)
+        public HttpRequestResponseLoggingMiddleware(
+            RequestDelegate next,
+            IOptionsMonitor<HttpRequestResponseLoggingOptions> httpRequestResponseLoggingOptionsMonitor,
+            ILogger<HttpRequestResponseLoggingMiddleware> logger)
         {
             _next = next;
             _logger = logger;
+            _httpRequestResponseLoggingOptionsMonitor = httpRequestResponseLoggingOptionsMonitor;
             _recyclableMemoryStreamManager = new RecyclableMemoryStreamManager();
         }
 
@@ -38,37 +50,76 @@ namespace GiG.Core.Logging.AspNetCore
                 return;
             }
 
-            await LogRequest(context);
-            await LogResponse(context);
+            var httpRequestResponseLoggingOptions = _httpRequestResponseLoggingOptionsMonitor.CurrentValue;
+
+            await LogRequest(httpRequestResponseLoggingOptions, context);
+            await LogResponse(httpRequestResponseLoggingOptions, context);
         }
 
-        private async Task LogRequest(HttpContext context)
+
+        private StringBuilder CreateStringBuilder(string httpRequestOrHttpReponse)
         {
+            return new StringBuilder()
+                .AppendLine(httpRequestOrHttpReponse)
+                .AppendLine("Scheme: {scheme}")
+                .AppendLine("Host: {host}")
+                .AppendLine("Path: {path}")
+                .AppendLine("QueryString: {queryString}");
+        }
+
+        private List<object> CreateParams(HttpContext context)
+        {
+            return new List<object>()
+            {
+                context.Request.Scheme,
+                context.Request.Host,
+                context.Request.Path,
+                context.Request.QueryString,
+            };
+        }
+
+        private async Task LogRequest(HttpRequestResponseLoggingOptions httpRequestResponseLoggingOptions, HttpContext context)
+        {
+            if (!httpRequestResponseLoggingOptions.IsRequestLoggingEnabled)
+            {
+                return;
+            }
+
             context.Request.EnableBuffering();
 
             using var requestStream = _recyclableMemoryStreamManager.GetStream();
 
             await context.Request.Body.CopyToAsync(requestStream);
 
-            _logger.LogInformation(@"Http Request Information... 
-                                    Scheme: {scheme}
-                                    Headers: {headers}
-                                    Host: {host}
-                                    Path: {path}
-                                    QueryString: {queryString}
-                                    Request Body: {requestBody}",
-                                    context.Request.Scheme,
-                                    context.Request.Headers,
-                                    context.Request.Host,
-                                    context.Request.Path,
-                                    context.Request.QueryString,
-                                    ReadStreamInChunks(requestStream));
+            _stringBuilder = CreateStringBuilder("Http Request Information...");
+
+            _params = CreateParams(context);
+
+            if (httpRequestResponseLoggingOptions.IncludeRequestHeaders)
+            {
+                _stringBuilder.AppendLine("Headers: {headers}");
+                _params.Add(context.Request.Headers);
+            }
+
+            if (httpRequestResponseLoggingOptions.IncludeRequestBody)
+            {
+                _stringBuilder.AppendLine("Request Body: {requestBody}");
+                _params.Add(ReadStreamInChunks(requestStream));
+            }
+
+            _logger.LogInformation(_stringBuilder.ToString(), _params.ToArray());
 
             context.Request.Body.Position = 0;
         }
 
-        private async Task LogResponse(HttpContext context)
+        private async Task LogResponse(HttpRequestResponseLoggingOptions httpRequestResponseLoggingOptions, HttpContext context)
         {
+            if (!httpRequestResponseLoggingOptions.IsResponseLoggingEnabled)
+            {
+                await _next(context);
+                return;
+            }
+
             var bodyStream = context.Response.Body;
 
             using var responseStream = _recyclableMemoryStreamManager.GetStream();
@@ -83,19 +134,23 @@ namespace GiG.Core.Logging.AspNetCore
 
             context.Response.Body.Seek(0, SeekOrigin.Begin);
 
-            _logger.LogInformation(@"Http Response Information...
-                                   Scheme:{scheme}
-                                   Headers: {headers}
-                                   Host: {host}
-                                   Path: {path}
-                                   QueryString: {queryString}
-                                   Response Body: {text}",
-                                   context.Request.Scheme,
-                                   context.Request.Headers,
-                                   context.Request.Host,
-                                   context.Request.Path,
-                                   context.Request.QueryString,
-                                   responseText);
+            _stringBuilder = CreateStringBuilder("Http Reponse Information...");
+
+            _params = CreateParams(context);
+
+            if (httpRequestResponseLoggingOptions.IncludeRequestHeaders)
+            {
+                _stringBuilder.AppendLine("Headers: {headers}");
+                _params.Add(context.Request.Headers);
+            }
+
+            if (httpRequestResponseLoggingOptions.IncludeRequestBody)
+            {
+                _stringBuilder.AppendLine("Response Body: {text}");
+                _params.Add(responseText);
+            }
+
+            _logger.LogInformation(_stringBuilder.ToString(), _params.ToArray());
 
             await responseStream.CopyToAsync(bodyStream);
         }

@@ -1,3 +1,4 @@
+using GiG.Core.Logging.AspNetCore.Extensions;
 using GiG.Core.MultiTenant.Activity.Extensions;
 using GiG.Core.Web.Authentication.ApiKey.Extensions;
 using GiG.Core.Web.Authentication.OAuth.Extensions;
@@ -34,12 +35,15 @@ namespace GiG.Core.Web.Sample
                 .AddApiKeyAuthentication();
 
             services.ConfigureOAuthAuthentication(Configuration);
+
+            services.ConfigureHttpRequestResponseLogging(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
             app.UseRouting();
+            app.UseHttpRequestResponseLogging();
             app.UseTenantIdMiddleware();
             app.UseAuthentication();
             app.UseAuthorization();
