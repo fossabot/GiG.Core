@@ -137,7 +137,7 @@ namespace GiG.Core.Logging.AspNetCore
 
             context.Response.Body.Seek(0, SeekOrigin.Begin);
 
-            _stringBuilder = CreateStringBuilder("Http Reponse Information...");
+            _stringBuilder = CreateStringBuilder("Http Response Information...");
 
             _params = CreateParams(context);
 
