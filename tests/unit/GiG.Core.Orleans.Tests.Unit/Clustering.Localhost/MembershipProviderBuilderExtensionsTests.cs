@@ -12,11 +12,11 @@ namespace GiG.Core.Orleans.Tests.Unit.Clustering.Localhost
         [Fact]
         public void ConfigureLocalhostClustering_MembershipProviderBuilderIsNull_ThrowsArgumentNullException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => MembershipProviderBuilderExtensions.ConfigureLocalhostClustering(clientBuilder: null, configuration: null));
-            Assert.Equal("clientBuilder", exception.ParamName);
+            var exception = Assert.Throws<ArgumentNullException>(() => MembershipProviderBuilderExtensions.ConfigureLocalhostClustering(builder: (Orleans.Clustering.Abstractions.MembershipProviderBuilder<global::Orleans.IClientBuilder>)null, configuration: null));
+            Assert.Equal("builder", exception.ParamName);
 
-            exception = Assert.Throws<ArgumentNullException>(() => MembershipProviderBuilderExtensions.ConfigureLocalhostClustering(siloBuilder: null, configuration: null));
-            Assert.Equal("siloBuilder", exception.ParamName);
+            exception = Assert.Throws<ArgumentNullException>(() => MembershipProviderBuilderExtensions.ConfigureLocalhostClustering(builder: (Orleans.Clustering.Abstractions.MembershipProviderBuilder<global::Orleans.Hosting.ISiloBuilder>)null, configuration: null));
+            Assert.Equal("builder", exception.ParamName);
         }
     }
 }

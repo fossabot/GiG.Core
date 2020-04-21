@@ -15,7 +15,7 @@ namespace GiG.Core.Logging.AspNetCore.Extensions
         /// Configures Logging for Http Request and Http Response.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
-        /// <param name="configuration">The <see cref="IConfiguration" />.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/> which binds to <see cref="HttpRequestResponseLoggingOptions"/>.</param>
         /// <returns>The <see cref="IServiceCollection" /> so that additional calls can be chained.</returns>
         public static IServiceCollection ConfigureHttpRequestResponseLogging(
             [NotNull] this IServiceCollection services,
@@ -31,7 +31,7 @@ namespace GiG.Core.Logging.AspNetCore.Extensions
         /// Configures Logging for Http Request and Http Response.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
-        /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/> which binds to <see cref="HttpRequestResponseLoggingOptions"/>.</param>
         /// <returns>The <see cref="IServiceCollection" /> so that additional calls can be chained.</returns>
         public static IServiceCollection ConfigureHttpRequestResponseLogging(
             [NotNull] this IServiceCollection services,

@@ -1,14 +1,13 @@
-using System;
 using JetBrains.Annotations;
-using Microsoft.Extensions.DependencyInjection;
 using Orleans;
 using Orleans.Hosting;
 using Orleans.Streams.Kafka.Config;
+using System;
 
 namespace GiG.Core.Orleans.Streams.Kafka.Extensions
 {
     /// <summary>
-    /// Client Builder Extensions.
+    /// The <see cref="IClientBuilder" /> Extensions.
     /// </summary>
     public static class ClientBuilderExtensions
     {

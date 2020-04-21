@@ -10,7 +10,7 @@ using System;
 namespace GiG.Core.Metrics.Prometheus.Orleans.Silo.Extensions
 {
     /// <summary>
-    /// Silo Builder Extensions.
+    /// The <see cref="ISiloBuilder" /> Extensions.
     /// </summary>
     public static class SiloBuilderExtensions
     {
@@ -18,7 +18,7 @@ namespace GiG.Core.Metrics.Prometheus.Orleans.Silo.Extensions
         /// Adds Prometheus Telemetry Consumer to Silo Builder.
         /// </summary>
         /// <param name="siloBuilder">The Orleans <see cref="ISiloBuilder"/>.</param>
-        /// <param name="configuration">The <see cref="IConfiguration"/> from which to bind to <see cref="OrleansMetricsOptions"/>.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/> which binds to <see cref="OrleansMetricsOptions"/>.</param>
         /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
         public static ISiloBuilder AddPrometheusTelemetry([NotNull] this ISiloBuilder siloBuilder, [NotNull] IConfiguration configuration)
         {
@@ -34,7 +34,7 @@ namespace GiG.Core.Metrics.Prometheus.Orleans.Silo.Extensions
         /// Adds Prometheus Telemetry Consumer to Silo Builder from configuration section.
         /// </summary>
         /// <param name="siloBuilder">The Orleans <see cref="ISiloBuilder"/>.</param>
-        /// <param name="configurationSection">The <see cref="IConfigurationSection"/> from which to bind to <see cref="OrleansMetricsOptions"/>.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/> which binds to <see cref="OrleansMetricsOptions"/>.</param>
         /// <returns>Returns the <see cref="ISiloBuilder"/> so that more methods can be chained.</returns>
         public static ISiloBuilder AddPrometheusTelemetry([NotNull] this ISiloBuilder siloBuilder, [NotNull] IConfigurationSection configurationSection)
         {

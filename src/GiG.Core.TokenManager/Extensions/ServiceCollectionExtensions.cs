@@ -17,10 +17,10 @@ namespace GiG.Core.TokenManager.Extensions
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Adds the required services for the Token Manager.
+        /// Adds the Token Manager.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection"/>.</param>
-        /// <param name="configuration">The <see cref="IConfiguration" />.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/> which binds to <see cref="TokenManagerOptions"/>.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
         /// <exception cref="ArgumentNullException"></exception>
         public static IServiceCollection AddTokenManager([NotNull] this IServiceCollection services, [NotNull] IConfiguration configuration)
@@ -32,10 +32,10 @@ namespace GiG.Core.TokenManager.Extensions
         }
 
         /// <summary>
-        /// Adds the required services for the Token Manager.
+        /// Adds the Token Manager.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection"/>.</param>
-        /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/> which binds to <see cref="TokenManagerOptions"/>.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ConfigurationErrorsException"></exception>

@@ -13,7 +13,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Dashboard
         public void ConfigureDashboard_SiloBuilderIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.ConfigureDashboard(null, null));
-            Assert.Equal("siloBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]

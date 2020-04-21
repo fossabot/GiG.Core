@@ -12,12 +12,13 @@ namespace GiG.Core.ApplicationMetrics.Extensions
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Registers a configuration instance which <see cref="ApplicationMetricsOptions" /> will bind against.
+        /// Configures Application Metrics.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
-        /// <param name="configuration">The <see cref="IConfiguration" />.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/> which binds to <see cref="ApplicationMetricsOptions"/>.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
-        public static IServiceCollection ConfigureApplicationMetrics([NotNull] this IServiceCollection services,
+        public static IServiceCollection ConfigureApplicationMetrics(
+            [NotNull] this IServiceCollection services,
             [NotNull] IConfiguration configuration)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
@@ -25,17 +26,19 @@ namespace GiG.Core.ApplicationMetrics.Extensions
 
             return services.ConfigureApplicationMetrics(configuration.GetSection(ApplicationMetricsOptions.DefaultSectionName));
         }
-        
+
         /// <summary>
-        /// Registers a configuration instance which <see cref="ApplicationMetricsOptions" /> will bind against.
+        /// Configures Application Metrics.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
-        /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/> which binds to <see cref="ApplicationMetricsOptions"/>.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
-        public static IServiceCollection ConfigureApplicationMetrics([NotNull] this IServiceCollection services,
+        public static IServiceCollection ConfigureApplicationMetrics(
+            [NotNull] this IServiceCollection services,
             [NotNull] IConfigurationSection configurationSection)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
+            
             var applicationMetricsOptions = configurationSection?.Get<ApplicationMetricsOptions>() ?? new ApplicationMetricsOptions();
 
             return services.Configure<ApplicationMetricsOptions>(options =>

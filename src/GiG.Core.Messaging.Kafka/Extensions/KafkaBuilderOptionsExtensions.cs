@@ -37,7 +37,7 @@ namespace GiG.Core.Messaging.Kafka.Extensions
         /// Configure the Kafka Provider Options from configuration.
         /// </summary>
         /// <param name="builderOptions">The <see cref="IKafkaBuilderOptions{TKey, TValue}"/> to build upon.</param>
-        /// <param name="configuration">The <see cref="IConfiguration"/>.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/> which binds to <see cref="KafkaProviderOptions"/>.</param>
         /// <typeparam name="TKey">The Key value of the message.</typeparam>
         /// <typeparam name="TValue">The Value of the message.</typeparam>
         /// <returns>The <see cref="IKafkaBuilderOptions{TKey, TValue}"/> to allow chaining.</returns>
@@ -56,7 +56,7 @@ namespace GiG.Core.Messaging.Kafka.Extensions
         /// Configure the Kafka Provider Options from configuration.
         /// </summary>
         /// <param name="builderOptions">The <see cref="IKafkaBuilderOptions{TKey, TValue}"/> to build upon.</param>
-        /// <param name="configurationSection">The <see cref="IConfigurationSection"/>.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/> which binds to <see cref="KafkaProviderOptions"/>.</param>
         /// <typeparam name="TKey">The Key value of the message.</typeparam>
         /// <typeparam name="TValue">The Value of the message.</typeparam>
         /// <returns>The <see cref="IKafkaBuilderOptions{TKey, TValue}"/> to allow chaining.</returns>

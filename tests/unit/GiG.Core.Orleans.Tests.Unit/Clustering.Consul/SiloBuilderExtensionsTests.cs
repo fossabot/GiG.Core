@@ -15,10 +15,10 @@ namespace GiG.Core.Orleans.Tests.Unit.Clustering.Consul
         public void ConfigureConsulClustering_SiloBuilderIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.ConfigureConsulClustering(null, configuration: null));
-            Assert.Equal("siloBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
 
             exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.ConfigureConsulClustering(null, null));
-            Assert.Equal("siloBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]

@@ -9,50 +9,50 @@ using System.Configuration;
 namespace GiG.Core.Orleans.Storage.Npgsql.Extensions
 {
     /// <summary>
-    /// Silo Builder Extensions.
+    /// The <see cref="ISiloBuilder" /> Extensions.
     /// </summary>
     public static class SiloBuilderExtensions
     {
         private const string InvariantNamePostgreSQL = "Npgsql";
 
         /// <summary>
-        /// Adds a named Npgsql Grain Storage Provider using Default storage provider.
+        /// Adds a named Npgsql Grain Storage Provider using Default Storage Provider.
         /// </summary>
-        /// <param name="siloBuilder">The <see cref="ISiloBuilder"/>.</param>
-        /// <param name="configuration">The <see cref="IConfiguration"/>.</param>
+        /// <param name="builder">The <see cref="ISiloBuilder"/>.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/> which binds to <see cref="NpgsqlOptions"/>.</param>
         /// <returns>The<see cref="ISiloBuilder"/>.</returns>
-        public static ISiloBuilder AddNpgsqlGrainStorageAsDefault([NotNull] this ISiloBuilder siloBuilder, [NotNull] IConfiguration configuration)
+        public static ISiloBuilder AddNpgsqlGrainStorageAsDefault([NotNull] this ISiloBuilder builder, [NotNull] IConfiguration configuration)
         {
-            if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
             
-            return siloBuilder.AddNpgsqlGrainStorage(ProviderConstants.DEFAULT_STORAGE_PROVIDER_NAME, configuration);
-        }
-        
-        /// <summary>
-        /// Adds a named Npgsql Grain Storage Provider.
-        /// </summary>
-        /// <param name="siloBuilder">The <see cref="ISiloBuilder"/>.</param>
-        /// <param name="storageName">The Grain Storage name.</param>
-        /// <param name="configuration">The <see cref="IConfiguration"/>.</param>
-        /// <returns>The<see cref="ISiloBuilder"/>.</returns>
-        public static ISiloBuilder AddNpgsqlGrainStorage([NotNull] this ISiloBuilder siloBuilder, [NotNull] string storageName, [NotNull] IConfiguration configuration)
-        {
-            if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
-            
-            return siloBuilder.AddNpgsqlGrainStorage(storageName, configuration, storageName);
+            return builder.AddNpgsqlGrainStorage(ProviderConstants.DEFAULT_STORAGE_PROVIDER_NAME, configuration);
         }
 
         /// <summary>
         /// Adds a named Npgsql Grain Storage Provider.
         /// </summary>
-        /// <param name="siloBuilder">The <see cref="ISiloBuilder"/>.</param>
+        /// <param name="builder">The <see cref="ISiloBuilder"/>.</param>
         /// <param name="storageName">The Grain Storage name.</param>
-        /// <param name="configuration">The <see cref="IConfiguration"/>.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/> which binds to <see cref="NpgsqlOptions"/>.</param>
+        /// <returns>The<see cref="ISiloBuilder"/>.</returns>
+        public static ISiloBuilder AddNpgsqlGrainStorage([NotNull] this ISiloBuilder builder, [NotNull] string storageName, [NotNull] IConfiguration configuration)
+        {
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            
+            return builder.AddNpgsqlGrainStorage(storageName, configuration, storageName);
+        }
+
+        /// <summary>
+        /// Adds a named Npgsql Grain Storage Provider.
+        /// </summary>
+        /// <param name="builder">The <see cref="ISiloBuilder"/>.</param>
+        /// <param name="storageName">The Grain Storage name.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/> which binds to <see cref="NpgsqlOptions"/>.</param>
         /// <param name="storageSectionName">The Storage Provider section name.</param>
         /// <returns>The <see cref="ISiloBuilder"/>.</returns>
-        public static ISiloBuilder AddNpgsqlGrainStorage([NotNull] this ISiloBuilder siloBuilder, [NotNull] string storageName, [NotNull] IConfiguration configuration, [NotNull] string storageSectionName)
+        public static ISiloBuilder AddNpgsqlGrainStorage([NotNull] this ISiloBuilder builder, [NotNull] string storageName, [NotNull] IConfiguration configuration, [NotNull] string storageSectionName)
         {
-            if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
             if (string.IsNullOrWhiteSpace(storageName)) throw new ArgumentException($"'{nameof(storageName)}' must not be null, empty or whitespace.", nameof(storageName));
             if (string.IsNullOrWhiteSpace(storageSectionName)) throw new ArgumentException($"'{nameof(storageSectionName)}' must not be null, empty or whitespace.", nameof(storageSectionName));
@@ -60,20 +60,20 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Extensions
             var namedStorageSectionName = $"{NpgsqlOptions.DefaultSectionName}:{storageSectionName}";
             var storageConfigSection = configuration.GetSection(namedStorageSectionName);
 
-            return siloBuilder.AddNpgsqlGrainStorage(storageName, storageConfigSection);
+            return builder.AddNpgsqlGrainStorage(storageName, storageConfigSection);
         }
 
 
         /// <summary>
         /// Adds a named Npgsql Grain Storage Provider.
         /// </summary>
-        /// <param name="siloBuilder">The <see cref="ISiloBuilder"/>.</param>
+        /// <param name="builder">The <see cref="ISiloBuilder"/>.</param>
         /// <param name="storageName">The Grain Storage name.</param>
-        /// <param name="configurationSection">The <see cref="IConfigurationSection"/>.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/> which binds to <see cref="NpgsqlOptions"/>.</param>
         /// <returns>The <see cref="ISiloBuilder"/>.</returns>
-        public static ISiloBuilder AddNpgsqlGrainStorage([NotNull] this ISiloBuilder siloBuilder, [NotNull] string storageName, [NotNull] IConfigurationSection configurationSection)
+        public static ISiloBuilder AddNpgsqlGrainStorage([NotNull] this ISiloBuilder builder, [NotNull] string storageName, [NotNull] IConfigurationSection configurationSection)
         {
-            if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection?.Path}' is incorrect.");
             if (string.IsNullOrWhiteSpace(storageName)) throw new ArgumentException($"'{nameof(storageName)}' must not be null, empty or whitespace.", nameof(storageName));
 
@@ -83,14 +83,14 @@ namespace GiG.Core.Orleans.Storage.Npgsql.Extensions
                 throw new ConfigurationErrorsException($"Configuration section '{configurationSection.Path}' is not valid.");
             }
 
-            siloBuilder.AddAdoNetGrainStorage(storageName, x =>
+            builder.AddAdoNetGrainStorage(storageName, x =>
             {
                 x.ConnectionString = npgsqlOptions.ConnectionString;
                 x.Invariant = InvariantNamePostgreSQL;
                 x.UseJsonFormat = true;
             });
 
-            return siloBuilder;
+            return builder;
         }
     }
 }

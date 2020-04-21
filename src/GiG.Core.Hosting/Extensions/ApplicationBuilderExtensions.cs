@@ -8,22 +8,22 @@ using System;
 namespace GiG.Core.Hosting.Extensions
 {
     /// <summary>
-    /// Application Builder Extensions.
+    /// The <see cref="IApplicationBuilder" /> Extensions.
     /// </summary>
     public static class ApplicationBuilderExtensions
     {
         /// <summary>
         /// Map the Info Management Endpoint to the Application.
         /// </summary>
-        /// <param name="app">The <see cref="IApplicationBuilder"/>.</param>
+        /// <param name="builder">The <see cref="IApplicationBuilder"/>.</param>
         /// <returns>The <see cref="IApplicationBuilder"/>.</returns>
-        public static IApplicationBuilder UseInfoManagement([NotNull] this IApplicationBuilder app)
+        public static IApplicationBuilder UseInfoManagement([NotNull] this IApplicationBuilder builder)
         {
-            if (app == null) throw new ArgumentNullException(nameof(app));
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
 
-            var options = app.ApplicationServices.GetService<IOptions<InfoManagementOptions>>()?.Value ?? new InfoManagementOptions();
+            var options = builder.ApplicationServices.GetService<IOptions<InfoManagementOptions>>()?.Value ?? new InfoManagementOptions();
 
-            return app.Map(options.Url, appBuilder =>
+            return builder.Map(options.Url, appBuilder =>
             {                    
                 appBuilder.Run(InfoManagementWriter.WriteJsonResponseWriter);
             });

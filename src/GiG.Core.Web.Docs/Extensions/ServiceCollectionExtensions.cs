@@ -15,10 +15,10 @@ namespace GiG.Core.Web.Docs.Extensions
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Registers a configuration instance which <see cref="ApiDocsOptions" /> will bind against.
+        /// Configures Api Docs.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
-        /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/> which binds to <see cref="ApiDocsOptions"/>.</param>
         /// <param name="configureOptions">A delegate that is used to configure the <see cref="SwaggerGenOptions" />.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection ConfigureApiDocs([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection, Action<SwaggerGenOptions> configureOptions = null)
@@ -41,12 +41,12 @@ namespace GiG.Core.Web.Docs.Extensions
                     // reporting api versions will return the headers "api-supported-versions" and "api-deprecated-versions"
                     options.ReportApiVersions = true;
                 });
-            
+
                 services.AddVersionedApiExplorer(options =>
                 {
                     //The format of the version added to the route URL: "'v'major"
                     options.GroupNameFormat = "'v'V";
-            
+
                     //Tells swagger to replace the version in the controller route  
                     options.SubstituteApiVersionInUrl = true;
                 });
@@ -66,11 +66,11 @@ namespace GiG.Core.Web.Docs.Extensions
         }
 
         /// <summary>
-        /// Registers a configuration instance which <see cref="ApiDocsOptions" /> will bind against.
+        /// Configures Api Docs.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
-        /// <param name="configuration">The <see cref="IConfiguration" />.</param>
-        /// <param name="configureOptions">A delegate that is used to configure the <see cref="SwaggerGenOptions" />.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/> which binds to <see cref="ApiDocsOptions"/>.</param>
+        /// <param name="configureOptions">A delegate that is used to configure the <see cref="ApiDocsOptions" />.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection ConfigureApiDocs([NotNull] this IServiceCollection services, [NotNull] IConfiguration configuration, Action<SwaggerGenOptions> configureOptions = null)
         {

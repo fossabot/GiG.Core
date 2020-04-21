@@ -12,7 +12,7 @@ namespace GiG.Core.Web.Tests.Unit.Docs
         public void UseApiDocs_ApplicationBuilderIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => ApplicationBuilderExtensions.UseApiDocs(null));
-            Assert.Equal("app", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
         }
     }
 }

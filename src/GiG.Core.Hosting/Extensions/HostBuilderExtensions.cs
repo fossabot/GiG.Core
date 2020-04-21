@@ -9,7 +9,7 @@ using System.IO;
 namespace GiG.Core.Hosting.Extensions
 {
     /// <summary>
-    /// Host Builder Extensions.
+    /// The <see cref="IHostBuilder" /> Extensions.
     /// </summary>
     public static class HostBuilderExtensions
     {

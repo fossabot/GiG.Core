@@ -7,7 +7,7 @@ using System;
 namespace GiG.Core.HealthChecks.Orleans.Extensions
 {
     /// <summary>
-    /// Silo Builder Extensions.
+    /// The <see cref="ISiloBuilder" /> Extensions.
     /// </summary>
     public static class SiloBuilderExtensions
     {

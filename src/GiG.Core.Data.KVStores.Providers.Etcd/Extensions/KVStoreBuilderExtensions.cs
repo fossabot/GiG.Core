@@ -17,7 +17,7 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd.Extensions
         /// Registers an etcd KV Store.
         /// </summary>
         /// <param name="builder">The <see cref="IKVStoreBuilder{T}" /> to add the services to.</param>        
-        /// <param name="configuration">The <see cref="IConfiguration" /> which contains data to be consumed.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/> which binds to <see cref="EtcdProviderOptions"/>.</param>
         /// <param name="configurationSectionName">Configuration section name. </param>
         /// <typeparam name="T">Generic to define type of KVStoreBuilder. </typeparam>
         /// <returns>The <see cref="IKVStoreBuilder{T}" /> so that additional calls can be chained.</returns>
@@ -35,7 +35,7 @@ namespace GiG.Core.Data.KVStores.Providers.Etcd.Extensions
         /// Registers an etcd KV Store.
         /// </summary>
         /// <param name="builder">The <see cref="IKVStoreBuilder{T}" /> to add the services to.</param>        
-        /// <param name="configurationSection">The <see cref="IConfigurationSection" /> which contains data to be consumed.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/> which binds to <see cref="EtcdProviderOptions"/>.</param>
         /// <typeparam name="T">Generic to define type of KVStoreBuilder. </typeparam>
         /// <returns>The <see cref="IKVStoreBuilder{T}" /> so that additional calls can be chained.</returns>
         /// <exception cref="ArgumentNullException"></exception>

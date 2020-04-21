@@ -5,8 +5,8 @@ using System;
 
 namespace GiG.Core.Http.DistributedTracing.Extensions
 {
-    ///<summary>
-    /// Http Client Builder Extensions.
+    /// <summary>
+    /// The <see cref="IHttpClientBuilder" /> Extensions.
     /// </summary>
     public static class HttpClientBuilderExtensions
     {

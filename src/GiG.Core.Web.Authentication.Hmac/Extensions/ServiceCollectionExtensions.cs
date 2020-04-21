@@ -20,7 +20,7 @@ namespace GiG.Core.Web.Authentication.Hmac.Extensions
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Adds required services to support the <see cref="HmacAuthenticationHandler" /> functionality.
+        /// Adds Hmac Authentication.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
         /// <param name="schemeName">The scheme name.</param>
@@ -44,10 +44,10 @@ namespace GiG.Core.Web.Authentication.Hmac.Extensions
         }
 
         /// <summary>
-        /// Adds option provider for <see cref="HmacAuthenticationHandler" /> functionality.
+        /// Configures Default Hmac Option Provider.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>        
-        /// <param name="configurationSection">The <see cref="IConfigurationSection" />Configuration section for hmac settings.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/> which binds to <see cref="HmacOptions"/>.</param>
         /// <param name="schemeName">The scheme name.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection ConfigureDefaultHmacOptionProvider([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection, string schemeName = Constants.SecurityScheme)
@@ -63,10 +63,10 @@ namespace GiG.Core.Web.Authentication.Hmac.Extensions
         }
 
         /// <summary>
-        /// Adds option provider for <see cref="HmacAuthenticationHandler" /> functionality.
+        /// Configures Default Hmac Option Provider.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>        
-        /// <param name="configuration">The <see cref="IConfiguration" />Configuration for hmac settings.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/> which binds to <see cref="HmacOptions"/>.</param>
         /// <param name="schemeName">The scheme name.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection ConfigureDefaultHmacOptionProvider([NotNull] this IServiceCollection services, [NotNull] IConfiguration configuration, string schemeName = Constants.SecurityScheme)

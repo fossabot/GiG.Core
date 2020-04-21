@@ -7,21 +7,21 @@ using Orleans;
 namespace GiG.Core.Orleans.Silo.Dashboard.Extensions
 {
     /// <summary>
-    /// Application Builder Extensions for Orleans Dashboard.
+    /// The <see cref="IApplicationBuilder" /> Extensions.
     /// </summary>
     public static class ApplicationBuilderExtensions
     {
         /// <summary>
         /// Configures the Orleans Dashboard to start inside the web app host using the provided configuration.
         /// </summary>
-        /// <param name="applicationBuilder">The <see cref="IApplicationBuilder"/> on which to configure the dashboard.</param>
-        public static void UseDashboard(this IApplicationBuilder applicationBuilder)
+        /// <param name="builder">The <see cref="IApplicationBuilder" />.</param>
+        public static void UseDashboard(this IApplicationBuilder builder)
         {
-            var options = applicationBuilder.ApplicationServices.GetService<IOptions<DashboardOptions>>()?.Value ?? new DashboardOptions();
+            var options = builder.ApplicationServices.GetService<IOptions<DashboardOptions>>()?.Value ?? new DashboardOptions();
             
             if (options.IsEnabled)
             {
-                applicationBuilder.UseOrleansDashboard(new OrleansDashboard.DashboardOptions
+                builder.UseOrleansDashboard(new OrleansDashboard.DashboardOptions
                 {
                     HostSelf = options.HostSelf,
                     Port = options.Port,

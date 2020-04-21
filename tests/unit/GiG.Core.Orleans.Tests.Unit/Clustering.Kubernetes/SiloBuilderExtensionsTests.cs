@@ -14,10 +14,10 @@ namespace GiG.Core.Orleans.Tests.Unit.Clustering.Kubernetes
         public void ConfigureConsulClustering_SiloBuilderIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.ConfigureKubernetesClustering(null, configuration: null));
-            Assert.Equal("siloBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
 
             exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.ConfigureKubernetesClustering(null, null));
-            Assert.Equal("siloBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]

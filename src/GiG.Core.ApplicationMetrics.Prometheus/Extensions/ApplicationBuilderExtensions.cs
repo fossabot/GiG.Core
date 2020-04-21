@@ -6,7 +6,7 @@ using System;
 namespace GiG.Core.ApplicationMetrics.Prometheus.Extensions
 {
     /// <summary>
-    /// Application Builder Extensions.
+    /// The <see cref="IApplicationBuilder" /> Extensions.
     /// </summary>
     public static class ApplicationBuilderExtensions
     {

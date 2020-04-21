@@ -13,10 +13,10 @@ namespace GiG.Core.HealthChecks.Extensions
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Registers a configuration instance which <see cref="HealthCheckOptions" /> will bind against.
+        /// Configures the Orleans Health Checks.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
-        /// <param name="configuration">The <see cref="IConfiguration" />.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/> which binds to <see cref="HealthCheckOptions"/>.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection ConfigureHealthChecks([NotNull] this IServiceCollection services, [NotNull] IConfiguration configuration)
         {
@@ -27,10 +27,10 @@ namespace GiG.Core.HealthChecks.Extensions
         }
 
         /// <summary>
-        /// Registers a configuration instance which <see cref="HealthCheckOptions" /> will bind against.
+        /// Configures the Orleans Health Checks.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
-        /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/> which binds to <see cref="HealthCheckOptions"/>.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection ConfigureHealthChecks([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection)
         {

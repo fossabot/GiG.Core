@@ -12,27 +12,27 @@ using System.Text;
 namespace GiG.Core.Web.Docs.Extensions
 {
     /// <summary>
-    /// Application Builder Extensions.
+    /// The <see cref="IApplicationBuilder" /> Extensions.
     /// </summary>
     public static class ApplicationBuilderExtensions
     {
         /// <summary>
         /// Adds Documentation to API.
         /// </summary>
-        /// <param name="app">The <see cref="IApplicationBuilder" />.</param>
+        /// <param name="builder">The <see cref="IApplicationBuilder" />.</param>
         /// <param name="configureOptions">A delegate that is used to configure the <see cref="SwaggerUIOptions" />.</param>
         /// <returns>The <see cref="IApplicationBuilder" />.</returns>
-        public static IApplicationBuilder UseApiDocs([NotNull] this IApplicationBuilder app,
+        public static IApplicationBuilder UseApiDocs([NotNull] this IApplicationBuilder builder,
             Action<SwaggerUIOptions> configureOptions = null)
         {
-            if (app == null) throw new ArgumentNullException(nameof(app));
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
 
-            var options = app.ApplicationServices.GetService<IOptions<ApiDocsOptions>>()?.Value;
+            var options = builder.ApplicationServices.GetService<IOptions<ApiDocsOptions>>()?.Value;
             if (options == null) throw new ConfigurationErrorsException("ConfigureApiDocs need to be registered");
 
             if (!options.IsEnabled)
             {
-                return app;
+                return builder;
             }
 
             if (string.IsNullOrEmpty(options.Url))
@@ -52,12 +52,12 @@ namespace GiG.Core.Web.Docs.Extensions
                 endpointPrefix.Append("../");
             }
 
-            return app
+            return builder
                 .UseSwagger()
                 .UseSwaggerUI(c =>
                 {
                     c.AddSwaggerEndpoint(endpointPrefix.ToString(),
-                        app.ApplicationServices.GetService<IApiVersionDescriptionProvider>());
+                        builder.ApplicationServices.GetService<IApiVersionDescriptionProvider>());
                     c.ShowExtensions();
                     c.RoutePrefix = options.Url;
                     c.DisplayRequestDuration();

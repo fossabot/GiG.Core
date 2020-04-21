@@ -14,10 +14,10 @@ namespace GiG.Core.Web.Authentication.OAuth.Extensions
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Registers a configuration instance which <see cref="OAuthAuthenticationOptions" /> will bind against.
+        /// Configures OAuth Authentication.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
-        /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/> which binds to <see cref="OAuthAuthenticationOptions"/>.</param>
         /// <param name="schemeName">The scheme name.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection ConfigureOAuthAuthentication([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection, string schemeName = Constants.SecurityScheme)
@@ -38,10 +38,10 @@ namespace GiG.Core.Web.Authentication.OAuth.Extensions
         }
 
         /// <summary>
-        /// Registers a configuration instance which <see cref="OAuthAuthenticationOptions" /> will bind against.
+        /// Configures OAuth Authentication.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
-        /// <param name="configuration">The <see cref="IConfiguration" />.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/> which binds to <see cref="OAuthAuthenticationOptions"/>.</param>
         /// <param name="schemeName">The scheme name.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection ConfigureOAuthAuthentication([NotNull] this IServiceCollection services, [NotNull] IConfiguration configuration, string schemeName = Constants.SecurityScheme)
@@ -54,7 +54,7 @@ namespace GiG.Core.Web.Authentication.OAuth.Extensions
         }
 
         /// <summary>
-        /// Registers a configuration instance which <see cref="OAuthAuthenticationOptions" /> will bind against.
+        /// Adds OAuth Authentication.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
         /// <param name="options">The <see cref="OAuthAuthenticationOptions" />.</param>

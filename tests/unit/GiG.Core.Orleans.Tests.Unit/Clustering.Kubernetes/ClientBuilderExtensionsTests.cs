@@ -15,10 +15,10 @@ namespace GiG.Core.Orleans.Tests.Unit.Clustering.Kubernetes
         public void ConfigureKubernetesClustering_ClientBuilderIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => ClientBuilderExtensions.ConfigureKubernetesClustering(null, configuration: null));
-            Assert.Equal("clientBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
 
             exception = Assert.Throws<ArgumentNullException>(() => ClientBuilderExtensions.ConfigureKubernetesClustering(null, null));
-            Assert.Equal("clientBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]
