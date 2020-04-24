@@ -8,7 +8,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Mocks
     {
         public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {
-            return Task.FromResult(HealthCheckResult.Unhealthy());
+            return Task.FromResult(HealthCheckResult.Unhealthy("Unhealthy Description"));
         }
     }
 }
