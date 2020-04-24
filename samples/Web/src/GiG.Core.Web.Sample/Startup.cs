@@ -1,4 +1,3 @@
-using GiG.Core.HealthChecks.Abstractions;
 using GiG.Core.HealthChecks.AspNetCore.Extensions;
 using GiG.Core.HealthChecks.Extensions;
 using GiG.Core.Logging.AspNetCore.Extensions;
