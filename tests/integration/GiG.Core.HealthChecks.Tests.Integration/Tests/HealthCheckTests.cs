@@ -40,6 +40,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             // Assert
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal("{\"status\":\"Healthy\"}", await response.Content.ReadAsStringAsync());
         }
 
         [Fact]
@@ -60,6 +61,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             // Assert
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal("{\"status\":\"Healthy\"}", await response.Content.ReadAsStringAsync());
         }
 
         [Fact]
@@ -80,6 +82,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             // Assert
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal("{\"status\":\"Healthy\"}", await response.Content.ReadAsStringAsync());
         }
 
         [Fact]
@@ -100,6 +103,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             // Assert
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal("{\"status\":\"Healthy\"}", await response.Content.ReadAsStringAsync());
         }
 
         [Fact]
@@ -120,6 +124,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             // Assert
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal("{\"status\":\"Healthy\"}", await response.Content.ReadAsStringAsync());
         }
 
         [Fact]
@@ -140,6 +145,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             // Assert
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal("{\"status\":\"Healthy\"}", await response.Content.ReadAsStringAsync());
         }
 
         [Fact]
@@ -161,6 +167,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             // Assert
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.ServiceUnavailable, response.StatusCode);
+            Assert.Equal("{\"status\":\"Unhealthy\",\"details\":{\"UnHealthyCheck\":{\"status\":\"Unhealthy\",\"details\":\"Unhealthy Description\"}}}", await response.Content.ReadAsStringAsync());
         }
 
         [Fact]
@@ -182,29 +189,30 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             // Assert
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.ServiceUnavailable, response.StatusCode);
+            Assert.Equal("{\"status\":\"Unhealthy\",\"details\":{\"UnHealthyCheck\":{\"status\":\"Unhealthy\",\"details\":\"Unhealthy Description\"}}}", await response.Content.ReadAsStringAsync());
         }
 
         [Fact]
         public async Task ReadyHealthCheck_WithLogging_ReturnsUnHealthyStatus()
         {
             // Act
-            var logEvent = await ReadyHealthCheckWithLoggingAsync<UnHealthyCheck>();
+            var (logEvent, httpResponseMessage) = await ReadyHealthCheckWithLoggingAsync<UnHealthyCheck>();
 
             // Assert
             Assert.NotNull(logEvent);
-            Assert.Equal("Health check \"UnHealthyCheck\" was Unhealthy threw an exception null", logEvent.MessageTemplate.Render(logEvent.Properties));
+            Assert.Equal("{\"status\":\"Unhealthy\",\"details\":{\"UnHealthyCheck\":{\"status\":\"Unhealthy\",\"details\":\"Unhealthy Description\"}}}", await httpResponseMessage.Content.ReadAsStringAsync());
         }
         
         [Fact]
         public async Task ReadyHealthCheck_WithLoggingAndException_ReturnsUnHealthyStatus()
         {
             // Act
-            var logEvent = await ReadyHealthCheckWithLoggingAsync<UnHealthyCheckWithException>();
+            var (logEvent, httpResponseMessage) = await ReadyHealthCheckWithLoggingAsync<UnHealthyCheckWithException>();
 
             // Assert
             Assert.NotNull(logEvent);
             Assert.NotNull(logEvent.Exception);
-            Assert.Equal("Health check \"UnHealthyCheckWithException\" was Unhealthy threw an exception \"Test Exception\"", logEvent.MessageTemplate.Render(logEvent.Properties));
+            Assert.Equal("{\"status\":\"Unhealthy\",\"details\":{\"UnHealthyCheckWithException\":{\"status\":\"Unhealthy\",\"details\":null,\"exception\":\"Test Exception\"}}}", await httpResponseMessage.Content.ReadAsStringAsync());
         }
 
         [Fact]
@@ -226,6 +234,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             // Assert
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.ServiceUnavailable, response.StatusCode);
+            Assert.Equal("{\"status\":\"Unhealthy\",\"details\":{\"UnHealthyCheck\":{\"status\":\"Unhealthy\",\"details\":\"Unhealthy Description\"}}}", await response.Content.ReadAsStringAsync());
         }
 
         [Fact]
@@ -247,6 +256,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             // Assert
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.ServiceUnavailable, response.StatusCode);
+            Assert.Equal("{\"status\":\"Unhealthy\",\"details\":{\"UnHealthyCheck\":{\"status\":\"Unhealthy\",\"details\":\"Unhealthy Description\"}}}", await response.Content.ReadAsStringAsync());
         }
 
         [Fact]
@@ -268,6 +278,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             // Assert
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.ServiceUnavailable, response.StatusCode);
+            Assert.Equal("{\"status\":\"Unhealthy\",\"details\":{\"UnHealthyCheckWithName\":{\"status\":\"Unhealthy\",\"details\":\"Unhealthy Description\"}}}", await response.Content.ReadAsStringAsync());
         }
 
         [Fact]
@@ -289,6 +300,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             // Assert
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.ServiceUnavailable, response.StatusCode);
+            Assert.Equal("{\"status\":\"Unhealthy\",\"details\":{\"UnHealthyCheck\":{\"status\":\"Unhealthy\",\"details\":\"Unhealthy Description\"}}}", await response.Content.ReadAsStringAsync());
         }
 
         [Fact]
@@ -315,6 +327,8 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             Assert.NotNull(response2);
             Assert.Equal(HttpStatusCode.ServiceUnavailable, response.StatusCode);
             Assert.Equal(HttpStatusCode.ServiceUnavailable, response2.StatusCode);
+            Assert.Equal("{\"status\":\"Unhealthy\",\"details\":{\"UnHealthyCheck\":{\"status\":\"Unhealthy\",\"details\":\"Unhealthy Description\"}}}", await response.Content.ReadAsStringAsync());
+            Assert.Equal(await response.Content.ReadAsStringAsync(), await response2.Content.ReadAsStringAsync());
         }
 
         [Fact]
@@ -341,6 +355,8 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             Assert.NotNull(response2);
             Assert.Equal(HttpStatusCode.ServiceUnavailable, response.StatusCode);
             Assert.Equal(HttpStatusCode.ServiceUnavailable, response2.StatusCode);
+            Assert.Equal("{\"status\":\"Unhealthy\",\"details\":{\"UnHealthyCheck\":{\"status\":\"Unhealthy\",\"details\":\"Unhealthy Description\"}}}", await response.Content.ReadAsStringAsync());
+            Assert.Equal(await response.Content.ReadAsStringAsync(), await response2.Content.ReadAsStringAsync());
         }
 
         [Fact]
@@ -368,6 +384,8 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             Assert.NotNull(response2);
             Assert.Equal(HttpStatusCode.ServiceUnavailable, response.StatusCode);
             Assert.Equal(HttpStatusCode.ServiceUnavailable, response2.StatusCode);
+            Assert.Equal("{\"status\":\"Unhealthy\",\"details\":{\"UnHealthyCheck\":{\"status\":\"Unhealthy\",\"details\":\"Unhealthy Description\"}}}", await response.Content.ReadAsStringAsync());
+            Assert.Equal(await response.Content.ReadAsStringAsync(), await response.Content.ReadAsStringAsync());
         }
 
         [Fact]
@@ -385,7 +403,7 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             await Assert.ThrowsAsync<ApplicationException>(() => server.CreateClient().SendAsync(request));
         }
         
-        private static async Task<LogEvent> ReadyHealthCheckWithLoggingAsync<T>() where T : class, IHealthCheck
+        private static async Task<(LogEvent, HttpResponseMessage)> ReadyHealthCheckWithLoggingAsync<T>() where T : class, IHealthCheck
         {
             // Arrange
             var semaphore = new SemaphoreSlim(0, 1);
@@ -416,14 +434,14 @@ namespace GiG.Core.HealthChecks.Tests.Integration.Tests
             using var request = new HttpRequestMessage(HttpMethod.Get, MockStartupWithDefaultConfiguration.ReadyUrl);
 
             // Act
-            using var response = await client.SendAsync(request);
+            var response = await client.SendAsync(request);
             await semaphore.WaitAsync(5000);
 
             // Assert
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.ServiceUnavailable, response.StatusCode);
 
-            return logEvent;
+            return (logEvent, response);
         }
     }
 }

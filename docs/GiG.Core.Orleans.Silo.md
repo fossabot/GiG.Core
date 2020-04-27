@@ -36,10 +36,19 @@ The below table outlines the valid Configurations used to override the [Endpoint
 
 The below table outlines the valid Configurations used to override the [ClusterOptions](https://github.com/dotnet/orleans/blob/master/src/Orleans.Core/Configuration/Options/ClusterOptions.cs) under the Config section `Orleans:Cluster`.
 
-| Configuration Name | Type   | Required | Default Value |
-|:-------------------|:-------|:---------|:--------------|
-| ClusterId          | String | No       | `dev`         |
-| ServiceId          | String | No       | `dev`         |
+| Configuration Name       | Type     | Required | Default Value |
+|:-------------------------|:---------|:---------|:--------------|
+| ClusterId                | String   | No       | `dev`         |
+| ServiceId                | String   | No       | `dev`         |
+
+#### Cluster Membership
+
+The below table outlines the valid Configurations used to override the [ClusterMembershipOptions](../src/GiG.Core.Orleans.Clustering.Abstractions/ClusterMembershipOptions.cs) under the Config section `Orleans:Cluster`.
+
+| Configuration Name       | Type     | Required | Default Value |
+|:-------------------------|:---------|:---------|:--------------|
+| DefunctSiloExpiration    | Timespan | No       | 3 days        |
+| DefunctSiloCleanupPeriod | Timespan | No       | 3 days        |
 
 #### Sample Configuration
 
