@@ -74,8 +74,11 @@ namespace GiG.Core.Orleans.Silo.Extensions
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection?.Path}' is incorrect.");
 
+            var options = configurationSection.Get<Clustering.Abstractions.ClusterMembershipOptions>();
+
             builder.Configure<ClusterOptions>(configurationSection);
-            siloBuilder.Configure<ClusterMembershipOptions>(x =>
+
+            builder.Configure<ClusterMembershipOptions>(x =>
             {
                 x.DefunctSiloExpiration = options.DefunctSiloExpiration;
                 x.DefunctSiloCleanupPeriod = options.DefunctSiloCleanupPeriod;
