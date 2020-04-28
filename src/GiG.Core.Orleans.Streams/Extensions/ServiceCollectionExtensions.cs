@@ -14,10 +14,10 @@ namespace GiG.Core.Orleans.Streams.Extensions
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Configure the Stream Options from configuration.
+        /// Configures the Stream.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection"/>.</param>
-        /// <param name="configuration">The <see cref="IConfiguration"/>.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/> which binds to <see cref="StreamOptions"/>.</param>
         /// <returns>The <see cref="IServiceCollection"/>.</returns>
         public static IServiceCollection ConfigureStream([NotNull] this IServiceCollection services, [NotNull] IConfiguration configuration)
         {
@@ -28,12 +28,12 @@ namespace GiG.Core.Orleans.Streams.Extensions
 
             return services;
         }
-        
+
         /// <summary>
-        /// Configure the Stream Options from configuration.
+        /// Configures the Stream.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection"/>.</param>
-        /// <param name="configurationSection">The <see cref="IConfigurationSection"/>.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/> which binds to <see cref="StreamOptions"/>.</param>
         /// <returns>The <see cref="IServiceCollection"/>.</returns>
         public static IServiceCollection ConfigureStream([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection)
         {
@@ -52,7 +52,7 @@ namespace GiG.Core.Orleans.Streams.Extensions
         }
         
         /// <summary>
-        /// Creates and registers a new <see cref="IStreamFactory"/>.
+        /// Adds Stream.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection"/>.</param>
         /// <returns>The <see cref="IServiceCollection"/>.</returns>
@@ -65,9 +65,9 @@ namespace GiG.Core.Orleans.Streams.Extensions
 
             return services;
         }
-        
+
         /// <summary>
-        /// Creates and registers a new <see cref="ICommandDispatcherFactory{TCommand, TSuccess, TFailure}"/>.
+        /// Adds the Command Dispatcher.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection"/>.</param>
         /// <returns>The <see cref="IServiceCollection"/>.</returns>
@@ -81,7 +81,7 @@ namespace GiG.Core.Orleans.Streams.Extensions
         }
 
         /// <summary>
-        /// Creates and registers the <see cref="IStreamIdProvider"/>.
+        /// Adds the Stream Id Provider.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection"/>.</param>
         /// <returns>The <see cref="IServiceCollection"/>.</returns>

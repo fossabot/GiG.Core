@@ -10,7 +10,7 @@ using System.Configuration;
 namespace GiG.Core.Logging.Extensions
 {
     /// <summary>
-    /// Host Builder Extensions.
+    /// The <see cref="IHostBuilder" /> Extensions.
     /// </summary>
     public static class HostBuilderExtensions
     {

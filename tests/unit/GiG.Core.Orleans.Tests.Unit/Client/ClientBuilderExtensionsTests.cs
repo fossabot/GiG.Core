@@ -17,20 +17,20 @@ namespace GiG.Core.Orleans.Tests.Unit.Client
         public void BuildAndConnect_ClientBuilderIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => ClientBuilderExtensions.BuildAndConnect(null));
-            Assert.Equal("clientBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]
         public void ConfigureCluster_ClientBuilderIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => ClientBuilderExtensions.ConfigureCluster(null, null));
-            Assert.Equal("clientBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
 
             exception = Assert.Throws<ArgumentNullException>(() => ClientBuilderExtensions.ConfigureCluster(null, configuration: null));
-            Assert.Equal("clientBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
 
             exception = Assert.Throws<ArgumentNullException>(() => ClientBuilderExtensions.ConfigureCluster(null, "", null));
-            Assert.Equal("clientBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]
@@ -61,14 +61,14 @@ namespace GiG.Core.Orleans.Tests.Unit.Client
         public void ConfigureAssemblies_ClientBuilderIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => ClientBuilderExtensions.ConfigureAssemblies(null, null));
-            Assert.Equal("clientBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]
         public void AddAssemblies_ClientBuilderIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => ClientBuilderExtensions.AddAssemblies(null, null));
-            Assert.Equal("clientBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]

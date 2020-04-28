@@ -12,7 +12,7 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry.Tests.Unit.Tests
         public void ConfigureTracing_TracerBuilderIsNull_ThrowsArgumentNullException()
         {
             // Act
-            var exception = Assert.Throws<ArgumentNullException>(() => TracerBuilderExtensions.ConfigureTracing(null, null, null, null));
+            var exception = Assert.Throws<ArgumentNullException>(() => TracerBuilderExtensions.ConfigureTracing(null, null, null));
             
             // Assert
             Assert.Equal("tracerBuilder", exception.ParamName);

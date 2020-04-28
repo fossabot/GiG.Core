@@ -12,11 +12,31 @@ namespace GiG.Core.Http.Extensions
     public static class HttpClientExtensions
     {
         /// <summary>
-        /// Use HttpClientOptions from configuration section.
+        /// Uses Http Client from configuration.
+        /// </summary>
+        /// <param name="client">The <see cref="HttpClient"/>.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/> which binds to <see cref="HttpClientOptions"/>.</param>
+        /// <param name="sectionName">Section Name for HttpClient Provider.</param>
+        /// <returns>An <see cref="HttpClient"/> configured with predefined actions.</returns>
+        public static HttpClient FromConfiguration([NotNull] this HttpClient client, [NotNull] IConfiguration configuration, string sectionName)
+        {
+            if (client == null) throw new ArgumentNullException(nameof(client));
+            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+            if (string.IsNullOrWhiteSpace(sectionName)) throw new ArgumentException($"'{nameof(sectionName)}' must not be null, empty or whitespace.", nameof(sectionName));
+
+            var defaultClientOptions =
+                configuration.GetSection(DefaultClientOptions.DefaultSectionName).Get<DefaultClientOptions>() ??
+                new DefaultClientOptions();
+
+            return client.FromConfiguration(defaultClientOptions.BaseUrl, configuration.GetSection(sectionName));
+        }
+
+        /// <summary>
+        /// Uses Http Client from configuration.
         /// </summary>
         /// <param name="client">The <see cref="HttpClient"/>.</param>
         /// <param name="baseUri">Base Url of default HTTP client.</param>
-        /// <param name="configurationSection">The <see cref="IConfigurationSection"/>.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/> which binds to <see cref="HttpClientOptions"/>.</param>
         /// <returns>An <see cref="HttpClient"/> configured with predefined actions.</returns>
         /// <exception cref="ArgumentNullException">.</exception>
         /// <exception cref="ConfigurationErrorsException">.</exception>
@@ -38,26 +58,6 @@ namespace GiG.Core.Http.Extensions
             client.BaseAddress = options.BaseAddress;
 
             return client;
-        }
-
-        /// <summary>
-        /// Use HttpClientOptions from configuration.
-        /// </summary>
-        /// <param name="client">The <see cref="HttpClient"/>.</param>
-        /// <param name="configuration">The <see cref="IConfiguration"/>.</param>
-        /// <param name="sectionName">Section Name for HttpClient Provider.</param>
-        /// <returns>An <see cref="HttpClient"/> configured with predefined actions.</returns>
-        public static HttpClient FromConfiguration([NotNull] this HttpClient client, [NotNull] IConfiguration configuration, string sectionName)
-        {
-            if (client == null) throw new ArgumentNullException(nameof(client));
-            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-            if (string.IsNullOrWhiteSpace(sectionName)) throw new ArgumentException($"'{nameof(sectionName)}' must not be null, empty or whitespace.", nameof(sectionName));
-
-            var defaultClientOptions =
-                configuration.GetSection(DefaultClientOptions.DefaultSectionName).Get<DefaultClientOptions>() ??
-                new DefaultClientOptions();
-
-            return client.FromConfiguration(defaultClientOptions.BaseUrl, configuration.GetSection(sectionName));
         }
     }
 }

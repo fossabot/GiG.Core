@@ -9,39 +9,39 @@ using System.Configuration;
 namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
 {
     /// <summary>
-    /// Silo Builder Extensions.
+    /// The <see cref="ISiloBuilder" /> Extensions.
     /// </summary>
     public static class SiloBuilderExtensions
     {
         /// <summary>
-        /// Registers a configuration instance which <see cref="KubernetesOptions" /> will bind against.
-        /// </summary>
-        /// <param name="siloBuilder">The Orleans <see cref="ISiloBuilder"/>.</param>
-        /// <param name="configuration">The <see cref="IConfiguration" />.</param>
+        /// Configures Kubernetes Clustering.
+        /// /// </summary>
+        /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/> which binds to <see cref="KubernetesOptions"/>.</param>
         /// <returns>The <see cref="ISiloBuilder"/>.</returns>
-        public static ISiloBuilder ConfigureKubernetesClustering([NotNull] this ISiloBuilder siloBuilder, [NotNull] IConfiguration configuration)
+        public static ISiloBuilder ConfigureKubernetesClustering([NotNull] this ISiloBuilder builder, [NotNull] IConfiguration configuration)
         {
-            if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            return siloBuilder.ConfigureKubernetesClustering(configuration.GetSection(KubernetesOptions.DefaultSectionName));
+            return builder.ConfigureKubernetesClustering(configuration.GetSection(KubernetesOptions.DefaultSectionName));
         }
 
         /// <summary>
-        /// Registers a configuration instance which <see cref="KubernetesOptions" /> will bind against.
+        /// Configures Kubernetes Clustering.
         /// </summary>
-        /// <param name="siloBuilder">The Orleans <see cref="ISiloBuilder"/>.</param>
-        /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
+        /// <param name="builder">The Orleans <see cref="ISiloBuilder"/>.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/> which binds to <see cref="KubernetesOptions"/>.</param>
         /// <returns>The <see cref="ISiloBuilder"/>.</returns>
-        public static ISiloBuilder ConfigureKubernetesClustering([NotNull] this ISiloBuilder siloBuilder, [NotNull] IConfigurationSection configurationSection)
+        public static ISiloBuilder ConfigureKubernetesClustering([NotNull] this ISiloBuilder builder, [NotNull] IConfigurationSection configurationSection)
         {
-            if (siloBuilder == null) throw new ArgumentNullException(nameof(siloBuilder));
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection?.Path}' is incorrect.");
 
             var kubernetesOptions = configurationSection.Get<KubernetesSiloOptions>() ?? new KubernetesSiloOptions();
 
             return
-                  siloBuilder.UseKubeMembership(options =>
+                  builder.UseKubeMembership(options =>
                   {
                       options.Group = kubernetesOptions.Group;
                       options.CertificateData = kubernetesOptions.CertificateData;

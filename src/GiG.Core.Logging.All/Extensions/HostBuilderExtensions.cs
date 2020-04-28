@@ -14,7 +14,7 @@ using System;
 namespace GiG.Core.Logging.All.Extensions
 {
     /// <summary>
-    /// Host Builder Extensions.
+    /// The <see cref="IHostBuilder" /> Extensions.
     /// </summary>
     public static class HostBuilderExtensions
     {

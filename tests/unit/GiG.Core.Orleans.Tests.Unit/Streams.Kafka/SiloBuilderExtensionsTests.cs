@@ -16,7 +16,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Streams.Kafka
             var exception =
                 Assert.Throws<ArgumentNullException>(() =>
                     SiloBuilderExtensions.AddKafkaStreamProvider(null, null, null));
-            Assert.Equal("siloBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]

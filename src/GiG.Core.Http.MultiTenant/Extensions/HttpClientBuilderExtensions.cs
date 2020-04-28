@@ -5,8 +5,8 @@ using System;
 
 namespace GiG.Core.Http.MultiTenant.Extensions
 {
-    ///<summary>
-    /// Http Client Builder Extensions.
+    /// <summary>
+    /// The <see cref="IHttpClientBuilder" /> Extensions.
     /// </summary>
     public static class HttpClientBuilderExtensions
     {
@@ -15,8 +15,7 @@ namespace GiG.Core.Http.MultiTenant.Extensions
         /// </summary>
         /// <param name="httpClientBuilder">The <see cref="IHttpClientBuilder"/>.</param>
         /// <returns>The <see cref="IHttpClientBuilder"/>.</returns>
-        public static IHttpClientBuilder AddTenantDelegatingHandler(
-            [NotNull] this IHttpClientBuilder httpClientBuilder)
+        public static IHttpClientBuilder AddTenantDelegatingHandler([NotNull] this IHttpClientBuilder httpClientBuilder)
         {
             if (httpClientBuilder == null) throw new ArgumentNullException(nameof(httpClientBuilder));
 

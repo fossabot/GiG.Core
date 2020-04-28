@@ -18,21 +18,19 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry.Extensions
         /// </summary>
         /// <param name="tracerBuilder">The <see cref="TracerBuilder"/>.</param>
         /// <param name="tracingConfigurationBuilder">A delegate that is used to configure the <see cref="TracingConfigurationBuilder" />.</param>
-        /// <param name="configuration">The <see cref="IConfiguration"/>.</param>
-        /// <param name="configurationSectionName">The Configuration section name.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/> which binds to <see cref="TracingOptions"/>.</param>
         /// <returns>The <see cref="TracerBuilder"/>.</returns>
-        public static TracerBuilder ConfigureTracing([NotNull] this TracerBuilder tracerBuilder, Action<TracingConfigurationBuilder> tracingConfigurationBuilder, IConfiguration configuration,
-            string configurationSectionName = TracingOptions.DefaultSectionName)
+        public static TracerBuilder ConfigureTracing(
+            [NotNull] this TracerBuilder tracerBuilder, 
+            Action<TracingConfigurationBuilder> tracingConfigurationBuilder, 
+            IConfigurationSection configurationSection)
         {
             if (tracerBuilder == null) throw new ArgumentNullException(nameof(tracerBuilder));
             if (tracingConfigurationBuilder == null) throw new ArgumentNullException(nameof(tracingConfigurationBuilder));
-            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-
-            if (string.IsNullOrWhiteSpace(configurationSectionName)) throw new ArgumentException($"'{nameof(configurationSectionName)}' must not be null, empty or whitespace.", nameof(configurationSectionName));
-
-            var configurationSection = configuration.GetSection(configurationSectionName);
+            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
 
             var tracingOptions = configurationSection.Get<TracingOptions>();
+            
             if (tracingOptions?.IsEnabled != true)
             {
                 return tracerBuilder;

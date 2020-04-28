@@ -30,8 +30,10 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry
         /// </summary>
         /// <param name="tracerBuilder">The <see cref="TracerBuilder"/>.</param>
         /// <param name="exporters"> A <see cref="IDictionary{String, BasicExporterOptions}" /> of exporters.</param>
-        /// <param name="configuration">The <see cref="IConfiguration"/>.</param>
-        public TracingConfigurationBuilder([NotNull] TracerBuilder tracerBuilder, [NotNull] IDictionary<string, BasicExporterOptions> exporters,
+        /// <param name="configuration">The <see cref="IConfiguration"/> which binds to <see cref="TracingOptions"/>.</param>
+        public TracingConfigurationBuilder(
+            [NotNull] TracerBuilder tracerBuilder, 
+            [NotNull] IDictionary<string, BasicExporterOptions> exporters,
             [NotNull] IConfiguration configuration)
         {
             _exporters = exporters ?? throw new ArgumentNullException(nameof(exporters));
@@ -44,7 +46,9 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry
         /// </summary>
         /// <param name="name">The Tracing Exporter name.</param>
         /// <param name="tracingExporter">The <see cref="ITracingExporter"/>.</param>
-        public TracingConfigurationBuilder RegisterExporter([NotNull] string name, [NotNull] ITracingExporter tracingExporter)
+        public TracingConfigurationBuilder RegisterExporter(
+            [NotNull] string name, 
+            [NotNull] ITracingExporter tracingExporter)
         {
             if (string.IsNullOrEmpty(name)) throw new ArgumentException($"'{nameof(name)}' must not be null, empty or whitespace.", nameof(name));
             if (tracingExporter == null) throw new ArgumentNullException(nameof(tracingExporter));

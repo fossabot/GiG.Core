@@ -18,10 +18,10 @@ namespace GiG.Core.Web.Authentication.Hmac.MultiTenant.Extensions
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Adds multi-tenant option provider for HmacAuthenticationHandler functionality.
+        /// Configures Multi-Tenant Hmac Option Provider.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
-        /// <param name="configurationSection">The <see cref="IConfigurationSection" /> for Hmac MultiTenant configuration.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/> which binds to <see cref="HmacOptions"/>.</param>
         /// <param name="schemeName">The scheme name.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection ConfigureMultiTenantHmacOptionProvider([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection, string schemeName = Constants.SecurityScheme)
@@ -38,10 +38,10 @@ namespace GiG.Core.Web.Authentication.Hmac.MultiTenant.Extensions
         }
 
         /// <summary>
-        /// Adds multi-tenant option provider for HmacAuthenticationHandler functionality.
+        /// Configures Multi-Tenant Hmac Option Provider.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
-        /// <param name="configuration">The <see cref="IConfiguration" />.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/> which binds to <see cref="HmacOptions"/>.</param>
         /// <param name="schemeName">The scheme name.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection ConfigureMultiTenantHmacOptionProvider([NotNull] this IServiceCollection services, [NotNull] IConfiguration configuration, string schemeName = Constants.SecurityScheme)

@@ -12,24 +12,24 @@ using System.Linq;
 namespace GiG.Core.Http.Authentication.Hmac.Extensions
 {
     /// <summary>
-    /// <see cref="IServiceCollection"/> for <see cref="HmacDelegatingHandler"/>.
+    /// The <see cref="IHttpClientBuilder" /> Extensions.
     /// </summary>
     public static class HttpClientBuilderExtensions
     {
         /// <summary>
         /// Adds required services to support the <see cref="HmacDelegatingHandler" /> functionality.
         /// </summary>
-        /// <param name="httpClientBuilder">The <see cref="IHttpClientBuilder" />.</param>        
+        /// <param name="builder">The <see cref="IHttpClientBuilder" />.</param>        
         /// <returns>The <see cref="IHttpClientBuilder" />.</returns>
-        public static IHttpClientBuilder AddHmacDelegatingHandler([NotNull]this IHttpClientBuilder httpClientBuilder)
+        public static IHttpClientBuilder AddHmacDelegatingHandler([NotNull]this IHttpClientBuilder builder)
         {
-            if (httpClientBuilder == null) throw new ArgumentNullException(nameof(httpClientBuilder));
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
 
-            var services = httpClientBuilder.Services;
-            httpClientBuilder.AddHttpMessageHandler(x=>
+            var services = builder.Services;
+            builder.AddHttpMessageHandler(x=>
             {
                 var optionsAccessor = x.GetRequiredService<IOptionsSnapshot<HmacOptions>>();
-                var options = optionsAccessor.Get(httpClientBuilder.Name);
+                var options = optionsAccessor.Get(builder.Name);
                 return new HmacDelegatingHandler(
                     Options.Create(options),
                     x.GetRequiredService<IHashProviderFactory>(),
@@ -42,40 +42,39 @@ namespace GiG.Core.Http.Authentication.Hmac.Extensions
             services.TryAddSingleton<Func<string, IHashProvider>>(x =>
                 hash => x.GetServices<IHashProvider>().FirstOrDefault(sp => sp.Name.Equals(hash)));
             
-            return httpClientBuilder;
+            return builder;
         }
 
         /// <summary>
         /// Adds option provider for <see cref="HmacDelegatingHandler" /> functionality.
         /// </summary>
-        /// <param name="httpClientBuilder">The <see cref="IHttpClientBuilder" />.</param>        
-        /// <param name="configurationSection">The <see cref="IConfigurationSection" />Configuration section for hmac settings.</param>        
+        /// <param name="builder">The <see cref="IHttpClientBuilder" />.</param>        
+        /// <param name="configuration">The <see cref="IConfiguration"/> which binds to <see cref="HmacOptions"/>.</param>
         /// <returns>The <see cref="IHttpClientBuilder" />.</returns>
-        public static IHttpClientBuilder ConfigureDefaultHmacDelegatingHandlerOptionProvider([NotNull]this IHttpClientBuilder httpClientBuilder, [NotNull]IConfigurationSection configurationSection)
+        public static IHttpClientBuilder ConfigureDefaultHmacDelegatingHandlerOptionProvider([NotNull]this IHttpClientBuilder builder, [NotNull]IConfiguration configuration)
         {
-            if (httpClientBuilder == null) throw new ArgumentNullException(nameof(httpClientBuilder));
-            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection?.Path}' is incorrect.");
-
-            httpClientBuilder.Services.Configure<HmacOptions>(httpClientBuilder.Name, configurationSection);
-
-
-            return httpClientBuilder;
-        }
-
-        /// <summary>
-        /// Adds option provider for <see cref="HmacDelegatingHandler" /> functionality.
-        /// </summary>
-        /// <param name="httpClientBuilder">The <see cref="IHttpClientBuilder" />.</param>        
-        /// <param name="configuration">The <see cref="IConfiguration" />Configuration for hmac settings.</param>        
-        /// <returns>The <see cref="IHttpClientBuilder" />.</returns>
-        public static IHttpClientBuilder ConfigureDefaultHmacDelegatingHandlerOptionProvider([NotNull]this IHttpClientBuilder httpClientBuilder, [NotNull]IConfiguration configuration)
-        {
-            if (httpClientBuilder == null) throw new ArgumentNullException(nameof(httpClientBuilder));
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            httpClientBuilder.ConfigureDefaultHmacDelegatingHandlerOptionProvider(configuration.GetSection(HmacOptions.DefaultSectionName));
+            builder.ConfigureDefaultHmacDelegatingHandlerOptionProvider(configuration.GetSection(HmacOptions.DefaultSectionName));
 
-            return httpClientBuilder;
+            return builder;
+        }
+
+        /// <summary>
+        /// Adds option provider for <see cref="HmacDelegatingHandler" /> functionality.
+        /// </summary>
+        /// <param name="builder">The <see cref="IHttpClientBuilder" />.</param>        
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/> which binds to <see cref="HmacOptions"/>.</param>
+        /// <returns>The <see cref="IHttpClientBuilder" />.</returns>
+        public static IHttpClientBuilder ConfigureDefaultHmacDelegatingHandlerOptionProvider([NotNull]this IHttpClientBuilder builder, [NotNull]IConfigurationSection configurationSection)
+        {
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration Section '{configurationSection?.Path}' is incorrect.");
+
+            builder.Services.Configure<HmacOptions>(builder.Name, configurationSection);
+
+            return builder;
         }
     }
 }

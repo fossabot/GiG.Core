@@ -20,17 +20,15 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry.Tests.Unit.Tests
         [Fact]
         public void AddTracing_ConfigurationIsNull_ThrowsArgumentNullException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => new ServiceCollection().AddTracing(null, null));
+            var exception = Assert.Throws<ArgumentNullException>(() => new ServiceCollection().AddTracing(null, configuration: null));
             Assert.Equal("configuration", exception.ParamName);
         }
-        
-        [Theory]
-        [InlineData("")]
-        [InlineData(null)]
-        public void AddTracing_SectionNameIsInvalid_ThrowsArgumentException(string configurationSectionName)
+
+        [Fact]
+        public void AddTracing_ConfigurationSectionIsNull_ThrowsArgumentNullException()
         {
-            var exception = Assert.Throws<ArgumentException>(() => new ServiceCollection().AddTracing(null, new ConfigurationBuilder().Build(), configurationSectionName));
-            Assert.Equal("configurationSectionName", exception.ParamName);
+            var exception = Assert.Throws<ArgumentNullException>(() => new ServiceCollection().AddTracing(null, null));
+            Assert.Equal("configurationSection", exception.ParamName);
         }
     }
 }

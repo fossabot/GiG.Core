@@ -12,7 +12,7 @@ namespace GiG.Core.Hosting.Tests.Unit
         public void UseInfoManagement_ApplicationBuilderIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => ApplicationBuilderExtensions.UseInfoManagement(null));
-            Assert.Equal("app", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
         }
     }
 }

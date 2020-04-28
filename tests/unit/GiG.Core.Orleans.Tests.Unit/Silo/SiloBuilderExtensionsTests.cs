@@ -14,10 +14,10 @@ namespace GiG.Core.Orleans.Tests.Unit.Silo
         public void AddAssemblies_SiloBuilderIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.AddAssemblies(null, assemblies: null));
-            Assert.Equal("siloBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
 
             exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.AddAssemblies(null, types: null));
-            Assert.Equal("siloBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]
@@ -40,10 +40,10 @@ namespace GiG.Core.Orleans.Tests.Unit.Silo
         public void ConfigureCluster_SiloBuilderIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.ConfigureCluster(null, configuration: null));
-            Assert.Equal("siloBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
 
             exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.ConfigureCluster(null, null));
-            Assert.Equal("siloBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]
@@ -66,10 +66,10 @@ namespace GiG.Core.Orleans.Tests.Unit.Silo
         public void ConfigureEndpoints_SiloBuilderIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.ConfigureEndpoints(null, configuration: null));
-            Assert.Equal("siloBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
 
             exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.ConfigureEndpoints(null, null));
-            Assert.Equal("siloBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]
@@ -84,7 +84,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Silo
         public void ConfigureDefaults_SiloBuilderIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.ConfigureDefaults(null, null));
-            Assert.Equal("siloBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]

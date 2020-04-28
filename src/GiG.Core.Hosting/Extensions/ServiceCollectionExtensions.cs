@@ -16,10 +16,10 @@ namespace GiG.Core.Hosting.Extensions
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Registers a configuration instance which <see cref="InfoManagementOptions" /> will bind against.
+        /// Configures Info Management.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
-        /// <param name="configuration">The <see cref="IConfiguration" />.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/> which binds to <see cref="InfoManagementOptions"/>.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection ConfigureInfoManagement([NotNull] this IServiceCollection services, [NotNull] IConfiguration configuration)
         {
@@ -30,10 +30,10 @@ namespace GiG.Core.Hosting.Extensions
         }
 
         /// <summary>
-        /// Registers a configuration instance which <see cref="InfoManagementOptions" /> will bind against.
+        /// Configures Info Management.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection" />.</param>
-        /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/> which binds to <see cref="InfoManagementOptions"/>.</param>
         /// <returns>The <see cref="IServiceCollection" />.</returns>
         public static IServiceCollection ConfigureInfoManagement([NotNull] this IServiceCollection services, [NotNull] IConfigurationSection configurationSection)
         {
@@ -44,7 +44,7 @@ namespace GiG.Core.Hosting.Extensions
         }
 
         /// <summary>
-        /// Adds registration of Metadata Accessor for the Application.
+        /// Adds the Application Metadata Accessor.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection"/>.</param>
         /// <returns>The <see cref="IServiceCollection"/>.</returns>

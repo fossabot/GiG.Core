@@ -14,13 +14,13 @@ namespace GiG.Core.Orleans.Tests.Unit.Reminders
         public void UseNpgsqlReminderService_SiloBuilderIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.UseNpgsqlReminderService(null, null, configuration: null));
-            Assert.Equal("siloBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
 
             exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.UseNpgsqlReminderService(null, null, null));
-            Assert.Equal("siloBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
 
             exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.UseNpgsqlReminderService(null, null, null, null));
-            Assert.Equal("siloBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]

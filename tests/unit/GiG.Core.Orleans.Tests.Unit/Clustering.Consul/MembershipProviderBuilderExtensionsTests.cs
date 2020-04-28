@@ -15,17 +15,17 @@ namespace GiG.Core.Orleans.Tests.Unit.Clustering.Consul
         [Fact]
         public void ConfigureConsulClustering_MembershipProviderBuilderIsNull_ThrowsArgumentNullException()
         {
-            var exception = Assert.Throws<ArgumentNullException>(() => MembershipProviderBuilderExtensions.ConfigureConsulClustering(clientBuilder: null, configuration: null));
-            Assert.Equal("clientBuilder", exception.ParamName);
+            var exception = Assert.Throws<ArgumentNullException>(() => MembershipProviderBuilderExtensions.ConfigureConsulClustering(builder: (Orleans.Clustering.Abstractions.MembershipProviderBuilder<IClientBuilder>)null, configuration: null));
+            Assert.Equal("builder", exception.ParamName);
 
-            exception = Assert.Throws<ArgumentNullException>(() => MembershipProviderBuilderExtensions.ConfigureConsulClustering(clientBuilder: null, configurationSection: null));
-            Assert.Equal("clientBuilder", exception.ParamName);
+            exception = Assert.Throws<ArgumentNullException>(() => MembershipProviderBuilderExtensions.ConfigureConsulClustering(builder: (Orleans.Clustering.Abstractions.MembershipProviderBuilder<IClientBuilder>)null, configurationSection: null));
+            Assert.Equal("builder", exception.ParamName);
 
-            exception = Assert.Throws<ArgumentNullException>(() => MembershipProviderBuilderExtensions.ConfigureConsulClustering(siloBuilder: null, configuration: null));
-            Assert.Equal("siloBuilder", exception.ParamName);
+            exception = Assert.Throws<ArgumentNullException>(() => MembershipProviderBuilderExtensions.ConfigureConsulClustering(builder: (Orleans.Clustering.Abstractions.MembershipProviderBuilder<global::Orleans.Hosting.ISiloBuilder>)null, configuration: null));
+            Assert.Equal("builder", exception.ParamName);
 
-            exception = Assert.Throws<ArgumentNullException>(() => MembershipProviderBuilderExtensions.ConfigureConsulClustering(siloBuilder: null, configurationSection: null));
-            Assert.Equal("siloBuilder", exception.ParamName);
+            exception = Assert.Throws<ArgumentNullException>(() => MembershipProviderBuilderExtensions.ConfigureConsulClustering(builder: (Orleans.Clustering.Abstractions.MembershipProviderBuilder<global::Orleans.Hosting.ISiloBuilder>)null, configurationSection: null));
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]

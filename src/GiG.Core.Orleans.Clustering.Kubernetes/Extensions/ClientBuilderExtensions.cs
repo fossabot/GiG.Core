@@ -9,45 +9,44 @@ using System.Configuration;
 namespace GiG.Core.Orleans.Clustering.Kubernetes.Extensions
 {
     /// <summary>
-    /// Client Builder Extensions.
+    /// The <see cref="IClientBuilder" /> Extensions.
     /// </summary>
     public static class ClientBuilderExtensions
     {
         /// <summary>
-        /// Registers a configuration instance which <see cref="KubernetesOptions" /> will bind against.
+        /// Configures Kubernetes Clustering.
         /// </summary>
-        /// <param name="clientBuilder">The Orleans <see cref="IClientBuilder"/>.</param>
-        /// <param name="configuration">The <see cref="IConfiguration" />.</param>
-        /// <returns>THe <see cref="IClientBuilder"/>.</returns>
-        public static IClientBuilder ConfigureKubernetesClustering([NotNull] this IClientBuilder clientBuilder, IConfiguration configuration)
+        /// <param name="builder">The Orleans <see cref="IClientBuilder"/>.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/> which binds to <see cref="KubernetesOptions"/>.</param>
+        /// <returns>The <see cref="IClientBuilder"/>.</returns>
+        public static IClientBuilder ConfigureKubernetesClustering([NotNull] this IClientBuilder builder, IConfiguration configuration)
         {
-            if (clientBuilder == null) throw new ArgumentNullException(nameof(clientBuilder));
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
-            return clientBuilder.ConfigureKubernetesClustering(configuration.GetSection(KubernetesOptions.DefaultSectionName));
+            return builder.ConfigureKubernetesClustering(configuration.GetSection(KubernetesOptions.DefaultSectionName));
         }
 
         /// <summary>
-        /// Registers a configuration instance which <see cref="KubernetesOptions" /> will bind against.
+        /// Configures Kubernetes Clustering.
         /// </summary>
-        /// <param name="clientBuilder">The Orleans <see cref="IClientBuilder"/>.</param>
-        /// <param name="configurationSection">The <see cref="IConfigurationSection" />.</param>
+        /// <param name="builder">The Orleans <see cref="IClientBuilder"/>.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/> which binds to <see cref="KubernetesOptions"/>.</param>
         /// <returns>The <see cref="IClientBuilder"/>.</returns>
-        public static IClientBuilder ConfigureKubernetesClustering([NotNull] this IClientBuilder clientBuilder, [NotNull] IConfigurationSection configurationSection)
+        public static IClientBuilder ConfigureKubernetesClustering([NotNull] this IClientBuilder builder, [NotNull] IConfigurationSection configurationSection)
         {
-            if (clientBuilder == null) throw new ArgumentNullException(nameof(clientBuilder));
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
             if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection?.Path}' is incorrect.");
 
             var kubernetesOptions = configurationSection.Get<KubernetesClientOptions>() ?? new KubernetesClientOptions();
 
-            return
-                clientBuilder.UseKubeGatewayListProvider(options =>
-                {
-                    options.Group = kubernetesOptions.Group;
-                    options.CertificateData = kubernetesOptions.CertificateData;
-                    options.APIEndpoint = kubernetesOptions.ApiEndpoint;
-                    options.APIToken = kubernetesOptions.ApiToken;
-                });
+            return builder.UseKubeGatewayListProvider(options =>
+            {
+                options.Group = kubernetesOptions.Group;
+                options.CertificateData = kubernetesOptions.CertificateData;
+                options.APIEndpoint = kubernetesOptions.ApiEndpoint;
+                options.APIToken = kubernetesOptions.ApiToken;
+            });
         }
     }
 }

@@ -15,17 +15,17 @@ namespace GiG.Core.Http.Tests.Unit.Authentication.Hmac
         public void AddHmacDelegatingHandler_HttpClientBuilderIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => HttpClientBuilderExtensions.AddHmacDelegatingHandler(null));
-            Assert.Equal("httpClientBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]
         public void ConfigureDefaultHmacDelegatingHandlerOptionProvider_HttpClientBuilderIsNull_ThrowsArgumentNullException()
         {
             var exception = Assert.Throws<ArgumentNullException>(() => HttpClientBuilderExtensions.ConfigureDefaultHmacDelegatingHandlerOptionProvider(null, configuration: null));
-            Assert.Equal("httpClientBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
 
             exception = Assert.Throws<ArgumentNullException>(() => HttpClientBuilderExtensions.ConfigureDefaultHmacDelegatingHandlerOptionProvider(null, null));
-            Assert.Equal("httpClientBuilder", exception.ParamName);
+            Assert.Equal("builder", exception.ParamName);
         }
 
         [Fact]

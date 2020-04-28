@@ -13,25 +13,43 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry.Extensions
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Adds the required services to support Distributed Tracing using OpenTelemetry.
+        /// Adds Distributed Tracing using OpenTelemetry.
         /// </summary>
         /// <param name="services">The <see cref="IServiceCollection"/>.</param>
         /// <param name="tracingConfigurationBuilder">>A delegate that is used to configure the <see cref="TracingConfigurationBuilder" />.</param>
-        /// <param name="configuration">The <see cref="IConfiguration"/>.</param>
-        /// <param name="configurationSectionName">The Configuration section name.</param>
+        /// <param name="configuration">The <see cref="IConfiguration"/> which binds to <see cref="TracingOptions"/>.</param>
         /// <returns>The <see cref="IServiceCollection"/>.</returns>
-        public static IServiceCollection AddTracing([NotNull] this IServiceCollection services, Action<TracingConfigurationBuilder> tracingConfigurationBuilder, [NotNull] IConfiguration configuration,
-            [NotNull] string configurationSectionName = TracingOptions.DefaultSectionName)
+        public static IServiceCollection AddTracing(
+            [NotNull] this IServiceCollection services, 
+            Action<TracingConfigurationBuilder> tracingConfigurationBuilder, 
+            [NotNull] IConfiguration configuration)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
-            if (string.IsNullOrEmpty(configurationSectionName)) throw new ArgumentException($"'{nameof(configurationSectionName)}' must not be null, empty or whitespace.", nameof(configurationSectionName));
+
+            return services.AddTracing(tracingConfigurationBuilder, configuration.GetSection(TracingOptions.DefaultSectionName));
+        }
+
+        /// <summary>
+        /// Adds Distributed Tracing using OpenTelemetry.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection"/>.</param>
+        /// <param name="tracingConfigurationBuilder">>A delegate that is used to configure the <see cref="TracingConfigurationBuilder" />.</param>
+        /// <param name="configurationSection">The <see cref="IConfigurationSection"/> which binds to <see cref="TracingOptions"/>.</param>
+        /// <returns>The <see cref="IServiceCollection"/>.</returns>
+        public static IServiceCollection AddTracing(
+            [NotNull] this IServiceCollection services, 
+            Action<TracingConfigurationBuilder> tracingConfigurationBuilder, 
+            [NotNull] IConfigurationSection configurationSection)
+        {
+            if (services == null) throw new ArgumentNullException(nameof(services));
+            if (configurationSection == null) throw new ArgumentNullException(nameof(configurationSection));
 
             services.AddOpenTelemetry(builder =>
             {
                 builder
                     // Configure tracing exporters
-                    .ConfigureTracing(tracingConfigurationBuilder, configuration, configurationSectionName)
+                    .ConfigureTracing(tracingConfigurationBuilder, configurationSection)
                     // Configure tracing to collect incoming HTTP requests
                     .AddRequestCollector()
                     // Configure tracing to collect outgoing HTTP requests
