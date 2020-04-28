@@ -45,6 +45,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Lifetimes
                     var endpointOptions = ctx.Configuration.GetSection(_siloSectionName).Get<EndpointOptions>() ?? new EndpointOptions();
 
                     x.ConfigureEndpoints(ctx.Configuration.GetSection(_siloSectionName));
+                    x.ConfigureCluster(ctx.Configuration);
                     x.UseMembershipProvider(ctx.Configuration,
                         y => { y.ConfigureLocalhostClustering(endpointOptions.SiloPort, endpointOptions.GatewayPort, null, serviceId, clusterId); });
                     x.AddAssemblies(typeof(EchoTestGrain));

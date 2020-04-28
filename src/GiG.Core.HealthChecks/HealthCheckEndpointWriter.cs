@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -30,6 +31,10 @@ namespace GiG.Core.HealthChecks
                 {
                     writer.WriteStartObject();
                     writer.WriteString("status", healthReport.Status.ToString());
+                    if (healthReport.Status != HealthStatus.Healthy)
+                    {
+                        WriteDetails(writer, healthReport.Entries.Where(x => x.Value.Status != HealthStatus.Healthy));
+                    }
                     writer.WriteEndObject();
                 }
 
@@ -58,6 +63,23 @@ namespace GiG.Core.HealthChecks
                 logger.LogWarning(entry.Value.Exception, "Health check {HealthCheckName} was {HealthCheckStatus} threw an exception {HealthCheckException}",
                     entry.Key, entry.Value.Status,  entry.Value.Exception?.Message);
             }
+        }
+        
+        private static void WriteDetails(Utf8JsonWriter writer, IEnumerable<KeyValuePair<string, HealthReportEntry>> entries)
+        {
+            writer.WriteStartObject("details");
+            foreach (var entry in entries)
+            {
+                writer.WriteStartObject(entry.Key);
+                writer.WriteString("status", entry.Value.Status.ToString());
+                writer.WriteString("details", entry.Value.Description);
+                if (entry.Value.Exception?.Message != null)
+                {
+                    writer.WriteString("exception", entry.Value.Exception.Message);
+                }
+                writer.WriteEndObject();
+            }
+            writer.WriteEndObject();
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
+using ClusterMembershipOptions = Orleans.Configuration.ClusterMembershipOptions;
 
 namespace GiG.Core.Orleans.Silo.Extensions
 {
@@ -74,6 +75,11 @@ namespace GiG.Core.Orleans.Silo.Extensions
             if (configurationSection?.Exists() != true) throw new ConfigurationErrorsException($"Configuration section '{configurationSection?.Path}' is incorrect.");
 
             builder.Configure<ClusterOptions>(configurationSection);
+            siloBuilder.Configure<ClusterMembershipOptions>(x =>
+            {
+                x.DefunctSiloExpiration = options.DefunctSiloExpiration;
+                x.DefunctSiloCleanupPeriod = options.DefunctSiloCleanupPeriod;
+            });
 
             return builder;
         }

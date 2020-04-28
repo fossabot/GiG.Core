@@ -1,3 +1,5 @@
+using GiG.Core.HealthChecks.AspNetCore.Extensions;
+using GiG.Core.HealthChecks.Extensions;
 using GiG.Core.Logging.AspNetCore.Extensions;
 using GiG.Core.MultiTenant.Activity.Extensions;
 using GiG.Core.Web.Authentication.ApiKey.Extensions;
@@ -37,6 +39,9 @@ namespace GiG.Core.Web.Sample
             services.ConfigureOAuthAuthentication(Configuration);
 
             services.ConfigureHttpRequestResponseLogging(Configuration);
+
+            services.ConfigureHealthChecks(Configuration)
+                .AddHealthChecks();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,7 +53,11 @@ namespace GiG.Core.Web.Sample
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseApiDocs();
-            app.UseEndpoints(endpoints => endpoints.MapControllers());
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapHealthChecks();
+            });
         }
     }
 }
