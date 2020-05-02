@@ -1,0 +1,22 @@
+version: "3.4"
+
+services:
+  app:
+    image: ${DOCKER_REGISTRY-}gig.core.performance.data.kvstores.providers.etcd.watchtrange
+    build:
+      context: ..
+      dockerfile: tests/performance/GiG.Core.Performance.Data.KVStores.Providers.Etcd.WatchRange/Dockerfile
+    environment:
+      - EtcdWatch__ConnectionString=http://etcd:2379
+      - EtcdWatch__Key=etcdwatchrange
+    depends_on:
+      - etcd
+
+  etcd:
+    image: 'bitnami/etcd:latest'
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
+    ports:
+      - 2379:2379
+      - 2380:2380
