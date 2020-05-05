@@ -1,8 +1,6 @@
 ﻿using dotnet_etcd;
 using GiG.Core.Data.KVStores.Abstractions;
-using GiG.Core.Data.KVStores.Providers.Etcd.Abstractions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -22,14 +20,10 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read.Controllers
         private readonly EtcdClient _etcdClient;
 
         public EtcdController(IDataProvider<string> dataProvider,
-            IOptions<EtcdProviderOptions> etcdProviderOptions)
+            EtcdClient etcdClient)
         {
             _dataProvider = dataProvider;
-
-            _etcdClient = new EtcdClient(etcdProviderOptions.Value.ConnectionString, etcdProviderOptions.Value.Port,
-                etcdProviderOptions.Value.Username, etcdProviderOptions.Value.Password, etcdProviderOptions.Value.CaCertificate,
-                etcdProviderOptions.Value.ClientCertificate, etcdProviderOptions.Value.ClientKey,
-                etcdProviderOptions.Value.IsPublicRootCa);
+            _etcdClient = etcdClient;
         }
 
         [HttpGet("{key}")]
