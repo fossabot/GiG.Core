@@ -53,7 +53,7 @@ namespace GiG.Core.Messaging.Kafka.Consumers
             _consumer.Subscribe(kafkaBuilderOptions.KafkaProviderOptions.Topic);
         }
 
-        /// <inheritdoc />k
+        /// <inheritdoc />
         public IKafkaMessage<TKey, TValue> Consume(CancellationToken cancellationToken = default)
         {
             try

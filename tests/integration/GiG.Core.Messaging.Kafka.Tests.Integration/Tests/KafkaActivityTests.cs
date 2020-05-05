@@ -52,7 +52,6 @@ namespace GiG.Core.Messaging.Kafka.Tests.Integration.Tests
             var semaphore  = new SemaphoreSlim(0,1);
             var consumedMessage = new KafkaMessage<string, MockMessage>();
            
-
             // Act
             Task.Factory.StartNew(() =>
                 {
