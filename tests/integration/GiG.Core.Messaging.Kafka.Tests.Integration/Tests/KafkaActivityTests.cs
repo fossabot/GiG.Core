@@ -16,63 +16,16 @@ using Guid = System.Guid;
 
 namespace GiG.Core.Messaging.Kafka.Tests.Integration.Tests
 {
-    [Trait("Category", "Integration")]
-    public class KafkaActivityTests
+    [Trait("Category", "IntegrationWithDependency")]
+    public class KafkaActivityTests : IAsyncLifetime
     {
         private IHost _host;
+        private IKafkaProducer<string, MockMessage> _kafkaProducer;
+        private IKafkaConsumer<string, MockMessage> _kafkaConsumer;
+        private IActivityContextAccessor _activityContextAccessor;
+        private SemaphoreSlim _semaphore;
 
-        public KafkaActivityTests()
-        {
-            SetupServices();
-        }
-        
-        [Fact]
-        public async Task KafkaActivity_ProduceConsumeMessage_CorrectActivityReceived()
-        {
-            // Arrange
-            var kafkaProducer = _host.Services.GetRequiredService<IKafkaProducer<string, MockMessage>>();
-            var kafkaConsumer = _host.Services.GetRequiredService<IKafkaConsumer<string, MockMessage>>();
-            var activityContext = _host.Services.GetRequiredService<IActivityContextAccessor>();
-            var baggageKey = "testKey";
-            
-            activityContext.CurrentActivity.AddBaggage(baggageKey, "testing");
-
-            var mockMessage = new MockMessage();
-            var messageId = Guid.NewGuid().ToString();
-
-            var message = new KafkaMessage<string, MockMessage>
-            {
-                Key = "mock-message",
-                Value = mockMessage,
-                MessageId = messageId,
-                MessageType = "mockMessage.Created"
-            };
-            
-            var cts = new CancellationTokenSource();
-            var semaphore  = new SemaphoreSlim(0,1);
-            var consumedMessage = new KafkaMessage<string, MockMessage>();
-           
-            // Act
-            Task.Factory.StartNew(() =>
-                {
-                    while (!cts.IsCancellationRequested)
-                    {
-                        consumedMessage = (KafkaMessage<string, MockMessage>) kafkaConsumer.Consume(cts.Token);
-                        semaphore.Release();
-                    }
-                }
-            , TaskCreationOptions.LongRunning);
-            
-            await kafkaProducer.ProduceAsync(message);
-
-            await semaphore.WaitAsync(30000);
-
-            // Assert
-            Assert.Equal(consumedMessage.Headers[Constants.CorrelationIdHeaderName], activityContext.CurrentActivity.ParentId);
-            Assert.Equal(consumedMessage.Headers[baggageKey], activityContext.CurrentActivity.Baggage.FirstOrDefault(x => x.Key == baggageKey).Value);
-        }
-
-        private void SetupServices()
+        public async Task InitializeAsync()
         {
             _host = Host.CreateDefaultBuilder()
                 .ConfigureServices((ctx, x) =>
@@ -87,8 +40,64 @@ namespace GiG.Core.Messaging.Kafka.Tests.Integration.Tests
                             .WithJson()
                             .WithTopic("new-mock-message-topic"))
                 )
-                .ConfigureAppConfiguration(appConfig => appConfig.AddJsonFile("appsettings.json"))
                 .Build();
+
+            await _host.StartAsync();
+
+            _kafkaProducer = _host.Services.GetRequiredService<IKafkaProducer<string, MockMessage>>();
+            _kafkaConsumer = _host.Services.GetRequiredService<IKafkaConsumer<string, MockMessage>>();
+            _activityContextAccessor = _host.Services.GetRequiredService<IActivityContextAccessor>();
+            _semaphore = new SemaphoreSlim(0, 1);
+        }
+
+        [Fact]
+        public async Task KafkaActivity_ProduceConsumeMessage_CorrectActivityReceived()
+        {
+            // Arrange
+
+            var baggageKey = "testKey";
+            _activityContextAccessor.CurrentActivity.AddBaggage(baggageKey, "testing");
+            var mockMessage = new MockMessage();
+            var messageId = Guid.NewGuid().ToString();
+
+            var message = new KafkaMessage<string, MockMessage>
+            {
+                Key = "mock-message",
+                Value = mockMessage,
+                MessageId = messageId,
+                MessageType = "mockMessage.Created"
+            };
+
+            var cts = new CancellationTokenSource();
+
+            var consumedMessage = new KafkaMessage<string, MockMessage>();
+
+            // Act
+            Task.Factory.StartNew(() =>
+            {
+                while (!cts.IsCancellationRequested)
+                {
+                    consumedMessage = (KafkaMessage<string, MockMessage>) _kafkaConsumer.Consume(cts.Token);
+                    _semaphore.Release();
+                }
+            }, TaskCreationOptions.LongRunning);
+
+            await _kafkaProducer.ProduceAsync(message);
+
+            await _semaphore.WaitAsync(20000);
+
+            // Assert
+            Assert.Equal(consumedMessage.Headers[Constants.CorrelationIdHeaderName], _activityContextAccessor.CurrentActivity.ParentId);
+            Assert.Equal(consumedMessage.Headers[baggageKey], _activityContextAccessor.CurrentActivity.Baggage.FirstOrDefault(x => x.Key == baggageKey).Value);
+        }
+
+        public async Task DisposeAsync()
+        {
+            await _host.StopAsync();
+            _host.Dispose();
+            _semaphore.Dispose();
+            _kafkaProducer.Dispose();
+            _kafkaConsumer.Dispose();
         }
     }
 }

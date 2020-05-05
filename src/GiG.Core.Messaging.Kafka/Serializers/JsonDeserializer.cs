@@ -1,7 +1,7 @@
 ﻿using Confluent.Kafka;
-using Newtonsoft.Json;
 using System;
 using System.Text;
+using System.Text.Json;
 
 namespace GiG.Core.Messaging.Kafka.Serializers
 {
@@ -20,7 +20,7 @@ namespace GiG.Core.Messaging.Kafka.Serializers
 
             var deserializedDataAsJson = Encoding.UTF8.GetString(data.ToArray());
 
-            return JsonConvert.DeserializeObject<T>(deserializedDataAsJson);
+            return JsonSerializer.Deserialize<T>(deserializedDataAsJson);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace GiG.Core.Messaging.Kafka.Consumers
 
         private bool _disposed;
 
-        internal KafkaConsumer([NotNull] IKafkaBuilderOptions<TKey, TValue> builderOptions, [NotNull] ILogger<KafkaConsumer<TKey, TValue>> logger, Tracer tracer)
+        internal KafkaConsumer([NotNull] IKafkaBuilderOptions<TKey, TValue> builderOptions, [NotNull] ILogger<KafkaConsumer<TKey, TValue>> logger, Tracer tracer = null)
         {
             var kafkaBuilderOptions = builderOptions ?? throw new ArgumentNullException(nameof(builderOptions));
 
@@ -63,15 +63,18 @@ namespace GiG.Core.Messaging.Kafka.Consumers
                 var consumeResult = _consumer.Consume(cancellationToken);
                 var kafkaMessage = (KafkaMessage<TKey, TValue>)consumeResult;
 
-                var parentActivityId = kafkaMessage.Headers[Constants.CorrelationIdHeaderName];
-            
-                if (!string.IsNullOrEmpty(parentActivityId))
-                {
-                    Activity.Current.SetParentId(parentActivityId);
-                }
-                
                 if (kafkaMessage.Headers?.Any() ?? false)
                 {
+                    if (kafkaMessage.Headers.ContainsKey(Constants.CorrelationIdHeaderName))
+                    {
+                        var parentActivityId = kafkaMessage.Headers[Constants.CorrelationIdHeaderName];
+
+                        if (!string.IsNullOrEmpty(parentActivityId))
+                        {
+                            Activity.Current.SetParentId(parentActivityId);
+                        }
+                    }
+
                     foreach (var baggageItem in kafkaMessage.Headers)
                     {
                         if (baggageItem.Key != Constants.CorrelationIdHeaderName)

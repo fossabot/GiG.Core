@@ -5,24 +5,23 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Confluent.Kafka" Version="1.3.0" PrivateAssets="compile" />
-        <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" PrivateAssets="compile" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.0.0" PrivateAssets="compile" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.0.0" PrivateAssets="compile" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" PrivateAssets="compile" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.0.0" PrivateAssets="compile" />
-        <PackageReference Include="Microsoft.Extensions.Options" Version="3.0.0" PrivateAssets="compile" />
-        <PackageReference Include="Newtonsoft.Json" Version="12.0.3" PrivateAssets="compile" />
-        <PackageReference Include="System.Collections.Immutable" Version="1.7.0" PrivateAssets="compile" />
-        <PackageReference Include="OpenTelemetry" Version="0.2.0-alpha.246" PrivateAssets="compile" />
-        <PackageReference Include="OpenTelemetry.Api" Version="0.2.0-alpha.246" PrivateAssets="compile" />
+        <PackageReference Include="Confluent.Kafka" Version="1.3.0" PrivateAssets="compile"/>
+        <PackageReference Include="JetBrains.Annotations" Version="2019.1.3" PrivateAssets="compile"/>
+        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.0.0" PrivateAssets="compile"/>
+        <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.0.0" PrivateAssets="compile"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" PrivateAssets="compile"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.0.0" PrivateAssets="compile"/>
+        <PackageReference Include="Microsoft.Extensions.Options" Version="3.0.0" PrivateAssets="compile"/>
+        <PackageReference Include="System.Collections.Immutable" Version="1.7.0" PrivateAssets="compile"/>
+        <PackageReference Include="OpenTelemetry" Version="0.2.0-alpha.246" PrivateAssets="compile"/>
+        <PackageReference Include="OpenTelemetry.Api" Version="0.2.0-alpha.246" PrivateAssets="compile"/>
+        <PackageReference Include="System.Text.Json" Version="4.7.1" PrivateAssets="compile"/>
     </ItemGroup>
-    
+
     <ItemGroup>
-      <ProjectReference Include="..\GiG.Core.Messaging.Kafka.Abstractions\GiG.Core.Messaging.Kafka.Abstractions.csproj" />
-      <ProjectReference Include="..\GiG.Core.MultiTenant.Abstractions\GiG.Core.MultiTenant.Abstractions.csproj" />
-      <ProjectReference Include="..\GiG.Core.Providers.DateTime.Abstractions\GiG.Core.Providers.DateTime.Abstractions.csproj" />
-      <ProjectReference Include="..\GiG.Core.Providers.DateTime\GiG.Core.Providers.DateTime.csproj" />
+        <ProjectReference Include="..\GiG.Core.Messaging.Kafka.Abstractions\GiG.Core.Messaging.Kafka.Abstractions.csproj"/>
+        <ProjectReference Include="..\GiG.Core.Providers.DateTime.Abstractions\GiG.Core.Providers.DateTime.Abstractions.csproj"/>
+        <ProjectReference Include="..\GiG.Core.Providers.DateTime\GiG.Core.Providers.DateTime.csproj"/>
     </ItemGroup>
 
 </Project>

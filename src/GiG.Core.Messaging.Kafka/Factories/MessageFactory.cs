@@ -2,7 +2,6 @@
 using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.Messaging.Kafka.Abstractions.Extensions;
 using GiG.Core.Messaging.Kafka.Abstractions.Interfaces;
-using GiG.Core.MultiTenant.Abstractions;
 using GiG.Core.Providers.DateTime.Abstractions;
 using JetBrains.Annotations;
 using System;
@@ -17,7 +16,7 @@ namespace GiG.Core.Messaging.Kafka.Factories
         private readonly IDateTimeProvider _dateTimeProvider;
         private readonly IActivityContextAccessor _activityContextAccessor;
         
-        public MessageFactory([NotNull] IDateTimeProvider dateTimeProvider, ITenantAccessor tenantAccessor = null, IActivityContextAccessor activityContextAccessor = null)
+        public MessageFactory([NotNull] IDateTimeProvider dateTimeProvider, IActivityContextAccessor activityContextAccessor = null)
         {
             _dateTimeProvider = dateTimeProvider;
             _activityContextAccessor = activityContextAccessor;
