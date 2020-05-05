@@ -3,10 +3,13 @@ using GiG.Core.Messaging.Kafka.Abstractions;
 using GiG.Core.Messaging.Kafka.Abstractions.Interfaces;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
+using OpenTelemetry.Trace;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using Constants = GiG.Core.Messaging.Kafka.Abstractions.Constants;
 
 namespace GiG.Core.Messaging.Kafka.Consumers
 {
@@ -14,15 +17,18 @@ namespace GiG.Core.Messaging.Kafka.Consumers
     internal class KafkaConsumer<TKey, TValue> : IKafkaConsumer<TKey, TValue>
     {
         private readonly IConsumer<TKey, TValue> _consumer;
-
         private readonly ILogger<KafkaConsumer<TKey, TValue>> _logger;
+        private readonly Tracer _tracer;
+        private TelemetrySpan _span;
 
         private bool _disposed;
 
-        internal KafkaConsumer([NotNull] IKafkaBuilderOptions<TKey, TValue> builderOptions, [NotNull] ILogger<KafkaConsumer<TKey, TValue>> logger)
+        internal KafkaConsumer([NotNull] IKafkaBuilderOptions<TKey, TValue> builderOptions, [NotNull] ILogger<KafkaConsumer<TKey, TValue>> logger, Tracer tracer)
         {
             var kafkaBuilderOptions = builderOptions ?? throw new ArgumentNullException(nameof(builderOptions));
+
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _tracer = tracer;
 
             var config = new ConsumerConfig(kafkaBuilderOptions.KafkaProviderOptions.AdditionalConfiguration)
             {
@@ -47,13 +53,35 @@ namespace GiG.Core.Messaging.Kafka.Consumers
             _consumer.Subscribe(kafkaBuilderOptions.KafkaProviderOptions.Topic);
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc />k
         public IKafkaMessage<TKey, TValue> Consume(CancellationToken cancellationToken = default)
         {
             try
             {
+                Activity.Current.Start();
+                
                 var consumeResult = _consumer.Consume(cancellationToken);
                 var kafkaMessage = (KafkaMessage<TKey, TValue>)consumeResult;
+
+                var parentActivityId = kafkaMessage.Headers[Constants.CorrelationIdHeaderName];
+            
+                if (!string.IsNullOrEmpty(parentActivityId))
+                {
+                    Activity.Current.SetParentId(parentActivityId);
+                }
+                
+                if (kafkaMessage.Headers?.Any() ?? false)
+                {
+                    foreach (var baggageItem in kafkaMessage.Headers)
+                    {
+                        if (baggageItem.Key != Constants.CorrelationIdHeaderName)
+                        {
+                            Activity.Current.AddBaggage(baggageItem.Key, baggageItem.Value);
+                        }
+                    }
+                }
+
+                _span = _tracer?.StartSpanFromActivity(Constants.SpanConsumeOperationNamePrefix, Activity.Current, SpanKind.Consumer);
 
                 _logger.LogDebug("Consumed message 'key {key} ' at: '{partitionOffset}'.", consumeResult.Key, consumeResult.TopicPartitionOffset);
 
@@ -69,13 +97,23 @@ namespace GiG.Core.Messaging.Kafka.Consumers
                 _logger.LogError(e, "KafkaException occurred: {reason}", e.Error.Reason);
                 throw;
             }
+            finally
+            {
+                Activity.Current.Stop();
+                _span?.End();
+            }
         }
 
         /// <inheritdoc />
         public void Commit(IKafkaMessage<TKey, TValue> message)
         {
-            var kafkaMessage = (KafkaMessage<TKey, TValue>)message;
-            _consumer.Commit(new List<TopicPartitionOffset> { kafkaMessage.Offset });
+            var kafkaMessage = (KafkaMessage<TKey, TValue>) message;
+
+            _span = _tracer?.StartSpanFromActivity(Constants.SpanConsumeCommitOperationNamePrefix, Activity.Current, SpanKind.Consumer);
+            
+            _consumer.Commit(new List<TopicPartitionOffset> {kafkaMessage.Offset});
+            
+            _span?.End();
         }
 
         public void Dispose()

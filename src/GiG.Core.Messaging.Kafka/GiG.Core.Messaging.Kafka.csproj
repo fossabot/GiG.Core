@@ -12,8 +12,10 @@
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" PrivateAssets="compile" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.0.0" PrivateAssets="compile" />
         <PackageReference Include="Microsoft.Extensions.Options" Version="3.0.0" PrivateAssets="compile" />
-        <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.3" PrivateAssets="compile" />
         <PackageReference Include="System.Collections.Immutable" Version="1.7.0" PrivateAssets="compile" />
+        <PackageReference Include="OpenTelemetry" Version="0.2.0-alpha.246" PrivateAssets="compile" />
+        <PackageReference Include="OpenTelemetry.Api" Version="0.2.0-alpha.246" PrivateAssets="compile" />
     </ItemGroup>
     
     <ItemGroup>
