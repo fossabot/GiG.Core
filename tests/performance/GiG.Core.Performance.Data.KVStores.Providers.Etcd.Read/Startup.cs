@@ -1,3 +1,4 @@
+using dotnet_etcd;
 using GiG.Core.Data.KVStores.Abstractions;
 using GiG.Core.Data.KVStores.Providers.Etcd;
 using GiG.Core.Data.KVStores.Providers.Etcd.Abstractions;
@@ -6,6 +7,7 @@ using GiG.Core.Web.Docs.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read
 {
@@ -25,6 +27,10 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read
             services.AddControllers();
 
             var etcdProviderOptions = Configuration.GetSection("EtcdRead").Get<EtcdProviderOptions>();
+            services.TryAddSingleton<EtcdClient>(new EtcdClient(etcdProviderOptions.ConnectionString, etcdProviderOptions.Port,
+                etcdProviderOptions.Username, etcdProviderOptions.Password, etcdProviderOptions.CaCertificate,
+                etcdProviderOptions.ClientCertificate, etcdProviderOptions.ClientKey,
+                etcdProviderOptions.IsPublicRootCa));
             services.AddSingleton<IDataProviderOptions<string, EtcdProviderOptions>>(new DataProviderOptions<string, EtcdProviderOptions>(etcdProviderOptions));
             services.AddSingleton<IDataSerializer<string>, StringSerializer>();
             services.AddSingleton<IDataProvider<string>, EtcdDataProvider<string>>();
