@@ -19,7 +19,6 @@ namespace GiG.Core.Messaging.Kafka.Consumers
         private readonly IConsumer<TKey, TValue> _consumer;
         private readonly ILogger<KafkaConsumer<TKey, TValue>> _logger;
         private readonly Tracer _tracer;
-        private TelemetrySpan _span;
 
         private bool _disposed;
 
@@ -56,6 +55,8 @@ namespace GiG.Core.Messaging.Kafka.Consumers
         /// <inheritdoc />
         public IKafkaMessage<TKey, TValue> Consume(CancellationToken cancellationToken = default)
         {
+            TelemetrySpan span = null;
+            
             try
             {
                 Activity.Current.Start();
@@ -84,7 +85,7 @@ namespace GiG.Core.Messaging.Kafka.Consumers
                     }
                 }
 
-                _span = _tracer?.StartSpanFromActivity(Constants.SpanConsumeOperationNamePrefix, Activity.Current, SpanKind.Consumer);
+                span = _tracer?.StartSpanFromActivity(Constants.SpanConsumeOperationNamePrefix, Activity.Current, SpanKind.Consumer);
 
                 _logger.LogDebug("Consumed message 'key {key} ' at: '{partitionOffset}'.", consumeResult.Key, consumeResult.TopicPartitionOffset);
 
@@ -103,7 +104,7 @@ namespace GiG.Core.Messaging.Kafka.Consumers
             finally
             {
                 Activity.Current.Stop();
-                _span?.End();
+                span?.End();
             }
         }
 
@@ -112,11 +113,11 @@ namespace GiG.Core.Messaging.Kafka.Consumers
         {
             var kafkaMessage = (KafkaMessage<TKey, TValue>) message;
 
-            _span = _tracer?.StartSpanFromActivity(Constants.SpanConsumeCommitOperationNamePrefix, Activity.Current, SpanKind.Consumer);
+            var span = _tracer?.StartSpanFromActivity(Constants.SpanConsumeCommitOperationNamePrefix, Activity.Current, SpanKind.Consumer);
             
             _consumer.Commit(new List<TopicPartitionOffset> {kafkaMessage.Offset});
             
-            _span?.End();
+            span?.End();
         }
 
         public void Dispose()

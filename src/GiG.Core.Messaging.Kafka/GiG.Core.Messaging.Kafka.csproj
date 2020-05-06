@@ -15,7 +15,7 @@
         <PackageReference Include="System.Collections.Immutable" Version="1.7.0" PrivateAssets="compile"/>
         <PackageReference Include="OpenTelemetry" Version="0.2.0-alpha.246" PrivateAssets="compile"/>
         <PackageReference Include="OpenTelemetry.Api" Version="0.2.0-alpha.246" PrivateAssets="compile"/>
-        <PackageReference Include="System.Text.Json" Version="4.7.1" PrivateAssets="compile"/>
+        <PackageReference Include="System.Text.Json" Version="4.7.0" PrivateAssets="compile"/>
     </ItemGroup>
 
     <ItemGroup>
