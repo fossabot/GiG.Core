@@ -16,14 +16,12 @@ namespace GiG.Core.Messaging.Kafka.Factories
     {
         private readonly ILoggerFactory _loggerFactory;
         private readonly IMessageFactory _messageFactory;
-        private readonly IActivityContextAccessor _activityContextAccessor;
         private readonly Tracer _tracer;
         
-        public ProducerFactory([NotNull] ILoggerFactory loggerFactory, [NotNull] IMessageFactory messageFactory, IActivityContextAccessor activityContextAccessor = null, TracerFactory tracerFactory = null)
+        public ProducerFactory([NotNull] ILoggerFactory loggerFactory, [NotNull] IMessageFactory messageFactory, TracerFactory tracerFactory = null)
         {
             _loggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
             _messageFactory = messageFactory ?? throw new ArgumentNullException(nameof(messageFactory));
-            _activityContextAccessor = activityContextAccessor;
             _tracer = tracerFactory?.GetTracer(Constants.TracerName);
         }
 
@@ -33,7 +31,7 @@ namespace GiG.Core.Messaging.Kafka.Factories
             var options = new KafkaBuilderOptions<TKey, TValue>(_messageFactory);
             setupAction?.Invoke(options);
 
-            return new KafkaProducer<TKey, TValue>(options, _loggerFactory.CreateLogger<KafkaProducer<TKey, TValue>>(), _activityContextAccessor, _tracer);
+            return new KafkaProducer<TKey, TValue>(options, _loggerFactory.CreateLogger<KafkaProducer<TKey, TValue>>(), _tracer);
         }
     }
 }

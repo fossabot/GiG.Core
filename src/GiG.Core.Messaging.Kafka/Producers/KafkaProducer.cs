@@ -18,17 +18,14 @@ namespace GiG.Core.Messaging.Kafka.Producers
         private readonly IProducer<TKey, TValue> _producer;
         private readonly IKafkaBuilderOptions<TKey, TValue> _kafkaBuilderOptions;
         private readonly ILogger<KafkaProducer<TKey, TValue>> _logger;
-        private readonly IActivityContextAccessor _activityContextAccessor;
         private readonly Tracer _tracer;
 
         private bool _isDisposing;
 
-        internal KafkaProducer([NotNull] IKafkaBuilderOptions<TKey, TValue> kafkaBuilderOptions, [NotNull] ILogger<KafkaProducer<TKey, TValue>> logger,
-            IActivityContextAccessor activityContextAccessor = null, Tracer tracer = null)
+        internal KafkaProducer([NotNull] IKafkaBuilderOptions<TKey, TValue> kafkaBuilderOptions, [NotNull] ILogger<KafkaProducer<TKey, TValue>> logger, Tracer tracer = null)
         {
             _kafkaBuilderOptions = kafkaBuilderOptions ?? throw new ArgumentNullException(nameof(kafkaBuilderOptions));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _activityContextAccessor = activityContextAccessor;
             _tracer = tracer;
 
             var config = new ProducerConfig(_kafkaBuilderOptions.KafkaProviderOptions.AdditionalConfiguration)
