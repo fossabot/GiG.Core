@@ -56,24 +56,21 @@ namespace GiG.Core.Messaging.Kafka.Consumers
         public IKafkaMessage<TKey, TValue> Consume(CancellationToken cancellationToken = default)
         {
             TelemetrySpan span = null;
-            
+
             try
             {
                 Activity.Current.Start();
-                
+
                 var consumeResult = _consumer.Consume(cancellationToken);
-                var kafkaMessage = (KafkaMessage<TKey, TValue>)consumeResult;
+                var kafkaMessage = (KafkaMessage<TKey, TValue>) consumeResult;
 
                 if (kafkaMessage.Headers?.Any() ?? false)
                 {
-                    if (kafkaMessage.Headers.ContainsKey(Constants.CorrelationIdHeaderName))
-                    {
-                        var parentActivityId = kafkaMessage.Headers[Constants.CorrelationIdHeaderName];
+                    kafkaMessage.Headers.TryGetValue(Constants.CorrelationIdHeaderName, out var parentActivityId);
 
-                        if (!string.IsNullOrEmpty(parentActivityId))
-                        {
-                            Activity.Current.SetParentId(parentActivityId);
-                        }
+                    if (!string.IsNullOrEmpty(parentActivityId))
+                    {
+                        Activity.Current.SetParentId(parentActivityId);
                     }
 
                     foreach (var baggageItem in kafkaMessage.Headers)
@@ -114,9 +111,9 @@ namespace GiG.Core.Messaging.Kafka.Consumers
             var kafkaMessage = (KafkaMessage<TKey, TValue>) message;
 
             var span = _tracer?.StartSpanFromActivity(Constants.SpanConsumeCommitOperationNamePrefix, Activity.Current, SpanKind.Consumer);
-            
+
             _consumer.Commit(new List<TopicPartitionOffset> {kafkaMessage.Offset});
-            
+
             span?.End();
         }
 
