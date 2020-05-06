@@ -27,6 +27,7 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read
             services.AddControllers();
 
             var etcdProviderOptions = Configuration.GetSection("EtcdRead").Get<EtcdProviderOptions>();
+            services.Configure<EtcdProviderOptions>(Configuration.GetSection("EtcdRead"));
             services.TryAddSingleton<EtcdClient>(new EtcdClient(etcdProviderOptions.ConnectionString, etcdProviderOptions.Port,
                 etcdProviderOptions.Username, etcdProviderOptions.Password, etcdProviderOptions.CaCertificate,
                 etcdProviderOptions.ClientCertificate, etcdProviderOptions.ClientKey,
