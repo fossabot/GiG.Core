@@ -15,30 +15,27 @@ namespace GiG.Core.Messaging.Kafka.Factories
     {
         private readonly IDateTimeProvider _dateTimeProvider;
         private readonly IActivityContextAccessor _activityContextAccessor;
-        
-        public MessageFactory([NotNull] IDateTimeProvider dateTimeProvider, IActivityContextAccessor activityContextAccessor = null)
+
+        public MessageFactory([NotNull] IDateTimeProvider dateTimeProvider, IActivityContextAccessor activityContextAccessor)
         {
             _dateTimeProvider = dateTimeProvider;
-            _activityContextAccessor = activityContextAccessor;
+            _activityContextAccessor = activityContextAccessor ?? throw new ArgumentNullException(nameof(activityContextAccessor));
         }
-        
+
         /// <inheritdoc />
         public virtual Message<TKey, TValue> BuildMessage<TKey, TValue>([NotNull] IKafkaMessage<TKey, TValue> kafkaMessage, Activity publishingActivity)
         {
             if (kafkaMessage == null) throw new ArgumentNullException(nameof(kafkaMessage));
             if (publishingActivity == null) throw new ArgumentNullException(nameof(publishingActivity));
-            
+
             kafkaMessage.Headers.AddOrUpdate(Constants.MessageTypeHeaderName, kafkaMessage.MessageType);
             kafkaMessage.Headers.AddOrUpdate(Constants.MessageIdHeaderName, kafkaMessage.MessageId);
 
-            if (_activityContextAccessor != null)
+            kafkaMessage.Headers.Add(Constants.CorrelationIdHeaderName, publishingActivity.Id);
+
+            foreach (var baggageItem in _activityContextAccessor.Baggage)
             {
-                kafkaMessage.Headers.Add(Constants.CorrelationIdHeaderName, publishingActivity.Id);
-                
-                foreach (var baggageItem in _activityContextAccessor.Baggage)
-                {
-                    kafkaMessage.Headers.Add(baggageItem.Key, baggageItem.Value);
-                }
+                kafkaMessage.Headers.Add(baggageItem.Key, baggageItem.Value);
             }
 
             return new Message<TKey, TValue>

@@ -1,4 +1,5 @@
-﻿using GiG.Core.Messaging.Kafka.Abstractions;
+﻿using GiG.Core.DistributedTracing.Activity.Extensions;
+using GiG.Core.Messaging.Kafka.Abstractions;
 using GiG.Core.Messaging.Kafka.Abstractions.Interfaces;
 using GiG.Core.Messaging.Kafka.Factories;
 using GiG.Core.Providers.DateTime.Extensions;
@@ -35,6 +36,7 @@ namespace GiG.Core.Messaging.Kafka.Extensions
             services.TryAddSingleton<IProducerFactory, ProducerFactory>();
             services.TryAddSingleton<IMessageFactory, MessageFactory>();
             services.TryAddSingleton(x => x.GetRequiredService<IProducerFactory>().Create(setupAction));
+            services.AddActivityContextAccessor();
             return services;
         }
 
