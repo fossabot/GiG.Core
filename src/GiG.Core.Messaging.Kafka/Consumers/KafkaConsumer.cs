@@ -84,7 +84,7 @@ namespace GiG.Core.Messaging.Kafka.Consumers
 
                 consumingActivity.Start();
 
-                span = _tracer?.StartSpanFromActivity(Constants.SpanConsumeOperationNamePrefix, Activity.Current, SpanKind.Consumer);
+                span = _tracer?.StartSpanFromActivity(Constants.SpanConsumeOperationNamePrefix, consumingActivity, SpanKind.Consumer);
 
                 _logger.LogDebug("Consumed message 'key {key} ' at: '{partitionOffset}'.", consumeResult.Key, consumeResult.TopicPartitionOffset);
 
