@@ -6,7 +6,7 @@ using GiG.Core.Providers.DateTime.Abstractions;
 using JetBrains.Annotations;
 using System;
 using System.Diagnostics;
-using Constants = GiG.Core.Messaging.Kafka.Abstractions.Constants;
+using AbstractionConstants = GiG.Core.Messaging.Kafka.Abstractions.Constants;
 
 namespace GiG.Core.Messaging.Kafka.Factories
 {
@@ -23,15 +23,14 @@ namespace GiG.Core.Messaging.Kafka.Factories
         }
 
         /// <inheritdoc />
-        public virtual Message<TKey, TValue> BuildMessage<TKey, TValue>([NotNull] IKafkaMessage<TKey, TValue> kafkaMessage, Activity publishingActivity)
+        public virtual Message<TKey, TValue> BuildMessage<TKey, TValue>([NotNull] IKafkaMessage<TKey, TValue> kafkaMessage)
         {
             if (kafkaMessage == null) throw new ArgumentNullException(nameof(kafkaMessage));
-            if (publishingActivity == null) throw new ArgumentNullException(nameof(publishingActivity));
 
-            kafkaMessage.Headers.AddOrUpdate(Constants.MessageTypeHeaderName, kafkaMessage.MessageType);
-            kafkaMessage.Headers.AddOrUpdate(Constants.MessageIdHeaderName, kafkaMessage.MessageId);
+            kafkaMessage.Headers.AddOrUpdate(AbstractionConstants.MessageTypeHeaderName, kafkaMessage.MessageType);
+            kafkaMessage.Headers.AddOrUpdate(AbstractionConstants.MessageIdHeaderName, kafkaMessage.MessageId);
 
-            kafkaMessage.Headers.Add(Constants.CorrelationIdHeaderName, publishingActivity.Id);
+            kafkaMessage.Headers.Add(AbstractionConstants.CorrelationIdHeaderName, Activity.Current.Id);
 
             foreach (var baggageItem in _activityContextAccessor.Baggage)
             {

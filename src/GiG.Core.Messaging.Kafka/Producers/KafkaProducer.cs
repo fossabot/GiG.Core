@@ -8,7 +8,7 @@ using OpenTelemetry.Trace;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Constants = GiG.Core.Messaging.Kafka.Abstractions.Constants;
+using Constants = GiG.Core.Messaging.Kafka.Internal.Constants;
 
 namespace GiG.Core.Messaging.Kafka.Producers
 {
@@ -51,7 +51,7 @@ namespace GiG.Core.Messaging.Kafka.Producers
             var publishingActivity = new Activity(Constants.PublishActivityName);
             publishingActivity.Start();
            
-            var message = _kafkaBuilderOptions.MessageFactory.BuildMessage(kafkaMessage, publishingActivity);
+            var message = _kafkaBuilderOptions.MessageFactory.BuildMessage(kafkaMessage);
             
             await ProduceAsync(message, publishingActivity);
         }

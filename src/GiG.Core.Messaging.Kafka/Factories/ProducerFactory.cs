@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 using OpenTelemetry.Trace;
 using OpenTelemetry.Trace.Configuration;
 using System;
-using Constants = GiG.Core.Messaging.Kafka.Abstractions.Constants;
+using Constants = GiG.Core.Messaging.Kafka.Internal.Constants;
 
 namespace GiG.Core.Messaging.Kafka.Factories
 {

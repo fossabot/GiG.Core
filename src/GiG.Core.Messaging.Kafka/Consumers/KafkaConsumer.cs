@@ -9,7 +9,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
-using Constants = GiG.Core.Messaging.Kafka.Abstractions.Constants;
+using Constants = GiG.Core.Messaging.Kafka.Internal.Constants;
+using AbstractionConstants = GiG.Core.Messaging.Kafka.Abstractions.Constants;
 
 namespace GiG.Core.Messaging.Kafka.Consumers
 {
@@ -56,31 +57,32 @@ namespace GiG.Core.Messaging.Kafka.Consumers
         public IKafkaMessage<TKey, TValue> Consume(CancellationToken cancellationToken = default)
         {
             TelemetrySpan span = null;
-
+            var consumingActivity = new Activity(Constants.ConsumeActivityName);
+            
             try
             {
-                Activity.Current.Start();
-
                 var consumeResult = _consumer.Consume(cancellationToken);
                 var kafkaMessage = (KafkaMessage<TKey, TValue>) consumeResult;
 
                 if (kafkaMessage.Headers?.Any() ?? false)
                 {
-                    kafkaMessage.Headers.TryGetValue(Constants.CorrelationIdHeaderName, out var parentActivityId);
+                    kafkaMessage.Headers.TryGetValue(AbstractionConstants.CorrelationIdHeaderName, out var parentActivityId);
 
                     if (!string.IsNullOrEmpty(parentActivityId))
                     {
-                        Activity.Current.SetParentId(parentActivityId);
+                        consumingActivity.SetParentId(parentActivityId);
                     }
 
                     foreach (var baggageItem in kafkaMessage.Headers)
                     {
-                        if (baggageItem.Key != Constants.CorrelationIdHeaderName)
+                        if (baggageItem.Key != AbstractionConstants.CorrelationIdHeaderName)
                         {
-                            Activity.Current.AddBaggage(baggageItem.Key, baggageItem.Value);
+                            consumingActivity.AddBaggage(baggageItem.Key, baggageItem.Value);
                         }
                     }
                 }
+
+                consumingActivity.Start();
 
                 span = _tracer?.StartSpanFromActivity(Constants.SpanConsumeOperationNamePrefix, Activity.Current, SpanKind.Consumer);
 
@@ -100,7 +102,7 @@ namespace GiG.Core.Messaging.Kafka.Consumers
             }
             finally
             {
-                Activity.Current.Stop();
+                consumingActivity?.Stop();
                 span?.End();
             }
         }
