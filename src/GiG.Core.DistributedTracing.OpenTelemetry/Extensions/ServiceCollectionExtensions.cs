@@ -51,9 +51,9 @@ namespace GiG.Core.DistributedTracing.OpenTelemetry.Extensions
                     // Configure tracing exporters
                     .ConfigureTracing(tracingConfigurationBuilder, configurationSection)
                     // Configure tracing to collect incoming HTTP requests
-                    .AddRequestCollector()
+                    .AddRequestAdapter()
                     // Configure tracing to collect outgoing HTTP requests
-                    .AddDependencyCollector();
+                    .AddDependencyAdapter();
             });
 
             return services;
