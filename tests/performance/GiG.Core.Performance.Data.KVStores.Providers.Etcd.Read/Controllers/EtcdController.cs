@@ -1,6 +1,8 @@
 ﻿using dotnet_etcd;
 using GiG.Core.Data.KVStores.Abstractions;
+using GiG.Core.Data.KVStores.Providers.Etcd.Abstractions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,12 +20,14 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read.Controllers
     {
         private readonly IDataProvider<string> _dataProvider;
         private readonly EtcdClient _etcdClient;
+        private readonly EtcdProviderOptions _etcdProviderOptions;
 
         public EtcdController(IDataProvider<string> dataProvider,
-            EtcdClient etcdClient)
+            EtcdClient etcdClient, IOptions<EtcdProviderOptions> etcdProviderOptions)
         {
             _dataProvider = dataProvider;
             _etcdClient = etcdClient;
+            _etcdProviderOptions = etcdProviderOptions.Value;
         }
 
         [HttpGet("{key}")]
@@ -94,18 +98,18 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read.Controllers
         [HttpGet("prefix/{keyPrefix}")]
         public async Task<ActionResult<IEnumerable<KeyValuePair<string, string>>>> GetRange([FromRoute, Required] string keyPrefix)
         {
-            var values = await _etcdClient.GetRangeAsync(keyPrefix);
+            var values = await _etcdClient.GetRangeAsync(GetKey(keyPrefix));
             var list = values.Kvs.Select(x => new KeyValuePair<string, string>(x.Key.ToStringUtf8(), x.Value.ToStringUtf8()));
 
             return Ok(list);
         }
-
+      
         [HttpGet("prefix/{keyPrefix}/duration")]
         public async Task<ActionResult<IEnumerable<KeyValuePair<string, string>>>> GetRangeWithDuration([FromRoute, Required] string keyPrefix)
         {
             Stopwatch timer = new Stopwatch();
             timer.Start();
-            var values = await _etcdClient.GetRangeAsync(keyPrefix);
+            var values = await _etcdClient.GetRangeAsync(GetKey(keyPrefix));
             var list = values.Kvs.Select(x => new KeyValuePair<string, string>(x.Key.ToStringUtf8(), x.Value.ToStringUtf8()));
             timer.Stop();
 
@@ -117,7 +121,7 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read.Controllers
         [HttpGet("prefix/{keyPrefix}/length")]
         public async Task<ActionResult<string>> GetRangeLength([FromRoute, Required] string keyPrefix)
         {
-            var values = await _etcdClient.GetRangeAsync(keyPrefix);
+            var values = await _etcdClient.GetRangeAsync(GetKey(keyPrefix));
             var valuesLength = values.Kvs.Select(x => x.Value.ToStringUtf8().Length).Sum();
 
             return Ok(valuesLength);
@@ -128,13 +132,20 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read.Controllers
         {
             Stopwatch timer = new Stopwatch();
             timer.Start();
-            var values = await _etcdClient.GetRangeAsync(keyPrefix);
+            var values = await _etcdClient.GetRangeAsync(GetKey(keyPrefix));
             var valuesLength = values.Kvs.Select(x => x.Value.ToStringUtf8().Length).Sum();
             timer.Stop();
 
             Response.Headers.Add("call-duration-ms", timer.Elapsed.Milliseconds.ToString());
 
             return Ok(valuesLength);
+        }
+
+        private string GetKey(string key)
+        {
+            return string.IsNullOrWhiteSpace(key)
+                ? _etcdProviderOptions.Key
+                : string.Concat(_etcdProviderOptions.Key, "/", key);
         }
     }
 }
