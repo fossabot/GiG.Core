@@ -57,11 +57,13 @@ namespace GiG.Core.Messaging.Kafka.Consumers
         public IKafkaMessage<TKey, TValue> Consume(CancellationToken cancellationToken = default)
         {
             TelemetrySpan span = null;
-            var consumingActivity = new Activity(Constants.ConsumeActivityName);
-            
+            Activity consumingActivity = null;
+         
             try
             {
                 var consumeResult = _consumer.Consume(cancellationToken);
+                consumingActivity = new Activity(Constants.ConsumeActivityName);
+                consumingActivity.Start();
                 var kafkaMessage = (KafkaMessage<TKey, TValue>) consumeResult;
 
                 if (kafkaMessage.Headers?.Any() ?? false)
@@ -81,8 +83,6 @@ namespace GiG.Core.Messaging.Kafka.Consumers
                         }
                     }
                 }
-
-                consumingActivity.Start();
 
                 span = _tracer?.StartSpanFromActivity(Constants.SpanConsumeOperationNamePrefix, consumingActivity, SpanKind.Consumer);
 

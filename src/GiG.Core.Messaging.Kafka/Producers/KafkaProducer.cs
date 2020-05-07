@@ -74,7 +74,7 @@ namespace GiG.Core.Messaging.Kafka.Producers
             }
             finally
             {
-                publishingActivity.Stop();
+                publishingActivity?.Stop();
                 span?.End();
             }
         }
