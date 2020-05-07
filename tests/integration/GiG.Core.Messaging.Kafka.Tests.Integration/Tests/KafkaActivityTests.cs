@@ -55,7 +55,6 @@ namespace GiG.Core.Messaging.Kafka.Tests.Integration.Tests
         public async Task KafkaActivity_ProduceConsumeMessage_CorrectActivityReceived()
         {
             // Arrange
-
             var baggageKey = "testKey";
             _activityContextAccessor.CurrentActivity.AddBaggage(baggageKey, "testing");
             var mockMessage = new MockMessage();
