@@ -3,7 +3,10 @@ using GiG.Core.Messaging.Kafka.Abstractions.Interfaces;
 using GiG.Core.Messaging.Kafka.Consumers;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
+using OpenTelemetry.Trace;
+using OpenTelemetry.Trace.Configuration;
 using System;
+using Constants = GiG.Core.Messaging.Kafka.Internal.Constants;
 
 namespace GiG.Core.Messaging.Kafka.Factories
 {
@@ -11,10 +14,12 @@ namespace GiG.Core.Messaging.Kafka.Factories
     internal class ConsumerFactory : IConsumerFactory
     {
         private readonly ILoggerFactory _loggerFactory;
+        private readonly Tracer _tracer;
 
-        public ConsumerFactory([NotNull] ILoggerFactory loggerFactory)
+        public ConsumerFactory([NotNull] ILoggerFactory loggerFactory, TracerFactory tracerFactory = null)
         {
             _loggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
+            _tracer = tracerFactory?.GetTracer(Constants.TracerName);
         }
 
         /// <inheritdoc />
@@ -23,7 +28,7 @@ namespace GiG.Core.Messaging.Kafka.Factories
             var builderOptions = new KafkaBuilderOptions<TKey, TValue>();
             setupAction?.Invoke(builderOptions);
 
-            return new KafkaConsumer<TKey, TValue>(builderOptions, _loggerFactory.CreateLogger<KafkaConsumer<TKey, TValue>>());
+            return new KafkaConsumer<TKey, TValue>(builderOptions, _loggerFactory.CreateLogger<KafkaConsumer<TKey, TValue>>(), _tracer);
         }
     }
 }

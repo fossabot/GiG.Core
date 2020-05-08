@@ -2,12 +2,11 @@
 using GiG.Core.DistributedTracing.Abstractions;
 using GiG.Core.Messaging.Kafka.Abstractions.Extensions;
 using GiG.Core.Messaging.Kafka.Abstractions.Interfaces;
-using GiG.Core.MultiTenant.Abstractions;
 using GiG.Core.Providers.DateTime.Abstractions;
 using JetBrains.Annotations;
 using System;
-using System.Linq;
-using Constants = GiG.Core.Messaging.Kafka.Abstractions.Constants;
+using System.Diagnostics;
+using AbstractionConstants = GiG.Core.Messaging.Kafka.Abstractions.Constants;
 
 namespace GiG.Core.Messaging.Kafka.Factories
 {
@@ -15,33 +14,27 @@ namespace GiG.Core.Messaging.Kafka.Factories
     internal class MessageFactory : IMessageFactory
     {
         private readonly IDateTimeProvider _dateTimeProvider;
-        private readonly ITenantAccessor _tenantAccessor;
-        private readonly ICorrelationContextAccessor _correlationContextAccessor;
-        
-        public MessageFactory([NotNull] IDateTimeProvider dateTimeProvider, ITenantAccessor tenantAccessor = null, ICorrelationContextAccessor correlationContextAccessor = null)
+        private readonly IActivityContextAccessor _activityContextAccessor;
+
+        public MessageFactory([NotNull] IDateTimeProvider dateTimeProvider, IActivityContextAccessor activityContextAccessor)
         {
             _dateTimeProvider = dateTimeProvider;
-            _tenantAccessor = tenantAccessor;
-            _correlationContextAccessor = correlationContextAccessor;
+            _activityContextAccessor = activityContextAccessor ?? throw new ArgumentNullException(nameof(activityContextAccessor));
         }
-        
+
         /// <inheritdoc />
         public virtual Message<TKey, TValue> BuildMessage<TKey, TValue>([NotNull] IKafkaMessage<TKey, TValue> kafkaMessage)
         {
             if (kafkaMessage == null) throw new ArgumentNullException(nameof(kafkaMessage));
-            
-            kafkaMessage.Headers.AddOrUpdate(Constants.MessageTypeHeaderName, kafkaMessage.MessageType);
-            kafkaMessage.Headers.AddOrUpdate(Constants.MessageIdHeaderName, kafkaMessage.MessageId);
 
-            if (_tenantAccessor != null)
-            {
-                var tenants = string.Join(",", _tenantAccessor.Values.ToArray());
-                kafkaMessage.Headers.AddOrUpdate(MultiTenant.Abstractions.Constants.Header, tenants);
-            }
+            kafkaMessage.Headers.AddOrUpdate(AbstractionConstants.MessageTypeHeaderName, kafkaMessage.MessageType);
+            kafkaMessage.Headers.AddOrUpdate(AbstractionConstants.MessageIdHeaderName, kafkaMessage.MessageId);
 
-            if (_correlationContextAccessor != null)
+            kafkaMessage.Headers.Add(AbstractionConstants.CorrelationIdHeaderName, Activity.Current.Id);
+
+            foreach (var baggageItem in _activityContextAccessor.Baggage)
             {
-                kafkaMessage.Headers.AddOrUpdate(DistributedTracing.Abstractions.Constants.Header, _correlationContextAccessor.Value.ToString());
+                kafkaMessage.Headers.Add(baggageItem.Key, baggageItem.Value);
             }
 
             return new Message<TKey, TValue>

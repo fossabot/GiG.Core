@@ -8,11 +8,16 @@
         /// <summary>
         /// Header name for the Message type.
         /// </summary>
-        public const string MessageTypeHeaderName = "MessageType";
+        public const string MessageTypeHeaderName = "message_type";
         
         /// <summary>
         /// Header name for the Message ID.
         /// </summary>
-        public const string MessageIdHeaderName = "MessageId";
+        public const string MessageIdHeaderName = "message_id";
+        
+        /// <summary>
+        /// Header name for the Message ID.
+        /// </summary>
+        public const string CorrelationIdHeaderName = "correlation_id";
     }
 }
