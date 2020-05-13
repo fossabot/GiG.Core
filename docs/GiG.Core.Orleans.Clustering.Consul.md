@@ -58,7 +58,7 @@ static class Program
 
 ### Configuration
 
-The below table outlines the valid Configurations used to override the [ConsulOptions](../src/GiG.Core.Orleans.Clustering.Consul/Abstractions/ConsulOptions.cs) under the Config section `Orleans:Consul`.
+The below table outlines the valid Configurations used to override the [ConsulOptions](../src/GiG.Core.Orleans.Clustering.Consul/Abstractions/ConsulOptions.cs) under the Config section `Orleans:MembershipProvider`.
 
 | Configuration Name | Type   | Optional | Default Value            |
 |:-------------------|:-------|:---------|:-------------------------|
