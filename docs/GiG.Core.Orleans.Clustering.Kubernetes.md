@@ -60,7 +60,7 @@ static class Program
 
 #### Silo
 
-The below table outlines the valid Configurations used to override the [KubernetesSiloOptions](../src/GiG.Core.Orleans.Clustering.Kubernetes/Abstractions/KubernetesSiloOptions.cs) under the Config section `Orleans:Kubernetes`.
+The below table outlines the valid Configurations used to override the [KubernetesSiloOptions](../src/GiG.Core.Orleans.Clustering.Kubernetes/Abstractions/KubernetesSiloOptions.cs) under the Config section `Orleans:MembershipProvider`.
 
 | Configuration Name  | Type   | Optional | Default Value                                                     |
 |:--------------------|:-------|:---------|:------------------------------------------------------------------|
@@ -73,7 +73,7 @@ The below table outlines the valid Configurations used to override the [Kubernet
 
 #### Client
 
-The below table outlines the valid Configurations used to override the [KubernetesClientOptions](../src/GiG.Core.Orleans.Clustering.Kubernetes/Abstractions/KubernetesClientOptions.cs) under the Config section `Orleans:Kubernetes`.
+The below table outlines the valid Configurations used to override the [KubernetesClientOptions](../src/GiG.Core.Orleans.Clustering.Kubernetes/Abstractions/KubernetesClientOptions.cs) under the Config section `Orleans:MembershipProvider`.
 
 | Configuration Name  | Type   | Optional | Default Value                                                     |
 |:--------------------|:-------|:---------|:------------------------------------------------------------------|
