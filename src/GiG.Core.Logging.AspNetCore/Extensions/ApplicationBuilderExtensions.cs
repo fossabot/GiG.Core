@@ -22,7 +22,7 @@ namespace GiG.Core.Logging.AspNetCore.Extensions
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
 
-            var httpRequestResponseLoggingOptions = builder.ApplicationServices.GetService<IOptions<HttpRequestResponseLoggingOptions>>().Value ?? new HttpRequestResponseLoggingOptions();
+            var httpRequestResponseLoggingOptions = builder.ApplicationServices.GetService<IOptions<HttpRequestResponseLoggingOptions>>()?.Value ?? new HttpRequestResponseLoggingOptions();
 
             if (httpRequestResponseLoggingOptions.IsEnabled)
             {
