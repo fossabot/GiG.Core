@@ -19,5 +19,10 @@
         /// The Response Options.
         /// </summary>
         public HttpRequestResponseOptions Response { get; set; } = new HttpRequestResponseOptions();
+
+        /// <summary>
+        /// A value to indicate if Logging is enabled or not.
+        /// </summary>
+        public bool IsEnabled { get; set; } = false;
     }
 }

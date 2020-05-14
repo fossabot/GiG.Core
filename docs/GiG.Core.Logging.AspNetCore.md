@@ -32,6 +32,7 @@ The below table outlines the valid Configurations used to override the [HttpRequ
 
 | Configuration Name        | Type    | Required                  | Default Value |
 |:--------------------------|:--------|:--------------------------|:--------------|
+| IsEnabled                 | Boolean | No                        | `false`       |
 | Request:IsEnabled         | Boolean | No                        | `true`        |
 | Request:IncludeHeaders    | Boolean | No                        | `true`        |
 | Request:IncludeBody       | Boolean | No                        | `true`        |
@@ -45,6 +46,7 @@ The below table outlines the valid Configurations used to override the [HttpRequ
 {
   "Logging": {     
     "HttpRequestResponse": {
+      "IsEnabled" : true,
       "Request": {
         "IsEnabled": true,
         "IncludeHeaders": false
