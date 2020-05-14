@@ -48,7 +48,7 @@ namespace GiG.Core.Web.Sample
         public void Configure(IApplicationBuilder app)
         {
             app.UseRouting();
-            app.UseHttpRequestResponseLogging();
+            app.UseHttpRequestResponseLogging(Configuration);
             app.UseTenantIdMiddleware();
             app.UseAuthentication();
             app.UseAuthorization();
