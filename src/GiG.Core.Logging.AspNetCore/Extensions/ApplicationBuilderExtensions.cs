@@ -1,7 +1,8 @@
 ﻿using GiG.Core.Logging.AspNetCore.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using System;
 
 namespace GiG.Core.Logging.AspNetCore.Extensions
@@ -15,15 +16,13 @@ namespace GiG.Core.Logging.AspNetCore.Extensions
         /// Adds Logging for Http Request and Http Response.
         /// </summary>
         /// <param name="builder">The <see cref="IApplicationBuilder" />.</param>
-        /// <param name="configuration">The <see cref="IConfiguration"/> which binds to <see cref="HttpRequestResponseLoggingOptions"/>.</param>
         /// <returns>The <see cref="IApplicationBuilder" />.</returns>
         public static IApplicationBuilder UseHttpRequestResponseLogging(
-            [NotNull] this IApplicationBuilder builder,
-            [NotNull] IConfiguration configuration)
+            [NotNull] this IApplicationBuilder builder)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
 
-            var httpRequestResponseLoggingOptions = configuration.Get<HttpRequestResponseLoggingOptions>() ?? new HttpRequestResponseLoggingOptions();
+            var httpRequestResponseLoggingOptions = builder.ApplicationServices.GetService<IOptions<HttpRequestResponseLoggingOptions>>().Value ?? new HttpRequestResponseLoggingOptions();
 
             if (httpRequestResponseLoggingOptions.IsEnabled)
             {
