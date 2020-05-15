@@ -58,6 +58,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Internal
                 !authorizedApiKeys.Any())
             {
                 _logger.LogError("ApiKey Authentication was enabled but the provided list of Authorized Api Keys was empty.");
+
                 return FailedApiKeyAuthentication();
             }
 
@@ -79,7 +80,7 @@ namespace GiG.Core.Web.Authentication.ApiKey.Internal
             return AuthenticateResult.Success(ticket);
         }
 
-        private AuthenticateResult FailedApiKeyAuthentication()
+        private static AuthenticateResult FailedApiKeyAuthentication()
         {
             return AuthenticateResult.Fail("Invalid API key.");
         }

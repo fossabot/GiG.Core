@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IO;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -20,10 +21,7 @@ namespace GiG.Core.Logging.AspNetCore
         private readonly IOptionsMonitor<HttpRequestResponseLoggingOptions> _httpRequestResponseLoggingOptionsMonitor;
         private readonly ILogger _logger;
         private readonly RecyclableMemoryStreamManager _recyclableMemoryStreamManager;
-
-        private StringBuilder _stringBuilder;
-        private IList<object> _params;
-
+        
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -41,7 +39,11 @@ namespace GiG.Core.Logging.AspNetCore
             _recyclableMemoryStreamManager = new RecyclableMemoryStreamManager();
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Middleware Invoke method.
+        /// </summary>
+        /// <param name="context">The <see cref="HttpContext"/>.</param>
+        /// <returns></returns>
         public async Task Invoke(HttpContext context)
         {
             if (!_logger.IsEnabled(LogLevel.Information))
@@ -52,33 +54,32 @@ namespace GiG.Core.Logging.AspNetCore
 
             var httpRequestResponseLoggingOptions = _httpRequestResponseLoggingOptionsMonitor.CurrentValue;
 
-            await LogRequest(httpRequestResponseLoggingOptions, context);
+            await LogRequest(httpRequestResponseLoggingOptions, context.Request);
             await LogResponse(httpRequestResponseLoggingOptions, context);
         }
 
-
-        private static StringBuilder CreateStringBuilder(string httpRequestOrHttpReponse)
+        private static StringBuilder CreateStringBuilder(string operationName)
         {
             return new StringBuilder()
-                .AppendLine(httpRequestOrHttpReponse)
+                .AppendLine(operationName)
                 .AppendLine("Scheme: {scheme}")
                 .AppendLine("Host: {host}")
                 .AppendLine("Path: {path}")
                 .AppendLine("QueryString: {queryString}");
         }
 
-        private static List<object> CreateParams(HttpContext context)
+        private static List<object> CreateParams(HttpRequest request)
         {
-            return new List<object>()
+            return new List<object>
             {
-                context.Request.Scheme,
-                context.Request.Host,
-                context.Request.Path,
-                context.Request.QueryString,
+                request.Scheme,
+                request.Host,
+                request.Path,
+                request.QueryString,
             };
         }
-
-        private async Task LogRequest(HttpRequestResponseLoggingOptions httpRequestResponseLoggingOptions, HttpContext context)
+        
+        private async Task LogRequest(HttpRequestResponseLoggingOptions httpRequestResponseLoggingOptions, HttpRequest request)
         {
             var requestOptions = httpRequestResponseLoggingOptions.Request ?? new HttpRequestResponseOptions();
             if (!requestOptions.IsEnabled)
@@ -86,31 +87,29 @@ namespace GiG.Core.Logging.AspNetCore
                 return;
             }
 
-            context.Request.EnableBuffering();
+            request.EnableBuffering();
 
-            using var requestStream = _recyclableMemoryStreamManager.GetStream();
+            await using var requestStream = _recyclableMemoryStreamManager.GetStream();
 
-            await context.Request.Body.CopyToAsync(requestStream);
-
-            _stringBuilder = CreateStringBuilder("Http Request Information...");
-
-            _params = CreateParams(context);
+            await request.Body.CopyToAsync(requestStream);
+            var stringBuilder = CreateStringBuilder("Http Request Information...");
+            var @params = CreateParams(request);
 
             if (requestOptions.IncludeHeaders)
             {
-                _stringBuilder.AppendLine("Headers: {headers}");
-                _params.Add(context.Request.Headers);
+                stringBuilder.AppendLine("Headers: {headers}");
+                @params.Add(request.Headers.ToImmutableArray());
             }
 
             if (requestOptions.IncludeBody)
             {
-                _stringBuilder.AppendLine("Request Body: {requestBody}");
-                _params.Add(ReadStreamInChunks(requestStream));
+                stringBuilder.AppendLine("Request Body: {requestBody}");
+                @params.Add(ReadStreamInChunks(requestStream));
             }
 
-            _logger.LogInformation(_stringBuilder.ToString(), _params.ToArray());
+            _logger.LogInformation(stringBuilder.ToString(), @params.ToArray());
 
-            context.Request.Body.Position = 0;
+            request.Body.Position = 0;
         }
 
         private async Task LogResponse(HttpRequestResponseLoggingOptions httpRequestResponseLoggingOptions, HttpContext context)
@@ -120,40 +119,38 @@ namespace GiG.Core.Logging.AspNetCore
             if (!responseOptions.IsEnabled)
             {
                 await _next(context);
+
                 return;
             }
 
-            var bodyStream = context.Response.Body;
+            var response = context.Response;
+            var bodyStream = response.Body;
 
-            using var responseStream = _recyclableMemoryStreamManager.GetStream();
-
-            context.Response.Body = responseStream;
+            await using var responseStream = _recyclableMemoryStreamManager.GetStream();
+            response.Body = responseStream;
 
             await _next(context);
 
-            context.Response.Body.Seek(0, SeekOrigin.Begin);
+            response.Body.Seek(0, SeekOrigin.Begin);
+            var responseText = await new StreamReader(response.Body).ReadToEndAsync();
+            response.Body.Seek(0, SeekOrigin.Begin);
 
-            var responseText = await new StreamReader(context.Response.Body).ReadToEndAsync();
-
-            context.Response.Body.Seek(0, SeekOrigin.Begin);
-
-            _stringBuilder = CreateStringBuilder("Http Response Information...");
-
-            _params = CreateParams(context);
+            var stringBuilder = CreateStringBuilder("Http Response Information...");
+            var @params = CreateParams(context.Request);
 
             if (responseOptions.IncludeHeaders)
             {
-                _stringBuilder.AppendLine("Headers: {headers}");
-                _params.Add(context.Request.Headers);
+                stringBuilder.AppendLine("Headers: {headers}");
+                @params.Add(response.Headers.ToImmutableArray());
             }
 
             if (responseOptions.IncludeBody)
             {
-                _stringBuilder.AppendLine("Response Body: {text}");
-                _params.Add(responseText);
+                stringBuilder.AppendLine("Response Body: {text}");
+                @params.Add(responseText);
             }
 
-            _logger.LogInformation(_stringBuilder.ToString(), _params.ToArray());
+            _logger.LogInformation(stringBuilder.ToString(), @params.ToArray());
 
             await responseStream.CopyToAsync(bodyStream);
         }
@@ -165,11 +162,9 @@ namespace GiG.Core.Logging.AspNetCore
             stream.Seek(0, SeekOrigin.Begin);
 
             using var stringWriter = new StringWriter();
-
             using var streamReader = new StreamReader(stream);
 
             var readChunk = new char[readChunkBufferLength];
-
             int readChunkLength;
 
             do

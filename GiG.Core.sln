@@ -496,6 +496,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Performance.Data.K
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Messaging.Kafka.Tests.Integration", "tests\integration\GiG.Core.Messaging.Kafka.Tests.Integration\GiG.Core.Messaging.Kafka.Tests.Integration.csproj", "{EBE1EC78-EF4D-4D8F-8668-A7150BC5EA7E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Web.Versioning", "src\GiG.Core.Web.Versioning\GiG.Core.Web.Versioning.csproj", "{75599EE4-BFB2-4CCE-AE90-5619D236FFFD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1126,6 +1128,10 @@ Global
 		{39F07DDA-2D42-4854-97B9-901836273E83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39F07DDA-2D42-4854-97B9-901836273E83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39F07DDA-2D42-4854-97B9-901836273E83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75599EE4-BFB2-4CCE-AE90-5619D236FFFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75599EE4-BFB2-4CCE-AE90-5619D236FFFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75599EE4-BFB2-4CCE-AE90-5619D236FFFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75599EE4-BFB2-4CCE-AE90-5619D236FFFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1328,6 +1334,7 @@ Global
 		{3EE79E77-87B6-444E-81BB-F7937AA3FAE6} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
 		{EBE1EC78-EF4D-4D8F-8668-A7150BC5EA7E} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 		{39F07DDA-2D42-4854-97B9-901836273E83} = {66468249-0BE3-4E03-A5B8-DE350CA051EE}
+		{75599EE4-BFB2-4CCE-AE90-5619D236FFFD} = {D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}

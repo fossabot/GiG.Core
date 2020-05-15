@@ -32,7 +32,7 @@ The below table outlines the valid Configurations used to override the [ApiDocsO
 
 | Configuration Name        | Type    | Required | Default Value |
 |:--------------------------|:--------|:---------|:--------------|
-| IsEnabled                 | Boolean | No       | `true`        |
+| IsEnabled                 | Boolean | No       | `false`       |
 | Url                       | String  | No       | `api-docs`    |
 | Title                     | String  | No       | <null>        |
 | Description               | String  | No       | <null>        |

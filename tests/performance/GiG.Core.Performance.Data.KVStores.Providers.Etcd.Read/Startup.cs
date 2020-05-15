@@ -4,6 +4,7 @@ using GiG.Core.Data.KVStores.Providers.Etcd;
 using GiG.Core.Data.KVStores.Providers.Etcd.Abstractions;
 using GiG.Core.Data.Serializers.Abstractions;
 using GiG.Core.Web.Docs.Extensions;
+using GiG.Core.Web.Versioning;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,15 +24,20 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Read
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.ConfigureApiDocs(Configuration);
+            services.ConfigureApiDocs(Configuration)
+                .AddApiExplorerVersioning();
+
             services.AddControllers();
 
-            var etcdProviderOptions = Configuration.GetSection("EtcdRead").Get<EtcdProviderOptions>();
-            services.Configure<EtcdProviderOptions>(Configuration.GetSection("EtcdRead"));
-            services.TryAddSingleton<EtcdClient>(new EtcdClient(etcdProviderOptions.ConnectionString, etcdProviderOptions.Port,
+            var etcdConfigurationSection = Configuration.GetSection("EtcdRead");
+            var etcdProviderOptions = etcdConfigurationSection.Get<EtcdProviderOptions>();
+
+            services.Configure<EtcdProviderOptions>(etcdConfigurationSection);
+            services.TryAddSingleton(new EtcdClient(etcdProviderOptions.ConnectionString, etcdProviderOptions.Port,
                 etcdProviderOptions.Username, etcdProviderOptions.Password, etcdProviderOptions.CaCertificate,
                 etcdProviderOptions.ClientCertificate, etcdProviderOptions.ClientKey,
                 etcdProviderOptions.IsPublicRootCa));
+
             services.AddSingleton<IDataProviderOptions<string, EtcdProviderOptions>>(new DataProviderOptions<string, EtcdProviderOptions>(etcdProviderOptions));
             services.AddSingleton<IDataSerializer<string>, StringSerializer>();
             services.AddSingleton<IDataProvider<string>, EtcdDataProvider<string>>();

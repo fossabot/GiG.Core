@@ -14,11 +14,10 @@ namespace GiG.Core.Performance.Data.KVStores.Providers.Etcd.Watch
             var configuration = hostContext.Configuration;
 
             var configurationSection = configuration.GetSection("EtcdWatch");
-            var isSslEnabled = configuration.GetSection("EtcdWatch:IsSslEnabled").Get<bool>();
+            var isSslEnabled = configurationSection.GetSection("IsSslEnabled").Get<bool>();
             var etcdProviderOptions = configurationSection.Get<EtcdProviderOptions>();
             services.Configure<EtcdProviderOptions>(configurationSection);
            
-
             var caCert = (isSslEnabled) ? File.ReadAllText("etcd-client-ca.crt") : "";
             var clientCert = (isSslEnabled) ? File.ReadAllText("etcd-client.crt") : "";
             var clientKey = (isSslEnabled) ? File.ReadAllText("etcd-client.key") : "";
