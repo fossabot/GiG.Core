@@ -47,7 +47,7 @@ namespace GiG.Core.Validation.FluentValidation.Web.Internal
         {
             var writerOptions = new JsonWriterOptions { Encoder = javaScriptEncoder ?? JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
 
-            var writer = new Utf8JsonWriter(response.Body, writerOptions);
+            await using var writer = new Utf8JsonWriter(response.Body, writerOptions);
 
             writer.WriteStartObject();
             writer.WriteString("errorSummary", "One or more validation errors occurred.");
