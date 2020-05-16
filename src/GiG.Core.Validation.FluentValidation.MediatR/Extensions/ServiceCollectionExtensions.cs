@@ -19,7 +19,7 @@ namespace GiG.Core.Validation.FluentValidation.MediatR.Extensions
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services.TryAddSingleton(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
+            services.TryAddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
             
             return services;
         }

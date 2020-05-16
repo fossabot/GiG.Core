@@ -3,8 +3,6 @@ using FluentValidation.Results;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -47,18 +45,19 @@ namespace GiG.Core.Validation.FluentValidation.Web.Internal
 
         private static async ValueTask SerialiseErrorResponseAsync(HttpResponse response, JavaScriptEncoder javaScriptEncoder, Dictionary<string, List<string>> errors)
         {
-            var writerOptions = new JsonWriterOptions {Encoder = javaScriptEncoder ?? JavaScriptEncoder.UnsafeRelaxedJsonEscaping};
-            using (var writer = new Utf8JsonWriter(response.Body, writerOptions))
-            {
-                writer.WriteStartObject();
-                writer.WriteString("errorSummary", "One or more validation errors occurred.");
-                writer.WriteStartObject("errors");
-                WriteErrorsArray(writer, errors);
-                writer.WriteEndObject();
-                writer.WriteEndObject();
-                
-                await writer.FlushAsync();
-            }
+            var writerOptions = new JsonWriterOptions { Encoder = javaScriptEncoder ?? JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
+
+            await using var writer = new Utf8JsonWriter(response.Body, writerOptions);
+
+            writer.WriteStartObject();
+            writer.WriteString("errorSummary", "One or more validation errors occurred.");
+            writer.WriteStartObject("errors");
+            WriteErrorsArray(writer, errors);
+            writer.WriteEndObject();
+            writer.WriteEndObject();
+
+            await writer.FlushAsync();
+            await writer.DisposeAsync();
         }
 
         private static void WriteErrorsArray(Utf8JsonWriter writer, Dictionary<string, List<string>> errors)
@@ -87,7 +86,7 @@ namespace GiG.Core.Validation.FluentValidation.Web.Internal
                 }
                 else
                 {
-                    dictionary.Add(errors.PropertyName, new List<string> {errors.ErrorMessage});
+                    dictionary.Add(errors.PropertyName, new List<string> { errors.ErrorMessage });
                 }
             }
 
