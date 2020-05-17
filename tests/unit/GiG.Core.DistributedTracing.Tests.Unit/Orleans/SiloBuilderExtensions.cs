@@ -14,5 +14,19 @@ namespace GiG.Core.DistributedTracing.Tests.Unit.Orleans
             var exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.AddActivityIncomingFilter(null));
             Assert.Equal("builder", exception.ParamName);
         }
+        
+        [Fact]
+        public void AddActivityOutgoingFilter_SiloBuilderIsNull_ThrowsArgumentNullException()
+        {
+            var exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.AddActivityOutgoingFilter(null));
+            Assert.Equal("builder", exception.ParamName);
+        }
+        
+        [Fact]
+        public void AddActivityFilters_SiloBuilderIsNull_ThrowsArgumentNullException()
+        {
+            var exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.AddActivityFilters(null));
+            Assert.Equal("builder", exception.ParamName);
+        }
     }
 }

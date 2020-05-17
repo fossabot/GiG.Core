@@ -13,7 +13,7 @@
         /// <summary>
         /// If enabled, topics will be created on application startup.
         /// </summary>
-        public bool IsTopicCreationEnabled  { get; set; } = true;
+        public bool IsTopicCreationEnabled  { get; set; } = false;
 
         /// <summary>
         /// Number of Partitions.
