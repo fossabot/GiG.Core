@@ -25,6 +25,9 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             // Arrange
             var grainId = Guid.NewGuid();
             var grain = _fixture.ClusterClient.GetGrain<IActivityTestGrain>(grainId);
+            
+            var activity = new Activity("test");
+            activity.Start();
 
             // Act
             var activityResponse = await grain.GetActivityAsync();

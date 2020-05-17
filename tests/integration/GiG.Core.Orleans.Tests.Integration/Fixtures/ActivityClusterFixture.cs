@@ -51,7 +51,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                 .UseOrleans((ctx, x) =>
                 {
                     var endpointOptions = ctx.Configuration.GetSection(SiloSectionName).Get<EndpointOptions>() ?? new EndpointOptions();
-                    x.AddActivityIncomingFilter();
+                    x.AddActivityFilters();
                     x.ConfigureEndpoints(ctx.Configuration.GetSection(SiloSectionName));
                     x.UseMembershipProvider(ctx.Configuration, y =>
                     {
@@ -76,7 +76,7 @@ namespace GiG.Core.Orleans.Tests.Integration.Fixtures
                     services.AddSingleton<IRequestContextAccessor, MockRequestContextAccessor>();
                     services.AddDefaultClusterClient((x, sp) =>
                     {
-                        x.AddActivityOutgoingFilter(sp);
+                        x.AddActivityOutgoingFilter();
                         x.AddRequestContextOutgoingFilter(sp);
                         x.UseMembershipProvider(config, y => { y.ConfigureLocalhostClustering(options.GatewayPort, serviceId, clusterId); });
                         x.AddAssemblies(typeof(IEchoTestGrain));
