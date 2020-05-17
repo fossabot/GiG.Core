@@ -1,6 +1,6 @@
-﻿using GiG.Core.DistributedTracing.Abstractions;
-using Orleans;
+﻿using Orleans;
 using Orleans.Runtime;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace GiG.Core.DistributedTracing.Orleans
@@ -10,14 +10,6 @@ namespace GiG.Core.DistributedTracing.Orleans
     /// </summary>
     public class ActivityOutgoingGrainCallFilter : IOutgoingGrainCallFilter
     {
-        private readonly IActivityContextAccessor _activityContextAccessor;
-
-        /// <summary>
-        /// Default constructor.
-        /// </summary>
-        /// <param name="activityContextAccessor">The <see cref="IActivityContextAccessor"/>.</param>
-        public ActivityOutgoingGrainCallFilter(IActivityContextAccessor activityContextAccessor) => _activityContextAccessor = activityContextAccessor;
-
         /// <summary>
         /// Invoke Grain call context.
         /// </summary>
@@ -25,9 +17,12 @@ namespace GiG.Core.DistributedTracing.Orleans
         /// <returns>A <see cref="Task"/>.</returns>
         public async Task Invoke(IOutgoingGrainCallContext context)
         {
-            RequestContext.Set(Constants.ActivityHeader, _activityContextAccessor.ActivityId);
-            RequestContext.Set(Constants.BaggageHeader, _activityContextAccessor.Baggage);
-
+            if (Activity.Current != null)
+            {
+                RequestContext.Set("Trace-Parent", Activity.Current.Id);
+                RequestContext.Set("Correlation-Context", Activity.Current.Baggage);
+            }
+                
             await context.Invoke();
         }
     }
