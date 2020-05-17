@@ -1,4 +1,5 @@
-﻿using Orleans;
+﻿using GiG.Core.DistributedTracing.Abstractions;
+using Orleans;
 using Orleans.Runtime;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -19,8 +20,8 @@ namespace GiG.Core.DistributedTracing.Orleans
         {
             if (Activity.Current != null)
             {
-                RequestContext.Set("Trace-Parent", Activity.Current.Id);
-                RequestContext.Set("Correlation-Context", Activity.Current.Baggage);
+                RequestContext.Set(Constants.ActivityHeader, Activity.Current.Id);
+                RequestContext.Set(Constants.BaggageHeader, Activity.Current.Baggage);
             }
                 
             await context.Invoke();
