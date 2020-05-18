@@ -26,17 +26,15 @@ namespace GiG.Core.Orleans.Tests.Integration.Tests
             var grainId = Guid.NewGuid();
             var grain = _fixture.ClusterClient.GetGrain<IActivityTestGrain>(grainId);
             
-            var activity = new Activity("test");
-            activity.Start();
-
             // Act
             var activityResponse = await grain.GetActivityAsync();
 
             // Assert
             Assert.NotNull(activityResponse);
-            Assert.NotNull(activityResponse.TraceId);
             Assert.NotNull(activityResponse.RootId);
-            Assert.False(string.IsNullOrEmpty(activityResponse.ParentId));
+            Assert.NotNull(activityResponse.TraceId);
+            Assert.True(string.IsNullOrEmpty(activityResponse.ParentId));
+            Assert.Null(activityResponse.Baggage);
         }
         
         [Fact]
