@@ -18,12 +18,11 @@ namespace GiG.Core.DistributedTracing.Orleans
         /// <returns>A <see cref="Task"/>.</returns>
         public Task Invoke(IOutgoingGrainCallContext context)
         {
-            if (Activity.Current != null)
-            {
-                RequestContext.Set(Constants.ActivityHeader, Activity.Current.Id);
-                RequestContext.Set(Constants.BaggageHeader, Activity.Current.Baggage);
-            }
-                
+            if (Activity.Current == null) return context.Invoke();
+
+            RequestContext.Set(Constants.ActivityHeader, Activity.Current.Id);
+            RequestContext.Set(Constants.BaggageHeader, Activity.Current.Baggage);
+
             return context.Invoke();
         }
     }
