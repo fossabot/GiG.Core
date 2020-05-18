@@ -16,7 +16,7 @@ namespace GiG.Core.DistributedTracing.Orleans
         /// </summary>
         /// <param name="context">The <see cref="IOutgoingGrainCallContext"/>.</param>
         /// <returns>A <see cref="Task"/>.</returns>
-        public async Task Invoke(IOutgoingGrainCallContext context)
+        public Task Invoke(IOutgoingGrainCallContext context)
         {
             if (Activity.Current != null)
             {
@@ -24,7 +24,7 @@ namespace GiG.Core.DistributedTracing.Orleans
                 RequestContext.Set(Constants.BaggageHeader, Activity.Current.Baggage);
             }
                 
-            await context.Invoke();
+            return context.Invoke();
         }
     }
 }
