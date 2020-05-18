@@ -7,7 +7,7 @@ using GiG.Core.Web.Authentication.OAuth.Extensions;
 using GiG.Core.Web.Docs.Authentication.ApiKey.Extensions;
 using GiG.Core.Web.Docs.Authentication.OAuth.Extensions;
 using GiG.Core.Web.Docs.Extensions;
-using GiG.Core.Web.Versioning;
+using GiG.Core.Web.Versioning.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

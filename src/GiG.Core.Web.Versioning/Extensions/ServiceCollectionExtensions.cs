@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace GiG.Core.Web.Versioning
+namespace GiG.Core.Web.Versioning.Extensions
 {
     /// <summary>
     /// The <see cref="IServiceCollection" /> Extensions.

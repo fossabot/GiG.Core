@@ -72,7 +72,7 @@ The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 - [GiG.Core.Web.Docs.Authentication.OAuth](docs/GiG.Core.Web.Docs.Authentication.OAuth.md) - Provides an API to configure OAuth2.0 as a protocol for Authentication when accessing API Documentation.
 - [GiG.Core.Web.Hosting](docs/GiG.Core.Web.Hosting.md) - Provides an API to configure `BASE_PATH` and Forwarded Headers.
 - [GiG.Core.Web.Mock](docs/GiG.Core.Web.Mock.md) - Provides a MockStartupBase class to be used for Testing.
-- [GiG.Core.Web.Versioning](docs/GiG.Core.Web.Versioning.md) - provides an API to add API Versioning.
+- [GiG.Core.Web.Versioning](docs/GiG.Core.Web.Versioning.md) - Provides an API to add API Versioning.
 ## Build
 
 You can build the NuGet packages using one of the following methods. You should find the NuGet packages in the `artifacts` folder after the following commands are executed successfully.

@@ -1,7 +1,6 @@
 using GiG.Core.Web.Docs.Extensions;
-using GiG.Core.Web.Versioning;
+using GiG.Core.Web.Versioning.Extensions;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
