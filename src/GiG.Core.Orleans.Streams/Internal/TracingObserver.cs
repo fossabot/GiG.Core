@@ -29,35 +29,48 @@ namespace GiG.Core.Orleans.Streams.Internal
 
         public async Task OnErrorAsync(Exception ex)
         {
+            var activity = CreateActivity($"{Constants.ConsumeActivityName}-{nameof(OnErrorAsync)}");
+            activity.Start();
+
+            var span = _tracer?.StartSpanFromActivity($"{Constants.SpanConsumeOperationNamePrefix}-{nameof(OnErrorAsync)}", activity, SpanKind.Internal);
+
             await _observer.OnErrorAsync(ex);
+            
+            activity.Stop();
+            span?.End();
         }
 
         public async Task OnNextAsync(T item, StreamSequenceToken token = null)
         {
-            var consumerActivity = new Activity(Constants.ConsumeActivityName);
+            var activity = CreateActivity(Constants.ConsumeActivityName);
+            activity.Start();
+
+            var span = _tracer?.StartSpanFromActivity($"{Constants.SpanConsumeOperationNamePrefix}-{item.GetType().Name}", activity, SpanKind.Consumer);
+
+            await _observer.OnNextAsync(item, token);
+
+            activity.Stop();
+            span?.End();
+        }
+        
+        private static Activity CreateActivity(string operationName)
+        {
+            var activity = new Activity(operationName);
 
             if (RequestContext.Get(DistributedTracingConstants.BaggageHeader) is string traceId)
             {
-                consumerActivity.SetParentId(traceId);
+                activity.SetParentId(traceId);
             }
     
             if (RequestContext.Get(DistributedTracingConstants.BaggageHeader) is IEnumerable<KeyValuePair<string, string>> baggage)
             {
                 foreach (var x in baggage)
                 {
-                    consumerActivity.AddBaggage(x.Key, x.Value);
+                    activity.AddBaggage(x.Key, x.Value);
                 }
             }
-            
-            consumerActivity.Start();
 
-            var span = _tracer?.StartSpanFromActivity($"{Constants.SpanConsumeOperationNamePrefix}-{item.GetType().Name}", 
-                consumerActivity, SpanKind.Consumer);
-
-            await _observer.OnNextAsync(item, token);
-
-            consumerActivity.Stop();
-            span?.End();
+            return activity;
         }
     }
 }
