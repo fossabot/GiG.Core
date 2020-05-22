@@ -70,7 +70,7 @@ namespace GiG.Core.Orleans.Streams
         ///</returns>
         public async Task<StreamSubscriptionHandle<TMessage>> SubscribeAsync(IAsyncObserver<TMessage> observer, StreamSequenceToken token = null)
         {
-            var tracingObserver = new TracingObserver<TMessage>(observer, _activityContextAccessor, _tracer);
+            var tracingObserver = new TracingObserver<TMessage>(observer, _tracer);
 
             return await _asyncStream.SubscribeAsync(tracingObserver, token);
         }
