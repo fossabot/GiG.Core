@@ -57,7 +57,7 @@ namespace GiG.Core.Orleans.Streams.Internal
         {
             var activity = new Activity(operationName);
 
-            if (RequestContext.Get(DistributedTracingConstants.BaggageHeader) is string traceId)
+            if (RequestContext.Get(DistributedTracingConstants.ActivityHeader) is string traceId)
             {
                 activity.SetParentId(traceId);
             }

@@ -36,7 +36,7 @@ namespace GiG.Core.Orleans.Tests.Unit.Streams
         }
 
         [Fact]
-        public async Task OnNextAsync_WithTracin_Success()
+        public async Task OnNextAsync_WithTracing_Success()
         {
             // Arrange
             var spanMock = new Mock<TelemetrySpan>();
