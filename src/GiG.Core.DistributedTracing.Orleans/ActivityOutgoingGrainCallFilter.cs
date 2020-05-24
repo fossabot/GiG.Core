@@ -18,7 +18,7 @@ namespace GiG.Core.DistributedTracing.Orleans
         /// <returns>A <see cref="Task"/>.</returns>
         public Task Invoke(IOutgoingGrainCallContext context)
         {
-            if (RequestContext.Get("Trace-Parent") != null || Activity.Current == null) return context.Invoke();
+            if (RequestContext.Get(Constants.ActivityHeader) != null || Activity.Current == null) return context.Invoke();
             
             RequestContext.Set(Constants.ActivityHeader, Activity.Current.Id);
             RequestContext.Set(Constants.BaggageHeader, Activity.Current.Baggage);
