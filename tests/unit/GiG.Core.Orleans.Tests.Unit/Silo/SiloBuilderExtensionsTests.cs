@@ -1,5 +1,6 @@
 ﻿using GiG.Core.Orleans.Silo.Extensions;
 using Microsoft.Extensions.Hosting;
+using Orleans.Streams;
 using System;
 using System.Configuration;
 using Xunit;
@@ -93,6 +94,21 @@ namespace GiG.Core.Orleans.Tests.Unit.Silo
             var exception = Assert.Throws<ArgumentNullException>(() =>
                             Host.CreateDefaultBuilder().UseOrleans(sb => sb.ConfigureDefaults(null)).Build());
             Assert.Equal("configuration", exception.ParamName);
+        }
+        
+        [Fact]
+        public void ConfigurePubSubType_SiloBuilderIsNull_ThrowsArgumentNullException()
+        {
+            var exception = Assert.Throws<ArgumentNullException>(() => SiloBuilderExtensions.ConfigurePubSubType(null, null, StreamPubSubType.ImplicitOnly));
+            Assert.Equal("builder", exception.ParamName);
+        }
+        
+        [Fact]
+        public void ConfigurePubSubType_StreamProviderNameIsNull_ThrowsArgumentException()
+        {
+            var exception = Assert.Throws<ArgumentException>(() =>
+                Host.CreateDefaultBuilder().UseOrleans(sb => sb.ConfigurePubSubType(null, StreamPubSubType.ImplicitOnly)).Build());
+            Assert.Equal("streamProviderName", exception.ParamName);
         }
     }
 }

@@ -25,7 +25,7 @@ The below table outlines the valid Configurations used to override the [Dashboar
 
 | Configuration Name      | Type    | Required                  | Default Value |
 |:------------------------|:--------|:--------------------------|:--------------|
-| IsEnabled               | Boolean | No                        | `true`        |
+| IsEnabled               | Boolean | No                        | `false`       |
 | Port                    | String  | Yes (If HostSelf is true) | `8080`        |
 | Path                    | String  | No                        | `/dashboard`  |
 | HostSelf                | Boolean | No                        | `false`       |
@@ -39,6 +39,7 @@ The below table outlines the valid Configurations used to override the [Dashboar
 ```json
 {
   "Dashboard": {
+    "IsEnabled": true,
     "HostSelf": true
   }
 }

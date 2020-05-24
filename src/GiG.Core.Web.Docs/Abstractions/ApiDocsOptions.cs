@@ -13,7 +13,7 @@
         /// <summary>
         /// A value to indicate if the ApiDocs are enabled or not.
         /// </summary>
-        public bool IsEnabled { get; set; } = true;
+        public bool IsEnabled { get; set; } = false;
 
         /// <summary>
         /// The ApiDocs Url.
@@ -44,10 +44,5 @@
         /// A value to indicate if Tenant ID header is enabled or not.
         /// </summary>
         public bool IsTenantIdEnabled { get; set; } = true;
-        
-        /// <summary>
-        /// A value to indicate if Api Versioning is enabled or not.
-        /// </summary>
-        public bool IsApiVersioningEnabled { get; set; } = true;
     }
 }

@@ -1,4 +1,4 @@
-﻿using GiG.Core.Orleans.Silo.Abstractions;
+﻿using GiG.Core.Orleans.Silo.Dashboard.Abstractions;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

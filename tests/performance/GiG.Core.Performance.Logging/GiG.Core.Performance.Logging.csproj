@@ -10,6 +10,7 @@
         <ProjectReference Include="..\..\..\src\GiG.Core.Logging\GiG.Core.Logging.csproj" />
         <ProjectReference Include="..\..\..\src\GiG.Core.Logging.All\GiG.Core.Logging.All.csproj" />
         <ProjectReference Include="..\..\..\src\GiG.Core.Web.Docs\GiG.Core.Web.Docs.csproj" />
+        <ProjectReference Include="..\..\..\src\GiG.Core.Web.Versioning\GiG.Core.Web.Versioning.csproj" />
     </ItemGroup>
     
 </Project>

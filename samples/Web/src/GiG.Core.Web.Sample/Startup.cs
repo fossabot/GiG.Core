@@ -7,6 +7,7 @@ using GiG.Core.Web.Authentication.OAuth.Extensions;
 using GiG.Core.Web.Docs.Authentication.ApiKey.Extensions;
 using GiG.Core.Web.Docs.Authentication.OAuth.Extensions;
 using GiG.Core.Web.Docs.Extensions;
+using GiG.Core.Web.Versioning.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +30,8 @@ namespace GiG.Core.Web.Sample
             services.AddControllers()
                 .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
+            services.AddApiExplorerVersioning();
+            
             services.ConfigureApiDocs(Configuration)
                 .AddApiDocsApiKeyAuthentication()
                 .AddApiDocsOAuthAuthentication();
@@ -48,11 +51,11 @@ namespace GiG.Core.Web.Sample
         public void Configure(IApplicationBuilder app)
         {
             app.UseRouting();
-            app.UseHttpRequestResponseLogging();
             app.UseTenantIdMiddleware();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseApiDocs();
+            app.UseHttpRequestResponseLogging();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

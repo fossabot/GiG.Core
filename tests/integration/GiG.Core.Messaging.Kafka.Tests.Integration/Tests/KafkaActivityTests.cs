@@ -73,7 +73,9 @@ namespace GiG.Core.Messaging.Kafka.Tests.Integration.Tests
             var consumedMessage = new KafkaMessage<string, MockMessage>();
 
             // Act
+#pragma warning disable 4014
             Task.Factory.StartNew(() =>
+#pragma warning restore 4014
             {
                 while (!cts.IsCancellationRequested)
                 {

@@ -1,6 +1,6 @@
 using GiG.Core.Web.Docs.Extensions;
+using GiG.Core.Web.Versioning.Extensions;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,7 +18,8 @@ namespace GiG.Core.Performance.Logging
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.ConfigureApiDocs(Configuration);
+            services.ConfigureApiDocs(Configuration)
+                .AddApiExplorerVersioning();
             
             services.AddControllers();
         }

@@ -1,4 +1,4 @@
-﻿namespace GiG.Core.Orleans.Silo.Abstractions
+﻿namespace GiG.Core.Orleans.Silo.Dashboard.Abstractions
 {
     /// <summary>
     /// Orleans Silo Dashboard Options.
@@ -13,7 +13,7 @@
         /// <summary>
         /// A value to indicate if the Dashboard is enabled or not.
         /// </summary>
-        public bool IsEnabled { get; set; } = true;
+        public bool IsEnabled { get; set; } = false;
 
         /// <summary>
         /// The Dashboard port.

@@ -1,4 +1,4 @@
-﻿using GiG.Core.Orleans.Silo.Abstractions;
+﻿using GiG.Core.Orleans.Silo.Dashboard.Abstractions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
