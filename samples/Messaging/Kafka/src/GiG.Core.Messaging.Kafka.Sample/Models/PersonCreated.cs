@@ -7,7 +7,7 @@ namespace GiG.Core.Messaging.Kafka.Sample.Models
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         public Address Address { get; set; }
     }
 }
