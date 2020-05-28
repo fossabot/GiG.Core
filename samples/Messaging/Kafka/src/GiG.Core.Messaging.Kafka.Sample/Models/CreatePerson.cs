@@ -3,23 +3,23 @@ using System;
 
 namespace GiG.Core.Messaging.Kafka.Sample.Models
 {
-    public class Person
+    public class CreatePerson
     {
-        private Guid Id { get; set; }
-        private string Name { get; set; }
-        private string Surname { get; set; }
-        private int Age { get; set; }
-        private Address Address { get; set; }
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public int Age { get; set; }
+        public Address Address { get; set; }
         
         public override string ToString() => $"{nameof(Id)}: {Id}, {nameof(Name)}: {Name}, {nameof(Surname)}: {Surname}, {nameof(Age)}: {Age}, {nameof(Address)}: {Address}";
 
         
-        public static Person Generate
+        public static CreatePerson Generate
         {
             get
             {
                 var fakePerson = new Faker().Person;
-                return new Person
+                return new CreatePerson
                 {
                     Id = Guid.NewGuid(),
                     Name = fakePerson.FirstName,

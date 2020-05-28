@@ -17,16 +17,21 @@ namespace GiG.Core.Messaging.Kafka.Sample
 
             services.AddActivityContextAccessor();
 
-            services.AddKafkaProducer<string, Person>(options => options
+            services.AddKafkaProducer<string, CreatePerson>(options => options
                 .WithJson()
                 .FromConfiguration(configuration)
-                .WithTopic("new-person-topic"));
+                .WithTopic("create-person"));
 
             services
-                .AddKafkaConsumer<string, Person>(options => options
+                .AddKafkaConsumer<string, CreatePerson>(options => options
                     .WithJson()
                     .FromConfiguration(configuration)
-                    .WithTopic("new-person-topic"));
+                    .WithTopic("create-person"));
+            
+            services.AddKafkaProducer<string, PersonCreated>(options => options
+                .WithJson()
+                .FromConfiguration(configuration)
+                .WithTopic("person"));
 
             services.AddHostedService<ProducerService>();
             services.AddHostedService<ConsumerService>();
