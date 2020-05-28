@@ -8,10 +8,10 @@ namespace GiG.Core.Messaging.Kafka.Sample.Models
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public int Age { get; set; }
+        public string DateOfBirth { get; set; }
         public Address Address { get; set; }
         
-        public override string ToString() => $"{nameof(Id)}: {Id}, {nameof(Name)}: {Name}, {nameof(Surname)}: {Surname}, {nameof(Age)}: {Age}, {nameof(Address)}: {Address}";
+        public override string ToString() => $"{nameof(Id)}: {Id}, {nameof(Name)}: {Name}, {nameof(Surname)}: {Surname}, {nameof(DateOfBirth)}: {DateOfBirth}, {nameof(Address)}: {Address}";
 
         
         public static CreatePerson Generate
@@ -24,7 +24,7 @@ namespace GiG.Core.Messaging.Kafka.Sample.Models
                     Id = Guid.NewGuid(),
                     Name = fakePerson.FirstName,
                     Surname = fakePerson.LastName,
-                    Age = 35,
+                    DateOfBirth = fakePerson.DateOfBirth.ToString(),
                     Address = new Address
                     {
                         Street = fakePerson.Address.Street,

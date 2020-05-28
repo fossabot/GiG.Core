@@ -91,7 +91,7 @@ namespace GiG.Core.Messaging.Kafka.Sample
                 {
                     Id = consumedMessage.Value.Id,
                     Address = consumedMessage.Value.Address,
-                    Age = consumedMessage.Value.Age,
+                    DateOfBirth = consumedMessage.Value.DateOfBirth,
                     Name = consumedMessage.Value.Name,
                     Surname = consumedMessage.Value.Surname
                 };
