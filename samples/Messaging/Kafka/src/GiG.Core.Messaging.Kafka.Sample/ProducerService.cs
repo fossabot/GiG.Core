@@ -50,11 +50,11 @@ namespace GiG.Core.Messaging.Kafka.Sample
                 };
 
                 // Send Command
-                await ProduceMessage(message);
+                await ProduceMessageAsync(message);
             }
         }
 
-        private async Task ProduceMessage(KafkaMessage<string, CreatePerson> message)
+        private async Task ProduceMessageAsync(KafkaMessage<string, CreatePerson> message)
         {
             try
             {
@@ -64,7 +64,6 @@ namespace GiG.Core.Messaging.Kafka.Sample
             {
                 _logger.LogError(ex, ex.Message);
                 _kafkaProducer.Dispose();
-                
             }
         }
     }
