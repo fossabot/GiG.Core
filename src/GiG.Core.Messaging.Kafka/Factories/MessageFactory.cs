@@ -30,11 +30,11 @@ namespace GiG.Core.Messaging.Kafka.Factories
             kafkaMessage.Headers.AddOrUpdate(AbstractionConstants.MessageTypeHeaderName, kafkaMessage.MessageType);
             kafkaMessage.Headers.AddOrUpdate(AbstractionConstants.MessageIdHeaderName, kafkaMessage.MessageId);
 
-            kafkaMessage.Headers.Add(AbstractionConstants.CorrelationIdHeaderName, Activity.Current.Id);
+            kafkaMessage.Headers.AddOrUpdate(AbstractionConstants.CorrelationIdHeaderName, Activity.Current.Id);
 
             foreach (var baggageItem in _activityContextAccessor.Baggage)
             {
-                kafkaMessage.Headers.Add(baggageItem.Key, baggageItem.Value);
+                kafkaMessage.Headers.AddOrUpdate(baggageItem.Key, baggageItem.Value);
             }
 
             return new Message<TKey, TValue>

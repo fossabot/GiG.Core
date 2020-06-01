@@ -1,13 +1,14 @@
 using GiG.Core.Messaging.Kafka.Abstractions;
 using GiG.Core.Messaging.Kafka.Abstractions.Exceptions;
 using GiG.Core.Messaging.Kafka.Abstractions.Interfaces;
-using GiG.Core.Messaging.Kafka.Sample.Helpers;
 using GiG.Core.Messaging.Kafka.Sample.Interfaces;
 using GiG.Core.Messaging.Kafka.Sample.Models;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Text.Json;
+using Polly;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GiG.Core.Messaging.Kafka.Sample.Services
@@ -26,6 +27,8 @@ namespace GiG.Core.Messaging.Kafka.Sample.Services
 
         public async Task HandleMessageAsync(IKafkaMessage<string, CreatePerson> consumedMessage)
         {
+            var jitter = new Random();
+            
             try
             {
                 // Validation
@@ -34,7 +37,7 @@ namespace GiG.Core.Messaging.Kafka.Sample.Services
                 // Add Idempotentcy Check -It's important to verify for possible duplicates of the same message
 
                 // Process 
-                var serializedValue = JsonConvert.SerializeObject(consumedMessage.Value);
+                var serializedValue = JsonSerializer.Serialize(consumedMessage.Value);
                 _logger.LogInformation("Consumed message in service [key: '{key} '] [value: '{serializedValue}']", consumedMessage.Key, serializedValue);
 
                 foreach (var (key, value) in consumedMessage.Headers)
@@ -61,8 +64,21 @@ namespace GiG.Core.Messaging.Kafka.Sample.Services
                     MessageType = nameof(PersonCreated)
                 };
 
+                var count = 1;
+                // Retry forever
+                var retryPolicy = Policy
+                    .Handle<KafkaProducerException>()
+                    .WaitAndRetryForeverAsync( // exponential back-off plus some jitter
+                        retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt > 6 ? 6 : retryAttempt))
+                                        + TimeSpan.FromMilliseconds(jitter.Next(0, 100)),
+                        (exception, timespan) =>
+                        {
+                            Console.Write($"RetryCount: {count} -  Timespan: {timespan} - Exception: {exception.Message}");
+                            count++;
+                        });
+                
                 // PublishEvent
-                await RetryHelper.RetryOnExceptionAsync<KafkaProducerException>(() => PublishEventAsync(personCreatedMessage));
+                await retryPolicy.ExecuteAsync(() => PublishEventAsync(personCreatedMessage));
             }
             catch (ValidationException ex)
             {
@@ -97,7 +113,7 @@ namespace GiG.Core.Messaging.Kafka.Sample.Services
             catch (Exception ex)
             {
                _logger.LogError(ex, ex.Message);
-               throw new KafkaProducerException();
+               throw new KafkaProducerException(ex.Message);
             }
         }
     }

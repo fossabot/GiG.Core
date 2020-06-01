@@ -1,5 +1,6 @@
 ﻿using Confluent.Kafka;
 using GiG.Core.DistributedTracing.Abstractions;
+using GiG.Core.Messaging.Kafka.Abstractions.Exceptions;
 using GiG.Core.Messaging.Kafka.Abstractions.Extensions;
 using GiG.Core.Messaging.Kafka.Abstractions.Interfaces;
 using JetBrains.Annotations;
@@ -70,7 +71,7 @@ namespace GiG.Core.Messaging.Kafka.Producers
             catch (ProduceException<TKey, TValue> e)
             {
                 _logger.LogError(e, "Delivery failed: {reason}", e.Error.Reason);
-                throw;
+                throw new KafkaProducerException(e.Message);
             }
             finally
             {
