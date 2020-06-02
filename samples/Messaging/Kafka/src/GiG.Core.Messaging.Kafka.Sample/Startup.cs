@@ -1,7 +1,9 @@
 ﻿using GiG.Core.DistributedTracing.Activity.Extensions;
 using GiG.Core.Messaging.Kafka.Abstractions;
 using GiG.Core.Messaging.Kafka.Extensions;
+using GiG.Core.Messaging.Kafka.Sample.Interfaces;
 using GiG.Core.Messaging.Kafka.Sample.Models;
+using GiG.Core.Messaging.Kafka.Sample.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -16,17 +18,24 @@ namespace GiG.Core.Messaging.Kafka.Sample
             services.Configure<KafkaProviderOptions>(configuration.GetSection(KafkaProviderOptions.DefaultSectionName));
 
             services.AddActivityContextAccessor();
+            
+            services.AddScoped<ICreatePersonService, CreatePersonService>();
 
-            services.AddKafkaProducer<string, Person>(options => options
+            services.AddKafkaProducer<string, CreatePerson>(options => options
                 .WithJson()
                 .FromConfiguration(configuration)
-                .WithTopic("new-person-topic"));
+                .WithTopic("create-person"));
 
             services
-                .AddKafkaConsumer<string, Person>(options => options
+                .AddKafkaConsumer<string, CreatePerson>(options => options
                     .WithJson()
                     .FromConfiguration(configuration)
-                    .WithTopic("new-person-topic"));
+                    .WithTopic("create-person"));
+            
+            services.AddKafkaProducer<string, PersonCreated>(options => options
+                .WithJson()
+                .FromConfiguration(configuration)
+                .WithTopic("person"));
 
             services.AddHostedService<ProducerService>();
             services.AddHostedService<ConsumerService>();

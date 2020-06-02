@@ -1,8 +1,8 @@
 ﻿using GiG.Core.Messaging.Kafka.Abstractions.Interfaces;
+using GiG.Core.Messaging.Kafka.Sample.Interfaces;
 using GiG.Core.Messaging.Kafka.Sample.Models;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,20 +11,21 @@ namespace GiG.Core.Messaging.Kafka.Sample
 {
     public class ConsumerService : BackgroundService
     {
-        private readonly IKafkaConsumer<string, Person> _kafkaConsumer;
+        private readonly IKafkaConsumer<string, CreatePerson> _kafkaConsumer;
         private readonly ILogger<ConsumerService> _logger;
-        
-        public ConsumerService(IKafkaConsumer<string, Person> kafkaConsumer, ILogger<ConsumerService> logger)
+        private readonly ICreatePersonService _createPersonService;
+
+        public ConsumerService(IKafkaConsumer<string, CreatePerson> kafkaConsumer, ILogger<ConsumerService> logger, ICreatePersonService createPersonService)
         {
             _kafkaConsumer = kafkaConsumer;
             _logger = logger;
+            _createPersonService = createPersonService;
         }
 
         /// <inheritdoc />
-        protected override Task ExecuteAsync(CancellationToken cancellationToken)
+        protected override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
-            RunConsumer(cancellationToken);
-            return Task.CompletedTask;
+            await RunConsumer(cancellationToken);
         }
 
         /// <inheritdoc />
@@ -34,7 +35,7 @@ namespace GiG.Core.Messaging.Kafka.Sample
             return Task.CompletedTask;
         }
 
-        private void RunConsumer(CancellationToken token = default)
+        private async Task RunConsumer(CancellationToken token = default)
         {
             var count = 0;
 
@@ -45,7 +46,7 @@ namespace GiG.Core.Messaging.Kafka.Sample
                     try
                     {
                         var message = _kafkaConsumer.Consume(token);
-                        HandleMessage(message);
+                        await HandleMessageAsync(message);
 
                         if (count++ % 10 == 0)
                         {
@@ -65,15 +66,9 @@ namespace GiG.Core.Messaging.Kafka.Sample
             }
         }
 
-        private void HandleMessage(IKafkaMessage<string, Person> message)
+        private async Task HandleMessageAsync(IKafkaMessage<string, CreatePerson> message)
         {
-            var serializedValue = JsonConvert.SerializeObject(message.Value);
-            _logger.LogInformation("Consumed message in service [key: '{key} '] [value: '{serializedValue}']", message.Key, serializedValue);
-
-            foreach (var (key, value) in message.Headers)
-            {
-                _logger.LogInformation("Header: {key}\tValue: {value}", key, value);
-            }
+            await _createPersonService.HandleMessageAsync(message);
         }
     }
 }

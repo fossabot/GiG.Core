@@ -11,10 +11,10 @@ namespace GiG.Core.Messaging.Kafka.Sample
 {
     public class ProducerService : IHostedService
     {
-        private readonly IKafkaProducer<string, Person> _kafkaProducer;
+        private readonly IKafkaProducer<string, CreatePerson> _kafkaProducer;
         private readonly ILogger<ProducerService> _logger;
-        
-        public ProducerService(IKafkaProducer<string, Person> kafkaProducer, ILogger<ProducerService> logger)
+
+        public ProducerService(IKafkaProducer<string, CreatePerson> kafkaProducer, ILogger<ProducerService> logger)
         {
             _kafkaProducer = kafkaProducer;
             _logger = logger;
@@ -23,7 +23,7 @@ namespace GiG.Core.Messaging.Kafka.Sample
         /// <inheritdoc />
         public Task StartAsync(CancellationToken cancellationToken = default)
         {
-            Task.Run(RunProducer, cancellationToken);
+            Task.Run(RunProducerAsync, cancellationToken);
             return Task.CompletedTask;
         }
 
@@ -34,30 +34,36 @@ namespace GiG.Core.Messaging.Kafka.Sample
             return Task.CompletedTask;
         }
 
-        private async Task RunProducer()
+        private async Task RunProducerAsync()
+        {
+            for (var i = 0; i < 20; i++)
+            {
+                var person = CreatePerson.Generate;
+                var messageId = Guid.NewGuid().ToString();
+
+                var message = new KafkaMessage<string, CreatePerson>
+                {
+                    Key = person.Id.ToString(),
+                    Value = person,
+                    MessageId = messageId,
+                    MessageType = nameof(CreatePerson)
+                };
+
+                // Send Command
+                await ProduceMessageAsync(message);
+            }
+        }
+
+        private async Task ProduceMessageAsync(KafkaMessage<string, CreatePerson> message)
         {
             try
             {
-                for (var i = 0; i < 20; i++)
-                {
-                    var person = Person.Generate;
-                    var messageId = Guid.NewGuid().ToString();
-
-                    var message = new KafkaMessage<string, Person>
-                    {
-                        Key = "person",
-                        Value = person,
-                        MessageId = messageId,
-                        MessageType = "Person.Created"
-                    };
-
-                    await _kafkaProducer.ProduceAsync(message);
-                }
+                await _kafkaProducer.ProduceAsync(message);
             }
             catch (Exception ex)
             {
-                _kafkaProducer.Dispose();
                 _logger.LogError(ex, ex.Message);
+                _kafkaProducer.Dispose();
             }
         }
     }
