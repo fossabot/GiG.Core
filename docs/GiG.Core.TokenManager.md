@@ -16,6 +16,16 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
+It is also possible to create the [TokenManager](../src/GiG.Core.TokenManager/Implementation/TokenManager.cs) using the factory pattern through the [TokenManagerFactory](../src/GiG.Core.TokenManager/Implementation/TokenManagerFactory.cs). 
+This functionality requires no configuration and is enabled by adding the following code to the `Startup.cs`.
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddTokenManagerFactory();
+}
+```
+
 ### Configuration
 
 The below table outlines the valid Configurations used to configure the [TokenManagerOptions](../src/GiG.Core.TokenManager.Abstractions/Models/TokenManagerOptions.cs). 

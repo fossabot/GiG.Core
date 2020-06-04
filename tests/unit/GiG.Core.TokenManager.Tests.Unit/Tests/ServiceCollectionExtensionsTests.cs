@@ -30,5 +30,12 @@ namespace GiG.Core.TokenManager.Tests.Unit.Tests
             var exception = Assert.Throws<ArgumentNullException>(() => new ServiceCollection().AddTokenManager(configuration: null));
             Assert.Equal("configuration", exception.ParamName);
         }
+
+        [Fact]
+        public void AddTokenManagerFactory_ServiceCollectionIsNull_ThrowsArgumentNullException()
+        {
+            var exception = Assert.Throws<ArgumentNullException>(() => ServiceCollectionExtensions.AddTokenManagerFactory(null));
+            Assert.Equal("services", exception.ParamName);
+        }
     }
 }

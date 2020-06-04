@@ -54,5 +54,24 @@ namespace GiG.Core.TokenManager.Extensions
 
             return services;
         }
+
+        /// <summary>
+        /// Adds the Token Manager Factory.
+        /// </summary>
+        /// <param name="services">The <see cref="IServiceCollection"/>.</param>
+        /// <returns>The <see cref="IServiceCollection" />.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static IServiceCollection AddTokenManagerFactory([NotNull] this IServiceCollection services)
+        {
+            if (services == null) throw new ArgumentNullException(nameof(services));
+         
+            services.AddUtcDateTimeProvider();
+            services.AddHttpClient();
+
+            services.TryAddSingleton<ITokenClientFactory, TokenClientFactory>();
+            services.TryAddSingleton<ITokenManagerFactory, TokenManagerFactory>();
+
+            return services;
+        }
     }
 }
