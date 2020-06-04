@@ -493,11 +493,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Test.Unit", "tests\unit\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Test.Unit\GiG.Core.DistributedTracing.OpenTelemetry.Exporters.Test.Unit.csproj", "{3EE79E77-87B6-444E-81BB-F7937AA3FAE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Performance.Data.KVStores.Providers.Etcd.WatchRange", "tests\performance\GiG.Core.Performance.Data.KVStores.Providers.Etcd.WatchRange\GiG.Core.Performance.Data.KVStores.Providers.Etcd.WatchRange.csproj", "{39F07DDA-2D42-4854-97B9-901836273E83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Performance.Data.KVStores.Providers.Etcd.WatchRange", "tests\performance\GiG.Core.Performance.Data.KVStores.Providers.Etcd.WatchRange\GiG.Core.Performance.Data.KVStores.Providers.Etcd.WatchRange.csproj", "{39F07DDA-2D42-4854-97B9-901836273E83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Messaging.Kafka.Tests.Integration", "tests\integration\GiG.Core.Messaging.Kafka.Tests.Integration\GiG.Core.Messaging.Kafka.Tests.Integration.csproj", "{EBE1EC78-EF4D-4D8F-8668-A7150BC5EA7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Messaging.Kafka.Tests.Integration", "tests\integration\GiG.Core.Messaging.Kafka.Tests.Integration\GiG.Core.Messaging.Kafka.Tests.Integration.csproj", "{EBE1EC78-EF4D-4D8F-8668-A7150BC5EA7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.Web.Versioning", "src\GiG.Core.Web.Versioning\GiG.Core.Web.Versioning.csproj", "{75599EE4-BFB2-4CCE-AE90-5619D236FFFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GiG.Core.Web.Versioning", "src\GiG.Core.Web.Versioning\GiG.Core.Web.Versioning.csproj", "{75599EE4-BFB2-4CCE-AE90-5619D236FFFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiG.Core.TokenManager.Tests.Integration", "tests\integration\GiG.Core.TokenManager.Tests.Integration\GiG.Core.TokenManager.Tests.Integration.csproj", "{6FAECF35-0E14-48EE-9D9C-2D3A561B4ECB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1121,18 +1123,22 @@ Global
 		{3EE79E77-87B6-444E-81BB-F7937AA3FAE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EE79E77-87B6-444E-81BB-F7937AA3FAE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EE79E77-87B6-444E-81BB-F7937AA3FAE6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EBE1EC78-EF4D-4D8F-8668-A7150BC5EA7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EBE1EC78-EF4D-4D8F-8668-A7150BC5EA7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EBE1EC78-EF4D-4D8F-8668-A7150BC5EA7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EBE1EC78-EF4D-4D8F-8668-A7150BC5EA7E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{39F07DDA-2D42-4854-97B9-901836273E83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{39F07DDA-2D42-4854-97B9-901836273E83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39F07DDA-2D42-4854-97B9-901836273E83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39F07DDA-2D42-4854-97B9-901836273E83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBE1EC78-EF4D-4D8F-8668-A7150BC5EA7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBE1EC78-EF4D-4D8F-8668-A7150BC5EA7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBE1EC78-EF4D-4D8F-8668-A7150BC5EA7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBE1EC78-EF4D-4D8F-8668-A7150BC5EA7E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{75599EE4-BFB2-4CCE-AE90-5619D236FFFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{75599EE4-BFB2-4CCE-AE90-5619D236FFFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75599EE4-BFB2-4CCE-AE90-5619D236FFFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75599EE4-BFB2-4CCE-AE90-5619D236FFFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FAECF35-0E14-48EE-9D9C-2D3A561B4ECB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FAECF35-0E14-48EE-9D9C-2D3A561B4ECB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FAECF35-0E14-48EE-9D9C-2D3A561B4ECB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FAECF35-0E14-48EE-9D9C-2D3A561B4ECB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1333,9 +1339,10 @@ Global
 		{337DF81B-E252-4CF3-92F7-3459582A6C44} = {E5CC5DF3-1551-49F0-B308-B80143E7ABE0}
 		{89EFB967-28E3-40BD-9F13-4A60045D8DD8} = {F3E4EB54-9129-4327-9A32-89ABD4ADA6C5}
 		{3EE79E77-87B6-444E-81BB-F7937AA3FAE6} = {01ED85ED-F3CF-4D12-B85F-ED8F8FEDECB6}
-		{EBE1EC78-EF4D-4D8F-8668-A7150BC5EA7E} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 		{39F07DDA-2D42-4854-97B9-901836273E83} = {66468249-0BE3-4E03-A5B8-DE350CA051EE}
+		{EBE1EC78-EF4D-4D8F-8668-A7150BC5EA7E} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 		{75599EE4-BFB2-4CCE-AE90-5619D236FFFD} = {D4C1B3D4-A75F-4D7F-8BD3-39FDE1B444DF}
+		{6FAECF35-0E14-48EE-9D9C-2D3A561B4ECB} = {4E76F09A-698A-4CF7-8552-A662C93EF30C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A1D7674-6D93-4A13-929B-2C95E28C8C38}
