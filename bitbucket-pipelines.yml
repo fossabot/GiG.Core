@@ -1,5 +1,8 @@
+clone:
+  depth: full
+
 pipelines:
   default:
     - step:
         script:
-          - git push --mirror --force git@github.com:GiG/GiG.Core.git
+          - git push --mirror --prune git@github.com:GiG/GiG.Core.git
