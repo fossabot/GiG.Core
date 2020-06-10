@@ -1,4 +1,5 @@
 # ![GiG Core](gig-core.png)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FGiG%2FGiG.Core.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FGiG%2FGiG.Core?ref=badge_shield)
 
 The latest major release is [GiG Core 2.0](release-notes/2.0/2.0.0.md).
 
@@ -125,3 +126,6 @@ docker-compose -f docker-compose.yml -f docker-compose-<Sample Name>.yml up --bu
 ```
 
 You can also find more samples [here](https://bitbucket.org/gaminginnovationgroup/gig.core.samples/src/master/).
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FGiG%2FGiG.Core.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FGiG%2FGiG.Core?ref=badge_large)
