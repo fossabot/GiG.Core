@@ -5,4 +5,4 @@ pipelines:
   default:
     - step:
         script:
-          - git push --mirror --prune git@github.com:GiG/GiG.Core.git
+          - git push --mirror git@github.com:GiG/GiG.Core.git
